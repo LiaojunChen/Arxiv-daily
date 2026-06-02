@@ -76,3 +76,22 @@ def test_get_block_html_contains_all_fields():
 def test_get_empty_html():
     html = get_empty_html()
     assert "No Papers Today" in html
+
+
+def test_render_email_keyword_mode_fields():
+    paper = make_sample_paper(
+        score=8.2,
+        tldr="A concise summary.",
+        affiliations=["MIT"],
+        keywords=["world model", "video generation"],
+        matched_keywords=["world model"],
+        feedback_urls={"interested": "https://github.com/o/r/issues/new?x=1", "like": "https://github.com/o/r/issues/new?x=2"},
+    )
+    paper.recommendation_group = "primary"
+    html = render_email([paper], top_keywords=["world model"], exploration_keywords=["embodied ai"])
+
+    assert "Top Keyword Matches" in html
+    assert "world model" in html
+    assert "video generation" in html
+    assert "\u611f\u5174\u8da3" in html
+    assert "\u559c\u6b22" in html

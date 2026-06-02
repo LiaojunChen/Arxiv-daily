@@ -54,6 +54,28 @@ reranker:
     timeout: 60 # Request timeout in seconds.
     instruction: "Given a research-interest profile, rank candidate papers by relevance and usefulness to the user's research."
 
+interest:
+  enabled: false # Set true to recommend from the keyword profile instead of Zotero corpus.
+  state_path: data/interest_profile.json
+  default_keywords: ["world model", "unified model", "generation model"]
+  top_keyword_count: 10
+  primary_paper_count: 40
+  exploration_paper_count: 10
+  exploration_keyword_count: 10
+  paper_keyword_count: 6
+  score_decay: 0.95
+  interested_weight: 1.0
+  liked_weight: 3.0
+  max_feedback_history: 200
+  use_llm_keyword_guess: true
+
+feedback:
+  enabled: true
+  github_repo: ${oc.env:GITHUB_REPOSITORY,null}
+  github_token: ${oc.env:GITHUB_TOKEN,null}
+  issue_label: paper-feedback
+  auto_close_issues: true
+
 executor:
   debug: false # Whether to use debug mode. Example: true
   send_empty: false # Whether to send an empty email even if no new papers today. Example: true

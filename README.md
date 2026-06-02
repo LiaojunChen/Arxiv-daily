@@ -22,6 +22,14 @@
     <br> 
 </p>
 
+## Keyword-feedback fork
+
+This copy is configured for keyword-profile recommendations. It sends 40 papers ranked by the current top keywords and 10 exploratory papers ranked by adjacent guessed keywords. The initial keywords are `world model`, `unified model`, and `generation model`.
+
+Paper cards include title, authors, affiliations, TLDR, extracted abstract keywords, similarity score, and feedback buttons. Feedback is collected through pre-filled GitHub issues; the next scheduled GitHub Action updates `data/interest_profile.json` and commits the new top keyword profile.
+
+See [docs/keyword-feedback-deployment.md](docs/keyword-feedback-deployment.md) for the deployment checklist.
+
 > [!IMPORTANT]
 > Please keep an eye on this repo, and merge your forked repo in time when there is any update of this upstream, in order to enjoy new features and fix found bugs.
 

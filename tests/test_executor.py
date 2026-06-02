@@ -209,6 +209,56 @@ def test_run_end_to_end(config, monkeypatch):
     assert "text/html" in email_body
 
 
+def test_run_keyword_mode_end_to_end(config, tmp_path, monkeypatch):
+    """Keyword mode: feedback profile -> retrieve -> keyword ranking -> email -> state file."""
+    from email import message_from_string
+    import smtplib
+
+    from omegaconf import open_dict
+
+    from tests.canned_responses import make_sample_paper, make_stub_openai_client, make_stub_smtp
+
+    with open_dict(config):
+        config.interest.enabled = True
+        config.interest.state_path = str(tmp_path / "interest_profile.json")
+        config.interest.primary_paper_count = 2
+        config.interest.exploration_paper_count = 1
+        config.interest.use_llm_keyword_guess = False
+        config.feedback.enabled = False
+        config.executor.source = ["arxiv"]
+        config.executor.reranker = "api"
+        config.executor.send_empty = False
+
+    stub_client = make_stub_openai_client()
+    monkeypatch.setattr("zotero_arxiv_daily.executor.OpenAI", lambda **kw: stub_client)
+    monkeypatch.setattr("zotero_arxiv_daily.reranker.api.OpenAI", lambda **kw: stub_client)
+
+    retrieved = [
+        make_sample_paper(title="World Model Paper", abstract="A latent world model for video generation."),
+        make_sample_paper(title="Unified Model Paper", abstract="A unified model for multimodal generation."),
+        make_sample_paper(title="Planning Paper", abstract="Embodied planning with learned simulators."),
+    ]
+
+    import zotero_arxiv_daily.retriever.arxiv_retriever  # noqa: F401
+
+    from zotero_arxiv_daily.retriever.base import registered_retrievers
+
+    monkeypatch.setattr(registered_retrievers["arxiv"], "retrieve_papers", lambda self: retrieved)
+
+    sent = []
+    monkeypatch.setattr(smtplib, "SMTP", make_stub_smtp(sent))
+
+    executor = Executor(config)
+    executor.run()
+
+    assert len(sent) == 1
+    _, _, email_body = sent[0]
+    message = message_from_string(email_body)
+    html = message.get_payload(decode=True).decode("utf-8")
+    assert "Top Keyword Matches" in html
+    assert (tmp_path / "interest_profile.json").exists()
+
+
 def test_run_no_papers_send_empty_false(config, monkeypatch):
     """When no papers are found and send_empty=false, no email is sent."""
     import smtplib

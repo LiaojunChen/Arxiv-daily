@@ -1,7 +1,8 @@
 zotero:
-  user_id: ${oc.env:ZOTERO_ID}
-  api_key: ${oc.env:ZOTERO_KEY}
-  include_path: null # Or set a list of glob patterns, e.g. ["2026/survey/**","2026/reading-group/**"]
+  user_id: ${oc.env:ZOTERO_ID,null}
+  api_key: ${oc.env:ZOTERO_KEY,null}
+  include_path: null # Keyword mode does not require Zotero, but legacy mode can still use it.
+  ignore_path: null
 
 email:
   sender: ${oc.env:SENDER}
@@ -19,7 +20,8 @@ llm:
 
 source:
   arxiv:
-    category: ["cs.AI","cs.CV"]
+    category: ["cs.AI","cs.LG","cs.CV","cs.CL","stat.ML"]
+    include_cross_list: false
 
 reranker:
   siliconflow:
@@ -28,8 +30,30 @@ reranker:
     model: Qwen/Qwen3-Reranker-0.6B
     batch_size: 64
 
+interest:
+  enabled: true
+  state_path: data/interest_profile.json
+  default_keywords: ["world model", "unified model", "generation model"]
+  top_keyword_count: 10
+  primary_paper_count: 40
+  exploration_paper_count: 10
+  exploration_keyword_count: 10
+  paper_keyword_count: 6
+  score_decay: 0.95
+  interested_weight: 1.0
+  liked_weight: 3.0
+  use_llm_keyword_guess: true
+
+feedback:
+  enabled: true
+  github_repo: ${oc.env:GITHUB_REPOSITORY,null}
+  github_token: ${oc.env:GITHUB_TOKEN,null}
+  issue_label: paper-feedback
+  auto_close_issues: true
+
 executor:
   debug: ${oc.env:DEBUG,null}
-  max_paper_num: 20
+  send_empty: true
+  max_paper_num: 50
   source: ['arxiv']
   reranker: siliconflow

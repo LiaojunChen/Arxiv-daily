@@ -13,6 +13,7 @@ from time import sleep
 from typing import Any, Callable, TypeVar
 from loguru import logger
 import requests
+from concurrent.futures import ThreadPoolExecutor, TimeoutError as FutureTimeoutError
 
 T = TypeVar("T")
 
@@ -50,6 +51,20 @@ def _run_with_hard_timeout(
     paper_title: str,
 ) -> T | None:
     start_methods = multiprocessing.get_all_start_methods()
+    if "fork" not in start_methods:
+        executor = ThreadPoolExecutor(max_workers=1)
+        future = executor.submit(func, *args)
+        try:
+            return future.result(timeout=timeout)
+        except FutureTimeoutError:
+            logger.warning(f"{operation} timed out for {paper_title} after {timeout} seconds")
+            return None
+        except Exception as exc:
+            logger.warning(f"{operation} failed for {paper_title}: {type(exc).__name__}: {exc}")
+            return None
+        finally:
+            executor.shutdown(wait=False, cancel_futures=True)
+
     context = multiprocessing.get_context("fork" if "fork" in start_methods else start_methods[0])
     result_queue = context.Queue()
     process = context.Process(target=_run_in_subprocess, args=(result_queue, func, args))

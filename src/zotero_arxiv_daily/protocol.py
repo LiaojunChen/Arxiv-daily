@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Optional, TypeVar
 from datetime import datetime
 import re
@@ -20,10 +20,15 @@ class Paper:
     tldr: Optional[str] = None
     affiliations: Optional[list[str]] = None
     score: Optional[float] = None
+    keywords: list[str] = field(default_factory=list)
+    matched_keywords: list[str] = field(default_factory=list)
+    recommendation_group: Optional[str] = None
+    paper_id: Optional[str] = None
+    feedback_urls: dict[str, str] = field(default_factory=dict)
 
     def _generate_tldr_with_llm(self, openai_client:OpenAI,llm_params:dict) -> str:
         lang = llm_params.get('language', 'English')
-        prompt = f"Given the following information of a paper, generate a one-sentence TLDR summary in {lang}:\n\n"
+        prompt = f"Given the following information of a paper, generate a concise TLDR summary in {lang}. Use no more than four sentences:\n\n"
         if self.title:
             prompt += f"Title:\n {self.title}\n\n"
 
@@ -47,7 +52,7 @@ class Paper:
             messages=[
                 {
                     "role": "system",
-                    "content": f"You are an assistant who perfectly summarizes scientific paper, and gives the core idea of the paper to the user. Your answer should be in {lang}.",
+                    "content": f"You are an assistant who perfectly summarizes scientific papers and gives the core idea to the user. Your answer should be in {lang}, and it must be no more than four sentences.",
                 },
                 {"role": "user", "content": prompt},
             ],

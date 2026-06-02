@@ -1,6 +1,6 @@
 import tarfile
 import re
-import glob
+import fnmatch
 import math
 import smtplib
 from collections import Counter
@@ -136,8 +136,13 @@ def extract_markdown_from_pdf(file_path:str) -> str:
     return pymupdf4llm.to_markdown(file_path,use_ocr=False,header=False,footer=False,ignore_code=True)
 
 def glob_match(path:str, pattern:str) -> bool:
-    re_pattern = glob.translate(pattern,recursive=True)
-    return re.match(re_pattern, path) is not None
+    normalized_path = path.replace("\\", "/")
+    normalized_pattern = pattern.replace("\\", "/")
+    if fnmatch.fnmatchcase(normalized_path, normalized_pattern):
+        return True
+    if normalized_pattern.startswith("**/"):
+        return fnmatch.fnmatchcase(normalized_path, normalized_pattern[3:])
+    return False
 
 def send_email(config:DictConfig, html:str):
     sender = config.email.sender

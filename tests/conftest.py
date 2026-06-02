@@ -42,6 +42,8 @@ def _base_config():
                 "reranker.siliconflow.key=sk-fake",
                 "reranker.siliconflow.url=http://localhost:30000/v1/rerank",
                 "source.arxiv.category=[cs.AI,cs.CV]",
+                "interest.enabled=false",
+                "feedback.enabled=false",
                 "executor.source=[arxiv]",
                 "executor.reranker=api",
                 "executor.debug=false",
