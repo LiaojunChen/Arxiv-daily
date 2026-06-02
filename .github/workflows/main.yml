@@ -14,8 +14,18 @@ jobs:
           repository: ${{ vars.REPOSITORY }}
           ref: ${{ vars.REF }}
 
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+
       - name: Setup uv
-        uses: astral-sh/setup-uv@v7
+        uses: astral-sh/setup-uv@v7.1.4
+
+      - name: Prepare config
+        env:
+          CUSTOM_CONFIG: ${{ vars.CUSTOM_CONFIG }}
+        run: bash .github/scripts/prepare-config.sh
 
       - name: Run script
         env:
@@ -26,9 +36,5 @@ jobs:
           SENDER_PASSWORD: ${{ secrets.SENDER_PASSWORD }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_API_BASE: ${{ secrets.OPENAI_API_BASE }}
-          CUSTOM_CONFIG: ${{ vars.CUSTOM_CONFIG }}
         run: |
-          printf "%b\n" "$CUSTOM_CONFIG" > config/custom.yaml
-          echo "Use custom config: "
-          cat config/custom.yaml
-          uv run src/zotero_arxiv_daily/main.py
+          uv run --locked src/zotero_arxiv_daily/main.py
