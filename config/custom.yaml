@@ -21,7 +21,15 @@ source:
   arxiv:
     category: ["cs.AI","cs.CV"]
 
+reranker:
+  siliconflow:
+    key: ${oc.env:SILICONFLOW_API_KEY}
+    url: https://api.siliconflow.cn/v1/rerank
+    model: Qwen/Qwen3-Reranker-0.6B
+    batch_size: 64
+
 executor:
   debug: ${oc.env:DEBUG,null}
   max_paper_num: 20
   source: ['arxiv']
+  reranker: siliconflow

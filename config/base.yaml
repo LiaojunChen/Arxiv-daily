@@ -42,6 +42,17 @@ reranker:
     base_url: null # API URL of your embedding model API. Example: https://api.openai.com/v1
     model: null # The model name of the embedding model. Example: text-embedding-3-large
     batch_size: null # The batch size for embedding API requests. Adjust to match your provider's limit. Example: 64
+  siliconflow:
+    key: null # SiliconFlow API key for the rerank endpoint. Example: sk-xxx
+    url: https://api.siliconflow.cn/v1/rerank # SiliconFlow rerank endpoint.
+    model: Qwen/Qwen3-Reranker-0.6B # The rerank model name.
+    batch_size: 64 # Number of candidate papers per rerank request.
+    max_query_papers: 30 # Number of recent Zotero papers used to build the interest query.
+    max_query_chars: 12000 # Character budget for the interest query.
+    max_document_chars: 4000 # Character budget per candidate document.
+    score_scale: 10.0 # Multiplier applied to relevance_score for email display.
+    timeout: 60 # Request timeout in seconds.
+    instruction: "Given a research-interest profile, rank candidate papers by relevance and usefulness to the user's research."
 
 executor:
   debug: false # Whether to use debug mode. Example: true
