@@ -3,7 +3,7 @@ import type { Paper } from "./types";
 import { usePapers } from "./hooks/usePapers";
 import TabNav from "./components/TabNav";
 import PaperList from "./components/PaperList";
-import ChatPanel from "./components/ChatPanel";
+import PaperViewer from "./components/PaperViewer";
 import SettingsPanel from "./components/SettingsPanel";
 
 export default function App() {
@@ -112,9 +112,9 @@ export default function App() {
         {activeTab === "settings" && <SettingsPanel />}
       </main>
 
-      {/* AI Chat Panel */}
+      {/* Paper Viewer (PDF + Chat unified) */}
       {chatPaper && (
-        <ChatPanel paper={chatPaper} onClose={() => setChatPaper(null)} />
+        <PaperViewer paper={chatPaper} onClose={() => setChatPaper(null)} />
       )}
     </div>
   );
