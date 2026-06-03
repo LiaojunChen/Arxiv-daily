@@ -221,12 +221,12 @@ ${truncated}`;
             <span className="text-xs text-green-600 px-2 font-medium">全文已加载</span>
           )}
           <a
-            href={paper.abstract_url}
+            href={paper.pdf_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs px-3 py-1.5 border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors"
+            className="text-xs px-3 py-1.5 bg-gray-900 text-white rounded-lg hover:bg-gray-800 cursor-pointer transition-colors"
           >
-            arXiv 页面
+            PDF
           </a>
         </div>
       </header>
@@ -252,12 +252,26 @@ ${truncated}`;
 
       {/* Split layout: 70% paper, 30% chat */}
       <div className="flex-1 flex min-h-0">
-        {/* Left: PDF viewer (70%) */}
+        {/* Left: Paper page (70%) — arXiv abstract works in iframe, PDF is blocked */}
         <div className={`${sidebarTab === "paper" ? "flex" : "hidden"} lg:flex flex-col lg:w-[70%] w-full`}>
+          {/* Top bar with PDF link */}
+          <div className="px-4 py-1.5 bg-amber-50 border-b border-amber-200 flex items-center justify-between shrink-0">
+            <span className="text-xs text-amber-700">
+              arXiv 页面（PDF 不支持内嵌，请点击右侧按钮在新窗口打开）
+            </span>
+            <a
+              href={paper.pdf_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs px-3 py-1 bg-amber-600 text-white rounded hover:bg-amber-700 cursor-pointer transition-colors shrink-0"
+            >
+              新窗口打开 PDF
+            </a>
+          </div>
           <iframe
-            src={`https://arxiv.org/pdf/${paper.arxiv_id}`}
+            src={`https://arxiv.org/abs/${paper.arxiv_id}`}
             className="flex-1 w-full border-0"
-            title={`PDF: ${paper.arxiv_id}`}
+            title={`arXiv: ${paper.arxiv_id}`}
           />
         </div>
 
