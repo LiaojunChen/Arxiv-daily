@@ -27,8 +27,9 @@ def _fetch_rss_paper_ids(categories: str) -> list[str]:
     Format: https://rss.arxiv.org/atom/cs.AI+cs.CL
     Returns list of arXiv IDs (without version suffix).
     """
-    # Build URL: replace "+" in ARXIV_QUERY with actual "+" for RSS
-    query = "+".join(categories.split("+"))
+    # Normalize categories: handle +, comma, space, newline separators
+    cats = [c.strip() for c in categories.replace(",", "+").replace(" ", "+").replace("\n", "+").split("+") if c.strip()]
+    query = "+".join(cats)
     url = f"https://rss.arxiv.org/atom/{query}"
     print(f"[INFO] Fetching RSS feed: {url}")
 
