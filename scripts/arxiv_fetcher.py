@@ -13,6 +13,7 @@ from datetime import datetime, timezone
 
 from config import (
     ARXIV_QUERY,
+    ARXIV_API_BASE,
     get_followed_authors,
     get_followed_institutions,
 )

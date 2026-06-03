@@ -49,6 +49,9 @@ export default function PaperViewer({ paper, onClose }: PaperViewerProps) {
   const [fullTextLoading, setFullTextLoading] = useState(false);
   const [fullTextLoaded, setFullTextLoaded] = useState(false);
   const [sidebarTab, setSidebarTab] = useState<"paper" | "chat">("paper");
+  const [splitRatio, setSplitRatio] = useState(70); // paper % (default 70%)
+  const [dragging, setDragging] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
   const messagesEnd = useRef<HTMLDivElement>(null);
 
   const settings = loadSettings();
@@ -84,6 +87,29 @@ arXiv ID: ${paper.arxiv_id}
   useEffect(() => {
     messagesEnd.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+  // Drag-to-resize handlers
+  const onDragStart = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    setDragging(true);
+  }, []);
+
+  useEffect(() => {
+    if (!dragging) return;
+    const onMove = (e: MouseEvent) => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const pct = ((e.clientX - rect.left) / rect.width) * 100;
+      setSplitRatio(Math.min(85, Math.max(30, pct)));
+    };
+    const onUp = () => setDragging(false);
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseup", onUp);
+    };
+  }, [dragging]);
 
   const fetchFullText = useCallback(async () => {
     setFullTextLoading(true);
@@ -250,10 +276,13 @@ ${truncated}`;
         <button onClick={() => setSidebarTab("chat")} className={`flex-1 py-2 text-sm font-medium text-center cursor-pointer ${sidebarTab === "chat" ? "text-indigo-600 border-b-2 border-indigo-600" : "text-gray-500"}`}>讨论</button>
       </div>
 
-      {/* Split layout: 70% paper, 30% chat */}
-      <div className="flex-1 flex min-h-0">
-        {/* Left: Paper page (70%) — arXiv abstract works in iframe, PDF is blocked */}
-        <div className={`${sidebarTab === "paper" ? "flex" : "hidden"} lg:flex flex-col lg:w-[70%] w-full`}>
+      {/* Split layout with draggable divider */}
+      <div ref={containerRef} className={`flex-1 flex min-h-0 ${dragging ? "select-none cursor-col-resize" : ""}`}>
+        {/* Left: Paper page */}
+        <div
+          className={`${sidebarTab === "paper" ? "flex" : "hidden"} lg:flex flex-col w-full`}
+          style={{ width: sidebarTab === "paper" || window.innerWidth >= 1024 ? `${splitRatio}%` : "100%" }}
+        >
           {/* Top bar with PDF link */}
           <div className="px-4 py-1.5 bg-amber-50 border-b border-amber-200 flex items-center justify-between shrink-0">
             <span className="text-xs text-amber-700">
@@ -275,8 +304,19 @@ ${truncated}`;
           />
         </div>
 
-        {/* Right: Chat (30%) */}
-        <div className={`${sidebarTab === "chat" ? "flex" : "hidden"} lg:flex flex-col lg:w-[30%] w-full border-l border-gray-200`}>
+        {/* Drag handle (desktop only) */}
+        <div
+          className="hidden lg:flex w-2 bg-gray-200 hover:bg-indigo-400 cursor-col-resize shrink-0 items-center justify-center transition-colors"
+          onMouseDown={onDragStart}
+        >
+          <div className="w-0.5 h-8 bg-gray-400 rounded" />
+        </div>
+
+        {/* Right: Chat */}
+        <div
+          className={`${sidebarTab === "chat" ? "flex" : "hidden"} lg:flex flex-col border-l border-gray-200`}
+          style={{ width: `${100 - splitRatio}%` }}
+        >
           <div className="px-3 py-2 border-b border-gray-100 bg-gray-50 shrink-0">
             <span className="text-xs text-gray-500 font-medium">AI 讨论</span>
           </div>
@@ -285,7 +325,7 @@ ${truncated}`;
           <div className="flex-1 overflow-y-auto p-3 space-y-3">
             {messages.filter((m) => m.role !== "system").map((msg, i) => (
               <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
-                <div className={`max-w-[90%] px-3 py-2 rounded-lg text-xs leading-relaxed ${
+                <div className={`max-w-[90%] px-3 py-2 rounded-lg text-sm leading-relaxed ${
                   msg.role === "user"
                     ? "bg-indigo-600 text-white"
                     : "bg-gray-100 text-gray-800"
