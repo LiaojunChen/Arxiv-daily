@@ -1,0 +1,77 @@
+name: Daily ArXiv Paper Fetch
+
+on:
+  schedule:
+    # UTC 22:00 = Beijing 06:00 (next day)
+    - cron: "0 22 * * *"
+  workflow_dispatch: # Manual trigger for testing
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  fetch-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Run paper fetch
+        continue-on-error: true
+        env:
+          ZOTERO_ID: ${{ secrets.ZOTERO_ID }}
+          ZOTERO_KEY: ${{ secrets.ZOTERO_KEY }}
+          ARXIV_QUERY: ${{ secrets.ARXIV_QUERY }}
+          MAX_PAPER_NUM: ${{ secrets.MAX_PAPER_NUM }}
+        run: python scripts/fetch_papers.py
+
+      - name: Use sample data if fetch failed
+        run: |
+          if [ ! -f data/papers.json ]; then
+            echo "[INFO] No papers.json generated, copying sample data"
+            cp frontend/public/papers.json data/papers.json
+          fi
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install frontend dependencies
+        run: |
+          cd frontend
+          npm install
+
+      - name: Build frontend
+        run: |
+          cd frontend
+          npm run build
+
+      - name: Copy papers.json to build output
+        run: cp data/papers.json frontend/dist/papers.json
+
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: frontend/dist
+
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4
