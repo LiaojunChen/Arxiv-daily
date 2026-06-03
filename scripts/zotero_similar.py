@@ -1,12 +1,28 @@
 """
-Zotero integration: fetch user's Zotero library and compute similarity
-with new ArXiv papers using TF-IDF + cosine similarity.
+Zotero-based similarity via SiliconFlow LLM Reranker.
+
+Fetches user's Zotero library to build an interest profile (query),
+then sends ArXiv candidates to SiliconFlow's /v1/rerank API for
+relevance scoring using Qwen3-Reranker-0.6B.
+
+This matches the approach used in the original zotero-arxiv-daily project.
 """
 
+import json
+import urllib.request
+import urllib.error
 import requests
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
-from config import ZOTERO_ID, ZOTERO_KEY, ZOTERO_API_BASE, MAX_PAPER_NUM
+from datetime import datetime
+from config import (
+    ZOTERO_ID,
+    ZOTERO_KEY,
+    ZOTERO_API_BASE,
+    MAX_PAPER_NUM,
+    SILICONFLOW_API_KEY,
+    SILICONFLOW_RERANK_URL,
+    SILICONFLOW_RERANK_MODEL,
+    SILICONFLOW_BATCH_SIZE,
+)
 
 ZOTERO_TIMEOUT = 15
 
@@ -18,7 +34,7 @@ def _zotero_headers() -> dict:
 def fetch_zotero_items() -> list[dict]:
     """
     Fetch all items from the user's Zotero library.
-    Returns a list of items with title, abstract, and tags.
+    Returns a list of items with title, abstract, added_date, and collections.
     """
     if not ZOTERO_ID or not ZOTERO_KEY:
         print("[WARN] ZOTERO_ID or ZOTERO_KEY not set, skipping Zotero fetch.")
@@ -31,13 +47,16 @@ def fetch_zotero_items() -> list[dict]:
     while url:
         try:
             resp = requests.get(
-                url, headers=_zotero_headers(), params=params if "?" not in url else None, timeout=ZOTERO_TIMEOUT
+                url,
+                headers=_zotero_headers(),
+                params=params if "?" not in url else None,
+                timeout=ZOTERO_TIMEOUT,
             )
             resp.raise_for_status()
             data = resp.json()
             all_items.extend(data)
 
-            # Handle pagination via Link header
+            # Pagination via Link header
             url = None
             link_header = resp.headers.get("Link")
             if link_header:
@@ -49,18 +68,24 @@ def fetch_zotero_items() -> list[dict]:
             print(f"[ERROR] Zotero API request failed: {e}")
             break
 
-    # Filter to items that have titles and abstracts (journal articles, conference papers, preprints)
+    # Extract papers with title
     papers = []
     for item in all_items:
         data = item.get("data", {})
         title = data.get("title", "").strip()
         abstract = data.get("abstractNote", "").strip() or data.get("abstract", "").strip()
         if title:
+            added_str = data.get("dateAdded", "")
+            try:
+                added_date = datetime.fromisoformat(added_str.replace("Z", "+00:00"))
+            except (ValueError, AttributeError):
+                added_date = datetime.min
+
             papers.append(
                 {
                     "title": title,
                     "abstract": abstract,
-                    "tags": [t.get("tag", "") for t in data.get("tags", [])],
+                    "added_date": added_date,
                 }
             )
 
@@ -68,55 +93,180 @@ def fetch_zotero_items() -> list[dict]:
     return papers
 
 
+def _build_interest_query(zotero_papers: list[dict]) -> str:
+    """
+    Build a query string from the user's Zotero library papers.
+    This is sent as the `query` to the rerank API, representing user interests.
+    Follows the same logic as SiliconFlowReranker._build_interest_query().
+    """
+    max_papers = 30
+    max_chars = 12000
+
+    # Sort by added_date descending (newest first)
+    sorted_papers = sorted(
+        zotero_papers, key=lambda p: p.get("added_date", datetime.min), reverse=True
+    )
+
+    intro = (
+        "The following papers are from the user's Zotero library and represent recent "
+        "research interests. Rank new candidate papers by relevance to these interests.\n\n"
+    )
+    parts = [intro]
+
+    for paper in sorted_papers[:max_papers]:
+        text = (
+            f"Title: {paper['title']}\n"
+            f"Abstract: {paper['abstract']}\n\n"
+        )
+        if sum(len(p) for p in parts) + len(text) > max_chars:
+            remaining = max_chars - sum(len(p) for p in parts)
+            if remaining > 0:
+                parts.append(text[:remaining].rstrip())
+            break
+        parts.append(text)
+
+    query = "".join(parts).strip()
+    print(f"[INFO] Built interest query: {len(query)} chars")
+    return query
+
+
+def _format_candidate(paper: dict) -> str:
+    """Format a candidate paper as a document string for the rerank API."""
+    max_chars = 4000
+    authors = ", ".join(paper.get("authors", [])) or "Unknown"
+    document = (
+        f"Title: {paper['title']}\n"
+        f"Authors: {authors}\n"
+        f"Abstract: {paper['abstract']}"
+    )
+    return document[:max_chars].rstrip()
+
+
+def _rerank_batch(query: str, documents: list[str]) -> list[float]:
+    """
+    Call SiliconFlow /v1/rerank API for one batch of documents.
+    Returns a list of relevance_score values, one per document (same order).
+    """
+    payload = {
+        "model": SILICONFLOW_RERANK_MODEL,
+        "query": query,
+        "documents": documents,
+        "top_n": len(documents),
+        "return_documents": False,
+    }
+
+    data = json.dumps(payload).encode("utf-8")
+    req = urllib.request.Request(
+        SILICONFLOW_RERANK_URL,
+        data=data,
+        method="POST",
+        headers={
+            "Authorization": f"Bearer {SILICONFLOW_API_KEY}",
+            "Content-Type": "application/json",
+        },
+    )
+
+    try:
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            body = resp.read().decode("utf-8")
+    except urllib.error.HTTPError as e:
+        body = e.read().decode("utf-8", errors="replace")
+        raise RuntimeError(
+            f"SiliconFlow rerank request failed with HTTP {e.code}: {body[:500]}"
+        ) from e
+    except urllib.error.URLError as e:
+        raise RuntimeError(f"SiliconFlow rerank request failed: {e}") from e
+
+    try:
+        parsed = json.loads(body)
+    except json.JSONDecodeError as e:
+        raise RuntimeError(f"SiliconFlow rerank response is not valid JSON: {body[:500]}") from e
+
+    results = parsed.get("results")
+    if not isinstance(results, list):
+        raise RuntimeError(f"SiliconFlow rerank response missing results list: {parsed}")
+
+    # Build ordered list matching the documents order
+    scores = [0.0] * len(documents)
+    for item in results:
+        idx = int(item["index"])
+        score = float(item["relevance_score"])
+        scores[idx] = score
+
+    return scores
+
+
 def compute_similarity(
     zotero_papers: list[dict], arxiv_papers: list[dict], top_n: int = None
 ) -> list[dict]:
     """
-    Compute TF-IDF cosine similarity between Zotero library papers and ArXiv papers.
-    For each ArXiv paper, the max similarity to any Zotero paper is used as its score.
-    Returns ArXiv papers sorted by similarity score (descending), top N.
+    Use SiliconFlow LLM Reranker to score ArXiv papers by relevance to
+    the user's Zotero library (interest profile).
+
+    Returns ArXiv papers sorted by relevance score (descending), top N.
     """
     if top_n is None:
         top_n = MAX_PAPER_NUM
-    if not zotero_papers or not arxiv_papers:
-        print("[WARN] No papers to compare for similarity.")
+
+    if not arxiv_papers:
+        print("[WARN] No ArXiv papers to rank.")
         return []
 
-    # Build text corpus: title + " " + abstract for each paper
-    zotero_texts = [
-        (p.get("title", "") + " " + p.get("abstract", "")) for p in zotero_papers
-    ]
-    arxiv_texts = [
-        (p.get("title", "") + " " + p.get("abstract", "")) for p in arxiv_papers
-    ]
+    if not SILICONFLOW_API_KEY:
+        print("[ERROR] SILICONFLOW_API_KEY not set. Cannot use reranker.")
+        raise RuntimeError("SILICONFLOW_API_KEY environment variable is required.")
 
-    # TF-IDF vectorization
-    vectorizer = TfidfVectorizer(
-        max_features=10000,
-        stop_words="english",
-        ngram_range=(1, 2),
-    )
-    all_texts = zotero_texts + arxiv_texts
-    tfidf_matrix = vectorizer.fit_transform(all_texts)
+    # Build interest query from Zotero library
+    query = _build_interest_query(zotero_papers or [])
 
-    zotero_vecs = tfidf_matrix[: len(zotero_texts)]
-    arxiv_vecs = tfidf_matrix[len(zotero_texts):]
+    if not zotero_papers:
+        # Fallback: use a generic query based on paper categories
+        all_cats = set()
+        for p in arxiv_papers:
+            all_cats.update(p.get("categories", []))
+        query = (
+            "The user is interested in papers from the following research areas: "
+            + ", ".join(sorted(all_cats)[:10])
+            + ". Rank new candidate papers by relevance to these areas."
+        )
+        print(f"[INFO] No Zotero items, using category-based query.")
 
-    # For each ArXiv paper, find max similarity to any Zotero paper
-    sim_matrix = cosine_similarity(arxiv_vecs, zotero_vecs)
-    max_sim_scores = sim_matrix.max(axis=1)
+    # Rerank all ArXiv papers in batches
+    all_scores = [0.0] * len(arxiv_papers)
+    total_batches = (len(arxiv_papers) + SILICONFLOW_BATCH_SIZE - 1) // SILICONFLOW_BATCH_SIZE
+
+    for batch_idx in range(total_batches):
+        start = batch_idx * SILICONFLOW_BATCH_SIZE
+        end = min(start + SILICONFLOW_BATCH_SIZE, len(arxiv_papers))
+        batch = arxiv_papers[start:end]
+        documents = [_format_candidate(p) for p in batch]
+
+        print(f"[INFO] Reranking batch {batch_idx + 1}/{total_batches} ({len(batch)} papers)...")
+        try:
+            scores = _rerank_batch(query, documents)
+            for i, score in enumerate(scores):
+                all_scores[start + i] = score
+        except RuntimeError as e:
+            print(f"[ERROR] Rerank batch {batch_idx + 1} failed: {e}")
+            # Keep default 0.0 scores for this batch, continue
 
     # Attach scores and sort
+    score_scale = 10.0
     scored = []
     for i, paper in enumerate(arxiv_papers):
-        scored.append({**paper, "similarity_score": round(float(max_sim_scores[i]), 4)})
+        scored.append(
+            {
+                **paper,
+                "similarity_score": round(all_scores[i] * score_scale, 4),
+            }
+        )
 
     scored.sort(key=lambda x: x["similarity_score"], reverse=True)
 
-    # Mark source
     for p in scored:
         p["source"] = "zotero_similar"
 
     result = scored[:top_n]
-    print(f"[INFO] Top {len(result)} similar papers computed (max score: {result[0]['similarity_score'] if result else 'N/A'})")
+    max_score = result[0]["similarity_score"] if result else "N/A"
+    print(f"[INFO] Top {len(result)} similar papers by LLM reranker (max score: {max_score})")
     return result

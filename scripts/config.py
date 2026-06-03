@@ -18,6 +18,12 @@ ARXIV_QUERY = os.environ.get("ARXIV_QUERY", "cs.CV+cs.LG+cs.AI+cs.CL")
 ARXIV_API_BASE = "http://export.arxiv.org/api/query"
 MAX_PAPER_NUM = int(os.environ.get("MAX_PAPER_NUM", "10"))
 
+# ── SiliconFlow Reranker ─────────────────────────────────
+SILICONFLOW_API_KEY = os.environ.get("SILICONFLOW_API_KEY", "")
+SILICONFLOW_RERANK_URL = "https://api.siliconflow.cn/v1/rerank"
+SILICONFLOW_RERANK_MODEL = "Qwen/Qwen3-Reranker-0.6B"
+SILICONFLOW_BATCH_SIZE = 64
+
 # ── Followed Authors & Institutions ─────────────────────
 _followed_authors = []
 _followed_institutions = []

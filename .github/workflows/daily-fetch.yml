@@ -37,6 +37,7 @@ jobs:
           ZOTERO_KEY: ${{ secrets.ZOTERO_KEY }}
           ARXIV_QUERY: ${{ secrets.ARXIV_QUERY }}
           MAX_PAPER_NUM: ${{ secrets.MAX_PAPER_NUM }}
+          SILICONFLOW_API_KEY: ${{ secrets.SILICONFLOW_API_KEY }}
         run: python scripts/fetch_papers.py
 
       - name: Use sample data if fetch failed
