@@ -48,65 +48,50 @@ def main():
     except Exception as e:
         print(f"[WARN] ArXiv API unavailable (expected on CI): {e}")
 
-    # Merge papers, preferring HF as primary
-    seen_ids = set()
-    all_papers = []
-    # Build lookup for ArXiv affiliations (ArXiv API provides <arxiv:affiliation>)
+    # Build affiliation lookup from ArXiv (which has <arxiv:affiliation>)
     arxiv_affiliations = {}
     for p in arxiv_papers:
         if p.get("arxiv_id") and p.get("affiliations"):
             arxiv_affiliations[p["arxiv_id"]] = p["affiliations"]
 
-    # HF papers first (start with what works reliably)
+    # Enrich HF papers with ArXiv affiliations
     for p in hf_papers:
-        if p.get("arxiv_id"):
-            seen_ids.add(p["arxiv_id"])
-            # Cross-reference affiliations from ArXiv data
-            if not p.get("affiliations") and p["arxiv_id"] in arxiv_affiliations:
-                p["affiliations"] = arxiv_affiliations[p["arxiv_id"]]
-            all_papers.append(p)
+        if not p.get("affiliations") and p.get("arxiv_id") in arxiv_affiliations:
+            p["affiliations"] = arxiv_affiliations[p["arxiv_id"]]
 
-    # Add ArXiv papers not already in HF list
-    arxiv_only = 0
-    for p in arxiv_papers:
-        if p["arxiv_id"] not in seen_ids:
-            seen_ids.add(p["arxiv_id"])
-            all_papers.append(p)
-            arxiv_only += 1
+    print(f"[INFO] ArXiv: {len(arxiv_papers)} papers, HF: {len(hf_papers)} papers")
 
-    print(f"[INFO] Total unique papers: {len(all_papers)} (HF: {len(hf_papers)}, ArXiv additional: {arxiv_only})")
-
-    if not all_papers:
-        print("[ERROR] No papers available from any source. Outputting empty result.")
-        output_result([], [], [])
-        return
-
-    # 3. Compute Zotero-based similar paper recommendations
-    print("\n[Step 3] Computing Zotero similarity...")
+    # 3. Compute Zotero-based similarity on ArXiv papers (full daily set)
+    print("\n[Step 3] Computing Zotero similarity on ArXiv papers...")
     similar_papers = []
+    if not arxiv_papers:
+        # Fallback: use HF papers if ArXiv is empty
+        print("[WARN] No ArXiv papers, falling back to HF papers for similarity.")
+        arxiv_papers = hf_papers
+
     try:
         zotero_items = fetch_zotero_items()
         if zotero_items:
-            similar_papers = compute_similarity(zotero_items, all_papers, top_n=MAX_PAPER_NUM)
+            similar_papers = compute_similarity(zotero_items, arxiv_papers, top_n=MAX_PAPER_NUM)
         else:
-            print("[WARN] No Zotero items, using top N latest papers.")
+            print("[WARN] No Zotero items, using top N latest ArXiv papers.")
             similar_papers = [
                 {**p, "similarity_score": 0.0, "source": "zotero_similar"}
-                for p in all_papers[:MAX_PAPER_NUM]
+                for p in arxiv_papers[:MAX_PAPER_NUM]
             ]
     except Exception as e:
         print(f"[ERROR] Zotero similarity failed: {e}")
         similar_papers = [
             {**p, "similarity_score": 0.0, "source": "zotero_similar"}
-            for p in all_papers[:MAX_PAPER_NUM]
+            for p in arxiv_papers[:MAX_PAPER_NUM]
         ]
 
-    # 4. Filter by followed authors and institutions (from all papers)
+    # 4. Filter by followed authors and institutions (from ArXiv papers)
     print("\n[Step 4] Filtering followed authors/institutions...")
     followed_papers = []
     try:
-        author_papers = filter_by_authors(all_papers)
-        institution_papers = filter_by_institutions(all_papers)
+        author_papers = filter_by_authors(arxiv_papers)
+        institution_papers = filter_by_institutions(arxiv_papers)
         followed_ids = set()
         for p in author_papers + institution_papers:
             if p["arxiv_id"] not in followed_ids:
