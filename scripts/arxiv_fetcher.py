@@ -20,9 +20,9 @@ from config import (
 
 def get_latest_papers(categories: str = None) -> list[dict]:
     """
-    Fetch today's new ArXiv papers from the RSS Atom feed.
-    The feed contains full metadata (title, authors, affiliations,
-    abstract, categories) — no second API call needed.
+    Fetch today's new ArXiv papers.
+    Step 1: RSS Atom feed for basic metadata (no affiliations in RSS).
+    Step 2: API queries by id_list to enrich with author affiliations.
     """
     if categories is None:
         categories = ARXIV_QUERY
@@ -47,8 +47,75 @@ def get_latest_papers(categories: str = None) -> list[dict]:
         return []
 
     papers = _parse_atom_feed(xml_data)
-    print(f"[INFO] RSS feed returned {len(papers)} papers for today")
+    print(f"[INFO] RSS feed returned {len(papers)} papers")
+
+    # Step 2: Enrich with affiliations from ArXiv API (id_list queries)
+    ids = [p["arxiv_id"] for p in papers]
+    try:
+        aff_map = _fetch_affiliations_by_ids(ids)
+        for p in papers:
+            if not p["affiliations"] and p["arxiv_id"] in aff_map:
+                p["affiliations"] = aff_map[p["arxiv_id"]]
+        enriched = sum(1 for p in papers if p["affiliations"])
+        print(f"[INFO] Enriched affiliations for {enriched}/{len(papers)} papers")
+    except Exception as e:
+        print(f"[WARN] Could not enrich affiliations (API limited): {e}")
+
     return papers
+
+
+def _fetch_affiliations_by_ids(arxiv_ids: list[str]) -> dict[str, list[dict]]:
+    """
+    Query ArXiv API by id_list to get author affiliations.
+    Returns map of arxiv_id → list of {author, affiliation} dicts.
+    Uses the same batch/retry strategy as the original zotero-arxiv-daily.
+    """
+    if not arxiv_ids:
+        return {}
+
+    import urllib.error
+    import time as time_mod
+
+    max_batch_retries = 5
+    batch_retry_delay = 30
+    batch_size = 20
+    aff_map = {}
+
+    for i in range(0, len(arxiv_ids), batch_size):
+        batch = arxiv_ids[i:i + batch_size]
+        id_param = ",".join(batch)
+        url = f"{ARXIV_API_BASE}?id_list={urllib.parse.quote(id_param)}&max_results={len(batch)}"
+        batch_num = i // batch_size + 1
+        total_batches = (len(arxiv_ids) - 1) // batch_size + 1
+
+        for attempt in range(max_batch_retries):
+            try:
+                req = urllib.request.Request(url, headers={"User-Agent": "arXivDaily/1.0"})
+                with urllib.request.urlopen(req, timeout=60) as resp:
+                    xml_data = resp.read().decode("utf-8")
+
+                # Extract affiliations from API response
+                papers = _parse_atom_feed(xml_data)
+                for p in papers:
+                    if p["affiliations"]:
+                        aff_map[p["arxiv_id"]] = p["affiliations"]
+                break
+            except Exception as e:
+                status = getattr(e, "code", None) if hasattr(e, "code") else None
+                if status == 429 and attempt < max_batch_retries - 1:
+                    wait = batch_retry_delay * (attempt + 1)
+                    print(f"[WARN] Affiliations API 429 on batch {batch_num}/{total_batches}, retry in {wait}s")
+                    time_mod.sleep(wait)
+                else:
+                    if attempt == 0:
+                        print(f"[WARN] Affiliations batch {batch_num} failed: {e}")
+                    break
+
+        # Delay between batches
+        if i + batch_size < len(arxiv_ids):
+            time_mod.sleep(3)
+
+    return aff_map
 
 
 def _parse_atom_feed(xml_data: str) -> list[dict]:
