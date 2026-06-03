@@ -2,8 +2,10 @@
 ArXiv API fetcher: query latest papers and filter by followed authors/institutions.
 """
 
+import time
 import urllib.request
 import urllib.parse
+import urllib.error
 import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta, timezone
 from config import (
@@ -14,9 +16,11 @@ from config import (
     get_followed_institutions,
 )
 
-# ArXiv API rate limit: 1 request per 3 seconds in production
-# For a single daily fetch, a 5-second delay is safe.
+# ArXiv API rate limit: requires a polite user-agent and delay between requests.
+# We add retry with exponential backoff for transient errors (429, 5xx).
 ARXIV_DELAY = 5
+
+_USER_AGENT = "arXivDaily/1.0 (https://github.com/LiaojunChen/Arxiv-daily; mailto:your-email@example.com)"
 
 
 def _make_arxiv_url(categories: str, max_results: int, start: int = 0) -> str:
@@ -89,25 +93,20 @@ def fetch_arxiv_papers(
     categories: str = None,
     max_results: int = None,
 ) -> list[dict]:
-    """Fetch recent papers from ArXiv API."""
+    """Fetch recent papers from ArXiv API with retry on rate limits."""
     if categories is None:
         categories = ARXIV_QUERY
     if max_results is None:
         max_results = MAX_PAPER_NUM * 3  # Fetch more to allow filtering
 
     all_papers = []
-    # ArXiv API returns max 2000 results per call; we paginate up to max_results
     for start in range(0, max_results, 100):
         batch_size = min(100, max_results - start)
         url = _make_arxiv_url(categories, batch_size, start)
         print(f"[INFO] Fetching ArXiv: start={start}, count={batch_size}")
 
-        req = urllib.request.Request(url, headers={"User-Agent": "arXivDaily/1.0"})
-        try:
-            with urllib.request.urlopen(req, timeout=30) as resp:
-                xml_data = resp.read().decode("utf-8")
-        except Exception as e:
-            print(f"[ERROR] ArXiv API request failed: {e}")
+        xml_data = _request_with_retry(url)
+        if xml_data is None:
             break
 
         papers = _parse_arxiv_xml(xml_data)
@@ -120,6 +119,28 @@ def fetch_arxiv_papers(
 
     print(f"[INFO] Fetched {len(all_papers)} papers from ArXiv")
     return all_papers
+
+
+def _request_with_retry(url: str, max_retries: int = 4) -> str | None:
+    """Make an HTTP request with exponential backoff for rate limits."""
+    for attempt in range(max_retries):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": _USER_AGENT})
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                return resp.read().decode("utf-8")
+        except urllib.error.HTTPError as e:
+            if e.code == 429:
+                wait = 2 ** attempt * ARXIV_DELAY
+                print(f"[WARN] ArXiv rate limited (429), retrying in {wait}s (attempt {attempt + 1}/{max_retries})...")
+                time.sleep(wait)
+            else:
+                print(f"[ERROR] ArXiv API HTTP {e.code}: {e}")
+                return None
+        except Exception as e:
+            print(f"[ERROR] ArXiv API request failed: {e}")
+            return None
+    print(f"[ERROR] ArXiv API still rate limited after {max_retries} retries.")
+    return None
 
 
 def filter_by_authors(papers: list[dict]) -> list[dict]:
