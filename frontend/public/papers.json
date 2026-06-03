@@ -86,5 +86,57 @@
       "matched_by": "institution:DeepMind",
       "source": "followed"
     }
+  ],
+  "hf_papers": [
+    {
+      "arxiv_id": "2401.00001",
+      "title": "Mixture of Experts for Efficient Scaling of Large Language Models",
+      "authors": ["Mi Zhang", "Nano Chen", "Aria Liu"],
+      "affiliations": [
+        {"author": "Mi Zhang", "affiliation": "Meta AI"},
+        {"author": "Nano Chen", "affiliation": "Meta AI"},
+        {"author": "Aria Liu", "affiliation": "Stanford University"}
+      ],
+      "abstract": "We present a novel Mixture of Experts (MoE) architecture that achieves state-of-the-art performance while using only 30% of the compute of a dense model of equivalent capability. Our key innovation is a dynamic routing mechanism that adaptively selects experts based on token-level complexity, supported by a load-balancing loss that ensures uniform expert utilization. Experiments across reasoning, coding, and multilingual benchmarks show consistent improvements over dense baselines.",
+      "categories": ["cs.LG", "cs.CL"],
+      "published": "2026-06-03T00:00:00Z",
+      "pdf_url": "https://arxiv.org/pdf/2401.00001",
+      "abstract_url": "https://arxiv.org/abs/2401.00001",
+      "hf_upvotes": 245,
+      "source": "huggingface"
+    },
+    {
+      "arxiv_id": "2401.00002",
+      "title": "LongRAG: Retrieval-Augmented Generation for Million-Token Contexts",
+      "authors": ["Kai Wang", "Luna Park"],
+      "affiliations": [
+        {"author": "Kai Wang", "affiliation": "Google Research"},
+        {"author": "Luna Park", "affiliation": "Google Research"}
+      ],
+      "abstract": "We introduce LongRAG, a retrieval-augmented generation system designed for processing documents with up to one million tokens. LongRAG combines hierarchical chunking, semantic re-ranking, and cross-attention fusion to enable precise information retrieval from extremely long contexts. On the LongBench and NarrativeQA benchmarks, LongRAG outperforms existing approaches by 15-30% while reducing latency by 40% compared to full-context processing.",
+      "categories": ["cs.CL", "cs.IR"],
+      "published": "2026-06-03T00:00:00Z",
+      "pdf_url": "https://arxiv.org/pdf/2401.00002",
+      "abstract_url": "https://arxiv.org/abs/2401.00002",
+      "hf_upvotes": 189,
+      "source": "huggingface"
+    },
+    {
+      "arxiv_id": "2401.00003",
+      "title": "GenWorld: A Generative World Model for Embodied AI",
+      "authors": ["Oscar Perez", "Priya Sharma", "Wei Huang"],
+      "affiliations": [
+        {"author": "Oscar Perez", "affiliation": "UC Berkeley"},
+        {"author": "Priya Sharma", "affiliation": "UC Berkeley"},
+        {"author": "Wei Huang", "affiliation": "Tsinghua University"}
+      ],
+      "abstract": "GenWorld is a generative world model that learns to predict future states, rewards, and visual observations from raw pixel inputs. Built on a diffusion transformer backbone, GenWorld achieves unprecedented accuracy in long-horizon video prediction and enables model-based planning for complex robotic manipulation tasks. We demonstrate that agents trained with GenWorld rollouts achieve 2x sample efficiency on real-world robot tasks.",
+      "categories": ["cs.AI", "cs.RO", "cs.CV"],
+      "published": "2026-06-03T00:00:00Z",
+      "pdf_url": "https://arxiv.org/pdf/2401.00003",
+      "abstract_url": "https://arxiv.org/abs/2401.00003",
+      "hf_upvotes": 167,
+      "source": "huggingface"
+    }
   ]
 }

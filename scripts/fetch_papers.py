@@ -1,5 +1,5 @@
 """
-Main entry point: fetch papers from ArXiv, compute Zotero similarity,
+Main entry point: fetch papers from ArXiv, HuggingFace, compute Zotero similarity,
 filter by followed authors/institutions, and output papers.json.
 """
 
@@ -15,6 +15,7 @@ from arxiv_fetcher import (
     filter_by_institutions,
 )
 from zotero_similar import fetch_zotero_items, compute_similarity
+from hf_fetcher import fetch_hf_daily_papers
 from config import MAX_PAPER_NUM, load_user_config, ARXIV_QUERY
 
 
@@ -36,7 +37,7 @@ def main():
     arxiv_papers = get_latest_papers(categories=ARXIV_QUERY)
     if not arxiv_papers:
         print("[ERROR] No papers fetched from ArXiv. Exiting.")
-        output_result([], [])
+        output_result([], [], [])
         return
 
     # 2. Compute Zotero-based similar paper recommendations
@@ -57,7 +58,6 @@ def main():
     author_papers = filter_by_authors(arxiv_papers)
     institution_papers = filter_by_institutions(arxiv_papers)
 
-    # Merge followed papers, deduplicate by arxiv_id
     seen_ids = set()
     followed_papers = []
     for p in author_papers + institution_papers:
@@ -66,11 +66,15 @@ def main():
             followed_papers.append(p)
     print(f"[INFO] Found {len(followed_papers)} papers from followed authors/institutions")
 
-    # 4. Output
-    output_result(similar_papers, followed_papers)
+    # 4. Fetch HuggingFace daily papers
+    print("\n[Step 4] Fetching HuggingFace daily papers...")
+    hf_papers = fetch_hf_daily_papers()
+
+    # 5. Output
+    output_result(similar_papers, followed_papers, hf_papers)
 
 
-def output_result(similar_papers: list[dict], followed_papers: list[dict]):
+def output_result(similar_papers: list[dict], followed_papers: list[dict], hf_papers: list[dict]):
     """Write papers.json to the data directory."""
     output_path = os.path.join(
         os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
@@ -83,6 +87,7 @@ def output_result(similar_papers: list[dict], followed_papers: list[dict]):
         "updated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S+00:00"),
         "similar_papers": similar_papers,
         "followed_papers": followed_papers,
+        "hf_papers": hf_papers,
     }
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
@@ -92,6 +97,7 @@ def output_result(similar_papers: list[dict], followed_papers: list[dict]):
     print(f"\n[DONE] Output written to {output_path}")
     print(f"  - Similar papers: {len(similar_papers)}")
     print(f"  - Followed papers: {len(followed_papers)}")
+    print(f"  - HF daily papers: {len(hf_papers)}")
 
 
 if __name__ == "__main__":

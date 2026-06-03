@@ -38,6 +38,16 @@ export default function PaperCard({ paper, onChat }: PaperCardProps) {
             {paper.matched_by}
           </span>
         )}
+        {paper.source === "huggingface" && (
+          <span className="text-xs px-2 py-0.5 rounded font-medium bg-yellow-100 text-yellow-800">
+            HF
+          </span>
+        )}
+        {(paper.hf_upvotes ?? 0) > 0 && (
+          <span className="text-xs px-2 py-0.5 rounded font-medium bg-yellow-100 text-yellow-800">
+            {paper.hf_upvotes} upvotes
+          </span>
+        )}
       </div>
 
       {/* Title */}

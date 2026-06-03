@@ -15,7 +15,8 @@ export interface Paper {
   abstract_url: string;
   similarity_score?: number;
   matched_by?: string;
-  source: "zotero_similar" | "followed";
+  hf_upvotes?: number;
+  source: "zotero_similar" | "followed" | "huggingface";
 }
 
 export interface PapersData {
@@ -23,6 +24,7 @@ export interface PapersData {
   updated_at: string;
   similar_papers: Paper[];
   followed_papers: Paper[];
+  hf_papers: Paper[];
 }
 
 export interface AppSettings {

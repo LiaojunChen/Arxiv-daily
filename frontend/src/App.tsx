@@ -7,9 +7,9 @@ import ChatPanel from "./components/ChatPanel";
 import SettingsPanel from "./components/SettingsPanel";
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<"similar" | "followed" | "settings">("similar");
+  const [activeTab, setActiveTab] = useState<"similar" | "followed" | "hf" | "settings">("similar");
   const [chatPaper, setChatPaper] = useState<Paper | null>(null);
-  const { data, loading, error, search, setSearch, filteredSimilar, filteredFollowed } = usePapers();
+  const { data, loading, error, search, setSearch, filteredSimilar, filteredFollowed, filteredHF } = usePapers();
 
   if (loading) {
     return (
@@ -82,6 +82,7 @@ export default function App() {
           onTabChange={setActiveTab}
           similarCount={data?.similar_papers.length ?? 0}
           followedCount={data?.followed_papers.length ?? 0}
+          hfCount={data?.hf_papers.length ?? 0}
         />
       </div>
 
@@ -92,6 +93,13 @@ export default function App() {
             papers={filteredSimilar}
             onChat={setChatPaper}
             emptyMessage="暂无相似论文推荐。请确保已配置 Zotero API 密钥。"
+          />
+        )}
+        {activeTab === "hf" && (
+          <PaperList
+            papers={filteredHF}
+            onChat={setChatPaper}
+            emptyMessage="暂无 HuggingFace 热门论文数据。"
           />
         )}
         {activeTab === "followed" && (

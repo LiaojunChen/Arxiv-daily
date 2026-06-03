@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import type { PapersData } from "../types";
+import type { PapersData, Paper } from "../types";
 
 export function usePapers() {
   const [data, setData] = useState<PapersData | null>(null);
@@ -24,30 +24,30 @@ export function usePapers() {
       });
   }, []);
 
-  const filteredSimilar = useMemo(() => {
-    if (!data) return [];
-    if (!search.trim()) return data.similar_papers;
+  const filterPapers = (papers: Paper[]) => {
+    if (!search.trim()) return papers;
     const q = search.toLowerCase();
-    return data.similar_papers.filter(
+    return papers.filter(
       (p) =>
         p.title.toLowerCase().includes(q) ||
         p.authors.some((a) => a.toLowerCase().includes(q)) ||
         p.abstract.toLowerCase().includes(q) ||
         p.categories.some((c) => c.toLowerCase().includes(q))
     );
-  }, [data, search]);
+  };
 
-  const filteredFollowed = useMemo(() => {
-    if (!data) return [];
-    if (!search.trim()) return data.followed_papers;
-    const q = search.toLowerCase();
-    return data.followed_papers.filter(
-      (p) =>
-        p.title.toLowerCase().includes(q) ||
-        p.authors.some((a) => a.toLowerCase().includes(q)) ||
-        p.abstract.toLowerCase().includes(q)
-    );
-  }, [data, search]);
+  const filteredSimilar = useMemo(
+    () => filterPapers(data?.similar_papers ?? []),
+    [data, search]
+  );
+  const filteredFollowed = useMemo(
+    () => filterPapers(data?.followed_papers ?? []),
+    [data, search]
+  );
+  const filteredHF = useMemo(
+    () => filterPapers(data?.hf_papers ?? []),
+    [data, search]
+  );
 
   return {
     data,
@@ -57,5 +57,6 @@ export function usePapers() {
     setSearch,
     filteredSimilar,
     filteredFollowed,
+    filteredHF,
   };
 }

@@ -1,13 +1,15 @@
 interface TabNavProps {
-  activeTab: "similar" | "followed" | "settings";
-  onTabChange: (tab: "similar" | "followed" | "settings") => void;
+  activeTab: "similar" | "followed" | "hf" | "settings";
+  onTabChange: (tab: "similar" | "followed" | "hf" | "settings") => void;
   similarCount: number;
   followedCount: number;
+  hfCount: number;
 }
 
-export default function TabNav({ activeTab, onTabChange, similarCount, followedCount }: TabNavProps) {
+export default function TabNav({ activeTab, onTabChange, similarCount, followedCount, hfCount }: TabNavProps) {
   const tabs = [
     { key: "similar" as const, label: "Zotero 推荐", count: similarCount },
+    { key: "hf" as const, label: "HF 热门", count: hfCount },
     { key: "followed" as const, label: "关注追踪", count: followedCount },
     { key: "settings" as const, label: "设置", count: null },
   ];
