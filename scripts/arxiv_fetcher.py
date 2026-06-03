@@ -1,39 +1,44 @@
 """
-ArXiv paper fetcher using the same two-step approach as zotero-arxiv-daily:
-  1. RSS/Atom feed to get today's paper IDs (lightweight, rarely rate-limited)
-  2. Query API by id_list for detailed metadata (cheaper than full search)
+ArXiv paper fetcher: uses the RSS Atom feed to get today's new papers
+with full metadata (including author affiliations).
+
+The RSS feed (rss.arxiv.org) is designed for feed readers and is NOT
+rate-limited — it includes full paper details in one request, avoiding
+the need to hit the search API at all.
 """
 
 import urllib.request
-import urllib.parse
-import urllib.error
 import xml.etree.ElementTree as ET
-import time
 from datetime import datetime, timezone
 
 from config import (
-    ARXIV_API_BASE,
     ARXIV_QUERY,
-    MAX_PAPER_NUM,
     get_followed_authors,
     get_followed_institutions,
 )
 
 
-def _fetch_rss_paper_ids(categories: str) -> list[str]:
+def get_latest_papers(categories: str = None) -> list[dict]:
     """
-    Step 1: Use RSS Atom feed to get today's new paper IDs.
-    This is the same lightweight endpoint the original project uses.
-    Format: https://rss.arxiv.org/atom/cs.AI+cs.CL
-    Returns list of arXiv IDs (without version suffix).
+    Fetch today's new ArXiv papers from the RSS Atom feed.
+    The feed contains full metadata (title, authors, affiliations,
+    abstract, categories) — no second API call needed.
     """
+    if categories is None:
+        categories = ARXIV_QUERY
+
     # Normalize categories: handle +, comma, space, newline separators
-    cats = [c.strip() for c in categories.replace(",", "+").replace(" ", "+").replace("\n", "+").split("+") if c.strip()]
+    cats = [
+        c.strip()
+        for c in categories.replace(",", "+").replace(" ", "+").replace("\n", "+").split("+")
+        if c.strip()
+    ]
     query = "+".join(cats)
     url = f"https://rss.arxiv.org/atom/{query}"
-    print(f"[INFO] Fetching RSS feed: {url}")
 
+    print(f"[INFO] Fetching ArXiv RSS feed: {url}")
     req = urllib.request.Request(url, headers={"User-Agent": "arXivDaily/1.0"})
+
     try:
         with urllib.request.urlopen(req, timeout=30) as resp:
             xml_data = resp.read().decode("utf-8")
@@ -41,8 +46,17 @@ def _fetch_rss_paper_ids(categories: str) -> list[str]:
         print(f"[ERROR] RSS feed request failed: {e}")
         return []
 
-    # Parse Atom XML to extract paper IDs
-    ns = {"atom": "http://www.w3.org/2005/Atom"}
+    papers = _parse_atom_feed(xml_data)
+    print(f"[INFO] RSS feed returned {len(papers)} papers for today")
+    return papers
+
+
+def _parse_atom_feed(xml_data: str) -> list[dict]:
+    """Parse ArXiv Atom feed XML into paper dicts with full metadata."""
+    ns = {
+        "atom": "http://www.w3.org/2005/Atom",
+        "arxiv": "http://arxiv.org/schemas/atom",
+    }
     root = ET.fromstring(xml_data)
 
     # Check for feed errors
@@ -51,89 +65,21 @@ def _fetch_rss_paper_ids(categories: str) -> list[str]:
         print(f"[ERROR] RSS feed error: {title_el.text}")
         return []
 
-    ids = []
-    for entry in root.findall("atom:entry", ns):
-        id_el = entry.find("atom:id", ns)
-        if id_el is not None and id_el.text:
-            # Format: "http://arxiv.org/abs/2301.12345v2" → "2301.12345"
-            arxiv_id = id_el.text.strip().split("/abs/")[-1]
-            arxiv_id = arxiv_id.split("v")[0]
-            ids.append(arxiv_id)
-
-    print(f"[INFO] RSS feed returned {len(ids)} paper IDs for today")
-    return ids
-
-
-def _fetch_papers_by_ids(arxiv_ids: list[str]) -> list[dict]:
-    """
-    Step 2: Get detailed paper metadata by querying the ArXiv API with id_list.
-    id_list queries are much cheaper than search queries for ArXiv.
-    Batched in groups of 20 with delays between batches (matching original project).
-    """
-    max_batch_retries = 5
-    batch_retry_delay = 30
-
-    all_papers = []
-    batch_size = 20
-
-    for i in range(0, len(arxiv_ids), batch_size):
-        batch = arxiv_ids[i : i + batch_size]
-        print(f"[INFO] Fetching batch {i // batch_size + 1}/{(len(arxiv_ids) - 1) // batch_size + 1} ({len(batch)} IDs)")
-
-        for attempt in range(max_batch_retries):
-            try:
-                papers = _request_batch_by_ids(batch)
-                all_papers.extend(papers)
-                break
-            except Exception as e:
-                status = getattr(e, "code", None)
-                if status == 429 and attempt < max_batch_retries - 1:
-                    wait = batch_retry_delay * (attempt + 1)
-                    print(f"[WARN] ArXiv 429 on batch {i // batch_size + 1}, retrying in {wait}s (attempt {attempt + 1}/{max_batch_retries})")
-                    time.sleep(wait)
-                else:
-                    print(f"[ERROR] Batch {i // batch_size + 1} failed: {e}")
-                    break
-
-        # 3 second delay between batches (matching original project)
-        if i + batch_size < len(arxiv_ids):
-            time.sleep(3)
-
-    print(f"[INFO] Fetched metadata for {len(all_papers)} papers via id_list API")
-    return all_papers
-
-
-def _request_batch_by_ids(arxiv_ids: list[str]) -> list[dict]:
-    """Query ArXiv API for specific paper IDs."""
-    id_param = ",".join(arxiv_ids)
-    url = f"{ARXIV_API_BASE}?id_list={urllib.parse.quote(id_param)}&max_results={len(arxiv_ids)}"
-
-    req = urllib.request.Request(url, headers={"User-Agent": "arXivDaily/1.0"})
-    try:
-        with urllib.request.urlopen(req, timeout=60) as resp:
-            xml_data = resp.read().decode("utf-8")
-    except urllib.error.HTTPError as e:
-        raise RuntimeError(f"HTTP {e.code}") from e
-
-    return _parse_api_xml(xml_data)
-
-
-def _parse_api_xml(xml_data: str) -> list[dict]:
-    """Parse ArXiv API Atom XML response into paper dicts."""
-    ns = {
-        "atom": "http://www.w3.org/2005/Atom",
-        "arxiv": "http://arxiv.org/schemas/atom",
-    }
-    root = ET.fromstring(xml_data)
     papers = []
-
     for entry in root.findall("atom:entry", ns):
+        # ID → arxiv ID
         id_full = entry.find("atom:id", ns).text.strip()
         arxiv_id = id_full.split("/abs/")[-1].split("v")[0]
 
-        title = " ".join(entry.find("atom:title", ns).text.strip().split())
-        abstract = " ".join(entry.find("atom:summary", ns).text.strip().split())
+        # Title
+        title_el = entry.find("atom:title", ns)
+        title = " ".join(title_el.text.strip().split()) if title_el is not None and title_el.text else ""
 
+        # Abstract (summary)
+        summary_el = entry.find("atom:summary", ns)
+        abstract = " ".join(summary_el.text.strip().split()) if summary_el is not None and summary_el.text else ""
+
+        # Authors with affiliations (from <arxiv:affiliation>)
         author_list = []
         affiliations = []
         for a in entry.findall("atom:author", ns):
@@ -145,13 +91,16 @@ def _parse_api_xml(xml_data: str) -> list[dict]:
             if aff:
                 affiliations.append({"author": name, "affiliation": aff})
 
+        # Categories
         categories = [
             c.get("term")
             for c in entry.findall("atom:category", ns)
             if c.get("term")
         ]
 
-        published = entry.find("atom:published", ns).text.strip()
+        # Published date
+        pub_el = entry.find("atom:published", ns)
+        published = pub_el.text.strip() if pub_el is not None and pub_el.text else ""
 
         papers.append({
             "arxiv_id": arxiv_id,
@@ -169,26 +118,7 @@ def _parse_api_xml(xml_data: str) -> list[dict]:
     return papers
 
 
-def get_latest_papers(categories: str = None) -> list[dict]:
-    """
-    Main entry point: fetch today's new ArXiv papers.
-    Uses two-step approach (RSS → ID list → API) to avoid rate limiting.
-    """
-    if categories is None:
-        categories = ARXIV_QUERY
-
-    # Step 1: Get today's paper IDs from RSS Atom feed
-    ids = _fetch_rss_paper_ids(categories)
-    if not ids:
-        print("[ERROR] No paper IDs from RSS feed.")
-        return []
-
-    # Step 2: Fetch detailed metadata by ID batches
-    papers = _fetch_papers_by_ids(ids)
-    return papers
-
-
-# ── Author/Institution filtering (unchanged) ──────────────
+# ── Author/Institution filtering ──────────────────────────
 
 def filter_by_authors(papers: list[dict]) -> list[dict]:
     followed = [a.lower() for a in get_followed_authors()]
@@ -223,8 +153,3 @@ def filter_by_institutions(papers: list[dict]) -> list[dict]:
                 matched.append({**paper, "matched_by": f"institution:{inst}", "source": "followed"})
                 break
     return matched
-
-
-def filter_today_papers(papers: list[dict]) -> list[dict]:
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    return [p for p in papers if p["published"].startswith(today)]
