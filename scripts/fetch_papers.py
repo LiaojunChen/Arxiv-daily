@@ -51,11 +51,19 @@ def main():
     # Merge papers, preferring HF as primary
     seen_ids = set()
     all_papers = []
+    # Build lookup for ArXiv affiliations (ArXiv API provides <arxiv:affiliation>)
+    arxiv_affiliations = {}
+    for p in arxiv_papers:
+        if p.get("arxiv_id") and p.get("affiliations"):
+            arxiv_affiliations[p["arxiv_id"]] = p["affiliations"]
 
     # HF papers first (start with what works reliably)
     for p in hf_papers:
         if p.get("arxiv_id"):
             seen_ids.add(p["arxiv_id"])
+            # Cross-reference affiliations from ArXiv data
+            if not p.get("affiliations") and p["arxiv_id"] in arxiv_affiliations:
+                p["affiliations"] = arxiv_affiliations[p["arxiv_id"]]
             all_papers.append(p)
 
     # Add ArXiv papers not already in HF list

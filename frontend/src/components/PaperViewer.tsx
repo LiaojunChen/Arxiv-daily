@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import type { Paper, ChatMessage } from "../types";
 import { loadSettings } from "../utils/storage";
 
@@ -6,6 +6,41 @@ interface PaperViewerProps {
   paper: Paper;
   onClose: () => void;
 }
+
+// Simple markdown renderer — handles bold, italic, code, lists, links, headings
+function renderMarkdown(text: string): string {
+  let html = text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+
+  // Code blocks (```...```)
+  html = html.replace(/```(\w*)\n([\s\S]*?)```/g,
+    '<pre class="bg-gray-800 text-green-100 rounded p-3 my-2 overflow-x-auto text-xs"><code>$2</code></pre>');
+  // Inline code
+  html = html.replace(/`([^`]+)`/g, '<code class="bg-gray-200 text-red-600 px-1 py-0.5 rounded text-xs">$1</code>');
+  // Bold
+  html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  // Italic
+  html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+  // Headings
+  html = html.replace(/^### (.+)$/gm, '<h4 class="font-semibold text-sm mt-3 mb-1">$1</h4>');
+  html = html.replace(/^## (.+)$/gm, '<h3 class="font-semibold text-sm mt-3 mb-1">$1</h3>');
+  html = html.replace(/^# (.+)$/gm, '<h2 class="font-semibold text-base mt-3 mb-1">$1</h2>');
+  // Unordered lists
+  html = html.replace(/^- (.+)$/gm, '<li class="ml-4 list-disc">$1</li>');
+  // Numbered lists
+  html = html.replace(/^\d+\. (.+)$/gm, '<li class="ml-4 list-decimal">$1</li>');
+  // Links
+  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" class="text-indigo-600 underline">$1</a>');
+  // Line breaks
+  html = html.replace(/\n\n/g, '</p><p class="mb-2">');
+  html = html.replace(/\n/g, '<br/>');
+  html = `<p class="mb-2">${html}</p>`;
+
+  return html;
+}
+
 
 export default function PaperViewer({ paper, onClose }: PaperViewerProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -18,10 +53,22 @@ export default function PaperViewer({ paper, onClose }: PaperViewerProps) {
 
   const settings = loadSettings();
 
+  const uniqueAffiliations = useMemo(() => {
+    const seen = new Set<string>();
+    return (paper.affiliations || [])
+      .filter((a) => {
+        if (!a.affiliation || seen.has(a.affiliation)) return false;
+        seen.add(a.affiliation);
+        return true;
+      })
+      .map((a) => a.affiliation);
+  }, [paper.affiliations]);
+
   const systemPrompt = `你正在讨论以下论文:
 
 标题: ${paper.title}
 作者: ${paper.authors.join(", ")}
+${uniqueAffiliations.length > 0 ? `机构: ${uniqueAffiliations.join(", ")}` : ""}
 分类: ${paper.categories.join(", ")}
 arXiv ID: ${paper.arxiv_id}
 
@@ -31,6 +78,7 @@ arXiv ID: ${paper.arxiv_id}
 
   useEffect(() => {
     setMessages([{ role: "system", content: systemPrompt }]);
+    setFullTextLoaded(false);
   }, [paper.arxiv_id]);
 
   useEffect(() => {
@@ -39,44 +87,53 @@ arXiv ID: ${paper.arxiv_id}
 
   const fetchFullText = useCallback(async () => {
     setFullTextLoading(true);
-    try {
-      const resp = await fetch(
-        `https://ar5iv.labs.arxiv.org/html/${paper.arxiv_id}`
-      );
-      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const sources = [
+      `https://arxiv.org/html/${paper.arxiv_id}`,
+      `https://ar5iv.labs.arxiv.org/html/${paper.arxiv_id}`,
+    ];
 
-      const html = await resp.text();
-      const div = document.createElement("div");
-      div.innerHTML = html;
+    let success = false;
+    for (const src of sources) {
+      try {
+        const resp = await fetch(src);
+        if (!resp.ok) continue;
 
-      // Remove math, scripts, styles, nav
-      div.querySelectorAll("script, style, nav, .ltx_navbar, math").forEach((el) => el.remove());
+        const html = await resp.text();
+        const div = document.createElement("div");
+        div.innerHTML = html;
+        div.querySelectorAll("script, style, nav, .ltx_navbar, math, .ltx_page_footer, .ltx_marksection").forEach((el) => el.remove());
 
-      const text = (div.textContent || "").replace(/\s{3,}/g, "\n").trim();
-      const truncated = text.slice(0, 15000);
+        const text = (div.textContent || "").replace(/\s{3,}/g, "\n").trim();
+        if (text.length < 500) continue; // too short, probably error page
 
-      const fullPrompt = `${systemPrompt}
+        const truncated = text.slice(0, 15000);
+        const fullPrompt = `${systemPrompt}
 
-以下是论文的完整内容（供参考，优先基于此内容回答用户问题）:
+以下为论文全文（优先基于此内容回答）:
 ${truncated}`;
 
-      setMessages((prev) => {
-        const filtered = prev.filter((m) => m.role !== "system");
-        return [{ role: "system", content: fullPrompt }, ...filtered];
-      });
-      setFullTextLoaded(true);
-    } catch (err: any) {
-      console.warn("Failed to fetch full text:", err.message);
+        setMessages((prev) => {
+          const filtered = prev.filter((m) => m.role !== "system");
+          return [{ role: "system", content: fullPrompt }, ...filtered];
+        });
+        setFullTextLoaded(true);
+        success = true;
+        break;
+      } catch {
+        continue;
+      }
+    }
+
+    if (!success) {
       setMessages((prev) => [
         ...prev,
         {
           role: "assistant",
-          content: "未能获取论文全文，将基于摘要进行讨论。部分较新的论文可能尚未在 ar5iv 上渲染。",
+          content: "自动获取全文失败，将基于摘要讨论。较新的论文可能在 arXiv 上尚无 HTML 版本，可尝试复制 PDF 文本到对话框中。",
         },
       ]);
-    } finally {
-      setFullTextLoading(false);
     }
+    setFullTextLoading(false);
   }, [paper.arxiv_id]);
 
   const sendMessage = async () => {
@@ -91,7 +148,7 @@ ${truncated}`;
     if (!settings.ai_api_key) {
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content: "请先在设置页面配置 AI API Key。" },
+        { role: "assistant", content: "请先在**设置**页面配置 AI API Key。" },
       ]);
       setSending(false);
       return;
@@ -128,7 +185,7 @@ ${truncated}`;
     } catch (err: any) {
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content: `错误: ${err.message}` },
+        { role: "assistant", content: `**错误**: ${err.message}` },
       ]);
     } finally {
       setSending(false);
@@ -138,11 +195,11 @@ ${truncated}`;
   return (
     <div className="fixed inset-0 bg-white z-20 flex flex-col">
       {/* Header */}
-      <header className="flex items-center justify-between px-4 py-3 border-b border-gray-200 bg-white shrink-0">
-        <div className="flex items-center gap-3 min-w-0">
+      <header className="flex items-center justify-between px-4 py-2.5 border-b border-gray-200 bg-white shrink-0">
+        <div className="flex items-center gap-3 min-w-0 flex-1">
           <button
             onClick={onClose}
-            className="p-1.5 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg cursor-pointer transition-colors"
+            className="p-1.5 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg cursor-pointer transition-colors shrink-0"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -150,119 +207,96 @@ ${truncated}`;
           </button>
           <h2 className="text-sm font-semibold text-gray-900 truncate">{paper.title}</h2>
         </div>
-        <div className="flex items-center gap-2 shrink-0">
-          {/* Full text button */}
+        <div className="flex items-center gap-2 shrink-0 ml-2">
           {!fullTextLoaded && (
             <button
               onClick={fetchFullText}
               disabled={fullTextLoading}
               className="text-xs px-3 py-1.5 border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50 disabled:opacity-50 cursor-pointer transition-colors"
             >
-              {fullTextLoading ? "加载全文中..." : "加载论文全文"}
+              {fullTextLoading ? "加载中..." : "加载全文到 AI"}
             </button>
           )}
           {fullTextLoaded && (
-            <span className="text-xs text-green-600 px-2">全文已加载</span>
+            <span className="text-xs text-green-600 px-2 font-medium">全文已加载</span>
           )}
-          {/* PDF link */}
           <a
-            href={paper.pdf_url}
+            href={paper.abstract_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs px-3 py-1.5 bg-gray-900 text-white rounded-lg hover:bg-gray-800 cursor-pointer transition-colors"
+            className="text-xs px-3 py-1.5 border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors"
           >
-            打开 PDF
+            arXiv 页面
           </a>
         </div>
       </header>
 
-      {/* Mobile tab switcher */}
-      <div className="flex lg:hidden border-b border-gray-200 shrink-0">
-        <button
-          onClick={() => setSidebarTab("paper")}
-          className={`flex-1 py-2.5 text-sm font-medium text-center transition-colors cursor-pointer ${
-            sidebarTab === "paper"
-              ? "text-indigo-600 border-b-2 border-indigo-600"
-              : "text-gray-500"
-          }`}
-        >
-          论文
-        </button>
-        <button
-          onClick={() => setSidebarTab("chat")}
-          className={`flex-1 py-2.5 text-sm font-medium text-center transition-colors cursor-pointer ${
-            sidebarTab === "chat"
-              ? "text-indigo-600 border-b-2 border-indigo-600"
-              : "text-gray-500"
-          }`}
-        >
-          讨论
-        </button>
+      {/* Paper metadata bar */}
+      <div className="px-4 py-2 border-b border-gray-100 bg-gray-50 shrink-0">
+        <p className="text-xs text-gray-500 mb-0.5">
+          {paper.authors.slice(0, 6).join(", ")}
+          {paper.authors.length > 6 && ` et al.`}
+        </p>
+        {uniqueAffiliations.length > 0 && (
+          <p className="text-xs text-gray-400">
+            {uniqueAffiliations.join("  ·  ")}
+          </p>
+        )}
       </div>
 
-      {/* Content: split layout */}
+      {/* Mobile tab switcher */}
+      <div className="flex lg:hidden border-b border-gray-200 shrink-0">
+        <button onClick={() => setSidebarTab("paper")} className={`flex-1 py-2 text-sm font-medium text-center cursor-pointer ${sidebarTab === "paper" ? "text-indigo-600 border-b-2 border-indigo-600" : "text-gray-500"}`}>论文</button>
+        <button onClick={() => setSidebarTab("chat")} className={`flex-1 py-2 text-sm font-medium text-center cursor-pointer ${sidebarTab === "chat" ? "text-indigo-600 border-b-2 border-indigo-600" : "text-gray-500"}`}>讨论</button>
+      </div>
+
+      {/* Split layout: 70% paper, 30% chat */}
       <div className="flex-1 flex min-h-0">
-        {/* Left: Paper viewer (desktop always visible, mobile conditional) */}
-        <div
-          className={`${
-            sidebarTab === "paper" ? "flex" : "hidden"
-          } lg:flex flex-col w-full lg:w-1/2 border-r border-gray-200`}
-        >
-          {/* Paper metadata */}
-          <div className="px-4 py-3 border-b border-gray-100 bg-gray-50 shrink-0">
-            <p className="text-xs text-gray-500 mb-1">
-              {paper.authors.slice(0, 5).join(", ")}
-              {paper.authors.length > 5 && ` et al.`}
-            </p>
-            <p className="text-xs text-gray-400">{paper.categories.join(" · ")}</p>
-          </div>
-          {/* arXiv abstract page iframe */}
+        {/* Left: PDF viewer (70%) */}
+        <div className={`${sidebarTab === "paper" ? "flex" : "hidden"} lg:flex flex-col lg:w-[70%] w-full`}>
           <iframe
-            src={`https://arxiv.org/abs/${paper.arxiv_id}`}
+            src={`https://arxiv.org/pdf/${paper.arxiv_id}`}
             className="flex-1 w-full border-0"
-            title={`arXiv: ${paper.arxiv_id}`}
+            title={`PDF: ${paper.arxiv_id}`}
           />
         </div>
 
-        {/* Right: Chat panel (desktop always visible, mobile conditional) */}
-        <div
-          className={`${
-            sidebarTab === "chat" ? "flex" : "hidden"
-          } lg:flex flex-col w-full lg:w-1/2`}
-        >
+        {/* Right: Chat (30%) */}
+        <div className={`${sidebarTab === "chat" ? "flex" : "hidden"} lg:flex flex-col lg:w-[30%] w-full border-l border-gray-200`}>
+          <div className="px-3 py-2 border-b border-gray-100 bg-gray-50 shrink-0">
+            <span className="text-xs text-gray-500 font-medium">AI 讨论</span>
+          </div>
+
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4">
-            {messages
-              .filter((m) => m.role !== "system")
-              .map((msg, i) => (
-                <div
-                  key={i}
-                  className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
-                >
-                  <div
-                    className={`max-w-[85%] px-4 py-2.5 rounded-lg text-sm leading-relaxed ${
-                      msg.role === "user"
-                        ? "bg-indigo-600 text-white"
-                        : "bg-gray-100 text-gray-800"
-                    }`}
-                  >
+          <div className="flex-1 overflow-y-auto p-3 space-y-3">
+            {messages.filter((m) => m.role !== "system").map((msg, i) => (
+              <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
+                <div className={`max-w-[90%] px-3 py-2 rounded-lg text-xs leading-relaxed ${
+                  msg.role === "user"
+                    ? "bg-indigo-600 text-white"
+                    : "bg-gray-100 text-gray-800"
+                }`}>
+                  {msg.role === "assistant" ? (
+                    <div dangerouslySetInnerHTML={{ __html: renderMarkdown(msg.content) }} />
+                  ) : (
                     <p className="whitespace-pre-wrap">{msg.content}</p>
-                  </div>
+                  )}
                 </div>
-              ))}
+              </div>
+            ))}
             {messages.filter((m) => m.role !== "system").length === 0 && (
-              <div className="text-center text-gray-400 mt-20">
-                <svg className="w-12 h-12 mx-auto mb-3 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="text-center text-gray-400 mt-16">
+                <svg className="w-10 h-10 mx-auto mb-2 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                 </svg>
-                <p className="text-sm">点击"加载论文全文"后开始讨论</p>
-                <p className="text-xs mt-1">或直接输入问题，基于摘要进行讨论</p>
+                <p className="text-xs">点击"加载全文到 AI"后讨论</p>
+                <p className="text-[10px] mt-0.5">或直接输入问题讨论</p>
               </div>
             )}
             {sending && (
               <div className="flex justify-start">
-                <div className="bg-gray-100 px-4 py-2 rounded-lg text-sm text-gray-500 flex items-center gap-2">
-                  <div className="w-4 h-4 border-2 border-gray-400 border-t-transparent rounded-full animate-spin" />
+                <div className="bg-gray-100 px-3 py-2 rounded-lg text-xs text-gray-500 flex items-center gap-2">
+                  <div className="w-3 h-3 border-2 border-gray-400 border-t-transparent rounded-full animate-spin" />
                   思考中...
                 </div>
               </div>
@@ -271,21 +305,21 @@ ${truncated}`;
           </div>
 
           {/* Input */}
-          <div className="p-4 border-t border-gray-200 bg-white">
-            <div className="flex gap-2">
+          <div className="p-3 border-t border-gray-200 bg-white">
+            <div className="flex gap-1.5">
               <input
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-                placeholder="输入问题讨论这篇论文..."
-                className="flex-1 px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                placeholder="输入问题..."
+                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 disabled={sending}
               />
               <button
                 onClick={sendMessage}
                 disabled={sending || !input.trim()}
-                className="px-5 py-2.5 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer transition-colors"
+                className="px-3 py-2 bg-indigo-600 text-white rounded-lg text-xs font-medium hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer transition-colors"
               >
                 发送
               </button>
