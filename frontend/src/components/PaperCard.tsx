@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import type { Paper } from "../types";
 import { truncateAbstract, categoryColor } from "../utils/arxiv";
 
@@ -7,6 +8,17 @@ interface PaperCardProps {
 }
 
 export default function PaperCard({ paper, onChat }: PaperCardProps) {
+  const uniqueAffiliations = useMemo(() => {
+    const seen = new Set<string>();
+    return (paper.affiliations || [])
+      .filter((a) => {
+        if (!a.affiliation || seen.has(a.affiliation)) return false;
+        seen.add(a.affiliation);
+        return true;
+      })
+      .map((a) => a.affiliation);
+  }, [paper.affiliations]);
+
   return (
     <div className="bg-white rounded-lg border border-gray-200 p-5 hover:shadow-md transition-shadow">
       {/* Categories */}
@@ -41,10 +53,22 @@ export default function PaperCard({ paper, onChat }: PaperCardProps) {
       </h3>
 
       {/* Authors */}
-      <p className="text-sm text-gray-600 mb-3">
+      <p className="text-sm text-gray-600 mb-1.5">
         {paper.authors.slice(0, 5).join(", ")}
         {paper.authors.length > 5 && ` et al. (${paper.authors.length} authors)`}
       </p>
+
+      {/* Affiliations */}
+      {uniqueAffiliations.length > 0 && (
+        <div className="flex flex-wrap items-center gap-1.5 mb-3">
+          <svg className="w-3.5 h-3.5 text-gray-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+          </svg>
+          <span className="text-xs text-gray-400">
+            {uniqueAffiliations.join("  ·  ")}
+          </span>
+        </div>
+      )}
 
       {/* Abstract */}
       <p className="text-sm text-gray-500 leading-relaxed mb-4">

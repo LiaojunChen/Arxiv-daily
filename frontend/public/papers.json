@@ -6,6 +6,11 @@
       "arxiv_id": "2301.12345",
       "title": "Attention Is All You Need: A Comprehensive Survey on Transformer Architectures",
       "authors": ["Jane Smith", "John Doe", "Alice Johnson"],
+      "affiliations": [
+        {"author": "Jane Smith", "affiliation": "Stanford University"},
+        {"author": "John Doe", "affiliation": "Stanford University"},
+        {"author": "Alice Johnson", "affiliation": "MIT CSAIL"}
+      ],
       "abstract": "The Transformer architecture has revolutionized the field of deep learning, particularly in natural language processing and computer vision. This paper provides a comprehensive survey of Transformer architectures, covering their mathematical foundations, key innovations, and diverse applications. We discuss self-attention mechanisms, positional encodings, and the evolution from the original encoder-decoder structure to modern variants including decoder-only and encoder-only architectures. We also analyze computational efficiency improvements such as sparse attention, linear attention, and flash attention mechanisms. Finally, we highlight open challenges and future research directions in the field.",
       "categories": ["cs.CL", "cs.LG", "cs.AI"],
       "published": "2026-06-03T00:00:00Z",
@@ -18,6 +23,10 @@
       "arxiv_id": "2302.23456",
       "title": "Efficient Fine-Tuning of Large Language Models with Low-Rank Adaptation",
       "authors": ["Bob Wilson", "Charlie Brown"],
+      "affiliations": [
+        {"author": "Bob Wilson", "affiliation": "Carnegie Mellon University"},
+        {"author": "Charlie Brown", "affiliation": "UC Berkeley"}
+      ],
       "abstract": "Fine-tuning large language models remains computationally expensive. We propose a novel low-rank adaptation method that reduces the number of trainable parameters by 99.9% while maintaining 98% of full fine-tuning performance. Our method, LoRA++, introduces dynamic rank allocation and adaptive scaling to optimize the trade-off between efficiency and expressiveness. Extensive experiments on GLUE, SuperGLUE, and instruction-following benchmarks demonstrate that our approach consistently outperforms existing parameter-efficient fine-tuning methods.",
       "categories": ["cs.CL", "cs.LG"],
       "published": "2026-06-03T00:00:00Z",
@@ -30,6 +39,10 @@
       "arxiv_id": "2303.34567",
       "title": "Vision-Language Models for Zero-Shot Object Detection: Progress and Pitfalls",
       "authors": ["Diana Prince", "Eve Adams"],
+      "affiliations": [
+        {"author": "Diana Prince", "affiliation": "ETH Zurich"},
+        {"author": "Eve Adams", "affiliation": "University of Oxford"}
+      ],
       "abstract": "Vision-language models like CLIP and its successors have demonstrated impressive zero-shot capabilities. This paper systematically evaluates the performance of state-of-the-art vision-language models on zero-shot object detection across diverse domains including natural images, medical imaging, and satellite imagery. We identify key failure modes related to fine-grained classification, occlusion handling, and domain shift. Based on our analysis, we propose targeted improvements to the prompt engineering and feature fusion strategies that yield consistent gains across all tested benchmarks.",
       "categories": ["cs.CV", "cs.AI", "cs.CL"],
       "published": "2026-06-03T00:00:00Z",
@@ -44,6 +57,11 @@
       "arxiv_id": "2304.45678",
       "title": "Scaling Laws for Multimodal Foundation Models: An Empirical Investigation",
       "authors": ["Yann LeCun", "Frank Miller", "Grace Hopper"],
+      "affiliations": [
+        {"author": "Yann LeCun", "affiliation": "New York University"},
+        {"author": "Frank Miller", "affiliation": "New York University"},
+        {"author": "Grace Hopper", "affiliation": "Google DeepMind"}
+      ],
       "abstract": "We present the first systematic study of scaling laws for multimodal foundation models trained on image-text pairs. By varying model size, dataset size, and compute budget across three orders of magnitude, we establish power-law relationships for downstream task performance. Our findings reveal that the optimal allocation between vision and language components depends critically on the target application domain. We release our scaling law parameters to guide future resource allocation decisions.",
       "categories": ["cs.CV", "cs.LG"],
       "published": "2026-06-03T00:00:00Z",
@@ -56,6 +74,10 @@
       "arxiv_id": "2305.56789",
       "title": "Reinforcement Learning from Human Feedback: A Review of Methods and Open Problems",
       "authors": ["Helen Keller", "Ivan Petrov"],
+      "affiliations": [
+        {"author": "Helen Keller", "affiliation": "University of Washington"},
+        {"author": "Ivan Petrov", "affiliation": "Google DeepMind"}
+      ],
       "abstract": "Reinforcement Learning from Human Feedback (RLHF) has become a cornerstone technique for aligning large language models with human preferences. This paper provides a comprehensive review of RLHF methodologies including reward modeling, proximal policy optimization variants, and direct preference optimization. We identify key open problems including reward hacking, distributional shifts, and the difficulty of capturing nuanced human values. We propose a taxonomy of existing solutions and suggest promising research directions for more robust and scalable alignment methods.",
       "categories": ["cs.LG", "cs.AI", "cs.CL"],
       "published": "2026-06-03T00:00:00Z",

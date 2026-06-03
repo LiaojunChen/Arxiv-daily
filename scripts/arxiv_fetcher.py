@@ -49,10 +49,16 @@ def _parse_arxiv_xml(xml_data: str) -> list[dict]:
         title = " ".join(entry.find("atom:title", ns).text.strip().split())
         abstract = " ".join(entry.find("atom:summary", ns).text.strip().split())
 
-        authors = [
-            " ".join(a.find("atom:name", ns).text.strip().split())
-            for a in entry.findall("atom:author", ns)
-        ]
+        author_list = []
+        affiliations = []
+        for a in entry.findall("atom:author", ns):
+            name_el = a.find("atom:name", ns)
+            aff_el = a.find("arxiv:affiliation", ns)
+            name = " ".join(name_el.text.strip().split()) if name_el is not None and name_el.text else ""
+            aff = " ".join(aff_el.text.strip().split()) if aff_el is not None and aff_el.text else ""
+            author_list.append(name)
+            if aff:
+                affiliations.append({"author": name, "affiliation": aff})
 
         categories = [
             c.get("term")
@@ -66,7 +72,8 @@ def _parse_arxiv_xml(xml_data: str) -> list[dict]:
             {
                 "arxiv_id": arxiv_id,
                 "title": title,
-                "authors": authors,
+                "authors": author_list,
+                "affiliations": affiliations,
                 "abstract": abstract,
                 "categories": categories,
                 "published": published,
@@ -138,8 +145,7 @@ def filter_by_authors(papers: list[dict]) -> list[dict]:
 def filter_by_institutions(papers: list[dict]) -> list[dict]:
     """
     Filter papers by institution affiliation.
-    ArXiv API doesn't directly expose affiliation in the list endpoint,
-    so we check the abstract text for institution mentions as a heuristic.
+    Checks author affiliations from ArXiv metadata first, then falls back to abstract text.
     """
     followed = [inst.lower() for inst in get_followed_institutions()]
     if not followed:
@@ -147,10 +153,12 @@ def filter_by_institutions(papers: list[dict]) -> list[dict]:
 
     matched = []
     for paper in papers:
-        abstract_lower = paper["abstract"].lower()
-        # Also check author affiliation comments in abstract
+        # Check explicit affiliations from ArXiv metadata
+        paper_affs = [a.get("affiliation", "").lower() for a in paper.get("affiliations", [])]
+        # Also check abstract as fallback
+        text_to_search = " ".join(paper_affs) + " " + paper["abstract"].lower()
         for inst in followed:
-            if inst in abstract_lower:
+            if inst in text_to_search:
                 matched.append(
                     {**paper, "matched_by": f"institution:{inst}", "source": "followed"}
                 )
