@@ -24,9 +24,13 @@ _USER_AGENT = "arXivDaily/1.0 (https://github.com/LiaojunChen/Arxiv-daily; mailt
 
 
 def _make_arxiv_url(categories: str, max_results: int, start: int = 0) -> str:
-    """Build ArXiv API query URL."""
+    """Build ArXiv API query URL, filtered to today's new submissions."""
+    today = datetime.now(timezone.utc).strftime("%Y%m%d")
+    # ArXiv API date range filter: only papers submitted today
+    date_filter = f"submittedDate:[{today}000000 TO {today}235959]"
+    cat_filter = " OR ".join([f"cat:{c}" for c in categories.split("+")])
     params = {
-        "search_query": " OR ".join([f"cat:{c}" for c in categories.split("+")]),
+        "search_query": f"({cat_filter}) AND ({date_filter})",
         "sortBy": "submittedDate",
         "sortOrder": "descending",
         "max_results": str(max_results),
@@ -97,7 +101,7 @@ def fetch_arxiv_papers(
     if categories is None:
         categories = ARXIV_QUERY
     if max_results is None:
-        max_results = MAX_PAPER_NUM * 3  # Fetch more to allow filtering
+        max_results = min(MAX_PAPER_NUM * 10, 200)  # Fetch more, but stay within reasonable limits
 
     all_papers = []
     for start in range(0, max_results, 100):
@@ -195,7 +199,12 @@ def filter_today_papers(papers: list[dict]) -> list[dict]:
 
 def get_latest_papers(categories: str = None) -> list[dict]:
     """
-    Main entry point: fetch latest ArXiv papers and return normalized list.
+    Main entry point: fetch today's ArXiv papers.
+    Filters by submission date — only returns papers submitted today (UTC).
     """
     papers = fetch_arxiv_papers(categories)
-    return papers
+    today_papers = filter_today_papers(papers)
+    skipped = len(papers) - len(today_papers)
+    if skipped > 0:
+        print(f"[INFO] Filtered to today: {len(today_papers)} papers (skipped {skipped} non-today)")
+    return today_papers
