@@ -1,16 +1,15 @@
 """
-ArXiv paper fetcher: uses the RSS Atom feed to get today's new papers
-with full metadata (including author affiliations).
+ArXiv paper fetcher.
 
-The RSS feed (rss.arxiv.org) is designed for feed readers and is NOT
-rate-limited — it includes full paper details in one request, avoiding
-the need to hit the search API at all.
+The RSS feed is used for the daily paper list. Author affiliations are only
+attached when they are explicitly present in arXiv metadata; they are never
+inferred from abstract text because that creates false institution labels.
 """
 
-import json
+import re
+import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
-from datetime import datetime, timezone
 
 from config import (
     ARXIV_QUERY,
@@ -23,13 +22,13 @@ from config import (
 def get_latest_papers(categories: str = None) -> list[dict]:
     """
     Fetch today's new ArXiv papers.
-    Step 1: RSS Atom feed for basic metadata (no affiliations in RSS).
-    Step 2: API queries by id_list to enrich with author affiliations.
+
+    Step 1: RSS Atom feed for the daily paper list.
+    Step 2: Best-effort API query by id_list for explicit author affiliations.
     """
     if categories is None:
         categories = ARXIV_QUERY
 
-    # Normalize categories: handle +, comma, space, newline separators
     cats = [
         c.strip()
         for c in categories.replace(",", "+").replace(" ", "+").replace("\n", "+").split("+")
@@ -51,81 +50,132 @@ def get_latest_papers(categories: str = None) -> list[dict]:
     papers = _parse_atom_feed(xml_data)
     print(f"[INFO] RSS feed returned {len(papers)} papers")
 
-    # Step 2: Extract affiliations from abstract text (heuristic)
-    # External APIs are rate-limited from GitHub Actions, so we parse
-    # institution names from author names and abstract footnotes.
-    text_enriched = _extract_affiliations_from_text(papers)
+    api_enriched = _enrich_affiliations_from_arxiv_api(papers)
     enriched = sum(1 for p in papers if p.get("affiliations"))
-    print(f"[INFO] Extracted affiliations for {text_enriched}/{len(papers)} papers (total with affs: {enriched})")
+    print(
+        f"[INFO] Enriched affiliations from arXiv API for {api_enriched}/{len(papers)} papers "
+        f"(total with affs: {enriched})"
+    )
 
     return papers
 
 
-def _extract_affiliations_from_text(papers: list[dict]) -> int:
-    """
-    Heuristic: extract affiliations from abstract text footnotes.
-    Many papers list author affiliations at the end of the abstract
-    or in patterns like "Author1 (MIT), Author2 (Stanford)".
-    Returns count of papers enriched.
-    """
-    import re
+def _normalize_arxiv_id(arxiv_id: str) -> str:
+    """Return an arXiv id without URL/prefix/version noise."""
+    arxiv_id = (arxiv_id or "").strip()
+    if "/abs/" in arxiv_id:
+        arxiv_id = arxiv_id.rsplit("/abs/", 1)[-1]
+    arxiv_id = arxiv_id.removeprefix("oai:arXiv.org:")
+    arxiv_id = arxiv_id.removeprefix("arXiv:").removeprefix("arxiv:")
+    return re.sub(r"v\d+$", "", arxiv_id)
 
+
+def _clean_text(value: str | None) -> str:
+    return " ".join((value or "").strip().split())
+
+
+def _dedupe_affiliations(affiliations: list[dict]) -> list[dict]:
+    deduped = []
+    seen = set()
+    for item in affiliations:
+        author = _clean_text(item.get("author"))
+        affiliation = _clean_text(item.get("affiliation"))
+        if not affiliation:
+            continue
+        key = (author.casefold(), affiliation.casefold())
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append({"author": author, "affiliation": affiliation})
+    return deduped
+
+
+def _parse_api_affiliations(xml_data: str) -> dict[str, list[dict]]:
+    """Parse author affiliations that are explicitly present in arXiv API XML."""
+    ns = {
+        "atom": "http://www.w3.org/2005/Atom",
+        "arxiv": "http://arxiv.org/schemas/atom",
+    }
+    root = ET.fromstring(xml_data)
+    by_id: dict[str, list[dict]] = {}
+    for entry in root.findall("atom:entry", ns):
+        id_el = entry.find("atom:id", ns)
+        if id_el is None or not id_el.text:
+            continue
+
+        arxiv_id = _normalize_arxiv_id(id_el.text)
+        affiliations = []
+        for author_el in entry.findall("atom:author", ns):
+            name_el = author_el.find("atom:name", ns)
+            aff_el = author_el.find("arxiv:affiliation", ns)
+            name = _clean_text(name_el.text if name_el is not None else "")
+            aff = _clean_text(aff_el.text if aff_el is not None else "")
+            if aff:
+                affiliations.append({"author": name, "affiliation": aff})
+
+        if affiliations:
+            by_id[arxiv_id] = _dedupe_affiliations(affiliations)
+    return by_id
+
+
+def _fetch_arxiv_api_affiliations(arxiv_ids: list[str]) -> dict[str, list[dict]]:
+    """Fetch explicit author affiliations from arXiv API, if available."""
+    ids = [_normalize_arxiv_id(arxiv_id) for arxiv_id in arxiv_ids if arxiv_id]
+    ids = list(dict.fromkeys(ids))
+    if not ids:
+        return {}
+
+    affiliations_by_id: dict[str, list[dict]] = {}
+    batch_size = 50
+    for start in range(0, len(ids), batch_size):
+        batch = ids[start : start + batch_size]
+        query = urllib.parse.urlencode({"id_list": ",".join(batch)})
+        url = f"{ARXIV_API_BASE}?{query}"
+        print(f"[INFO] Fetching arXiv API metadata: batch {start // batch_size + 1}")
+        req = urllib.request.Request(url, headers={"User-Agent": "arXivDaily/1.0"})
+        try:
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                xml_data = resp.read().decode("utf-8")
+        except Exception as e:
+            print(f"[WARN] arXiv API affiliation request failed: {e}")
+            continue
+
+        try:
+            affiliations_by_id.update(_parse_api_affiliations(xml_data))
+        except ET.ParseError as e:
+            print(f"[WARN] arXiv API affiliation response parse failed: {e}")
+            continue
+
+    return affiliations_by_id
+
+
+def _enrich_affiliations_from_arxiv_api(papers: list[dict]) -> int:
+    """Attach explicit arXiv API affiliations to papers that lack them."""
+    affiliations_by_id = _fetch_arxiv_api_affiliations(
+        [paper.get("arxiv_id", "") for paper in papers]
+    )
     enriched = 0
-    for p in papers:
-        if p.get("affiliations"):
-            continue  # already has affiliations
+    for paper in papers:
+        if paper.get("affiliations"):
+            paper["affiliations"] = _dedupe_affiliations(paper["affiliations"])
+            continue
 
-        abstract = p.get("abstract", "")
-        affs_from_text = []
-
-        # Pattern 1: "Author1, Author2 (Institution1, Institution2)"
-        # Pattern 2: Lines with university/institute/lab keywords at end of abstract
-        inst_patterns = [
-            r'(?:University|Institute|College|School)\s+of\s+[\w\s]+',
-            r'(?:MIT|CMU|ETH|EPFL|NYU|UCLA|UC\s+\w+|Caltech)',
-            r'[\w\s]+(?:University|Institute|College|Laboratory|Lab|Research|Inc\.|Ltd\.)',
-            r'(?:Google|Microsoft|Meta|Apple|Amazon|OpenAI|DeepMind|Anthropic|NVIDIA|Intel|IBM)\s+(?:Research|AI|DeepMind)?',
-        ]
-
-        found_affs = set()
-        for pattern in inst_patterns:
-            matches = re.findall(pattern, abstract, re.IGNORECASE)
-            for m in matches:
-                cleaned = m.strip().rstrip(',').rstrip('.').strip()
-                if len(cleaned) > 4:
-                    found_affs.add(cleaned)
-
-        # Also check last few lines of abstract (common for affiliation footnotes)
-        lines = abstract.split('.')
-        last_lines = [l.strip() for l in lines[-5:] if len(l.strip()) > 20]
-        for line in last_lines:
-            for pattern in inst_patterns:
-                matches = re.findall(pattern, line, re.IGNORECASE)
-                for m in matches:
-                    cleaned = m.strip().rstrip(',').rstrip('.').strip()
-                    if len(cleaned) > 4:
-                        found_affs.add(cleaned)
-
-        if found_affs:
-            # Assign to first author (best effort)
-            first_author = p["authors"][0] if p["authors"] else "Unknown"
-            for aff in list(found_affs)[:3]:
-                affs_from_text.append({"author": first_author, "affiliation": aff})
-            p["affiliations"] = affs_from_text
+        affiliations = affiliations_by_id.get(_normalize_arxiv_id(paper.get("arxiv_id", "")))
+        if affiliations:
+            paper["affiliations"] = affiliations
             enriched += 1
 
     return enriched
 
 
 def _parse_atom_feed(xml_data: str) -> list[dict]:
-    """Parse ArXiv Atom feed XML into paper dicts with full metadata."""
+    """Parse ArXiv Atom feed XML into paper dicts."""
     ns = {
         "atom": "http://www.w3.org/2005/Atom",
         "arxiv": "http://arxiv.org/schemas/atom",
     }
     root = ET.fromstring(xml_data)
 
-    # Check for feed errors
     title_el = root.find("atom:title", ns)
     if title_el is not None and "Feed error" in (title_el.text or ""):
         print(f"[ERROR] RSS feed error: {title_el.text}")
@@ -133,58 +183,53 @@ def _parse_atom_feed(xml_data: str) -> list[dict]:
 
     papers = []
     for entry in root.findall("atom:entry", ns):
-        # ID → arxiv ID
-        id_full = entry.find("atom:id", ns).text.strip()
-        arxiv_id = id_full.split("/abs/")[-1].split("v")[0]
+        id_el = entry.find("atom:id", ns)
+        id_full = id_el.text.strip() if id_el is not None and id_el.text else ""
+        arxiv_id = _normalize_arxiv_id(id_full)
 
-        # Title
         title_el = entry.find("atom:title", ns)
-        title = " ".join(title_el.text.strip().split()) if title_el is not None and title_el.text else ""
+        title = _clean_text(title_el.text if title_el is not None else "")
 
-        # Abstract (summary)
         summary_el = entry.find("atom:summary", ns)
-        abstract = " ".join(summary_el.text.strip().split()) if summary_el is not None and summary_el.text else ""
+        abstract = _clean_text(summary_el.text if summary_el is not None else "")
 
-        # Authors with affiliations (from <arxiv:affiliation>)
         author_list = []
         affiliations = []
-        for a in entry.findall("atom:author", ns):
-            name_el = a.find("atom:name", ns)
-            aff_el = a.find("arxiv:affiliation", ns)
-            name = " ".join(name_el.text.strip().split()) if name_el is not None and name_el.text else ""
-            aff = " ".join(aff_el.text.strip().split()) if aff_el is not None and aff_el.text else ""
+        for author_el in entry.findall("atom:author", ns):
+            name_el = author_el.find("atom:name", ns)
+            aff_el = author_el.find("arxiv:affiliation", ns)
+            name = _clean_text(name_el.text if name_el is not None else "")
+            aff = _clean_text(aff_el.text if aff_el is not None else "")
             author_list.append(name)
             if aff:
                 affiliations.append({"author": name, "affiliation": aff})
 
-        # Categories
         categories = [
-            c.get("term")
-            for c in entry.findall("atom:category", ns)
-            if c.get("term")
+            category.get("term")
+            for category in entry.findall("atom:category", ns)
+            if category.get("term")
         ]
 
-        # Published date
         pub_el = entry.find("atom:published", ns)
         published = pub_el.text.strip() if pub_el is not None and pub_el.text else ""
 
-        papers.append({
-            "arxiv_id": arxiv_id,
-            "title": title,
-            "authors": author_list,
-            "affiliations": affiliations,
-            "abstract": abstract,
-            "categories": categories,
-            "published": published,
-            "pdf_url": f"https://arxiv.org/pdf/{arxiv_id}",
-            "abstract_url": f"https://arxiv.org/abs/{arxiv_id}",
-            "source": "arxiv",
-        })
+        papers.append(
+            {
+                "arxiv_id": arxiv_id,
+                "title": title,
+                "authors": author_list,
+                "affiliations": _dedupe_affiliations(affiliations),
+                "abstract": abstract,
+                "categories": categories,
+                "published": published,
+                "pdf_url": f"https://arxiv.org/pdf/{arxiv_id}",
+                "abstract_url": f"https://arxiv.org/abs/{arxiv_id}",
+                "source": "arxiv",
+            }
+        )
 
     return papers
 
-
-# ── Author/Institution filtering ──────────────────────────
 
 def filter_by_authors(papers: list[dict]) -> list[dict]:
     followed = [a.lower() for a in get_followed_authors()]
@@ -193,7 +238,7 @@ def filter_by_authors(papers: list[dict]) -> list[dict]:
 
     matched = []
     for paper in papers:
-        paper_authors_lower = [a.lower() for a in paper["authors"]]
+        paper_authors_lower = [a.lower() for a in paper.get("authors", [])]
         for fa in followed:
             for pa in paper_authors_lower:
                 if fa in pa:
@@ -213,9 +258,8 @@ def filter_by_institutions(papers: list[dict]) -> list[dict]:
     matched = []
     for paper in papers:
         paper_affs = [a.get("affiliation", "").lower() for a in paper.get("affiliations", [])]
-        text_to_search = " ".join(paper_affs) + " " + paper["abstract"].lower()
         for inst in followed:
-            if inst in text_to_search:
+            if any(inst in aff for aff in paper_affs):
                 matched.append({**paper, "matched_by": f"institution:{inst}", "source": "followed"})
                 break
     return matched

@@ -78,12 +78,38 @@ def test_affiliations_none_without_fulltext(llm_params):
 
 def test_affiliations_deduplicates(llm_params):
     """The stub returns two distinct affiliations, so no dedup needed.
-    But confirm the set() dedup in the code doesn't break anything.
+    But confirm deduplication in the code doesn't break anything.
     """
     client = make_stub_openai_client()
     paper = make_sample_paper()
     result = paper.generate_affiliations(client, llm_params)
     assert len(result) == len(set(result))
+
+
+def test_affiliations_preserves_order_and_normalizes_objects(llm_params):
+    """Affiliations should remain in author order after deduplication."""
+    from types import SimpleNamespace
+
+    def create_affiliations(**kwargs):
+        return SimpleNamespace(
+            choices=[
+                SimpleNamespace(
+                    message=SimpleNamespace(
+                        content='["MIT", "Stanford University", "mit", {"affiliation": "OpenAI"}, {"institution": "Stanford University"}]',
+                    ),
+                )
+            ]
+        )
+
+    client = SimpleNamespace(
+        chat=SimpleNamespace(
+            completions=SimpleNamespace(create=create_affiliations)
+        )
+    )
+    paper = make_sample_paper()
+    result = paper.generate_affiliations(client, llm_params)
+
+    assert result == ["MIT", "Stanford University", "OpenAI"]
 
 
 def test_affiliations_malformed_llm_output(llm_params):

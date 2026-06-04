@@ -8,6 +8,28 @@ from loguru import logger
 import json
 RawPaperItem = TypeVar('RawPaperItem')
 
+
+def _normalize_affiliation_value(value) -> str:
+    if isinstance(value, dict):
+        value = value.get("affiliation") or value.get("institution") or value.get("name") or ""
+    return " ".join(str(value).strip().split())
+
+
+def _dedupe_affiliations_preserving_order(affiliations: list) -> list[str]:
+    deduped = []
+    seen = set()
+    for affiliation in affiliations:
+        normalized = _normalize_affiliation_value(affiliation)
+        if not normalized:
+            continue
+        key = normalized.casefold()
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append(normalized)
+    return deduped
+
+
 @dataclass
 class Paper:
     source: str
@@ -92,10 +114,13 @@ class Paper:
             )
             affiliations = affiliations.choices[0].message.content
 
-            affiliations = re.search(r'\[.*?\]', affiliations, flags=re.DOTALL).group(0)
-            affiliations = json.loads(affiliations)
-            affiliations = list(set(affiliations))
-            affiliations = [str(a) for a in affiliations]
+            match = re.search(r'\[.*?\]', affiliations, flags=re.DOTALL)
+            if match is None:
+                return None
+            affiliations = json.loads(match.group(0))
+            if not isinstance(affiliations, list):
+                return []
+            affiliations = _dedupe_affiliations_preserving_order(affiliations)
 
             return affiliations
     
