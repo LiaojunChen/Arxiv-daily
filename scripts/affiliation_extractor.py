@@ -30,7 +30,11 @@ AFFILIATION_KEYWORDS = (
     "college",
     "school",
     "laborator",
+    "lab",
     "research",
+    "inc",
+    "corp",
+    "ltd",
     "academy",
     "center",
     "centre",
@@ -44,6 +48,7 @@ AFFILIATION_KEYWORDS = (
     "nvidia",
     "amazon",
     "apple",
+    "bytedance",
     "mit",
     "stanford",
     "berkeley",
@@ -174,9 +179,11 @@ def _clean_latex_affiliation(value: str) -> str:
     value = re.sub(r"\\(?:href|url)\{[^{}]*\}\{([^{}]*)\}", r"\1", value)
     value = re.sub(r"\\(?:email|thanks|footnote|corref|fnref|textsuperscript)\*?\s*(?:\[[^\]]*\])?\s*\{[^{}]*\}", " ", value)
     value = re.sub(r"\\[a-zA-Z]+\*?\s*(?:\[[^\]]*\])?", " ", value)
+    value = re.sub(r"\[[^\]]*(?:ex|em|pt)[^\]]*\]", " ", value, flags=re.IGNORECASE)
+    value = re.sub(r"\b\d+(?:\.\d+)?(?:ex|em|pt)\b", " ", value, flags=re.IGNORECASE)
     value = value.replace("\\", " ")
     value = value.replace("~", " ").replace("^", " ")
-    value = re.sub(r"[{}$]", " ", value)
+    value = re.sub(r"[{}$*]", " ", value)
     value = _clean_text(value)
     value = re.sub(r"^(?:\d+|[a-z])\s+", "", value, flags=re.IGNORECASE)
     return value.strip(" ,;:-")
@@ -189,32 +196,63 @@ def _looks_like_affiliation(value: str) -> bool:
     return any(keyword in lowered for keyword in AFFILIATION_KEYWORDS)
 
 
-def _split_affiliation_candidates(block: str) -> list[str]:
+def _normalize_affiliation_candidate(value: str) -> str:
+    value = re.sub(r"^.*?\bare with\b\s+", "", value, flags=re.IGNORECASE)
+    value = re.sub(r"^.*?\bis with\b\s+", "", value, flags=re.IGNORECASE)
+    value = re.sub(r"^.*?\bis the director of\b\s+", "", value, flags=re.IGNORECASE)
+    return _clean_latex_affiliation(value)
+
+
+def _extract_numbered_affiliations(value: str) -> list[str]:
+    cleaned = _clean_latex_affiliation(value)
+    matches = re.findall(
+        r"(?:^|\s)\d+\s+([A-Z][^0-9]*?)(?=\s+\d+\s+[A-Z]|$)",
+        cleaned,
+    )
+    affiliations = []
+    for match in matches:
+        candidate = _normalize_affiliation_candidate(match)
+        if _looks_like_affiliation(candidate):
+            affiliations.append(candidate)
+    return affiliations
+
+
+def _split_affiliation_candidates(block: str, include_whole: bool = True) -> list[str]:
     parts = re.split(r"\\\\|\\and|\n|;", block)
     candidates = []
     for part in parts:
-        cleaned = _clean_latex_affiliation(part)
+        for numbered in _extract_numbered_affiliations(part):
+            candidates.append(numbered)
+        if part.strip().endswith(","):
+            continue
+        cleaned = _normalize_affiliation_candidate(part)
         if _looks_like_affiliation(cleaned):
             candidates.append(cleaned)
-    whole = _clean_latex_affiliation(block)
-    if _looks_like_affiliation(whole):
-        candidates.append(whole)
+    for numbered in _extract_numbered_affiliations(block):
+        candidates.append(numbered)
+    if include_whole:
+        whole = _normalize_affiliation_candidate(block)
+        if _looks_like_affiliation(whole):
+            candidates.append(whole)
     return candidates
 
 
 def extract_affiliations_from_paper_text(paper_text: str, authors: list[str]) -> list[dict]:
-    blocks = _latex_command_blocks(
-        paper_text[:MAX_CONTEXT_CHARS],
-        ("affiliation", "affil", "institute", "address", "IEEEauthorblockA"),
-    )
+    blocks = [
+        (block, True)
+        for block in _latex_command_blocks(
+            paper_text[:MAX_CONTEXT_CHARS],
+            ("affiliation", "affil", "institute", "address", "IEEEauthorblockA"),
+        )
+    ]
 
     author_blocks = _latex_command_blocks(paper_text[:8000], ("author",))
-    blocks.extend(author_blocks)
+    blocks.extend((block, False) for block in author_blocks)
 
     affiliations = []
     seen = set()
-    for block in blocks:
-        for candidate in _split_affiliation_candidates(block):
+    for block, include_whole in blocks:
+        for candidate in _split_affiliation_candidates(block, include_whole=include_whole):
             key = candidate.casefold()
             if key in seen:
                 continue

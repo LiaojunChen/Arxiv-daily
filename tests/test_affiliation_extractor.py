@@ -65,6 +65,46 @@ def test_clean_latex_affiliation_removes_stray_backslashes():
     )
 
 
+def test_extract_affiliations_from_ieee_author_sentence():
+    paper_text = r"""
+    \IEEEauthorblockA{Ada Lovelace and Grace Hopper are with
+    eBRAIN Lab, Division of Engineering, New York University Abu Dhabi,
+    United Arab Emirates.}
+    """
+
+    affiliations = affiliation_extractor.extract_affiliations_from_paper_text(
+        paper_text,
+        ["Ada Lovelace", "Grace Hopper"],
+    )
+
+    assert affiliations == [
+        {
+            "author": "Ada Lovelace",
+            "affiliation": "eBRAIN Lab, Division of Engineering, New York University Abu Dhabi, United Arab Emirates.",
+        }
+    ]
+
+
+def test_extract_affiliations_from_numbered_author_block():
+    paper_text = r"""
+    \author{Han Zhu 1 , Chengkun Cai 2* , Yuanfeng Song 3
+    1 The Hong Kong University of Science and Technology
+    2 ByteDance, China
+    3 University College London}
+    """
+
+    affiliations = affiliation_extractor.extract_affiliations_from_paper_text(
+        paper_text,
+        ["Han Zhu", "Chengkun Cai", "Yuanfeng Song"],
+    )
+
+    assert affiliations == [
+        {"author": "Han Zhu", "affiliation": "The Hong Kong University of Science and Technology"},
+        {"author": "Chengkun Cai", "affiliation": "ByteDance, China"},
+        {"author": "Yuanfeng Song", "affiliation": "University College London"},
+    ]
+
+
 def test_enrich_affiliations_normalizes_existing_affiliations(monkeypatch):
     paper = {
         "arxiv_id": "2606.00001",
