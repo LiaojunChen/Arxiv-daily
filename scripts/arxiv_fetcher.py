@@ -68,13 +68,19 @@ def get_latest_papers(categories: str = None) -> list[dict]:
 def _fetch_affiliations_by_ids(arxiv_ids: list[str]) -> dict[str, list[dict]]:
     """
     Query ArXiv API by id_list to get author affiliations.
+    Uses the `arxiv` Python package (same as the original zotero-arxiv-daily
+    project) with its built-in retry logic for rate limiting.
     Returns map of arxiv_id → list of {author, affiliation} dicts.
-    Uses the same batch/retry strategy as the original zotero-arxiv-daily.
     """
     if not arxiv_ids:
         return {}
 
-    import urllib.error
+    try:
+        import arxiv
+    except ImportError:
+        print("[WARN] arxiv package not installed, skipping affiliation enrichment.")
+        return {}
+
     import time as time_mod
 
     max_batch_retries = 5
@@ -82,37 +88,43 @@ def _fetch_affiliations_by_ids(arxiv_ids: list[str]) -> dict[str, list[dict]]:
     batch_size = 20
     aff_map = {}
 
+    # Match the original project's client settings exactly
+    client = arxiv.Client(num_retries=10, delay_seconds=10)
+
     for i in range(0, len(arxiv_ids), batch_size):
         batch = arxiv_ids[i:i + batch_size]
-        id_param = ",".join(batch)
-        url = f"{ARXIV_API_BASE}?id_list={urllib.parse.quote(id_param)}&max_results={len(batch)}"
         batch_num = i // batch_size + 1
         total_batches = (len(arxiv_ids) - 1) // batch_size + 1
 
         for attempt in range(max_batch_retries):
             try:
-                req = urllib.request.Request(url, headers={"User-Agent": "arXivDaily/1.0"})
-                with urllib.request.urlopen(req, timeout=60) as resp:
-                    xml_data = resp.read().decode("utf-8")
-
-                # Extract affiliations from API response
-                papers = _parse_atom_feed(xml_data)
-                for p in papers:
-                    if p["affiliations"]:
-                        aff_map[p["arxiv_id"]] = p["affiliations"]
+                search = arxiv.Search(id_list=batch)
+                results = list(client.results(search))
+                for r in results:
+                    affs = []
+                    for a in r.authors:
+                        aff_str = getattr(a, 'affiliation', '') or ''
+                        if aff_str:
+                            affs.append({"author": a.name, "affiliation": aff_str})
+                    if affs:
+                        # Extract clean arxiv_id from the result
+                        rid = r.entry_id.split("/abs/")[-1].split("v")[0]
+                        aff_map[rid] = affs
                 break
-            except Exception as e:
-                status = getattr(e, "code", None) if hasattr(e, "code") else None
-                if status == 429 and attempt < max_batch_retries - 1:
+            except arxiv.HTTPError as exc:
+                if exc.status == 429 and attempt < max_batch_retries - 1:
                     wait = batch_retry_delay * (attempt + 1)
-                    print(f"[WARN] Affiliations API 429 on batch {batch_num}/{total_batches}, retry in {wait}s")
+                    print(f"[WARN] Affiliations API 429 batch {batch_num}/{total_batches}, retry in {wait}s")
                     time_mod.sleep(wait)
                 else:
                     if attempt == 0:
-                        print(f"[WARN] Affiliations batch {batch_num} failed: {e}")
+                        print(f"[WARN] Affiliations batch {batch_num} failed: {exc}")
                     break
+            except Exception as exc:
+                if attempt == 0:
+                    print(f"[WARN] Affiliations batch {batch_num} failed: {exc}")
+                break
 
-        # Delay between batches
         if i + batch_size < len(arxiv_ids):
             time_mod.sleep(3)
 

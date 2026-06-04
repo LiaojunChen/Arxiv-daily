@@ -283,24 +283,28 @@ ${truncated}`;
           className={`${sidebarTab === "paper" ? "flex" : "hidden"} lg:flex flex-col w-full`}
           style={{ width: sidebarTab === "paper" || window.innerWidth >= 1024 ? `${splitRatio}%` : "100%" }}
         >
-          {/* Top bar with PDF link */}
-          <div className="px-4 py-1.5 bg-amber-50 border-b border-amber-200 flex items-center justify-between shrink-0">
-            <span className="text-xs text-amber-700">
-              arXiv 页面（PDF 不支持内嵌，请点击右侧按钮在新窗口打开）
+          {/* Top bar with PDF fallback */}
+          <div className="px-4 py-1.5 bg-gray-50 border-b border-gray-200 flex items-center justify-between shrink-0">
+            <span className="text-xs text-gray-500">
+              arXiv HTML 全文（部分论文无此版本）
             </span>
             <a
               href={paper.pdf_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs px-3 py-1 bg-amber-600 text-white rounded hover:bg-amber-700 cursor-pointer transition-colors shrink-0"
+              className="text-xs px-3 py-1 bg-gray-900 text-white rounded hover:bg-gray-800 cursor-pointer transition-colors shrink-0"
             >
               新窗口打开 PDF
             </a>
           </div>
           <iframe
-            src={`https://arxiv.org/abs/${paper.arxiv_id}`}
+            src={`https://arxiv.org/html/${paper.arxiv_id}`}
             className="flex-1 w-full border-0"
-            title={`arXiv: ${paper.arxiv_id}`}
+            title={`arXiv HTML: ${paper.arxiv_id}`}
+            onError={(e) => {
+              // Fallback to abstract page if HTML version not available
+              (e.target as HTMLIFrameElement).src = `https://arxiv.org/abs/${paper.arxiv_id}`;
+            }}
           />
         </div>
 
