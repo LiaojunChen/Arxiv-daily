@@ -1,13 +1,15 @@
 export interface AuthorAffiliation {
-  author: string;
-  affiliation: string;
+  author?: string;
+  affiliation?: string;
+  institution?: string;
+  org?: string;
 }
 
 export interface Paper {
   arxiv_id: string;
   title: string;
   authors: string[];
-  affiliations: AuthorAffiliation[];
+  affiliations: (AuthorAffiliation | string)[];
   abstract: string;
   categories: string[];
   published: string;

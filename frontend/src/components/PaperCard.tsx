@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import type { Paper } from "../types";
 import { truncateAbstract, categoryColor } from "../utils/arxiv";
+import { getUniqueAffiliations } from "../utils/affiliations";
 
 interface PaperCardProps {
   paper: Paper;
@@ -9,14 +10,7 @@ interface PaperCardProps {
 
 export default function PaperCard({ paper, onChat }: PaperCardProps) {
   const uniqueAffiliations = useMemo(() => {
-    const seen = new Set<string>();
-    return (paper.affiliations || [])
-      .filter((a) => {
-        if (!a.affiliation || seen.has(a.affiliation)) return false;
-        seen.add(a.affiliation);
-        return true;
-      })
-      .map((a) => a.affiliation);
+    return getUniqueAffiliations(paper.affiliations);
   }, [paper.affiliations]);
 
   return (

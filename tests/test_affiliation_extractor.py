@@ -58,6 +58,39 @@ def test_clean_latex_affiliation_removes_leading_markers():
     )
 
 
+def test_clean_latex_affiliation_removes_stray_backslashes():
+    assert (
+        affiliation_extractor._clean_latex_affiliation(r"Nanyang Technological University \\")
+        == "Nanyang Technological University"
+    )
+
+
+def test_enrich_affiliations_normalizes_existing_affiliations(monkeypatch):
+    paper = {
+        "arxiv_id": "2606.00001",
+        "authors": ["Ada Lovelace", "Grace Hopper"],
+        "affiliations": [
+            "MIT",
+            {"author": "Grace Hopper", "institution": "OpenAI"},
+            {"author": "Ignored", "affiliation": ""},
+        ],
+    }
+    monkeypatch.setattr(affiliation_extractor, "AFFILIATION_MAX_PAPERS", 5)
+    monkeypatch.setattr(
+        affiliation_extractor,
+        "fetch_paper_text",
+        lambda arxiv_id: (_ for _ in ()).throw(AssertionError("should not fetch source")),
+    )
+
+    enriched = affiliation_extractor.enrich_affiliations_for_display_papers([[paper]])
+
+    assert enriched == 0
+    assert paper["affiliations"] == [
+        {"author": "Ada Lovelace", "affiliation": "MIT"},
+        {"author": "Grace Hopper", "affiliation": "OpenAI"},
+    ]
+
+
 def test_enrich_affiliations_for_display_papers_updates_missing_affiliations(monkeypatch):
     paper = {
         "arxiv_id": "2606.00001",

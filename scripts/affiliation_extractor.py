@@ -174,6 +174,7 @@ def _clean_latex_affiliation(value: str) -> str:
     value = re.sub(r"\\(?:href|url)\{[^{}]*\}\{([^{}]*)\}", r"\1", value)
     value = re.sub(r"\\(?:email|thanks|footnote|corref|fnref|textsuperscript)\*?\s*(?:\[[^\]]*\])?\s*\{[^{}]*\}", " ", value)
     value = re.sub(r"\\[a-zA-Z]+\*?\s*(?:\[[^\]]*\])?", " ", value)
+    value = value.replace("\\", " ")
     value = value.replace("~", " ").replace("^", " ")
     value = re.sub(r"[{}$]", " ", value)
     value = _clean_text(value)
@@ -321,6 +322,13 @@ def _normalize_affiliation_response(raw, authors: list[str]) -> list[dict]:
     return affiliations
 
 
+def _normalize_existing_affiliations(affiliations, authors: list[str]) -> list[dict]:
+    normalized = _normalize_affiliation_response(affiliations, authors)
+    if normalized:
+        return normalized
+    return []
+
+
 def _call_llm_for_affiliations(paper: dict, paper_text: str) -> list[dict]:
     if not OPENAI_API_KEY:
         return []
@@ -379,7 +387,13 @@ def enrich_affiliations_for_display_papers(paper_groups: list[list[dict]]) -> in
         for paper in group:
             if attempted >= AFFILIATION_MAX_PAPERS:
                 return enriched
-            if paper.get("affiliations"):
+
+            existing_affiliations = _normalize_existing_affiliations(
+                paper.get("affiliations"),
+                paper.get("authors", []),
+            )
+            if existing_affiliations:
+                paper["affiliations"] = existing_affiliations
                 continue
 
             arxiv_id = _normalize_arxiv_id(paper.get("arxiv_id") or paper.get("abstract_url") or "")

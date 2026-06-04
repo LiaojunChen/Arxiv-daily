@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import type { Paper, ChatMessage } from "../types";
 import { loadSettings } from "../utils/storage";
+import { getUniqueAffiliations } from "../utils/affiliations";
 
 interface PaperViewerProps {
   paper: Paper;
@@ -57,14 +58,7 @@ export default function PaperViewer({ paper, onClose }: PaperViewerProps) {
   const settings = loadSettings();
 
   const uniqueAffiliations = useMemo(() => {
-    const seen = new Set<string>();
-    return (paper.affiliations || [])
-      .filter((a) => {
-        if (!a.affiliation || seen.has(a.affiliation)) return false;
-        seen.add(a.affiliation);
-        return true;
-      })
-      .map((a) => a.affiliation);
+    return getUniqueAffiliations(paper.affiliations);
   }, [paper.affiliations]);
 
   const systemPrompt = `你正在讨论以下论文:
