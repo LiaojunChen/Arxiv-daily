@@ -16,13 +16,19 @@ ZOTERO_API_BASE = "https://api.zotero.org"
 # ArXiv category codes, e.g. "cs.CV+cs.LG+cs.AI+cs.CL"
 ARXIV_QUERY = os.environ.get("ARXIV_QUERY", "cs.CV+cs.LG+cs.AI+cs.CL")
 ARXIV_API_BASE = "http://export.arxiv.org/api/query"
-MAX_PAPER_NUM = int(os.environ.get("MAX_PAPER_NUM", "10"))
+MAX_PAPER_NUM = int(os.environ.get("MAX_PAPER_NUM") or "10")
 
 # ── SiliconFlow Reranker ─────────────────────────────────
 SILICONFLOW_API_KEY = os.environ.get("SILICONFLOW_API_KEY", "")
 SILICONFLOW_RERANK_URL = "https://api.siliconflow.cn/v1/rerank"
 SILICONFLOW_RERANK_MODEL = "Qwen/Qwen3-Reranker-0.6B"
 SILICONFLOW_BATCH_SIZE = 64
+
+# LLM affiliation extraction for displayed papers.
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "")
+OPENAI_API_BASE = os.environ.get("OPENAI_API_BASE") or "https://api.openai.com/v1"
+MODEL_NAME = os.environ.get("MODEL_NAME") or "gpt-4o-mini"
+AFFILIATION_MAX_PAPERS = int(os.environ.get("AFFILIATION_MAX_PAPERS") or MAX_PAPER_NUM)
 
 # ── Followed Authors & Institutions ─────────────────────
 _followed_authors = []

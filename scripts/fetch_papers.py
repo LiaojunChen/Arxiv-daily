@@ -17,6 +17,7 @@ from arxiv_fetcher import (
 )
 from zotero_similar import fetch_zotero_items, compute_similarity
 from hf_fetcher import fetch_hf_daily_papers
+from affiliation_extractor import enrich_affiliations_for_display_papers
 from config import MAX_PAPER_NUM, load_user_config, ARXIV_QUERY
 
 
@@ -101,7 +102,17 @@ def main():
     except Exception as e:
         print(f"[ERROR] Followed filtering failed: {e}")
 
-    # 5. Output
+    # 5. Enrich affiliations for papers shown on the web page
+    print("\n[Step 5] Enriching affiliations for displayed papers...")
+    try:
+        enriched = enrich_affiliations_for_display_papers(
+            [similar_papers, followed_papers, hf_papers]
+        )
+        print(f"[INFO] LLM affiliation extraction enriched {enriched} papers")
+    except Exception as e:
+        print(f"[ERROR] Affiliation enrichment failed: {e}")
+
+    # 6. Output
     output_result(similar_papers, followed_papers, hf_papers)
 
 
