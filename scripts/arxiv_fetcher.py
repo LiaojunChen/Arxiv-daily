@@ -68,44 +68,56 @@ def get_latest_papers(categories: str = None) -> list[dict]:
 
 def _fetch_affiliations_by_ids(arxiv_ids: list[str]) -> dict[str, list[dict]]:
     """
-    Enrich papers with author affiliations from Semantic Scholar API.
-    Semantic Scholar is free, doesn't rate-limit from CI, and returns
-    author affiliations for most ArXiv papers.
+    Enrich papers with author affiliations using Semantic Scholar batch API.
     Returns map of arxiv_id → list of {author, affiliation} dicts.
     """
     if not arxiv_ids:
         return {}
 
-    import time as time_mod
-
     aff_map = {}
-    # Only enrich top papers (users see MAX_PAPER_NUM × 2 in similar + followed)
-    target_ids = arxiv_ids[:200]  # reasonable limit
-    print(f"[INFO] Fetching affiliations from Semantic Scholar for {len(target_ids)} papers...")
+    target_ids = arxiv_ids[:200]
+    batch_size = 100
+    print(f"[INFO] Fetching affiliations via Semantic Scholar for {len(target_ids)} papers...")
 
-    for i, aid in enumerate(target_ids):
+    for b in range(0, len(target_ids), batch_size):
+        batch = target_ids[b:b + batch_size]
         try:
-            url = f"https://api.semanticscholar.org/graph/v1/paper/ArXiv:{aid}?fields=authors"
-            req = urllib.request.Request(url, headers={"User-Agent": "arXivDaily/1.0"})
-            with urllib.request.urlopen(req, timeout=10) as resp:
-                data = json.loads(resp.read().decode("utf-8"))
+            s2_ids = [f"ArXiv:{aid}" for aid in batch]
+            payload = json.dumps({"ids": s2_ids}).encode("utf-8")
+            url = "https://api.semanticscholar.org/graph/v1/paper/batch?fields=authors"
+            req = urllib.request.Request(
+                url, data=payload, method="POST",
+                headers={"Content-Type": "application/json", "User-Agent": "arXivDaily/1.0"},
+            )
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                results = json.loads(resp.read().decode("utf-8"))
 
-            affs = []
-            for a in data.get("authors", []):
-                name = a.get("name", "")
-                aff = a.get("affiliations", [])
-                aff_name = aff[0] if aff else ""
-                if aff_name:
-                    affs.append({"author": name, "affiliation": aff_name})
-            if affs:
-                aff_map[aid] = affs
-        except Exception:
-            pass  # paper not in Semantic Scholar or network error
+            if not isinstance(results, list):
+                print(f"[WARN] Semantic Scholar unexpected response: {type(results)}")
+                continue
 
-        # Polite: 1 request per second
-        if i % 50 == 49:
-            print(f"[INFO]   ... {i + 1}/{len(target_ids)} affiliations fetched")
-        time_mod.sleep(0.2)
+            for item in results:
+                if not item or not isinstance(item, dict):
+                    continue
+                # Get arxiv_id back from paperId or externalIds
+                ext_ids = item.get("externalIds", {}) or {}
+                arxiv_id = ext_ids.get("ArXiv", "")
+                if not arxiv_id:
+                    continue
+
+                affs = []
+                for a in item.get("authors", []):
+                    name = a.get("name", "")
+                    aff_list = a.get("affiliations", [])
+                    aff_name = aff_list[0] if aff_list else ""
+                    if aff_name:
+                        affs.append({"author": name, "affiliation": aff_name})
+                if affs:
+                    aff_map[arxiv_id] = affs
+
+            print(f"[INFO]   batch {b // batch_size + 1}: {len(results)} results")
+        except Exception as e:
+            print(f"[WARN] Semantic Scholar batch {b // batch_size + 1} failed: {e}")
 
     print(f"[INFO] Fetched affiliations for {len(aff_map)}/{len(target_ids)} papers")
     return aff_map
