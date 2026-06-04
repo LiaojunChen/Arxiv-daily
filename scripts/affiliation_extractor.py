@@ -174,7 +174,7 @@ def _latex_command_blocks(text: str, commands: tuple[str, ...]) -> list[str]:
     return blocks
 
 
-def _clean_latex_affiliation(value: str) -> str:
+def _clean_latex_affiliation(value: str, strip_marker: bool = True) -> str:
     value = re.sub(r"%.*", " ", value)
     value = re.sub(r"\\(?:href|url)\{[^{}]*\}\{([^{}]*)\}", r"\1", value)
     value = re.sub(r"\\(?:email|thanks|footnote|corref|fnref|textsuperscript)\*?\s*(?:\[[^\]]*\])?\s*\{[^{}]*\}", " ", value)
@@ -185,7 +185,8 @@ def _clean_latex_affiliation(value: str) -> str:
     value = value.replace("~", " ").replace("^", " ")
     value = re.sub(r"[{}$*]", " ", value)
     value = _clean_text(value)
-    value = re.sub(r"^(?:\d+|[a-z])\s+", "", value, flags=re.IGNORECASE)
+    if strip_marker:
+        value = re.sub(r"^(?:\d+|[a-z])\s+", "", value, flags=re.IGNORECASE)
     return value.strip(" ,;:-")
 
 
@@ -204,7 +205,7 @@ def _normalize_affiliation_candidate(value: str) -> str:
 
 
 def _extract_numbered_affiliations(value: str) -> list[str]:
-    cleaned = _clean_latex_affiliation(value)
+    cleaned = _clean_latex_affiliation(value, strip_marker=False)
     matches = re.findall(
         r"(?:^|\s)\d+\s+([A-Z][^0-9]*?)(?=\s+\d+\s+[A-Z]|$)",
         cleaned,
@@ -221,15 +222,19 @@ def _split_affiliation_candidates(block: str, include_whole: bool = True) -> lis
     parts = re.split(r"\\\\|\\and|\n|;", block)
     candidates = []
     for part in parts:
-        for numbered in _extract_numbered_affiliations(part):
-            candidates.append(numbered)
+        numbered_affiliations = _extract_numbered_affiliations(part)
+        if numbered_affiliations:
+            candidates.extend(numbered_affiliations)
+            continue
         if part.strip().endswith(","):
             continue
         cleaned = _normalize_affiliation_candidate(part)
         if _looks_like_affiliation(cleaned):
             candidates.append(cleaned)
-    for numbered in _extract_numbered_affiliations(block):
-        candidates.append(numbered)
+    numbered_affiliations = _extract_numbered_affiliations(block)
+    if numbered_affiliations:
+        candidates.extend(numbered_affiliations)
+        return candidates
     if include_whole:
         whole = _normalize_affiliation_candidate(block)
         if _looks_like_affiliation(whole):
