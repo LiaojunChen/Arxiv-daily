@@ -33,7 +33,7 @@ OPENAI_API_BASE = os.environ.get("OPENAI_API_BASE") or (
 MODEL_NAME = os.environ.get("MODEL_NAME") or (
     "Qwen/Qwen3-8B" if not _OPENAI_API_KEY and SILICONFLOW_API_KEY else "gpt-4o-mini"
 )
-AFFILIATION_MAX_PAPERS = int(os.environ.get("AFFILIATION_MAX_PAPERS") or MAX_PAPER_NUM)
+AFFILIATION_MAX_PAPERS = int(os.environ.get("AFFILIATION_MAX_PAPERS") or min(MAX_PAPER_NUM, 3))
 
 # ── Followed Authors & Institutions ─────────────────────
 _followed_authors = []
