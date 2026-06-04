@@ -19,7 +19,7 @@ from config import (
 )
 
 
-REQUEST_TIMEOUT = (10, 30)
+REQUEST_TIMEOUT = (10, 60)
 MAX_DOWNLOAD_BYTES = 12 * 1024 * 1024
 MAX_CONTEXT_CHARS = 12000
 USER_AGENT = "arXivDaily/1.0"
@@ -135,7 +135,7 @@ def _extract_text_from_source_bytes(data: bytes) -> str | None:
     except tarfile.TarError:
         try:
             text = _decode_bytes(gzip.decompress(data))
-        except OSError:
+        except (OSError, EOFError):
             text = _decode_bytes(data)
         candidates.append((_score_source_text(text), text))
 
@@ -280,7 +280,11 @@ def enrich_affiliations_for_display_papers(paper_groups: list[list[dict]]) -> in
             seen_ids.add(arxiv_id)
             attempted += 1
 
-            paper_text = fetch_paper_text(arxiv_id)
+            try:
+                paper_text = fetch_paper_text(arxiv_id)
+            except Exception as exc:
+                print(f"[WARN] Failed to read source/html text for {arxiv_id}: {exc}")
+                continue
             if not paper_text:
                 print(f"[WARN] No source/html text available for affiliation extraction: {arxiv_id}")
                 continue

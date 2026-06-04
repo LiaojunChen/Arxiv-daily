@@ -62,3 +62,28 @@ def test_enrich_affiliations_skips_without_openai_key(monkeypatch):
 
     assert enriched == 0
     assert paper["affiliations"] == []
+
+
+def test_enrich_affiliations_continues_when_source_read_fails(monkeypatch):
+    bad_paper = {"arxiv_id": "2606.00001", "authors": ["Ada Lovelace"], "affiliations": []}
+    good_paper = {"arxiv_id": "2606.00002", "authors": ["Grace Hopper"], "affiliations": []}
+    monkeypatch.setattr(affiliation_extractor, "OPENAI_API_KEY", "sk-test")
+    monkeypatch.setattr(affiliation_extractor, "AFFILIATION_MAX_PAPERS", 5)
+
+    def fetch_text(arxiv_id):
+        if arxiv_id == "2606.00001":
+            raise EOFError("truncated gzip")
+        return "source text"
+
+    monkeypatch.setattr(affiliation_extractor, "fetch_paper_text", fetch_text)
+    monkeypatch.setattr(
+        affiliation_extractor,
+        "_call_llm_for_affiliations",
+        lambda p, text: [{"author": "Grace Hopper", "affiliation": "OpenAI"}],
+    )
+
+    enriched = affiliation_extractor.enrich_affiliations_for_display_papers([[bad_paper, good_paper]])
+
+    assert enriched == 1
+    assert bad_paper["affiliations"] == []
+    assert good_paper["affiliations"] == [{"author": "Grace Hopper", "affiliation": "OpenAI"}]
