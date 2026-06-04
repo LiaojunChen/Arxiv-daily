@@ -25,9 +25,14 @@ SILICONFLOW_RERANK_MODEL = "Qwen/Qwen3-Reranker-0.6B"
 SILICONFLOW_BATCH_SIZE = 64
 
 # LLM affiliation extraction for displayed papers.
-OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "")
-OPENAI_API_BASE = os.environ.get("OPENAI_API_BASE") or "https://api.openai.com/v1"
-MODEL_NAME = os.environ.get("MODEL_NAME") or "gpt-4o-mini"
+_OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "")
+OPENAI_API_KEY = _OPENAI_API_KEY or SILICONFLOW_API_KEY
+OPENAI_API_BASE = os.environ.get("OPENAI_API_BASE") or (
+    "https://api.siliconflow.cn/v1" if not _OPENAI_API_KEY and SILICONFLOW_API_KEY else "https://api.openai.com/v1"
+)
+MODEL_NAME = os.environ.get("MODEL_NAME") or (
+    "Qwen/Qwen3-8B" if not _OPENAI_API_KEY and SILICONFLOW_API_KEY else "gpt-4o-mini"
+)
 AFFILIATION_MAX_PAPERS = int(os.environ.get("AFFILIATION_MAX_PAPERS") or MAX_PAPER_NUM)
 
 # ── Followed Authors & Institutions ─────────────────────
