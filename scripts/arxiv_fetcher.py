@@ -7,6 +7,7 @@ rate-limited — it includes full paper details in one request, avoiding
 the need to hit the search API at all.
 """
 
+import json
 import urllib.request
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
@@ -67,67 +68,46 @@ def get_latest_papers(categories: str = None) -> list[dict]:
 
 def _fetch_affiliations_by_ids(arxiv_ids: list[str]) -> dict[str, list[dict]]:
     """
-    Query ArXiv API by id_list to get author affiliations.
-    Uses the `arxiv` Python package (same as the original zotero-arxiv-daily
-    project) with its built-in retry logic for rate limiting.
+    Enrich papers with author affiliations from Semantic Scholar API.
+    Semantic Scholar is free, doesn't rate-limit from CI, and returns
+    author affiliations for most ArXiv papers.
     Returns map of arxiv_id → list of {author, affiliation} dicts.
     """
     if not arxiv_ids:
         return {}
 
-    try:
-        import arxiv
-    except ImportError:
-        print("[WARN] arxiv package not installed, skipping affiliation enrichment.")
-        return {}
-
     import time as time_mod
 
-    max_batch_retries = 5
-    batch_retry_delay = 30
-    batch_size = 20
     aff_map = {}
+    # Only enrich top papers (users see MAX_PAPER_NUM × 2 in similar + followed)
+    target_ids = arxiv_ids[:200]  # reasonable limit
+    print(f"[INFO] Fetching affiliations from Semantic Scholar for {len(target_ids)} papers...")
 
-    # Match the original project's client settings exactly
-    client = arxiv.Client(num_retries=10, delay_seconds=10)
+    for i, aid in enumerate(target_ids):
+        try:
+            url = f"https://api.semanticscholar.org/graph/v1/paper/ArXiv:{aid}?fields=authors"
+            req = urllib.request.Request(url, headers={"User-Agent": "arXivDaily/1.0"})
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
 
-    for i in range(0, len(arxiv_ids), batch_size):
-        batch = arxiv_ids[i:i + batch_size]
-        batch_num = i // batch_size + 1
-        total_batches = (len(arxiv_ids) - 1) // batch_size + 1
+            affs = []
+            for a in data.get("authors", []):
+                name = a.get("name", "")
+                aff = a.get("affiliations", [])
+                aff_name = aff[0] if aff else ""
+                if aff_name:
+                    affs.append({"author": name, "affiliation": aff_name})
+            if affs:
+                aff_map[aid] = affs
+        except Exception:
+            pass  # paper not in Semantic Scholar or network error
 
-        for attempt in range(max_batch_retries):
-            try:
-                search = arxiv.Search(id_list=batch)
-                results = list(client.results(search))
-                for r in results:
-                    affs = []
-                    for a in r.authors:
-                        aff_str = getattr(a, 'affiliation', '') or ''
-                        if aff_str:
-                            affs.append({"author": a.name, "affiliation": aff_str})
-                    if affs:
-                        # Extract clean arxiv_id from the result
-                        rid = r.entry_id.split("/abs/")[-1].split("v")[0]
-                        aff_map[rid] = affs
-                break
-            except arxiv.HTTPError as exc:
-                if exc.status == 429 and attempt < max_batch_retries - 1:
-                    wait = batch_retry_delay * (attempt + 1)
-                    print(f"[WARN] Affiliations API 429 batch {batch_num}/{total_batches}, retry in {wait}s")
-                    time_mod.sleep(wait)
-                else:
-                    if attempt == 0:
-                        print(f"[WARN] Affiliations batch {batch_num} failed: {exc}")
-                    break
-            except Exception as exc:
-                if attempt == 0:
-                    print(f"[WARN] Affiliations batch {batch_num} failed: {exc}")
-                break
+        # Polite: 1 request per second
+        if i % 50 == 49:
+            print(f"[INFO]   ... {i + 1}/{len(target_ids)} affiliations fetched")
+        time_mod.sleep(0.2)
 
-        if i + batch_size < len(arxiv_ids):
-            time_mod.sleep(3)
-
+    print(f"[INFO] Fetched affiliations for {len(aff_map)}/{len(target_ids)} papers")
     return aff_map
 
 
