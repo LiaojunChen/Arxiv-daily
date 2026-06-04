@@ -283,10 +283,10 @@ ${truncated}`;
           className={`${sidebarTab === "paper" ? "flex" : "hidden"} lg:flex flex-col w-full`}
           style={{ width: sidebarTab === "paper" || window.innerWidth >= 1024 ? `${splitRatio}%` : "100%" }}
         >
-          {/* Top bar with PDF fallback */}
+          {/* Top bar */}
           <div className="px-4 py-1.5 bg-gray-50 border-b border-gray-200 flex items-center justify-between shrink-0">
             <span className="text-xs text-gray-500">
-              arXiv HTML 全文（部分论文无此版本）
+              arXiv 论文页面
             </span>
             <a
               href={paper.pdf_url}
@@ -298,13 +298,9 @@ ${truncated}`;
             </a>
           </div>
           <iframe
-            src={`https://arxiv.org/html/${paper.arxiv_id}`}
+            src={`https://arxiv.org/abs/${paper.arxiv_id}`}
             className="flex-1 w-full border-0"
-            title={`arXiv HTML: ${paper.arxiv_id}`}
-            onError={(e) => {
-              // Fallback to abstract page if HTML version not available
-              (e.target as HTMLIFrameElement).src = `https://arxiv.org/abs/${paper.arxiv_id}`;
-            }}
+            title={`arXiv: ${paper.arxiv_id}`}
           />
         </div>
 

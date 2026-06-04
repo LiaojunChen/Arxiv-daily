@@ -51,76 +51,70 @@ def get_latest_papers(categories: str = None) -> list[dict]:
     papers = _parse_atom_feed(xml_data)
     print(f"[INFO] RSS feed returned {len(papers)} papers")
 
-    # Step 2: Enrich with affiliations from ArXiv API (id_list queries)
-    ids = [p["arxiv_id"] for p in papers]
-    try:
-        aff_map = _fetch_affiliations_by_ids(ids)
-        for p in papers:
-            if not p["affiliations"] and p["arxiv_id"] in aff_map:
-                p["affiliations"] = aff_map[p["arxiv_id"]]
-        enriched = sum(1 for p in papers if p["affiliations"])
-        print(f"[INFO] Enriched affiliations for {enriched}/{len(papers)} papers")
-    except Exception as e:
-        print(f"[WARN] Could not enrich affiliations (API limited): {e}")
+    # Step 2: Extract affiliations from abstract text (heuristic)
+    # External APIs are rate-limited from GitHub Actions, so we parse
+    # institution names from author names and abstract footnotes.
+    text_enriched = _extract_affiliations_from_text(papers)
+    enriched = sum(1 for p in papers if p.get("affiliations"))
+    print(f"[INFO] Extracted affiliations for {text_enriched}/{len(papers)} papers (total with affs: {enriched})")
 
     return papers
 
 
-def _fetch_affiliations_by_ids(arxiv_ids: list[str]) -> dict[str, list[dict]]:
+def _extract_affiliations_from_text(papers: list[dict]) -> int:
     """
-    Enrich papers with author affiliations using Semantic Scholar batch API.
-    Returns map of arxiv_id → list of {author, affiliation} dicts.
+    Heuristic: extract affiliations from abstract text footnotes.
+    Many papers list author affiliations at the end of the abstract
+    or in patterns like "Author1 (MIT), Author2 (Stanford)".
+    Returns count of papers enriched.
     """
-    if not arxiv_ids:
-        return {}
+    import re
 
-    aff_map = {}
-    target_ids = arxiv_ids[:200]
-    batch_size = 100
-    print(f"[INFO] Fetching affiliations via Semantic Scholar for {len(target_ids)} papers...")
+    enriched = 0
+    for p in papers:
+        if p.get("affiliations"):
+            continue  # already has affiliations
 
-    for b in range(0, len(target_ids), batch_size):
-        batch = target_ids[b:b + batch_size]
-        try:
-            s2_ids = [f"ArXiv:{aid}" for aid in batch]
-            payload = json.dumps({"ids": s2_ids}).encode("utf-8")
-            url = "https://api.semanticscholar.org/graph/v1/paper/batch?fields=authors"
-            req = urllib.request.Request(
-                url, data=payload, method="POST",
-                headers={"Content-Type": "application/json", "User-Agent": "arXivDaily/1.0"},
-            )
-            with urllib.request.urlopen(req, timeout=30) as resp:
-                results = json.loads(resp.read().decode("utf-8"))
+        abstract = p.get("abstract", "")
+        affs_from_text = []
 
-            if not isinstance(results, list):
-                print(f"[WARN] Semantic Scholar unexpected response: {type(results)}")
-                continue
+        # Pattern 1: "Author1, Author2 (Institution1, Institution2)"
+        # Pattern 2: Lines with university/institute/lab keywords at end of abstract
+        inst_patterns = [
+            r'(?:University|Institute|College|School)\s+of\s+[\w\s]+',
+            r'(?:MIT|CMU|ETH|EPFL|NYU|UCLA|UC\s+\w+|Caltech)',
+            r'[\w\s]+(?:University|Institute|College|Laboratory|Lab|Research|Inc\.|Ltd\.)',
+            r'(?:Google|Microsoft|Meta|Apple|Amazon|OpenAI|DeepMind|Anthropic|NVIDIA|Intel|IBM)\s+(?:Research|AI|DeepMind)?',
+        ]
 
-            for item in results:
-                if not item or not isinstance(item, dict):
-                    continue
-                # Get arxiv_id back from paperId or externalIds
-                ext_ids = item.get("externalIds", {}) or {}
-                arxiv_id = ext_ids.get("ArXiv", "")
-                if not arxiv_id:
-                    continue
+        found_affs = set()
+        for pattern in inst_patterns:
+            matches = re.findall(pattern, abstract, re.IGNORECASE)
+            for m in matches:
+                cleaned = m.strip().rstrip(',').rstrip('.').strip()
+                if len(cleaned) > 4:
+                    found_affs.add(cleaned)
 
-                affs = []
-                for a in item.get("authors", []):
-                    name = a.get("name", "")
-                    aff_list = a.get("affiliations", [])
-                    aff_name = aff_list[0] if aff_list else ""
-                    if aff_name:
-                        affs.append({"author": name, "affiliation": aff_name})
-                if affs:
-                    aff_map[arxiv_id] = affs
+        # Also check last few lines of abstract (common for affiliation footnotes)
+        lines = abstract.split('.')
+        last_lines = [l.strip() for l in lines[-5:] if len(l.strip()) > 20]
+        for line in last_lines:
+            for pattern in inst_patterns:
+                matches = re.findall(pattern, line, re.IGNORECASE)
+                for m in matches:
+                    cleaned = m.strip().rstrip(',').rstrip('.').strip()
+                    if len(cleaned) > 4:
+                        found_affs.add(cleaned)
 
-            print(f"[INFO]   batch {b // batch_size + 1}: {len(results)} results")
-        except Exception as e:
-            print(f"[WARN] Semantic Scholar batch {b // batch_size + 1} failed: {e}")
+        if found_affs:
+            # Assign to first author (best effort)
+            first_author = p["authors"][0] if p["authors"] else "Unknown"
+            for aff in list(found_affs)[:3]:
+                affs_from_text.append({"author": first_author, "affiliation": aff})
+            p["affiliations"] = affs_from_text
+            enriched += 1
 
-    print(f"[INFO] Fetched affiliations for {len(aff_map)}/{len(target_ids)} papers")
-    return aff_map
+    return enriched
 
 
 def _parse_atom_feed(xml_data: str) -> list[dict]:
