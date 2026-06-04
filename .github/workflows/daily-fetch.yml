@@ -42,6 +42,7 @@ jobs:
           OPENAI_API_BASE: ${{ secrets.OPENAI_API_BASE }}
           MODEL_NAME: ${{ secrets.MODEL_NAME }}
           AFFILIATION_MAX_PAPERS: ${{ vars.AFFILIATION_MAX_PAPERS }}
+          AFFILIATION_MAX_LLM_PAPERS: ${{ vars.AFFILIATION_MAX_LLM_PAPERS }}
         run: python scripts/fetch_papers.py
 
       - name: Use sample data if fetch failed

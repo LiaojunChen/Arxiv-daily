@@ -32,6 +32,25 @@ def test_normalize_affiliation_response_handles_strings_and_objects():
     ]
 
 
+def test_extract_affiliations_from_latex_commands():
+    paper_text = r"""
+    \author{Ada Lovelace}
+    \affiliation{Department of Computer Science, MIT}
+    \author{Grace Hopper}
+    \affil{OpenAI Research}
+    """
+
+    affiliations = affiliation_extractor.extract_affiliations_from_paper_text(
+        paper_text,
+        ["Ada Lovelace", "Grace Hopper"],
+    )
+
+    assert affiliations == [
+        {"author": "Ada Lovelace", "affiliation": "Department of Computer Science, MIT"},
+        {"author": "Grace Hopper", "affiliation": "OpenAI Research"},
+    ]
+
+
 def test_enrich_affiliations_for_display_papers_updates_missing_affiliations(monkeypatch):
     paper = {
         "arxiv_id": "2606.00001",

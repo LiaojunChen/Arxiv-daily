@@ -8,7 +8,7 @@ export function usePapers() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    fetch("/Arxiv-daily/papers.json")
+    fetch(`/Arxiv-daily/papers.json?ts=${Date.now()}`, { cache: "no-store" })
       .then((res) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();

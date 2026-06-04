@@ -12,6 +12,7 @@ from html.parser import HTMLParser
 import requests
 
 from config import (
+    AFFILIATION_MAX_LLM_PAPERS,
     AFFILIATION_MAX_PAPERS,
     MODEL_NAME,
     OPENAI_API_BASE,
@@ -23,6 +24,30 @@ REQUEST_TIMEOUT = (10, 45)
 MAX_DOWNLOAD_BYTES = 12 * 1024 * 1024
 MAX_CONTEXT_CHARS = 12000
 USER_AGENT = "arXivDaily/1.0"
+AFFILIATION_KEYWORDS = (
+    "university",
+    "institute",
+    "college",
+    "school",
+    "laborator",
+    "research",
+    "academy",
+    "center",
+    "centre",
+    "department",
+    "google",
+    "microsoft",
+    "meta",
+    "openai",
+    "deepmind",
+    "anthropic",
+    "nvidia",
+    "amazon",
+    "apple",
+    "mit",
+    "stanford",
+    "berkeley",
+)
 
 
 class _TextHTMLParser(HTMLParser):
@@ -114,6 +139,88 @@ def _score_source_text(text: str) -> int:
         + lowered.count("\\author") * 2
         + lowered.count("\\affil") * 5
     )
+
+
+def _read_braced_content(text: str, open_brace_idx: int) -> str | None:
+    depth = 0
+    start = open_brace_idx + 1
+    for idx in range(open_brace_idx, len(text)):
+        char = text[idx]
+        if char == "{":
+            depth += 1
+        elif char == "}":
+            depth -= 1
+            if depth == 0:
+                return text[start:idx]
+    return None
+
+
+def _latex_command_blocks(text: str, commands: tuple[str, ...]) -> list[str]:
+    command_pattern = "|".join(re.escape(command) for command in commands)
+    pattern = re.compile(
+        rf"\\(?:{command_pattern})\*?\s*(?:\[[^\]]*\])?\s*\{{",
+        flags=re.IGNORECASE,
+    )
+    blocks = []
+    for match in pattern.finditer(text):
+        block = _read_braced_content(text, match.end() - 1)
+        if block:
+            blocks.append(block)
+    return blocks
+
+
+def _clean_latex_affiliation(value: str) -> str:
+    value = re.sub(r"%.*", " ", value)
+    value = re.sub(r"\\(?:href|url)\{[^{}]*\}\{([^{}]*)\}", r"\1", value)
+    value = re.sub(r"\\(?:email|thanks|footnote|corref|fnref|textsuperscript)\*?\s*(?:\[[^\]]*\])?\s*\{[^{}]*\}", " ", value)
+    value = re.sub(r"\\[a-zA-Z]+\*?\s*(?:\[[^\]]*\])?", " ", value)
+    value = value.replace("~", " ").replace("^", " ")
+    value = re.sub(r"[{}$]", " ", value)
+    value = _clean_text(value)
+    return value.strip(" ,;:-")
+
+
+def _looks_like_affiliation(value: str) -> bool:
+    lowered = value.lower()
+    if len(value) < 4 or "@" in value:
+        return False
+    return any(keyword in lowered for keyword in AFFILIATION_KEYWORDS)
+
+
+def _split_affiliation_candidates(block: str) -> list[str]:
+    parts = re.split(r"\\\\|\\and|\n|;", block)
+    candidates = []
+    for part in parts:
+        cleaned = _clean_latex_affiliation(part)
+        if _looks_like_affiliation(cleaned):
+            candidates.append(cleaned)
+    whole = _clean_latex_affiliation(block)
+    if _looks_like_affiliation(whole):
+        candidates.append(whole)
+    return candidates
+
+
+def extract_affiliations_from_paper_text(paper_text: str, authors: list[str]) -> list[dict]:
+    blocks = _latex_command_blocks(
+        paper_text[:MAX_CONTEXT_CHARS],
+        ("affiliation", "affil", "institute", "address", "IEEEauthorblockA"),
+    )
+
+    author_blocks = _latex_command_blocks(paper_text[:8000], ("author",))
+    blocks.extend(author_blocks)
+
+    affiliations = []
+    seen = set()
+    for block in blocks:
+        for candidate in _split_affiliation_candidates(block):
+            key = candidate.casefold()
+            if key in seen:
+                continue
+            seen.add(key)
+            author = authors[len(affiliations)] if len(affiliations) < len(authors) else ""
+            affiliations.append({"author": author, "affiliation": candidate})
+
+    return affiliations
 
 
 def _extract_text_from_source_bytes(data: bytes) -> str | None:
@@ -261,11 +368,11 @@ def _call_llm_for_affiliations(paper: dict, paper_text: str) -> list[dict]:
 
 def enrich_affiliations_for_display_papers(paper_groups: list[list[dict]]) -> int:
     if not OPENAI_API_KEY:
-        print("[WARN] OPENAI_API_KEY not set; skipping LLM affiliation extraction.")
-        return 0
+        print("[WARN] No LLM API key set; only deterministic TeX affiliation extraction will run.")
 
     enriched = 0
     attempted = 0
+    llm_attempted = 0
     seen_ids = set()
     for group in paper_groups:
         for paper in group:
@@ -289,7 +396,11 @@ def enrich_affiliations_for_display_papers(paper_groups: list[list[dict]]) -> in
                 print(f"[WARN] No source/html text available for affiliation extraction: {arxiv_id}")
                 continue
 
-            affiliations = _call_llm_for_affiliations(paper, paper_text)
+            authors = paper.get("authors", [])
+            affiliations = extract_affiliations_from_paper_text(paper_text, authors)
+            if not affiliations and OPENAI_API_KEY and llm_attempted < AFFILIATION_MAX_LLM_PAPERS:
+                llm_attempted += 1
+                affiliations = _call_llm_for_affiliations(paper, paper_text)
             if affiliations:
                 paper["affiliations"] = affiliations
                 enriched += 1
