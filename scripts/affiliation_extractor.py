@@ -177,6 +177,7 @@ def _clean_latex_affiliation(value: str) -> str:
     value = value.replace("~", " ").replace("^", " ")
     value = re.sub(r"[{}$]", " ", value)
     value = _clean_text(value)
+    value = re.sub(r"^(?:\d+|[a-z])\s+", "", value, flags=re.IGNORECASE)
     return value.strip(" ,;:-")
 
 

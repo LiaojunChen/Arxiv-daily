@@ -51,6 +51,13 @@ def test_extract_affiliations_from_latex_commands():
     ]
 
 
+def test_clean_latex_affiliation_removes_leading_markers():
+    assert (
+        affiliation_extractor._clean_latex_affiliation("1 University of California, Los Angeles")
+        == "University of California, Los Angeles"
+    )
+
+
 def test_enrich_affiliations_for_display_papers_updates_missing_affiliations(monkeypatch):
     paper = {
         "arxiv_id": "2606.00001",
