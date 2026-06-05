@@ -5,11 +5,14 @@ No authentication required.
 """
 
 import requests
+import os
 from datetime import datetime, timezone
 
 
 HF_API_BASE = "https://huggingface.co/api/daily_papers"
 HF_TIMEOUT = 15
+HF_PAGE_SIZE = int(os.environ.get("HF_PAGE_SIZE") or "50")
+HF_MAX_PAPERS = int(os.environ.get("HF_MAX_PAPERS") or "50")
 
 
 def _parse_hf_paper(item: dict) -> dict:
@@ -66,10 +69,12 @@ def fetch_hf_daily_papers(date: str = None) -> list[dict]:
         date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
     all_papers = []
+    seen_ids = set()
     page = 1
 
-    while True:
-        url = f"{HF_API_BASE}?date={date}&page={page}&limit=50"
+    while len(all_papers) < HF_MAX_PAPERS:
+        limit = min(HF_PAGE_SIZE, HF_MAX_PAPERS - len(all_papers))
+        url = f"{HF_API_BASE}?date={date}&page={page}&limit={limit}"
         print(f"[INFO] Fetching HF papers: page={page}")
 
         try:
@@ -83,12 +88,24 @@ def fetch_hf_daily_papers(date: str = None) -> list[dict]:
         if not data:
             break
 
+        new_on_page = 0
         for item in data:
-            all_papers.append(_parse_hf_paper(item))
+            paper = _parse_hf_paper(item)
+            key = paper.get("arxiv_id") or paper.get("title")
+            if not key or key in seen_ids:
+                continue
+            seen_ids.add(key)
+            all_papers.append(paper)
+            new_on_page += 1
+            if len(all_papers) >= HF_MAX_PAPERS:
+                break
 
-        if len(data) < 50:
+        if new_on_page == 0:
+            print("[WARN] HF papers page returned no new papers; stopping pagination.")
+            break
+        if len(data) < limit:
             break
         page += 1
 
-    print(f"[INFO] Fetched {len(all_papers)} HF daily papers for {date}")
+    print(f"[INFO] Fetched {len(all_papers)} HF daily papers for {date} (max={HF_MAX_PAPERS})")
     return all_papers
