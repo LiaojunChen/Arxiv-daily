@@ -1,4 +1,11 @@
-import { useState, useRef, useEffect, useCallback, useMemo } from "react";
+import {
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+  useMemo,
+} from "react";
+import type { CSSProperties } from "react";
 import type { Paper, ChatMessage } from "../types";
 import { loadSettings } from "../utils/storage";
 import { getUniqueAffiliations } from "../utils/affiliations";
@@ -33,7 +40,21 @@ function renderMarkdown(text: string): string {
   // Numbered lists
   html = html.replace(/^\d+\. (.+)$/gm, '<li class="ml-4 list-decimal">$1</li>');
   // Links
-  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" class="text-indigo-600 underline">$1</a>');
+  html = html.replace(
+    /\[([^\]]+)\]\(([^)]+)\)/g,
+    (_match, label: string, href: string) => {
+      try {
+        const url = new URL(href);
+        if (url.protocol !== "http:" && url.protocol !== "https:") {
+          return `${label} (${href})`;
+        }
+        const safeHref = url.href.replace(/"/g, "&quot;");
+        return `<a href="${safeHref}" target="_blank" rel="noopener noreferrer" class="text-indigo-600 underline">${label}</a>`;
+      } catch {
+        return `${label} (${href})`;
+      }
+    }
+  );
   // Line breaks
   html = html.replace(/\n\n/g, '</p><p class="mb-2">');
   html = html.replace(/\n/g, '<br/>');
@@ -44,24 +65,13 @@ function renderMarkdown(text: string): string {
 
 
 export default function PaperViewer({ paper, onClose }: PaperViewerProps) {
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [input, setInput] = useState("");
-  const [sending, setSending] = useState(false);
-  const [fullTextLoading, setFullTextLoading] = useState(false);
-  const [fullTextLoaded, setFullTextLoaded] = useState(false);
-  const [sidebarTab, setSidebarTab] = useState<"paper" | "chat">("paper");
-  const [splitRatio, setSplitRatio] = useState(70); // paper % (default 70%)
-  const [dragging, setDragging] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const messagesEnd = useRef<HTMLDivElement>(null);
-
   const settings = loadSettings();
 
   const uniqueAffiliations = useMemo(() => {
     return getUniqueAffiliations(paper.affiliations);
   }, [paper.affiliations]);
 
-  const systemPrompt = `你正在讨论以下论文:
+  const systemPrompt = useMemo(() => `你正在讨论以下论文:
 
 标题: ${paper.title}
 作者: ${paper.authors.join(", ")}
@@ -71,12 +81,20 @@ arXiv ID: ${paper.arxiv_id}
 
 摘要: ${paper.abstract}
 
-请基于以上信息回答用户关于这篇论文的问题。你可以解释论文的核心贡献、方法论、实验结果、与其他工作的关系等。如果用户询问论文中未提及的细节，请诚实地说明。`;
+请基于以上信息回答用户关于这篇论文的问题。你可以解释论文的核心贡献、方法论、实验结果、与其他工作的关系等。如果用户询问论文中未提及的细节，请诚实地说明。`, [paper, uniqueAffiliations]);
 
-  useEffect(() => {
-    setMessages([{ role: "system", content: systemPrompt }]);
-    setFullTextLoaded(false);
-  }, [paper.arxiv_id]);
+  const [messages, setMessages] = useState<ChatMessage[]>(() => [
+    { role: "system", content: systemPrompt },
+  ]);
+  const [input, setInput] = useState("");
+  const [sending, setSending] = useState(false);
+  const [fullTextLoading, setFullTextLoading] = useState(false);
+  const [fullTextLoaded, setFullTextLoaded] = useState(false);
+  const [sidebarTab, setSidebarTab] = useState<"paper" | "chat">("paper");
+  const [splitRatio, setSplitRatio] = useState(70); // paper % (default 70%)
+  const [dragging, setDragging] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const messagesEnd = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     messagesEnd.current?.scrollIntoView({ behavior: "smooth" });
@@ -154,7 +172,7 @@ ${truncated}`;
       ]);
     }
     setFullTextLoading(false);
-  }, [paper.arxiv_id]);
+  }, [paper.arxiv_id, systemPrompt]);
 
   const sendMessage = async () => {
     const text = input.trim();
@@ -202,10 +220,11 @@ ${truncated}`;
 
       const reply = data.choices?.[0]?.message?.content || "(无回复)";
       setMessages((prev) => [...prev, { role: "assistant", content: reply }]);
-    } catch (err: any) {
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "未知错误";
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content: `**错误**: ${err.message}` },
+        { role: "assistant", content: `**错误**: ${message}` },
       ]);
     } finally {
       setSending(false);
@@ -271,16 +290,19 @@ ${truncated}`;
       </div>
 
       {/* Split layout with draggable divider */}
-      <div ref={containerRef} className={`flex-1 flex min-h-0 ${dragging ? "select-none cursor-col-resize" : ""}`}>
+      <div
+        ref={containerRef}
+        className={`flex-1 flex min-h-0 ${dragging ? "select-none cursor-col-resize" : ""}`}
+        style={{ "--paper-pane-width": `${splitRatio}%` } as CSSProperties}
+      >
         {/* Left: Paper page */}
         <div
-          className={`${sidebarTab === "paper" ? "flex" : "hidden"} lg:flex flex-col w-full`}
-          style={{ width: sidebarTab === "paper" || window.innerWidth >= 1024 ? `${splitRatio}%` : "100%" }}
+          className={`${sidebarTab === "paper" ? "flex" : "hidden"} lg:flex flex-col w-full lg:w-[var(--paper-pane-width)]`}
         >
           {/* Top bar */}
           <div className="px-4 py-1.5 bg-gray-50 border-b border-gray-200 flex items-center justify-between shrink-0">
             <span className="text-xs text-gray-500">
-              arXiv 论文页面
+              arXiv HTML 论文页面
             </span>
             <a
               href={paper.pdf_url}
@@ -292,9 +314,10 @@ ${truncated}`;
             </a>
           </div>
           <iframe
-            src={`https://arxiv.org/abs/${paper.arxiv_id}`}
+            src={`https://arxiv.org/html/${paper.arxiv_id}`}
             className="flex-1 w-full border-0"
             title={`arXiv: ${paper.arxiv_id}`}
+            sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox"
           />
         </div>
 
@@ -308,8 +331,7 @@ ${truncated}`;
 
         {/* Right: Chat */}
         <div
-          className={`${sidebarTab === "chat" ? "flex" : "hidden"} lg:flex flex-col border-l border-gray-200`}
-          style={{ width: `${100 - splitRatio}%` }}
+          className={`${sidebarTab === "chat" ? "flex" : "hidden"} lg:flex flex-col w-full lg:flex-1 border-l border-gray-200`}
         >
           <div className="px-3 py-2 border-b border-gray-100 bg-gray-50 shrink-0">
             <span className="text-xs text-gray-500 font-medium">AI 讨论</span>

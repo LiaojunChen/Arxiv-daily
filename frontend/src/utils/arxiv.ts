@@ -12,6 +12,12 @@ export function truncateAbstract(text: string, maxLen = 300): string {
   return text.slice(0, maxLen) + "...";
 }
 
+/** Backend reranker scores use a 0-10 scale. */
+export function formatSimilarityPercentage(score: number): string {
+  const clamped = Math.min(10, Math.max(0, score));
+  return `${Math.round(clamped * 10)}%`;
+}
+
 export function categoryColor(cat: string): string {
   const colors: Record<string, string> = {
     "cs.CV": "bg-blue-100 text-blue-800",

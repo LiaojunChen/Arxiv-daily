@@ -5,7 +5,7 @@ build-backend = "uv_build"
 [project]
 name = "zotero-arxiv-daily"
 version = "1.0.0"
-description = "Add your description here"
+description = "Daily arXiv paper recommendations with keyword feedback and a web dashboard"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [

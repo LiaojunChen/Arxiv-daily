@@ -21,6 +21,7 @@ from config import (
 
 
 REQUEST_TIMEOUT = (10, 45)
+LLM_REQUEST_TIMEOUT = (10, 25)
 MAX_DOWNLOAD_BYTES = 12 * 1024 * 1024
 MAX_CONTEXT_CHARS = 12000
 USER_AGENT = "arXivDaily/1.0"
@@ -60,23 +61,47 @@ class _TextHTMLParser(HTMLParser):
         super().__init__()
         self.parts: list[str] = []
         self._ignored_depth = 0
+        self.affiliation_parts: list[str] = []
+        self._affiliation_depth = 0
+        self._affiliation_buffer: list[str] = []
 
     def handle_starttag(self, tag, attrs):
         if tag in {"script", "style", "nav", "footer"}:
             self._ignored_depth += 1
 
+        attr_map = dict(attrs)
+        classes = set((attr_map.get("class") or "").split())
+        starts_affiliation = "ltx_role_affiliation" in classes
+        if self._affiliation_depth or starts_affiliation:
+            self._affiliation_depth += 1
+
     def handle_endtag(self, tag):
         if tag in {"script", "style", "nav", "footer"} and self._ignored_depth:
             self._ignored_depth -= 1
+        if self._affiliation_depth:
+            self._affiliation_depth -= 1
+            if not self._affiliation_depth:
+                affiliation = _clean_text(" ".join(self._affiliation_buffer))
+                if affiliation:
+                    self.affiliation_parts.append(affiliation)
+                self._affiliation_buffer = []
 
     def handle_data(self, data):
         if not self._ignored_depth:
             text = data.strip()
             if text:
                 self.parts.append(text)
+                if self._affiliation_depth:
+                    self._affiliation_buffer.append(text)
 
     def text(self) -> str:
-        return _clean_text(" ".join(self.parts))
+        # Preserve explicit LaTeXML affiliation spans as synthetic commands so
+        # the deterministic TeX parser can handle both source and HTML input.
+        affiliation_commands = "\n".join(
+            f"\\affiliation{{{affiliation}}}" for affiliation in self.affiliation_parts
+        )
+        body = _clean_text(" ".join(self.parts))
+        return f"{affiliation_commands}\n{body}".strip()
 
 
 def _clean_text(value: str | None) -> str:
@@ -104,6 +129,18 @@ def _download_limited(url: str) -> bytes | None:
             if response.status_code == 404:
                 return None
             response.raise_for_status()
+
+            content_length = response.headers.get("Content-Length")
+            try:
+                content_length = int(content_length) if content_length else None
+            except (TypeError, ValueError):
+                content_length = None
+            if content_length and content_length > MAX_DOWNLOAD_BYTES:
+                print(
+                    f"[WARN] Skipping oversized download ({content_length} bytes): {url}"
+                )
+                return None
+
             chunks = []
             size = 0
             for chunk in response.iter_content(chunk_size=1024 * 256):
@@ -112,7 +149,8 @@ def _download_limited(url: str) -> bytes | None:
                 chunks.append(chunk)
                 size += len(chunk)
                 if size > MAX_DOWNLOAD_BYTES:
-                    break
+                    print(f"[WARN] Download exceeded size limit; using fallback: {url}")
+                    return None
             return b"".join(chunks)
     except requests.RequestException as exc:
         print(f"[WARN] Failed to download {url}: {exc}")
@@ -185,6 +223,27 @@ def _clean_latex_affiliation(value: str, strip_marker: bool = True) -> str:
     value = value.replace("~", " ").replace("^", " ")
     value = re.sub(r"[{}$*]", " ", value)
     value = _clean_text(value)
+
+    # LaTeX packages such as authblk/acmart sometimes expose structured fields
+    # as ``organization=..., addressline=..., city=...``. Keep institutional
+    # fields and discard postal-address noise before showing the value.
+    field_pattern = re.compile(
+        r"\b(organization|institution|department|addressline|city|postcode|"
+        r"postalcode|country|state)\s*=\s*",
+        flags=re.IGNORECASE,
+    )
+    field_matches = list(field_pattern.finditer(value))
+    if field_matches:
+        institutional_values = []
+        for idx, match in enumerate(field_matches):
+            end = field_matches[idx + 1].start() if idx + 1 < len(field_matches) else len(value)
+            field_name = match.group(1).casefold()
+            field_value = value[match.end() : end].strip(" ,;:-")
+            if field_name in {"organization", "institution", "department"} and field_value:
+                institutional_values.append(field_value)
+        if institutional_values:
+            value = ", ".join(institutional_values)
+
     if strip_marker:
         value = re.sub(r"^(?:\d+|[a-z])\s+", "", value, flags=re.IGNORECASE)
     return value.strip(" ,;:-")
@@ -243,6 +302,9 @@ def _split_affiliation_candidates(block: str, include_whole: bool = True) -> lis
 
 
 def extract_affiliations_from_paper_text(paper_text: str, authors: list[str]) -> list[dict]:
+    if not paper_text:
+        return []
+
     blocks = [
         (block, True)
         for block in _latex_command_blocks(
@@ -284,7 +346,7 @@ def _extract_text_from_source_bytes(data: bytes) -> str | None:
                     continue
                 text = _decode_bytes(file_obj.read(512000))
                 candidates.append((_score_source_text(text), text))
-    except tarfile.TarError:
+    except (tarfile.TarError, EOFError, OSError):
         try:
             text = _decode_bytes(gzip.decompress(data))
         except (OSError, EOFError):
@@ -407,7 +469,7 @@ def _call_llm_for_affiliations(paper: dict, paper_text: str) -> list[dict]:
                 "Content-Type": "application/json",
             },
             json=payload,
-            timeout=REQUEST_TIMEOUT,
+            timeout=LLM_REQUEST_TIMEOUT,
         )
         response.raise_for_status()
         content = response.json()["choices"][0]["message"]["content"]
@@ -422,46 +484,80 @@ def enrich_affiliations_for_display_papers(paper_groups: list[list[dict]]) -> in
     if not OPENAI_API_KEY:
         print("[WARN] No LLM API key set; only deterministic TeX affiliation extraction will run.")
 
-    enriched = 0
-    attempted = 0
-    llm_attempted = 0
-    seen_ids = set()
+    affiliations_by_id: dict[str, list[dict]] = {}
     for group in paper_groups:
         for paper in group:
-            if attempted >= AFFILIATION_MAX_PAPERS:
-                return enriched
-
-            existing_affiliations = _normalize_existing_affiliations(
-                paper.get("affiliations"),
-                paper.get("authors", []),
+            existing = _normalize_existing_affiliations(
+                paper.get("affiliations"), paper.get("authors", [])
             )
-            if existing_affiliations:
-                paper["affiliations"] = existing_affiliations
-                continue
+            paper["affiliations"] = existing
+            arxiv_id = _normalize_arxiv_id(
+                paper.get("arxiv_id") or paper.get("abstract_url") or ""
+            )
+            if arxiv_id and existing:
+                affiliations_by_id.setdefault(arxiv_id, existing)
 
-            arxiv_id = _normalize_arxiv_id(paper.get("arxiv_id") or paper.get("abstract_url") or "")
-            if not arxiv_id or arxiv_id in seen_ids:
-                continue
-            seen_ids.add(arxiv_id)
-            attempted += 1
+    # Interleave groups so a finite budget cannot be consumed entirely by the
+    # first tab (which previously left every Hugging Face paper untouched).
+    candidates = []
+    max_group_size = max((len(group) for group in paper_groups), default=0)
+    for index in range(max_group_size):
+        for group in paper_groups:
+            if index < len(group):
+                candidates.append(group[index])
 
-            try:
-                paper_text = fetch_paper_text(arxiv_id)
-            except Exception as exc:
-                print(f"[WARN] Failed to read source/html text for {arxiv_id}: {exc}")
-                continue
-            if not paper_text:
-                print(f"[WARN] No source/html text available for affiliation extraction: {arxiv_id}")
-                continue
+    attempted_ids = set()
+    enriched_ids = set()
+    llm_attempted = 0
+    for paper in candidates:
+        arxiv_id = _normalize_arxiv_id(
+            paper.get("arxiv_id") or paper.get("abstract_url") or ""
+        )
+        if not arxiv_id:
+            continue
 
-            authors = paper.get("authors", [])
-            affiliations = extract_affiliations_from_paper_text(paper_text, authors)
-            if not affiliations and OPENAI_API_KEY and llm_attempted < AFFILIATION_MAX_LLM_PAPERS:
-                llm_attempted += 1
-                affiliations = _call_llm_for_affiliations(paper, paper_text)
-            if affiliations:
-                paper["affiliations"] = affiliations
-                enriched += 1
-                print(f"[INFO] Extracted affiliations for {arxiv_id}: {len(affiliations)} entries")
+        cached = affiliations_by_id.get(arxiv_id)
+        if cached:
+            paper["affiliations"] = cached
+            continue
+        if arxiv_id in attempted_ids:
+            continue
+        if AFFILIATION_MAX_PAPERS > 0 and len(attempted_ids) >= AFFILIATION_MAX_PAPERS:
+            break
+        attempted_ids.add(arxiv_id)
 
-    return enriched
+        try:
+            paper_text = fetch_paper_text(arxiv_id)
+        except Exception as exc:
+            print(f"[WARN] Failed to read source/html text for {arxiv_id}: {exc}")
+            continue
+        if not paper_text:
+            print(f"[WARN] No source/html text available for affiliation extraction: {arxiv_id}")
+            continue
+
+        authors = paper.get("authors", [])
+        affiliations = extract_affiliations_from_paper_text(paper_text, authors)
+        if (
+            not affiliations
+            and OPENAI_API_KEY
+            and llm_attempted < AFFILIATION_MAX_LLM_PAPERS
+        ):
+            llm_attempted += 1
+            affiliations = _call_llm_for_affiliations(paper, paper_text)
+        if affiliations:
+            paper["affiliations"] = affiliations
+            affiliations_by_id[arxiv_id] = affiliations
+            enriched_ids.add(arxiv_id)
+            print(f"[INFO] Extracted affiliations for {arxiv_id}: {len(affiliations)} entries")
+
+    # Copies of one paper can appear in multiple tabs. Propagate cached values
+    # after extraction instead of letting the duplicate-id guard leave them empty.
+    for group in paper_groups:
+        for paper in group:
+            arxiv_id = _normalize_arxiv_id(
+                paper.get("arxiv_id") or paper.get("abstract_url") or ""
+            )
+            if arxiv_id in affiliations_by_id:
+                paper["affiliations"] = affiliations_by_id[arxiv_id]
+
+    return len(enriched_ids)

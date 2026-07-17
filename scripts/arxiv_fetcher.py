@@ -1,19 +1,20 @@
 """
 ArXiv paper fetcher.
 
-The RSS feed is used for the daily paper list. Author affiliations are only
-attached when they are explicitly present in arXiv metadata; they are never
-inferred from abstract text because that creates false institution labels.
+The RSS feed is used for the daily paper list. The current arXiv RSS schema
+publishes authors in ``dc:creator`` (as a comma-separated string), while some
+older/test feeds use Atom ``author`` elements. Both forms are supported.
+
+Affiliations are only attached when they are explicitly present in metadata;
+they are never inferred from abstract text because that creates false labels.
 """
 
 import re
-import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
 
 from config import (
     ARXIV_QUERY,
-    ARXIV_API_BASE,
     get_followed_authors,
     get_followed_institutions,
 )
@@ -23,8 +24,9 @@ def get_latest_papers(categories: str = None) -> list[dict]:
     """
     Fetch today's new ArXiv papers.
 
-    Step 1: RSS Atom feed for the daily paper list.
-    Step 2: Best-effort API query by id_list for explicit author affiliations.
+    The RSS endpoint is deliberately used instead of the rate-limited search
+    API. Affiliation enrichment for the papers that are actually displayed is
+    handled later by ``affiliation_extractor``.
     """
     if categories is None:
         categories = ARXIV_QUERY
@@ -50,12 +52,9 @@ def get_latest_papers(categories: str = None) -> list[dict]:
     papers = _parse_atom_feed(xml_data)
     print(f"[INFO] RSS feed returned {len(papers)} papers")
 
-    api_enriched = _enrich_affiliations_from_arxiv_api(papers)
-    enriched = sum(1 for p in papers if p.get("affiliations"))
-    print(
-        f"[INFO] Enriched affiliations from arXiv API for {api_enriched}/{len(papers)} papers "
-        f"(total with affs: {enriched})"
-    )
+    missing_authors = sum(1 for paper in papers if not paper.get("authors"))
+    if missing_authors:
+        print(f"[WARN] RSS feed omitted authors for {missing_authors}/{len(papers)} papers")
 
     return papers
 
@@ -90,89 +89,12 @@ def _dedupe_affiliations(affiliations: list[dict]) -> list[dict]:
     return deduped
 
 
-def _parse_api_affiliations(xml_data: str) -> dict[str, list[dict]]:
-    """Parse author affiliations that are explicitly present in arXiv API XML."""
-    ns = {
-        "atom": "http://www.w3.org/2005/Atom",
-        "arxiv": "http://arxiv.org/schemas/atom",
-    }
-    root = ET.fromstring(xml_data)
-    by_id: dict[str, list[dict]] = {}
-    for entry in root.findall("atom:entry", ns):
-        id_el = entry.find("atom:id", ns)
-        if id_el is None or not id_el.text:
-            continue
-
-        arxiv_id = _normalize_arxiv_id(id_el.text)
-        affiliations = []
-        for author_el in entry.findall("atom:author", ns):
-            name_el = author_el.find("atom:name", ns)
-            aff_el = author_el.find("arxiv:affiliation", ns)
-            name = _clean_text(name_el.text if name_el is not None else "")
-            aff = _clean_text(aff_el.text if aff_el is not None else "")
-            if aff:
-                affiliations.append({"author": name, "affiliation": aff})
-
-        if affiliations:
-            by_id[arxiv_id] = _dedupe_affiliations(affiliations)
-    return by_id
-
-
-def _fetch_arxiv_api_affiliations(arxiv_ids: list[str]) -> dict[str, list[dict]]:
-    """Fetch explicit author affiliations from arXiv API, if available."""
-    ids = [_normalize_arxiv_id(arxiv_id) for arxiv_id in arxiv_ids if arxiv_id]
-    ids = list(dict.fromkeys(ids))
-    if not ids:
-        return {}
-
-    affiliations_by_id: dict[str, list[dict]] = {}
-    batch_size = 50
-    for start in range(0, len(ids), batch_size):
-        batch = ids[start : start + batch_size]
-        query = urllib.parse.urlencode({"id_list": ",".join(batch)})
-        url = f"{ARXIV_API_BASE}?{query}"
-        print(f"[INFO] Fetching arXiv API metadata: batch {start // batch_size + 1}")
-        req = urllib.request.Request(url, headers={"User-Agent": "arXivDaily/1.0"})
-        try:
-            with urllib.request.urlopen(req, timeout=30) as resp:
-                xml_data = resp.read().decode("utf-8")
-        except Exception as e:
-            print(f"[WARN] arXiv API affiliation request failed: {e}")
-            continue
-
-        try:
-            affiliations_by_id.update(_parse_api_affiliations(xml_data))
-        except ET.ParseError as e:
-            print(f"[WARN] arXiv API affiliation response parse failed: {e}")
-            continue
-
-    return affiliations_by_id
-
-
-def _enrich_affiliations_from_arxiv_api(papers: list[dict]) -> int:
-    """Attach explicit arXiv API affiliations to papers that lack them."""
-    affiliations_by_id = _fetch_arxiv_api_affiliations(
-        [paper.get("arxiv_id", "") for paper in papers]
-    )
-    enriched = 0
-    for paper in papers:
-        if paper.get("affiliations"):
-            paper["affiliations"] = _dedupe_affiliations(paper["affiliations"])
-            continue
-
-        affiliations = affiliations_by_id.get(_normalize_arxiv_id(paper.get("arxiv_id", "")))
-        if affiliations:
-            paper["affiliations"] = affiliations
-            enriched += 1
-
-    return enriched
-
-
 def _parse_atom_feed(xml_data: str) -> list[dict]:
     """Parse ArXiv Atom feed XML into paper dicts."""
     ns = {
         "atom": "http://www.w3.org/2005/Atom",
         "arxiv": "http://arxiv.org/schemas/atom",
+        "dc": "http://purl.org/dc/elements/1.1/",
     }
     root = ET.fromstring(xml_data)
 
@@ -200,9 +122,19 @@ def _parse_atom_feed(xml_data: str) -> list[dict]:
             aff_el = author_el.find("arxiv:affiliation", ns)
             name = _clean_text(name_el.text if name_el is not None else "")
             aff = _clean_text(aff_el.text if aff_el is not None else "")
-            author_list.append(name)
+            if name:
+                author_list.append(name)
             if aff:
                 affiliations.append({"author": name, "affiliation": aff})
+
+        # rss.arxiv.org currently emits one dc:creator element containing all
+        # names separated by commas, and no Atom author elements.
+        if not author_list:
+            for creator_el in entry.findall("dc:creator", ns):
+                creator = _clean_text(creator_el.text)
+                author_list.extend(
+                    name for name in re.split(r"\s*,\s*", creator) if name
+                )
 
         categories = [
             category.get("term")
