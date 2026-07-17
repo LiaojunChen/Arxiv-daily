@@ -1,6 +1,10 @@
 import { useMemo } from "react";
 import type { Paper } from "../types";
-import { truncateAbstract, categoryColor } from "../utils/arxiv";
+import {
+  truncateAbstract,
+  categoryColor,
+  formatSimilarityPercentage,
+} from "../utils/arxiv";
 import { getUniqueAffiliations } from "../utils/affiliations";
 
 interface PaperCardProps {
@@ -24,7 +28,7 @@ export default function PaperCard({ paper, onChat }: PaperCardProps) {
         ))}
         {paper.similarity_score !== undefined && paper.similarity_score > 0 && (
           <span className="text-xs px-2 py-0.5 rounded font-medium bg-indigo-100 text-indigo-800">
-            匹配度: {(paper.similarity_score * 100).toFixed(0)}%
+            匹配度: {formatSimilarityPercentage(paper.similarity_score)}
           </span>
         )}
         {paper.matched_by && (

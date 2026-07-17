@@ -114,7 +114,11 @@ export default function App() {
 
       {/* Paper Viewer (PDF + Chat unified) */}
       {chatPaper && (
-        <PaperViewer paper={chatPaper} onClose={() => setChatPaper(null)} />
+        <PaperViewer
+          key={chatPaper.arxiv_id}
+          paper={chatPaper}
+          onClose={() => setChatPaper(null)}
+        />
       )}
     </div>
   );

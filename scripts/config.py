@@ -33,8 +33,11 @@ OPENAI_API_BASE = os.environ.get("OPENAI_API_BASE") or (
 MODEL_NAME = os.environ.get("MODEL_NAME") or (
     "Qwen/Qwen3-8B" if not _OPENAI_API_KEY and SILICONFLOW_API_KEY else "gpt-4o-mini"
 )
-AFFILIATION_MAX_PAPERS = int(os.environ.get("AFFILIATION_MAX_PAPERS") or MAX_PAPER_NUM)
-AFFILIATION_MAX_LLM_PAPERS = int(os.environ.get("AFFILIATION_MAX_LLM_PAPERS") or MAX_PAPER_NUM)
+# A value of 0 means all unique papers shown on the page. Deterministic source
+# extraction is cheap enough for the display set; expensive LLM fallbacks have
+# a separate, deliberately small budget.
+AFFILIATION_MAX_PAPERS = int(os.environ.get("AFFILIATION_MAX_PAPERS") or "0")
+AFFILIATION_MAX_LLM_PAPERS = int(os.environ.get("AFFILIATION_MAX_LLM_PAPERS") or "8")
 
 # ── Followed Authors & Institutions ─────────────────────
 _followed_authors = []

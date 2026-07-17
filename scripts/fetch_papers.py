@@ -18,7 +18,12 @@ from arxiv_fetcher import (
 from zotero_similar import fetch_zotero_items, compute_similarity
 from hf_fetcher import fetch_hf_daily_papers
 from affiliation_extractor import enrich_affiliations_for_display_papers
-from config import MAX_PAPER_NUM, load_user_config, ARXIV_QUERY
+from config import (
+    MAX_PAPER_NUM,
+    load_user_config,
+    ARXIV_QUERY,
+    get_followed_institutions,
+)
 
 
 def main():
@@ -41,15 +46,15 @@ def main():
     except Exception as e:
         print(f"[ERROR] HF papers fetch failed: {e}")
 
-    # 2. Try ArXiv API as supplementary source (GitHub Actions IP often rate-limited)
-    print("\n[Step 2] Fetching ArXiv papers (supplementary)...")
+    # 2. Use the arXiv RSS service as the broad daily candidate source.
+    print("\n[Step 2] Fetching arXiv RSS papers (supplementary)...")
     arxiv_papers = []
     try:
         arxiv_papers = get_latest_papers(categories=ARXIV_QUERY)
     except Exception as e:
-        print(f"[WARN] ArXiv API unavailable (expected on CI): {e}")
+        print(f"[WARN] arXiv RSS unavailable: {e}")
 
-    # Build affiliation lookup from ArXiv (which has <arxiv:affiliation>)
+    # Preserve any explicit affiliations supplied by older Atom feeds.
     arxiv_affiliations = {}
     for p in arxiv_papers:
         if p.get("arxiv_id") and p.get("affiliations"):
@@ -87,37 +92,54 @@ def main():
             for p in arxiv_papers[:MAX_PAPER_NUM]
         ]
 
-    # 4. Filter by followed authors and institutions (from ArXiv papers)
-    print("\n[Step 4] Filtering followed authors/institutions...")
-    followed_papers = []
+    # 4. Followed authors can be filtered immediately. Institution matching
+    # must wait until explicit affiliations have been extracted.
+    print("\n[Step 4] Filtering followed authors...")
+    author_papers = []
     try:
         author_papers = filter_by_authors(arxiv_papers)
-        institution_papers = filter_by_institutions(arxiv_papers)
-        followed_ids = set()
-        for p in author_papers + institution_papers:
-            if p["arxiv_id"] not in followed_ids:
-                followed_ids.add(p["arxiv_id"])
-                followed_papers.append(p)
-        print(f"[INFO] Found {len(followed_papers)} papers from followed authors/institutions")
+        print(f"[INFO] Found {len(author_papers)} papers from followed authors")
     except Exception as e:
-        print(f"[ERROR] Followed filtering failed: {e}")
+        print(f"[ERROR] Followed-author filtering failed: {e}")
 
     # 5. Enrich affiliations for papers shown on the web page
     print("\n[Step 5] Enriching affiliations for displayed papers...")
     try:
-        enriched = enrich_affiliations_for_display_papers(
-            [similar_papers, followed_papers, hf_papers]
-        )
-        print(f"[INFO] LLM affiliation extraction enriched {enriched} papers")
+        affiliation_groups = [similar_papers, author_papers, hf_papers]
+        if get_followed_institutions():
+            # Institution subscriptions require affiliation metadata for the
+            # whole candidate set. AFFILIATION_MAX_PAPERS can cap this work.
+            affiliation_groups.append(arxiv_papers)
+        enriched = enrich_affiliations_for_display_papers(affiliation_groups)
+        print(f"[INFO] Affiliation extraction enriched {enriched} papers")
     except Exception as e:
         print(f"[ERROR] Affiliation enrichment failed: {e}")
 
-    # 6. Output
+    # 6. Complete followed-paper filtering now that affiliations are available.
+    print("\n[Step 6] Filtering followed institutions...")
+    followed_papers = []
+    try:
+        institution_papers = filter_by_institutions(arxiv_papers)
+        followed_ids = set()
+        for paper in author_papers + institution_papers:
+            if paper["arxiv_id"] not in followed_ids:
+                followed_ids.add(paper["arxiv_id"])
+                followed_papers.append(paper)
+        print(
+            f"[INFO] Found {len(followed_papers)} papers from followed "
+            "authors/institutions"
+        )
+    except Exception as e:
+        print(f"[ERROR] Followed-institution filtering failed: {e}")
+        followed_papers = author_papers
+
+    # 7. Output
     output_result(similar_papers, followed_papers, hf_papers)
 
 
 def output_result(similar_papers: list[dict], followed_papers: list[dict], hf_papers: list[dict]):
     """Write papers.json to the data directory."""
+    _validate_display_data(similar_papers, followed_papers, hf_papers)
     output_path = os.path.join(
         os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
         "data",
@@ -140,6 +162,48 @@ def output_result(similar_papers: list[dict], followed_papers: list[dict], hf_pa
     print(f"  - Similar papers (Zotero reranked): {len(similar_papers)}")
     print(f"  - Followed papers: {len(followed_papers)}")
     print(f"  - HF raw papers: {len(hf_papers)}")
+
+
+def _validate_display_data(
+    similar_papers: list[dict], followed_papers: list[dict], hf_papers: list[dict]
+) -> None:
+    """Reject empty or structurally broken data before a Pages deployment."""
+    display_papers = similar_papers + followed_papers + hf_papers
+    if not display_papers:
+        raise RuntimeError(
+            "No papers were fetched from either arXiv RSS or Hugging Face; "
+            "refusing to replace the deployed page with empty/sample data."
+        )
+
+    invalid = [
+        paper
+        for paper in display_papers
+        if not paper.get("arxiv_id") or not paper.get("title")
+    ]
+    if invalid:
+        raise ValueError(
+            f"{len(invalid)} displayed papers are missing arxiv_id/title metadata"
+        )
+
+    malformed = [
+        paper
+        for paper in display_papers
+        if not isinstance(paper.get("authors"), list)
+        or not isinstance(paper.get("affiliations"), list)
+        or not isinstance(paper.get("categories"), list)
+        or not isinstance(paper.get("abstract"), str)
+    ]
+    if malformed:
+        raise ValueError(
+            f"{len(malformed)} displayed papers have malformed list/text fields"
+        )
+
+    primary_group = similar_papers or hf_papers
+    if primary_group and all(not paper.get("authors") for paper in primary_group):
+        raise ValueError(
+            "All primary papers are missing authors; the upstream RSS/API schema "
+            "likely changed, so deployment was stopped."
+        )
 
 
 if __name__ == "__main__":

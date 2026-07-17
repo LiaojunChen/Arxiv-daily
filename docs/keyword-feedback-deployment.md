@@ -28,11 +28,13 @@ Set these in `Settings -> Secrets and variables -> Actions -> Secrets`:
 - `SENDER`: SMTP sender email address.
 - `SENDER_PASSWORD`: SMTP password or app password.
 - `RECEIVER`: destination email address.
-- `OPENAI_API_KEY`: OpenAI-compatible LLM API key.
-- `OPENAI_API_BASE`: OpenAI-compatible API base URL.
+- `OPENAI_API_KEY`: OpenAI-compatible LLM API key (optional when the SiliconFlow key is used as the LLM fallback).
+- `OPENAI_API_BASE`: OpenAI-compatible API base URL (defaults to SiliconFlow when only `SILICONFLOW_API_KEY` is configured).
 - `SILICONFLOW_API_KEY`: SiliconFlow rerank API key.
 
 `ZOTERO_ID` and `ZOTERO_KEY` are optional in keyword mode. They are only needed if you disable `interest.enabled` and return to the original Zotero mode.
+
+If `SENDER`, `SENDER_PASSWORD`, or `RECEIVER` is absent, the scheduled email job records a notice and skips cleanly. The separate GitHub Pages workflow continues to run.
 
 ## Repository Variables
 

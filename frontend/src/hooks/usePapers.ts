@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import type { PapersData, Paper } from "../types";
+import { getUniqueAffiliations } from "../utils/affiliations";
 
 export function usePapers() {
   const [data, setData] = useState<PapersData | null>(null);
@@ -8,7 +9,9 @@ export function usePapers() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    fetch(`/Arxiv-daily/papers.json?ts=${Date.now()}`, { cache: "no-store" })
+    fetch(`${import.meta.env.BASE_URL}papers.json?ts=${Date.now()}`, {
+      cache: "no-store",
+    })
       .then((res) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();
@@ -24,30 +27,28 @@ export function usePapers() {
       });
   }, []);
 
-  const filterPapers = (papers: Paper[]) => {
-    if (!search.trim()) return papers;
-    const q = search.toLowerCase();
-    return papers.filter(
-      (p) =>
-        p.title.toLowerCase().includes(q) ||
-        p.authors.some((a) => a.toLowerCase().includes(q)) ||
-        p.abstract.toLowerCase().includes(q) ||
-        p.categories.some((c) => c.toLowerCase().includes(q))
-    );
-  };
+  const { filteredSimilar, filteredFollowed, filteredHF } = useMemo(() => {
+    const filterPapers = (papers: Paper[]) => {
+      if (!search.trim()) return papers;
+      const q = search.toLowerCase();
+      return papers.filter(
+        (p) =>
+          p.title.toLowerCase().includes(q) ||
+          p.authors.some((a) => a.toLowerCase().includes(q)) ||
+          getUniqueAffiliations(p.affiliations).some((affiliation) =>
+            affiliation.toLowerCase().includes(q)
+          ) ||
+          p.abstract.toLowerCase().includes(q) ||
+          p.categories.some((c) => c.toLowerCase().includes(q))
+      );
+    };
 
-  const filteredSimilar = useMemo(
-    () => filterPapers(data?.similar_papers ?? []),
-    [data, search]
-  );
-  const filteredFollowed = useMemo(
-    () => filterPapers(data?.followed_papers ?? []),
-    [data, search]
-  );
-  const filteredHF = useMemo(
-    () => filterPapers(data?.hf_papers ?? []),
-    [data, search]
-  );
+    return {
+      filteredSimilar: filterPapers(data?.similar_papers ?? []),
+      filteredFollowed: filterPapers(data?.followed_papers ?? []),
+      filteredHF: filterPapers(data?.hf_papers ?? []),
+    };
+  }, [data, search]);
 
   return {
     data,

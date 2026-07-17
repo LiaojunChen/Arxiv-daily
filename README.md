@@ -41,6 +41,7 @@ See [docs/keyword-feedback-deployment.md](docs/keyword-feedback-deployment.md) f
 
 ## ✨ Features
 - Totally free! All the calculation can be done in the Github Action runner locally within its quota (for public repo).
+- A GitHub Pages dashboard for browsing daily papers, authors, institutions, abstracts, and arXiv HTML/PDF links.
 - AI-generated TL;DR for you to quickly pick up target papers.
 - Affiliations of the paper are resolved and presented.
 - Links of PDF and code implementation (if any) presented in the e-mail.
@@ -52,6 +53,18 @@ See [docs/keyword-feedback-deployment.md](docs/keyword-feedback-deployment.md) f
   - arxiv
   - biorxiv
   - medrxiv
+
+### Web dashboard
+
+`Daily ArXiv Paper Fetch` runs at `22:00 UTC`, writes a validated `papers.json`, builds the React frontend, and deploys it to GitHub Pages. The deployed site for this repository is [liaojunchen.github.io/Arxiv-daily](https://liaojunchen.github.io/Arxiv-daily/).
+
+The web workflow and the email workflow are independent. If `SENDER`, `RECEIVER`, or `SENDER_PASSWORD` is missing, `Send emails daily` exits successfully with a configuration notice; it does not affect the Pages dashboard. Configure those three secrets to enable email delivery.
+
+Optional repository variables for web affiliation enrichment:
+
+- `AFFILIATION_MAX_PAPERS`: maximum unique displayed papers to inspect; `0` or unset means all displayed papers.
+- `AFFILIATION_MAX_LLM_PAPERS`: maximum LLM fallbacks after deterministic TeX/HTML extraction; the default is `8`.
+- `VITE_BASE_PATH`: custom Vite base path for a custom Pages setup. The repository name is detected automatically for normal project Pages deployments.
 
 ## 📷 Screenshot
 ![screenshot](./assets/screenshot.png)
@@ -76,6 +89,8 @@ Below are all the secrets you need to set. They are invisible to anyone includin
 | OPENAI_API_KEY | API Key when using the API to access LLMs. You can get FREE API for using advanced open source LLMs in [SiliconFlow](https://cloud.siliconflow.cn/i/b3XhBRAm). | sk-xxx |
 | OPENAI_API_BASE | API URL when using the API to access LLMs. | https://api.siliconflow.cn/v1 |
 | SILICONFLOW_API_KEY | API Key for the SiliconFlow rerank endpoint when using `executor.reranker: siliconflow`. | sk-xxx |
+
+For LLM features, configure `OPENAI_API_KEY` and `OPENAI_API_BASE`, or configure `SILICONFLOW_API_KEY`; the workflows use SiliconFlow as the OpenAI-compatible fallback. SMTP port `465` uses implicit TLS, while other configured SMTP ports use STARTTLS. Plain-text SMTP authentication is not used.
 
 Then you should also set a public variable `CUSTOM_CONFIG` for your custom configuration.
 ![vars](./assets/repo_var.png)
@@ -203,7 +218,7 @@ Supported by [uv](https://github.com/astral-sh/uv), this workflow can easily run
 # export ZOTERO_ID=xxxx
 # ...
 cd zotero-arxiv-daily
-uv run main.py
+uv run src/zotero_arxiv_daily/main.py
 ```
 
 ## 🚀 Sync with the latest version

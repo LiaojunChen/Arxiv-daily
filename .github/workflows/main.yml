@@ -11,35 +11,51 @@ permissions:
 jobs:
   calculate-and-send:
     runs-on: ubuntu-latest
+    timeout-minutes: 90
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7.0.0
+
+      - name: Check email configuration
+        id: email-config
+        env:
+          SENDER: ${{ secrets.SENDER }}
+          RECEIVER: ${{ secrets.RECEIVER }}
+          SENDER_PASSWORD: ${{ secrets.SENDER_PASSWORD }}
+        run: bash .github/scripts/check-email-config.sh
 
       - name: Setup Python
-        uses: actions/setup-python@v6
+        if: steps.email-config.outputs.enabled == 'true'
+        uses: actions/setup-python@v6.3.0
         with:
           python-version: '3.13'
 
       - name: Setup uv
-        uses: astral-sh/setup-uv@v7.1.4
+        if: steps.email-config.outputs.enabled == 'true'
+        uses: astral-sh/setup-uv@v8.3.2
+        with:
+          version: "0.11.29"
+          enable-cache: true
 
       - name: Prepare config
+        if: steps.email-config.outputs.enabled == 'true'
         env:
           CUSTOM_CONFIG: ${{ vars.CUSTOM_CONFIG }}
         run: bash .github/scripts/prepare-config.sh
 
       - name: Run script
+        if: steps.email-config.outputs.enabled == 'true'
         env:
           ZOTERO_ID: ${{ secrets.ZOTERO_ID }}
           ZOTERO_KEY: ${{ secrets.ZOTERO_KEY }}
           SENDER: ${{ secrets.SENDER }}
           RECEIVER: ${{ secrets.RECEIVER }}
           SENDER_PASSWORD: ${{ secrets.SENDER_PASSWORD }}
-          SMTP_SERVER: ${{ secrets.SMTP_SERVER }}
-          SMTP_PORT: ${{ secrets.SMTP_PORT }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          OPENAI_API_BASE: ${{ secrets.OPENAI_API_BASE }}
-          MODEL_NAME: ${{ secrets.MODEL_NAME }}
+          SMTP_SERVER: ${{ secrets.SMTP_SERVER || 'smtp.qq.com' }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT || '465' }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY || secrets.SILICONFLOW_API_KEY }}
+          OPENAI_API_BASE: ${{ secrets.OPENAI_API_BASE || 'https://api.siliconflow.cn/v1' }}
+          MODEL_NAME: ${{ secrets.MODEL_NAME || 'Qwen/Qwen3-8B' }}
           SILICONFLOW_API_KEY: ${{ secrets.SILICONFLOW_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
@@ -47,7 +63,7 @@ jobs:
           uv run --locked src/zotero_arxiv_daily/main.py
 
       - name: Commit interest profile
-        if: success()
+        if: steps.email-config.outputs.enabled == 'true' && success()
         run: |
           if [[ -n "$(git status --short data/interest_profile.json)" ]]; then
             git config user.name "github-actions[bot]"

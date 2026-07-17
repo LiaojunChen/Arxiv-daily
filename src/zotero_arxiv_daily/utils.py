@@ -3,6 +3,7 @@ import re
 import fnmatch
 import math
 import smtplib
+import ssl
 from collections import Counter
 from email.header import Header
 from email.mime.text import MIMEText
@@ -145,11 +146,30 @@ def glob_match(path:str, pattern:str) -> bool:
     return False
 
 def send_email(config:DictConfig, html:str):
-    sender = config.email.sender
-    receiver = config.email.receiver
-    password = config.email.sender_password
-    smtp_server = config.email.smtp_server
-    smtp_port = config.email.smtp_port
+    sender = str(config.email.sender or "").strip()
+    receiver = str(config.email.receiver or "").strip()
+    password = str(config.email.sender_password or "")
+    smtp_server = str(config.email.smtp_server or "").strip()
+    missing = [
+        name
+        for name, value in {
+            "email.sender": sender,
+            "email.receiver": receiver,
+            "email.sender_password": password,
+            "email.smtp_server": smtp_server,
+        }.items()
+        if not value
+    ]
+    if missing:
+        raise ValueError(f"Missing email configuration: {', '.join(missing)}")
+
+    try:
+        smtp_port = int(config.email.smtp_port)
+    except (TypeError, ValueError) as exc:
+        raise ValueError("email.smtp_port must be an integer") from exc
+    if not 1 <= smtp_port <= 65535:
+        raise ValueError("email.smtp_port must be between 1 and 65535")
+
     def _format_addr(s):
         name, addr = parseaddr(s)
         return formataddr((Header(name, 'utf-8').encode(), addr))
@@ -160,17 +180,27 @@ def send_email(config:DictConfig, html:str):
     today = datetime.datetime.now().strftime('%Y/%m/%d')
     msg['Subject'] = Header(f'Daily arXiv {today}', 'utf-8').encode()
 
-    try:
-        server = smtplib.SMTP(smtp_server, smtp_port)
-        server.starttls()
-    except Exception as e:
-        logger.debug(f"Failed to use TLS. {e}\nTry to use SSL.")
-        try:
-            server = smtplib.SMTP_SSL(smtp_server, smtp_port)
-        except Exception as e:
-            logger.debug(f"Failed to use SSL. {e}\nTry to use plain text.")
-            server = smtplib.SMTP(smtp_server, smtp_port)
+    tls_context = ssl.create_default_context()
+    if smtp_port == 465:
+        server = smtplib.SMTP_SSL(
+            smtp_server,
+            smtp_port,
+            timeout=30,
+            context=tls_context,
+        )
+    else:
+        server = smtplib.SMTP(smtp_server, smtp_port, timeout=30)
+        server.ehlo()
+        server.starttls(context=tls_context)
+        server.ehlo()
 
-    server.login(sender, password)
-    server.sendmail(sender, [receiver], msg.as_string())
-    server.quit()
+    try:
+        server.login(sender, password)
+        server.sendmail(sender, [receiver], msg.as_string())
+    finally:
+        try:
+            server.quit()
+        except smtplib.SMTPException:
+            # Preserve the original authentication/send exception if the
+            # connection has already been closed by the remote server.
+            pass

@@ -77,5 +77,5 @@ If gstack skills aren't working, run `cd .claude/skills/gstack && ./setup` to bu
 
 ## Git Workflow
 
-- PRs should target the `dev` branch, not `main`
-- Current development branch: `dev`
+- The active development/default branch is `main`.
+- Use a topic branch for changes and target pull requests to `main`.
