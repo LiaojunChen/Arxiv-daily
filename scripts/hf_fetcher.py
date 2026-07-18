@@ -6,13 +6,14 @@ No authentication required.
 
 import requests
 import os
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 
 HF_API_BASE = "https://huggingface.co/api/daily_papers"
 HF_TIMEOUT = 15
 HF_PAGE_SIZE = int(os.environ.get("HF_PAGE_SIZE") or "50")
 HF_MAX_PAPERS = int(os.environ.get("HF_MAX_PAPERS") or "50")
+HF_FALLBACK_DAYS = int(os.environ.get("HF_FALLBACK_DAYS") or "7")
 
 
 def _parse_hf_paper(item: dict) -> dict:
@@ -58,16 +59,8 @@ def _parse_hf_paper(item: dict) -> dict:
     }
 
 
-def fetch_hf_daily_papers(date: str = None) -> list[dict]:
-    """
-    Fetch HuggingFace daily papers.
-
-    Args:
-        date: YYYY-MM-DD format. Defaults to today (UTC).
-    """
-    if date is None:
-        date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-
+def _fetch_hf_papers_for_date(date: str) -> list[dict]:
+    """Fetch one explicit Hugging Face daily-paper date."""
     all_papers = []
     seen_ids = set()
     page = 1
@@ -75,14 +68,14 @@ def fetch_hf_daily_papers(date: str = None) -> list[dict]:
     while len(all_papers) < HF_MAX_PAPERS:
         limit = min(HF_PAGE_SIZE, HF_MAX_PAPERS - len(all_papers))
         url = f"{HF_API_BASE}?date={date}&page={page}&limit={limit}"
-        print(f"[INFO] Fetching HF papers: page={page}")
+        print(f"[INFO] Fetching HF papers for {date}: page={page}")
 
         try:
             resp = requests.get(url, timeout=HF_TIMEOUT)
             resp.raise_for_status()
             data = resp.json()
         except requests.RequestException as e:
-            print(f"[ERROR] HF papers API request failed: {e}")
+            print(f"[ERROR] HF papers API request failed for {date}: {e}")
             break
 
         if not data:
@@ -107,5 +100,39 @@ def fetch_hf_daily_papers(date: str = None) -> list[dict]:
             break
         page += 1
 
-    print(f"[INFO] Fetched {len(all_papers)} HF daily papers for {date} (max={HF_MAX_PAPERS})")
     return all_papers
+
+
+def fetch_hf_daily_papers(date: str = None) -> list[dict]:
+    """
+    Fetch HuggingFace daily papers.
+
+    Args:
+        date: YYYY-MM-DD format. Defaults to today (UTC).
+    """
+    requested_date = (
+        datetime.strptime(date, "%Y-%m-%d").replace(tzinfo=timezone.utc)
+        if date
+        else datetime.now(timezone.utc)
+    )
+    fallback_days = 0 if date else HF_FALLBACK_DAYS
+
+    for offset in range(fallback_days + 1):
+        candidate_date = (requested_date - timedelta(days=offset)).strftime("%Y-%m-%d")
+        papers = _fetch_hf_papers_for_date(candidate_date)
+        if papers:
+            if offset:
+                print(
+                    f"[INFO] HF daily list is empty for the current date; "
+                    f"using the latest non-empty date {candidate_date}."
+                )
+            print(
+                f"[INFO] Fetched {len(papers)} HF daily papers for {candidate_date} "
+                f"(max={HF_MAX_PAPERS})"
+            )
+            return papers
+
+    print(
+        f"[WARN] No HF daily papers found in the last {fallback_days + 1} date(s)."
+    )
+    return []
