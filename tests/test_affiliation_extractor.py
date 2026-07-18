@@ -97,6 +97,21 @@ def test_clean_latex_affiliation_removes_structured_address_noise():
     )
 
 
+def test_clean_latex_affiliation_decodes_accents_and_removes_author_note_noise():
+    assert affiliation_extractor._clean_latex_affiliation(
+        r'ELLIS Institute, T\"ubingen Equal contribution Project lead'
+    ) == "ELLIS Institute, Tübingen"
+
+
+def test_affiliation_detection_uses_word_boundaries_for_short_company_names():
+    assert affiliation_extractor._looks_like_affiliation("MIT")
+    assert affiliation_extractor._looks_like_affiliation("MindLab")
+    assert affiliation_extractor._looks_like_affiliation("Adobe Research")
+    assert not affiliation_extractor._looks_like_affiliation("Xinchao Wang 1")
+    assert not affiliation_extractor._looks_like_affiliation("Konstantinos Kallidromitis")
+    assert not affiliation_extractor._looks_like_affiliation("center")
+
+
 def test_html_affiliation_spans_are_preserved_for_deterministic_extraction():
     html = b"""
     <html><body>
