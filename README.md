@@ -64,6 +64,7 @@ Optional repository variables for web affiliation enrichment:
 
 - `AFFILIATION_MAX_PAPERS`: maximum unique displayed papers to inspect; `0` or unset means all displayed papers.
 - `AFFILIATION_MAX_LLM_PAPERS`: maximum LLM fallbacks after deterministic TeX/HTML extraction; the default is `8`.
+- `HF_FALLBACK_DAYS`: how many previous UTC dates to check when today's Hugging Face daily list is empty; the default is `7`.
 - `VITE_BASE_PATH`: custom Vite base path for a custom Pages setup. The repository name is detected automatically for normal project Pages deployments.
 
 ## 📷 Screenshot

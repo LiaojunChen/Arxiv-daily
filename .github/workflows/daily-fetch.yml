@@ -47,6 +47,7 @@ jobs:
           MODEL_NAME: ${{ secrets.MODEL_NAME }}
           AFFILIATION_MAX_PAPERS: ${{ vars.AFFILIATION_MAX_PAPERS }}
           AFFILIATION_MAX_LLM_PAPERS: ${{ vars.AFFILIATION_MAX_LLM_PAPERS }}
+          HF_FALLBACK_DAYS: ${{ vars.HF_FALLBACK_DAYS }}
         run: python scripts/fetch_papers.py
 
       - name: Set up Node.js
