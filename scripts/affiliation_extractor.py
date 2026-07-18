@@ -7,6 +7,7 @@ import io
 import json
 import re
 import tarfile
+import unicodedata
 from html.parser import HTMLParser
 
 import requests
@@ -25,35 +26,41 @@ LLM_REQUEST_TIMEOUT = (10, 25)
 MAX_DOWNLOAD_BYTES = 12 * 1024 * 1024
 MAX_CONTEXT_CHARS = 12000
 USER_AGENT = "arXivDaily/1.0"
-AFFILIATION_KEYWORDS = (
-    "university",
-    "institute",
-    "college",
-    "school",
-    "laborator",
-    "lab",
-    "research",
-    "inc",
-    "corp",
-    "ltd",
+AFFILIATION_PATTERN = re.compile(
+    r"(?:\b(?:university|institute|college|school|laboratory|laboratories|"
+    r"research|researcher|academy|center|centre|department|inc|corp|ltd|"
+    r"google|microsoft|meta|openai|deepmind|anthropic|nvidia|amazon|apple|"
+    r"bytedance|mit|stanford|berkeley)\b|labs?\b)",
+    flags=re.IGNORECASE,
+)
+GENERIC_AFFILIATIONS = {
     "academy",
     "center",
     "centre",
     "department",
-    "google",
-    "microsoft",
-    "meta",
-    "openai",
-    "deepmind",
-    "anthropic",
-    "nvidia",
-    "amazon",
-    "apple",
-    "bytedance",
-    "mit",
-    "stanford",
-    "berkeley",
-)
+    "institute",
+    "lab",
+    "laboratory",
+    "research",
+    "school",
+}
+
+LATEX_ACCENTS = {
+    '"': "\u0308",
+    "'": "\u0301",
+    "`": "\u0300",
+    "^": "\u0302",
+    "~": "\u0303",
+    "=": "\u0304",
+    ".": "\u0307",
+    "u": "\u0306",
+    "v": "\u030c",
+    "H": "\u030b",
+    "c": "\u0327",
+    "k": "\u0328",
+    "b": "\u0331",
+    "d": "\u0323",
+}
 
 
 class _TextHTMLParser(HTMLParser):
@@ -213,7 +220,13 @@ def _latex_command_blocks(text: str, commands: tuple[str, ...]) -> list[str]:
 
 
 def _clean_latex_affiliation(value: str, strip_marker: bool = True) -> str:
+    def replace_accent(match: re.Match) -> str:
+        accent, letter = match.groups()
+        return unicodedata.normalize("NFC", letter + LATEX_ACCENTS[accent])
+
     value = re.sub(r"%.*", " ", value)
+    value = re.sub(r'''\\(["'`^~=\.])\s*\{?([A-Za-z])\}?''', replace_accent, value)
+    value = re.sub(r"\\([uvHckbd])\s*\{([A-Za-z])\}", replace_accent, value)
     value = re.sub(r"\\(?:href|url)\{[^{}]*\}\{([^{}]*)\}", r"\1", value)
     value = re.sub(r"\\(?:email|thanks|footnote|corref|fnref|textsuperscript)\*?\s*(?:\[[^\]]*\])?\s*\{[^{}]*\}", " ", value)
     value = re.sub(r"\\[a-zA-Z]+\*?\s*(?:\[[^\]]*\])?", " ", value)
@@ -244,16 +257,25 @@ def _clean_latex_affiliation(value: str, strip_marker: bool = True) -> str:
         if institutional_values:
             value = ", ".join(institutional_values)
 
+    value = re.sub(
+        r"\s+(?:equal\s+(?:contribution|advising)|project\s+lead|"
+        r"corresponding\s+author|tabular\b|https?://\S+|\S+\.github\.io\S*).*$",
+        "",
+        value,
+        flags=re.IGNORECASE,
+    )
+
     if strip_marker:
         value = re.sub(r"^(?:\d+|[a-z])\s+", "", value, flags=re.IGNORECASE)
     return value.strip(" ,;:-")
 
 
 def _looks_like_affiliation(value: str) -> bool:
-    lowered = value.lower()
-    if len(value) < 4 or "@" in value:
+    normalized = _clean_text(value)
+    canonical = re.sub(r"[^a-z]+", " ", normalized.casefold()).strip()
+    if len(normalized) < 3 or "@" in normalized or canonical in GENERIC_AFFILIATIONS:
         return False
-    return any(keyword in lowered for keyword in AFFILIATION_KEYWORDS)
+    return AFFILIATION_PATTERN.search(normalized) is not None
 
 
 def _normalize_affiliation_candidate(value: str) -> str:
