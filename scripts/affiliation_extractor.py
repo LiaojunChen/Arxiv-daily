@@ -278,17 +278,81 @@ def _looks_like_affiliation(value: str) -> bool:
     return AFFILIATION_PATTERN.search(normalized) is not None
 
 
+def _normalize_display_affiliation(value: str, author: str = "") -> str:
+    """Return a safe, human-readable affiliation or an empty string.
+
+    Source and HTML formats vary widely, and the bounded LLM fallback can
+    occasionally copy author labels, email addresses, or homepage URLs into an
+    affiliation field.  Apply the same quality gate to every source before the
+    value reaches the JSON consumed by the web page.
+    """
+
+    value = _clean_text(value)
+    if not value:
+        return ""
+
+    # ``Apple Author 2`` is a common LaTeXML author-label artefact.  Do not
+    # reduce it to ``Apple``: that would turn a malformed field into a false
+    # positive company affiliation.
+    if re.search(r"\bauthor\s*(?:\d+|[ivxlcdm]+)\b", value, flags=re.IGNORECASE):
+        return ""
+
+    # Remove contact details without discarding a legitimate institution that
+    # happens to be adjacent to one.  A value that was only a URL/email then
+    # fails the affiliation check below.
+    value = re.sub(r"(?:https?://|www\.)\S+|\b\S+\.github\.io\S*", " ", value, flags=re.IGNORECASE)
+    value = re.sub(r"\b[^\s@]+@[^\s@]+\b", " ", value)
+    value = _clean_latex_affiliation(value)
+    value = re.sub(
+        r"^(?:(?:contact|corresponding)\s+)?(?:affiliation|address)\s*:\s*",
+        "",
+        value,
+        flags=re.IGNORECASE,
+    )
+    value = _clean_text(value)
+
+    # A leading conjunction means the parser has captured only the tail of a
+    # multi-line author block, so its institution name is incomplete.
+    if re.match(r"^(?:and|&)\b", value, flags=re.IGNORECASE):
+        return ""
+
+    # A known author embedded *between* two affiliation fragments is ambiguous
+    # (for example, ``Labs, Huawei Yingxue Zhang Noah's Ark Lab``).  Suppress
+    # it rather than publishing a reordered or partial institution.  An author
+    # accidentally copied as a leading/trailing label can still be removed.
+    author = _clean_text(author)
+    if author:
+        author_match = re.search(
+            rf"(?<!\w){re.escape(author)}(?!\w)", value, flags=re.IGNORECASE
+        )
+        if author_match:
+            if value[: author_match.start()].strip(" ,;:-") and value[
+                author_match.end() :
+            ].strip(" ,;:-"):
+                return ""
+            value = value[: author_match.start()] + value[author_match.end() :]
+
+    value = re.sub(r"\s*,\s*", ", ", value)
+    value = _clean_text(value).strip(" ,;:-")
+    return value if _looks_like_affiliation(value) else ""
+
+
 def _normalize_affiliation_candidate(value: str) -> str:
     value = re.sub(r"^.*?\bare with\b\s+", "", value, flags=re.IGNORECASE)
     value = re.sub(r"^.*?\bis with\b\s+", "", value, flags=re.IGNORECASE)
     value = re.sub(r"^.*?\bis the director of\b\s+", "", value, flags=re.IGNORECASE)
-    return _clean_latex_affiliation(value)
+    return _normalize_display_affiliation(value)
 
 
 def _extract_numbered_affiliations(value: str) -> list[str]:
     cleaned = _clean_latex_affiliation(value, strip_marker=False)
+    # Superscript affiliation labels are short (``1``, ``2``, ...).  A four
+    # digit number is far more likely to be part of an institution name, such
+    # as ``2012 Labs, Huawei``; treating it as a marker used to drop the first
+    # half of the affiliation and merge later authors into the remainder.
+    marker = r"(?:[1-9]\d{0,2})"
     matches = re.findall(
-        r"(?:^|\s)\d+\s+([A-Z][^0-9]*?)(?=\s+\d+\s+[A-Z]|$)",
+        rf"(?:^|\s){marker}\s+([A-Z][^0-9]*?)(?=\s+{marker}\s+[A-Z]|$)",
         cleaned,
     )
     affiliations = []
@@ -300,7 +364,10 @@ def _extract_numbered_affiliations(value: str) -> list[str]:
 
 
 def _split_affiliation_candidates(block: str, include_whole: bool = True) -> list[str]:
-    parts = re.split(r"\\\\|\\and|\n|;", block)
+    # ``\\And`` is case-sensitive in TeX but semantically the same separator
+    # as ``\\and``.  Supporting both prevents following author names from
+    # being merged into the preceding institution.
+    parts = re.split(r"\\\\|\\and|\n|;", block, flags=re.IGNORECASE)
     candidates = []
     for part in parts:
         numbered_affiliations = _extract_numbered_affiliations(part)
@@ -436,7 +503,7 @@ def _normalize_affiliation_response(raw, authors: list[str]) -> list[dict]:
             continue
 
         author = _clean_text(author)
-        affiliation = _clean_text(affiliation)
+        affiliation = _normalize_display_affiliation(affiliation, author)
         if not affiliation or affiliation.lower() in {"unknown", "none", "n/a", "not found"}:
             continue
 
