@@ -26,7 +26,7 @@
 
 This copy is configured for keyword-profile recommendations. It sends 40 papers ranked by the current top keywords and 10 exploratory papers ranked by adjacent guessed keywords. The initial keywords are `world model`, `unified model`, and `generation model`.
 
-Paper cards include title, authors, affiliations, TLDR, extracted abstract keywords, similarity score, and feedback buttons. Feedback is collected through pre-filled GitHub issues; the next scheduled GitHub Action updates `data/interest_profile.json` and commits the new top keyword profile.
+Paper cards include title, authors, affiliations, TLDR, extracted abstract keywords, similarity score, recommendation reasons, and feedback buttons. Feedback is collected through pre-filled GitHub issues: `Interested` and `Like` strengthen topics, while `少推荐此类` suppresses matching topics. The dedicated feedback workflow updates and commits `data/interest_profile.json` immediately after issue submission, even when SMTP email delivery is not configured.
 
 See [docs/keyword-feedback-deployment.md](docs/keyword-feedback-deployment.md) for the deployment checklist.
 
@@ -58,7 +58,7 @@ See [docs/keyword-feedback-deployment.md](docs/keyword-feedback-deployment.md) f
 
 `Daily ArXiv Paper Fetch` runs at `22:00 UTC`, writes a validated `papers.json`, builds the React frontend, and deploys it to GitHub Pages. The deployed site for this repository is [liaojunchen.github.io/Arxiv-daily](https://liaojunchen.github.io/Arxiv-daily/).
 
-The web workflow and the email workflow are independent. If `SENDER`, `RECEIVER`, or `SENDER_PASSWORD` is missing, `Send emails daily` exits successfully with a configuration notice; it does not affect the Pages dashboard. Configure those three secrets to enable email delivery.
+The web workflow and the email workflow are independent. Both now consume the same persisted interest profile: the Pages recommendation tab reads `data/interest_profile.json`, while email uses it to build the reranker query. If `SENDER`, `RECEIVER`, or `SENDER_PASSWORD` is missing, `Send emails daily` exits successfully with a configuration notice; it does not affect the Pages dashboard or the standalone `Sync paper feedback` workflow. Configure those three secrets to enable email delivery.
 
 Optional repository variables for web affiliation enrichment:
 

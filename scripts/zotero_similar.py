@@ -9,10 +9,12 @@ This matches the approach used in the original zotero-arxiv-daily project.
 """
 
 import json
+import sys
 import urllib.request
 import urllib.error
 import requests
 from datetime import datetime
+from pathlib import Path
 from config import (
     ZOTERO_ID,
     ZOTERO_KEY,
@@ -22,6 +24,18 @@ from config import (
     SILICONFLOW_RERANK_URL,
     SILICONFLOW_RERANK_MODEL,
     SILICONFLOW_BATCH_SIZE,
+)
+
+# ``daily-fetch.yml`` installs only ``scripts/requirements.txt``.  The shared
+# selection helpers are intentionally stdlib-only, so adding src to the path
+# lets the dashboard apply the same negative-feedback and MMR semantics as
+# email without pulling in the full mail runtime.
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+from zotero_arxiv_daily.recommendation import (  # noqa: E402
+    matched_keywords_for_text,
+    mmr_select,
+    negative_feedback_penalty,
+    recommendation_reason,
 )
 
 ZOTERO_TIMEOUT = 15
@@ -130,6 +144,25 @@ def _build_interest_query(zotero_papers: list[dict]) -> str:
     return query
 
 
+def _build_keyword_interest_query(
+    interest_keywords: list[str],
+    suppressed_keywords: list[str],
+) -> str:
+    """Build the same positive/negative profile query used for web ranking."""
+    query = (
+        "The user has the following positive research interests. Rank papers by "
+        "relevance and usefulness to these interests:\n"
+        + ", ".join(interest_keywords)
+    )
+    if suppressed_keywords:
+        query += (
+            "\n\nThe user explicitly wants fewer papers about these themes. "
+            "Rank papers dominated by them lower unless they strongly match a positive interest:\n"
+            + ", ".join(suppressed_keywords)
+        )
+    return query
+
+
 def _format_candidate(paper: dict) -> str:
     """Format a candidate paper as a document string for the rerank API."""
     max_chars = 4000
@@ -197,7 +230,12 @@ def _rerank_batch(query: str, documents: list[str]) -> list[float]:
 
 
 def compute_similarity(
-    zotero_papers: list[dict], arxiv_papers: list[dict], top_n: int = None
+    zotero_papers: list[dict],
+    arxiv_papers: list[dict],
+    top_n: int = None,
+    *,
+    interest_keywords: list[str] | None = None,
+    suppressed_keywords: list[str] | None = None,
 ) -> list[dict]:
     """
     Use SiliconFlow LLM Reranker to score ArXiv papers by relevance to
@@ -212,14 +250,14 @@ def compute_similarity(
         print("[WARN] No ArXiv papers to rank.")
         return []
 
-    if not SILICONFLOW_API_KEY:
-        print("[ERROR] SILICONFLOW_API_KEY not set. Cannot use reranker.")
-        raise RuntimeError("SILICONFLOW_API_KEY environment variable is required.")
+    interest_keywords = interest_keywords or []
+    suppressed_keywords = suppressed_keywords or []
+    if interest_keywords:
+        query = _build_keyword_interest_query(interest_keywords, suppressed_keywords)
+    else:
+        query = _build_interest_query(zotero_papers or [])
 
-    # Build interest query from Zotero library
-    query = _build_interest_query(zotero_papers or [])
-
-    if not zotero_papers:
+    if not zotero_papers and not interest_keywords:
         # Fallback: use a generic query based on paper categories
         all_cats = set()
         for p in arxiv_papers:
@@ -231,42 +269,67 @@ def compute_similarity(
         )
         print(f"[INFO] No Zotero items, using category-based query.")
 
-    # Rerank all ArXiv papers in batches
+    # Rerank all ArXiv papers in batches.  If the optional rerank secret is
+    # absent, a deterministic keyword score still makes the profile useful.
     all_scores = [0.0] * len(arxiv_papers)
-    total_batches = (len(arxiv_papers) + SILICONFLOW_BATCH_SIZE - 1) // SILICONFLOW_BATCH_SIZE
+    if SILICONFLOW_API_KEY:
+        total_batches = (len(arxiv_papers) + SILICONFLOW_BATCH_SIZE - 1) // SILICONFLOW_BATCH_SIZE
+        for batch_idx in range(total_batches):
+            start = batch_idx * SILICONFLOW_BATCH_SIZE
+            end = min(start + SILICONFLOW_BATCH_SIZE, len(arxiv_papers))
+            batch = arxiv_papers[start:end]
+            documents = [_format_candidate(p) for p in batch]
 
-    for batch_idx in range(total_batches):
-        start = batch_idx * SILICONFLOW_BATCH_SIZE
-        end = min(start + SILICONFLOW_BATCH_SIZE, len(arxiv_papers))
-        batch = arxiv_papers[start:end]
-        documents = [_format_candidate(p) for p in batch]
-
-        print(f"[INFO] Reranking batch {batch_idx + 1}/{total_batches} ({len(batch)} papers)...")
-        try:
-            scores = _rerank_batch(query, documents)
-            for i, score in enumerate(scores):
-                all_scores[start + i] = score
-        except RuntimeError as e:
-            print(f"[ERROR] Rerank batch {batch_idx + 1} failed: {e}")
-            # Keep default 0.0 scores for this batch, continue
+            print(f"[INFO] Reranking batch {batch_idx + 1}/{total_batches} ({len(batch)} papers)...")
+            try:
+                scores = _rerank_batch(query, documents)
+                for i, score in enumerate(scores):
+                    all_scores[start + i] = score
+            except RuntimeError as e:
+                print(f"[ERROR] Rerank batch {batch_idx + 1} failed: {e}")
+                # Keep default 0.0 scores for this batch, continue
+    elif interest_keywords:
+        print("[WARN] SILICONFLOW_API_KEY not set; using deterministic keyword-profile ranking.")
+        for index, paper in enumerate(arxiv_papers):
+            text = f"{paper.get('title', '')}\n{paper.get('abstract', '')}"
+            matched = matched_keywords_for_text(text, interest_keywords)
+            all_scores[index] = len(matched) / max(1, len(interest_keywords))
+    else:
+        print("[ERROR] SILICONFLOW_API_KEY not set. Cannot use Zotero reranker.")
+        raise RuntimeError("SILICONFLOW_API_KEY environment variable is required.")
 
     # Attach scores and sort
     score_scale = 10.0
     scored = []
     for i, paper in enumerate(arxiv_papers):
-        scored.append(
-            {
-                **paper,
-                "similarity_score": round(all_scores[i] * score_scale, 4),
-            }
-        )
+        text = f"{paper.get('title', '')}\n{paper.get('abstract', '')}"
+        matched = matched_keywords_for_text(text, interest_keywords)
+        penalty, suppressed = negative_feedback_penalty(text, suppressed_keywords, per_keyword=2.0)
+        score = max(0.0, all_scores[i] * score_scale - penalty)
+        item = {
+            **paper,
+            "similarity_score": round(score, 4),
+            "source": "interest_profile" if interest_keywords else "zotero_similar",
+        }
+        if interest_keywords:
+            item["matched_keywords"] = matched
+            item["suppressed_keywords"] = suppressed
+            item["recommendation_reason"] = recommendation_reason(
+                matched,
+                diversity_selected=True,
+            )
+        scored.append(item)
 
     scored.sort(key=lambda x: x["similarity_score"], reverse=True)
 
-    for p in scored:
-        p["source"] = "zotero_similar"
-
-    result = scored[:top_n]
+    candidate_pool = scored[: max(top_n * 5, top_n)]
+    result = mmr_select(
+        candidate_pool,
+        limit=top_n,
+        score_getter=lambda paper: paper.get("similarity_score"),
+        text_getter=lambda paper: f"{paper.get('title', '')}\n{paper.get('abstract', '')}",
+        diversity_lambda=0.65,
+    )
     max_score = result[0]["similarity_score"] if result else "N/A"
-    print(f"[INFO] Top {len(result)} similar papers by LLM reranker (max score: {max_score})")
+    print(f"[INFO] Top {len(result)} diversified recommendations (max score: {max_score})")
     return result

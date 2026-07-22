@@ -13,12 +13,18 @@ from openai import OpenAI
 from tqdm import tqdm
 import os
 
-from .feedback import GitHubFeedbackClient, build_feedback_issue_url, make_paper_id
+from .feedback import build_feedback_issue_url, make_paper_id
+from .feedback_sync import apply_pending_feedback
 from .interest_profile import InterestProfile, guess_exploration_keywords, utcnow_iso
 from .keyword_extractor import (
     assign_keywords_to_papers,
     keyword_overlap_score,
     matched_keywords_for_paper,
+)
+from .recommendation import (
+    mmr_select,
+    negative_feedback_penalty,
+    recommendation_reason,
 )
 
 
@@ -136,23 +142,13 @@ class Executor:
 
     def _run_keyword_recommendations(self):
         interest_config = self.config.interest
-        profile = InterestProfile.from_config(self.config)
-        feedback_client = GitHubFeedbackClient.from_config(self.config)
-        try:
-            feedback_items = feedback_client.fetch_feedback()
-        except Exception as exc:
-            logger.warning(f"Failed to collect GitHub feedback; continuing with current profile: {exc}")
-            feedback_items = []
-        applied_feedback = profile.apply_feedback(feedback_items)
-        if applied_feedback:
-            applied_keys = {item["feedback_key"] for item in applied_feedback}
-            feedback_client.close_feedback_issues(
-                [item for item in feedback_items if profile._feedback_key(item) in applied_keys]
-            )
-            profile.save()
+        profile, _ = apply_pending_feedback(self.config)
 
         top_keywords = profile.top_keywords()
+        suppressed_keywords = profile.suppressed_keywords()
         logger.info(f"Current top keywords: {top_keywords}")
+        if suppressed_keywords:
+            logger.info(f"Current suppressed keywords: {suppressed_keywords}")
 
         all_papers = self._retrieve_all_papers()
         logger.info(f"Total {len(all_papers)} papers retrieved from all sources")
@@ -179,11 +175,16 @@ class Executor:
         exploration_count = int(interest_config.get("exploration_paper_count", 10))
         exploration_keyword_count = int(interest_config.get("exploration_keyword_count", 10))
 
-        primary_ranked = self._rank_by_keywords(all_papers, top_keywords)
-        primary_papers = primary_ranked[:primary_count]
+        primary_ranked = self._rank_by_keywords(all_papers, top_keywords, suppressed_keywords)
+        primary_papers = self._diversify(primary_ranked, primary_count)
         for paper in primary_papers:
             paper.recommendation_group = "primary"
             paper.matched_keywords = matched_keywords_for_paper(paper, top_keywords)
+            paper.recommendation_reason = recommendation_reason(
+                paper.matched_keywords,
+                group="primary",
+                diversity_selected=True,
+            )
 
         exploration_keywords = guess_exploration_keywords(
             top_keywords=top_keywords,
@@ -193,15 +194,26 @@ class Executor:
             llm_config=self.config.llm,
             max_keywords=exploration_keyword_count,
             use_llm=bool(interest_config.get("use_llm_keyword_guess", True)),
+            excluded_keywords=suppressed_keywords,
         )
         logger.info(f"Exploration keywords: {exploration_keywords}")
 
         selected_ids = {paper.paper_id for paper in primary_papers}
         remaining = [paper for paper in all_papers if paper.paper_id not in selected_ids]
-        exploration_papers = self._rank_by_keywords(remaining, exploration_keywords)[:exploration_count]
+        exploration_ranked = self._rank_by_keywords(
+            remaining,
+            exploration_keywords,
+            suppressed_keywords,
+        )
+        exploration_papers = self._diversify(exploration_ranked, exploration_count)
         for paper in exploration_papers:
             paper.recommendation_group = "exploration"
             paper.matched_keywords = matched_keywords_for_paper(paper, exploration_keywords)
+            paper.recommendation_reason = recommendation_reason(
+                paper.matched_keywords,
+                group="exploration",
+                diversity_selected=True,
+            )
 
         selected_papers = primary_papers + exploration_papers
         self._attach_feedback_urls(selected_papers, run_id)
@@ -238,22 +250,53 @@ class Executor:
             all_papers.extend(papers)
         return all_papers
 
-    def _rank_by_keywords(self, papers: list[Paper], keywords: list[str]) -> list[Paper]:
+    def _rank_by_keywords(
+        self,
+        papers: list[Paper],
+        keywords: list[str],
+        suppressed_keywords: list[str] | None = None,
+    ) -> list[Paper]:
         if not papers:
             return []
         if not keywords:
             logger.warning("No keywords available for ranking; returning candidates unchanged.")
-            return papers
+            ranked = list(papers)
+        else:
+            corpus = InterestProfile.from_config(self.config).to_corpus(keywords)
+            try:
+                ranked = self.reranker.rerank(papers, corpus)
+            except Exception as exc:
+                logger.warning(f"Configured reranker failed; falling back to keyword overlap scoring: {exc}")
+                for paper in papers:
+                    paper.score = keyword_overlap_score(paper, keywords)
+                ranked = sorted(papers, key=lambda paper: paper.score or 0.0, reverse=True)
 
-        corpus = InterestProfile.from_config(self.config).to_corpus(keywords)
-        try:
-            ranked = self.reranker.rerank(papers, corpus)
-        except Exception as exc:
-            logger.warning(f"Configured reranker failed; falling back to keyword overlap scoring: {exc}")
-            for paper in papers:
-                paper.score = keyword_overlap_score(paper, keywords)
-            ranked = sorted(papers, key=lambda paper: paper.score or 0.0, reverse=True)
-        return ranked
+        penalty_per_keyword = float(self.config.interest.get("negative_match_penalty", 2.0))
+        for paper in ranked:
+            paper.matched_keywords = matched_keywords_for_paper(paper, keywords)
+            text = f"{paper.title or ''}\n{paper.abstract or ''}\n{' '.join(paper.keywords)}"
+            penalty, matched_negative = negative_feedback_penalty(
+                text,
+                suppressed_keywords,
+                per_keyword=penalty_per_keyword,
+            )
+            paper.suppressed_keywords = matched_negative
+            if paper.score is not None:
+                paper.score = max(0.0, float(paper.score) - penalty)
+
+        return sorted(ranked, key=lambda paper: paper.score or 0.0, reverse=True)
+
+    def _diversify(self, papers: list[Paper], limit: int) -> list[Paper]:
+        diversity_lambda = float(self.config.interest.get("mmr_diversity_lambda", 0.65))
+        return mmr_select(
+            papers,
+            limit=limit,
+            score_getter=lambda paper: paper.score,
+            text_getter=lambda paper: (
+                f"{paper.title or ''}\n{paper.abstract or ''}\n{' '.join(paper.keywords)}"
+            ),
+            diversity_lambda=diversity_lambda,
+        )
 
     def _attach_feedback_urls(self, papers: list[Paper], run_id: str) -> None:
         feedback_config = self.config.get("feedback", {})
@@ -275,4 +318,5 @@ class Executor:
             paper.feedback_urls = {
                 "interested": build_feedback_issue_url(repo, paper, "interested", run_id, label),
                 "like": build_feedback_issue_url(repo, paper, "like", run_id, label),
+                "not_interested": build_feedback_issue_url(repo, paper, "not_interested", run_id, label),
             }

@@ -256,6 +256,8 @@ def test_run_keyword_mode_end_to_end(config, tmp_path, monkeypatch):
     message = message_from_string(email_body)
     html = message.get_payload(decode=True).decode("utf-8")
     assert "Top Keyword Matches" in html
+    assert "Why recommended" in html
+    assert "\u5c11\u63a8\u8350\u6b64\u7c7b" in html
     assert (tmp_path / "interest_profile.json").exists()
 
 

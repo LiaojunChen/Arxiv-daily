@@ -18,6 +18,7 @@ from arxiv_fetcher import (
 from zotero_similar import fetch_zotero_items, compute_similarity
 from hf_fetcher import fetch_hf_daily_papers
 from affiliation_extractor import enrich_affiliations_for_display_papers
+from interest_state import load_interest_state
 from config import (
     MAX_PAPER_NUM,
     load_user_config,
@@ -67,28 +68,43 @@ def main():
 
     print(f"[INFO] ArXiv: {len(arxiv_papers)} papers, HF: {len(hf_papers)} papers")
 
-    # 3. Compute Zotero-based similarity on ArXiv papers (full daily set)
-    print("\n[Step 3] Computing Zotero similarity on ArXiv papers...")
+    # 3. Use the same persisted interest profile as the email recommender.
+    # Zotero remains a compatibility fallback for profiles that have no terms.
+    print("\n[Step 3] Computing interest-profile similarity on ArXiv papers...")
     similar_papers = []
     if not arxiv_papers:
         # Fallback: use HF papers if ArXiv is empty
         print("[WARN] No ArXiv papers, falling back to HF papers for similarity.")
         arxiv_papers = hf_papers
 
+    profile_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "interest_profile.json")
+    interest_keywords, suppressed_keywords = load_interest_state(profile_path)
     try:
-        zotero_items = fetch_zotero_items()
-        if zotero_items:
-            similar_papers = compute_similarity(zotero_items, arxiv_papers, top_n=MAX_PAPER_NUM)
+        if interest_keywords:
+            print(f"[INFO] Using shared interest profile: {interest_keywords}")
+            if suppressed_keywords:
+                print(f"[INFO] Suppressing profile themes: {suppressed_keywords}")
+            similar_papers = compute_similarity(
+                [],
+                arxiv_papers,
+                top_n=MAX_PAPER_NUM,
+                interest_keywords=interest_keywords,
+                suppressed_keywords=suppressed_keywords,
+            )
         else:
-            print("[WARN] No Zotero items, using top N latest ArXiv papers.")
-            similar_papers = [
-                {**p, "similarity_score": 0.0, "source": "zotero_similar"}
-                for p in arxiv_papers[:MAX_PAPER_NUM]
-            ]
+            zotero_items = fetch_zotero_items()
+            if zotero_items:
+                similar_papers = compute_similarity(zotero_items, arxiv_papers, top_n=MAX_PAPER_NUM)
+            else:
+                print("[WARN] No profile or Zotero items; using top N latest ArXiv papers.")
+                similar_papers = [
+                    {**p, "similarity_score": 0.0, "source": "zotero_similar"}
+                    for p in arxiv_papers[:MAX_PAPER_NUM]
+                ]
     except Exception as e:
-        print(f"[ERROR] Zotero similarity failed: {e}")
+        print(f"[ERROR] Interest-profile similarity failed: {e}")
         similar_papers = [
-            {**p, "similarity_score": 0.0, "source": "zotero_similar"}
+            {**p, "similarity_score": 0.0, "source": "interest_profile"}
             for p in arxiv_papers[:MAX_PAPER_NUM]
         ]
 
@@ -159,7 +175,7 @@ def output_result(similar_papers: list[dict], followed_papers: list[dict], hf_pa
         json.dump(result, f, ensure_ascii=False, indent=2)
 
     print(f"\n[DONE] Output written to {output_path}")
-    print(f"  - Similar papers (Zotero reranked): {len(similar_papers)}")
+    print(f"  - Interest-profile recommendations: {len(similar_papers)}")
     print(f"  - Followed papers: {len(followed_papers)}")
     print(f"  - HF raw papers: {len(hf_papers)}")
 

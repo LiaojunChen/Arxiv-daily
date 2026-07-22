@@ -36,6 +36,11 @@ export default function PaperCard({ paper, onChat }: PaperCardProps) {
             {paper.matched_by}
           </span>
         )}
+        {paper.source === "interest_profile" && (
+          <span className="text-xs px-2 py-0.5 rounded font-medium bg-emerald-100 text-emerald-800">
+            Interest profile
+          </span>
+        )}
         {paper.source === "huggingface" && (
           <span className="text-xs px-2 py-0.5 rounded font-medium bg-yellow-100 text-yellow-800">
             HF
@@ -82,6 +87,22 @@ export default function PaperCard({ paper, onChat }: PaperCardProps) {
       <p className="text-sm text-gray-500 leading-relaxed mb-4">
         {truncateAbstract(paper.abstract)}
       </p>
+
+      {paper.recommendation_reason && (
+        <div className="mb-4 rounded-md border border-emerald-100 bg-emerald-50 px-3 py-2 text-xs leading-relaxed text-emerald-900">
+          <span className="font-semibold">Why recommended: </span>
+          {paper.recommendation_reason}
+          {(paper.matched_keywords?.length ?? 0) > 0 && (
+            <div className="mt-1 flex flex-wrap gap-1">
+              {paper.matched_keywords?.slice(0, 4).map((keyword) => (
+                <span key={keyword} className="rounded bg-white px-1.5 py-0.5 text-emerald-800">
+                  {keyword}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Actions */}
       <div className="flex items-center gap-3">

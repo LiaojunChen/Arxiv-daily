@@ -1,0 +1,59 @@
+name: Sync paper feedback
+
+on:
+  issues:
+    types: [opened]
+  workflow_dispatch:
+  schedule:
+    # Safety net for a transient issues-event or GitHub API failure.
+    - cron: "17 */6 * * *"
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: interest-profile
+  cancel-in-progress: false
+
+jobs:
+  sync-feedback:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.0
+
+      - name: Setup Python
+        uses: actions/setup-python@v6.3.0
+        with:
+          python-version: "3.13"
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v8.3.2
+        with:
+          version: "0.11.29"
+          enable-cache: true
+
+      - name: Prepare config
+        env:
+          CUSTOM_CONFIG: ${{ vars.CUSTOM_CONFIG }}
+        run: bash .github/scripts/prepare-config.sh
+
+      - name: Apply pending feedback
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: uv run --locked python -m zotero_arxiv_daily.feedback_sync
+
+      - name: Commit interest profile
+        run: |
+          if [[ -n "$(git status --short data/interest_profile.json)" ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data/interest_profile.json
+            git commit -m "Update paper interest profile from feedback"
+            git push
+          else
+            echo "No interest profile changes to commit."
+          fi

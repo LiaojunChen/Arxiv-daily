@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
   "updated_at": "2026-06-02T00:00:00Z",
   "keywords": [
@@ -16,6 +16,7 @@
       "score": 8.0
     }
   ],
+  "negative_keywords": [],
   "processed_feedback": [],
   "feedback_history": [],
   "last_run": {}

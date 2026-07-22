@@ -8,6 +8,7 @@ from .protocol import Paper
 
 INTERESTED_LABEL = "\u611f\u5174\u8da3"
 LIKE_LABEL = "\u559c\u6b22"
+LESS_LIKE_THIS_LABEL = "\u5c11\u63a8\u8350\u6b64\u7c7b"
 
 
 framework = """
@@ -32,6 +33,7 @@ framework = """
     .button-paper { background: #2563eb; }
     .button-interested { background: #047857; }
     .button-like { background: #7c3aed; }
+    .button-less-like-this { background: #b45309; }
     .muted { color: #64748b; font-size: 13px; line-height: 1.45; }
     .star-wrapper { font-size: 1.3em; line-height: 1; display: inline-flex; align-items: center; }
     .half-star { display: inline-block; width: 0.5em; overflow: hidden; white-space: nowrap; vertical-align: middle; }
@@ -90,6 +92,7 @@ def get_block_html(
     feedback_urls: dict[str, str] | None = None,
     paper_url: str | None = None,
     matched_keywords: list[str] | None = None,
+    recommendation_reason: str | None = None,
 ):
     feedback_urls = feedback_urls or {}
     title_html = _escape(title)
@@ -101,6 +104,7 @@ def get_block_html(
         + _button(paper_url, "Abstract", "button-paper")
         + _button(feedback_urls.get("interested"), INTERESTED_LABEL, "button-interested")
         + _button(feedback_urls.get("like"), LIKE_LABEL, "button-like")
+        + _button(feedback_urls.get("not_interested"), LESS_LIKE_THIS_LABEL, "button-less-like-this")
     )
 
     matched_html = ""
@@ -108,6 +112,14 @@ def get_block_html(
         matched_html = f"""
         <div class="field">
           <strong>Matched Top Keywords:</strong> {_chips(matched_keywords)}
+        </div>
+        """
+
+    reason_html = ""
+    if recommendation_reason:
+        reason_html = f"""
+        <div class="field">
+          <strong>Why recommended:</strong> {_escape(recommendation_reason)}
         </div>
         """
 
@@ -124,6 +136,7 @@ def get_block_html(
           <div class="field"><strong>TLDR:</strong> {_escape(tldr)}</div>
           <div class="field"><strong>Keywords:</strong> {_chips(keywords)}</div>
           {matched_html}
+          {reason_html}
           <div>{actions}</div>
         </td>
       </tr>
@@ -179,7 +192,7 @@ def _header_html(top_keywords: list[str] | None, exploration_keywords: list[str]
       <div class="paper-title">Daily Paper Recommendations</div>
       <div class="field"><strong>Current Top Keywords:</strong> {_chips(top_keywords)}</div>
       {exploration_block}
-      <div class="muted">Feedback buttons open a pre-filled GitHub issue. Submit it, and the next scheduled run will update the keyword profile automatically.</div>
+      <div class="muted">Feedback buttons open a pre-filled GitHub issue. Submit it to strengthen a topic, or choose “少推荐此类” to suppress it. The profile updates automatically.</div>
     </div>
     """
 
@@ -197,6 +210,7 @@ def _paper_html(paper: Paper) -> str:
         paper.feedback_urls,
         paper.url,
         paper.matched_keywords,
+        paper.recommendation_reason,
     )
 
 

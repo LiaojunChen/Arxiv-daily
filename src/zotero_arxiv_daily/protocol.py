@@ -44,6 +44,8 @@ class Paper:
     score: Optional[float] = None
     keywords: list[str] = field(default_factory=list)
     matched_keywords: list[str] = field(default_factory=list)
+    suppressed_keywords: list[str] = field(default_factory=list)
+    recommendation_reason: Optional[str] = None
     recommendation_group: Optional[str] = None
     paper_id: Optional[str] = None
     feedback_urls: dict[str, str] = field(default_factory=dict)

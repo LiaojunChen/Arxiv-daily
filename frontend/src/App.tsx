@@ -92,7 +92,7 @@ export default function App() {
           <PaperList
             papers={filteredSimilar}
             onChat={setChatPaper}
-            emptyMessage="暂无相似论文推荐。请确保已配置 Zotero API 密钥。"
+            emptyMessage="暂无兴趣推荐论文。请等待下一次抓取，或检查兴趣画像与论文源配置。"
           />
         )}
         {activeTab === "hf" && (

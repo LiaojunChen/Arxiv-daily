@@ -15,6 +15,7 @@ from .protocol import Paper
 
 MARKER_START = "<!-- zotero-arxiv-daily-feedback"
 MARKER_END = "-->"
+FEEDBACK_ACTIONS = {"interested", "like", "not_interested"}
 
 
 def make_paper_id(paper: Paper) -> str:
@@ -39,7 +40,11 @@ def build_feedback_issue_url(
     label: str | None = "paper-feedback",
 ) -> str:
     paper_id = paper.paper_id or make_paper_id(paper)
-    action_label = {"interested": "Interested", "like": "Like"}.get(action, action)
+    action_label = {
+        "interested": "Interested",
+        "like": "Like",
+        "not_interested": "Less like this",
+    }.get(action, action)
     payload = {
         "paper_id": paper_id,
         "action": action,
@@ -81,7 +86,7 @@ def parse_feedback_body(body: str | None) -> dict[str, Any] | None:
         return None
     if not isinstance(payload, dict):
         return None
-    if payload.get("action") not in {"interested", "like"}:
+    if payload.get("action") not in FEEDBACK_ACTIONS:
         return None
     if not payload.get("paper_id"):
         return None

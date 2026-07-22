@@ -17,8 +17,11 @@ export interface Paper {
   abstract_url: string;
   similarity_score?: number;
   matched_by?: string;
+  matched_keywords?: string[];
+  suppressed_keywords?: string[];
+  recommendation_reason?: string;
   hf_upvotes?: number;
-  source: "zotero_similar" | "followed" | "huggingface";
+  source: "zotero_similar" | "interest_profile" | "followed" | "huggingface";
 }
 
 export interface PapersData {

@@ -36,6 +36,7 @@ class InterestProfile:
         score_decay: float = 0.95,
         interested_weight: float = 1.0,
         liked_weight: float = 3.0,
+        not_interested_weight: float = 3.0,
         max_feedback_history: int = 200,
     ):
         self.state_path = Path(state_path)
@@ -44,6 +45,7 @@ class InterestProfile:
         self.score_decay = float(score_decay)
         self.interested_weight = float(interested_weight)
         self.liked_weight = float(liked_weight)
+        self.not_interested_weight = float(not_interested_weight)
         self.max_feedback_history = int(max_feedback_history)
         self.data = self._load_or_initialize()
 
@@ -57,6 +59,7 @@ class InterestProfile:
             score_decay=float(_config_get(interest_config, "score_decay", 0.95)),
             interested_weight=float(_config_get(interest_config, "interested_weight", 1.0)),
             liked_weight=float(_config_get(interest_config, "liked_weight", 3.0)),
+            not_interested_weight=float(_config_get(interest_config, "not_interested_weight", 3.0)),
             max_feedback_history=int(_config_get(interest_config, "max_feedback_history", 200)),
         )
 
@@ -64,8 +67,9 @@ class InterestProfile:
         if self.state_path.exists():
             with self.state_path.open("r", encoding="utf-8") as file:
                 data = json.load(file)
-            data.setdefault("version", 1)
+            data["version"] = max(int(data.get("version", 1)), 2)
             data.setdefault("keywords", [])
+            data.setdefault("negative_keywords", [])
             data.setdefault("processed_feedback", [])
             data.setdefault("feedback_history", [])
             data.setdefault("last_run", {})
@@ -73,10 +77,11 @@ class InterestProfile:
             return data
 
         data = {
-            "version": 1,
+            "version": 2,
             "created_at": utcnow_iso(),
             "updated_at": utcnow_iso(),
             "keywords": [],
+            "negative_keywords": [],
             "processed_feedback": [],
             "feedback_history": [],
             "last_run": {},
@@ -92,9 +97,15 @@ class InterestProfile:
         data["keywords"] = self._scores_to_keyword_items(scores)
 
     def _keyword_scores(self, data: dict[str, Any] | None = None) -> dict[str, float]:
+        return self._scores_for_key("keywords", data)
+
+    def _negative_keyword_scores(self, data: dict[str, Any] | None = None) -> dict[str, float]:
+        return self._scores_for_key("negative_keywords", data)
+
+    def _scores_for_key(self, key: str, data: dict[str, Any] | None = None) -> dict[str, float]:
         source = self.data if data is None else data
         scores: dict[str, float] = {}
-        for item in source.get("keywords", []):
+        for item in source.get(key, []):
             if isinstance(item, dict):
                 keyword = normalize_keyword(str(item.get("term", "")))
                 score = item.get("score", 0.0)
@@ -120,6 +131,11 @@ class InterestProfile:
         limit = self.top_keyword_count if limit is None else int(limit)
         return [item["term"] for item in self.data.get("keywords", [])[:limit]]
 
+    def suppressed_keywords(self, limit: int | None = None) -> list[str]:
+        """Return the strongest themes explicitly marked "less like this"."""
+        limit = self.top_keyword_count if limit is None else int(limit)
+        return [item["term"] for item in self.data.get("negative_keywords", [])[:limit]]
+
     def to_corpus(self, keywords: list[str] | None = None) -> list[CorpusPaper]:
         selected = normalize_keywords(keywords or self.top_keywords())
         now = datetime.now(timezone.utc).replace(tzinfo=None)
@@ -141,6 +157,10 @@ class InterestProfile:
             return []
 
         scores = {keyword: score * self.score_decay for keyword, score in self._keyword_scores().items()}
+        negative_scores = {
+            keyword: score * self.score_decay
+            for keyword, score in self._negative_keyword_scores().items()
+        }
         processed = set(str(item) for item in self.data.get("processed_feedback", []))
         last_papers = self.data.get("last_run", {}).get("papers", {})
         applied: list[dict[str, Any]] = []
@@ -158,13 +178,23 @@ class InterestProfile:
                 continue
 
             action = item.get("action")
-            weight = self.liked_weight if action == "like" else self.interested_weight
             keywords = normalize_keywords(paper.get("keywords", []) + paper.get("matched_keywords", []))
             if not keywords:
                 keywords = normalize_keywords(_title_phrases(paper.get("title", "")))
 
-            for index, keyword in enumerate(keywords):
-                scores[keyword] = scores.get(keyword, 0.0) + weight / (1.0 + index * 0.35)
+            if action == "not_interested":
+                for index, keyword in enumerate(keywords):
+                    increment = self.not_interested_weight / (1.0 + index * 0.35)
+                    negative_scores[keyword] = negative_scores.get(keyword, 0.0) + increment
+            else:
+                weight = self.liked_weight if action == "like" else self.interested_weight
+                for index, keyword in enumerate(keywords):
+                    increment = weight / (1.0 + index * 0.35)
+                    scores[keyword] = scores.get(keyword, 0.0) + increment
+                    # A later positive action should be able to correct an
+                    # earlier "less like this" decision for the same theme.
+                    if keyword in negative_scores:
+                        negative_scores[keyword] = max(0.0, negative_scores[keyword] - increment)
 
             record = {
                 "processed_at": utcnow_iso(),
@@ -181,6 +211,7 @@ class InterestProfile:
             history = self.data.get("feedback_history", []) + applied
             self.data["feedback_history"] = history[-self.max_feedback_history :]
             self.data["keywords"] = self._scores_to_keyword_items(scores)
+            self.data["negative_keywords"] = self._scores_to_keyword_items(negative_scores)
             self.data["processed_feedback"] = sorted(processed)[-1000:]
             self.data["updated_at"] = utcnow_iso()
             logger.info(f"Applied {len(applied)} feedback item(s) to the interest profile.")
@@ -205,6 +236,8 @@ class InterestProfile:
                 "score": paper.score,
                 "keywords": paper.keywords,
                 "matched_keywords": paper.matched_keywords,
+                "suppressed_keywords": paper.suppressed_keywords,
+                "recommendation_reason": paper.recommendation_reason,
                 "recommendation_group": paper.recommendation_group,
             }
 
@@ -223,10 +256,15 @@ class InterestProfile:
             json.dump(self.data, file, ensure_ascii=False, indent=2)
             file.write("\n")
 
-    def _feedback_key(self, item: dict[str, Any]) -> str:
+    def feedback_key(self, item: dict[str, Any]) -> str:
         if item.get("issue_number") is not None:
             return f"issue:{item['issue_number']}"
         return f"{item.get('run_id')}:{item.get('paper_id')}:{item.get('action')}"
+
+    # Kept as a compatibility alias for third-party scripts that used the
+    # original private helper before feedback sync became a standalone command.
+    def _feedback_key(self, item: dict[str, Any]) -> str:
+        return self.feedback_key(item)
 
 
 def _title_phrases(title: str) -> list[str]:
@@ -247,6 +285,7 @@ def guess_exploration_keywords(
     llm_config,
     max_keywords: int = 10,
     use_llm: bool = True,
+    excluded_keywords: list[str] | None = None,
 ) -> list[str]:
     if use_llm:
         guessed = _guess_exploration_keywords_with_llm(
@@ -256,11 +295,17 @@ def guess_exploration_keywords(
             openai_client=openai_client,
             llm_config=llm_config,
             max_keywords=max_keywords,
+            excluded_keywords=excluded_keywords,
         )
         if guessed:
             return guessed
 
-    return fallback_exploration_keywords(top_keywords, candidates, max_keywords=max_keywords)
+    return fallback_exploration_keywords(
+        top_keywords,
+        candidates,
+        max_keywords=max_keywords,
+        excluded_keywords=excluded_keywords,
+    )
 
 
 def _guess_exploration_keywords_with_llm(
@@ -271,6 +316,7 @@ def _guess_exploration_keywords_with_llm(
     openai_client,
     llm_config,
     max_keywords: int,
+    excluded_keywords: list[str] | None,
 ) -> list[str]:
     candidate_counter = Counter()
     for paper in candidates[:120]:
@@ -313,7 +359,12 @@ def _guess_exploration_keywords_with_llm(
     if not isinstance(parsed, list):
         return []
 
-    return _dedupe_exploration_keywords(parsed, top_keywords, max_keywords=max_keywords)
+    return _dedupe_exploration_keywords(
+        parsed,
+        top_keywords,
+        max_keywords=max_keywords,
+        excluded_keywords=excluded_keywords,
+    )
 
 
 def fallback_exploration_keywords(
@@ -321,6 +372,7 @@ def fallback_exploration_keywords(
     candidates: list[Paper],
     *,
     max_keywords: int = 10,
+    excluded_keywords: list[str] | None = None,
 ) -> list[str]:
     counter: Counter[str] = Counter()
     for paper in candidates:
@@ -334,6 +386,7 @@ def fallback_exploration_keywords(
         [keyword for keyword, _ in counter.most_common(max_keywords * 5)],
         top_keywords,
         max_keywords=max_keywords,
+        excluded_keywords=excluded_keywords,
     )
 
 
@@ -342,8 +395,10 @@ def _dedupe_exploration_keywords(
     top_keywords: list[str],
     *,
     max_keywords: int,
+    excluded_keywords: list[str] | None = None,
 ) -> list[str]:
     top = normalize_keywords(top_keywords)
+    excluded = normalize_keywords(excluded_keywords)
     selected: list[str] = []
     for item in keywords:
         keyword = normalize_keyword(str(item))
@@ -352,6 +407,8 @@ def _dedupe_exploration_keywords(
         if keyword in selected:
             continue
         if any(keyword == current or keyword in current or current in keyword for current in top):
+            continue
+        if any(keyword == current or keyword in current or current in keyword for current in excluded):
             continue
         selected.append(keyword)
         if len(selected) >= max_keywords:

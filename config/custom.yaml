@@ -42,6 +42,9 @@ interest:
   score_decay: 0.95
   interested_weight: 1.0
   liked_weight: 3.0
+  not_interested_weight: 3.0
+  negative_match_penalty: 2.0
+  mmr_diversity_lambda: 0.65
   use_llm_keyword_guess: true
 
 feedback:

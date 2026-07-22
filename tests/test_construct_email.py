@@ -85,7 +85,12 @@ def test_render_email_keyword_mode_fields():
         affiliations=["MIT"],
         keywords=["world model", "video generation"],
         matched_keywords=["world model"],
-        feedback_urls={"interested": "https://github.com/o/r/issues/new?x=1", "like": "https://github.com/o/r/issues/new?x=2"},
+        recommendation_reason="Matches your interests: world model",
+        feedback_urls={
+            "interested": "https://github.com/o/r/issues/new?x=1",
+            "like": "https://github.com/o/r/issues/new?x=2",
+            "not_interested": "https://github.com/o/r/issues/new?x=3",
+        },
     )
     paper.recommendation_group = "primary"
     html = render_email([paper], top_keywords=["world model"], exploration_keywords=["embodied ai"])
@@ -93,5 +98,8 @@ def test_render_email_keyword_mode_fields():
     assert "Top Keyword Matches" in html
     assert "world model" in html
     assert "video generation" in html
+    assert "Why recommended" in html
+    assert "Matches your interests: world model" in html
     assert "\u611f\u5174\u8da3" in html
     assert "\u559c\u6b22" in html
+    assert "\u5c11\u63a8\u8350\u6b64\u7c7b" in html
