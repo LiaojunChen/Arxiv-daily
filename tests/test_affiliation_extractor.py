@@ -207,6 +207,60 @@ def test_extract_affiliations_from_inline_numbered_author_block():
     ]
 
 
+def test_extract_affiliations_keeps_year_named_lab_and_splits_tex_and_separator():
+    paper_text = r"""
+    \author{
+    Lingfeng Zhang \thanks{Corresponding to lingfeng.zhang@example.com}\\
+    Noah's Ark Lab, 2012 Labs, Huawei \\
+    \And
+    Zhanguang Zhang \\
+    Noah's Ark Lab, 2012 Labs, Huawei \\
+    \And
+    Tongtong Cao \\
+    Department of Foundation model, 2012 Labs, Huawei
+    }
+    """
+
+    affiliations = affiliation_extractor.extract_affiliations_from_paper_text(
+        paper_text,
+        ["Lingfeng Zhang", "Zhanguang Zhang", "Tongtong Cao"],
+    )
+
+    assert affiliations == [
+        {"author": "Lingfeng Zhang", "affiliation": "Noah's Ark Lab, 2012 Labs, Huawei"},
+        {
+            "author": "Zhanguang Zhang",
+            "affiliation": "Department of Foundation model, 2012 Labs, Huawei",
+        },
+    ]
+
+
+def test_normalize_affiliation_response_rejects_labels_and_urls_and_cleans_contact_prefix():
+    affiliations = affiliation_extractor._normalize_affiliation_response(
+        [
+            {"author": "Seanie Lee", "affiliation": "Apple Author 2"},
+            {"author": "Yukang Cao", "affiliation": "https://example.github.io/home"},
+            {
+                "author": "Shifeng Wu",
+                "affiliation": "Contact affiliation: Guangzhou Polytechnic Normal University",
+            },
+            {"author": "Ming Li", "affiliation": "and Application for Data Science"},
+            {
+                "author": "Yingxue Zhang",
+                "affiliation": "Labs, Huawei Yingxue Zhang Noah's Ark Lab",
+            },
+        ],
+        ["Seanie Lee", "Yukang Cao", "Shifeng Wu", "Ming Li", "Yingxue Zhang"],
+    )
+
+    assert affiliations == [
+        {
+            "author": "Shifeng Wu",
+            "affiliation": "Guangzhou Polytechnic Normal University",
+        }
+    ]
+
+
 def test_enrich_affiliations_normalizes_existing_affiliations(monkeypatch):
     paper = {
         "arxiv_id": "2606.00001",
