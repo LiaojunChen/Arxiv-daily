@@ -6,7 +6,7 @@ This fork is configured to run in keyword-profile mode. It keeps the original pa
 
 Each daily email contains:
 
-- 40 papers ranked against the current top keyword profile, then diversified with MMR so near-duplicate topics do not dominate one issue.
+- 50 papers ranked against the current top keyword profile, then diversified with MMR so near-duplicate topics do not dominate one issue.
 - 10 exploratory papers ranked against guessed adjacent keywords.
 - Paper title, authors, affiliations, TLDR, extracted abstract keywords, similarity score, PDF/abstract links, and feedback buttons.
 - `Interested`, `Like`, and `少推荐此类` feedback buttons. The buttons open pre-filled GitHub issues. Positive actions strengthen matching topics; `少推荐此类` adds them to a separate negative profile that is applied as a ranking penalty.

@@ -35,7 +35,7 @@ interest:
   state_path: data/interest_profile.json
   default_keywords: ["world model", "unified model", "generation model"]
   top_keyword_count: 10
-  primary_paper_count: 40
+  primary_paper_count: 50
   exploration_paper_count: 10
   exploration_keyword_count: 10
   paper_keyword_count: 6
