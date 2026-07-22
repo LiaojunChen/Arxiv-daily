@@ -297,6 +297,16 @@ def _normalize_display_affiliation(value: str, author: str = "") -> str:
     if re.search(r"\bauthor\s*(?:\d+|[ivxlcdm]+)\b", value, flags=re.IGNORECASE):
         return ""
 
+    # Disclosure statements are often rendered beside authors in conference
+    # templates. They describe publication status, not an institution, but can
+    # otherwise pass the broad ``research`` keyword check.
+    if re.search(
+        r"\b(?:disclosure|conflicts?\s+of\s+interest|competing\s+interests?)\b",
+        value,
+        flags=re.IGNORECASE,
+    ):
+        return ""
+
     # Remove contact details without discarding a legitimate institution that
     # happens to be adjacent to one.  A value that was only a URL/email then
     # fails the affiliation check below.
