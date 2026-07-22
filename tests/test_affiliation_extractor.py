@@ -249,8 +249,19 @@ def test_normalize_affiliation_response_rejects_labels_and_urls_and_cleans_conta
                 "author": "Yingxue Zhang",
                 "affiliation": "Labs, Huawei Yingxue Zhang Noah's Ark Lab",
             },
+            {
+                "author": "Suyash Mishra",
+                "affiliation": "Suyash Mishra, . Disclosure: this is independent research",
+            },
         ],
-        ["Seanie Lee", "Yukang Cao", "Shifeng Wu", "Ming Li", "Yingxue Zhang"],
+        [
+            "Seanie Lee",
+            "Yukang Cao",
+            "Shifeng Wu",
+            "Ming Li",
+            "Yingxue Zhang",
+            "Suyash Mishra",
+        ],
     )
 
     assert affiliations == [
