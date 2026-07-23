@@ -162,9 +162,15 @@ def output_result(similar_papers: list[dict], followed_papers: list[dict], hf_pa
         "papers.json",
     )
 
+    generated_at = datetime.now(timezone.utc).replace(microsecond=0)
+    updated_at = generated_at.isoformat()
     result = {
-        "date": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
-        "updated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S+00:00"),
+        "date": generated_at.strftime("%Y-%m-%d"),
+        "updated_at": updated_at,
+        # A single stable marker for all cards in this Pages build. It lets the
+        # feedback service deduplicate a repeated click without conflating
+        # separate daily recommendation runs.
+        "run_id": f"pages-{generated_at.strftime('%Y%m%dT%H%M%SZ')}",
         "similar_papers": similar_papers,
         "followed_papers": followed_papers,
         "hf_papers": hf_papers,

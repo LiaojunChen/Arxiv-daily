@@ -1,0 +1,18 @@
+name = "arxiv-daily-feedback"
+main = "src/index.ts"
+compatibility_date = "2026-07-23"
+workers_dev = true
+
+# Copy this file to wrangler.toml, then replace the placeholder after creating
+# the D1 database. Do not commit a real database ID or any Worker secret.
+[[d1_databases]]
+binding = "DB"
+database_name = "arxiv-daily-feedback"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+migrations_dir = "migrations"
+
+[vars]
+# Comma-separated Origins allowed to submit browser feedback. GitHub Pages uses
+# the repository host, not its path, as the Origin.
+ALLOWED_ORIGINS = "https://liaojunchen.github.io"
+MAX_EVENTS_PER_HOUR = "20"

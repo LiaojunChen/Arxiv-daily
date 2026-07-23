@@ -172,6 +172,10 @@ class InterestProfile:
 
             paper_id = str(item.get("paper_id"))
             paper = last_papers.get(paper_id)
+            if not paper and isinstance(item.get("paper"), dict):
+                # Pages feedback includes a compact paper snapshot because a
+                # deployed card can outlive the email run stored in last_run.
+                paper = item["paper"]
             processed.add(feedback_key)
             if not paper:
                 logger.warning(f"Feedback for unknown paper_id {paper_id} was marked processed but not applied.")
@@ -204,6 +208,7 @@ class InterestProfile:
                 "paper_title": paper.get("title"),
                 "keywords": keywords,
                 "issue_url": item.get("issue_url"),
+                "source": item.get("source", "github"),
             }
             applied.append(record)
 
@@ -257,6 +262,8 @@ class InterestProfile:
             file.write("\n")
 
     def feedback_key(self, item: dict[str, Any]) -> str:
+        if item.get("feedback_id") is not None:
+            return f"cloudflare:{item['feedback_id']}"
         if item.get("issue_number") is not None:
             return f"issue:{item['issue_number']}"
         return f"{item.get('run_id')}:{item.get('paper_id')}:{item.get('action')}"

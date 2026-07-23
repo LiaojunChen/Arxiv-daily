@@ -78,6 +78,13 @@ feedback:
   github_token: ${oc.env:GITHUB_TOKEN,null}
   issue_label: paper-feedback
   auto_close_issues: true
+  cloudflare:
+    # The Worker remains inactive until both environment values exist. This
+    # makes Pages feedback opt-in without embedding credentials in the site.
+    enabled: true
+    api_url: ${oc.env:CLOUDFLARE_FEEDBACK_API_URL,null}
+    sync_token: ${oc.env:CLOUDFLARE_FEEDBACK_SYNC_TOKEN,null}
+    batch_size: 100
 
 executor:
   debug: false # Whether to use debug mode. Example: true

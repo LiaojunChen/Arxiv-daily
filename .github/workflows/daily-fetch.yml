@@ -65,6 +65,7 @@ jobs:
         working-directory: frontend
         env:
           VITE_BASE_PATH: ${{ vars.VITE_BASE_PATH }}
+          VITE_FEEDBACK_API_URL: ${{ vars.CLOUDFLARE_FEEDBACK_API_URL }}
         run: npm run build
 
       - name: Copy papers.json to build output

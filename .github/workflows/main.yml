@@ -63,6 +63,9 @@ jobs:
           SILICONFLOW_API_KEY: ${{ secrets.SILICONFLOW_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
+          CLOUDFLARE_FEEDBACK_API_URL: ${{ vars.CLOUDFLARE_FEEDBACK_API_URL }}
+          CLOUDFLARE_FEEDBACK_SYNC_TOKEN: ${{ secrets.CLOUDFLARE_FEEDBACK_SYNC_TOKEN }}
+          DEFER_FEEDBACK_ACK: "true"
         run: |
           uv run --locked src/zotero_arxiv_daily/main.py
 
@@ -78,3 +81,13 @@ jobs:
           else
             echo "No interest profile changes to commit."
           fi
+
+      - name: Acknowledge committed feedback
+        if: steps.email-config.outputs.enabled == 'true' && success()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          CLOUDFLARE_FEEDBACK_API_URL: ${{ vars.CLOUDFLARE_FEEDBACK_API_URL }}
+          CLOUDFLARE_FEEDBACK_SYNC_TOKEN: ${{ secrets.CLOUDFLARE_FEEDBACK_SYNC_TOKEN }}
+          ACKNOWLEDGE_PROCESSED_FEEDBACK: "true"
+        run: uv run --locked python -m zotero_arxiv_daily.feedback_sync

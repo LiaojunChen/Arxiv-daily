@@ -5,9 +5,10 @@ interface PaperListProps {
   papers: Paper[];
   onChat: (paper: Paper) => void;
   emptyMessage: string;
+  feedbackRunId: string;
 }
 
-export default function PaperList({ papers, onChat, emptyMessage }: PaperListProps) {
+export default function PaperList({ papers, onChat, emptyMessage, feedbackRunId }: PaperListProps) {
   if (papers.length === 0) {
     return (
       <div className="text-center py-16 text-gray-400">
@@ -22,7 +23,12 @@ export default function PaperList({ papers, onChat, emptyMessage }: PaperListPro
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-2">
       {papers.map((paper) => (
-        <PaperCard key={paper.arxiv_id} paper={paper} onChat={onChat} />
+        <PaperCard
+          key={paper.arxiv_id}
+          paper={paper}
+          onChat={onChat}
+          feedbackRunId={feedbackRunId}
+        />
       ))}
     </div>
   );

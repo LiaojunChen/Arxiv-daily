@@ -26,9 +26,10 @@
 
 This copy is configured for keyword-profile recommendations. It sends 50 papers ranked by the current top keywords and 10 exploratory papers ranked by adjacent guessed keywords. The initial keywords are `world model`, `unified model`, and `generation model`.
 
-Paper cards include title, authors, affiliations, TLDR, extracted abstract keywords, similarity score, recommendation reasons, and feedback buttons. Feedback is collected through pre-filled GitHub issues: `Interested` and `Like` strengthen topics, while `少推荐此类` suppresses matching topics. The dedicated feedback workflow updates and commits `data/interest_profile.json` immediately after issue submission, even when SMTP email delivery is not configured.
+Paper cards include title, authors, affiliations, TLDR, extracted abstract keywords, similarity score, recommendation reasons, and feedback buttons. The GitHub Pages dashboard can send `喜欢`, `感兴趣`, and `少推荐此类` directly through Cloudflare Worker + D1; the dedicated feedback workflow updates and commits `data/interest_profile.json` hourly. Email links keep pre-filled GitHub Issues as a compatibility fallback.
 
 See [docs/keyword-feedback-deployment.md](docs/keyword-feedback-deployment.md) for the deployment checklist.
+For the non-Issue web feedback deployment, see [docs/cloudflare-feedback-deployment.md](docs/cloudflare-feedback-deployment.md).
 
 > [!IMPORTANT]
 > Please keep an eye on this repo, and merge your forked repo in time when there is any update of this upstream, in order to enjoy new features and fix found bugs.
@@ -66,6 +67,7 @@ Optional repository variables for web affiliation enrichment:
 - `AFFILIATION_MAX_LLM_PAPERS`: maximum LLM fallbacks after deterministic TeX/HTML extraction; the default is `8`.
 - `HF_FALLBACK_DAYS`: how many previous UTC dates to check when today's Hugging Face daily list is empty; the default is `7`.
 - `VITE_BASE_PATH`: custom Vite base path for a custom Pages setup. The repository name is detected automatically for normal project Pages deployments.
+- `CLOUDFLARE_FEEDBACK_API_URL`: optional public Worker URL used by the three per-paper web feedback controls. Follow [the Cloudflare + D1 deployment guide](docs/cloudflare-feedback-deployment.md); the corresponding `CLOUDFLARE_FEEDBACK_SYNC_TOKEN` must be a repository secret.
 
 ## 📷 Screenshot
 ![screenshot](./assets/screenshot.png)

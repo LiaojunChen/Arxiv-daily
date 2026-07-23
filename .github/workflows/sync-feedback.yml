@@ -5,8 +5,8 @@ on:
     types: [opened]
   workflow_dispatch:
   schedule:
-    # Safety net for a transient issues-event or GitHub API failure.
-    - cron: "17 */6 * * *"
+    # D1 events have no GitHub webhook, so keep web feedback reasonably fresh.
+    - cron: "17 * * * *"
 
 permissions:
   contents: write
@@ -44,6 +44,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
+          CLOUDFLARE_FEEDBACK_API_URL: ${{ vars.CLOUDFLARE_FEEDBACK_API_URL }}
+          CLOUDFLARE_FEEDBACK_SYNC_TOKEN: ${{ secrets.CLOUDFLARE_FEEDBACK_SYNC_TOKEN }}
+          DEFER_FEEDBACK_ACK: "true"
         run: uv run --locked python -m zotero_arxiv_daily.feedback_sync
 
       - name: Commit interest profile
@@ -57,3 +60,12 @@ jobs:
           else
             echo "No interest profile changes to commit."
           fi
+
+      - name: Acknowledge committed feedback
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          CLOUDFLARE_FEEDBACK_API_URL: ${{ vars.CLOUDFLARE_FEEDBACK_API_URL }}
+          CLOUDFLARE_FEEDBACK_SYNC_TOKEN: ${{ secrets.CLOUDFLARE_FEEDBACK_SYNC_TOKEN }}
+          ACKNOWLEDGE_PROCESSED_FEEDBACK: "true"
+        run: uv run --locked python -m zotero_arxiv_daily.feedback_sync

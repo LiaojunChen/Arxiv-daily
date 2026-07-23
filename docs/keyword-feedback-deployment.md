@@ -9,7 +9,7 @@ Each daily email contains:
 - 50 papers ranked against the current top keyword profile, then diversified with MMR so near-duplicate topics do not dominate one issue.
 - 10 exploratory papers ranked against guessed adjacent keywords.
 - Paper title, authors, affiliations, TLDR, extracted abstract keywords, similarity score, PDF/abstract links, and feedback buttons.
-- `Interested`, `Like`, and `少推荐此类` feedback buttons. The buttons open pre-filled GitHub issues. Positive actions strengthen matching topics; `少推荐此类` adds them to a separate negative profile that is applied as a ranking penalty.
+- `Interested`, `Like`, and `少推荐此类` feedback buttons. Email buttons open pre-filled GitHub issues as a fallback. The GitHub Pages dashboard supports direct Cloudflare Worker + D1 submission; see [cloudflare-feedback-deployment.md](cloudflare-feedback-deployment.md). Positive actions strengthen matching topics; `少推荐此类` adds them to a separate negative profile that is applied as a ranking penalty.
 - A short recommendation reason with the matched interest topics.
 
 ## Initial Keywords
@@ -37,7 +37,7 @@ Set these in `Settings -> Secrets and variables -> Actions -> Secrets`:
 
 `ZOTERO_ID` and `ZOTERO_KEY` are optional in keyword mode. They are only needed if you disable `interest.enabled` and return to the original Zotero mode.
 
-If `SENDER`, `SENDER_PASSWORD`, or `RECEIVER` is absent, the scheduled email job records a notice and skips cleanly. The separate GitHub Pages workflow continues to run. Feedback does not depend on SMTP: `Sync paper feedback` runs when a feedback issue is opened, every six hours as a safety net, or manually from Actions.
+If `SENDER`, `SENDER_PASSWORD`, or `RECEIVER` is absent, the scheduled email job records a notice and skips cleanly. The separate GitHub Pages workflow continues to run. Feedback does not depend on SMTP: `Sync paper feedback` runs when a feedback issue is opened, every hour as a safety net for Cloudflare D1 events, or manually from Actions.
 
 ## Repository Variables
 

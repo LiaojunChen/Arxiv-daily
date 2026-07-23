@@ -92,6 +92,7 @@ export default function App() {
           <PaperList
             papers={filteredSimilar}
             onChat={setChatPaper}
+            feedbackRunId={data?.run_id ?? data?.updated_at ?? "unknown-run"}
             emptyMessage="暂无兴趣推荐论文。请等待下一次抓取，或检查兴趣画像与论文源配置。"
           />
         )}
@@ -99,6 +100,7 @@ export default function App() {
           <PaperList
             papers={filteredHF}
             onChat={setChatPaper}
+            feedbackRunId={data?.run_id ?? data?.updated_at ?? "unknown-run"}
             emptyMessage="暂无 HuggingFace 热门论文数据。"
           />
         )}
@@ -106,6 +108,7 @@ export default function App() {
           <PaperList
             papers={filteredFollowed}
             onChat={setChatPaper}
+            feedbackRunId={data?.run_id ?? data?.updated_at ?? "unknown-run"}
             emptyMessage="暂无关注的作者/机构论文。请在设置中添加关注列表。"
           />
         )}

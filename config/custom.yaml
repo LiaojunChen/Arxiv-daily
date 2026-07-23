@@ -53,6 +53,11 @@ feedback:
   github_token: ${oc.env:GITHUB_TOKEN,null}
   issue_label: paper-feedback
   auto_close_issues: true
+  cloudflare:
+    enabled: true
+    api_url: ${oc.env:CLOUDFLARE_FEEDBACK_API_URL,null}
+    sync_token: ${oc.env:CLOUDFLARE_FEEDBACK_SYNC_TOKEN,null}
+    batch_size: 100
 
 executor:
   debug: ${oc.env:DEBUG,null}

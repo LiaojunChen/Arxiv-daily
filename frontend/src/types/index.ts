@@ -27,6 +27,7 @@ export interface Paper {
 export interface PapersData {
   date: string;
   updated_at: string;
+  run_id?: string;
   similar_papers: Paper[];
   followed_papers: Paper[];
   hf_papers: Paper[];
@@ -38,6 +39,7 @@ export interface AppSettings {
   ai_api_base: string;
   ai_api_key: string;
   ai_model: string;
+  feedback_access_code: string;
 }
 
 export interface ChatMessage {

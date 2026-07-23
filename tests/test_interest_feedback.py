@@ -78,6 +78,34 @@ def test_not_interested_feedback_creates_a_separate_negative_profile(tmp_path):
     assert "diffusion model" not in profile.top_keywords()
 
 
+def test_cloudflare_feedback_uses_embedded_pages_paper_when_last_run_is_absent(tmp_path):
+    profile = InterestProfile(
+        tmp_path / "interest_profile.json",
+        default_keywords=["world model"],
+        not_interested_weight=4.0,
+    )
+    event = {
+        "feedback_id": 42,
+        "paper_id": "2607.12345",
+        "run_id": "pages-20260723T010203Z",
+        "action": "not_interested",
+        "source": "cloudflare",
+        "paper": {
+            "title": "Diffusion Video Generation",
+            "keywords": ["diffusion model", "video generation"],
+            "matched_keywords": [],
+        },
+    }
+
+    applied = profile.apply_feedback([event])
+
+    assert len(applied) == 1
+    assert applied[0]["feedback_key"] == "cloudflare:42"
+    assert applied[0]["source"] == "cloudflare"
+    assert profile.suppressed_keywords()[:2] == ["diffusion model", "video generation"]
+    assert profile.feedback_key(event) == "cloudflare:42"
+
+
 def test_negative_penalty_and_mmr_keep_the_final_list_varied():
     penalty, matched = negative_feedback_penalty(
         "A diffusion model for video generation",
