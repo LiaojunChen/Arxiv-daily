@@ -1,6 +1,7 @@
 import type { AppSettings } from "../types";
 
 const SETTINGS_KEY = "arxiv-daily-settings";
+export const SETTINGS_UPDATED_EVENT = "arxiv-daily-settings-updated";
 
 const defaultSettings: AppSettings = {
   followed_authors: [],
@@ -24,4 +25,5 @@ export function loadSettings(): AppSettings {
 
 export function saveSettings(settings: AppSettings): void {
   localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+  window.dispatchEvent(new Event(SETTINGS_UPDATED_EVENT));
 }

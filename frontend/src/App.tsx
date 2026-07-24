@@ -9,7 +9,17 @@ import SettingsPanel from "./components/SettingsPanel";
 export default function App() {
   const [activeTab, setActiveTab] = useState<"similar" | "followed" | "hf" | "settings">("similar");
   const [chatPaper, setChatPaper] = useState<Paper | null>(null);
-  const { data, loading, error, search, setSearch, filteredSimilar, filteredFollowed, filteredHF } = usePapers();
+  const {
+    data,
+    loading,
+    error,
+    search,
+    setSearch,
+    filteredSimilar,
+    filteredFollowed,
+    filteredHF,
+    followedPapers,
+  } = usePapers();
 
   if (loading) {
     return (
@@ -81,7 +91,7 @@ export default function App() {
           activeTab={activeTab}
           onTabChange={setActiveTab}
           similarCount={data?.similar_papers.length ?? 0}
-          followedCount={data?.followed_papers.length ?? 0}
+          followedCount={followedPapers.length}
           hfCount={data?.hf_papers.length ?? 0}
         />
       </div>

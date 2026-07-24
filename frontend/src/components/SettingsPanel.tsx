@@ -5,6 +5,8 @@ import { loadSettings, saveSettings } from "../utils/storage";
 export default function SettingsPanel() {
   const [settings, setSettings] = useState<AppSettings>(loadSettings());
   const [saved, setSaved] = useState(false);
+  const [authorInput, setAuthorInput] = useState("");
+  const [institutionInput, setInstitutionInput] = useState("");
 
   const update = (patch: Partial<AppSettings>) => {
     setSettings((prev) => ({ ...prev, ...patch }));
@@ -18,10 +20,11 @@ export default function SettingsPanel() {
   };
 
   const addAuthor = () => {
-    const name = prompt("输入要关注的作者名:");
-    if (name?.trim()) {
-      update({ followed_authors: [...settings.followed_authors, name.trim()] });
-    }
+    const name = authorInput.trim();
+    if (!name || settings.followed_authors.includes(name)) return;
+
+    update({ followed_authors: [...settings.followed_authors, name] });
+    setAuthorInput("");
   };
 
   const removeAuthor = (idx: number) => {
@@ -30,10 +33,11 @@ export default function SettingsPanel() {
   };
 
   const addInstitution = () => {
-    const name = prompt("输入要关注的机构名:");
-    if (name?.trim()) {
-      update({ followed_institutions: [...settings.followed_institutions, name.trim()] });
-    }
+    const name = institutionInput.trim();
+    if (!name || settings.followed_institutions.includes(name)) return;
+
+    update({ followed_institutions: [...settings.followed_institutions, name] });
+    setInstitutionInput("");
   };
 
   const removeInstitution = (idx: number) => {
@@ -66,12 +70,27 @@ export default function SettingsPanel() {
       <section className="bg-white border border-gray-200 rounded-lg p-6">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-base font-semibold text-gray-900">关注作者</h3>
-          <button
-            onClick={addAuthor}
-            className="text-sm px-3 py-1.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 cursor-pointer transition-colors"
-          >
-            + 添加
-          </button>
+          <div className="flex items-center gap-2">
+            <input
+              type="text"
+              value={authorInput}
+              onChange={(e) => setAuthorInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") addAuthor();
+              }}
+              placeholder="作者姓名"
+              aria-label="添加关注作者"
+              className="w-40 px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            />
+            <button
+              type="button"
+              onClick={addAuthor}
+              disabled={!authorInput.trim() || settings.followed_authors.includes(authorInput.trim())}
+              className="text-sm px-3 py-1.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:bg-gray-300 disabled:cursor-not-allowed cursor-pointer transition-colors"
+            >
+              + 添加
+            </button>
+          </div>
         </div>
         {settings.followed_authors.length === 0 ? (
           <p className="text-sm text-gray-400">尚未添加关注作者</p>
@@ -101,12 +120,27 @@ export default function SettingsPanel() {
       <section className="bg-white border border-gray-200 rounded-lg p-6">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-base font-semibold text-gray-900">关注机构</h3>
-          <button
-            onClick={addInstitution}
-            className="text-sm px-3 py-1.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 cursor-pointer transition-colors"
-          >
-            + 添加
-          </button>
+          <div className="flex items-center gap-2">
+            <input
+              type="text"
+              value={institutionInput}
+              onChange={(e) => setInstitutionInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") addInstitution();
+              }}
+              placeholder="机构名称"
+              aria-label="添加关注机构"
+              className="w-40 px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            />
+            <button
+              type="button"
+              onClick={addInstitution}
+              disabled={!institutionInput.trim() || settings.followed_institutions.includes(institutionInput.trim())}
+              className="text-sm px-3 py-1.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:bg-gray-300 disabled:cursor-not-allowed cursor-pointer transition-colors"
+            >
+              + 添加
+            </button>
+          </div>
         </div>
         {settings.followed_institutions.length === 0 ? (
           <p className="text-sm text-gray-400">尚未添加关注机构</p>
@@ -184,7 +218,7 @@ export default function SettingsPanel() {
       </div>
 
       <p className="text-xs text-gray-400 pb-8">
-        提示：关注的作者和机构列表需要同步到仓库的 data/config.json 文件中，才能在每日自动拉取时生效。
+        提示：保存后的关注会立即用于当前浏览器的“关注追踪”。若需每日任务从完整候选集中追踪，仍需同步到仓库的 data/config.json 文件。
       </p>
     </div>
   );
