@@ -43,6 +43,25 @@ export default function SettingsPanel() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-8">
+      {/* Feedback settings */}
+      <section className="bg-white border border-gray-200 rounded-lg p-6">
+        <h3 className="text-base font-semibold text-gray-900 mb-2">论文反馈</h3>
+        <p className="text-xs text-gray-400 mb-4">
+          反馈访问码仅保存在当前浏览器，用于向 Cloudflare 反馈服务验证提交身份；它不会被写入 GitHub Pages 页面或仓库。
+        </p>
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">反馈访问码</label>
+          <input
+            type="password"
+            value={settings.feedback_access_code}
+            onChange={(e) => update({ feedback_access_code: e.target.value })}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            placeholder="在 Cloudflare Worker 中设置的 FEEDBACK_ACCESS_CODE"
+            autoComplete="off"
+          />
+        </div>
+      </section>
+
       {/* Followed Authors */}
       <section className="bg-white border border-gray-200 rounded-lg p-6">
         <div className="flex items-center justify-between mb-4">
@@ -150,25 +169,6 @@ export default function SettingsPanel() {
               placeholder="gpt-4o"
             />
           </div>
-        </div>
-      </section>
-
-      {/* Feedback settings */}
-      <section className="bg-white border border-gray-200 rounded-lg p-6">
-        <h3 className="text-base font-semibold text-gray-900 mb-2">论文反馈</h3>
-        <p className="text-xs text-gray-400 mb-4">
-          反馈访问码仅保存在当前浏览器，用于向 Cloudflare 反馈服务验证提交身份；它不会被写入 GitHub Pages 页面或仓库。
-        </p>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">反馈访问码</label>
-          <input
-            type="password"
-            value={settings.feedback_access_code}
-            onChange={(e) => update({ feedback_access_code: e.target.value })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            placeholder="在 Cloudflare Worker 中设置的 FEEDBACK_ACCESS_CODE"
-            autoComplete="off"
-          />
         </div>
       </section>
 

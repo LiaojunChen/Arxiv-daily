@@ -103,6 +103,35 @@ export default function PaperCard({ paper, onChat, feedbackRunId }: PaperCardPro
         </div>
       )}
 
+      <div className="mb-4 border-y border-gray-100 py-3">
+        <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+          <span className="text-xs font-semibold text-gray-700">推荐反馈</span>
+          <span className="text-xs text-gray-400">帮助优化下一次推荐</span>
+        </div>
+        <div className="mt-2 flex flex-wrap gap-2">
+          {(["like", "interested", "not_interested"] as FeedbackAction[]).map((action) => (
+            <button
+              key={action}
+              type="button"
+              disabled={submittingAction !== null}
+              onClick={() => void submitFeedback(action)}
+              title={feedbackLabels[action]}
+              className={`inline-flex items-center rounded-md border px-3 py-1.5 text-xs font-medium transition-colors cursor-pointer disabled:cursor-wait disabled:opacity-60 ${
+                submittedAction === action
+                  ? "border-emerald-300 bg-emerald-50 text-emerald-700"
+                  : action === "not_interested"
+                    ? "border-rose-200 bg-rose-50 text-rose-700 hover:border-rose-300 hover:bg-rose-100"
+                    : action === "like"
+                      ? "border-emerald-200 bg-emerald-50 text-emerald-700 hover:border-emerald-300 hover:bg-emerald-100"
+                      : "border-indigo-200 bg-indigo-50 text-indigo-700 hover:border-indigo-300 hover:bg-indigo-100"
+              }`}
+            >
+              {submittingAction === action ? "提交中..." : feedbackLabels[action]}
+            </button>
+          ))}
+        </div>
+      </div>
+
       <p className="text-sm text-gray-500 leading-relaxed mb-4">{truncateAbstract(paper.abstract)}</p>
 
       {paper.recommendation_reason && (
@@ -143,26 +172,6 @@ export default function PaperCard({ paper, onChat, feedbackRunId }: PaperCardPro
           </svg>
           讨论
         </button>
-        <div className="flex items-center gap-1 border-l border-gray-200 pl-3">
-          {(["like", "interested", "not_interested"] as FeedbackAction[]).map((action) => (
-            <button
-              key={action}
-              type="button"
-              disabled={submittingAction !== null}
-              onClick={() => void submitFeedback(action)}
-              title={feedbackLabels[action]}
-              className={`inline-flex items-center gap-1 rounded-lg border px-2.5 py-2 text-xs transition-colors cursor-pointer disabled:cursor-wait disabled:opacity-60 ${
-                submittedAction === action
-                  ? "border-emerald-300 bg-emerald-50 text-emerald-700"
-                  : action === "not_interested"
-                    ? "border-gray-300 text-gray-600 hover:border-rose-300 hover:bg-rose-50 hover:text-rose-700"
-                    : "border-gray-300 text-gray-600 hover:border-indigo-300 hover:bg-indigo-50 hover:text-indigo-700"
-              }`}
-            >
-              {submittingAction === action ? "提交中…" : feedbackLabels[action]}
-            </button>
-          ))}
-        </div>
       </div>
       {submittedAction && (
         <p className="mt-2 text-xs text-emerald-700">已记录：{feedbackLabels[submittedAction]}</p>
