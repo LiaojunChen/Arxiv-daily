@@ -27072,8 +27072,8 @@
   },
   "delivery": {
     "batch_id": "c9cadfd9f6d49d9d3856fcfa",
-    "run_id": "daily-3a681b14208edbb15bef9e86",
-    "updated_at": "2026-09-08T08:27:00+00:00",
+    "run_id": "daily-0dd7214968ae379b5fb19d63",
+    "updated_at": "2026-09-08T08:41:20+00:00",
     "profile_version": "62454b745888fc46",
     "papers": [
       {
@@ -27965,7 +27965,12 @@
         "categories": [
           "cs.AI"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Mingrui Li",
+            "affiliation": "ShanghaiTech University"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-09-07",
         "listing_date": "2026-09-07",
@@ -27975,7 +27980,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "unresolved",
+        "affiliation_status": "resolved",
         "keywords": [
           "protlingo",
           "expert routing",
@@ -28557,7 +28562,16 @@
           "cs.AI",
           "cs.SE"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Jiazheng Sun",
+            "affiliation": "College of Computer Science and Artificial Intelligence, Fudan University"
+          },
+          {
+            "author": "Boyu Yang",
+            "affiliation": "College of Computer Science and Artificial Intelligence, Fudan University Shanghai 200433, China"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-09-07",
         "listing_date": "2026-09-07",
@@ -28567,7 +28581,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "unresolved",
+        "affiliation_status": "resolved",
         "keywords": [
           "trace2tower",
           "transition-aware eigentrace",
@@ -28739,7 +28753,12 @@
           "cs.RO",
           "cs.CV"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Jie Ma",
+            "affiliation": "Wayne State University"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-09-07",
         "listing_date": "2026-09-07",
@@ -28749,7 +28768,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "unresolved",
+        "affiliation_status": "resolved",
         "keywords": [
           "failure detection",
           "timestamp-level",
@@ -30484,7 +30503,8 @@
         "world-space camera": 0.3636,
         "liked_papers": 9.717675,
         "zotero": 9.717675
-      }
+      },
+      "reused_batch": true
     }
   },
   "positive_examples": {
