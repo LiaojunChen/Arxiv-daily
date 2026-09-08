@@ -38,6 +38,18 @@ def apply_pending_feedback(
     cloudflare_client = CloudflareFeedbackClient.from_config(config)
 
     try:
+        saved = cloudflare_client.fetch_preferences()
+        if saved and isinstance(saved.get("preferences"), dict) and saved.get("revision", 0) > profile.data.get("subscriptions_revision", 0):
+            preferences = saved["preferences"]
+            keys = ("followed_authors", "followed_institutions")
+            if all(isinstance(preferences.get(key), list) and all(isinstance(v, str) for v in preferences[key]) for key in keys):
+                profile.data["subscriptions"] = {key: preferences[key] for key in keys}
+                profile.data["subscriptions_revision"] = saved["revision"]
+                profile.save()
+    except Exception as exc:
+        logger.warning(f"Failed to sync subscription preferences: {exc}")
+
+    try:
         github_feedback = github_client.fetch_feedback()
     except Exception as exc:  # A delivery run must still be able to recommend papers.
         logger.warning(f"Failed to collect GitHub feedback; continuing with current profile: {exc}")

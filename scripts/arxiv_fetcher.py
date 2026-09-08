@@ -108,6 +108,9 @@ def _parse_atom_feed(xml_data: str) -> list[dict]:
 
     papers = []
     for entry in root.findall("atom:entry", ns):
+        announcement = entry.find("arxiv:announce_type", ns)
+        if announcement is not None and "replace" in (announcement.text or "").lower():
+            continue
         id_el = entry.find("atom:id", ns)
         id_full = id_el.text.strip() if id_el is not None and id_el.text else ""
         arxiv_id = _normalize_arxiv_id(id_full)

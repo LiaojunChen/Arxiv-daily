@@ -16,7 +16,7 @@ ZOTERO_API_BASE = "https://api.zotero.org"
 # ArXiv category codes, e.g. "cs.CV+cs.LG+cs.AI+cs.CL"
 ARXIV_QUERY = os.environ.get("ARXIV_QUERY", "").strip() or "cs.CV+cs.LG+cs.AI+cs.CL+stat.ML"
 ARXIV_API_BASE = "http://export.arxiv.org/api/query"
-MAX_PAPER_NUM = int(os.environ.get("MAX_PAPER_NUM") or "10")
+MAX_PAPER_NUM = int(os.environ.get("MAX_PAPER_NUM") or "50")
 
 # ── SiliconFlow Reranker ─────────────────────────────────
 SILICONFLOW_API_KEY = os.environ.get("SILICONFLOW_API_KEY", "")

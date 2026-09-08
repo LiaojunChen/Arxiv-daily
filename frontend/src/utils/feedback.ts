@@ -1,9 +1,9 @@
-import type { Paper } from "../types";
+import type { Paper, AppSettings } from "../types";
 import { loadSettings } from "./storage";
 
 const CLIENT_ID_KEY = "arxiv-daily-feedback-client-id";
 
-export type FeedbackAction = "like" | "interested" | "not_interested";
+export type FeedbackAction = "like" | "interested" | "not_interested" | "dismiss" | "read" | "bookmark";
 
 export class FeedbackSubmissionError extends Error {
   public readonly code:
@@ -85,8 +85,10 @@ export async function submitPaperFeedback(
         run_id: runId,
         action,
         client_id: feedbackClientId(),
+        event_id: crypto.randomUUID(),
         paper: {
           title: paper.title,
+          abstract: paper.abstract,
           keywords: paper.keywords ?? [],
           matched_keywords: paper.matched_keywords ?? [],
         },
@@ -104,4 +106,18 @@ export async function submitPaperFeedback(
   } catch {
     return { duplicate: false };
   }
+}
+
+export async function syncSubscriptions(settings: AppSettings): Promise<void> {
+  const url = feedbackApiUrl();
+  if (!url || !settings.feedback_access_code.trim()) {
+    throw new Error("已保存到本机；填写反馈访问码后再次保存，才能同步关注到每日推荐。");
+  }
+  // Explicit allowlist: never send AI API keys or other browser settings.
+  const response = await fetch(`${url}/v1/preferences`, {
+    method: "POST",
+    headers: {"content-type": "application/json", "x-feedback-access-code": settings.feedback_access_code.trim()},
+    body: JSON.stringify({followed_authors: settings.followed_authors, followed_institutions: settings.followed_institutions}),
+  });
+  if (!response.ok) throw new Error("已保存到本机，关注同步失败；请检查访问码或稍后重试保存。");
 }

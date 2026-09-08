@@ -1,60 +1,39 @@
-# Subscription and recommendation pipeline
+# Personal recommendation pipeline
 
-The scheduled `Daily ArXiv Paper Fetch` now owns feedback synchronization, candidate collection, ranking, snapshot registration and Pages deployment. Its email job consumes the same `papers.json` artifact. `Send emails daily` is a manual alias for that workflow; it no longer has a second schedule. The legacy CLI and manual debug workflow remain available for development.
+The shared snapshot powers Pages and email. A new arXiv announcement batch produces up to 50 recommendations (normally 40 primary plus up to 10 exploration). There is no new global relevance cutoff. If exploration is unsuitable, primary results fill its places; if fewer than 50 unseen eligible papers exist, the list is shorter instead of recycling papers.
 
-## Subscriptions
+## Ranking
 
-The static site downloads `candidate_papers`, a rolling seven-day pool of RSS and HF candidates, independently of recommendation Top N. Browser subscriptions filter that pool immediately after saving. They remain local preferences; no credential or preference is uploaded. This fixes recall within the downloaded categories/date window without requiring a subscription server or changing the settings UI.
+Each of the top ten weighted interest themes gets its own rerank query. Up to eight liked/interested/bookmarked papers and eight recent Zotero papers provide additional example channels, even when explicit keywords exist. Positive channel scores are combined numerically: 65% weighted best channel plus 35% weighted mean, on a 0–10 scale. Weights are applied in code, not left as numbers in a prompt. Each result records its topic scores, leading topic, semantic score and follow boost. These scores are not calibrated probabilities.
 
-`data/config.json` provides the repository's defaults and precomputed follows. An explicitly saved browser list overrides those defaults, including an empty list. Changing browser preferences does not change the repository owner's email settings or another browser. Subscription coverage is reported in the snapshot's `coverage` and `pipeline_status` fields.
+Confirmed unwanted themes and their paper examples incur a bounded soft penalty. An author follow adds up to 15% of the semantic score; an institution follow up to 10%, with their combined addition capped at one point. Unknown affiliations are never guessed. Consequently institution boosts depend on metadata already available at selection time.
 
-Author matching requires a normalized complete name. Institutional aliases live in `data/institution_aliases.json`, consumed by both Python and TypeScript. Add known aliases there; arbitrary abbreviation inference is deliberately avoided. Institution metadata has `resolved`, `unresolved` or `pending` status. No implementation can match an institution whose affiliation has not yet been extracted; such papers remain in the candidate pool rather than being discarded.
+Exploration requires semantic relevance at least the larger of the candidate median and one quarter of the best score, no confirmed unwanted theme match, and an uncovered topic or at least two keywords not covered by the primary list. Its diversity penalty compares against the entire already selected list. Unused exploration slots return to the primary group.
 
-## Feedback and history
+Rerank calls use the existing cache, validation and one retry. Failure of any channel switches every channel to the deterministic fallback scale. Independent corpus phrase extraction supplies feedback keywords.
 
-GitHub Issue feedback defaults to the repository owner's login only. Configure `feedback.allowed_users` with explicit GitHub logins to permit additional trusted submitters; `[]` disables all Issue submissions. Issue-provided paper metadata is discarded. Events must refer to a known run and paper. Cloudflare events continue to use the existing authenticated service, with old embedded snapshots supported for compatibility.
+## New batches and permanent deduplication
 
-Published runs retain compact title/keyword snapshots in `interest_profile.json.runs`. The previous `last_run` is migrated on load. Existing links whose snapshots were already lost before this upgrade cannot be reconstructed automatically. Unknown events remain pending and are never acknowledged as applied, including when processed alongside valid feedback. Idempotency IDs are retained rather than truncated lexicographically.
+New arXiv listings, including cross-lists and excluding replacements, define the recommendation batch. HF remains a supplementary view; older HF curation does not fill the new-paper recommendation quota. The seven-day candidate pool still supports follow searches independently of recommendation selection.
 
-New arXiv paper IDs are version-independent IDs on both surfaces; existing historical IDs remain queryable in their saved runs. Paper keywords are extracted independently of interest matches and submitted separately, allowing new topics to enter the profile. Profile decay now depends on elapsed days, not the number of sync batches.
+`interest_profile.json.recommended_papers` is a permanent canonical-ID ledger, separate from expiring caches. It is written after successful Pages publication. Startup also recovers the live snapshot before generating a new issue, covering a deployment that succeeded before its ledger commit failed. Transient recovery failures stop the job rather than silently lose publication history. Historical snapshots and retained legacy run selections have been backfilled where available; expired historical artifacts cannot be reconstructed.
 
-Feedback button layout and whether separate button actions should be editable/undoable are not changed by this non-UI patch; distinct action events retain their existing meaning.
+The current batch is frozen: later runs enrich its metadata without replacing its selection or emailing it again. A new batch excludes every recorded recommendation, read paper and dismissed paper. Changing arXiv versions never makes a previously recommended paper eligible. Already published current-issue cards remain visible; that is a refresh of the existing issue, not another recommendation issue.
 
-## Ranking and resource budgets
+## Feedback and subscriptions
 
-Reranker results must include exactly one finite score in [0,1] for each document. A failed batch gets one retry. If any batch still fails, the entire run uses the same deterministic fallback scale; missing scores are never silently treated as low relevance. Keyword matching uses word boundaries (and contiguous CJK phrases). Zero/nonfinite scores are excluded before diversity selection.
+`read` and `bookmark` are separate explicit states. Reading does not create positive keyword evidence. Likes, interest and bookmarks provide positive examples. `dismiss` excludes only that paper. `not_interested` also gathers theme evidence, but a theme is suppressed only after two distinct papers support it. Duplicate events or repeated clicks are not extra votes. A positive correction withdraws that paper's negative evidence without repeatedly adding the same positive weight.
 
-The shared snapshot contains primary and exploration groups within the total `MAX_PAPER_NUM` budget. Exploration cannot bypass relevance or negative-feedback filtering. Profile weights enter the model query and deterministic fallback. Previously recommended papers from the preceding seven days are downweighted. The existing UI continues to render the returned list.
+In Settings, Save stores local preferences and posts only author/institution lists to the authenticated Worker. AI credentials are never included. Empty lists explicitly clear server follows. The hourly feedback sync and daily generation import the latest preference revision into the owner's shared recommendation profile. Local follow filtering updates immediately; ranking changes apply to the next new batch. Each browser can retain its own local filter, while the last explicitly saved server list controls the shared feed.
 
-`data/cache` stores candidate history, successful rerank scores and affiliation extraction outcomes. GitHub Actions restores this cache across runs. Successful affiliation results expire after 30 days and failures after six hours. Version/content changes invalidate cache entries. Requests are serialized with a three-second minimum start interval. `AFFILIATION_BUDGET_SECONDS` defaults to 900; the existing paper/LLM count limits still apply. Budget exhaustion leaves candidates marked pending for a later run. A cache miss reduces historical coverage and performance but cannot discard today's candidate list.
+The Worker retains existing public access-code and private sync-token authentication. Migration `0002_preferences.sql` adds columns and a preferences table without rewriting old events. New event types are exposed through `action_v2`; deploy the matching Worker before the new Pages frontend. Keep the v2 Worker when pending v2 events exist. GitHub Issue feedback continues to allow the repository owner by default and requires known run/paper metadata.
 
-The scheduled workflow requires `interest.state_path: data/interest_profile.json` so the commit/ack sequence persists the file it actually updated. Local commands may use another path. Source failure, ranking degradation, profile version and coverage are included in JSON. Both sources returning no valid data aborts publication, preserving the previous deployment.
+## Schedule and deployment
 
-## Validation and evaluation
+arXiv announces Sunday–Thursday at 20:00 America/New_York, subject to holidays/delays. The 20:05 run prioritizes publication using cached affiliations; the 00:10 run refreshes metadata with the normal 900-second extraction budget. GitHub handles DST. Open visible pages revalidate every minute and on focus. GitHub scheduling is best effort, not an exact-time delivery guarantee.
 
-Run `PYTHONPATH=src pytest -m 'not slow'`; run `npm test`, `npm run lint`, and `npm run build` from frontend. CI includes the frontend checks. No paid API, email send or deployed feedback submission is needed by the new regression tests.
+Deploy order: authenticate Wrangler, apply migration 0002 to the existing D1 binding, deploy the updated Worker preserving its existing secrets/origins, merge the application change, then run `daily-fetch.yml` with `quick=true`. Verify preferences/feedback endpoints, snapshot batch/ledger state, and the Pages deployment. A preview deployment without the Worker migration is not sufficient to enable the new feedback controls.
 
-For ranking evaluation, label a fixed candidate set in JSON:
+## Validation
 
-```json
-{
-  "2609.00001": {"relevance": 3, "topics": ["world model"], "negative": false},
-  "2609.00002": {"relevance": 0, "topics": ["unrelated"], "negative": true}
-}
-```
-
-Run `python scripts/evaluate_recommendations.py data/papers.json labels.json --k 10`. It reports Precision@K, NDCG@K, negative rate and topic count, and refuses to silently treat unlabeled returned results as irrelevant. Compare changes against the same labeled candidate set; passing regression tests alone is not evidence of better personal recommendation quality.
-# Announcement-time updates
-
-arXiv announces papers Sunday–Thursday at 20:00 US Eastern time (holidays can
-defer announcements). The workflow runs at 20:05 in `America/New_York`, which
-is 08:05 Beijing during US daylight saving time and 09:05 during standard time.
-GitHub schedules can be delayed; this is a best-effort trigger, not a delivery SLA.
-
-The first run reads category `/new` pages, including cross-lists and excluding
-replacements. It preserves the listing date, falls back to RSS on unavailable or
-invalid pages, and uses cached affiliations without waiting for new extraction.
-At 00:10 Eastern a second run refreshes sources and enriches institutions using
-the normal budget. This second scheduled run does not send a second email.
-Manual runs retain full enrichment and email delivery. The later refresh also
-catches delayed announcements; RSS documentation specifies a midnight update.
+Python regression tests cover explicit topic weights, corpus fusion, consistent fallback, follow boost, distinct negative evidence, corrections, separate reading/bookmark states, permanent version-independent deduplication, same-batch reuse and next-batch exclusion. Frontend tests cover allowlisted preference payloads, error reporting and refresh behavior. The Worker integration test executes both D1 migrations and authenticates, saves/clears preferences, preserves legacy events, and submits/acknowledges new actions. `scripts/evaluate_recommendations.py` remains available for manually labelled relevance evaluation.

@@ -75,6 +75,11 @@ class CloudflareFeedbackClient:
             return
         self._request_json("/v1/internal/ack", method="POST", payload={"feedback_ids": feedback_ids})
 
+    def fetch_preferences(self):
+        if not self.enabled():
+            return None
+        return self._request_json("/v1/internal/preferences")
+
     def _request_json(
         self,
         path: str,

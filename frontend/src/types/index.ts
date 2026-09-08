@@ -19,6 +19,7 @@ export interface Paper {
   matched_by?: string;
   matched_keywords?: string[];
   keywords?: string[];
+  user_actions?: string[];
   affiliation_status?: "resolved" | "unresolved" | "pending";
   suppressed_keywords?: string[];
   recommendation_reason?: string;

@@ -21,11 +21,22 @@ const feedbackLabels: Record<FeedbackAction, string> = {
   like: "喜欢",
   interested: "感兴趣",
   not_interested: "少推荐此类",
+  dismiss: "不喜欢这篇",
+  read: "已读",
+  bookmark: "收藏",
 };
 
 export default function PaperCard({ paper, onChat, feedbackRunId }: PaperCardProps) {
   const [submittingAction, setSubmittingAction] = useState<FeedbackAction | null>(null);
-  const [submittedAction, setSubmittedAction] = useState<FeedbackAction | null>(null);
+  const [localActions, setSubmittedActions] = useState<FeedbackAction[]>(() => {
+    try {
+      const values = JSON.parse(localStorage.getItem(`paper-actions:${paper.arxiv_id}`) || "[]");
+      return Array.isArray(values) ? values.filter(action => typeof action === "string" && action in feedbackLabels) : [];
+    }
+    catch { return []; }
+  });
+  const submittedActions = [...new Set([...localActions, ...(paper.user_actions ?? [])
+    .filter((action): action is FeedbackAction => action in feedbackLabels)])];
   const [feedbackError, setFeedbackError] = useState<string | null>(null);
   const uniqueAffiliations = useMemo(
     () => getUniqueAffiliations(paper.affiliations),
@@ -37,7 +48,11 @@ export default function PaperCard({ paper, onChat, feedbackRunId }: PaperCardPro
     setFeedbackError(null);
     try {
       await submitPaperFeedback(paper, feedbackRunId, action);
-      setSubmittedAction(action);
+      const retained = action === "read" || action === "bookmark" ? submittedActions :
+        submittedActions.filter(value => value === "read" || value === "bookmark");
+      const next = [...new Set([...retained, action])];
+      setSubmittedActions(next);
+      localStorage.setItem(`paper-actions:${paper.arxiv_id}`, JSON.stringify(next));
     } catch (error) {
       setFeedbackError(error instanceof Error ? error.message : "反馈提交失败，请稍后重试。");
     } finally {
@@ -109,15 +124,15 @@ export default function PaperCard({ paper, onChat, feedbackRunId }: PaperCardPro
           <span className="text-xs text-gray-400">帮助优化下一次推荐</span>
         </div>
         <div className="mt-2 flex flex-wrap gap-2">
-          {(["like", "interested", "not_interested"] as FeedbackAction[]).map((action) => (
+          {(["like", "interested", "dismiss", "not_interested", "read", "bookmark"] as FeedbackAction[]).map((action) => (
             <button
               key={action}
               type="button"
-              disabled={submittingAction !== null}
+              disabled={submittingAction !== null || submittedActions.includes(action)}
               onClick={() => void submitFeedback(action)}
               title={feedbackLabels[action]}
               className={`inline-flex items-center rounded-md border px-3 py-1.5 text-xs font-medium transition-colors cursor-pointer disabled:cursor-wait disabled:opacity-60 ${
-                submittedAction === action
+                submittedActions.includes(action)
                   ? "border-emerald-300 bg-emerald-50 text-emerald-700"
                   : action === "not_interested"
                     ? "border-rose-200 bg-rose-50 text-rose-700 hover:border-rose-300 hover:bg-rose-100"
@@ -173,8 +188,8 @@ export default function PaperCard({ paper, onChat, feedbackRunId }: PaperCardPro
           讨论
         </button>
       </div>
-      {submittedAction && (
-        <p className="mt-2 text-xs text-emerald-700">已记录：{feedbackLabels[submittedAction]}</p>
+      {submittedActions.length > 0 && (
+        <p className="mt-2 text-xs text-emerald-700">已记录：{submittedActions.map(action => feedbackLabels[action]).join("、")}</p>
       )}
       {feedbackError && <p className="mt-2 text-xs text-rose-700">{feedbackError}</p>}
     </div>

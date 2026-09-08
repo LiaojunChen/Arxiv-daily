@@ -1,10 +1,13 @@
 import { useState } from "react";
 import type { AppSettings } from "../types";
 import { loadSettings, saveSettings } from "../utils/storage";
+import { syncSubscriptions } from "../utils/feedback";
 
 export default function SettingsPanel() {
   const [settings, setSettings] = useState<AppSettings>(loadSettings());
   const [saved, setSaved] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [syncError, setSyncError] = useState("");
   const [authorInput, setAuthorInput] = useState("");
   const [institutionInput, setInstitutionInput] = useState("");
 
@@ -13,10 +16,18 @@ export default function SettingsPanel() {
     setSaved(false);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     saveSettings(settings);
-    setSaved(true);
-    setTimeout(() => setSaved(false), 2000);
+    setSaving(true);
+    setSyncError("");
+    try {
+      await syncSubscriptions(settings);
+      setSaved(true);
+    } catch (error) {
+      setSyncError(error instanceof Error ? error.message : "关注同步失败，请重试保存。");
+    } finally {
+      setSaving(false);
+    }
   };
 
   const addAuthor = () => {
@@ -210,15 +221,17 @@ export default function SettingsPanel() {
       <div className="flex items-center gap-4">
         <button
           onClick={handleSave}
+          disabled={saving}
           className="px-6 py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 cursor-pointer transition-colors font-medium"
         >
           保存设置
         </button>
-        {saved && <span className="text-sm text-green-600">已保存</span>}
+        {saved && <span className="text-sm text-green-600">已保存并同步关注</span>}
+        {syncError && <span className="text-sm text-rose-600">{syncError}</span>}
       </div>
 
       <p className="text-xs text-gray-400 pb-8">
-        提示：保存后的关注会立即用于当前浏览器的“关注追踪”。若需每日任务从完整候选集中追踪，仍需同步到仓库的 data/config.json 文件。
+        保存后的关注立即用于“关注追踪”，同步后会在后续新批次推荐中适度加权。清空后保存也会同步取消关注。
       </p>
     </div>
   );

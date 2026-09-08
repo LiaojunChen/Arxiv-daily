@@ -23,9 +23,14 @@ def main(config: DictConfig):
     sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "scripts"))
     from daily_pipeline import generate
     snapshot = generate()
+    if os.environ.get("GITHUB_OUTPUT"):
+        new_issue = bool(snapshot["similar_papers"]) and not snapshot.get("pipeline_status", {}).get("ranking", {}).get("reused_batch")
+        with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
+            output.write(f"new_issue={str(new_issue).lower()}\n")
     profile.data.setdefault("runs", {})[snapshot["run_id"]] = {
         "run_id": snapshot["run_id"], "generated_at": snapshot["updated_at"],
-        "papers": {p["arxiv_id"]: {key: p.get(key, []) for key in ("title", "keywords", "matched_keywords")}
+        "selected_ids": [p["arxiv_id"] for p in snapshot["similar_papers"]],
+        "papers": {p["arxiv_id"]: {key: p.get(key, []) for key in ("title", "abstract", "categories", "keywords", "matched_keywords")}
                    for p in snapshot["candidate_papers"] + snapshot["similar_papers"]},
     }
     profile.data["updated_at"] = snapshot["updated_at"]
