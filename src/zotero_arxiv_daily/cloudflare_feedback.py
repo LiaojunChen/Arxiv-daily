@@ -95,6 +95,7 @@ class CloudflareFeedbackClient:
                 "Authorization": f"Bearer {self.sync_token}",
                 "Accept": "application/json",
                 "Content-Type": "application/json",
+                "User-Agent": "ArxivDaily/1.0 (+https://github.com/LiaojunChen/Arxiv-daily)",
             },
         )
         try:

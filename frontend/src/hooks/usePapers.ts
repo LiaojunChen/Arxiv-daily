@@ -12,22 +12,51 @@ export function usePapers() {
   const [settings, setSettings] = useState<AppSettings>(loadSettings);
 
   useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}papers.json?ts=${Date.now()}`, {
-      cache: "no-store",
-    })
-      .then((res) => {
+    let disposed = false;
+    let hasSnapshot = false;
+    let request: AbortController | null = null;
+    const refresh = async () => {
+      if (request || disposed) return;
+      request = new AbortController();
+      const timeout = window.setTimeout(() => request?.abort(), 20_000);
+      try {
+        const res = await fetch(`${import.meta.env.BASE_URL}papers.json`, {
+          // Revalidate with ETag instead of downloading the whole candidate pool
+          // under a different timestamp URL on every poll.
+          cache: "no-cache",
+          signal: request.signal,
+        });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return res.json();
-      })
-      .then((json: PapersData) => {
-        setData(json);
-        setLoading(false);
-      })
-      .catch((err) => {
+        const json: PapersData = await res.json();
+        if (disposed) return;
+        hasSnapshot = true;
+        setData((current) => current?.run_id === json.run_id && current?.updated_at === json.updated_at ? current : json);
+        setError(null);
+      } catch (err) {
+        if (disposed) return;
         console.error("Failed to load papers:", err);
-        setError("无法加载论文数据。请确保 papers.json 已部署。");
-        setLoading(false);
-      });
+        // A temporary refresh failure must not hide already loaded papers.
+        if (!hasSnapshot) setError("无法加载论文数据。请确保 papers.json 已部署。");
+      } finally {
+        window.clearTimeout(timeout);
+        request = null;
+        if (!disposed) setLoading(false);
+      }
+    };
+    const refreshVisible = () => {
+      if (document.visibilityState === "visible") void refresh();
+    };
+    void refresh();
+    const interval = window.setInterval(refreshVisible, 60_000);
+    document.addEventListener("visibilitychange", refreshVisible);
+    window.addEventListener("focus", refreshVisible);
+    return () => {
+      disposed = true;
+      window.clearInterval(interval);
+      document.removeEventListener("visibilitychange", refreshVisible);
+      window.removeEventListener("focus", refreshVisible);
+      request?.abort();
+    };
   }, []);
 
   useEffect(() => {
