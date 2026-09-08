@@ -44,3 +44,17 @@ For ranking evaluation, label a fixed candidate set in JSON:
 ```
 
 Run `python scripts/evaluate_recommendations.py data/papers.json labels.json --k 10`. It reports Precision@K, NDCG@K, negative rate and topic count, and refuses to silently treat unlabeled returned results as irrelevant. Compare changes against the same labeled candidate set; passing regression tests alone is not evidence of better personal recommendation quality.
+# Announcement-time updates
+
+arXiv announces papers Sunday–Thursday at 20:00 US Eastern time (holidays can
+defer announcements). The workflow runs at 20:05 in `America/New_York`, which
+is 08:05 Beijing during US daylight saving time and 09:05 during standard time.
+GitHub schedules can be delayed; this is a best-effort trigger, not a delivery SLA.
+
+The first run reads category `/new` pages, including cross-lists and excluding
+replacements. It preserves the listing date, falls back to RSS on unavailable or
+invalid pages, and uses cached affiliations without waiting for new extraction.
+At 00:10 Eastern a second run refreshes sources and enriches institutions using
+the normal budget. This second scheduled run does not send a second email.
+Manual runs retain full enrichment and email delivery. The later refresh also
+catches delayed announcements; RSS documentation specifies a midnight update.
