@@ -7,15 +7,17 @@ export interface Env {
   SYNC_API_TOKEN: string;
 }
 
-type FeedbackAction = "interested" | "like" | "not_interested";
+type FeedbackAction = "interested" | "like" | "not_interested" | "dismiss" | "read" | "bookmark";
 
 interface BrowserFeedbackRequest {
   paper_id?: unknown;
   run_id?: unknown;
   action?: unknown;
   client_id?: unknown;
+  event_id?: unknown;
   paper?: {
     title?: unknown;
+    abstract?: unknown;
     keywords?: unknown;
     matched_keywords?: unknown;
   };
@@ -30,9 +32,10 @@ interface FeedbackRow {
   keywords_json: string;
   matched_keywords_json: string;
   created_at: string;
+  abstract_text: string;
 }
 
-const ACTIONS = new Set<FeedbackAction>(["interested", "like", "not_interested"]);
+const ACTIONS = new Set<FeedbackAction>(["interested", "like", "not_interested", "dismiss", "read", "bookmark"]);
 const JSON_HEADERS = { "content-type": "application/json; charset=utf-8" };
 
 export default {
@@ -49,13 +52,22 @@ export default {
         return json({ ok: true });
       }
       if (url.pathname === "/v1/feedback" && request.method === "POST") {
-        return submitBrowserFeedback(request, env);
+        return await submitBrowserFeedback(request, env);
+      }
+      if (url.pathname === "/v1/preferences" && request.method === "POST") {
+        return await savePreferences(request, env);
+      }
+      if (url.pathname === "/v1/internal/preferences" && request.method === "GET") {
+        if (!(await hasSyncAuthorization(request, env))) return json({error: "unauthorized"}, 401);
+        const row = await env.DB.prepare("SELECT preferences_json, revision FROM recommendation_preferences WHERE id = 1")
+          .first<{preferences_json: string; revision: number}>();
+        return json(row ? {preferences: JSON.parse(row.preferences_json), revision: row.revision} : {preferences: null, revision: 0});
       }
       if (url.pathname === "/v1/internal/feedback" && request.method === "GET") {
-        return listPendingFeedback(request, env, url);
+        return await listPendingFeedback(request, env, url);
       }
       if (url.pathname === "/v1/internal/ack" && request.method === "POST") {
-        return acknowledgeFeedback(request, env);
+        return await acknowledgeFeedback(request, env);
       }
       return json({ error: "not_found" }, 404);
     } catch (error) {
@@ -83,7 +95,7 @@ async function submitBrowserFeedback(request: Request, env: Env): Promise<Respon
   const clientHash = await sha256Hex(
     `${env.FEEDBACK_RATE_LIMIT_SALT || env.FEEDBACK_ACCESS_CODE}:${event.clientId}`,
   );
-  const maxEvents = parseLimit(env.MAX_EVENTS_PER_HOUR, 20, 1, 100);
+  const maxEvents = parseLimit(env.MAX_EVENTS_PER_HOUR, 100, 1, 1000);
   const recent = await env.DB.prepare(
     "SELECT COUNT(*) AS count FROM feedback_events WHERE client_hash = ? AND created_at >= datetime('now', '-1 hour')",
   ).bind(clientHash).first<{ count: number | string }>();
@@ -91,24 +103,26 @@ async function submitBrowserFeedback(request: Request, env: Env): Promise<Respon
     return json({ error: "rate_limited" }, 429, cors);
   }
 
-  const eventKey = await sha256Hex(
-    `${event.clientId}:${event.runId}:${event.paperId}:${event.action}`,
-  );
+  const baseKey = `${event.clientId}:${event.runId}:${event.paperId}:${event.action}`;
+  const eventId = cleanString(input.event_id, 80);
+  const eventKey = await sha256Hex(eventId ? `${baseKey}:${eventId}` : baseKey);
   const result = await env.DB.prepare(
     `INSERT INTO feedback_events (
       event_key, paper_id, run_id, action, paper_title,
-      keywords_json, matched_keywords_json, client_hash
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+      keywords_json, matched_keywords_json, client_hash, action_v2, abstract_text
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     ON CONFLICT(event_key) DO NOTHING`,
   ).bind(
     eventKey,
     event.paperId,
     event.runId,
-    event.action,
+    ["dismiss", "read", "bookmark"].includes(event.action) ? "interested" : event.action,
     event.paperTitle,
     JSON.stringify(event.keywords),
     JSON.stringify(event.matchedKeywords),
     clientHash,
+    event.action,
+    cleanString(input.paper?.abstract, 6000),
   ).run();
 
   return json(
@@ -118,6 +132,30 @@ async function submitBrowserFeedback(request: Request, env: Env): Promise<Respon
   );
 }
 
+async function savePreferences(request: Request, env: Env): Promise<Response> {
+  const cors = requirePublicOrigin(request, env);
+  if (cors instanceof Response) return cors;
+  if (!(await secureEquals(request.headers.get("x-feedback-access-code") || "", env.FEEDBACK_ACCESS_CODE || ""))) {
+    return json({error: "invalid_access_code"}, 401, cors);
+  }
+  const input = await parseJson<{followed_authors?: unknown; followed_institutions?: unknown}>(request);
+  if (!input || !Array.isArray(input.followed_authors) || !Array.isArray(input.followed_institutions)) {
+    return json({error: "invalid_preferences"}, 400, cors);
+  }
+  const clean = (items: unknown[]): string[] | null => {
+    if (items.length > 100 || items.some(item => typeof item !== "string" || item.length > 160)) return null;
+    return [...new Set(items.map(item => cleanString(item, 160)).filter(Boolean))];
+  };
+  const authors = clean(input.followed_authors), institutions = clean(input.followed_institutions);
+  if (!authors || !institutions) return json({error: "invalid_preferences"}, 400, cors);
+  const preferences = {followed_authors: authors, followed_institutions: institutions};
+  await env.DB.prepare(`INSERT INTO recommendation_preferences (id, preferences_json) VALUES (1, ?)
+    ON CONFLICT(id) DO UPDATE SET preferences_json = excluded.preferences_json,
+    revision = recommendation_preferences.revision + 1, updated_at = CURRENT_TIMESTAMP`)
+    .bind(JSON.stringify(preferences)).run();
+  return json({ok: true}, 200, cors);
+}
+
 async function listPendingFeedback(request: Request, env: Env, url: URL): Promise<Response> {
   if (!(await hasSyncAuthorization(request, env))) {
     return json({ error: "unauthorized" }, 401);
@@ -125,8 +163,8 @@ async function listPendingFeedback(request: Request, env: Env, url: URL): Promis
 
   const limit = parseLimit(url.searchParams.get("limit"), 100, 1, 200);
   const result = await env.DB.prepare(
-    `SELECT id, paper_id, run_id, action, paper_title, keywords_json,
-            matched_keywords_json, created_at
+    `SELECT id, paper_id, run_id, COALESCE(action_v2, action) AS action, paper_title, keywords_json,
+            matched_keywords_json, created_at, abstract_text
      FROM feedback_events
      WHERE status = 'pending'
      ORDER BY id ASC
@@ -142,6 +180,7 @@ async function listPendingFeedback(request: Request, env: Env, url: URL): Promis
     source: "cloudflare",
     paper: {
       title: row.paper_title,
+      abstract: row.abstract_text,
       keywords: parseKeywordArray(row.keywords_json),
       matched_keywords: parseKeywordArray(row.matched_keywords_json),
     },
@@ -195,7 +234,7 @@ function validateBrowserFeedback(input: BrowserFeedbackRequest):
     clientId,
     keywords: cleanKeywords(input.paper?.keywords),
     matchedKeywords: cleanKeywords(input.paper?.matched_keywords),
-  };
+};
 }
 
 function cleanString(value: unknown, maxLength: number): string {
@@ -232,10 +271,23 @@ function parseLimit(value: string | null | undefined, fallback: number, min: num
 }
 
 async function parseJson<T>(request: Request): Promise<T | null> {
+  const reader = request.body?.getReader();
+  if (!reader) return null;
   try {
-    return (await request.json()) as T;
+    let size = 0, body = "";
+    const decoder = new TextDecoder();
+    while (true) {
+      const {value, done} = await reader.read();
+      if (done) break;
+      size += value.byteLength;
+      if (size > 65536) { await reader.cancel(); return null; }
+      body += decoder.decode(value, {stream: true});
+    }
+    return JSON.parse(body + decoder.decode()) as T;
   } catch {
     return null;
+  } finally {
+    reader.releaseLock();
   }
 }
 

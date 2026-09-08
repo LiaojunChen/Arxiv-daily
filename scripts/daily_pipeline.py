@@ -6,15 +6,16 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from zotero_arxiv_daily.recommendation import canonical_arxiv_id, paper_keywords, mmr_select, matched_keywords_for_text
+from zotero_arxiv_daily.recommendation import canonical_arxiv_id, paper_keywords
 from pipeline_state import fingerprint, read_json, write_json
 from config import MAX_PAPER_NUM, ARXIV_QUERY, load_user_config, get_followed_authors, get_followed_institutions
-from arxiv_fetcher import get_latest_papers, filter_by_authors, filter_by_institutions
+from arxiv_fetcher import get_latest_papers
 from arxiv_listing import get_new_listing_papers
 from hf_fetcher import fetch_hf_daily_papers
 from affiliation_extractor import enrich_affiliations_for_display_papers
 from interest_state import load_interest_state, load_interest_weights
-from zotero_similar import compute_similarity, fetch_zotero_items
+from zotero_similar import fetch_zotero_items
+from personalization import rank_personalized, select_personalized, follow_signals
 
 
 def merge_candidates(groups):
@@ -77,45 +78,46 @@ def generate():
     hf = [{**by_id[canonical_arxiv_id(p["arxiv_id"])], "source": "huggingface"} for p in hf]
     interests, suppressed = load_interest_state(profile_path)
     weights = load_interest_weights(profile_path)
+    profile = read_json(profile_path, {})
+    for p in candidates:
+        p["user_actions"] = [action for action, field in (("read", "read_papers"), ("bookmark", "bookmarked_papers"))
+                             if p["arxiv_id"] in profile.get(field, {})]
+    profile.setdefault("subscriptions", {"followed_authors": get_followed_authors(), "followed_institutions": get_followed_institutions()})
     diagnostics = {}
     os.environ["RERANK_CACHE_PATH"] = str(cache_dir / "rerank.json")
-    # Score all current candidates before selecting; subscription search is independent.
-    ranked = compute_similarity([] if interests else fetch_zotero_items(), current,
-        top_n=len(current), interest_keywords=interests, suppressed_keywords=suppressed,
-        keyword_weights=weights, diagnostics=diagnostics)
-    seen = read_json(cache_dir / "recommended.json")
-    for paper in ranked:
-        date = seen.get(paper["arxiv_id"], "")
-        if cutoff <= date < today:
-            paper["similarity_score"] *= .5
-            paper["previously_recommended"] = True
-    ranked.sort(key=lambda p: p["similarity_score"], reverse=True)
-    select = lambda papers, n: mmr_select(papers, limit=n,
-        score_getter=lambda p: p["similarity_score"], text_getter=lambda p: p["title"] + "\n" + p["abstract"])
-    # Explicit exploration quota within the same total delivery count.
-    exploration_count = min(MAX_PAPER_NUM // 5, int(os.environ.get("EXPLORATION_PAPER_COUNT") or 10))
-    primary = select(ranked, max(0, MAX_PAPER_NUM - exploration_count))
-    ids = {p["arxiv_id"] for p in primary}
-    adjacent = [p for p in ranked if p["arxiv_id"] not in ids and
-        any(term not in interests for term in p.get("keywords", [])) and not matched_keywords_for_text(p["abstract"], suppressed)]
-    exploration = select(adjacent, exploration_count)
-    for paper in primary:
-        paper["recommendation_group"] = "primary"
-    for paper in exploration:
-        paper["recommendation_group"] = "exploration"
-    selected = primary + exploration
-    # Use remaining relevant results when the exploration quota cannot be filled.
-    selected_ids = {p["arxiv_id"] for p in selected}
-    for paper in select([p for p in ranked if p["arxiv_id"] not in selected_ids], MAX_PAPER_NUM - len(selected)):
-        paper["recommendation_group"] = "primary"
-        selected.append(paper)
-    followed = merge_candidates([filter_by_authors(candidates), filter_by_institutions(candidates)])
-    profile_version = fingerprint([interests, suppressed, weights])[:16]
+    listing_date = max((p.get("listing_date") or p.get("source_date", "") for p in rss), default=today)
+    # HF is a supplementary view. Old curated papers cannot displace new arXiv announcements.
+    rss_ids = {canonical_arxiv_id(p["arxiv_id"]) for p in rss}
+    fresh = [p for p in current if p.get("listing_date") == listing_date or
+             (arxiv_source == "rss" and p["arxiv_id"] in rss_ids)]
+    batch_id = fingerprint([listing_date, sorted(p["arxiv_id"] for p in fresh)])[:24]
+    delivery = profile.get("delivery", {})
+    if not rss:
+        if not delivery.get("batch_id"):
+            raise RuntimeError("arXiv unavailable and no published issue to preserve")
+        batch_id = delivery["batch_id"]
+    blocked = set(profile.get("recommended_papers", {})) | set(profile.get("read_papers", {})) | set(profile.get("dismissed_papers", {}))
+    if delivery.get("batch_id") == batch_id:
+        # Refresh metadata of an existing issue; never generate a second issue from the same batch.
+        selected = [{**p, "affiliations": by_id.get(p["arxiv_id"], p).get("affiliations", []),
+                     "user_actions": by_id.get(p["arxiv_id"], p).get("user_actions", []),
+                     "affiliation_status": by_id.get(p["arxiv_id"], p).get("affiliation_status", "pending")}
+                    for p in delivery.get("papers", []) if p["arxiv_id"] not in profile.get("dismissed_papers", {})]
+        diagnostics = {**delivery.get("ranking", {}), "reused_batch": True}
+    else:
+        eligible = [p for p in fresh if p["arxiv_id"] not in blocked]
+        ranked = rank_personalized(eligible, profile, fetch_zotero_items(), diagnostics)
+        selected = select_personalized(ranked, MAX_PAPER_NUM, int(os.environ.get("EXPLORATION_PAPER_COUNT") or 10))
+    exploration = [p for p in selected if p.get("recommendation_group") == "exploration"]
+    followed = [{**p, "source": "followed"} for p in candidates if any(follow_signals(p, profile["subscriptions"]))]
+    profile_version = fingerprint([interests, suppressed, weights, profile.get("positive_examples", {}), profile["subscriptions"]])[:16]
+    if diagnostics.get("reused_batch"):
+        profile_version = delivery.get("profile_version") or profile_version
     run_id = "daily-" + fingerprint([today, profile_version, selected, candidates])[:24]
     result = output_result(selected, followed, hf, candidate_papers=candidates, metadata={
-        "run_id": run_id, "profile_version": profile_version, "top_keywords": interests,
+        "run_id": run_id, "batch_id": batch_id, "profile_version": profile_version, "top_keywords": interests,
         "exploration_keywords": sorted({k for p in exploration for k in p.get("keywords", []) if k not in interests}),
-        "subscriptions": {"followed_authors": get_followed_authors(), "followed_institutions": get_followed_institutions()},
+        "subscriptions": profile["subscriptions"],
         "pipeline_status": {"arxiv": "ok" if rss else "empty_or_unavailable", "hf": "ok" if hf else "empty_or_unavailable",
             "arxiv_source": arxiv_source, "arxiv_listing_date": max((p.get("listing_date", "") for p in rss), default=""),
             "source_errors": source_errors,
@@ -124,6 +126,4 @@ def generate():
         "coverage": {"from": min(p["source_date"] for p in candidates), "to": today, "categories": ARXIV_QUERY},
     })
     write_json(cache_dir / "candidates.json", candidates)
-    seen.update({p["arxiv_id"]: today for p in selected})
-    write_json(cache_dir / "recommended.json", {key: date for key, date in seen.items() if date >= cutoff})
     return result

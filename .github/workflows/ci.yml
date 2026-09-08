@@ -13,6 +13,15 @@ on:
       - main
 
 jobs:
+  feedback-worker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.0
+      - uses: actions/setup-node@v7.0.0
+        with:
+          node-version: "24"
+      - run: npm ci && npm run typecheck && npm test
+        working-directory: cloudflare/feedback-worker
   frontend:
     runs-on: ubuntu-latest
     steps:

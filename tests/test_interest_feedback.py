@@ -74,7 +74,8 @@ def test_not_interested_feedback_creates_a_separate_negative_profile(tmp_path):
 
     assert len(applied) == 1
     assert applied[0]["action"] == "not_interested"
-    assert profile.suppressed_keywords()[:2] == ["diffusion model", "video generation"]
+    assert profile.suppressed_keywords() == []
+    assert "diffusion model" in profile.data["negative_evidence"]
     assert "diffusion model" not in profile.top_keywords()
 
 
@@ -102,7 +103,8 @@ def test_cloudflare_feedback_uses_embedded_pages_paper_when_last_run_is_absent(t
     assert len(applied) == 1
     assert applied[0]["feedback_key"] == "cloudflare:42"
     assert applied[0]["source"] == "cloudflare"
-    assert profile.suppressed_keywords()[:2] == ["diffusion model", "video generation"]
+    assert profile.suppressed_keywords() == []
+    assert "diffusion model" in profile.data["negative_evidence"]
     assert profile.feedback_key(event) == "cloudflare:42"
 
 

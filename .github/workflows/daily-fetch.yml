@@ -28,6 +28,8 @@ concurrency:
 
 jobs:
   fetch-and-deploy:
+    outputs:
+      new_issue: ${{ steps.generate.outputs.new_issue }}
     runs-on: ubuntu-latest
     timeout-minutes: 45
     env:
@@ -67,6 +69,7 @@ jobs:
           restore-keys: paper-cache-v1-${{ github.ref_name }}-
 
       - name: Sync feedback and generate one snapshot
+        id: generate
         env:
           ZOTERO_ID: ${{ secrets.ZOTERO_ID }}
           ZOTERO_KEY: ${{ secrets.ZOTERO_KEY }}
@@ -80,7 +83,9 @@ jobs:
           AFFILIATION_MAX_LLM_PAPERS: ${{ vars.AFFILIATION_MAX_LLM_PAPERS }}
           HF_FALLBACK_DAYS: ${{ vars.HF_FALLBACK_DAYS }}
           AFFILIATION_BUDGET_SECONDS: ${{ (github.event.schedule == '5 20 * * 0-4' || inputs.quick == true) && '0' || vars.AFFILIATION_BUDGET_SECONDS || '900' }}
-        run: python -m zotero_arxiv_daily.daily
+        run: |
+          python -m zotero_arxiv_daily.delivery_state --recover
+          python -m zotero_arxiv_daily.daily
 
       - name: Persist feedback and run history
         run: |
@@ -137,9 +142,20 @@ jobs:
         id: deploy
         uses: actions/deploy-pages@v5.0.0
 
+      - name: Persist successfully published paper IDs
+        run: |
+          python -m zotero_arxiv_daily.delivery_state
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/interest_profile.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Record published recommendation IDs"
+            git push
+          fi
+
   send-email:
     needs: fetch-and-deploy
-    if: github.event.schedule != '10 0 * * 1-5'
+    if: github.event.schedule != '10 0 * * 1-5' && needs.fetch-and-deploy.outputs.new_issue == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:

@@ -12,6 +12,7 @@ from loguru import logger
 from .feedback import make_paper_id
 from .keyword_extractor import normalize_keyword, normalize_keywords
 from .protocol import CorpusPaper, Paper
+from .recommendation import canonical_arxiv_id
 
 
 DEFAULT_KEYWORDS = ["world model", "unified model", "generation model"]
@@ -77,6 +78,9 @@ class InterestProfile:
             if data["last_run"].get("run_id"):
                 data["runs"].setdefault(data["last_run"]["run_id"], data["last_run"])
             self._ensure_default_keywords(data)
+            if "positive_examples" not in data:
+                data["positive_examples"] = {canonical_arxiv_id(event["paper_id"]): {"title": event.get("paper_title", ""), "abstract": ""}
+                    for event in data["feedback_history"] if event.get("action") in {"like", "interested", "bookmark"} and event.get("paper_id")}
             return data
 
         data = {
@@ -176,7 +180,7 @@ class InterestProfile:
             if feedback_key in processed:
                 continue
 
-            paper_id = str(item.get("paper_id"))
+            paper_id = canonical_arxiv_id(item.get("paper_id", ""))
             run_id = item.get("run_id")
             run = self.data.get("runs", {}).get(run_id, {})
             if not run and self.data.get("last_run", {}).get("run_id") == run_id:
@@ -191,19 +195,53 @@ class InterestProfile:
                 continue
 
             action = item.get("action")
-            if action not in {"like", "interested", "not_interested"}:
+            if action not in {"like", "interested", "not_interested", "dismiss", "read", "bookmark"}:
                 continue
             processed.add(feedback_key)
             keywords = normalize_keywords(paper.get("keywords", []) + paper.get("matched_keywords", []))
             if not keywords:
                 keywords = normalize_keywords(_title_phrases(paper.get("title", "")))
 
+            actions = self.data.setdefault("paper_actions", {})
+            action_key = paper_id + ":" + action
+            prior_action = action_key in actions
+            preferences = self.data.setdefault("paper_preferences", {})
+            if prior_action and (action in {"read", "bookmark"} or preferences.get(paper_id) == action):
+                # Different publication runs/client retries are not additional votes.
+                applied.append({"feedback_key": feedback_key, "paper_id": paper_id, "action": action, "duplicate": True})
+                continue
+            actions[action_key] = now.isoformat()
+            if action not in {"read", "bookmark"}:
+                preferences[paper_id] = action
+            if action in {"dismiss", "not_interested"}:
+                self.data.setdefault("dismissed_papers", {})[paper_id] = now.isoformat()
+                self.data.setdefault("positive_examples", {}).pop(paper_id, None)
+            if action == "read":
+                self.data.setdefault("read_papers", {})[paper_id] = now.isoformat()
+            if action == "bookmark":
+                self.data.setdefault("bookmarked_papers", {})[paper_id] = now.isoformat()
             if action == "not_interested":
-                for index, keyword in enumerate(keywords):
-                    increment = self.not_interested_weight / (1.0 + index * 0.35)
-                    negative_scores[keyword] = negative_scores.get(keyword, 0.0) + increment
-            else:
-                weight = self.liked_weight if action == "like" else self.interested_weight
+                self.data.setdefault("negative_examples", {})[paper_id] = {key: paper.get(key, "") for key in ("title", "abstract")}
+                # A paper-level dislike is not proof that its whole field is unwanted.
+                # Require agreement across at least two distinct papers before a
+                # theme enters the negative profile; repeated clicks never count.
+                votes = self.data.setdefault("negative_evidence", {})
+                for index, keyword in enumerate(keywords[:3]):
+                    ids = votes.setdefault(keyword, [])
+                    if paper_id not in ids: ids.append(paper_id)
+                    if len(ids) >= 2:
+                        increment = self.not_interested_weight / (1.0 + index * 0.35)
+                        negative_scores[keyword] = negative_scores.get(keyword, 0.0) + increment
+            elif action in {"like", "interested", "bookmark"}:
+                self.data.setdefault("positive_examples", {})[paper_id] = {
+                    key: paper.get(key, "") for key in ("title", "abstract")}
+                self.data.setdefault("dismissed_papers", {}).pop(paper_id, None)
+                self.data.setdefault("negative_examples", {}).pop(paper_id, None)
+                for term, ids in self.data.setdefault("negative_evidence", {}).items():
+                    if paper_id in ids:
+                        ids.remove(paper_id)
+                        if len(ids) < 2: negative_scores.pop(term, None)
+                weight = 0 if prior_action else (self.liked_weight if action == "like" else self.interested_weight)
                 for index, keyword in enumerate(keywords):
                     increment = weight / (1.0 + index * 0.35)
                     scores[keyword] = scores.get(keyword, 0.0) + increment
