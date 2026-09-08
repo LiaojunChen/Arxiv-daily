@@ -15957,8 +15957,8 @@
   },
   "delivery": {
     "batch_id": "de8c3688124c0e14da0d5658",
-    "run_id": "daily-32c66e541681018ff9ba38e3",
-    "updated_at": "2026-09-08T06:41:40+00:00",
+    "run_id": "daily-079cbcda3436ce4c9ae7afac",
+    "updated_at": "2026-09-08T08:01:50+00:00",
     "profile_version": "f5ab0ac21fe4dc21",
     "papers": [
       {
@@ -16021,7 +16021,8 @@
         ],
         "suppressed_keywords": [],
         "recommendation_reason": "Matches your interests: unified model; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.05415",
@@ -16084,7 +16085,8 @@
         ],
         "suppressed_keywords": [],
         "recommendation_reason": "Matches your interests: unified model; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.04894",
@@ -16125,7 +16127,8 @@
         ],
         "suppressed_keywords": [],
         "recommendation_reason": "Matches your interests: world model; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.04911",
@@ -16182,7 +16185,8 @@
         ],
         "suppressed_keywords": [],
         "recommendation_reason": "Matches your interests: world model; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.04528",
@@ -16225,7 +16229,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.05097",
@@ -16265,7 +16270,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.04283",
@@ -16327,7 +16333,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.04476",
@@ -16372,7 +16379,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.05295",
@@ -16410,7 +16418,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.04377",
@@ -16447,7 +16456,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.04699",
@@ -16492,7 +16502,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.04837",
@@ -16540,7 +16551,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.05016",
@@ -16585,7 +16597,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.04726",
@@ -16635,7 +16648,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.04409",
@@ -16676,7 +16690,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.05251",
@@ -16724,7 +16739,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.04809",
@@ -16765,7 +16781,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.03693",
@@ -16806,7 +16823,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.04693",
@@ -16850,7 +16868,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.04570",
@@ -16889,7 +16908,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.05111",
@@ -16930,7 +16950,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.04356",
@@ -16970,7 +16991,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.04390",
@@ -17022,7 +17044,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.04840",
@@ -17065,7 +17088,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.04579",
@@ -17118,7 +17142,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.04711",
@@ -17159,7 +17184,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.05351",
@@ -17204,7 +17230,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.04866",
@@ -17248,7 +17275,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.05232",
@@ -17284,7 +17312,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.05404",
@@ -17321,7 +17350,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.05088",
@@ -17366,7 +17396,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.04689",
@@ -17414,7 +17445,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.05400",
@@ -17452,7 +17484,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.04435",
@@ -17492,7 +17525,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.04747",
@@ -17538,7 +17572,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.05157",
@@ -17579,7 +17614,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.04678",
@@ -17618,7 +17654,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.04792",
@@ -17657,7 +17694,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.04325",
@@ -17703,7 +17741,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.05182",
@@ -17744,7 +17783,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "primary"
+        "recommendation_group": "primary",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.04249",
@@ -17797,7 +17837,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "exploration"
+        "recommendation_group": "exploration",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.04804",
@@ -17837,7 +17878,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "exploration"
+        "recommendation_group": "exploration",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.04646",
@@ -17886,7 +17928,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "exploration"
+        "recommendation_group": "exploration",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.04484",
@@ -17925,7 +17968,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "exploration"
+        "recommendation_group": "exploration",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.04921",
@@ -17983,7 +18027,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "exploration"
+        "recommendation_group": "exploration",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.04779",
@@ -18025,7 +18070,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "exploration"
+        "recommendation_group": "exploration",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.05241",
@@ -18069,7 +18115,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "exploration"
+        "recommendation_group": "exploration",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.05399",
@@ -18125,7 +18172,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "exploration"
+        "recommendation_group": "exploration",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.04442",
@@ -18164,7 +18212,8 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "exploration"
+        "recommendation_group": "exploration",
+        "user_actions": []
       },
       {
         "arxiv_id": "2609.04871",
@@ -18207,13 +18256,15 @@
         "matched_keywords": [],
         "suppressed_keywords": [],
         "recommendation_reason": "Relevant to your current interest profile; selected to keep this issue diverse",
-        "recommendation_group": "exploration"
+        "recommendation_group": "exploration",
+        "user_actions": []
       }
     ],
     "ranking": {
       "scorer": "Qwen/Qwen3-Reranker-0.6B",
       "degraded": false,
-      "failed_batches": 0
+      "failed_batches": 0,
+      "reused_batch": true
     }
   },
   "positive_examples": {
