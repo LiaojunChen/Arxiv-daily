@@ -20,7 +20,7 @@ llm:
 
 source:
   arxiv:
-    category: ["cs.AI","cs.LG","cs.CV","cs.CL","stat.ML"]
+    category: ["cs.AI","cs.LG","cs.CV","cs.CL","stat.ML","cs.RO"]
     include_cross_list: false
 
 reranker:
