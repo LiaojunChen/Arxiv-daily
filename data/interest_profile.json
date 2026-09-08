@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-06-02T00:00:00Z",
+  "updated_at": "2026-09-08T06:23:18+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -19,5 +19,3585 @@
   "negative_keywords": [],
   "processed_feedback": [],
   "feedback_history": [],
-  "last_run": {}
+  "last_run": {},
+  "runs": {
+    "daily-09fc5c6b7bee25a9669d7e23": {
+      "run_id": "daily-09fc5c6b7bee25a9669d7e23",
+      "generated_at": "2026-09-08T06:23:18+00:00",
+      "papers": {
+        "2609.02998": {
+          "title": "Verify Before You Distill: Prompt-Level Teacher Gating for On-Policy Distillation",
+          "keywords": [
+            "on-policy distillation",
+            "tgopd",
+            "vanilla opd",
+            "teacher",
+            "achieves higher seven-benchmark",
+            "agreement but do"
+          ],
+          "matched_keywords": []
+        },
+        "2609.03241": {
+          "title": "FlowBalance: Verifier-Grounded Self-Improvement from On-Policy Reasoning Experience",
+          "keywords": [
+            "flowbalance",
+            "rollout group",
+            "trajectory balance",
+            "verifier-grounded self-improvement",
+            "self-guidance",
+            "against false-positive self-guidance"
+          ],
+          "matched_keywords": []
+        },
+        "2609.03254": {
+          "title": "What Else Needs Fixing? Exploring Cost-Effective Test-Time Compute for Revision Propagation in Artifacts Generated Through Conversation",
+          "keywords": [
+            "cost-effective test-time compute",
+            "revision",
+            "artifacts generated through",
+            "artifacts through iterative",
+            "baselines achieve accuracies",
+            "change during revision"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04276": {
+          "title": "FailSAE: Towards Interpretable Failure Prediction for Vision-Language Models via Sparse Autoencoders",
+          "keywords": [
+            "failure prediction",
+            "interpretable failure prediction",
+            "sae latent directions",
+            "class-specific concepts",
+            "failure-aware training",
+            "sparse autoencoders"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04281": {
+          "title": "When Seeing Overrides Knowing: Visual Dominance and Deferral-Based Method for Personalized Safety in VLMs",
+          "keywords": [
+            "personalized safety",
+            "visual dominance",
+            "almost always respond",
+            "altered text representation",
+            "always respond directly",
+            "analyze multimodal interactions"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04282": {
+          "title": "Step Back to Move Forward: Reflection-Aware Preference Optimization for Visual Generation",
+          "keywords": [
+            "visual generation",
+            "preference alignment",
+            "advanced multimedia content",
+            "backward reflection during",
+            "content synthesis especially",
+            "counterfactual path synthesis"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04283": {
+          "title": "Joint Alignment and Distillation for Video Generation via Sample-Guided Distribution Matching",
+          "keywords": [
+            "applying rl",
+            "gradient direction",
+            "distribution matching",
+            "distillation",
+            "aligning video generative",
+            "alignment consistently outperforming"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04325": {
+          "title": "The microscope is the mask: privileged views and labels from a cryo-ET forward model",
+          "keywords": [
+            "paired views",
+            "protein",
+            "augmented paired views",
+            "benchmark dataset containing",
+            "carnival outperforms state-of-the-art",
+            "containing multiple protein"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04348": {
+          "title": "Object Concepts Emerge from Motion",
+          "keywords": [
+            "visual pretraining",
+            "annotations nor camera",
+            "biologically inspired framework",
+            "but existing visual",
+            "capture semantic categories",
+            "clustering produce pseudo-instance"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04369": {
+          "title": "AdaptVPR: Route-Aware Hard Positive Generation for Robust Visual Place Recognition",
+          "keywords": [
+            "same-place hard positives",
+            "visual place recognition",
+            "appearance diversity",
+            "local occlusion",
+            "domain shifts",
+            "adaptvpr"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04381": {
+          "title": "Where Appearance Fails, Geometry Recognizes: A CAD-Free 3D Shape Prior That Complements Vision Foundation Models",
+          "keywords": [
+            "industrial parts",
+            "shape prior",
+            "cad",
+            "dgs",
+            "t-less",
+            "appearance fails geometry"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04383": {
+          "title": "What Moves? Localized Motion Representations for Compositional Scene Control",
+          "keywords": [
+            "localized motion",
+            "masking features",
+            "beyond generative control",
+            "capturing localized motion",
+            "compositional scene control",
+            "conditions motion encoding"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04392": {
+          "title": "FAVE: Foveated Adaptive Visual Encoding for Efficient Fine-Grained Visual Understanding",
+          "keywords": [
+            "adaptive visual encoding",
+            "fine-grained visual understanding",
+            "foveated adaptive visual",
+            "fave",
+            "fave improves",
+            "local tokens"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04438": {
+          "title": "ICM-Bench: Person-Level Identity Reasoning in Multimodal Agents with Long-Term Memory",
+          "keywords": [
+            "multimodal agents",
+            "recurring",
+            "accumulated around stable",
+            "agents should remember",
+            "around stable person",
+            "baselines memory-augmented agents"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04439": {
+          "title": "Segmentation of the aorta in 4D flow MRI using 4D convolutional kernels and learning from sparse annotations",
+          "keywords": [
+            "aortic segmentation",
+            "dense annotations",
+            "expert contours",
+            "semi-automatic references",
+            "set scans",
+            "flow mri"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04454": {
+          "title": "Topology-Aware Training and Spatial Diagnostics for Fiber Bundle Segmentation in Tracer Histology",
+          "keywords": [
+            "fiber bundle segmentation",
+            "bce-dice",
+            "betti matching",
+            "tracer histology",
+            "segmentation methods",
+            "dice"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04550": {
+          "title": "VISTA: Dense Multi-Label Classroom Coding with Vision-Language Models",
+          "keywords": [
+            "copus",
+            "vista",
+            "audio-partial observability fine-grained",
+            "benchmark tooling prompts",
+            "binary vector every",
+            "characterize three systematic"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04555": {
+          "title": "DART: Depth-as-Target Pretraining for Surgical Vision Foundation Models",
+          "keywords": [
+            "dart",
+            "scene geometry",
+            "surgery where",
+            "pretraining",
+            "vision foundation",
+            "depth"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04590": {
+          "title": "Dual-Part Multi-Lateral Branched Network for Multi-Class Segmentation in Cardiovascular Catheterization Angiograms",
+          "keywords": [
+            "dual-part mlbnet architecture",
+            "cardiovascular catheterization",
+            "catheterization scenes",
+            "multi-class segmentation",
+            "architecture several multi-class",
+            "binary segmentation there"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04592": {
+          "title": "Hidden In Plain Gaze: Gaze Representations as Privacy Controls for Utility and Re-identification Risk in XR",
+          "keywords": [
+            "gaze",
+            "engineered features",
+            "gaze representations",
+            "raw gaze",
+            "representation choice",
+            "privacy"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04603": {
+          "title": "An Evaluation Framework for Generating Multi-View Images of a Person in a Scene",
+          "keywords": [
+            "camera angle changes",
+            "multi-view datasets",
+            "person",
+            "background often producing",
+            "but still struggle",
+            "camera movements around"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04646": {
+          "title": "Importance-Aware Low-Rank Distillation of Diffusion Transformers",
+          "keywords": [
+            "original parameter",
+            "truncated svd",
+            "diffusion transformers",
+            "parameter budget",
+            "svdtrunc",
+            "benchmarks geneval hpsv2"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04649": {
+          "title": "ReaDiT Guidance: Control for Image and Video Generation using Diffusion Transformer Features",
+          "keywords": [
+            "readit guidance",
+            "dit",
+            "diffusion transformer",
+            "video generation",
+            "adapter-based approaches while",
+            "approaches while requiring"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04689": {
+          "title": "Retinal OCTA Phenotyping with LLM Reporting for Alzheimer's Disease",
+          "keywords": [
+            "diagnostic labels",
+            "llm reporting",
+            "vascular complex",
+            "alzheimer disease",
+            "octa",
+            "phenotyping"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04690": {
+          "title": "Enhancing Multimodal Emotion Recognition via Multi-Feature Encoding and Attention-Based Fusion",
+          "keywords": [
+            "multimodal emotion recognition",
+            "attention-based fusion strategy",
+            "adaptively weigh contributions",
+            "capture temporal dependencies",
+            "captures diverse emotional",
+            "combines deep residual"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04698": {
+          "title": "LookThere! Sparse Vision by Reinforced Selection",
+          "keywords": [
+            "lookthere",
+            "adaptive computation",
+            "adaptive computation methods",
+            "ade20k segmentation zero-shot",
+            "classification local recognition",
+            "computation methods accelerate"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04709": {
+          "title": "AngelFingerprint: A Traceable, Explainable, and White-Box Stealthy Watermark for Text-Guided Image Editing",
+          "keywords": [
+            "white-box",
+            "white-box access",
+            "achieves top-1 accuracy",
+            "angelfingerprint novel watermarking",
+            "cannot explain what",
+            "carry fixed id"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04716": {
+          "title": "Counting Beyond Instances: A Benchmark for Group-Individual Object Counting",
+          "keywords": [
+            "counting beyond instances",
+            "group-individual object counting",
+            "containment relations",
+            "semantic groups",
+            "bunchcount",
+            "ability establishing strong"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04718": {
+          "title": "HiSfM: Disambiguating Structure-from-Motion via Scaffold-Anchored Hierarchical Reconstruction",
+          "keywords": [
+            "hisfm",
+            "absorb remaining images",
+            "aggressive sparsification methods",
+            "ambiguity-induced failures while",
+            "coarse-to-fine sfm framework",
+            "compact yet strong"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04726": {
+          "title": "Bridging Modalities and Tasks: A Unified Hierarchical ViT for SAR-to-Optical Translation and Semantic Segmentation",
+          "keywords": [
+            "semantic segmentation",
+            "bridging modalities",
+            "translation",
+            "s2o",
+            "achieves competitive s2o",
+            "all-weather day-and-night observation"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04741": {
+          "title": "Where to Look Matters: Learning Influential Views for VLM-based 3D Visual Grounding",
+          "keywords": [
+            "reasoning vlm through",
+            "vlm-based visual grounding",
+            "influential views",
+            "consistently improves grounding",
+            "effective visual grounding",
+            "existing zero-shot pipelines"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04751": {
+          "title": "SeamFlow: Structure-Aware Flow Matching on Edge Probabilities for Artist-Like UV Unwrapping",
+          "keywords": [
+            "semantic coherence",
+            "seamflow",
+            "autoregressive generative",
+            "parameterization distortion",
+            "surface cutting",
+            "uv unwrapping"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04775": {
+          "title": "LUMIN: Lightweight Universal Manufacturing Inspection Network for Anomaly Detection",
+          "keywords": [
+            "backbone forward passes",
+            "lightweight universal manufacturing",
+            "manufacturing inspection network",
+            "universal manufacturing inspection",
+            "memory bank",
+            "psp"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04781": {
+          "title": "CoMLP: Cooperatively-Gated MLPs for Fine-Grained Cross-Modal Information Fusion in Medical Image Segmentation",
+          "keywords": [
+            "cross-modal information fusion",
+            "fine-grained cross-modal information",
+            "medical image segmentation",
+            "comlp",
+            "clinical reports",
+            "cross-modal dependencies"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04784": {
+          "title": "CLON: Cue-Calibrated Linguistic Object Onboarding for Zero-Shot 6D Pose Front-Ends",
+          "keywords": [
+            "cue-calibrated linguistic object",
+            "linguistic object onboarding",
+            "onboarded object set",
+            "clon",
+            "cue weights",
+            "downstream pose"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04791": {
+          "title": "An Attention-Guided Global and Local Fusion Framework for Lesion-Focused Image Classification",
+          "keywords": [
+            "lesion-focused image classification",
+            "adaptive fusion",
+            "fusion branch",
+            "guava leaf",
+            "skin lesion",
+            "attention-guided"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04800": {
+          "title": "Intrinsic Temporal Adaptation of CLIP for Partially Relevant Video Retrieval",
+          "keywords": [
+            "intrinsic temporal adaptation",
+            "partially relevant video",
+            "relevant video retrieval",
+            "prvr",
+            "frame-level evidence",
+            "clip"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04802": {
+          "title": "Linguistic Trajectory Encoding for Efficient Long-Horizon Spatial Memory in Embodied Agents",
+          "keywords": [
+            "linguistic trajectory encoding",
+            "long-horizon object retrieval",
+            "semantic trajectory retrieval",
+            "spatial memory",
+            "embodied agents",
+            "lte"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04827": {
+          "title": "Weather-Conditioned Depth Anything",
+          "keywords": [
+            "depth anything",
+            "fog rain snow",
+            "weather-conditioned depth anything",
+            "depth estimation",
+            "weather",
+            "achieved remarkable performance"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04837": {
+          "title": "PAPT++: Risk-Aware Adversarial Tuning and Generation for Single Domain Generalization",
+          "keywords": [
+            "single domain generalization",
+            "generated samples",
+            "papt",
+            "current classifier",
+            "risk-aware adversarial",
+            "sdg"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04846": {
+          "title": "LetOccVote: Learning Weakly Supervised 3D Occupancy through Consensus",
+          "keywords": [
+            "weakly supervised occupancy",
+            "pseudo-label supervision",
+            "semantic supervision",
+            "letoccvote",
+            "aggregates pseudo-semantic observations",
+            "assessing pseudo-label reliability"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04860": {
+          "title": "Mitigating Performance Discrepancy in Cross-Domain 3D Class-Incremental Learning",
+          "keywords": [
+            "performance discrepancy",
+            "adapt wide range",
+            "autonomous driving robotics",
+            "available upon acceptance",
+            "beyond catastrophic forgetting",
+            "cad domain but"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04886": {
+          "title": "SimFuse3D: Source-Guided Target Simulation and Confidence-Guided Multi-Stage Localization Reweighting for Cross-Platform 3D Object Detection",
+          "keywords": [
+            "compared adaptation methods",
+            "confidence-guided multi-stage localization",
+            "labeled source scans",
+            "multi-stage localization reweighting",
+            "ranks first among",
+            "target location"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04902": {
+          "title": "Sound-based Multi-Person 3D Pose Estimation",
+          "keywords": [
+            "multi-person pose",
+            "acoustic",
+            "acoustic signals",
+            "acoustic signatures",
+            "sound-based multi-person",
+            "poses"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04903": {
+          "title": "InterSing: Explicit Interaction Dynamics for 3D Duet Singing Animation and Beyond",
+          "keywords": [
+            "duet",
+            "singing",
+            "duet singing",
+            "head animations",
+            "interaction dynamics",
+            "performers engage"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04906": {
+          "title": "Methane Detection On Board Satellites from Unorthorectified Imagery",
+          "keywords": [
+            "unorthorectified hyperspectral imagery",
+            "conventional detection methods",
+            "correct geometric distortions",
+            "detection methods rely",
+            "effective mitigation relies",
+            "enhance plume signals"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04911": {
+          "title": "TourPhysics: Bringing Physics to World Models for Exploration and Manipulation from a Single Image",
+          "keywords": [
+            "tourphysics",
+            "simulator",
+            "appearance memory",
+            "generator controls",
+            "simulator geometry",
+            "single image"
+          ],
+          "matched_keywords": [
+            "world model"
+          ]
+        },
+        "2609.04921": {
+          "title": "One Diffusion Model, Two Roles: Guided Trajectory Planning and Safety-Critical Scenario Generation in Closed-Loop Simulation",
+          "keywords": [
+            "planner",
+            "closed-loop",
+            "safety-critical",
+            "achieves stronger nominal",
+            "aggressive cut-ins lead-vehicle",
+            "annealing posterior sampling"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04939": {
+          "title": "LensStyle: Learning the Optical Aesthetics for Controllable Stylized Lens Effect Rendering",
+          "keywords": [
+            "lens effect rendering",
+            "controllable stylized lens",
+            "existing lens effect",
+            "stylized lens effect",
+            "large apertures",
+            "optical"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04942": {
+          "title": "Learning 3D Editing without Paired Supervision via Generative Prior Distillation",
+          "keywords": [
+            "generative prior distillation",
+            "paired supervision",
+            "editing",
+            "achieves superior instruction",
+            "consistency significantly outperforming",
+            "content creation yet"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04947": {
+          "title": "MCPO: Modality-Contrastive Preference Optimization for Multimodal Chain-of-Thought Compression",
+          "keywords": [
+            "modality-contrastive preference optimization",
+            "achieve domain-adaptive initialization",
+            "achieving stable cross-modal",
+            "adopts highly nonlinear",
+            "alignment paradigms mainly",
+            "applying scaled flat-gradient"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04948": {
+          "title": "VICAL: Vicinal Consistency Alignment for Long-Tailed Visual Recognition",
+          "keywords": [
+            "deep ensemble distillation",
+            "vical",
+            "expert diversity",
+            "long-tailed",
+            "al ignment framework",
+            "better ensemble accuracy"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04958": {
+          "title": "MINT: A Unified Model for World-Space Camera and Hand Motion Estimation from Scalable Egocentric Pipeline Supervision",
+          "keywords": [
+            "hand motion",
+            "mint",
+            "world-space",
+            "egocentric",
+            "labeling pipeline",
+            "world-space camera"
+          ],
+          "matched_keywords": [
+            "unified model"
+          ]
+        },
+        "2609.04965": {
+          "title": "ARC-Loc: Leveraging Azimuthal Ray Convergence as a Geometric Cue for Direct Cross-View Localization",
+          "keywords": [
+            "external depth foundation",
+            "azimuthal ray convergence",
+            "bev transformations",
+            "cross-view localization",
+            "ground image",
+            "satellite image"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04976": {
+          "title": "RefDiT: Local Attribute Guidance in Reference-Based Image Generation",
+          "keywords": [
+            "reference image",
+            "refdit",
+            "global style",
+            "identifier token",
+            "image generation",
+            "guidance"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04984": {
+          "title": "Temporal Residual Neural Radiance Fields for Monocular Video Dynamic Human Body Reconstruction",
+          "keywords": [
+            "neural radiance fields",
+            "residual neural radiance",
+            "temporal residual neural",
+            "dynamic scene",
+            "human body",
+            "accelerates rendering thereby"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05028": {
+          "title": "Compositional Reward Models for Conditional Medical Image Generation",
+          "keywords": [
+            "conditional medical image",
+            "medical image generation",
+            "compositional reward",
+            "fine",
+            "prism",
+            "accrued preventing easier"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05038": {
+          "title": "PuTR-CouT: Counting-by-Tracking in Camera-Trap Image Sequences",
+          "keywords": [
+            "camera trap images",
+            "putr-cout",
+            "counting",
+            "been widely studied",
+            "but key ecological",
+            "camera-trap image sequences"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05049": {
+          "title": "Efficient Multi-Timescale Event Representations for Feed-Forward Object Detection",
+          "keywords": [
+            "temporal information",
+            "object detection",
+            "event representations",
+            "accumulate sparse temporal",
+            "autonomous systems require",
+            "b-spline temporal encoding"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05066": {
+          "title": "Adaptive Multi-Granularity Temporal Modeling for Weakly Supervised Video Anomaly Detection",
+          "keywords": [
+            "supervised video anomaly",
+            "video anomaly detection",
+            "weakly supervised video",
+            "temporal modeling",
+            "wsvad",
+            "adaptive event segmentation"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05070": {
+          "title": "MultiAttenGastro: Multi-Dimensional Attention Augmentation for Gastrointestinal Endoscopy Classification",
+          "keywords": [
+            "gi endoscopy classification",
+            "multiattengastro",
+            "gaps coincides",
+            "multi-dimensional attention",
+            "attention helps gi",
+            "automated gastrointestinal gi"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05091": {
+          "title": "Training-Free Logical and Structural Anomaly Detection via Calibrated Fusion",
+          "keywords": [
+            "anomaly detection",
+            "structural anomalies",
+            "object count",
+            "logical",
+            "training-free",
+            "achieves image-level aurocs"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05114": {
+          "title": "VoxelFix: Post-Hoc Semantic Correction of Completed 3D Voxel Maps",
+          "keywords": [
+            "post-hoc semantic correction",
+            "occufly maps",
+            "completed",
+            "aerial scene further",
+            "annotated occufly maps",
+            "apply non-learned local"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05171": {
+          "title": "WeAgent-MMGenEdit: A Full-Stack Recipe for Multimodal Agentic Image Generation and Editing",
+          "keywords": [
+            "image generation",
+            "agent policy",
+            "full-stack recipe",
+            "image backend",
+            "yet remain",
+            "weagent-mmgenedit"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05174": {
+          "title": "SMILE: Self-Explainable Multimodal Information Bottleneck for Medical Diagnosis",
+          "keywords": [
+            "medical diagnosis",
+            "self-explainable multimodal",
+            "information bottleneck",
+            "explainability",
+            "absolute accuracy improvement",
+            "achieves strong diagnostic"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05182": {
+          "title": "Conserved Immune Topology Improves Pathology Foundation Model Generalization for Cross-Cancer MSI-H Prediction",
+          "keywords": [
+            "conserved immune topology",
+            "cross-cancer msi-h prediction",
+            "pathology foundation",
+            "cross-cancer generalization",
+            "foundation-model embeddings",
+            "cit"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05210": {
+          "title": "BLASt3R: Bundle Adjustment of Any Image Set with Multi-View Matching and Monocular Priors",
+          "keywords": [
+            "bundle adjustment",
+            "monocular priors",
+            "vslam",
+            "any image set",
+            "applications like visual",
+            "best performing methods"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05224": {
+          "title": "First Things First: Teaching LLM-Based Agents to Prioritize Must-Haves before Nice-to-Haves",
+          "keywords": [
+            "must-have requirements",
+            "first things first",
+            "mllms",
+            "reasoning tasks",
+            "agent should abstain",
+            "candidate solution satisfies"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05234": {
+          "title": "Measured Sliders: Learning Continuous Controls from Differentiable Image Measurements",
+          "keywords": [
+            "differentiable image measurements",
+            "sliders",
+            "continuous controls",
+            "measured sliders",
+            "observability test",
+            "achieves average selectivity"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05239": {
+          "title": "Cross-Domain Tracker Adaptation Without Target-Domain Labels via Vision-Language Agents",
+          "keywords": [
+            "target-domain labels",
+            "adapting detect-to-track pipeline",
+            "against annotated metrics",
+            "any target-domain labels",
+            "applying source-derived oracle",
+            "clear failure mode"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05242": {
+          "title": "Few-Shot Video Recognition via Hierarchical Metric Learning",
+          "keywords": [
+            "cross-frame global spatial",
+            "few-shot action recognition",
+            "hierarchical metric",
+            "class prototypes",
+            "hml-fsar",
+            "action recognition fsar"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05255": {
+          "title": "Compact Neural Appearance Models for Efficient Gaussian Splatting",
+          "keywords": [
+            "sh",
+            "recent spherical",
+            "reconstruction quality",
+            "gaussian splatting",
+            "per-primitive",
+            "appearance"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05303": {
+          "title": "Learning Spatial-Spectral Refinement and Calibrating Complementary Observations for Hyperspectral Image Super-Resolution",
+          "keywords": [
+            "hyperspectral image",
+            "fine spatial",
+            "multispectral image",
+            "rich spectral",
+            "spatial structures",
+            "tsr-itnr"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05320": {
+          "title": "Adaptive Gated Deepfake Detection for Low-Resolution and Resource-Constrained Environments",
+          "keywords": [
+            "deepfake detection",
+            "adaptive gated deepfake",
+            "gated deepfake detection",
+            "adagate-df",
+            "adagate-df against mad-corn",
+            "adagate-df demonstrated practical"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05323": {
+          "title": "Scalable Detection of Fossil Palynomorphs in Multifocal Digital Microscopy Images",
+          "keywords": [
+            "digital microscopy images",
+            "multifocal digital microscopy",
+            "palynomorph detection",
+            "slide images",
+            "palynomorphs",
+            "automated palynomorph detection"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05334": {
+          "title": "Lightweight Vision Transformer Compression for On-Device Plant Disease Detection in Resource-Constrained Agricultural Field Conditions",
+          "keywords": [
+            "vision transformer compression",
+            "knowledge distillation",
+            "size reduction",
+            "mb",
+            "achieved high classification",
+            "adaptive block pruning"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05351": {
+          "title": "MEOX: Compact Multimodal Mixture-of-Experts for Earth Observation",
+          "keywords": [
+            "earth observation",
+            "accommodate heterogeneous sensors",
+            "accompany single spatial",
+            "adapters explicit validity",
+            "attention supports downstream",
+            "bigearthnet finetuning reaches"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05382": {
+          "title": "Reflection-aware Generative Novel View Synthesis",
+          "keywords": [
+            "generative novel view",
+            "novel view synthesis",
+            "multi-view diffusion",
+            "nvs",
+            "ref-genvs",
+            "mirror"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05388": {
+          "title": "Think-Verify-Revise: Neuro-Symbolic Visual Reasoning with Vision-Language Models and Dynamic Logic Tensor Networks",
+          "keywords": [
+            "dynamic logic tensor",
+            "visual reasoning",
+            "vlm",
+            "achieves auc scores",
+            "apply formal relational",
+            "approaches handle well"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05397": {
+          "title": "CrossDepth: Geometry-Constrained Attention for Generalizable Multi-View Surround Depth Estimation",
+          "keywords": [
+            "multi-view surround",
+            "cross-image",
+            "depth estimation",
+            "adjacent images typically",
+            "broad scene coverage",
+            "calibrated rig setup"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05399": {
+          "title": "From Interpretability Methods to Interpretable Models",
+          "keywords": [
+            "along two complementary",
+            "already within reach",
+            "assembled mature toolbox",
+            "attribution feature visualization",
+            "compare what different",
+            "existing tools let"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05400": {
+          "title": "A Generalizable Feature Extractor for Alzheimer's-Related Brain MRI Tasks",
+          "keywords": [
+            "brain age",
+            "gave",
+            "alzheimer",
+            "experiment",
+            "adaptation lora requiring",
+            "additional trainable parameters"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05415": {
+          "title": "UniMate: One Unified Model to Animate Diverse Skeletons",
+          "keywords": [
+            "unimate",
+            "animate diverse skeletons",
+            "arbitrary kinematic trees",
+            "articulated rigid objects",
+            "automatic rigging now",
+            "avian marine insectoid"
+          ],
+          "matched_keywords": [
+            "unified model"
+          ]
+        },
+        "2609.05416": {
+          "title": "WorldSculpt: Generating Compositional Worlds from Grounded Videos",
+          "keywords": [
+            "densely cluttered scenes",
+            "generating compositional",
+            "hundreds",
+            "adapting strong single-object",
+            "any scene-level training",
+            "approaches typically reconstruct"
+          ],
+          "matched_keywords": []
+        },
+        "2506.04061": {
+          "title": "Collaborative On-Sensor Array Cameras",
+          "keywords": [
+            "array",
+            "broadband imaging",
+            "cameras",
+            "approaches cannot support",
+            "bulky refractive surfaces",
+            "camera performs favorably"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04242": {
+          "title": "Training-Free Speech-Centric Omni Understanding with Frozen VLMs",
+          "keywords": [
+            "speech-centric omni",
+            "speech-centric omni understanding",
+            "native omni",
+            "audio-visual understanding",
+            "omni capability",
+            "tfo"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04249": {
+          "title": "Encore: Infinite Audio-Video Generation with Adaptive Signal Routing",
+          "keywords": [
+            "audio-video generation",
+            "adaptive signal routing",
+            "temporal coherence",
+            "encore",
+            "generation methods",
+            "long audio-video"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04250": {
+          "title": "Motion-Omni: End-to-End Joint Speech and Full-Body Motion for Spoken Dialogue",
+          "keywords": [
+            "spoken dialogue",
+            "motion",
+            "speech",
+            "alignment while retaining",
+            "any joint optimisation",
+            "automatic metrics human"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04253": {
+          "title": "AVENUE: Audio-Video EditiNg Understanding and Evaluation",
+          "keywords": [
+            "av editing",
+            "audio-video editing understanding",
+            "modality-aware evaluation framework",
+            "edit types",
+            "avenue",
+            "audio-video av editing"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04273": {
+          "title": "Scalable Neural Video Representation Compression",
+          "keywords": [
+            "decoding complexity",
+            "bitrate",
+            "complexity scalability",
+            "network layers",
+            "scalable inr-based",
+            "video coding"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04274": {
+          "title": "Multi-scale Image Representation Compression",
+          "keywords": [
+            "overfitted image",
+            "rate-distortion objective",
+            "mirc",
+            "against vvc vtm",
+            "associated quantization parameters",
+            "bd-rate saving against"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04277": {
+          "title": "FailureSpot: Label-Efficient Timestamp-Level Failure Detection for Vision-Language-Action Models",
+          "keywords": [
+            "failure detection",
+            "timestamp-level",
+            "timestamp-level failure",
+            "vla policies",
+            "trajectory-level",
+            "action-derived weak supervision"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04357": {
+          "title": "Cross-modal triage network: a multimodal deep learning framework for severity-based triage and visual explainability in chest radiographs",
+          "keywords": [
+            "triage",
+            "cross-modal triage network",
+            "cmtn",
+            "clinical audit",
+            "severity triage",
+            "multimodal deep"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04365": {
+          "title": "Ultrasound-Based Prediction of Cirrhosis Decompensation Using Large-Scale Computer Vision Models",
+          "keywords": [
+            "large-scale computer vision",
+            "decompensation",
+            "cirrhosis",
+            "ultrasound",
+            "abdominal ultrasound images",
+            "analyze routine abdominal"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04390": {
+          "title": "Development and Evaluation of Ultrasound Image Learning Pipelines for MASLD Risk Stratification",
+          "keywords": [
+            "masld risk stratification",
+            "ultrasound image",
+            "fibrosis",
+            "swe",
+            "fibrosis staging",
+            "metabolic dysfunction-associated"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04411": {
+          "title": "AquaBEV: Monocular Underwater BEV Occupancy with 3D Sonar Supervision",
+          "keywords": [
+            "bev occupancy",
+            "underwater",
+            "aquabev",
+            "sonar",
+            "imaging sonar",
+            "monocular underwater"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04435": {
+          "title": "STEMPix: A Phase-Transition-Material-Based Pixel Sensor for Resolving Edge-Movement Direction",
+          "keywords": [
+            "stempix",
+            "edge-movement direction",
+            "achieves horizontal pitch",
+            "active switching energy",
+            "additional in-array processing",
+            "applications where local"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04500": {
+          "title": "STyMo: Fast and Controllable Few-Shot Motion Style Transfer",
+          "keywords": [
+            "component capturing",
+            "motion styles",
+            "motion style",
+            "automatically prevents artifacts",
+            "but current methods",
+            "cannot generalize beyond"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04501": {
+          "title": "EyeMakeYou: Identity-, Task-, and Subjective-State-Conditioned Diffusion for High-Frequency Gaze Synthesis",
+          "keywords": [
+            "high-frequency gaze synthesis",
+            "eyemakeyou",
+            "achieves higher median",
+            "appear visually realistic",
+            "approaches while retaining",
+            "augmented-reality systems where"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04502": {
+          "title": "Fractional-Order Adaptive Motion Magnification: Phase-Reliability Weighting for Noise-Constrained Video Amplification",
+          "keywords": [
+            "adaptive motion magnification",
+            "fractional-order adaptive motion",
+            "video amplification",
+            "amplification boosts sub-pixel",
+            "applying uniform gain",
+            "band-pass filtering per-pixel"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04512": {
+          "title": "Explainable Multimodal Deep Learning Integrating Imaging and Clinical Data for Oral Potentially Malignant Disorder Detection",
+          "keywords": [
+            "oral potentially malignant",
+            "structured clinical",
+            "explainable multimodal",
+            "opmd detection",
+            "oral cancer",
+            "risk factors"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04545": {
+          "title": "SocioGesture: Real-Time and Adaptive Social Gesture Perception for Human-Robot Interaction",
+          "keywords": [
+            "adaptive social gesture",
+            "social gesture perception",
+            "sociogesture",
+            "human-robot interaction",
+            "achieves strong held-out-subject",
+            "adaptation enabling sociogesture"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04598": {
+          "title": "PetQA: Benchmarking Veterinary Knowledge and Clinical Reasoning",
+          "keywords": [
+            "veterinary",
+            "veterinary knowledge",
+            "petqa",
+            "clinical reasoning",
+            "additionally provide translated",
+            "addressing veterinary clinical"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04645": {
+          "title": "Latent-Aligned Reasoning for Multimodal Recommendation",
+          "keywords": [
+            "first stage",
+            "latent-aligned reasoning",
+            "reasoning framework",
+            "alignment mechanisms within",
+            "chain-of-thought cot reasoning",
+            "challenge persists when"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04705": {
+          "title": "Sustainable Edge Vision via Empirically Calibrated DVFS: Eliminating Thermal Throttling on Passively Cooled Hardware",
+          "keywords": [
+            "passively cooled",
+            "thermal throttling",
+            "empirically calibrated",
+            "cooling",
+            "passive",
+            "absolute temperature bounds"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04747": {
+          "title": "BEAM3R: Beam's-eye-view architecture with Mamba-3 for implicit dose reconstruction",
+          "keywords": [
+            "gamma pass rates",
+            "stratified plan-level maes",
+            "dose",
+            "proton",
+            "photon",
+            "beam s-eye-view"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04807": {
+          "title": "CoLMIN: LLM-based Multi-Decision Path Negotiation for Cooperative Autonomous Driving",
+          "keywords": [
+            "cooperative autonomous driving",
+            "multi-decision path negotiation",
+            "autonomous driving systems",
+            "llm-based multi-decision path",
+            "colmin",
+            "consensus formation"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05140": {
+          "title": "Cross-dataset transportability of pediatric chest X-ray deep learning across three countries: discrimination, calibration, operating-point failure, and limited-label recovery",
+          "keywords": [
+            "bdcxr",
+            "three countries",
+            "auroc",
+            "affected ranking probability",
+            "analyses used fixed",
+            "auroc degradation occurred"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05149": {
+          "title": "From Vision to Language: Investigating Causal Information Flow in Multimodal Decision-Making",
+          "keywords": [
+            "information flow",
+            "visual information",
+            "anchors during multimodal",
+            "applying layer-wise causal",
+            "but understanding whether",
+            "candidate answer options"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05202": {
+          "title": "Real-World Multi-Modal and Longitudinal Lung Cancer Dataset",
+          "keywords": [
+            "integrating heterogeneous",
+            "lung cancer",
+            "multi-modal fusion",
+            "predictive performance",
+            "longitudinal",
+            "accurately reflect real-world"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05324": {
+          "title": "RoboSPA: Can VLA Models Go Beyond Simple Scenes and Short-Horizon Tasks?",
+          "keywords": [
+            "texttt robospa",
+            "increasing spatial",
+            "procedural complexity",
+            "robotic manipulation",
+            "vla",
+            "textbf"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05369": {
+          "title": "Towards Neuro-Symbolic Procedural Reasoning for Long-Horizon Vision-Language-Action Manipulation",
+          "keywords": [
+            "task graphs",
+            "vla",
+            "action dependencies valid",
+            "actions textual context",
+            "active step completed",
+            "branch conditions while"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05376": {
+          "title": "What Matters, When? Diagnosing and Improving Conditional Visual Grounding in Visuomotor Imitation Policies",
+          "keywords": [
+            "conditional visual grounding",
+            "improving target selection",
+            "visuomotor imitation policies",
+            "distractor",
+            "achieve high performance",
+            "appearance-based visual prompting"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04239": {
+          "title": "EXAONE Forecast for Finance",
+          "keywords": [
+            "exaone finance",
+            "exaone forecast",
+            "financial forecasting",
+            "financial markets",
+            "accuracy cross-sectional asset",
+            "achieve strong zero-shot"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04286": {
+          "title": "From Matching Models to Recruiting Agents: A Systematized Narrative Review of AI Recruitment Systems, Evaluation, and Governance",
+          "keywords": [
+            "systematized narrative review",
+            "coded set",
+            "recruiting agents",
+            "ai recruitment systems",
+            "analyze three coupled",
+            "arise because behavioral"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04298": {
+          "title": "Harbor Adapters and Harbor-Index: Infrastructure and a Curated Meta-Dataset for Large-Scale Agentic Evaluation",
+          "keywords": [
+            "harbor-index",
+            "agentic benchmarks",
+            "harbor adapters",
+            "large-scale agentic",
+            "adapted suite through",
+            "adapters unified evaluation"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04300": {
+          "title": "Data-Optimized Contingency Screening: A Machine Learning Approach to Power System Security",
+          "keywords": [
+            "contingency",
+            "smote",
+            "pca",
+            "contingency scenarios",
+            "overall performance",
+            "power system"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04304": {
+          "title": "Iris: Climbing to the Search Frontier",
+          "keywords": [
+            "search agents",
+            "against live search",
+            "among open-source search",
+            "author multi-hop chains",
+            "b-a17b scales together",
+            "because inference-time context"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04343": {
+          "title": "A Removal Based Approach to Improve LLM Faithfulness at Test-Time",
+          "keywords": [
+            "llm faithfulness",
+            "explanation",
+            "actual reasoning underlying",
+            "consequential decisions making",
+            "directly targets incompleteness",
+            "eliminates unmentioned influences"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04373": {
+          "title": "Why Better Models Can Create Riskier Systems: Evidence from LLM Agents in Financial Markets",
+          "keywords": [
+            "financial markets",
+            "correlated behavior",
+            "improving individual",
+            "system-level outcomes",
+            "accurate increasing agent",
+            "agent participation reduces"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04377": {
+          "title": "Corporate Language Model (CLM): Transforming Tacit and Fragmented Enterprise Knowledge into a Sovereign, Auditable, and Executable Corporate Intelligence Layer",
+          "keywords": [
+            "clm",
+            "corporate language",
+            "skill graph",
+            "enterprise",
+            "ai deployments fail",
+            "architecture treating tacit-knowledge"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04444": {
+          "title": "HarvestBench: Measuring Whether LLM Agents Will Pay to Avoid Killing Animals",
+          "keywords": [
+            "kill rate",
+            "side effect",
+            "animals",
+            "harvestbench",
+            "price",
+            "harm"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04476": {
+          "title": "PerfReasoning: How Well Do LLMs Reason on Hardware Performance?",
+          "keywords": [
+            "perfreasoning",
+            "analytical performance-model code",
+            "configurations average below",
+            "direct performance reasoners",
+            "do llms reason",
+            "feedback-free multi-round self-revision"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04490": {
+          "title": "When Quantization Breaks Memory: Recurrent-State Write-Back in Low-Precision Temporal Inference",
+          "keywords": [
+            "recurrent-state write-back",
+            "component tau",
+            "error feedback",
+            "recurrent",
+            "state",
+            "alter subsequent computations"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04493": {
+          "title": "ResLearn-XR: Residual Learning for Network Traffic and Quality-of-Experience-Aware Modeling in Extended Reality",
+          "keywords": [
+            "continuous xr traffic",
+            "reslearn-xr",
+            "network traffic",
+            "qoe risk",
+            "extended reality",
+            "adopts two-stage temporal"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04495": {
+          "title": "Rethinking Indirect Prompt Injection as a Test-Time Search Problem",
+          "keywords": [
+            "indirect prompt injection",
+            "attacker",
+            "test-time search",
+            "attack",
+            "agentic security evaluations",
+            "attack surface induced"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04504": {
+          "title": "BioSync: Transformer-Based Cross-Modal Fusion for a Multimodal Physiological Digital Biomarker",
+          "keywords": [
+            "biosync",
+            "cognitive-cohort auc",
+            "cohort biosync",
+            "digital biomarker",
+            "concatenation",
+            "cohorts"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04518": {
+          "title": "What Does Multi-Harness RL Learn? Credit Assignment and Portability in Coding Agents",
+          "keywords": [
+            "harness",
+            "multi-harness rl",
+            "two rules",
+            "harnesses",
+            "credit",
+            "pooled"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04523": {
+          "title": "MaxKernel: Agentic Kernel Generation for TPUs",
+          "keywords": [
+            "maxkernel",
+            "auto agent",
+            "kernel generation",
+            "agentic kernel generation",
+            "alongside complex real-world",
+            "authoring high-performance custom"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04528": {
+          "title": "Towards a universal language of concepts: A survey",
+          "keywords": [
+            "contribution toward universal",
+            "generalize novel concepts",
+            "rich structural formats",
+            "toward universal representational",
+            "towards universal language",
+            "universal representational language"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04541": {
+          "title": "Data-Driven Discovery of Composition-Dependent Constitutive Models for Hyperelasticity and Viscoelasticity of Digital Materials",
+          "keywords": [
+            "digital materials",
+            "data-driven discovery",
+            "constitutive",
+            "compositions",
+            "closed-form",
+            "appropriately constrained artificial"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04543": {
+          "title": "From Answers to Interpretations: Rethinking Ambiguity-Induced Aleatoric Uncertainty Estimation in LLMs",
+          "keywords": [
+            "aleatoric uncertainty",
+            "ambiguity-induced aleatoric uncertainty",
+            "interpretations",
+            "add avoidable cost",
+            "aleatoric uncertainty estimation",
+            "ambiguity-induced component directly"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04559": {
+          "title": "IPGeoAI: Transformer-Based Geolocation with LLM Semantic Fusion",
+          "keywords": [
+            "city-level",
+            "geolocation",
+            "ipgeoai",
+            "accuracy while extending",
+            "accurate city-level ip",
+            "adopting hierarchical inference"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04561": {
+          "title": "Reducing Hallucinated Transcripts in Whisper via Hallucination Space Projection",
+          "keywords": [
+            "gated projection",
+            "hallucinated transcripts",
+            "projection reduces",
+            "relative reduction",
+            "speech recognition",
+            "whisper"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04564": {
+          "title": "La Agente Óptima: Towards Agentic Self-Driving Laboratories",
+          "keywords": [
+            "ptima",
+            "la agente ptima",
+            "campaigns",
+            "campaign ptima",
+            "contact angle",
+            "optimization campaigns"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04565": {
+          "title": "Extremely Sparse Supervision Incentivizes Reasoning Ability",
+          "keywords": [
+            "extremely sparse supervision",
+            "effective post-training",
+            "reasoning ability",
+            "ability despite excluding",
+            "admits dense teacher",
+            "avoiding micro-level corrections"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04579": {
+          "title": "Does the Selected Object Reach the Reader? Auditing Identity Handoffs in Grounded Language-Model Pipelines",
+          "keywords": [
+            "grounded language-model pipelines",
+            "selected object",
+            "exact match",
+            "resolvable records",
+            "passage",
+            "reader"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04611": {
+          "title": "$τ^τ$-Bench: An Environment for End-To-End, Realistic Agent Construction",
+          "keywords": [
+            "tau tau bench",
+            "agent construction",
+            "client",
+            "coding agents",
+            "actually keeps client",
+            "against held-out simulated"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04627": {
+          "title": "Leveraging Imperfect Restoration for Data Availability Attack",
+          "keywords": [
+            "poisoning",
+            "ssl",
+            "imperfect restoration",
+            "irp",
+            "sl",
+            "image quality"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04629": {
+          "title": "SiLR: Structure-Preserving Admission and Process Reward for LLM Tool Agents",
+          "keywords": [
+            "product order",
+            "scalar projection",
+            "admission",
+            "llm tool",
+            "process reward",
+            "proposal"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04641": {
+          "title": "A Cost-Aware Agentic Architecture for NL-to-SQL over Nested Enterprise Schemas, with a New Benchmark",
+          "keywords": [
+            "agentic architecture",
+            "devrev nl2sql",
+            "enterprise schemas",
+            "academic benchmarks yet",
+            "ad- vanced rapidly",
+            "agentic architecture whose"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04651": {
+          "title": "Continual Graph Memory for Adaptive Recommendation under Intent Drift",
+          "keywords": [
+            "continual graph memory",
+            "through memory writes",
+            "adaptive recommendation",
+            "cgm-rec",
+            "adaptation occurs",
+            "cgm-rec improves"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04665": {
+          "title": "Harness-agnostic detection and immunization of reward hacking in self-evolving language models",
+          "keywords": [
+            "self-evolving language",
+            "hacking",
+            "reward hacking",
+            "immunization",
+            "actually wants sustained",
+            "alone recovers nothing"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04667": {
+          "title": "ERPBench: Evaluating LLM Agents for Enterprise Decision-Making Across Competitive Market Ecologies",
+          "keywords": [
+            "competitive market ecologies",
+            "erpbench",
+            "evaluated llm",
+            "enterprise",
+            "llm agents",
+            "arena"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04678": {
+          "title": "Train What You Deploy:Token-Faithful Post-Training of a Production Coding",
+          "keywords": [
+            "original prompts",
+            "standard dppo",
+            "adaptive-k rules budget-aware",
+            "agent logs distorts",
+            "agents suffer severe",
+            "atop standard dppo"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04693": {
+          "title": "Predicting Spatiotemporal Mobile Sensing-Based PM2.5 Concentrations Using Low-Rank Adapted Spatially Attentive Graph Neural Network",
+          "keywords": [
+            "urban air quality",
+            "sa-gnn",
+            "meteorological variables",
+            "adapted spatially attentive",
+            "adaptive attention significantly",
+            "adaptively group dense"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04697": {
+          "title": "SQL-Zero: Self-Evolving Text-to-SQL",
+          "keywords": [
+            "sql pairs",
+            "databases",
+            "challenger",
+            "bird",
+            "agent usually depends",
+            "bird-gold control whereas"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04699": {
+          "title": "Model Retirement Creates Reproducibility Risk in Biomedical AI Publications",
+          "keywords": [
+            "most frequently used",
+            "biomedical",
+            "biomedical research",
+            "publication",
+            "retirement",
+            "publications"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04706": {
+          "title": "FinalityBench: An Effect-Level Benchmark for Agent Decisions Under Delayed and Conflicting Financial Finality",
+          "keywords": [
+            "paired loss",
+            "finality",
+            "almost entirely one",
+            "authoritative finality probe",
+            "canonical event log",
+            "conflicting financial finality"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04715": {
+          "title": "PLUME: Parameter-Efficient Personalization of Large Language Models via Low-Rank User Modulation in Shared Subspaces",
+          "keywords": [
+            "user modulation",
+            "plume",
+            "subspace",
+            "per-user",
+            "personalization",
+            "adaptation through user"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04738": {
+          "title": "Aplaud: Adaptive Personalized Low-Rank Decomposition for User-Specific LLM",
+          "keywords": [
+            "adaptive personalized low-rank",
+            "aplaud",
+            "user-specific",
+            "achieves efficient scalable",
+            "aplaud achieves efficient",
+            "aplaud adaptive personalized"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04749": {
+          "title": "DCFA: Dual-view Causal-inspired Attribution for Failure Reasoning in LLM-based Multi-agent Systems",
+          "keywords": [
+            "dcfa",
+            "causal-inspired attribution",
+            "decisive error",
+            "failure attribution",
+            "system traces",
+            "multi-agent systems"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04767": {
+          "title": "Shadow Queries for Private Retrieval in Vector Databases",
+          "keywords": [
+            "document embeddings",
+            "eias",
+            "shaq",
+            "against eias",
+            "retrieval utility",
+            "shadow queries"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04778": {
+          "title": "Diffusion Language Models for Mobile Edge Agentic AI: Foundations, Applications, and Challenges",
+          "keywords": [
+            "mobile edge agentic",
+            "diffusion language",
+            "acceleration compression edge",
+            "agentic artificial intelligence",
+            "agents where partial",
+            "autoregressive transformer-based large"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04782": {
+          "title": "DODR: Deterministic Operator-Driven Reasoning in Latent Space",
+          "keywords": [
+            "deterministic operator-driven reasoning",
+            "deduction",
+            "operator information",
+            "latent space",
+            "abduction operator defined",
+            "abduction solutions exceed"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04793": {
+          "title": "ProtLingo: Efficient Protein Language Modeling via Conditional Memory and Expert Routing",
+          "keywords": [
+            "protlingo",
+            "expert routing",
+            "protein language",
+            "achieves competitive performance",
+            "alter stability activity",
+            "augments pretrained single-sequence"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04801": {
+          "title": "Whose record is this? Diagnosing and authorizing record use in personalized multimodal models",
+          "keywords": [
+            "clean recall",
+            "record",
+            "wedge",
+            "authorization",
+            "additional unsafe cases",
+            "answer support must"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04803": {
+          "title": "Hierarchical Possession-Aware Graph Pointer Network for Pass Receiver Selection",
+          "keywords": [
+            "pass receiver selection",
+            "fixed event context",
+            "graph pointer network",
+            "hierarchical possession-aware graph",
+            "possession-aware graph pointer",
+            "hpgpn"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04804": {
+          "title": "MedFlow: Class-Aware Multi-Scale Generation for Medical Time-Series Synthesis",
+          "keywords": [
+            "medical time-series synthesis",
+            "medflow",
+            "class-aware multi-scale",
+            "flow matching",
+            "class-aware multi-scale flow",
+            "class-aware multi-scale generation"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04806": {
+          "title": "When Financial Fine-tuning Fails: A Three-Level Detectability Analysis of Numerical Hallucination in Domain-Adapted Language Models",
+          "keywords": [
+            "numerical hallucination",
+            "insufficient numerical reasoning",
+            "ft-a",
+            "detectability levels",
+            "financial summarization",
+            "numerical restraint"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04809": {
+          "title": "CPR-IE:A Compression-Prediction-Resource Intelligence Efficiency Metric",
+          "keywords": [
+            "compression-prediction-resource intelligence efficiency",
+            "cpr-ie",
+            "algorithmic complexity proper",
+            "behavior trade-off identities",
+            "boundary behavior trade-off",
+            "choices but do"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04840": {
+          "title": "Long Horizon Transformer Quantile Fault Prediction for Multi Site Industrial Predictive Maintenance",
+          "keywords": [
+            "predictive maintenance",
+            "quantile",
+            "auxiliary memory modulation",
+            "bounded instability-aware signal",
+            "causal recurrent encoding",
+            "channel machine behaviour"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04850": {
+          "title": "ElderBench: Benchmarking Autonomous Mobile Agents for Older Adults",
+          "keywords": [
+            "older adults",
+            "autonomous mobile agents",
+            "gui agents",
+            "benchmark instructions",
+            "existing gui",
+            "language patterns"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04859": {
+          "title": "MM-IFEval-Pro: A Multilingual and Attack-Resistant Benchmark for Instruction-Following in Vision-Language Models",
+          "keywords": [
+            "instruction-following",
+            "mm-ifeval-pro",
+            "complex instruction",
+            "multimodal instruction-following",
+            "adversarial safety scenarios",
+            "become key indicator"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04864": {
+          "title": "MZ-Rain: Moisture-Budget-Guided Zero-Inflated Model for Station-Level Precipitation Nowcasting",
+          "keywords": [
+            "station-level precipitation nowcasting",
+            "mz-rain",
+            "moisture-budget-guided zero-inflated",
+            "precipitation formation",
+            "moisture",
+            "accurate station-level precipitation"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04865": {
+          "title": "CoSkill: Joint Reinforcement Learning of Reasoning and Meta-Skill Agents for Hierarchical Skill Evolution",
+          "keywords": [
+            "reasoning agent",
+            "coskill",
+            "meta-skill",
+            "hierarchical skill",
+            "meta-skill agent",
+            "meta-skill agents"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04866": {
+          "title": "LLM-Assisted Behavioural and Scenario Augmentation for Agent-Based Energy Adoption Models",
+          "keywords": [
+            "behavioural",
+            "bounded behavioural",
+            "scenario specifications",
+            "adoption",
+            "llm-assisted",
+            "adoption increase relative"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04869": {
+          "title": "From Interaction Traces to Persistent Skills: Online Evolution for Computer-Use Agents",
+          "keywords": [
+            "computer-use agents",
+            "procedural knowledge",
+            "skill libraries",
+            "accepted edits fail",
+            "against frozen library",
+            "attains higher post-warm-up"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04870": {
+          "title": "CHAMP: Cross-domain Hybrid Architecture for Matchmaking and Prediction in Online Multi-Player Games",
+          "keywords": [
+            "champ",
+            "matchmaking",
+            "players",
+            "dawn",
+            "per-mode",
+            "win-rate"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04871": {
+          "title": "AutoLR: Automating the Path from Research to Launch Review in Industrial Recommender Systems",
+          "keywords": [
+            "industrial recommender",
+            "launch review",
+            "autolr",
+            "textbf",
+            "adversarially reviews proposals",
+            "agents perform semantic"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04877": {
+          "title": "MARLA: A Conceptual Scaffold for Regulatory Learning under the EU AI Act",
+          "keywords": [
+            "eu ai act",
+            "regulatory",
+            "conceptual scaffold",
+            "marla",
+            "legal",
+            "act governance architecture"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04880": {
+          "title": "Reinforcement Learning for Sequential Solar PV Policy Design under Uncertainty: An Agent-Based Approach",
+          "keywords": [
+            "policy ppo text",
+            "ppo text cost",
+            "pv policy design",
+            "solar pv",
+            "pv adoption",
+            "adopters"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04894": {
+          "title": "From Language Models to World-Acting Systems: Progress and Limits of Agentic AI across Digital, Social, Virtual, and Physical Environments",
+          "keywords": [
+            "but do",
+            "authority",
+            "adds specialization alongside",
+            "agent2agent improve interoperability",
+            "agents when surrounding",
+            "along delegated authority"
+          ],
+          "matched_keywords": [
+            "world model"
+          ]
+        },
+        "2609.04915": {
+          "title": "Compact-Memory LLM Agents via Online Max-Member Clustering and Atom-Aware Packing",
+          "keywords": [
+            "compact-memory",
+            "rsm-full",
+            "online k-means",
+            "pareto point",
+            "pp",
+            "ablations show most"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04917": {
+          "title": "Artificial Intelligence in Equity and Crypto Markets: Progress, Profitability Evidence, and the Limits of Automated Investing",
+          "keywords": [
+            "net alpha",
+            "spot perpetual",
+            "crypto",
+            "artificial intelligence",
+            "adaptation prospective tests",
+            "adds informative state"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04931": {
+          "title": "Solving Hard XAI Queries Based on a Compiled Dual-Rail Encoding",
+          "keywords": [
+            "abductive explanations",
+            "dual-rail encoding",
+            "classifier",
+            "compiled",
+            "abductive explanations remain",
+            "ai within real-world"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04962": {
+          "title": "Why We Care About Understanding: Competence through Predictive Compression",
+          "keywords": [
+            "enables prediction",
+            "human understanding",
+            "ai research substantial",
+            "because what becomes",
+            "becomes predictable need",
+            "characteristically human form"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04978": {
+          "title": "Global to Local: Topology-Preserving Adaptive Graph Pooling via Granular-Ball",
+          "keywords": [
+            "adaptive graph pooling",
+            "topology-preserving adaptive graph",
+            "adaptive granularity",
+            "topological structure",
+            "benchmark datasets effectively",
+            "clusters thus neglecting"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04981": {
+          "title": "A Tree-based RAG Framework for Evidence-Intensive QA via Adaptive Planning and Topology-Aware Evidence Gathering",
+          "keywords": [
+            "topology-aware evidence gathering",
+            "evidence-intensive qa",
+            "structured rag methods",
+            "adaptive planning",
+            "rag framework",
+            "adaptive planning dynamically"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05009": {
+          "title": "Language models judge war differently when tested for alignment",
+          "keywords": [
+            "start war",
+            "adding one sentence",
+            "arose principally because",
+            "artificial-intelligence systems respond",
+            "attenuated strategic considerations",
+            "behaviour if artificial-intelligence"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05019": {
+          "title": "TROVE: Adaptive Agent Skill Orchestration via Trace-Grounded Route Validation and Editing",
+          "keywords": [
+            "trove",
+            "adaptive agent",
+            "composite skills",
+            "evidence invalidates",
+            "trace-grounded route",
+            "continuation"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05036": {
+          "title": "Moral Competence Before Moral Content: Why LLM Agents Lack the Prerequisites for Coherent Alignment",
+          "keywords": [
+            "expresses coherent policy",
+            "moral competence",
+            "llm-based agents",
+            "agents facing moral",
+            "ai alignment requires",
+            "alone produces verdict-rate"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05040": {
+          "title": "Towards Efficient Evaluation of Evolutionary Transfer Optimization: Case Studies on Task-Parameterized Applications",
+          "keywords": [
+            "evolutionary transfer optimization",
+            "evaluation scaling",
+            "task-parameterized applications",
+            "application-specific serial computations",
+            "b-spline trajectory evaluation",
+            "become major source"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05075": {
+          "title": "MePo++: Unifying Representation Refinement and Reconciliation for General Continual Learning",
+          "keywords": [
+            "continual",
+            "mepo",
+            "gcl",
+            "general continual",
+            "continual adaptation",
+            "representation refinement"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05079": {
+          "title": "TruthInsightBench: An Evidence-Grounded Benchmark for Automated Evaluation of Open-Ended Scientific Discovery Agents",
+          "keywords": [
+            "truthinsightbench",
+            "coding agents",
+            "agent own claims",
+            "agents form narrow",
+            "along six dimensions",
+            "around hidden target"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05088": {
+          "title": "Measuring AI Accountability Through Argumentation Analysis: Can Model Reasoning Withstand Scrutiny?",
+          "keywords": [
+            "post-hoc justification",
+            "accountability through argumentation",
+            "ai accountability through",
+            "ai alignment suggesting",
+            "ai oversight methods",
+            "alignment suggesting need"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05090": {
+          "title": "Constructing and Evaluating Clinical Reasoning Trajectories for Medical Agent",
+          "keywords": [
+            "reasoning steps",
+            "quality-weighted context",
+            "zero-shot baseline",
+            "reasoning trajectories",
+            "agents remains predominantly",
+            "answer reached through"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05093": {
+          "title": "LLM-Guided Program Evolution for Circle Packing: Breaking 10 Packomania Records for $28",
+          "keywords": [
+            "packomania",
+            "adaptive plateau-detection mechanism",
+            "algorithmic improvements guided",
+            "analyze cost-efficiency dynamics",
+            "automated scientific discovery",
+            "been independently accepted"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05094": {
+          "title": "ProCA: Progressive Contrastive Alignment for Robust EEG Visual Decoding",
+          "keywords": [
+            "eeg visual decoding",
+            "progressive contrastive alignment",
+            "strict cross-subject transfer",
+            "proca",
+            "robust eeg",
+            "semantic relations"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05104": {
+          "title": "Compact Bellman-Grounded Cognitive Maps for Cost-Aware Navigation",
+          "keywords": [
+            "route costs",
+            "additive heterogeneous route",
+            "additive route costs",
+            "agents navigate familiar",
+            "bcm maintains full",
+            "bellman-grounded cognitive maps"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05111": {
+          "title": "Unifying ICL, SFT, KL-Regularized RL Through a Bayesian Lens",
+          "keywords": [
+            "forward-kl projection onto",
+            "kl-regularized rlhf rlvr",
+            "icl",
+            "sft",
+            "posterior",
+            "actions given context"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05141": {
+          "title": "SciDocBench: A Workflow-Centered Benchmark and Data Pipeline for Scientific Document Understanding",
+          "keywords": [
+            "scientific document understanding",
+            "workflow-centered benchmark",
+            "scidocbench",
+            "scidocir",
+            "approximately supervised fine-tuning",
+            "benchmarks typically evaluate"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05146": {
+          "title": "A Hybrid Predictive Ensemble of Machine Learning and Deep Neural Networks for Early Cardiovascular Disease Risk Assessment",
+          "keywords": [
+            "cardiovascular disease risk",
+            "risk assessment",
+            "deep neural",
+            "ensemble",
+            "accuracy reduced false",
+            "achieve proactive healthcare"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05190": {
+          "title": "The Mirror Agent Model: a Bayesian Architecture for Interpretable Agent Behavior",
+          "keywords": [
+            "mirror agent",
+            "architecture generating interpretable",
+            "explanations through off-the-shelf",
+            "firstly show prior",
+            "generating interpretable behavior",
+            "illustrate novel architecture"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05198": {
+          "title": "What Matters in On-Policy Distillation? A Perspective on Data Efficiency and Data Selection",
+          "keywords": [
+            "hard examples",
+            "longer cot",
+            "shot opd",
+            "on-policy distillation",
+            "adopted post-training paradigm",
+            "critical thinking patterns"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05227": {
+          "title": "CABAL: Multi-Agent Simulacra for Tracing the Effects of Collusive Bidding in Peer Review",
+          "keywords": [
+            "collusive bidding",
+            "multi-agent simulacra",
+            "reviewer assignment",
+            "target papers",
+            "aaai-27 review cycle",
+            "affinity while very-high-only"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05228": {
+          "title": "ACE: Adaptive Calibration-Free Expert Skipping for MoE-based LLMs",
+          "keywords": [
+            "expert skipping",
+            "moe-based llms",
+            "ace",
+            "ace consistently outperforms",
+            "ace contains two",
+            "ace reduces wikitext-2"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05232": {
+          "title": "Substrate-Aware AI Agents: Execution Context as a First-Class Input",
+          "keywords": [
+            "agent planning",
+            "execution context",
+            "wall time",
+            "ai agents",
+            "claude opus",
+            "task-only"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05241": {
+          "title": "Uncensored Open-weight Models: Redistribution as the Persistence Layer",
+          "keywords": [
+            "uncensored",
+            "applications integrating uncensored",
+            "built-in safety guardrails",
+            "github applications integrating",
+            "identified github applications",
+            "identified original uncensored"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05245": {
+          "title": "Do LLMs Exhibit Coherent Knowledge Structures in Mathematical Reasoning? A Perspective from Knowledge Space Theory",
+          "keywords": [
+            "knowledge structure",
+            "knowledge space theory",
+            "exhibit coherent",
+            "human knowledge",
+            "knowledge dependencies",
+            "llms do"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05251": {
+          "title": "A Unified Physics-Aware Quantum Machine Learning Framework across Power GaN HEMTs and Logic Nanowire FETs: Predicting Unseen Process Splits and Held-Out Geometry Combinations with Lower Error and Tighter Split-to-Split Variability",
+          "keywords": [
+            "tighter fold variability",
+            "lower error",
+            "ioff",
+            "absolute error mae",
+            "classically simulated pqcs",
+            "compact parametrized quantum"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05257": {
+          "title": "Commonsense Reasoning in Computer Vision: Foundations, Recent Advancements, and Future Directions",
+          "keywords": [
+            "commonsense knowledge",
+            "computer vision",
+            "commonsense reasoning",
+            "bias knowledge incompleteness",
+            "cnn-based conventional vision",
+            "commonsense knowledge enables"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05261": {
+          "title": "Trace2Tower: Transition-Aware EigenTrace Induction of Multi-Level Skills for LLM Agents",
+          "keywords": [
+            "trace2tower",
+            "transition-aware eigentrace",
+            "abstracts step-level interactions",
+            "action templates procedural",
+            "agents increasingly rely",
+            "alfworld trace2tower achieves"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05270": {
+          "title": "AI for Computational Design Science: A Responsible Human-AI Framework and Case Study on Short-Form Video Safety Surveillance",
+          "keywords": [
+            "computational design science",
+            "design search",
+            "ai4cds",
+            "childriskguard",
+            "ai actively participates",
+            "ai expands problem"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05275": {
+          "title": "Don't Drop Dropout: Optimizing Layer Sparsity for Efficient LLM Training and Inference",
+          "keywords": [
+            "layer dropout",
+            "llm training",
+            "training flops",
+            "accuracy no comprehensive",
+            "cerebras cs-3 systems",
+            "decoding yielding up"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05279": {
+          "title": "Testing Interchangeability in LLM Agent Teams",
+          "keywords": [
+            "teams",
+            "swap",
+            "agent filling role",
+            "agent keeping private",
+            "alongside one other",
+            "any other agent"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05284": {
+          "title": "GUT: Quantifying and Optimizing the Reasoning Uncertainty of LLMs via Graph Complexity",
+          "keywords": [
+            "reasoning uncertainty",
+            "gut",
+            "graph complexity",
+            "potential branches",
+            "llms often",
+            "acyclic graph thereby"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05289": {
+          "title": "Beyond Aggregate Scores: Behavioral Correctness Assumptions for Assessing Reference-Based Automatic Evaluation Methods",
+          "keywords": [
+            "behavioral correctness assumptions",
+            "automatic evaluation methods",
+            "reference-based automatic evaluation",
+            "aggregate",
+            "assessing natural language",
+            "assessing reference-based automatic"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05295": {
+          "title": "RISE: Recursive Improvement via Self-Extrapolating Policy Distillation",
+          "keywords": [
+            "rise",
+            "policy distillation",
+            "privileged conditioning",
+            "recursive improvement",
+            "textbf",
+            "agentic tasks show"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05314": {
+          "title": "Large Language Models for HVAC Operations in Building Energy Systems: A Critical Review of Methods, Applications, and Deployment Readiness",
+          "keywords": [
+            "hvac",
+            "building energy",
+            "deployment readiness",
+            "hvac operations",
+            "advisory interfaces around",
+            "around physics-based controllers"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05327": {
+          "title": "LLM-Driven Algorithm Design for Quantum Circuit Synthesis based on Binary Decision Diagrams",
+          "keywords": [
+            "binary decision diagrams",
+            "quantum",
+            "bdd",
+            "qcc",
+            "bdd size",
+            "boolean functions"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05333": {
+          "title": "Technical Manual for a Toolkit for Measuring Contextual Individuation in Transformer Language Models",
+          "keywords": [
+            "toolkit",
+            "interpret empirical",
+            "transformer language",
+            "sense",
+            "word",
+            "archived separately section"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05339": {
+          "title": "Does Your Agent's Memory Survive a Model Upgrade? A Controlled Study of Memory Portability",
+          "keywords": [
+            "notes",
+            "pm",
+            "repair",
+            "accuracy improvement forfeiting",
+            "accuracy shifting asymmetrically",
+            "achieved through full"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05346": {
+          "title": "Who Should Grade My Work? Student Perspectives on Transparent AI-Assisted Writing Assessment in Higher Education",
+          "keywords": [
+            "human instructor",
+            "students",
+            "computing students",
+            "evaluative authority",
+            "explicitly informed",
+            "feedback utility"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05374": {
+          "title": "CUA-Universe: A Scalable and Dynamic Environment for Hybrid GUI+CLI Agents",
+          "keywords": [
+            "hybrid gui cli",
+            "steps tokens",
+            "computer-use agents",
+            "cua-universe",
+            "inefficient",
+            "pts"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05381": {
+          "title": "Molecular Déjà Vu: Digit-Level Retrieval of Published Values in Frontier Language Models",
+          "keywords": [
+            "verbatim retrieval",
+            "regression benchmarks",
+            "accuracy cannot distinguish",
+            "benchmarks but accuracy",
+            "but relatively benchmark-specific",
+            "cases still recognise"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05385": {
+          "title": "Necessary or Sufficient? Evaluating LLM Explanations With Behavioural Evidence",
+          "keywords": [
+            "named factors",
+            "three factors",
+            "top three",
+            "sufficiency",
+            "necessity",
+            "cited"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05395": {
+          "title": "Multi-Step Tool-Calling over Korean Open Public APIs: A Benchmark and a Data-Synthesis Recipe",
+          "keywords": [
+            "korean open public",
+            "apis",
+            "actually called against",
+            "another input keeps",
+            "api benchmark kopa-bench",
+            "benchmark kopa-bench comprising"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05396": {
+          "title": "A Deep Generative Model for Synthesizing Labeled Wireless Signals",
+          "keywords": [
+            "labeled wireless signals",
+            "synthesizing labeled wireless",
+            "wireless sensing",
+            "generated signals",
+            "acquiring real-world datasets",
+            "adversarial networks iins-gan"
+          ],
+          "matched_keywords": []
+        },
+        "2609.03693": {
+          "title": "AlcaTRAz - Anchored Tree-Rule Defense Against Jailbreaks",
+          "keywords": [
+            "alcatraz anchored tree-rule",
+            "anchored tree-rule defense",
+            "defense against jailbreaks",
+            "tree-rule defense against",
+            "jailbreak",
+            "jailbreak attacks"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04288": {
+          "title": "Scalable Context Orchestration for Serving LLMs Over Voice",
+          "keywords": [
+            "voice",
+            "llmovoice",
+            "packet loss",
+            "voice context",
+            "accessible spoken interactions",
+            "adverse environmental conditions"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04290": {
+          "title": "Evidence Integration in Large Language Models",
+          "keywords": [
+            "candidate integration",
+            "evidence integration",
+            "receiver",
+            "admitting external candidate",
+            "answers promoting them",
+            "candidate answers promoting"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04303": {
+          "title": "Abstraction Agent",
+          "keywords": [
+            "abstraction agent",
+            "private states",
+            "strategic",
+            "abstraction agent zero-shot",
+            "abstractions reduce lifted-strategy",
+            "agent zero-shot pipeline"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04329": {
+          "title": "Data-Driven Learning of Unknown Nonlinear Differential Equations Using Functional Analysis",
+          "keywords": [
+            "unknown vector field",
+            "differential equations",
+            "differential equations odes",
+            "discover unknown external",
+            "existing ml approaches",
+            "finally numerical examples"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04350": {
+          "title": "Adapting from Downturns: Prediction of Long-Term Conversational-Skill Development in Mental-Health Crisis Counselors",
+          "keywords": [
+            "conversations toward positive",
+            "mental-health crisis counselors",
+            "toward positive outcomes",
+            "moments",
+            "adaptations predict improvement",
+            "become better conversationalists"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04355": {
+          "title": "VLA-Precision: Asymmetric Co-Bootstrapping for Efficient Real-World Online RL of Vision-Language-Action Models",
+          "keywords": [
+            "efficient real-world online",
+            "real-world online rl",
+            "asymmetric co-bootstrapping",
+            "acob",
+            "vla-precision",
+            "accumulates global return"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04356": {
+          "title": "Blockchain-Enabled Secure Logging for Fiscal Electronic Mechanisms: Evaluation of the Greek eSEND and myDATA Tax Systems",
+          "keywords": [
+            "fiscal electronic mechanisms",
+            "blockchain-based integrity",
+            "fiscal devices",
+            "transaction",
+            "tax",
+            "blockchain-based integrity guarantees"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04384": {
+          "title": "You Really Didn't Get That? Benchmarking Social Pragmatic Inference for Indirect and Playful Chinese Online Comments",
+          "keywords": [
+            "chinese online comments",
+            "leave-writer-out accuracy",
+            "pragmatic",
+            "around predefined phenomena",
+            "benchmarking social pragmatic",
+            "categories leaving open"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04409": {
+          "title": "A Systematic Evaluation of Cross-Lingual Consistency Enhancement Methods in Multilingual Language Models",
+          "keywords": [
+            "clc",
+            "clc enhancement",
+            "cross-lingual consistency",
+            "multilingual language",
+            "question answering",
+            "accuracy reductions particularly"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04415": {
+          "title": "REFINE: LLM Refinement over Budgeted Text-Attributed Graphs for Personalized Medical Concept Representation",
+          "keywords": [
+            "concept representations",
+            "medical concept",
+            "observed code",
+            "refine",
+            "kg",
+            "patient-specific"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04442": {
+          "title": "GRACE: Graph-Grounded Reflective Agent Copilot Engine for Expert-in-the-Loop Knowledge Expansion",
+          "keywords": [
+            "agent copilot engine",
+            "graph-grounded reflective agent",
+            "reflective agent copilot",
+            "knowledge base",
+            "grace",
+            "claims"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04453": {
+          "title": "When Load-Balancing Goes Too Far: Expert Pruning in Over-Dispersed Mixture-of-Experts Models",
+          "keywords": [
+            "expert pruning",
+            "over-dispersed routing",
+            "importance",
+            "mathematical reasoning",
+            "accuracy degrade together",
+            "activation-aware scoring preserves"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04461": {
+          "title": "A Roadmap for MEG Foundation Models",
+          "keywords": [
+            "meg foundation",
+            "but still",
+            "address consent privacy",
+            "architectures self-supervised objectives",
+            "around native meg",
+            "backbone architectures self-supervised"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04463": {
+          "title": "Shared circuits predict whether LLMs generalize across formats in arithmetic reasoning",
+          "keywords": [
+            "numeric arithmetic problems",
+            "solve numeric arithmetic",
+            "two plus five",
+            "verbal",
+            "arithmetic reasoning",
+            "verbal formats"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04484": {
+          "title": "Patterns of Priming in Production: Lexical, Semantic and Structural Alignment in Language Model Generation",
+          "keywords": [
+            "structural priming",
+            "completions display greater",
+            "context influences sentence",
+            "controlled sentence-completion experiments",
+            "demonstrated priming effects",
+            "display greater levels"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04485": {
+          "title": "Cultural Misalignment in Large Language Models: Detection, Measurement, and Mitigation Through Targeted Fine-Tuning",
+          "keywords": [
+            "demographic personas",
+            "lora fine-tuning",
+            "worst-case personas",
+            "misalignment",
+            "against world values",
+            "bielik worst-case personas"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04489": {
+          "title": "Towards Understanding Pause Token Fine-Tuning Dynamics: A Mode Retention Perspective",
+          "keywords": [
+            "pause tokens",
+            "mode retention",
+            "training dynamics",
+            "adaptation h1 mode",
+            "boundary pause mbp",
+            "boundary-adjacent token comes"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04494": {
+          "title": "Hakken: Predicting future discoveries to fill the gaps in today's knowledge",
+          "keywords": [
+            "hakken",
+            "above-confidence-threshold hypotheses related",
+            "aging qualitatively validated",
+            "as-yet undocumented relationships",
+            "calls model-agnostic explanation",
+            "confirmed introducing previously"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04509": {
+          "title": "A Semantic Model of Genetic Evidence: A Step Toward Bridging the Basic-Science-Clinic Gap",
+          "keywords": [
+            "fhir evidence",
+            "genetic evidence",
+            "variant interpretation",
+            "attach compact dimensional",
+            "but existing standards",
+            "clinical decision-making depends"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04513": {
+          "title": "Atlas: Optimizing Deployment of Compound AI Workflows on Heterogeneous Clusters",
+          "keywords": [
+            "compound ai workflows",
+            "exhaustive end-to-end profiling",
+            "atlas",
+            "candidate plans",
+            "workflow stage",
+            "workflow topology"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04516": {
+          "title": "Pitch-class Steering for Diffusion-based Music Generation via Latent-space Probes",
+          "keywords": [
+            "diffusion-based music",
+            "music generation",
+            "pitch-class",
+            "audio open latent",
+            "autoencoder latent space",
+            "baseline e-5 wilcoxon"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04533": {
+          "title": "Repeat-After-Me: Black-Box Adaptive Visual Prompt Injection",
+          "keywords": [
+            "visual prompt injection",
+            "adaptive visual prompt",
+            "black-box adaptive visual",
+            "original asr",
+            "commercial",
+            "attack"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04552": {
+          "title": "Continual Field-Adaptive Models (CFAMs) for Post-Deployment Physical AI",
+          "keywords": [
+            "cfam",
+            "capsule field",
+            "continual field-adaptive",
+            "post-deployment physical",
+            "prior competence",
+            "verified near-ood"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04570": {
+          "title": "Dynamic Adaptation of the LLM Context for Generating Routines with Coupled Semantics",
+          "keywords": [
+            "structured execution feedback",
+            "when correctness depends",
+            "generation agent",
+            "accumulated sufficient diversity",
+            "adaptation sample-efficient validation-generation",
+            "agent extracts structured"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04575": {
+          "title": "Training-Free Halving of Activated Experts in Fine-Grained Mixture-of-Experts Models",
+          "keywords": [
+            "fine-grained mixture-of-experts",
+            "top experts",
+            "renormalization",
+            "accuracy favor different",
+            "against selecting moe",
+            "appropriate reference set"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04582": {
+          "title": "When Do Internal Probes Beat Reading the Answer? Miscalibrated Readouts and Behavior-Concealed Knowledge in Language Models",
+          "keywords": [
+            "threshold offset",
+            "sigma",
+            "margin",
+            "accuracy collapses onto",
+            "along well-aligned readout",
+            "answer-channel failure rather"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04634": {
+          "title": "SCAPES: Semantically Conditioned Autoregressive Prior for Environmental Sounds",
+          "keywords": [
+            "conditioned autoregressive prior",
+            "semantically conditioned autoregressive",
+            "scapes",
+            "environmental sounds",
+            "audio",
+            "audio duration yielding"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04637": {
+          "title": "Tracing Audio Grounding and Answer Selection in Audio LLMs",
+          "keywords": [
+            "audio llms",
+            "acoustic information most",
+            "ask what must",
+            "audio causes substantially",
+            "audio large language",
+            "audio understanding yet"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04681": {
+          "title": "Beyond Code Generation: Reliability, Verification, and Cost Economics in the Agentic Software Development Lifecycle",
+          "keywords": [
+            "agentic sdlc",
+            "activity but newer",
+            "agentic sdlc control",
+            "agentic sdlc throughput",
+            "agentic software development",
+            "ai coding systems"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04707": {
+          "title": "Wireless Foundation Models: State-of-the-Art and Open Challenges",
+          "keywords": [
+            "pretraining objectives",
+            "task families",
+            "wireless foundation",
+            "physical-layer",
+            "wfms",
+            "architectures adaptation strategies"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04710": {
+          "title": "Simulation-free Unbalanced Dynamic Optimal Transport with General Growth Penalty",
+          "keywords": [
+            "dynamic optimal transport",
+            "unbalanced dynamic optimal",
+            "growth penalties",
+            "sudo",
+            "udot",
+            "conditional paths"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04711": {
+          "title": "Building a research-software catalog with a coding agent: from hackathon prototype to public deployment",
+          "keywords": [
+            "curated metadata",
+            "public deployment",
+            "documentation",
+            "coding agents",
+            "accelerate research software",
+            "achieving reliable operation"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04714": {
+          "title": "Refuse without Refusal: A Structural Analysis of Safety-Tuning Responses for Reducing False Refusals in Language Models",
+          "keywords": [
+            "false refusals",
+            "harmful queries",
+            "refusal",
+            "benign queries",
+            "aligning large language",
+            "benign inputs even"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04720": {
+          "title": "Knowing What Not to Answer: Selective Non-Compliance in Vision-Language Models",
+          "keywords": [
+            "selective non-compliance",
+            "require selective non-compliance",
+            "answerable",
+            "fully answerable",
+            "withholding compliance",
+            "accuracy while largely"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04766": {
+          "title": "When Does an Interpretation Count as Established? The Formation, Evaluation, and Responsibility of Interpretation in Generative AI",
+          "keywords": [
+            "been established",
+            "generative ai",
+            "interpretation",
+            "materials",
+            "acquire recognition while",
+            "answering objections revising"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04773": {
+          "title": "Persistent Teacher Anchoring for Tool-Using Agents",
+          "keywords": [
+            "persistent teacher anchoring",
+            "downstream rl",
+            "pta",
+            "adds turn-level commitment",
+            "advancing future samples",
+            "anchoring pta student-induced"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04779": {
+          "title": "Dynamic Heterogeneous Graph Representation Learning: A Survey",
+          "keywords": [
+            "dhg representation",
+            "dynamic heterogeneous",
+            "graph representation",
+            "ai systems inherently",
+            "approaches graph neural",
+            "categorizes existing literature"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04792": {
+          "title": "Can Activation Steering Capture Multidimensional Authorship Style?",
+          "keywords": [
+            "activation steering",
+            "authorship style",
+            "a3s improves authorship",
+            "a3s training-free framework",
+            "activation space bypassing",
+            "activation steering a3s"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04808": {
+          "title": "Recurrence Is Not Enough: Causally Validating Multilingual SAE Translation Features in Gemma 2 and 3",
+          "keywords": [
+            "wu et al",
+            "gemma",
+            "sae",
+            "activations during inference",
+            "affect translation behavior",
+            "autoencoder sae features"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04820": {
+          "title": "Cost-Aware Hierarchical Multi-Agent Ransomware Detection and Family Attribution",
+          "keywords": [
+            "family attribution",
+            "ransomware detection",
+            "hmas",
+            "adaptive hmas",
+            "hierarchical multi-agent",
+            "reduced average"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04823": {
+          "title": "Reinforcement Learning for improving Large Language Models' Catalan text simplification capabilities",
+          "keywords": [
+            "text simplification",
+            "reward function",
+            "ats",
+            "catalan",
+            "asset",
+            "although automatic text"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04841": {
+          "title": "MABPD: Multi-Agent Bias Probing & Detection via Structured Argument Debate",
+          "keywords": [
+            "bias probing detection",
+            "multi-agent bias probing",
+            "structured argument debate",
+            "supervised sota",
+            "et al",
+            "macro f1"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04842": {
+          "title": "MMTClinic: Multimodal, Multilingual Time Series Question Answering and Reasoning Benchmark for Clinical Domain",
+          "keywords": [
+            "mmtclinic",
+            "medical ai",
+            "multimodal multilingual",
+            "advancing multilingual multimodal",
+            "ai systems remains",
+            "capturing dynamic changes"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04855": {
+          "title": "CC-Mediation: Evaluating Large Language Models for Cross-Cultural Conflict Mediation",
+          "keywords": [
+            "culturally grounded conflicts",
+            "mediation",
+            "intercultural",
+            "cross-cultural mediation",
+            "intercultural stance",
+            "cc-mediation"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04867": {
+          "title": "PRISM-Bench: An Audio-Centric Diagnostic Benchmark for Text-to-Audio-Video Generation",
+          "keywords": [
+            "audio-centric diagnostic benchmark",
+            "t2av generation",
+            "audio",
+            "prism-bench",
+            "advanced rapidly but",
+            "against ground-truth references"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04875": {
+          "title": "Forgetting Without Restarting: Execution-State Unlearning for Stateful LLM Agents",
+          "keywords": [
+            "execution-state unlearning",
+            "kv cache",
+            "plaintext memory",
+            "selective replay",
+            "accrete compressed summaries",
+            "agent must behave"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04878": {
+          "title": "ReCAST: Restoration-aware Cascaded Stage-wise Training for Obfuscated SMS Risk Classification",
+          "keywords": [
+            "cascaded stage-wise training",
+            "restoration-aware cascaded stage-wise",
+            "sms risk classification",
+            "chinese sms",
+            "obfuscated",
+            "smaller deployable"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04891": {
+          "title": "Attention-guided super-resolution of 4D flow MRI in carotid arteries",
+          "keywords": [
+            "flow mri",
+            "carotid arteries",
+            "flow patterns",
+            "architecture uses convolutional",
+            "attention modules cbam",
+            "block attention modules"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04898": {
+          "title": "RefactorPlatform: An Open-Source Harness for Controlled Evaluation of Repository-Scale Refactoring Agents",
+          "keywords": [
+            "repository-scale refactoring",
+            "refactorplatform",
+            "accuracy gains absorb",
+            "altering program behavior",
+            "ast-aware chunking outperforms",
+            "chunking outperforms naive"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04901": {
+          "title": "Adaptation Interfaces for In-Context Tabular Foundation Models in Time-to-Event Prediction",
+          "keywords": [
+            "tabular foundation",
+            "time-to-event prediction",
+            "sets",
+            "zero-shot inference",
+            "tabfm",
+            "adaptation becomes increasingly"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04909": {
+          "title": "Better Understanding, Better Fixes? A Study of Hallucination in LLM-based Automated Program Repair",
+          "keywords": [
+            "intermediate artifacts",
+            "automated program repair",
+            "final patches",
+            "line coverage",
+            "hallucination",
+            "apr"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04912": {
+          "title": "TreeFI: Value-Aware Statistical Fault Injection for Deep Neural Networks",
+          "keywords": [
+            "fault injection",
+            "statistical fault injection",
+            "deep neural networks",
+            "treefi",
+            "value-aware statistical",
+            "faults"
+          ],
+          "matched_keywords": []
+        },
+        "2609.04913": {
+          "title": "ARIA - An Agentic Framework for Autonomous Testing of Infotainment Systems",
+          "keywords": [
+            "infotainment",
+            "aria",
+            "android infotainment",
+            "infotainment systems",
+            "per step",
+            "action expected outcome"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05016": {
+          "title": "Amortizing Scaling Law Construction Costs",
+          "keywords": [
+            "scaling law",
+            "scaling law construction",
+            "scaling law fitting",
+            "grid",
+            "accurate scaling law",
+            "allowing accurate scaling"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05018": {
+          "title": "How a Chatbot's Response Style Shapes a Classroom: A Multi-Agent Simulation of Students Consulting AI",
+          "keywords": [
+            "ai dependence",
+            "inciting",
+            "psychological",
+            "style",
+            "affirming listening solution-oriented",
+            "agent carries five"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05025": {
+          "title": "Leveraging Low-Level Symbolic Competences for Unsupervised Grounding in Hallucination Detection",
+          "keywords": [
+            "hallucination detection",
+            "sql database",
+            "low-level",
+            "alternative low level",
+            "competence already present",
+            "database thereby providing"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05037": {
+          "title": "How do LLMs Evaluate Perceived Moral Agency? Investigating Moral Decision-Making in Human-Artificial Agents Interactions",
+          "keywords": [
+            "moral agency",
+            "evaluate perceived moral",
+            "llms evaluate perceived",
+            "perceived moral agency",
+            "artificial agents",
+            "smart city"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05039": {
+          "title": "Qlippy: A Retrieval-Augmented GenAI Assistant for Reproducible Quantum Workflows and Experiment Tracking",
+          "keywords": [
+            "retrieval-augmented genai assistant",
+            "experiment tracking",
+            "qlippy",
+            "augments existing qiskit",
+            "existing qiskit programs",
+            "experiment tracking aligned"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05063": {
+          "title": "Beyond Co-purchase Relation: Evolution of Complementary Recommendations at Allegro",
+          "keywords": [
+            "co-purchase",
+            "active users monthly",
+            "adds professional camera",
+            "another camera body",
+            "architectures effectively filters",
+            "authentic user behaviour"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05069": {
+          "title": "A Structured Debate-Mixture-of-Agents Framework for Complex Clinical Diagnostic Decision Support",
+          "keywords": [
+            "dmoa",
+            "token budget",
+            "ablation experiments showed",
+            "budget affected performance",
+            "clinical diagnostic decision",
+            "complex clinical diagnostic"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05097": {
+          "title": "NEAT-POCKET: Pocket-Conditioned Autoregressive 3D Molecular Generation with a Neighborhood-Guided Set Transformer",
+          "keywords": [
+            "neat-pocket",
+            "molecular generation",
+            "atom",
+            "pocket-conditioned",
+            "accelerate early-stage drug",
+            "achieves competitive structure-based"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05117": {
+          "title": "TIER: Threat Implicitness Benchmark for Evaluating LLM Safety Behaviors",
+          "keywords": [
+            "threat implicitness benchmark",
+            "llm safety",
+            "safety behaviors",
+            "safety evaluation",
+            "threat levels",
+            "tier"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05133": {
+          "title": "A Schema Bounded Language Model for Refining Robot Policies Without Destabilizing Local Learning",
+          "keywords": [
+            "tick-level action selection",
+            "double dqn",
+            "active policy parameters",
+            "bound ucb bandit",
+            "central llm generates",
+            "combines large language"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05143": {
+          "title": "A Human-in-the-Loop Framework for AI-Assisted Scoring in Large-Scale Writing Assessment",
+          "keywords": [
+            "ai-assisted scoring",
+            "national assessment",
+            "ai particularly large",
+            "ai-assisted scoring framework",
+            "ai-supported review workflows",
+            "approximately student responses"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05150": {
+          "title": "Beyond Stationarity in Time Series: Discovering Causal Structures and Latent Regimes via Markov Blankets",
+          "keywords": [
+            "time series",
+            "causal discovery",
+            "causal structure",
+            "rcbnb-mb",
+            "causal graphs",
+            "markov blankets"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05157": {
+          "title": "AxQM: A Textbook-Scale Benchmark for Formal Proof Synthesis in a Library of Finite-Dimensional Quantum Mechanics",
+          "keywords": [
+            "finite-dimensional quantum mechanics",
+            "proof",
+            "axqm",
+            "any logical gaps",
+            "arguments carry idealizations",
+            "assistant where machine"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05194": {
+          "title": "Phase Transition Frequency as a Training Time Predictor of Test Accuracy in ResNets",
+          "keywords": [
+            "cifar-100",
+            "test accuracy",
+            "transition count",
+            "cifar-10",
+            "additional analyses discipline",
+            "against effective rank"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05221": {
+          "title": "A Verifier-Guided Explainable Reasoning Framework with Gold-Anchored QLoRA, Task-Aware Mixture-of-Experts, and Group-Relative RLVR",
+          "keywords": [
+            "explainable reasoning framework",
+            "gold-anchored qlora task-aware",
+            "verifier-guided explainable reasoning",
+            "candidate responses",
+            "group-relative rlvr",
+            "symbolic verification"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05235": {
+          "title": "PRICE: A Systematic Study of LLM Adaptation Choices for Bitcoin Price Forecasting",
+          "keywords": [
+            "bitcoin price forecasting",
+            "adaptation choices",
+            "ctf prompting",
+            "numerical representation",
+            "price achieves",
+            "zero-temperature decoding"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05258": {
+          "title": "Ask Before You Optimize: Dynamic Pre-Formulation Clarification for Interactive Optimization",
+          "keywords": [
+            "interactive optimization",
+            "pre-formulation clarification",
+            "slot recovery",
+            "interopt",
+            "agent knows when",
+            "agents through bounded"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05269": {
+          "title": "CONTINUITY: Security-Context Contracts for Composable LLM Agent Controls",
+          "keywords": [
+            "external effect",
+            "continuity",
+            "llm agent",
+            "controls",
+            "actions cross component",
+            "agent execution requires"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05309": {
+          "title": "How Does mHC Use Its Residual Streams? Selective Routing and Near-Identity Mixing",
+          "keywords": [
+            "average score",
+            "increases perplexity",
+            "residual pathway",
+            "streams",
+            "residual mixing",
+            "mhc"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05335": {
+          "title": "The History Is the Detector: Executing CVE Patch History, End-to-End",
+          "keywords": [
+            "fixing commits",
+            "bugstone-e2e",
+            "detection rules",
+            "cve",
+            "advisory leaving much",
+            "anchors fix semantics"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05364": {
+          "title": "Design Docs Are All You Need: An AI-native Machine-Learning Performance Tool",
+          "keywords": [
+            "design docs",
+            "machine-learning performance",
+            "ai coding agents",
+            "ai-native machine-learning performance",
+            "almost no code",
+            "analytical roll-up mode"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05370": {
+          "title": "When LLM Decompilers Recompile More and Preserve Less",
+          "keywords": [
+            "every shipped test",
+            "pass every shipped",
+            "decompilers",
+            "behavioral comparison oracle",
+            "compiled machine code",
+            "cve-grounded functions recompilability"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05403": {
+          "title": "RegionFed: Federated Learning for Personalized Query Understanding in Heterogeneous Retail Environments",
+          "keywords": [
+            "regionfed",
+            "federated",
+            "regional",
+            "adaptively controls personalization",
+            "amazon esci amazon",
+            "amazon reviews leaf-femnist"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05404": {
+          "title": "Diffusion TV: Experiencing Diffusion Models through Tangible, Embodied Interaction",
+          "keywords": [
+            "diffusion tv",
+            "embodied",
+            "ai art installation",
+            "alternative embodied mode",
+            "antenna audiences control",
+            "channels featuring ai-generated"
+          ],
+          "matched_keywords": []
+        }
+      }
+    }
+  }
 }
