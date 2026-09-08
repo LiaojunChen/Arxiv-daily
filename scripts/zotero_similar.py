@@ -313,6 +313,10 @@ def compute_similarity(
                         print(f"[ERROR] Rerank batch {batch_idx + 1} failed: {e}")
                         failed = True
                         failed_batches += 1
+            if failed:
+                # The whole run will use the fallback scale; do not spend the
+                # remaining request budget on scores that will be discarded.
+                break
     if failed and interest_keywords:
         print("[WARN] Reranker unavailable; using keyword-profile ranking for the entire run.")
         weights = {term: max(0.0, float((keyword_weights or {}).get(term, 1))) for term in interest_keywords}
