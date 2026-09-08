@@ -167,6 +167,25 @@ def test_download_limited_skips_oversized_source_before_streaming(monkeypatch):
     assert response.iterated is False
 
 
+def test_download_limited_retries_transient_connection_failure(monkeypatch):
+    response = _DownloadResponse(24)
+    calls = []
+
+    def download(*args, **kwargs):
+        calls.append(args[0])
+        if len(calls) == 1:
+            raise affiliation_extractor.requests.ConnectionError("connection reset")
+        return response
+
+    monkeypatch.setattr(affiliation_extractor.requests, "get", download)
+    monkeypatch.setattr(affiliation_extractor.time, "sleep", lambda _: None)
+
+    assert affiliation_extractor._download_limited(
+        "https://arxiv.org/e-print/test"
+    ) == b"should not be downloaded"
+    assert len(calls) == 2
+
+
 def test_extract_affiliations_from_ieee_author_sentence():
     paper_text = r"""
     \IEEEauthorblockA{Ada Lovelace and Grace Hopper are with

@@ -28,6 +28,9 @@ LLM_REQUEST_TIMEOUT = (10, 25)
 MAX_DOWNLOAD_BYTES = 12 * 1024 * 1024
 MAX_CONTEXT_CHARS = 12000
 USER_AGENT = "arXivDaily/1.0"
+DOWNLOAD_ATTEMPTS = 2
+FAILURE_CACHE_VERSION = 2
+FAILURE_CACHE_TTL_SECONDS = 3600
 _last_request_at = 0.0
 AFFILIATION_PATTERN = re.compile(
     r"(?:\b(?:university|institute|college|school|laboratory|laboratories|"
@@ -130,46 +133,50 @@ def _normalize_arxiv_id(arxiv_id: str) -> str:
 
 def _download_limited(url: str) -> bytes | None:
     global _last_request_at
-    delay = 3.0 - (time.monotonic() - _last_request_at)
-    if delay > 0:
-        time.sleep(delay)
-    _last_request_at = time.monotonic()
-    try:
-        with requests.get(
-            url,
-            headers={"User-Agent": USER_AGENT},
-            stream=True,
-            timeout=REQUEST_TIMEOUT,
-        ) as response:
-            if response.status_code == 404:
-                return None
-            response.raise_for_status()
-
-            content_length = response.headers.get("Content-Length")
-            try:
-                content_length = int(content_length) if content_length else None
-            except (TypeError, ValueError):
-                content_length = None
-            if content_length and content_length > MAX_DOWNLOAD_BYTES:
-                print(
-                    f"[WARN] Skipping oversized download ({content_length} bytes): {url}"
-                )
-                return None
-
-            chunks = []
-            size = 0
-            for chunk in response.iter_content(chunk_size=1024 * 256):
-                if not chunk:
-                    continue
-                chunks.append(chunk)
-                size += len(chunk)
-                if size > MAX_DOWNLOAD_BYTES:
-                    print(f"[WARN] Download exceeded size limit; using fallback: {url}")
+    for attempt in range(1, DOWNLOAD_ATTEMPTS + 1):
+        delay = 3.0 - (time.monotonic() - _last_request_at)
+        if delay > 0:
+            time.sleep(delay)
+        _last_request_at = time.monotonic()
+        try:
+            with requests.get(
+                url,
+                headers={"User-Agent": USER_AGENT},
+                stream=True,
+                timeout=REQUEST_TIMEOUT,
+            ) as response:
+                if response.status_code == 404:
                     return None
-            return b"".join(chunks)
-    except requests.RequestException as exc:
-        print(f"[WARN] Failed to download {url}: {exc}")
-        return None
+                response.raise_for_status()
+
+                content_length = response.headers.get("Content-Length")
+                try:
+                    content_length = int(content_length) if content_length else None
+                except (TypeError, ValueError):
+                    content_length = None
+                if content_length and content_length > MAX_DOWNLOAD_BYTES:
+                    print(
+                        f"[WARN] Skipping oversized download ({content_length} bytes): {url}"
+                    )
+                    return None
+
+                chunks = []
+                size = 0
+                for chunk in response.iter_content(chunk_size=1024 * 256):
+                    if not chunk:
+                        continue
+                    chunks.append(chunk)
+                    size += len(chunk)
+                    if size > MAX_DOWNLOAD_BYTES:
+                        print(f"[WARN] Download exceeded size limit; using fallback: {url}")
+                        return None
+                return b"".join(chunks)
+        except requests.RequestException as exc:
+            if attempt < DOWNLOAD_ATTEMPTS:
+                print(f"[WARN] Download failed; retrying {url}: {exc}")
+            else:
+                print(f"[WARN] Failed to download {url}: {exc}")
+    return None
 
 
 def _decode_bytes(data: bytes) -> str:
@@ -642,7 +649,10 @@ def enrich_affiliations_for_display_papers(paper_groups: list[list[dict]], *, ca
         if arxiv_id in attempted_ids:
             continue
         record = cache.get(paper_cache_key(paper), {})
-        if record.get("expires_at", 0) > now:
+        if (
+            record.get("expires_at", 0) > now
+            and record.get("failure_cache_version") == FAILURE_CACHE_VERSION
+        ):
             paper["affiliation_status"] = "unresolved"
             continue
         if time.monotonic() - started >= budget_seconds:
@@ -651,7 +661,11 @@ def enrich_affiliations_for_display_papers(paper_groups: list[list[dict]], *, ca
             break
         attempted_ids.add(arxiv_id)
         # Cache failures briefly, including exceptions and missing source text.
-        cache[paper_cache_key(paper)] = {"affiliations": [], "expires_at": now + 6 * 3600}
+        cache[paper_cache_key(paper)] = {
+            "affiliations": [],
+            "expires_at": now + FAILURE_CACHE_TTL_SECONDS,
+            "failure_cache_version": FAILURE_CACHE_VERSION,
+        }
         paper["affiliation_status"] = "unresolved"
 
         try:

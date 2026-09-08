@@ -100,6 +100,34 @@ def test_affiliation_cache_and_budget(tmp_path, monkeypatch):
     assert pending["affiliation_status"] == "pending"
 
 
+def test_legacy_negative_affiliation_cache_is_retried(tmp_path, monkeypatch):
+    calls = []
+    monkeypatch.setattr(
+        ae,
+        "fetch_paper_text",
+        lambda key: calls.append(key) or r"\sfsetaffiliation{Salesforce AI Research}",
+    )
+    monkeypatch.setattr(ae, "OPENAI_API_KEY", "")
+    cache = tmp_path / "aff.json"
+    target = paper("2609.05295")
+    ae.write_json(
+        cache,
+        {
+            ae.paper_cache_key(target): {
+                "affiliations": [],
+                "expires_at": ae.time.time() + 6 * 3600,
+            }
+        },
+    )
+
+    ae.enrich_affiliations_for_display_papers([[target]], cache_path=cache)
+
+    assert calls == ["2609.05295"]
+    assert target["affiliations"] == [
+        {"author": "Alice Smith", "affiliation": "Salesforce AI Research"}
+    ]
+
+
 def test_old_email_feedback_survives_next_run_and_reload(tmp_path):
     state = tmp_path / "profile.json"
     profile = InterestProfile(state)
