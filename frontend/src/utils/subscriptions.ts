@@ -1,5 +1,6 @@
 import type { AppSettings, Paper } from "../types";
 import { getUniqueAffiliations } from "./affiliations";
+import institutionAliases from "../../../data/institution_aliases.json";
 
 type SubscriptionSettings = Pick<AppSettings, "followed_authors" | "followed_institutions">;
 
@@ -11,17 +12,16 @@ function normalizeSubscriptionValue(value: string): string {
     .trim();
 }
 
-function matchesSubscription(value: string, subscription: string): boolean {
+function matchesSubscription(value: string, subscription: string, institution = false): boolean {
   const normalizedValue = normalizeSubscriptionValue(value);
   const normalizedSubscription = normalizeSubscriptionValue(subscription);
   if (!normalizedValue || !normalizedSubscription) return false;
 
-  const valueWithBoundaries = ` ${normalizedValue} `;
-  const subscriptionWithBoundaries = ` ${normalizedSubscription} `;
-  return (
-    valueWithBoundaries.includes(subscriptionWithBoundaries) ||
-    subscriptionWithBoundaries.includes(valueWithBoundaries)
-  );
+  if (!institution) return normalizedValue === normalizedSubscription;
+  const group = Object.entries(institutionAliases)
+    .map(([canonical, aliases]) => [canonical, ...aliases].map(normalizeSubscriptionValue))
+    .find((names) => names.includes(normalizedSubscription));
+  return (group ?? [normalizedSubscription]).some((name) => ` ${normalizedValue} `.includes(` ${name} `));
 }
 
 function getLocalMatchReason(paper: Paper, settings: SubscriptionSettings): string | null {
@@ -32,7 +32,7 @@ function getLocalMatchReason(paper: Paper, settings: SubscriptionSettings): stri
 
   const institution = settings.followed_institutions.find((followedInstitution) =>
     getUniqueAffiliations(paper.affiliations).some((affiliation) =>
-      matchesSubscription(affiliation, followedInstitution),
+      matchesSubscription(affiliation, followedInstitution, true),
     ),
   );
   return institution ? `本地机构订阅:${institution}` : null;
@@ -43,10 +43,10 @@ export function mergeFollowedPapers(
   discoveredPapers: Paper[],
   settings: SubscriptionSettings,
 ): Paper[] {
-  const paperIds = new Set(serverFollowedPapers.map((paper) => paper.arxiv_id));
-  const followedPapers = [...serverFollowedPapers];
+  const paperIds = new Set<string>();
+  const followedPapers: Paper[] = [];
 
-  for (const paper of discoveredPapers) {
+  for (const paper of [...serverFollowedPapers, ...discoveredPapers]) {
     if (paperIds.has(paper.arxiv_id)) continue;
 
     const matchedBy = getLocalMatchReason(paper, settings);

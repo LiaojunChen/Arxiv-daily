@@ -41,3 +41,11 @@ def load_interest_state(path: str | Path) -> tuple[list[str], list[str]]:
         print(f"[WARN] Interest profile {profile_path} is not a JSON object.")
         return [], []
     return _terms(data.get("keywords")), _terms(data.get("negative_keywords"))
+
+
+def load_interest_weights(path: str | Path) -> dict[str, float]:
+    try:
+        data = json.loads(Path(path).read_text(encoding="utf-8"))
+        return {item["term"]: float(item.get("score", 1)) for item in data.get("keywords", []) if isinstance(item, dict)}
+    except (OSError, ValueError, TypeError, AttributeError):
+        return {}

@@ -11,11 +11,49 @@ from __future__ import annotations
 
 import math
 import re
+from collections import Counter
 from collections.abc import Callable, Sequence
 from typing import TypeVar
 
 
 T = TypeVar("T")
+
+
+def canonical_arxiv_id(value: str) -> str:
+    value = str(value or "").strip()
+    value = re.sub(r"^https?://(?:www\.)?arxiv\.org/(?:abs|pdf)/", "", value)
+    value = re.sub(r"^(?:oai:arXiv.org:|ar[Xx]iv:)", "", value)
+    value = re.sub(r"(?:\.pdf)?(?:[?#].*)?$", "", value)
+    return re.sub(r"v\d+$", "", value)
+
+
+def paper_keywords(documents: Sequence[str], limit: int = 6) -> list[list[str]]:
+    """Corpus-weighted contiguous phrases, independent of the user's interests."""
+    stop = _SIMILARITY_STOPWORDS | set("a an the of and or to in on for is are we our it as by be can new more that this these those learning learned propose proposed presents use via from than not has have was were will how which at its each both such their they all only into over under without across".split())
+    counts = []
+    for text in documents:
+        counter = Counter()
+        for sentence in re.split(r"[\n.!?;:]", text.lower()):
+            tokens = re.findall(r"[a-z][a-z0-9-]{1,}", sentence)
+            for n in (1, 2, 3):
+                for i in range(len(tokens) - n + 1):
+                    words = tokens[i:i+n]
+                    if any(word in stop for word in words):
+                        continue
+                    counter[" ".join(words)] += 1
+        counts.append(counter)
+    df = Counter(term for counter in counts for term in counter)
+    output = []
+    for counter in counts:
+        ranked = sorted(counter, key=lambda term: (-(1 + math.log(counter[term])) * (1 + math.log((1 + len(documents)) / (1 + df[term]))) * (1 + .4 * (len(term.split()) - 1)), term))
+        selected = []
+        for term in ranked:
+            if not any(set(term.split()) <= set(existing.split()) for existing in selected):
+                selected.append(term)
+            if len(selected) >= limit:
+                break
+        output.append(selected)
+    return output
 
 _TOKEN_RE = re.compile(r"[A-Za-z0-9][A-Za-z0-9-]{1,}")
 _SIMILARITY_STOPWORDS = {
@@ -56,12 +94,25 @@ def matched_keywords_for_text(text: str, keywords: Sequence[str] | None) -> list
     matches: list[str] = []
     for keyword in normalize_keywords(keywords):
         tokens = keyword.split()
-        if keyword in text_lower:
+        if phrase_matches(text_lower, keyword):
             matches.append(keyword)
             continue
-        if tokens and sum(token in text_lower for token in tokens) / len(tokens) >= 0.67:
+        if len(tokens) >= 3 and sum(phrase_matches(text_lower, token) for token in tokens) / len(tokens) >= 0.67:
             matches.append(keyword)
     return matches
+
+
+def phrase_matches(text: str, phrase: str) -> bool:
+    """Match complete Latin words; CJK phrases may occur without spaces."""
+    phrase = normalize_keyword(phrase)
+    if not phrase:
+        return False
+    pattern = r"[\s-]+".join(re.escape(part) for part in phrase.split())
+    if re.fullmatch(r"[a-z]{4,}", phrase.split()[-1]) and not phrase.endswith("s"):
+        pattern += "s?"
+    left = r"(?<![\w])" if phrase[0].isascii() and phrase[0].isalnum() else ""
+    right = r"(?![\w])" if phrase[-1].isascii() and phrase[-1].isalnum() else ""
+    return re.search(left + pattern + right, str(text).lower()) is not None
 
 
 def negative_feedback_penalty(
@@ -137,7 +188,11 @@ def mmr_select(
     if limit <= 0 or not items:
         return []
 
-    candidates = list(items)
+    # Unknown/zero relevance must not become eligible merely through diversity.
+    candidates = [item for item in items if score_getter(item) is not None
+                  and math.isfinite(float(score_getter(item))) and float(score_getter(item)) > 0]
+    if not candidates:
+        return []
     if len(candidates) <= limit:
         return candidates
 
@@ -159,25 +214,23 @@ def mmr_select(
         relevance = [0.5 + 0.5 * (score - low) / (high - low) for score in raw_scores]
 
     selected_indices: list[int] = []
+    tokens = [_similarity_tokens(text_getter(item)) for item in candidates]
+    redundancy_scores = [0.0] * len(candidates)
     available = set(range(len(candidates)))
     while available and len(selected_indices) < limit:
         best_index = -1
         best_value = float("-inf")
         for index in sorted(available):
-            redundancy = max(
-                (
-                    token_jaccard_similarity(
-                        text_getter(candidates[index]), text_getter(candidates[selected_index])
-                    )
-                    for selected_index in selected_indices
-                ),
-                default=0.0,
-            )
+            redundancy = redundancy_scores[index]
             value = diversity_lambda * relevance[index] - (1.0 - diversity_lambda) * redundancy
             if value > best_value:
                 best_index = index
                 best_value = value
         selected_indices.append(best_index)
         available.remove(best_index)
+        for index in available:
+            union = tokens[index] | tokens[best_index]
+            similarity = len(tokens[index] & tokens[best_index]) / len(union) if union else 0.0
+            redundancy_scores[index] = max(redundancy_scores[index], similarity)
 
     return [candidates[index] for index in selected_indices]

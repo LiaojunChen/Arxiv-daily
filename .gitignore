@@ -12,6 +12,7 @@ wheels/
 
 # Project specific
 data/papers.json
+data/cache/
 frontend/node_modules/
 frontend/dist/
 cloudflare/feedback-worker/node_modules/

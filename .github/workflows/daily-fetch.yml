@@ -5,20 +5,28 @@ on:
     # UTC 22:00 = Beijing 06:00 (next day)
     - cron: "0 22 * * *"
   workflow_dispatch: # Manual trigger for testing
+  workflow_call:
 
 permissions:
-  contents: read
+  contents: write
+  issues: write
   pages: write
   id-token: write
 
 concurrency:
-  group: github-pages
+  group: interest-profile
   cancel-in-progress: false
 
 jobs:
   fetch-and-deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 45
+    env:
+      PYTHONPATH: src
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_REPOSITORY: ${{ github.repository }}
+      CLOUDFLARE_FEEDBACK_API_URL: ${{ vars.CLOUDFLARE_FEEDBACK_API_URL }}
+      CLOUDFLARE_FEEDBACK_SYNC_TOKEN: ${{ secrets.CLOUDFLARE_FEEDBACK_SYNC_TOKEN }}
     environment:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
@@ -26,6 +34,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7.0.0
+        with:
+          ref: ${{ github.ref }}
 
       - name: Set up Python
         uses: actions/setup-python@v6.3.0
@@ -35,7 +45,19 @@ jobs:
       - name: Install Python dependencies
         run: python -m pip install --disable-pip-version-check -r scripts/requirements.txt
 
-      - name: Run paper fetch
+      - name: Prepare config
+        env:
+          CUSTOM_CONFIG: ${{ vars.CUSTOM_CONFIG }}
+        run: bash .github/scripts/prepare-config.sh
+
+      - name: Restore incremental paper caches
+        uses: actions/cache@v4
+        with:
+          path: data/cache
+          key: paper-cache-v1-${{ github.ref_name }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: paper-cache-v1-${{ github.ref_name }}-
+
+      - name: Sync feedback and generate one snapshot
         env:
           ZOTERO_ID: ${{ secrets.ZOTERO_ID }}
           ZOTERO_KEY: ${{ secrets.ZOTERO_KEY }}
@@ -48,7 +70,30 @@ jobs:
           AFFILIATION_MAX_PAPERS: ${{ vars.AFFILIATION_MAX_PAPERS }}
           AFFILIATION_MAX_LLM_PAPERS: ${{ vars.AFFILIATION_MAX_LLM_PAPERS }}
           HF_FALLBACK_DAYS: ${{ vars.HF_FALLBACK_DAYS }}
-        run: python scripts/fetch_papers.py
+          AFFILIATION_BUDGET_SECONDS: ${{ vars.AFFILIATION_BUDGET_SECONDS }}
+        run: python -m zotero_arxiv_daily.daily
+
+      - name: Persist feedback and run history
+        run: |
+          if [[ -n "$(git status --short data/interest_profile.json)" ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data/interest_profile.json
+            git commit -m "Persist daily recommendation snapshot and feedback"
+            git push
+          fi
+
+      - name: Acknowledge committed feedback
+        env:
+          ACKNOWLEDGE_PROCESSED_FEEDBACK: "true"
+        run: python -m zotero_arxiv_daily.feedback_sync
+
+      - name: Upload shared recommendation snapshot
+        uses: actions/upload-artifact@v4
+        with:
+          name: recommendation-snapshot
+          path: data/papers.json
+          retention-days: 30
 
       - name: Set up Node.js
         uses: actions/setup-node@v7.0.0
@@ -82,3 +127,47 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deploy
         uses: actions/deploy-pages@v5.0.0
+
+  send-email:
+    needs: fetch-and-deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7.0.0
+      - name: Check email configuration
+        id: email-config
+        env:
+          SENDER: ${{ secrets.SENDER }}
+          RECEIVER: ${{ secrets.RECEIVER }}
+          SENDER_PASSWORD: ${{ secrets.SENDER_PASSWORD }}
+        run: bash .github/scripts/check-email-config.sh
+      - uses: actions/setup-python@v6.3.0
+        if: steps.email-config.outputs.enabled == 'true'
+        with:
+          python-version: "3.13"
+      - uses: actions/download-artifact@v4
+        if: steps.email-config.outputs.enabled == 'true'
+        with:
+          name: recommendation-snapshot
+          path: data
+      - name: Prepare config
+        if: steps.email-config.outputs.enabled == 'true'
+        env:
+          CUSTOM_CONFIG: ${{ vars.CUSTOM_CONFIG }}
+        run: bash .github/scripts/prepare-config.sh
+      - name: Send the deployed snapshot
+        if: steps.email-config.outputs.enabled == 'true'
+        env:
+          PYTHONPATH: src
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          SENDER: ${{ secrets.SENDER }}
+          RECEIVER: ${{ secrets.RECEIVER }}
+          SENDER_PASSWORD: ${{ secrets.SENDER_PASSWORD }}
+          SMTP_SERVER: ${{ secrets.SMTP_SERVER || 'smtp.qq.com' }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT || '465' }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY || secrets.SILICONFLOW_API_KEY }}
+          OPENAI_API_BASE: ${{ secrets.OPENAI_API_BASE || 'https://api.siliconflow.cn/v1' }}
+          MODEL_NAME: ${{ secrets.MODEL_NAME || 'Qwen/Qwen3-8B' }}
+        run: |
+          python -m pip install -r scripts/requirements.txt
+          python -m zotero_arxiv_daily.snapshot_mail

@@ -74,6 +74,7 @@ interest:
 
 feedback:
   enabled: true
+  allowed_users: null # GitHub logins; null allows only the repository owner. [] denies all.
   github_repo: ${oc.env:GITHUB_REPOSITORY,null}
   github_token: ${oc.env:GITHUB_TOKEN,null}
   issue_label: paper-feedback

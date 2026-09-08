@@ -1,0 +1,13 @@
+{
+  "Massachusetts Institute of Technology": ["MIT", "麻省理工学院"],
+  "Tsinghua University": ["THU", "清华大学"],
+  "Peking University": ["PKU", "北京大学"],
+  "University of Chinese Academy of Sciences": ["UCAS", "中国科学院大学"],
+  "Chinese Academy of Sciences": ["CAS", "中国科学院"],
+  "University of Science and Technology of China": ["USTC", "中国科学技术大学"],
+  "Stanford University": ["Stanford", "斯坦福大学"],
+  "University of California Berkeley": ["UC Berkeley", "University of California, Berkeley", "加州大学伯克利分校"],
+  "Carnegie Mellon University": ["CMU", "卡内基梅隆大学"],
+  "ETH Zurich": ["ETH Zürich", "Swiss Federal Institute of Technology Zurich", "苏黎世联邦理工学院"],
+  "National University of Singapore": ["NUS", "新加坡国立大学"]
+}
