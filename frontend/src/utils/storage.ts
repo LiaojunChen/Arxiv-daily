@@ -27,3 +27,7 @@ export function saveSettings(settings: AppSettings): void {
   localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
   window.dispatchEvent(new Event(SETTINGS_UPDATED_EVENT));
 }
+
+export function hasSavedSettings(): boolean {
+  return localStorage.getItem(SETTINGS_KEY) !== null;
+}

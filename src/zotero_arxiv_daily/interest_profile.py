@@ -73,6 +73,9 @@ class InterestProfile:
             data.setdefault("processed_feedback", [])
             data.setdefault("feedback_history", [])
             data.setdefault("last_run", {})
+            data.setdefault("runs", {})
+            if data["last_run"].get("run_id"):
+                data["runs"].setdefault(data["last_run"]["run_id"], data["last_run"])
             self._ensure_default_keywords(data)
             return data
 
@@ -156,13 +159,16 @@ class InterestProfile:
         if not feedback_items:
             return []
 
-        scores = {keyword: score * self.score_decay for keyword, score in self._keyword_scores().items()}
+        now = datetime.now(timezone.utc)
+        last_decay = self.data.get("last_feedback_decay_at", now.isoformat())
+        elapsed = max(0, (now - datetime.fromisoformat(last_decay.replace("Z", "+00:00"))).total_seconds()) / 86400
+        decay = self.score_decay ** elapsed
+        scores = {keyword: score * decay for keyword, score in self._keyword_scores().items()}
         negative_scores = {
-            keyword: score * self.score_decay
+            keyword: score * decay
             for keyword, score in self._negative_keyword_scores().items()
         }
         processed = set(str(item) for item in self.data.get("processed_feedback", []))
-        last_papers = self.data.get("last_run", {}).get("papers", {})
         applied: list[dict[str, Any]] = []
 
         for item in feedback_items:
@@ -171,17 +177,23 @@ class InterestProfile:
                 continue
 
             paper_id = str(item.get("paper_id"))
-            paper = last_papers.get(paper_id)
-            if not paper and isinstance(item.get("paper"), dict):
+            run_id = item.get("run_id")
+            run = self.data.get("runs", {}).get(run_id, {})
+            if not run and self.data.get("last_run", {}).get("run_id") == run_id:
+                run = self.data["last_run"]
+            paper = run.get("papers", {}).get(paper_id)
+            if not paper and item.get("source") == "cloudflare" and isinstance(item.get("paper"), dict):
                 # Pages feedback includes a compact paper snapshot because a
                 # deployed card can outlive the email run stored in last_run.
                 paper = item["paper"]
-            processed.add(feedback_key)
             if not paper:
-                logger.warning(f"Feedback for unknown paper_id {paper_id} was marked processed but not applied.")
+                logger.warning(f"Feedback for unknown run/paper {run_id}/{paper_id} remains pending.")
                 continue
 
             action = item.get("action")
+            if action not in {"like", "interested", "not_interested"}:
+                continue
+            processed.add(feedback_key)
             keywords = normalize_keywords(paper.get("keywords", []) + paper.get("matched_keywords", []))
             if not keywords:
                 keywords = normalize_keywords(_title_phrases(paper.get("title", "")))
@@ -213,11 +225,13 @@ class InterestProfile:
             applied.append(record)
 
         if applied:
+            self.data["last_feedback_decay_at"] = now.isoformat()
             history = self.data.get("feedback_history", []) + applied
             self.data["feedback_history"] = history[-self.max_feedback_history :]
             self.data["keywords"] = self._scores_to_keyword_items(scores)
             self.data["negative_keywords"] = self._scores_to_keyword_items(negative_scores)
-            self.data["processed_feedback"] = sorted(processed)[-1000:]
+            # Never discard idempotency keys by lexicographic order.
+            self.data["processed_feedback"] = sorted(processed)
             self.data["updated_at"] = utcnow_iso()
             logger.info(f"Applied {len(applied)} feedback item(s) to the interest profile.")
 
@@ -253,6 +267,7 @@ class InterestProfile:
             "exploration_keywords": exploration_keywords,
             "papers": paper_map,
         }
+        self.data.setdefault("runs", {})[run_id] = self.data["last_run"]
         self.data["updated_at"] = utcnow_iso()
 
     def save(self) -> None:

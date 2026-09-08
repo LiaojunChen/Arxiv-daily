@@ -12,6 +12,7 @@ they are never inferred from abstract text because that creates false labels.
 import re
 import urllib.request
 import xml.etree.ElementTree as ET
+from subscriptions import matches_author, matches_institution
 
 from config import (
     ARXIV_QUERY,
@@ -37,6 +38,8 @@ def get_latest_papers(categories: str = None) -> list[dict]:
         if c.strip()
     ]
     query = "+".join(cats)
+    if not cats or any(not re.fullmatch(r"[A-Za-z][A-Za-z0-9.-]*", cat) for cat in cats):
+        raise ValueError("ARXIV_QUERY must contain category codes such as cs.AI+cs.LG")
     url = f"https://rss.arxiv.org/atom/{query}"
 
     print(f"[INFO] Fetching ArXiv RSS feed: {url}")
@@ -148,6 +151,7 @@ def _parse_atom_feed(xml_data: str) -> list[dict]:
         papers.append(
             {
                 "arxiv_id": arxiv_id,
+                "version": (re.search(r"v\d+$", id_full).group() if re.search(r"v\d+$", id_full) else None),
                 "title": title,
                 "authors": author_list,
                 "affiliations": _dedupe_affiliations(affiliations),
@@ -173,7 +177,7 @@ def filter_by_authors(papers: list[dict]) -> list[dict]:
         paper_authors_lower = [a.lower() for a in paper.get("authors", [])]
         for fa in followed:
             for pa in paper_authors_lower:
-                if fa in pa:
+                if matches_author(pa, fa):
                     matched.append({**paper, "matched_by": f"author:{fa}", "source": "followed"})
                     break
             else:
@@ -191,7 +195,7 @@ def filter_by_institutions(papers: list[dict]) -> list[dict]:
     for paper in papers:
         paper_affs = [a.get("affiliation", "").lower() for a in paper.get("affiliations", [])]
         for inst in followed:
-            if any(inst in aff for aff in paper_affs):
+            if any(matches_institution(aff, inst) for aff in paper_affs):
                 matched.append({**paper, "matched_by": f"institution:{inst}", "source": "followed"})
                 break
     return matched

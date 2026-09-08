@@ -87,7 +87,7 @@ export async function submitPaperFeedback(
         client_id: feedbackClientId(),
         paper: {
           title: paper.title,
-          keywords: paper.matched_keywords ?? [],
+          keywords: paper.keywords ?? [],
           matched_keywords: paper.matched_keywords ?? [],
         },
       }),

@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import type { AppSettings, PapersData, Paper } from "../types";
 import { getUniqueAffiliations } from "../utils/affiliations";
-import { loadSettings, SETTINGS_UPDATED_EVENT } from "../utils/storage";
+import { hasSavedSettings, loadSettings, SETTINGS_UPDATED_EVENT } from "../utils/storage";
 import { mergeFollowedPapers } from "../utils/subscriptions";
 
 export function usePapers() {
@@ -44,8 +44,8 @@ export function usePapers() {
     () =>
       mergeFollowedPapers(
         data?.followed_papers ?? [],
-        [...(data?.similar_papers ?? []), ...(data?.hf_papers ?? [])],
-        settings,
+        data?.candidate_papers ?? [...(data?.similar_papers ?? []), ...(data?.hf_papers ?? [])],
+        !hasSavedSettings() && data?.subscriptions ? data.subscriptions : settings,
       ),
     [data, settings],
   );

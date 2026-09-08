@@ -18,6 +18,8 @@ export interface Paper {
   similarity_score?: number;
   matched_by?: string;
   matched_keywords?: string[];
+  keywords?: string[];
+  affiliation_status?: "resolved" | "unresolved" | "pending";
   suppressed_keywords?: string[];
   recommendation_reason?: string;
   hf_upvotes?: number;
@@ -31,6 +33,8 @@ export interface PapersData {
   similar_papers: Paper[];
   followed_papers: Paper[];
   hf_papers: Paper[];
+  candidate_papers?: Paper[];
+  subscriptions?: Pick<AppSettings, "followed_authors" | "followed_institutions">;
 }
 
 export interface AppSettings {

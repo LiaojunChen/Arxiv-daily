@@ -11,6 +11,7 @@ from urllib.request import Request, urlopen
 from loguru import logger
 
 from .protocol import Paper
+from .recommendation import canonical_arxiv_id
 
 
 MARKER_START = "<!-- zotero-arxiv-daily-feedback"
@@ -20,6 +21,8 @@ FEEDBACK_ACTIONS = {"interested", "like", "not_interested"}
 
 def make_paper_id(paper: Paper) -> str:
     raw = paper.url or paper.pdf_url or paper.title
+    if "arxiv.org/" in raw:
+        return canonical_arxiv_id(raw)
     return hashlib.sha1(raw.encode("utf-8")).hexdigest()[:16]
 
 
@@ -100,10 +103,14 @@ class GitHubFeedbackClient:
         token: str | None,
         *,
         auto_close: bool = True,
+        allowed_users: list[str] | None = None,
     ):
         self.repo = _clean_repo(repo)
         self.token = token
         self.auto_close = auto_close
+        self.allowed_users = {str(user).casefold() for user in (
+            allowed_users if allowed_users is not None else [self.repo.split('/')[0]] if self.repo else []
+        )}
 
     @classmethod
     def from_config(cls, config) -> "GitHubFeedbackClient":
@@ -111,7 +118,8 @@ class GitHubFeedbackClient:
         repo = feedback_config.get("github_repo") or os.environ.get("GITHUB_REPOSITORY")
         token = feedback_config.get("github_token") or os.environ.get("GITHUB_TOKEN")
         auto_close = bool(feedback_config.get("auto_close_issues", True))
-        return cls(repo=repo, token=token, auto_close=auto_close)
+        allowed = feedback_config.get("allowed_users")
+        return cls(repo=repo, token=token, auto_close=auto_close, allowed_users=allowed)
 
     def enabled(self) -> bool:
         return bool(self.repo and self.token)
@@ -131,9 +139,14 @@ class GitHubFeedbackClient:
             for issue in issues:
                 if "pull_request" in issue:
                     continue
+                if str(issue.get("user", {}).get("login", "")).casefold() not in self.allowed_users:
+                    continue
                 payload = parse_feedback_body(issue.get("body"))
                 if payload is None:
                     continue
+                # Issue bodies cannot supply authoritative paper metadata.
+                payload.pop("paper", None)
+                payload["source"] = "github"
                 payload["issue_number"] = issue.get("number")
                 payload["issue_url"] = issue.get("html_url")
                 payload["created_at"] = issue.get("created_at")

@@ -11,6 +11,8 @@ import unicodedata
 from html.parser import HTMLParser
 
 import requests
+import time
+from pipeline_state import paper_cache_key, read_json, write_json
 
 from config import (
     AFFILIATION_MAX_LLM_PAPERS,
@@ -26,6 +28,7 @@ LLM_REQUEST_TIMEOUT = (10, 25)
 MAX_DOWNLOAD_BYTES = 12 * 1024 * 1024
 MAX_CONTEXT_CHARS = 12000
 USER_AGENT = "arXivDaily/1.0"
+_last_request_at = 0.0
 AFFILIATION_PATTERN = re.compile(
     r"(?:\b(?:university|institute|college|school|laboratory|laboratories|"
     r"research|researcher|academy|center|centre|department|inc|corp|ltd|"
@@ -126,6 +129,11 @@ def _normalize_arxiv_id(arxiv_id: str) -> str:
 
 
 def _download_limited(url: str) -> bytes | None:
+    global _last_request_at
+    delay = 3.0 - (time.monotonic() - _last_request_at)
+    if delay > 0:
+        time.sleep(delay)
+    _last_request_at = time.monotonic()
     try:
         with requests.get(
             url,
@@ -579,13 +587,19 @@ def _call_llm_for_affiliations(paper: dict, paper_text: str) -> list[dict]:
     return _normalize_affiliation_response(_extract_json_array(content), authors)
 
 
-def enrich_affiliations_for_display_papers(paper_groups: list[list[dict]]) -> int:
+def enrich_affiliations_for_display_papers(paper_groups: list[list[dict]], *, cache_path=None, budget_seconds=900) -> int:
+    cache = read_json(cache_path) if cache_path else {}
+    started = time.monotonic()
+    now = time.time()
     if not OPENAI_API_KEY:
         print("[WARN] No LLM API key set; only deterministic TeX affiliation extraction will run.")
 
     affiliations_by_id: dict[str, list[dict]] = {}
     for group in paper_groups:
         for paper in group:
+            record = cache.get(paper_cache_key(paper), {})
+            if record.get("expires_at", 0) > now and record.get("affiliations"):
+                paper["affiliations"] = record["affiliations"]
             existing = _normalize_existing_affiliations(
                 paper.get("affiliations"), paper.get("authors", [])
             )
@@ -621,9 +635,18 @@ def enrich_affiliations_for_display_papers(paper_groups: list[list[dict]]) -> in
             continue
         if arxiv_id in attempted_ids:
             continue
+        record = cache.get(paper_cache_key(paper), {})
+        if record.get("expires_at", 0) > now:
+            paper["affiliation_status"] = "unresolved"
+            continue
+        if time.monotonic() - started >= budget_seconds:
+            break
         if AFFILIATION_MAX_PAPERS > 0 and len(attempted_ids) >= AFFILIATION_MAX_PAPERS:
             break
         attempted_ids.add(arxiv_id)
+        # Cache failures briefly, including exceptions and missing source text.
+        cache[paper_cache_key(paper)] = {"affiliations": [], "expires_at": now + 6 * 3600}
+        paper["affiliation_status"] = "unresolved"
 
         try:
             paper_text = fetch_paper_text(arxiv_id)
@@ -647,6 +670,7 @@ def enrich_affiliations_for_display_papers(paper_groups: list[list[dict]]) -> in
             paper["affiliations"] = affiliations
             affiliations_by_id[arxiv_id] = affiliations
             enriched_ids.add(arxiv_id)
+            cache[paper_cache_key(paper)] = {"affiliations": affiliations, "expires_at": now + 30 * 86400}
             print(f"[INFO] Extracted affiliations for {arxiv_id}: {len(affiliations)} entries")
 
     # Copies of one paper can appear in multiple tabs. Propagate cached values
@@ -658,5 +682,11 @@ def enrich_affiliations_for_display_papers(paper_groups: list[list[dict]]) -> in
             )
             if arxiv_id in affiliations_by_id:
                 paper["affiliations"] = affiliations_by_id[arxiv_id]
+            paper["affiliation_status"] = "resolved" if paper.get("affiliations") else (
+                "unresolved" if arxiv_id in attempted_ids or paper.get("affiliation_status") == "unresolved" else "pending"
+            )
+
+    if cache_path:
+        write_json(cache_path, {key: value for key, value in cache.items() if value.get("expires_at", 0) > now})
 
     return len(enriched_ids)

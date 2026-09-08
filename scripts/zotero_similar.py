@@ -13,7 +13,11 @@ import sys
 import urllib.request
 import urllib.error
 import requests
-from datetime import datetime
+import math
+import time
+import os
+from pipeline_state import fingerprint, read_json, write_json
+from datetime import datetime, timezone
 from pathlib import Path
 from config import (
     ZOTERO_ID,
@@ -36,6 +40,7 @@ from zotero_arxiv_daily.recommendation import (  # noqa: E402
     mmr_select,
     negative_feedback_penalty,
     recommendation_reason,
+    token_jaccard_similarity,
 )
 
 ZOTERO_TIMEOUT = 15
@@ -93,7 +98,7 @@ def fetch_zotero_items() -> list[dict]:
             try:
                 added_date = datetime.fromisoformat(added_str.replace("Z", "+00:00"))
             except (ValueError, AttributeError):
-                added_date = datetime.min
+                added_date = datetime.min.replace(tzinfo=timezone.utc)
 
             papers.append(
                 {
@@ -118,7 +123,7 @@ def _build_interest_query(zotero_papers: list[dict]) -> str:
 
     # Sort by added_date descending (newest first)
     sorted_papers = sorted(
-        zotero_papers, key=lambda p: p.get("added_date", datetime.min), reverse=True
+        zotero_papers, key=lambda p: p.get("added_date", datetime.min).replace(tzinfo=timezone.utc), reverse=True
     )
 
     intro = (
@@ -207,7 +212,7 @@ def _rerank_batch(query: str, documents: list[str]) -> list[float]:
         raise RuntimeError(
             f"SiliconFlow rerank request failed with HTTP {e.code}: {body[:500]}"
         ) from e
-    except urllib.error.URLError as e:
+    except (urllib.error.URLError, TimeoutError, OSError) as e:
         raise RuntimeError(f"SiliconFlow rerank request failed: {e}") from e
 
     try:
@@ -215,16 +220,25 @@ def _rerank_batch(query: str, documents: list[str]) -> list[float]:
     except json.JSONDecodeError as e:
         raise RuntimeError(f"SiliconFlow rerank response is not valid JSON: {body[:500]}") from e
 
-    results = parsed.get("results")
+    results = parsed.get("results") if isinstance(parsed, dict) else None
     if not isinstance(results, list):
         raise RuntimeError(f"SiliconFlow rerank response missing results list: {parsed}")
 
     # Build ordered list matching the documents order
     scores = [0.0] * len(documents)
-    for item in results:
-        idx = int(item["index"])
-        score = float(item["relevance_score"])
-        scores[idx] = score
+    seen = set()
+    try:
+        for item in results:
+            idx = item["index"]
+            score = float(item["relevance_score"])
+            if type(idx) is not int or idx not in range(len(documents)) or idx in seen or not math.isfinite(score) or not 0 <= score <= 1:
+                raise ValueError("invalid/duplicate rerank result")
+            seen.add(idx)
+            scores[idx] = score
+        if len(seen) != len(documents):
+            raise ValueError("incomplete rerank results")
+    except (KeyError, TypeError, ValueError) as exc:
+        raise RuntimeError(f"Invalid rerank response: {exc}") from exc
 
     return scores
 
@@ -236,6 +250,8 @@ def compute_similarity(
     *,
     interest_keywords: list[str] | None = None,
     suppressed_keywords: list[str] | None = None,
+    keyword_weights: dict[str, float] | None = None,
+    diagnostics: dict | None = None,
 ) -> list[dict]:
     """
     Use SiliconFlow LLM Reranker to score ArXiv papers by relevance to
@@ -254,6 +270,8 @@ def compute_similarity(
     suppressed_keywords = suppressed_keywords or []
     if interest_keywords:
         query = _build_keyword_interest_query(interest_keywords, suppressed_keywords)
+        if keyword_weights:
+            query += "\nInterest weights (higher is more important): " + json.dumps(keyword_weights, sort_keys=True)
     else:
         query = _build_interest_query(zotero_papers or [])
 
@@ -272,6 +290,8 @@ def compute_similarity(
     # Rerank all ArXiv papers in batches.  If the optional rerank secret is
     # absent, a deterministic keyword score still makes the profile useful.
     all_scores = [0.0] * len(arxiv_papers)
+    failed = not bool(SILICONFLOW_API_KEY)
+    failed_batches = 0
     if SILICONFLOW_API_KEY:
         total_batches = (len(arxiv_papers) + SILICONFLOW_BATCH_SIZE - 1) // SILICONFLOW_BATCH_SIZE
         for batch_idx in range(total_batches):
@@ -281,22 +301,35 @@ def compute_similarity(
             documents = [_format_candidate(p) for p in batch]
 
             print(f"[INFO] Reranking batch {batch_idx + 1}/{total_batches} ({len(batch)} papers)...")
-            try:
-                scores = _rerank_batch(query, documents)
-                for i, score in enumerate(scores):
-                    all_scores[start + i] = score
-            except RuntimeError as e:
-                print(f"[ERROR] Rerank batch {batch_idx + 1} failed: {e}")
-                # Keep default 0.0 scores for this batch, continue
-    elif interest_keywords:
-        print("[WARN] SILICONFLOW_API_KEY not set; using deterministic keyword-profile ranking.")
+            for attempt in range(2):
+                try:
+                    scores = _cached_rerank(query, documents)
+                    all_scores[start:end] = scores
+                    break
+                except RuntimeError as e:
+                    if attempt == 0:
+                        time.sleep(1)
+                    else:
+                        print(f"[ERROR] Rerank batch {batch_idx + 1} failed: {e}")
+                        failed = True
+                        failed_batches += 1
+            if failed:
+                # The whole run will use the fallback scale; do not spend the
+                # remaining request budget on scores that will be discarded.
+                break
+    if failed and interest_keywords:
+        print("[WARN] Reranker unavailable; using keyword-profile ranking for the entire run.")
+        weights = {term: max(0.0, float((keyword_weights or {}).get(term, 1))) for term in interest_keywords}
         for index, paper in enumerate(arxiv_papers):
             text = f"{paper.get('title', '')}\n{paper.get('abstract', '')}"
             matched = matched_keywords_for_text(text, interest_keywords)
-            all_scores[index] = len(matched) / max(1, len(interest_keywords))
-    else:
-        print("[ERROR] SILICONFLOW_API_KEY not set. Cannot use Zotero reranker.")
-        raise RuntimeError("SILICONFLOW_API_KEY environment variable is required.")
+            all_scores[index] = sum(weights[term] for term in matched) / max(1e-9, sum(weights.values()))
+    elif failed:
+        all_scores = [token_jaccard_similarity(query, _format_candidate(p)) for p in arxiv_papers]
+
+    if diagnostics is not None:
+        diagnostics.update(scorer="keyword" if failed else SILICONFLOW_RERANK_MODEL,
+                           degraded=failed, failed_batches=failed_batches)
 
     # Attach scores and sort
     score_scale = 10.0
@@ -310,6 +343,7 @@ def compute_similarity(
             **paper,
             "similarity_score": round(score, 4),
             "source": "interest_profile" if interest_keywords else "zotero_similar",
+            "scorer": "keyword" if failed else SILICONFLOW_RERANK_MODEL,
         }
         if interest_keywords:
             item["matched_keywords"] = matched
@@ -333,3 +367,19 @@ def compute_similarity(
     max_score = result[0]["similarity_score"] if result else "N/A"
     print(f"[INFO] Top {len(result)} diversified recommendations (max score: {max_score})")
     return result
+
+
+def _cached_rerank(query, documents):
+    path = os.environ.get("RERANK_CACHE_PATH")
+    if not path:
+        return _rerank_batch(query, documents)
+    now = time.time()
+    cache = {key: value for key, value in read_json(path).items() if value.get("expires_at", 0) > now}
+    keys = [fingerprint([SILICONFLOW_RERANK_MODEL, query, doc]) for doc in documents]
+    missing = [i for i, key in enumerate(keys) if key not in cache]
+    if missing:
+        scores = _rerank_batch(query, [documents[i] for i in missing])
+        for i, score in zip(missing, scores, strict=True):
+            cache[keys[i]] = {"score": score, "expires_at": now + 30 * 86400}
+        write_json(path, cache)
+    return [cache[key]["score"] for key in keys]

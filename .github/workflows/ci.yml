@@ -13,6 +13,17 @@ on:
       - main
 
 jobs:
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.0
+      - uses: actions/setup-node@v7.0.0
+        with:
+          node-version: "24"
+      - run: npm ci
+        working-directory: frontend
+      - run: npm test && npm run lint && npm run build
+        working-directory: frontend
   pytest:
     runs-on: ubuntu-latest
     steps:

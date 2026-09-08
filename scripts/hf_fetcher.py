@@ -121,6 +121,8 @@ def fetch_hf_daily_papers(date: str = None) -> list[dict]:
         candidate_date = (requested_date - timedelta(days=offset)).strftime("%Y-%m-%d")
         papers = _fetch_hf_papers_for_date(candidate_date)
         if papers:
+            for paper in papers:
+                paper["source_date"] = candidate_date
             if offset:
                 print(
                     f"[INFO] HF daily list is empty for the current date; "

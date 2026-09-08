@@ -11,12 +11,6 @@ from email.utils import parseaddr, formataddr
 from loguru import logger
 import datetime
 from omegaconf import DictConfig
-import pymupdf
-import pymupdf.layout
-pymupdf.TOOLS.mupdf_display_errors(False)
-pymupdf.layout.activate()
-
-import pymupdf4llm  # noqa: E402
 
 _TOKEN_RE = re.compile(r'[a-zA-Z0-9]+')
 
@@ -134,6 +128,11 @@ def extract_tex_code_from_tar(file_path:str, paper_id:str, paper_title:str | Non
     return file_contents
 
 def extract_markdown_from_pdf(file_path:str) -> str:
+    import pymupdf
+    import pymupdf.layout
+    import pymupdf4llm
+    pymupdf.TOOLS.mupdf_display_errors(False)
+    pymupdf.layout.activate()
     return pymupdf4llm.to_markdown(file_path,use_ocr=False,header=False,footer=False,ignore_code=True)
 
 def glob_match(path:str, pattern:str) -> bool:

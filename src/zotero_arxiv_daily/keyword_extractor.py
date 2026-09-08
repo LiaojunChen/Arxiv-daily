@@ -4,10 +4,10 @@ import math
 import re
 from collections import Counter
 
-from loguru import logger
-from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS, TfidfVectorizer
+from .recommendation import paper_keywords
 
 from .protocol import Paper
+from .recommendation import matched_keywords_for_text, phrase_matches
 
 
 _WORD_RE = re.compile(r"[A-Za-z][A-Za-z0-9-]{2,}")
@@ -39,7 +39,7 @@ _EXTRA_STOPWORDS = {
     "training",
     "using",
 }
-_STOPWORDS = set(ENGLISH_STOP_WORDS) | _EXTRA_STOPWORDS
+_STOPWORDS = set("a an the of and or to in on for is are we our it as by be can new more".split()) | _EXTRA_STOPWORDS
 
 
 def normalize_keyword(keyword: str) -> str:
@@ -96,68 +96,13 @@ def extract_keywords_from_text(text: str, max_keywords: int = 6) -> list[str]:
 
 
 def assign_keywords_to_papers(papers: list[Paper], max_keywords: int = 6) -> None:
-    if not papers:
-        return
-
-    documents = [_paper_text(paper) for paper in papers]
-    stop_words = sorted(_STOPWORDS)
-    try:
-        vectorizer = TfidfVectorizer(
-            lowercase=True,
-            stop_words=stop_words,
-            ngram_range=(1, 3),
-            min_df=1,
-            max_features=2500,
-            token_pattern=r"(?u)\b[A-Za-z][A-Za-z0-9-]{2,}\b",
-        )
-        matrix = vectorizer.fit_transform(documents)
-        features = vectorizer.get_feature_names_out()
-    except ValueError as exc:
-        logger.warning(f"Keyword extraction fell back to token counting: {exc}")
-        for paper, document in zip(papers, documents):
-            paper.keywords = extract_keywords_from_text(document, max_keywords=max_keywords)
-        return
-
-    for index, paper in enumerate(papers):
-        row = matrix.getrow(index)
-        if row.nnz == 0:
-            paper.keywords = extract_keywords_from_text(documents[index], max_keywords=max_keywords)
-            continue
-
-        ranked = sorted(zip(row.indices, row.data), key=lambda item: item[1], reverse=True)
-        keywords: list[str] = []
-        seen_tokens: set[str] = set()
-
-        for feature_index, _score in ranked:
-            phrase = normalize_keyword(features[feature_index])
-            if not _valid_phrase(phrase):
-                continue
-            phrase_tokens = set(phrase.split())
-            if len(phrase_tokens) == 1 and phrase_tokens.issubset(seen_tokens):
-                continue
-            keywords.append(phrase)
-            seen_tokens.update(phrase_tokens)
-            if len(keywords) >= max_keywords:
-                break
-
-        if len(keywords) < max_keywords:
-            for phrase in extract_keywords_from_text(documents[index], max_keywords=max_keywords * 2):
-                if phrase not in keywords:
-                    keywords.append(phrase)
-                if len(keywords) >= max_keywords:
-                    break
-
-        paper.keywords = keywords[:max_keywords]
+    for paper, keywords in zip(papers, paper_keywords([_paper_text(p) for p in papers], max_keywords)):
+        paper.keywords = keywords
 
 
 def matched_keywords_for_paper(paper: Paper, keywords: list[str]) -> list[str]:
     text = f"{paper.title or ''} {paper.abstract or ''} {' '.join(paper.keywords)}".lower()
-    matched: list[str] = []
-    for keyword in normalize_keywords(keywords):
-        tokens = keyword.split()
-        if keyword in text or (tokens and sum(token in text for token in tokens) / len(tokens) >= 0.67):
-            matched.append(keyword)
-    return matched
+    return matched_keywords_for_text(text, keywords)
 
 
 def keyword_overlap_score(paper: Paper, keywords: list[str]) -> float:
@@ -174,11 +119,11 @@ def keyword_overlap_score(paper: Paper, keywords: list[str]) -> float:
         if not tokens:
             continue
         keyword_score = 0.0
-        if keyword in text:
+        if phrase_matches(text, keyword):
             keyword_score += 3.0
-        if keyword in paper_keyword_text:
+        if phrase_matches(paper_keyword_text, keyword):
             keyword_score += 2.0
-        overlap = sum(token in text for token in tokens) / len(tokens)
+        overlap = sum(phrase_matches(text, token) for token in tokens) / len(tokens)
         keyword_score += 2.0 * overlap
         score += min(keyword_score, 5.0)
 
