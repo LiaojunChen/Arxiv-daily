@@ -72,6 +72,24 @@ def test_extract_affiliations_from_latex_commands():
     ]
 
 
+def test_extract_affiliations_from_template_specific_command():
+    paper_text = r"""
+    \usepackage{salesforce,times}
+    \author{Yang Li, Semih Yavuz, Shafiq Joty}
+    \sfsetaffiliation{Salesforce AI Research}
+    \sfsetauthornote{\texttt{\{yli2,syavuz,sjoty\}@salesforce.com}}
+    """
+
+    affiliations = affiliation_extractor.extract_affiliations_from_paper_text(
+        paper_text,
+        ["Yang Li", "Semih Yavuz", "Shafiq Joty"],
+    )
+
+    assert affiliations == [
+        {"author": "Yang Li", "affiliation": "Salesforce AI Research"}
+    ]
+
+
 def test_clean_latex_affiliation_removes_leading_markers():
     assert (
         affiliation_extractor._clean_latex_affiliation("1 University of California, Los Angeles")

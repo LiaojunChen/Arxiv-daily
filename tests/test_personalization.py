@@ -132,7 +132,14 @@ def test_pipeline_freezes_a_batch_and_excludes_history_on_new_batch(tmp_path, mo
     monkeypatch.setattr(pipeline, "get_new_listing_papers", lambda _: copy.deepcopy(source))
     monkeypatch.setattr(pipeline, "fetch_hf_daily_papers", lambda: [paper("old-hf", source_date="2020-01-01", source="huggingface")])
     monkeypatch.setattr(pipeline, "fetch_zotero_items", lambda: [])
-    monkeypatch.setattr(pipeline, "enrich_affiliations_for_display_papers", lambda *a, **k: None)
+    affiliation_orders = []
+    monkeypatch.setattr(
+        pipeline,
+        "enrich_affiliations_for_display_papers",
+        lambda groups, **k: affiliation_orders.append(
+            [paper["arxiv_id"] for paper in groups[0]]
+        ),
+    )
     monkeypatch.setattr(engine.reranker, "SILICONFLOW_API_KEY", "")
     monkeypatch.setattr(fetch_papers, "output_result", lambda selected, followed, hf, **kw:
         dict(similar_papers=selected, followed_papers=followed, hf_papers=hf, **kw["metadata"], candidate_papers=kw["candidate_papers"]))
@@ -145,9 +152,11 @@ def test_pipeline_freezes_a_batch_and_excludes_history_on_new_batch(tmp_path, mo
     assert set(profile["recommended_papers"]) == {"old"}
     record_delivery(profile, first)
     state.write_text(json.dumps(profile))
+    affiliation_orders.clear()
     same = pipeline.generate()
     assert same["pipeline_status"]["ranking"]["reused_batch"]
     assert {p["arxiv_id"] for p in same["similar_papers"]} == ids
+    assert set(affiliation_orders[0][:len(ids)]) == ids
     for p in source:
         p["listing_date"] = p["source_date"] = "2026-09-09"
     source.append(paper("new", listing_date="2026-09-09", source_date="2026-09-09", source="arxiv"))

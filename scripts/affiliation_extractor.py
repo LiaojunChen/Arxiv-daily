@@ -215,6 +215,12 @@ def _read_braced_content(text: str, open_brace_idx: int) -> str | None:
 
 def _latex_command_blocks(text: str, commands: tuple[str, ...]) -> list[str]:
     command_pattern = "|".join(re.escape(command) for command in commands)
+    # Conference and company templates frequently wrap the standard concept in
+    # a namespaced command, for example Salesforce's ``\sfsetaffiliation``.
+    # Accept custom command names containing ``affil`` while retaining the
+    # stricter institutional-name quality gate applied to extracted values.
+    if {command.casefold() for command in commands} & {"affil", "affiliation"}:
+        command_pattern = rf"(?:{command_pattern}|[A-Za-z@]*affil[A-Za-z@]*)"
     pattern = re.compile(
         rf"\\(?:{command_pattern})\*?\s*(?:\[[^\]]*\])?\s*\{{",
         flags=re.IGNORECASE,

@@ -44,6 +44,7 @@ def generate():
     today = now.date().isoformat()
     profile_path = Path(os.environ.get("INTEREST_PROFILE_PATH") or ROOT / "data/interest_profile.json")
     cache_dir = Path(os.environ.get("PIPELINE_CACHE_DIR") or ROOT / "data/cache")
+    profile = read_json(profile_path, {})
     source_errors = {}
     def fetch_source(name, fetch):
         try:
@@ -68,7 +69,17 @@ def generate():
     previous = [p for p in read_json(cache_dir / "candidates.json", []) if p.get("source_date", "") >= cutoff]
     candidates = merge_candidates([previous, current])
     candidates.sort(key=lambda p: p.get("source_date", ""), reverse=True)
-    candidates.sort(key=lambda p: p.get("affiliation_status") == "unresolved")
+    delivered_ids = {
+        canonical_arxiv_id(p.get("arxiv_id", ""))
+        for p in profile.get("delivery", {}).get("papers", [])
+    }
+    # The later enrichment run has a finite time budget. Resolve papers already
+    # visible in the current issue before spending that budget on the full
+    # seven-day candidate pool.
+    candidates.sort(key=lambda p: (
+        canonical_arxiv_id(p.get("arxiv_id", "")) not in delivered_ids,
+        p.get("affiliation_status") == "unresolved",
+    ))
     enrich_affiliations_for_display_papers([candidates], cache_path=cache_dir / "affiliations.json",
         budget_seconds=float(os.environ.get("AFFILIATION_BUDGET_SECONDS") or 900))
     for paper, keywords in zip(candidates, paper_keywords([f"{p['title']}\n{p['abstract']}" for p in candidates])):
@@ -78,7 +89,6 @@ def generate():
     hf = [{**by_id[canonical_arxiv_id(p["arxiv_id"])], "source": "huggingface"} for p in hf]
     interests, suppressed = load_interest_state(profile_path)
     weights = load_interest_weights(profile_path)
-    profile = read_json(profile_path, {})
     for p in candidates:
         p["user_actions"] = [action for action, field in (("read", "read_papers"), ("bookmark", "bookmarked_papers"))
                              if p["arxiv_id"] in profile.get(field, {})]
