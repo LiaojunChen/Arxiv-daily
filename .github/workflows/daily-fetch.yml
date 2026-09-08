@@ -2,9 +2,18 @@ name: Daily ArXiv Paper Fetch
 
 on:
   schedule:
-    # UTC 22:00 = Beijing 06:00 (next day)
-    - cron: "0 22 * * *"
+    # Announcement: Sun–Thu 20:00 America/New_York. DST handled by GitHub.
+    - cron: "5 20 * * 0-4"
+      timezone: "America/New_York"
+    # Later refresh catches delayed announcements/RSS and enriches affiliations.
+    - cron: "10 0 * * 1-5"
+      timezone: "America/New_York"
   workflow_dispatch: # Manual trigger for testing
+    inputs:
+      quick:
+        description: "Publish immediately using cached affiliations"
+        type: boolean
+        default: false
   workflow_call:
 
 permissions:
@@ -70,7 +79,7 @@ jobs:
           AFFILIATION_MAX_PAPERS: ${{ vars.AFFILIATION_MAX_PAPERS }}
           AFFILIATION_MAX_LLM_PAPERS: ${{ vars.AFFILIATION_MAX_LLM_PAPERS }}
           HF_FALLBACK_DAYS: ${{ vars.HF_FALLBACK_DAYS }}
-          AFFILIATION_BUDGET_SECONDS: ${{ vars.AFFILIATION_BUDGET_SECONDS }}
+          AFFILIATION_BUDGET_SECONDS: ${{ (github.event.schedule == '5 20 * * 0-4' || inputs.quick == true) && '0' || vars.AFFILIATION_BUDGET_SECONDS || '900' }}
         run: python -m zotero_arxiv_daily.daily
 
       - name: Persist feedback and run history
@@ -130,6 +139,7 @@ jobs:
 
   send-email:
     needs: fetch-and-deploy
+    if: github.event.schedule != '10 0 * * 1-5'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:

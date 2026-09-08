@@ -10,6 +10,7 @@ from zotero_arxiv_daily.recommendation import canonical_arxiv_id, paper_keywords
 from pipeline_state import fingerprint, read_json, write_json
 from config import MAX_PAPER_NUM, ARXIV_QUERY, load_user_config, get_followed_authors, get_followed_institutions
 from arxiv_fetcher import get_latest_papers, filter_by_authors, filter_by_institutions
+from arxiv_listing import get_new_listing_papers
 from hf_fetcher import fetch_hf_daily_papers
 from affiliation_extractor import enrich_affiliations_for_display_papers
 from interest_state import load_interest_state, load_interest_weights
@@ -51,9 +52,13 @@ def generate():
             print(f"[WARN] {name} source failed: {exc}")
             return []
     hf = fetch_source("hf", fetch_hf_daily_papers)
-    rss = fetch_source("arxiv", lambda: get_latest_papers(ARXIV_QUERY))
+    rss = fetch_source("arxiv_listing", lambda: get_new_listing_papers(ARXIV_QUERY))
+    arxiv_source = "new_listing"
+    if not rss:
+        rss = fetch_source("arxiv", lambda: get_latest_papers(ARXIV_QUERY))
+        arxiv_source = "rss"
     for paper in rss:
-        paper["source_date"] = today
+        paper.setdefault("source_date", (paper.get("published") or today)[:10])
     current = merge_candidates([hf, rss])
     _validate_display_data([], [], current)
     for paper in current:
@@ -112,6 +117,7 @@ def generate():
         "exploration_keywords": sorted({k for p in exploration for k in p.get("keywords", []) if k not in interests}),
         "subscriptions": {"followed_authors": get_followed_authors(), "followed_institutions": get_followed_institutions()},
         "pipeline_status": {"arxiv": "ok" if rss else "empty_or_unavailable", "hf": "ok" if hf else "empty_or_unavailable",
+            "arxiv_source": arxiv_source, "arxiv_listing_date": max((p.get("listing_date", "") for p in rss), default=""),
             "source_errors": source_errors,
             "ranking": diagnostics, "affiliations_resolved": sum(bool(p.get("affiliations")) for p in candidates),
             "candidate_count": len(candidates)},

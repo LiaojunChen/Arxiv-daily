@@ -144,6 +144,7 @@ def test_full_candidate_pool_and_identical_email_selection(tmp_path, monkeypatch
     monkeypatch.delenv("PIPELINE_CACHE_DIR", raising=False)
     monkeypatch.setattr(pipeline, "MAX_PAPER_NUM", 1)
     monkeypatch.setattr(pipeline, "fetch_hf_daily_papers", lambda: [])
+    monkeypatch.setattr(pipeline, "get_new_listing_papers", lambda _: [])
     monkeypatch.setattr(pipeline, "get_latest_papers", lambda _: [paper(), paper("2609.00002")])
     monkeypatch.setattr(pipeline, "enrich_affiliations_for_display_papers", lambda *a, **kw: None)
     monkeypatch.setattr(ranking, "SILICONFLOW_API_KEY", "")
