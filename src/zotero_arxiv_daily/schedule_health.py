@@ -52,8 +52,16 @@ def main():
         snapshot = json.loads(Path("data/papers.json").read_text(encoding="utf-8"))
         if not is_fresh(snapshot, now):
             actual = snapshot.get("pipeline_status", {}).get("arxiv_listing_date", "unknown")
-            raise SystemExit(f"arXiv release pending/stale: expected {expected_listing_date(now)}, got {actual}. "
-                             "Previous recommendations preserved; retry scheduled. Holidays may delay release.")
+            message = (f"arXiv release pending/stale: expected {expected_listing_date(now)}, got {actual}. "
+                       "Previous recommendations preserved; automatic recovery remains enabled. "
+                       "Holidays or upstream caching may delay release.")
+            print(f"::warning title=Waiting for arXiv release::{message}")
+        else:
+            message = f"arXiv release is current: {snapshot['pipeline_status']['arxiv_listing_date']}."
+            print(message)
+        if os.environ.get("GITHUB_STEP_SUMMARY"):
+            with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as summary:
+                summary.write(f"### Paper release status\n\n{message}\n")
         return
     repo = os.environ["GITHUB_REPOSITORY"]
     owner, name = repo.split("/", 1)

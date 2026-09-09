@@ -43,3 +43,24 @@ def test_no_dispatch_storm(status, created):
 def test_no_weekend_or_before_grace_dispatch():
     assert not recovery_due({}, [], utc("2026-09-12T02:00:00"))
     assert not recovery_due({}, [], utc("2026-09-09T00:30:00"))
+
+
+def test_verify_pending_warns_and_writes_summary_without_failing(tmp_path, monkeypatch, capsys):
+    import json
+    from zotero_arxiv_daily import schedule_health
+    monkeypatch.chdir(tmp_path)
+    (tmp_path / "data").mkdir()
+    snapshot = {"pipeline_status": {"arxiv": "stale", "arxiv_listing_date": "2026-09-07"}}
+    (tmp_path / "data/papers.json").write_text(json.dumps(snapshot))
+    summary = tmp_path / "summary.md"
+    monkeypatch.setenv("GITHUB_STEP_SUMMARY", str(summary))
+    monkeypatch.setattr(schedule_health.sys, "argv", ["health", "--verify"])
+    schedule_health.main()
+    assert "::warning" in capsys.readouterr().out
+    assert "pending/stale" in summary.read_text()
+    assert not is_fresh(snapshot, utc("2026-09-09T02:00:00"))
+    assert recovery_due(snapshot, [], utc("2026-09-09T02:00:00"))
+    # Broken snapshot data remains an actual error, not a pending release.
+    (tmp_path / "data/papers.json").write_text("broken json")
+    with pytest.raises(json.JSONDecodeError):
+        schedule_health.main()

@@ -24,7 +24,10 @@ def main(config: DictConfig):
     from daily_pipeline import generate
     snapshot = generate()
     if os.environ.get("GITHUB_OUTPUT"):
-        new_issue = bool(snapshot["similar_papers"]) and not snapshot.get("pipeline_status", {}).get("ranking", {}).get("reused_batch")
+        from .schedule_health import is_fresh
+        from datetime import datetime, timezone
+        new_issue = (is_fresh(snapshot, datetime.now(timezone.utc)) and bool(snapshot["similar_papers"])
+                     and not snapshot.get("pipeline_status", {}).get("ranking", {}).get("reused_batch"))
         with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
             output.write(f"new_issue={str(new_issue).lower()}\n")
     profile.data.setdefault("runs", {})[snapshot["run_id"]] = {
