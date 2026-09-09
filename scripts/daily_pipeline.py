@@ -17,6 +17,7 @@ from affiliation_extractor import enrich_affiliations_for_display_papers
 from interest_state import load_interest_state, load_interest_weights
 from zotero_similar import fetch_zotero_items
 from personalization import rank_personalized, select_personalized, follow_signals
+from source_http import fetches as source_fetches
 
 
 def merge_candidates(groups):
@@ -39,6 +40,7 @@ def merge_candidates(groups):
 
 
 def generate():
+    source_fetches.clear()
     from fetch_papers import output_result, _validate_display_data
     load_user_config(ROOT / "data/config.json")
     now = datetime.now(timezone.utc)
@@ -142,6 +144,7 @@ def generate():
             "expected_listing_date": expected_date,
             "arxiv_source": arxiv_source, "arxiv_listing_date": max((p.get("listing_date", "") for p in rss), default=""),
             "source_errors": source_errors,
+            "source_fetches": list(source_fetches),
             "ranking": diagnostics, "affiliations_resolved": sum(bool(p.get("affiliations")) for p in candidates),
             "candidate_count": len(candidates)},
         "coverage": {"from": min(p["source_date"] for p in candidates), "to": today, "categories": ARXIV_QUERY},

@@ -36,6 +36,8 @@ Early retry opportunities are 20:25, 20:45, 21:05 and 21:35 ET (Beijing 08:25, 0
 
 Freshness is based on the arXiv listing date, never the website generation timestamp. Stale listings trigger an RSS check; older RSS data cannot replace newer listing data. If neither source reaches the expected release, the current issue is preserved, the snapshot reports `arxiv: stale`, and the post-deployment check writes a warning and a pending-release job summary without failing a successful deployment. Pending releases never trigger new-paper email. Holidays can legitimately produce this pending state; no new papers are invented or old recommendations recycled. Recovery still checks source freshness independently of workflow success. Code, invalid snapshot and deployment errors continue to fail normally.
 
+arXiv HTTP requests ask caches to revalidate (`Cache-Control: no-cache, max-age=0` and `Pragma: no-cache`). This is a request, not a guarantee that an upstream CDN refreshes. `pipeline_status.source_fetches` records each URL, HTTP status, response date, cache age, listing/feed date and count. An empty RSS feed is distinct from HTTP errors, rate limits and malformed feeds; those propagate to `source_errors`. Rate-limited requests are not immediately retried with altered URLs.
+
 Deploy order: authenticate Wrangler, apply migration 0002 to the existing D1 binding, deploy the updated Worker preserving its existing secrets/origins, merge the application change, then run `daily-fetch.yml` with `quick=true`. Verify preferences/feedback endpoints, snapshot batch/ledger state, and the Pages deployment. A preview deployment without the Worker migration is not sufficient to enable the new feedback controls.
 
 ## Validation

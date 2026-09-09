@@ -2,6 +2,7 @@
 
 from pathlib import Path
 import sys
+import pytest
 
 
 SCRIPTS_DIR = Path(__file__).resolve().parents[1] / "scripts"
@@ -9,6 +10,7 @@ if str(SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPTS_DIR))
 
 import arxiv_fetcher  # noqa: E402
+import source_http
 
 
 RSS_XML_WITH_ABSTRACT_INSTITUTION = """\
@@ -57,6 +59,43 @@ def test_get_latest_papers_does_not_infer_affiliations_from_abstract(monkeypatch
     assert papers[0]["arxiv_id"] == "2606.00001"
     assert papers[0]["authors"] == ["Ada Lovelace", "Grace Hopper"]
     assert papers[0]["affiliations"] == []
+
+
+def test_empty_feed_preserves_upstream_date_and_cache_evidence(monkeypatch):
+    body = '<feed xmlns="http://www.w3.org/2005/Atom"><updated>2026-09-08T04:00:20Z</updated></feed>'
+    def respond(request, timeout):
+        assert request.get_header("Cache-control") == "no-cache, max-age=0"
+        response = FakeResponse(body)
+        response.headers = {"Age": "83251", "X-Cache": "HIT, HIT"}
+        return response
+    monkeypatch.setattr(source_http.urllib.request, "urlopen", respond)
+    assert arxiv_fetcher.get_latest_papers("cs.CV") == []
+    evidence = source_http.fetches[-1]
+    assert evidence["empty_feed"]
+    assert evidence["feed_updated"] == "2026-09-08T04:00:20Z"
+    assert evidence["cache_age_seconds"] == "83251"
+
+
+def test_rate_limit_is_not_reported_as_an_empty_feed(monkeypatch):
+    from urllib.error import HTTPError
+    calls = []
+    def limited(request, timeout):
+        calls.append(request.full_url)
+        raise HTTPError(request.full_url, 429, "Rate limited", {"Retry-After": "120"}, None)
+    monkeypatch.setattr(source_http.urllib.request, "urlopen", limited)
+    with pytest.raises(HTTPError):
+        arxiv_fetcher.get_latest_papers("cs.CV")
+    assert len(calls) == 1
+    assert source_http.fetches[-1]["status"] == 429
+    assert source_http.fetches[-1]["retry_after"] == "120"
+
+
+@pytest.mark.parametrize("body", ['<html>Unavailable</html>',
+    '<feed xmlns="http://www.w3.org/2005/Atom"><title>Feed error: invalid category</title></feed>'])
+def test_invalid_rss_response_is_not_empty_success(monkeypatch, body):
+    monkeypatch.setattr(source_http.urllib.request, "urlopen", lambda *a, **kw: FakeResponse(body))
+    with pytest.raises(ValueError):
+        arxiv_fetcher.get_latest_papers("cs.CV")
 
 
 def test_filter_by_institutions_ignores_abstract_mentions(monkeypatch):
