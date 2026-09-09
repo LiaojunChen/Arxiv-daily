@@ -2,6 +2,7 @@
 import re
 import time
 import urllib.request
+from source_http import fetch_text
 from datetime import datetime
 from html.parser import HTMLParser
 
@@ -91,7 +92,8 @@ def get_new_listing_papers(categories):
     for index, category in enumerate(cats):
         if index:
             time.sleep(3)
-        request = urllib.request.Request(f"https://arxiv.org/list/{category}/new?show=2000", headers={"User-Agent": "arXivDaily/1.0"})
-        with urllib.request.urlopen(request, timeout=45) as response:
-            papers.extend(parse_listing(response.read().decode("utf-8")))
+        html, evidence = fetch_text(f"https://arxiv.org/list/{category}/new?show=2000", timeout=45)
+        batch = parse_listing(html)
+        evidence.update(paper_count=len(batch), listing_date=max((p["listing_date"] for p in batch), default=""))
+        papers.extend(batch)
     return papers

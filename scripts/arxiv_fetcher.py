@@ -12,6 +12,7 @@ they are never inferred from abstract text because that creates false labels.
 import re
 import urllib.request
 import xml.etree.ElementTree as ET
+from source_http import fetch_text
 from subscriptions import matches_author, matches_institution
 
 from config import (
@@ -43,16 +44,13 @@ def get_latest_papers(categories: str = None) -> list[dict]:
     url = f"https://rss.arxiv.org/atom/{query}"
 
     print(f"[INFO] Fetching ArXiv RSS feed: {url}")
-    req = urllib.request.Request(url, headers={"User-Agent": "arXivDaily/1.0"})
-
-    try:
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            xml_data = resp.read().decode("utf-8")
-    except Exception as e:
-        print(f"[ERROR] RSS feed request failed: {e}")
-        return []
-
+    xml_data, evidence = fetch_text(url)
+    root = ET.fromstring(xml_data)
+    if root.tag != "{http://www.w3.org/2005/Atom}feed":
+        raise ValueError("Expected an arXiv Atom feed")
+    evidence["feed_updated"] = root.findtext("{http://www.w3.org/2005/Atom}updated", default="")
     papers = _parse_atom_feed(xml_data)
+    evidence.update(paper_count=len(papers), empty_feed=not papers)
     print(f"[INFO] RSS feed returned {len(papers)} papers")
 
     missing_authors = sum(1 for paper in papers if not paper.get("authors"))
@@ -103,8 +101,7 @@ def _parse_atom_feed(xml_data: str) -> list[dict]:
 
     title_el = root.find("atom:title", ns)
     if title_el is not None and "Feed error" in (title_el.text or ""):
-        print(f"[ERROR] RSS feed error: {title_el.text}")
-        return []
+        raise ValueError(f"RSS feed error: {title_el.text}")
 
     papers = []
     for entry in root.findall("atom:entry", ns):
