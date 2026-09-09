@@ -5,6 +5,11 @@ on:
     # Announcement: Sun–Thu 20:00 America/New_York. DST handled by GitHub.
     - cron: "5 20 * * 0-4"
       timezone: "America/New_York"
+    # Independent opportunities if the first schedule is delayed/dropped.
+    - cron: "25,45 20 * * 0-4"
+      timezone: "America/New_York"
+    - cron: "5,35 21 * * 0-4"
+      timezone: "America/New_York"
     # Later refresh catches delayed announcements/RSS and enriches affiliations.
     - cron: "10 0 * * 1-5"
       timezone: "America/New_York"
@@ -82,7 +87,7 @@ jobs:
           AFFILIATION_MAX_PAPERS: ${{ vars.AFFILIATION_MAX_PAPERS }}
           AFFILIATION_MAX_LLM_PAPERS: ${{ vars.AFFILIATION_MAX_LLM_PAPERS }}
           HF_FALLBACK_DAYS: ${{ vars.HF_FALLBACK_DAYS }}
-          AFFILIATION_BUDGET_SECONDS: ${{ (github.event.schedule == '5 20 * * 0-4' || inputs.quick == true) && '0' || vars.AFFILIATION_BUDGET_SECONDS || '900' }}
+          AFFILIATION_BUDGET_SECONDS: ${{ ((github.event_name == 'schedule' && github.event.schedule != '10 0 * * 1-5') || inputs.quick == true) && '0' || vars.AFFILIATION_BUDGET_SECONDS || '900' }}
         run: |
           python -m zotero_arxiv_daily.delivery_state --recover
           python -m zotero_arxiv_daily.daily
@@ -152,6 +157,9 @@ jobs:
             git commit -m "Record published recommendation IDs"
             git push
           fi
+
+      - name: Verify announced paper freshness
+        run: python -m zotero_arxiv_daily.schedule_health --verify
 
   send-email:
     needs: fetch-and-deploy
