@@ -32,6 +32,10 @@ The Worker retains existing public access-code and private sync-token authentica
 
 arXiv announces Sunday–Thursday at 20:00 America/New_York, subject to holidays/delays. The 20:05 run prioritizes publication using cached affiliations; the 00:10 run refreshes metadata with the normal 900-second extraction budget. GitHub handles DST. Open visible pages revalidate every minute and on focus. GitHub scheduling is best effort, not an exact-time delivery guarantee.
 
+Early retry opportunities are 20:25, 20:45, 21:05 and 21:35 ET (Beijing 08:25, 08:45, 09:05 and 09:35 in summer, one hour later in winter). Scheduled/manual feedback sync also checks the published listing date and dispatches a quick recovery after 21:00 ET through the following morning. Active runs and attempts less than one hour old suppress dispatches. This is a second GitHub workflow, not an independent scheduler or a guarantee against platform-wide delays.
+
+Freshness is based on the arXiv listing date, never the website generation timestamp. Stale listings trigger an RSS check; older RSS data cannot replace newer listing data. If neither source reaches the expected release, the current issue is preserved, the snapshot reports `arxiv: stale`, and the post-deployment freshness check fails visibly. Holidays can legitimately produce this pending state; no new papers are invented or old recommendations recycled. The next successful scheduled attempt resolves it.
+
 Deploy order: authenticate Wrangler, apply migration 0002 to the existing D1 binding, deploy the updated Worker preserving its existing secrets/origins, merge the application change, then run `daily-fetch.yml` with `quick=true`. Verify preferences/feedback endpoints, snapshot batch/ledger state, and the Pages deployment. A preview deployment without the Worker migration is not sufficient to enable the new feedback controls.
 
 ## Validation

@@ -129,6 +129,8 @@ def test_pipeline_freezes_a_batch_and_excludes_history_on_new_batch(tmp_path, mo
     monkeypatch.setenv("INTEREST_PROFILE_PATH", str(state))
     monkeypatch.setenv("PIPELINE_CACHE_DIR", str(tmp_path / "cache"))
     monkeypatch.setattr(pipeline, "MAX_PAPER_NUM", 3)
+    monkeypatch.setattr(pipeline, "expected_listing_date", lambda _: "2026-09-08")
+    monkeypatch.setattr(pipeline, "get_latest_papers", lambda _: [])
     monkeypatch.setattr(pipeline, "get_new_listing_papers", lambda _: copy.deepcopy(source))
     monkeypatch.setattr(pipeline, "fetch_hf_daily_papers", lambda: [paper("old-hf", source_date="2020-01-01", source="huggingface")])
     monkeypatch.setattr(pipeline, "fetch_zotero_items", lambda: [])
@@ -157,6 +159,13 @@ def test_pipeline_freezes_a_batch_and_excludes_history_on_new_batch(tmp_path, mo
     assert same["pipeline_status"]["ranking"]["reused_batch"]
     assert {p["arxiv_id"] for p in same["similar_papers"]} == ids
     assert set(affiliation_orders[0][:len(ids)]) == ids
+    # A successful fetch of an old/partial batch must not consume unseen papers.
+    monkeypatch.setattr(pipeline, "expected_listing_date", lambda _: "2026-09-09")
+    source.append(paper("late-old", listing_date="2026-09-08", source_date="2026-09-08", source="arxiv"))
+    stale = pipeline.generate()
+    assert stale["pipeline_status"]["arxiv"] == "stale"
+    assert {p["arxiv_id"] for p in stale["similar_papers"]} == ids
+    source.pop()
     for p in source:
         p["listing_date"] = p["source_date"] = "2026-09-09"
     source.append(paper("new", listing_date="2026-09-09", source_date="2026-09-09", source="arxiv"))

@@ -7,6 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 from zotero_arxiv_daily.recommendation import canonical_arxiv_id, paper_keywords
+from zotero_arxiv_daily.schedule_health import expected_listing_date
 from pipeline_state import fingerprint, read_json, write_json
 from config import MAX_PAPER_NUM, ARXIV_QUERY, load_user_config, get_followed_authors, get_followed_institutions
 from arxiv_fetcher import get_latest_papers
@@ -56,9 +57,18 @@ def generate():
     hf = fetch_source("hf", fetch_hf_daily_papers)
     rss = fetch_source("arxiv_listing", lambda: get_new_listing_papers(ARXIV_QUERY))
     arxiv_source = "new_listing"
-    if not rss:
-        rss = fetch_source("arxiv", lambda: get_latest_papers(ARXIV_QUERY))
-        arxiv_source = "rss"
+    expected_date = expected_listing_date(now)
+    listing_dates = [p.get("listing_date", "") for p in rss]
+    if not rss or min(listing_dates) < expected_date:
+        fallback = fetch_source("arxiv", lambda: get_latest_papers(ARXIV_QUERY))
+        fallback_date = max((p.get("published", "")[:10] for p in fallback), default="")
+        if fallback and (not rss or fallback_date > max(listing_dates)):
+            rss = [{**p, "listing_date": fallback_date} for p in fallback]
+            arxiv_source = "rss"
+    source_dates = [p.get("listing_date", "") for p in rss]
+    source_fresh = bool(source_dates) and min(source_dates) >= expected_date
+    if not source_fresh:
+        print(f"[WARN] arXiv release pending/stale: expected {expected_date}; received {sorted(set(source_dates))}")
     for paper in rss:
         paper.setdefault("source_date", (paper.get("published") or today)[:10])
     current = merge_candidates([hf, rss])
@@ -102,7 +112,7 @@ def generate():
              (arxiv_source == "rss" and p["arxiv_id"] in rss_ids)]
     batch_id = fingerprint([listing_date, sorted(p["arxiv_id"] for p in fresh)])[:24]
     delivery = profile.get("delivery", {})
-    if not rss:
+    if not rss or (not source_fresh and delivery.get("batch_id")):
         if not delivery.get("batch_id"):
             raise RuntimeError("arXiv unavailable and no published issue to preserve")
         batch_id = delivery["batch_id"]
@@ -128,7 +138,8 @@ def generate():
         "run_id": run_id, "batch_id": batch_id, "profile_version": profile_version, "top_keywords": interests,
         "exploration_keywords": sorted({k for p in exploration for k in p.get("keywords", []) if k not in interests}),
         "subscriptions": profile["subscriptions"],
-        "pipeline_status": {"arxiv": "ok" if rss else "empty_or_unavailable", "hf": "ok" if hf else "empty_or_unavailable",
+        "pipeline_status": {"arxiv": ("ok" if source_fresh else "stale") if rss else "empty_or_unavailable", "hf": "ok" if hf else "empty_or_unavailable",
+            "expected_listing_date": expected_date,
             "arxiv_source": arxiv_source, "arxiv_listing_date": max((p.get("listing_date", "") for p in rss), default=""),
             "source_errors": source_errors,
             "ranking": diagnostics, "affiliations_resolved": sum(bool(p.get("affiliations")) for p in candidates),
