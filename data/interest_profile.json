@@ -100229,8 +100229,8 @@
   },
   "delivery": {
     "batch_id": "50c5654f0d57f3c7e1ceb8e9",
-    "run_id": "daily-8d40c3a4ab1ca7d3f8895ed2",
-    "updated_at": "2026-09-09T09:12:14+00:00",
+    "run_id": "daily-bfc7b95d8a253a528a8db7f3",
+    "updated_at": "2026-09-10T01:10:09+00:00",
     "profile_version": "62454b745888fc46",
     "papers": [
       {
@@ -100802,7 +100802,7 @@
           },
           {
             "author": "Yu Zhang",
-            "affiliation": "Texas A &M University--San Antonio Correspondence to: Yu Zhang"
+            "affiliation": "Texas A &M University--San Antonio Correspondence to"
           }
         ],
         "source": "interest_profile",
@@ -101498,12 +101498,7 @@
           "Sanping Zhou",
           "Maoqing Yao"
         ],
-        "affiliations": [
-          {
-            "author": "AgiBot Research Team",
-            "affiliation": "AgiBot Research Team"
-          }
-        ],
+        "affiliations": [],
         "abstract": "World-action models (WAM) predict future states to guide robot actions, enabling learning from both action-free video and action-labeled interaction. Most inherit pretrained video generators, leaving WAM pretraining and scaling underexplored. We introduce Genie Envisioner Act 2.0 (GE-Act 2.0), a world-action model whose trainable generative and action components are all initialized from scratch on manipulation data. It combines a control-oriented autoencoder (CoAE), a single-step visual planner (SVP), and an inverse dynamics model (IDM). CoAE retains action- and instruction-relevant information under aggressive compression, while SVP produces a complete future state in one differentiable pass, so visual planning and inverse dynamics can be pretrained separately on complementary data. The components are then jointly trained with knowledge-aligned selective optimization (KASO), which reduces mismatched supervision by selecting only predicted futures judged behaviorally compatible with the recorded action. We evaluate pretrained checkpoints directly, without per-task fine-tuning, on 100 tasks across 20 manipulation skill groups with held-out scenes, backgrounds, lighting, and object instances. Scaling co-training data from 300 to 30,000 hours raises success from 17.1% to 44.1% on G1-OP and from 13.4% to 31.1% on G2-90D; despite comprising less than 2% of the co-training data, G2-90D improves by 17.7 points, suggesting cross-embodiment transfer. Gains span 19/20 and 18/20 skill groups, and skill-specific coverage strongly correlates with zero-shot out-of-distribution (OOD) success (Pearson r=0.80; Spearman rho=0.85). Under the same protocol, the model grounds object, color, shape, and position references in at least 90% of trials and follows explicit instructions even when they conflict with an already-committed behavior or a conventional scene association.",
         "categories": [
           "cs.RO",
@@ -101520,7 +101515,7 @@
           "arxiv"
         ],
         "listing_date": "2026-09-09",
-        "affiliation_status": "resolved",
+        "affiliation_status": "pending",
         "keywords": [
           "inverse dynamics",
           "skill groups",
