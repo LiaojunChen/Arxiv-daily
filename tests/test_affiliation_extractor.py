@@ -130,6 +130,48 @@ def test_affiliation_detection_uses_word_boundaries_for_short_company_names():
     assert not affiliation_extractor._looks_like_affiliation("center")
 
 
+def test_icml_two_argument_affiliations_preserve_author_labels():
+    text = r"""
+    % \icmlaffiliation{unused}{Placeholder University}
+    \icmlaffiliation{hit}
+      {Harbin Institute of Technology, China}
+    \icmlaffiliation{ntu}{Nanyang Technological University, Singapore}
+    \icmlauthor{Alice}{ntu,hit}
+    \icmlauthor{Bob}{hit}
+    """
+    assert affiliation_extractor.extract_affiliations_from_paper_text(text, ["Alice", "Bob"]) == [
+        {"author": "Alice", "affiliation": "Nanyang Technological University, Singapore"},
+        {"author": "Alice", "affiliation": "Harbin Institute of Technology, China"},
+        {"author": "Bob", "affiliation": "Harbin Institute of Technology, China"},
+    ]
+
+
+def test_french_and_portuguese_institutions_and_commented_templates():
+    text = r"""
+    % \affil{Placeholder University}
+    \IEEEauthorblockA{EDF R\&D; Universit\'{e} Paris Cit\'{e}}
+    \institute{Instituto de Computação\\Universidade Estadual de Campinas}
+    """
+    names = [p["affiliation"] for p in affiliation_extractor.extract_affiliations_from_paper_text(text, [])]
+    assert names == ["EDF R&D", "Université Paris Cité", "Instituto de Computação", "Universidade Estadual de Campinas"]
+
+
+def test_cvpr_abbreviated_institutions_are_split_on_tex_spacing():
+    text = r"""\author{Alice\\
+      \textsuperscript{1}HKUST\qquad \textsuperscript{2}LightIllusions\qquad
+      \textsuperscript{3}BYD\quad \textsuperscript{4}CUHK-Shenzhen}
+    """
+    names = [p["affiliation"] for p in affiliation_extractor.extract_affiliations_from_paper_text(text, [])]
+    assert names == ["HKUST", "LightIllusions", "BYD", "CUHK-Shenzhen"]
+    assert not affiliation_extractor._looks_like_affiliation("bydesign")
+
+
+def test_contact_only_author_does_not_imply_an_institution():
+    assert affiliation_extractor.extract_affiliations_from_paper_text(
+        r"\author{Alice (alice@uw.edu)}", ["Alice"]
+    ) == []
+
+
 def test_html_affiliation_spans_are_preserved_for_deterministic_extraction():
     html = b"""
     <html><body>

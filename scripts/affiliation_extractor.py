@@ -30,14 +30,15 @@ MAX_DOWNLOAD_BYTES = 12 * 1024 * 1024
 MAX_CONTEXT_CHARS = 12000
 USER_AGENT = "arXivDaily/1.0"
 DOWNLOAD_ATTEMPTS = 2
-FAILURE_CACHE_VERSION = 3
+FAILURE_CACHE_VERSION = 4
 FAILURE_CACHE_TTL_SECONDS = 3600
 _last_request_at = 0.0
 AFFILIATION_PATTERN = re.compile(
     r"(?:\b(?:university|institute|college|school|laboratory|laboratories|"
     r"research|researcher|academy|center|centre|department|inc|corp|ltd|"
     r"google|microsoft|meta|openai|deepmind|anthropic|nvidia|amazon|apple|"
-    r"bytedance|mit|stanford|berkeley)\b|labs?\b)",
+    r"bytedance|mit|stanford|berkeley|hkust|cuhk|byd|edf|lightillusions|sensetime|"
+    r"université|universität|universidade|universidad|università|universitas|instituto|institut|école)\b|labs?\b)",
     flags=re.IGNORECASE,
 )
 GENERIC_AFFILIATIONS = {
@@ -246,7 +247,7 @@ def _clean_latex_affiliation(value: str, strip_marker: bool = True) -> str:
         accent, letter = match.groups()
         return unicodedata.normalize("NFC", letter + LATEX_ACCENTS[accent])
 
-    value = re.sub(r"%.*", " ", value)
+    value = re.sub(r"%.*", " ", value).replace(r"\&", "&")
     value = re.sub(r'''\\(["'`^~=\.])\s*\{?([A-Za-z])\}?''', replace_accent, value)
     value = re.sub(r"\\([uvHckbd])\s*\{([A-Za-z])\}", replace_accent, value)
     value = re.sub(r"\\(?:href|url)\{[^{}]*\}\{([^{}]*)\}", r"\1", value)
@@ -310,6 +311,7 @@ def _normalize_display_affiliation(value: str, author: str = "") -> str:
     """
 
     value = _clean_text(value)
+    value = re.sub(r"\b(?:first|corresponding)\s+author\s*:.*$", "", value, flags=re.IGNORECASE)
     if not value:
         return ""
 
@@ -399,7 +401,7 @@ def _split_affiliation_candidates(block: str, include_whole: bool = True) -> lis
     # ``\\And`` is case-sensitive in TeX but semantically the same separator
     # as ``\\and``.  Supporting both prevents following author names from
     # being merged into the preceding institution.
-    parts = re.split(r"\\\\|\\and|\n|;", block, flags=re.IGNORECASE)
+    parts = re.split(r"\\\\|\\and|\\qquad\b|\\quad\b|\n|;", block, flags=re.IGNORECASE)
     candidates = []
     for part in parts:
         numbered_affiliations = _extract_numbered_affiliations(part)
@@ -415,16 +417,44 @@ def _split_affiliation_candidates(block: str, include_whole: bool = True) -> lis
     if numbered_affiliations:
         candidates.extend(numbered_affiliations)
         return candidates
-    if include_whole:
+    if include_whole and not candidates:
         whole = _normalize_affiliation_candidate(block)
         if _looks_like_affiliation(whole):
             candidates.append(whole)
     return candidates
 
 
+def _two_argument_commands(text: str, command: str):
+    for match in re.finditer(rf"\\{re.escape(command)}\s*\{{", text):
+        first = _read_braced_content(text, match.end() - 1)
+        if first is None:
+            continue
+        second_start = match.end() + len(first) + 1
+        while second_start < len(text) and text[second_start].isspace():
+            second_start += 1
+        if second_start < len(text) and text[second_start] == "{":
+            second = _read_braced_content(text, second_start)
+            if second is not None:
+                yield first, second
+
+
 def extract_affiliations_from_paper_text(paper_text: str, authors: list[str]) -> list[dict]:
     if not paper_text:
         return []
+    # Commented template examples are not affiliation evidence.
+    paper_text = re.sub(r"(?<!\\)%[^\n]*", "", paper_text)
+    header = paper_text[:MAX_CONTEXT_CHARS]
+    # ICML's first argument is a reference label, not the institution. Resolve
+    # the second argument and the author-label mapping, including multiple labels.
+    icml_affiliations = dict(_two_argument_commands(header, "icmlaffiliation"))
+    mapped = []
+    for author, labels in _two_argument_commands(header, "icmlauthor"):
+        for label in labels.split(","):
+            affiliation = _normalize_display_affiliation(icml_affiliations.get(label.strip(), ""))
+            if affiliation:
+                mapped.append({"author": _clean_latex_affiliation(author), "affiliation": affiliation})
+    if mapped:
+        return _normalize_affiliation_response(mapped, authors)
 
     blocks = [
         (block, True)
