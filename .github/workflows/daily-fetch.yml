@@ -16,7 +16,7 @@ on:
   workflow_dispatch: # Manual trigger for testing
     inputs:
       quick:
-        description: "Publish immediately using cached affiliations"
+        description: "Compatibility flag: all runs now publish immediately, then enrich affiliations"
         type: boolean
         default: false
   workflow_call:
@@ -87,7 +87,8 @@ jobs:
           AFFILIATION_MAX_PAPERS: ${{ vars.AFFILIATION_MAX_PAPERS }}
           AFFILIATION_MAX_LLM_PAPERS: ${{ vars.AFFILIATION_MAX_LLM_PAPERS }}
           HF_FALLBACK_DAYS: ${{ vars.HF_FALLBACK_DAYS }}
-          AFFILIATION_BUDGET_SECONDS: ${{ ((github.event_name == 'schedule' && github.event.schedule != '10 0 * * 1-5') || inputs.quick == true) && '0' || vars.AFFILIATION_BUDGET_SECONDS || '900' }}
+          # Publish the new issue promptly; enrich its selected papers below.
+          AFFILIATION_BUDGET_SECONDS: '0'
         run: |
           python -m zotero_arxiv_daily.delivery_state --recover
           python -m zotero_arxiv_daily.daily
@@ -106,13 +107,6 @@ jobs:
         env:
           ACKNOWLEDGE_PROCESSED_FEEDBACK: "true"
         run: python -m zotero_arxiv_daily.feedback_sync
-
-      - name: Upload shared recommendation snapshot
-        uses: actions/upload-artifact@v4
-        with:
-          name: recommendation-snapshot
-          path: data/papers.json
-          retention-days: 30
 
       - name: Set up Node.js
         uses: actions/setup-node@v7.0.0
@@ -157,6 +151,47 @@ jobs:
             git commit -m "Record published recommendation IDs"
             git push
           fi
+
+      - name: Enrich published paper affiliations
+        env:
+          SILICONFLOW_API_KEY: ${{ secrets.SILICONFLOW_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_API_BASE: ${{ secrets.OPENAI_API_BASE }}
+          MODEL_NAME: ${{ secrets.MODEL_NAME }}
+          AFFILIATION_MAX_PAPERS: ${{ vars.AFFILIATION_MAX_PAPERS }}
+          AFFILIATION_MAX_LLM_PAPERS: ${{ vars.AFFILIATION_MAX_LLM_PAPERS }}
+          AFFILIATION_BUDGET_SECONDS: ${{ vars.AFFILIATION_BUDGET_SECONDS || '900' }}
+          AFFILIATION_INCLUDE_CANDIDATES: ${{ github.event.schedule == '10 0 * * 1-5' && 'true' || 'false' }}
+        run: |
+          python -m zotero_arxiv_daily.affiliation_refresh
+          cp data/papers.json frontend/dist/papers.json
+
+      - name: Upload enriched Pages artifact
+        uses: actions/upload-pages-artifact@v5.0.0
+        with:
+          name: github-pages-enriched
+          path: frontend/dist
+
+      - name: Deploy enriched affiliations
+        uses: actions/deploy-pages@v5.0.0
+        with:
+          artifact_name: github-pages-enriched
+
+      - name: Persist published affiliation metadata
+        run: |
+          python -m zotero_arxiv_daily.delivery_state
+          git add data/interest_profile.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Record published affiliation metadata"
+            git push
+          fi
+
+      - name: Upload shared recommendation snapshot
+        uses: actions/upload-artifact@v4
+        with:
+          name: recommendation-snapshot
+          path: data/papers.json
+          retention-days: 30
 
       - name: Verify announced paper freshness
         run: python -m zotero_arxiv_daily.schedule_health --verify

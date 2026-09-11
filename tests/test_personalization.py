@@ -120,6 +120,12 @@ def test_permanent_ledger_dedupes_versions_and_never_marks_all_candidates():
 def test_pipeline_freezes_a_batch_and_excludes_history_on_new_batch(tmp_path, monkeypatch):
     import daily_pipeline as pipeline
     import fetch_papers
+    from datetime import datetime, timezone
+    class FixedDatetime(datetime):
+        @classmethod
+        def now(cls, tz=None):
+            return datetime(2026, 9, 8, 12, tzinfo=timezone.utc)
+    monkeypatch.setattr(pipeline, "datetime", FixedDatetime)
     root = tmp_path / "data"
     root.mkdir()
     state = root / "interest_profile.json"
@@ -159,6 +165,14 @@ def test_pipeline_freezes_a_batch_and_excludes_history_on_new_batch(tmp_path, mo
     assert same["pipeline_status"]["ranking"]["reused_batch"]
     assert {p["arxiv_id"] for p in same["similar_papers"]} == ids
     assert set(affiliation_orders[0][:len(ids)]) == ids
+    # A cache eviction must not erase affiliations recovered from Pages delivery.
+    known = [{"author": "Alice Smith", "affiliation": "MIT"}]
+    for p in profile["delivery"]["papers"]:
+        p["affiliations"] = known
+    state.write_text(json.dumps(profile))
+    (tmp_path / "cache" / "candidates.json").unlink()
+    recovered = pipeline.generate()
+    assert all(p["affiliations"] == known for p in recovered["similar_papers"])
     # A successful fetch of an old/partial batch must not consume unseen papers.
     monkeypatch.setattr(pipeline, "expected_listing_date", lambda _: "2026-09-09")
     source.append(paper("late-old", listing_date="2026-09-08", source_date="2026-09-08", source="arxiv"))
