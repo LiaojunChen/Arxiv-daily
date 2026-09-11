@@ -78,7 +78,10 @@ def generate():
     for paper in current:
         paper.setdefault("source_date", today)
     cutoff = (now.date() - timedelta(days=7)).isoformat()
-    previous = [p for p in read_json(cache_dir / "candidates.json", []) if p.get("source_date", "") >= cutoff]
+    # Published metadata is durable even if Actions evicts its incremental cache.
+    previous = [p for p in merge_candidates([
+        read_json(cache_dir / "candidates.json", []), profile.get("delivery", {}).get("papers", [])
+    ]) if p.get("source_date", "") >= cutoff]
     candidates = merge_candidates([previous, current])
     candidates.sort(key=lambda p: p.get("source_date", ""), reverse=True)
     delivered_ids = {
