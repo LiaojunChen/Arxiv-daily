@@ -6,6 +6,7 @@ Non-sensitive values are loaded from data/config.json.
 
 import os
 import json
+from urllib.parse import urlparse
 
 # ── Zotero API ──────────────────────────────────────────
 ZOTERO_ID = os.environ.get("ZOTERO_ID", "")
@@ -33,11 +34,17 @@ OPENAI_API_BASE = os.environ.get("OPENAI_API_BASE") or (
 MODEL_NAME = os.environ.get("MODEL_NAME") or (
     "Qwen/Qwen3-8B" if not _OPENAI_API_KEY and SILICONFLOW_API_KEY else "gpt-4o-mini"
 )
+# Affiliation extraction is a short structured task, independent of the model
+# selected for long-form paper analysis. Use Qwen's non-thinking mode below.
+AFFILIATION_MODEL_NAME = os.environ.get("AFFILIATION_MODEL_NAME") or (
+    "Qwen/Qwen3-8B" if urlparse(OPENAI_API_BASE).hostname in {"api.siliconflow.cn", "api.siliconflow.com"}
+    else MODEL_NAME
+)
 # A value of 0 means all unique papers shown on the page. Deterministic source
 # extraction is cheap enough for the display set; expensive LLM fallbacks have
 # a separate, deliberately small budget.
 AFFILIATION_MAX_PAPERS = int(os.environ.get("AFFILIATION_MAX_PAPERS") or "0")
-AFFILIATION_MAX_LLM_PAPERS = int(os.environ.get("AFFILIATION_MAX_LLM_PAPERS") or "8")
+AFFILIATION_MAX_LLM_PAPERS = int(os.environ.get("AFFILIATION_MAX_LLM_PAPERS") or "50")
 
 # ── Followed Authors & Institutions ─────────────────────
 _followed_authors = []

@@ -84,3 +84,35 @@ def test_zero_budget_uses_existing_metadata_without_network(tmp_path, monkeypatc
     refresh_snapshot(data, tmp_path, budget_seconds=0)
     assert data["pipeline_status"]["recommendation_affiliations_resolved"] == 1
     assert data["candidate_papers"][1]["affiliations"]
+
+
+def test_llm_quota_deferred_papers_are_retried_on_next_refresh(tmp_path, monkeypatch):
+    setup_extractor(monkeypatch)
+    monkeypatch.setattr(ae, "OPENAI_API_KEY", "test")
+    monkeypatch.setattr(ae, "AFFILIATION_MAX_LLM_PAPERS", 1)
+    monkeypatch.setattr(ae, "fetch_paper_text", lambda key: "Custom title page: MIT")
+    calls = []
+    monkeypatch.setattr(ae, "_call_llm_for_affiliations", lambda p, text:
+        calls.append(p["arxiv_id"]) or [{"author": "Alice", "affiliation": "MIT"}])
+    data = refresh_snapshot(snapshot(), tmp_path)
+    assert data["similar_papers"][1]["affiliation_status"] == "pending"
+    refresh_snapshot(data, tmp_path)
+    assert calls == ["2609.00001", "2609.00002"]
+    assert all(p["affiliations"] for p in data["similar_papers"])
+
+
+def test_siliconflow_extraction_disables_thinking_and_parses_response(monkeypatch):
+    monkeypatch.setattr(ae, "OPENAI_API_KEY", "test")
+    monkeypatch.setattr(ae, "OPENAI_API_BASE", "https://api.siliconflow.cn/v1")
+    monkeypatch.setattr(ae, "AFFILIATION_MODEL_NAME", "Qwen/Qwen3-8B")
+    captured = []
+    class Response:
+        def raise_for_status(self): pass
+        def json(self):
+            return {"choices": [{"message": {"content": '[{"author":"Alice","affiliation":"MIT"}]'}}]}
+    monkeypatch.setattr(ae.requests, "post", lambda *args, **kwargs: captured.append(kwargs) or Response())
+    assert ae._call_llm_for_affiliations(paper("2609.00001"), "MIT")[0]["affiliation"] == "MIT"
+    assert captured[0]["json"]["enable_thinking"] is False
+    monkeypatch.setattr(ae, "OPENAI_API_BASE", "https://api.example.com/v1")
+    ae._call_llm_for_affiliations(paper("2609.00001"), "MIT")
+    assert "enable_thinking" not in captured[1]["json"]

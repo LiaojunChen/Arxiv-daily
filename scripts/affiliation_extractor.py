@@ -9,6 +9,7 @@ import re
 import tarfile
 import unicodedata
 from html.parser import HTMLParser
+from urllib.parse import urlparse
 
 import requests
 import time
@@ -17,19 +18,19 @@ from pipeline_state import paper_cache_key, read_json, write_json
 from config import (
     AFFILIATION_MAX_LLM_PAPERS,
     AFFILIATION_MAX_PAPERS,
-    MODEL_NAME,
+    AFFILIATION_MODEL_NAME,
     OPENAI_API_BASE,
     OPENAI_API_KEY,
 )
 
 
 REQUEST_TIMEOUT = (10, 45)
-LLM_REQUEST_TIMEOUT = (10, 25)
+LLM_REQUEST_TIMEOUT = (10, 60)
 MAX_DOWNLOAD_BYTES = 12 * 1024 * 1024
 MAX_CONTEXT_CHARS = 12000
 USER_AGENT = "arXivDaily/1.0"
 DOWNLOAD_ATTEMPTS = 2
-FAILURE_CACHE_VERSION = 2
+FAILURE_CACHE_VERSION = 3
 FAILURE_CACHE_TTL_SECONDS = 3600
 _last_request_at = 0.0
 AFFILIATION_PATTERN = re.compile(
@@ -569,7 +570,7 @@ def _call_llm_for_affiliations(paper: dict, paper_text: str) -> list[dict]:
         f"Paper text:\n{paper_text[:MAX_CONTEXT_CHARS]}"
     )
     payload = {
-        "model": MODEL_NAME,
+        "model": AFFILIATION_MODEL_NAME,
         "messages": [
             {
                 "role": "system",
@@ -581,6 +582,9 @@ def _call_llm_for_affiliations(paper: dict, paper_text: str) -> list[dict]:
         "max_tokens": 1000,
     }
     url = f"{OPENAI_API_BASE.rstrip('/')}/chat/completions"
+    if (urlparse(OPENAI_API_BASE).hostname in {"api.siliconflow.cn", "api.siliconflow.com"}
+            and AFFILIATION_MODEL_NAME == "Qwen/Qwen3-8B"):
+        payload["enable_thinking"] = False
     try:
         response = requests.post(
             url,
@@ -634,6 +638,7 @@ def enrich_affiliations_for_display_papers(paper_groups: list[list[dict]], *, ca
 
     attempted_ids = set()
     enriched_ids = set()
+    deferred_ids = set()
     llm_attempted = 0
     for paper in candidates:
         arxiv_id = _normalize_arxiv_id(
@@ -679,6 +684,12 @@ def enrich_affiliations_for_display_papers(paper_groups: list[list[dict]], *, ca
 
         authors = paper.get("authors", [])
         affiliations = extract_affiliations_from_paper_text(paper_text, authors)
+        if not affiliations and OPENAI_API_KEY and llm_attempted >= AFFILIATION_MAX_LLM_PAPERS:
+            # A quota-deferred extraction is not a failed extraction. Allow the
+            # next refresh to try it instead of caching a false failure for an hour.
+            cache.pop(paper_cache_key(paper), None)
+            deferred_ids.add(arxiv_id)
+            continue
         if (
             not affiliations
             and OPENAI_API_KEY
@@ -702,7 +713,7 @@ def enrich_affiliations_for_display_papers(paper_groups: list[list[dict]], *, ca
             )
             if arxiv_id in affiliations_by_id:
                 paper["affiliations"] = affiliations_by_id[arxiv_id]
-            paper["affiliation_status"] = "resolved" if paper.get("affiliations") else (
+            paper["affiliation_status"] = "resolved" if paper.get("affiliations") else "pending" if arxiv_id in deferred_ids else (
                 "unresolved" if arxiv_id in attempted_ids or paper.get("affiliation_status") == "unresolved" else "pending"
             )
 
