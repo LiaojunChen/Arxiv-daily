@@ -72,15 +72,7 @@ jobs:
       - name: Commit interest profile
         if: steps.email-config.outputs.enabled == 'true' && success()
         run: |
-          if [[ -n "$(git status --short data/interest_profile.json)" ]]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add data/interest_profile.json
-            git commit -m "Update paper interest profile"
-            git push
-          else
-            echo "No interest profile changes to commit."
-          fi
+          bash .github/scripts/commit-interest-profile.sh "Update paper interest profile"
 
       - name: Acknowledge committed feedback
         if: steps.email-config.outputs.enabled == 'true' && success()
