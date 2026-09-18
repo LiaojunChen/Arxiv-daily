@@ -13,6 +13,7 @@ from .feedback import make_paper_id
 from .keyword_extractor import normalize_keyword, normalize_keywords
 from .protocol import CorpusPaper, Paper
 from .recommendation import canonical_arxiv_id
+from .profile_storage import load_archived_run, save_profile
 
 
 DEFAULT_KEYWORDS = ["world model", "unified model", "generation model"]
@@ -185,6 +186,8 @@ class InterestProfile:
             run = self.data.get("runs", {}).get(run_id, {})
             if not run and self.data.get("last_run", {}).get("run_id") == run_id:
                 run = self.data["last_run"]
+            if not run:
+                run = load_archived_run(self.state_path, run_id)
             paper = run.get("papers", {}).get(paper_id)
             if not paper and item.get("source") == "cloudflare" and isinstance(item.get("paper"), dict):
                 # Pages feedback includes a compact paper snapshot because a
@@ -309,10 +312,7 @@ class InterestProfile:
         self.data["updated_at"] = utcnow_iso()
 
     def save(self) -> None:
-        self.state_path.parent.mkdir(parents=True, exist_ok=True)
-        with self.state_path.open("w", encoding="utf-8") as file:
-            json.dump(self.data, file, ensure_ascii=False, indent=2)
-            file.write("\n")
+        save_profile(self.state_path, self.data)
 
     def feedback_key(self, item: dict[str, Any]) -> str:
         if item.get("feedback_id") is not None:

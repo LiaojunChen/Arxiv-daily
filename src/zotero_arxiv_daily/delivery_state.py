@@ -1,7 +1,6 @@
 """Permanent exposure ledger, written only after successful Pages deployment."""
 import json
 import os
-import tempfile
 import sys
 import hashlib
 from urllib.request import Request, urlopen
@@ -9,6 +8,7 @@ from urllib.error import HTTPError
 from pathlib import Path
 
 from .recommendation import canonical_arxiv_id
+from .profile_storage import save_profile
 
 
 def batch_fingerprint(date, ids):
@@ -51,10 +51,7 @@ def main():
     else:
         snapshot = json.loads(Path("data/papers.json").read_text(encoding="utf-8"))
     record_delivery(profile, snapshot)
-    with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=path.parent, delete=False) as out:
-        json.dump(profile, out, ensure_ascii=False, indent=2)
-        temp = out.name
-    os.replace(temp, path)
+    save_profile(path, profile)
 
 
 if __name__ == "__main__":
