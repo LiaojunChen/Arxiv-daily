@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-09-21T06:02:53+00:00",
+  "updated_at": "2026-09-21T09:53:56+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-7d7f7b78cbd3c3639238d451": {
-      "run_id": "daily-7d7f7b78cbd3c3639238d451",
-      "generated_at": "2026-09-21T05:09:01+00:00",
+    "daily-b6baf55b06f78a01d81ebc39": {
+      "run_id": "daily-b6baf55b06f78a01d81ebc39",
+      "generated_at": "2026-09-21T06:02:53+00:00",
       "selected_ids": [
         "2609.22055",
         "2609.21748",
@@ -1307,34 +1307,6 @@
             "training tasks",
             "codemidas",
             "improves performance"
-          ],
-          "matched_keywords": []
-        },
-        "2609.22000": {
-          "title": "RecreationWorld: Scalable and Verifiable Environments for Hybrid Computer-Use Agents",
-          "abstract": "Computer-use agents (CUAs) have advanced along two separate lines: graphical interaction and software development through code and the command line. Real digital work requires both, interleaved rather than stacked end to end. We study hybrid CUAs that autonomously decide when to explore an interface, implement software, and run and visually verify their artifacts. We introduce RecreationWorld, a five-platform framework built around recreation: given a running reference, an agent must discover its behavior and build a faithful implementation with no prescribed workflow. RecreationWorld provides reproducible environments on Ubuntu, macOS, Windows, Android, and Web, plus a unified harness with native GUI control and coding tools. The running reference serves as an oracle for hidden behavioral tests, providing execution-grounded rewards. We scale trajectory generation with high-quality open-source applications. Models trained on these trajectories improve across five out-of-distribution coding and hybrid computer-use benchmarks and more frequently verify their rendered outputs, providing evidence of transfer beyond recreation. For held-out evaluation, we introduce RecreationBench, comprising 250 diverse tasks across domains and platforms. Reference-grounded programmatic and visual assertions cover action-conditioned outcomes at multiple interaction depths; each is validated on the reference and by human reviewers before the suite is frozen for automatic scoring. GPT-6 Astra leads at 58.1% overall, but passes all programmatic tests on just 2.8% of tasks. Agents reproduce static interface structure more reliably than interactions and computed outputs, while generated applications remain smaller and more monolithic than their references. We release the benchmark, environments, and test suites.",
-          "categories": [],
-          "keywords": [
-            "hybrid computer-use",
-            "running reference",
-            "recreationworld",
-            "computer-use agents",
-            "advanced along two",
-            "agent must discover"
-          ],
-          "matched_keywords": []
-        },
-        "2609.05571": {
-          "title": "Grounded Skill Synthesis from Code at Scale for Agentic Intelligence",
-          "abstract": "Reusable skills give agents transferable procedural knowledge, making scalable acquisition essential for extending agents beyond prior experience. Existing methods face two limitations: trajectory-based synthesis requires interactions with specific environments, while document-derived skills may lack executable evidence and verification. Source code offers a complementary path: it requires no prior agent experience yet provides executable evidence for grounding abstractions. We present Code2Skill, a fully automated pipeline that transforms selected code units into implementation-anchored records of atomic operations, composite workflows, and recurring patterns, then verifies each record through source-body-blind reconstruction and source-aware comparison. Applied to 19,769 popular, actively maintained GitHub repositories, Code2Skill produces CodeSkillBank, a grounded bank of 1,006,822 accepted records with workflow, boundary, provenance, and source-evidence metadata. Across 72 protocol-matched evaluations covering nine model settings and eight benchmarks, models augmented with retrieved CodeSkillBank skills improve by 11.7% on average over matched baselines and outperform them in 57 cases. Under a unified downstream interface, Code2Skill also outperforms trajectory-derived skill banks on all seven shared benchmarks, showing that repository-derived skills can provide useful procedural knowledge before agents accumulate sufficient interaction experience. Skills synthesized from tested AI-generated code achieve a 93.50% pass rate, compared with 93.00% for human-written code, providing initial evidence that the pipeline can expand with the growing volume of AI-generated software. Overall, Code2Skill transforms procedural knowledge embedded in repositories into grounded, verifiable, and transferable agent skills.",
-          "categories": [],
-          "keywords": [
-            "procedural knowledge",
-            "code2skill",
-            "executable evidence",
-            "accumulate sufficient interaction",
-            "actively maintained github",
-            "agent experience yet"
           ],
           "matched_keywords": []
         },
@@ -5521,6 +5493,51 @@
             "heal",
             "actively regulates visual-language",
             "actual information shift"
+          ],
+          "matched_keywords": []
+        },
+        "2609.15126": {
+          "title": "MoME: Mixture-of-Memory Embeddings for Context-Aware Sparse Lookup",
+          "abstract": "Scaling large language models efficiently has motivated sparse capacity mechanisms such as Mixture-of-Experts and, more recently, conditional memory: token-indexed embedding tables that augment the backbone with cheap parametric lookups. Existing memory-embedding methods retrieve via a deterministic function of the surface form, which collapses different contextual senses of the same token (e.g., python the language vs. the animal) into a single fixed entry. We introduce Mixture of Memory Embeddings (MoME), a context-aware memory mechanism that replaces each token's single memory row with a mixture of M slots and uses a learned gate over the hidden state to choose which slots to read at each position. In controlled pretraining experiments across nanochat, Llama-3/MobileLLM, and Qwen3 backbones, MoME improves over Value Embedding, Bigram, and STEM baselines in iso-parameter and iso-training-FLOP settings, shows a more promising memory-size scaling trend at sub-billion scale, and remains efficient in training and inference. Qualitative routing analyses on polysemous tokens further suggest that the learned mixture exhibits a degree of semantic interpretability, dispatching the same surface token to distinct memory slots under different senses.",
+          "categories": [
+            "cs.CL",
+            "cs.AI"
+          ],
+          "keywords": [
+            "mome",
+            "backbones mome improves",
+            "cheap parametric lookups",
+            "collapses different contextual",
+            "context-aware memory mechanism",
+            "context-aware sparse lookup"
+          ],
+          "matched_keywords": []
+        },
+        "2609.18766": {
+          "title": "FRAUDSkill: Structured Frozen-Weight Skill Optimization for Audio Anti-Fraud Detection",
+          "abstract": "Large audio-language models have shown promise for anti-fraud detection by directly processing speech and reasoning over fraud-related evidence. Their deployment, however, requires predictions to follow a predefined label space and a structured decision protocol consisting of service-scenario identification, fraud detection, and conditional fraud-type classification. Existing fine-tuning and prompt-based approaches typically encode task knowledge, constraints, and decision rules into model parameters or manually maintained prompts, making them difficult to adapt as fraud patterns and labeling policies evolve. To this end, we propose FRAUDSkill, a structured frozen-weight adaptation framework that leaves the underlying audio-language model unchanged while optimizing an external layer of skill programs, route-specific policies, and decision rules. We further combine structured output control with validation-guided multi-path inference to ensure protocol-compliant predictions. On the TeleAntiFraud benchmark, FRAUDSkill achieves 73.50% Macro-F1, outperforming the shared frozen-model baseline by 31.96% while reducing invalid outputs to 1.94%. Extensive experiments demonstrate that external skill optimization provides an effective and adaptable solution for structured audio anti-fraud detection without modifying the underlying model. The source code is available at https://anonymous.4open.science/r/FRAUDSKILL-114514.",
+          "categories": [],
+          "keywords": [
+            "audio anti-fraud detection",
+            "structured frozen-weight",
+            "fraudskill",
+            "decision rules",
+            "skill optimization",
+            "approaches typically encode"
+          ],
+          "matched_keywords": []
+        },
+        "2609.18748": {
+          "title": "TeleAntiFraud 2.0: A Refreshable, Profile-Grounded, and Audio-Based Benchmark for Telecom Fraud Detection",
+          "abstract": "Telecom fraud scripts evolve rapidly and are often designed to resemble routine service conversations, creating two key requirements for audio-based telecom-fraud evaluation. First, benchmarks must incorporate newly observed scam patterns without overwriting previously established test sets. Second, they must distinguish fraud from lawful, near-domain calls rather than relying on topic-separated negative examples. We present TeleAntiFraud 2.0, constructed with our Mixed-Tree Anti-Fraud Generation Pipeline and evaluated under a monthly frozen evaluation protocol. The pipeline transforms online fraud-case abstracts into profile-grounded scenarios, expands them through mixed-tree generation, realizes fraud and non-fraud dialogue paths under shared contexts, renders validated dialogues as role-matched speech, and freezes the resulting audio, labels, prompts, manifests, and provenance records for each monthly evaluation set. Each frozen set contains 900 Chinese calls, comprising 600 fraud and 300 near-domain non-fraud cases. Controlled text experiments show that three classifiers achieve perfect macro-averaged F1 (Macro-F1) when evaluated against unrelated or ordinary negatives, but drop to 0.65-0.68 with near-domain sibling negatives. Full-set audio and automatic-speech-recognition plus large-language-model (ASR+LLM) evaluations further reveal class-prior shortcuts, prediction collapse, and snapshot sensitivity. Together, these findings establish near-domain construction and collapse-aware reporting as core requirements for evaluating audio-based telecom-fraud models under realistic confusable conditions. The accompanying research artifact includes the construction code, evaluation scripts, manifests, and documentation. Our dataset and code are available at https://anonymous.4open.science/r/TeleAntiFraud-2_0-EEB2/.",
+          "categories": [],
+          "keywords": [
+            "near-domain",
+            "audio-based telecom-fraud",
+            "telecom fraud",
+            "accompanying research artifact",
+            "achieve perfect macro-averaged",
+            "anti-fraud generation pipeline"
           ],
           "matched_keywords": []
         },
@@ -10279,11 +10296,11 @@
           ],
           "keywords": [
             "music hallucination",
-            "audio-language",
             "affirmative bias generation-mode",
             "bias generation-mode effects",
             "confident music descriptions",
-            "events temporal properties"
+            "events temporal properties",
+            "first music-specific layer-wise"
           ],
           "matched_keywords": []
         },
@@ -21593,8 +21610,8 @@
             "classifier-guided diffusion",
             "adaptive masking",
             "meddime",
-            "making them",
-            "achieves high-quality counterfactual"
+            "achieves high-quality counterfactual",
+            "adaptive masking mechanism"
           ],
           "matched_keywords": []
         },
@@ -26268,8 +26285,8 @@
           "keywords": [
             "distributed inference",
             "mane",
-            "multi-path",
             "edge server",
+            "multi-path",
             "accuracy pp higher",
             "alleviating server load"
           ],
@@ -27064,23 +27081,6 @@
             "rfpo",
             "online reinforcement",
             "almost every task"
-          ],
-          "matched_keywords": []
-        },
-        "2609.15126": {
-          "title": "MoME: Mixture-of-Memory Embeddings for Context-Aware Sparse Lookup",
-          "abstract": "Scaling large language models efficiently has motivated sparse capacity mechanisms such as Mixture-of-Experts and, more recently, conditional memory: token-indexed embedding tables that augment the backbone with cheap parametric lookups. Existing memory-embedding methods retrieve via a deterministic function of the surface form, which collapses different contextual senses of the same token (e.g., python the language vs. the animal) into a single fixed entry. We introduce Mixture of Memory Embeddings (MoME), a context-aware memory mechanism that replaces each token's single memory row with a mixture of M slots and uses a learned gate over the hidden state to choose which slots to read at each position. In controlled pretraining experiments across nanochat, Llama-3/MobileLLM, and Qwen3 backbones, MoME improves over Value Embedding, Bigram, and STEM baselines in iso-parameter and iso-training-FLOP settings, shows a more promising memory-size scaling trend at sub-billion scale, and remains efficient in training and inference. Qualitative routing analyses on polysemous tokens further suggest that the learned mixture exhibits a degree of semantic interpretability, dispatching the same surface token to distinct memory slots under different senses.",
-          "categories": [
-            "cs.CL",
-            "cs.AI"
-          ],
-          "keywords": [
-            "mome",
-            "backbones mome improves",
-            "cheap parametric lookups",
-            "collapses different contextual",
-            "context-aware memory mechanism",
-            "context-aware sparse lookup"
           ],
           "matched_keywords": []
         },
@@ -33943,8 +33943,8 @@
             "cs.AI"
           ],
           "keywords": [
-            "skill optimization",
             "cobra-skills",
+            "skill optimization",
             "agent skill optimization",
             "average performance among",
             "budgeted sequential optimization",
@@ -34188,6 +34188,34 @@
             "point improvement",
             "action prediction making",
             "actions remains fundamental"
+          ],
+          "matched_keywords": []
+        },
+        "2609.22000": {
+          "title": "RecreationWorld: Scalable and Verifiable Environments for Hybrid Computer-Use Agents",
+          "abstract": "Computer-use agents (CUAs) have advanced along two separate lines: graphical interaction and software development through code and the command line. Real digital work requires both, interleaved rather than stacked end to end. We study hybrid CUAs that autonomously decide when to explore an interface, implement software, and run and visually verify their artifacts. We introduce RecreationWorld, a five-platform framework built around recreation: given a running reference, an agent must discover its behavior and build a faithful implementation with no prescribed workflow. RecreationWorld provides reproducible environments on Ubuntu, macOS, Windows, Android, and Web, plus a unified harness with native GUI control and coding tools. The running reference serves as an oracle for hidden behavioral tests, providing execution-grounded rewards. We scale trajectory generation with high-quality open-source applications. Models trained on these trajectories improve across five out-of-distribution coding and hybrid computer-use benchmarks and more frequently verify their rendered outputs, providing evidence of transfer beyond recreation. For held-out evaluation, we introduce RecreationBench, comprising 250 diverse tasks across domains and platforms. Reference-grounded programmatic and visual assertions cover action-conditioned outcomes at multiple interaction depths; each is validated on the reference and by human reviewers before the suite is frozen for automatic scoring. GPT-6 Astra leads at 58.1% overall, but passes all programmatic tests on just 2.8% of tasks. Agents reproduce static interface structure more reliably than interactions and computed outputs, while generated applications remain smaller and more monolithic than their references. We release the benchmark, environments, and test suites.",
+          "categories": [],
+          "keywords": [
+            "hybrid computer-use",
+            "running reference",
+            "recreationworld",
+            "computer-use agents",
+            "advanced along two",
+            "agent must discover"
+          ],
+          "matched_keywords": []
+        },
+        "2609.05571": {
+          "title": "Grounded Skill Synthesis from Code at Scale for Agentic Intelligence",
+          "abstract": "Reusable skills give agents transferable procedural knowledge, making scalable acquisition essential for extending agents beyond prior experience. Existing methods face two limitations: trajectory-based synthesis requires interactions with specific environments, while document-derived skills may lack executable evidence and verification. Source code offers a complementary path: it requires no prior agent experience yet provides executable evidence for grounding abstractions. We present Code2Skill, a fully automated pipeline that transforms selected code units into implementation-anchored records of atomic operations, composite workflows, and recurring patterns, then verifies each record through source-body-blind reconstruction and source-aware comparison. Applied to 19,769 popular, actively maintained GitHub repositories, Code2Skill produces CodeSkillBank, a grounded bank of 1,006,822 accepted records with workflow, boundary, provenance, and source-evidence metadata. Across 72 protocol-matched evaluations covering nine model settings and eight benchmarks, models augmented with retrieved CodeSkillBank skills improve by 11.7% on average over matched baselines and outperform them in 57 cases. Under a unified downstream interface, Code2Skill also outperforms trajectory-derived skill banks on all seven shared benchmarks, showing that repository-derived skills can provide useful procedural knowledge before agents accumulate sufficient interaction experience. Skills synthesized from tested AI-generated code achieve a 93.50% pass rate, compared with 93.00% for human-written code, providing initial evidence that the pipeline can expand with the growing volume of AI-generated software. Overall, Code2Skill transforms procedural knowledge embedded in repositories into grounded, verifiable, and transferable agent skills.",
+          "categories": [],
+          "keywords": [
+            "procedural knowledge",
+            "code2skill",
+            "executable evidence",
+            "accumulate sufficient interaction",
+            "actively maintained github",
+            "agent experience yet"
           ],
           "matched_keywords": []
         },
@@ -35336,9 +35364,9 @@
         }
       }
     },
-    "daily-b6baf55b06f78a01d81ebc39": {
-      "run_id": "daily-b6baf55b06f78a01d81ebc39",
-      "generated_at": "2026-09-21T06:02:53+00:00",
+    "daily-01cbe46eb805ad4d88f9905f": {
+      "run_id": "daily-01cbe46eb805ad4d88f9905f",
+      "generated_at": "2026-09-21T09:53:56+00:00",
       "selected_ids": [
         "2609.22055",
         "2609.21748",
