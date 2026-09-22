@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-09-22T05:58:24+00:00",
+  "updated_at": "2026-09-22T09:17:17+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-93f707d0fcc76edec183f1d1": {
-      "run_id": "daily-93f707d0fcc76edec183f1d1",
-      "generated_at": "2026-09-22T05:58:24+00:00",
+    "daily-354e27a14004b90ed39b459a": {
+      "run_id": "daily-354e27a14004b90ed39b459a",
+      "generated_at": "2026-09-22T09:17:17+00:00",
       "selected_ids": [
         "2609.24048",
         "2609.24682",
@@ -5110,7 +5110,7 @@
             "cell somas",
             "partial annotation",
             "weakly supervised",
-            "em"
+            "electron microscopy"
           ],
           "matched_keywords": []
         },
@@ -9670,10 +9670,10 @@
             "cs.CY"
           ],
           "keywords": [
-            "instructional",
             "educational videos",
             "learner understanding",
             "video tutoring",
+            "instructional",
             "content generation",
             "generative video"
           ],
@@ -13184,6 +13184,20 @@
             "adding ier improves",
             "allocates teacher supervision",
             "allocating sparse supervision"
+          ],
+          "matched_keywords": []
+        },
+        "2609.23088": {
+          "title": "OmniEdu: Open Foundation Models for Learning and Teaching",
+          "abstract": "Educational foundation models must solve problems, understand curriculum structure, diagnose learner difficulties, and provide appropriate instructional support. Existing educational language models often focus on either problem solving or tutoring, with training mixtures organized by source or task rather than capability. We present OmniEdu, an open family of foundation models for K-12 learning and teaching. Its instruction-tuning corpus combines over 100 educational resources and general instruction sources, organized around four capabilities: subject competence, curriculum grounding, diagnostic reasoning, and pedagogical action and scaffolding. Our pipeline integrates deterministic cleaning, semantic auditing and rewriting, task-specific quality scoring, token-budgeted diversity selection, and pedagogical instruction assignment. It yields 69,999 examples and 15.96M supervised response tokens, including 60,951 education-specific examples. We fine-tune 4B, 9B, and 27B models and evaluate curriculum grounding, K-12 problem solving, and pedagogical tutoring, alongside general capability. Education-oriented tuning consistently improves all three educational benchmark groups across model scales. OmniEdu-27B achieves 63.12% EM and 76.69% F1 on K12-Bench, 85.89% on MathFish, 86.95% on EDUMATH, and 78.74% in MathTutorBench's Scaffold setting. It also achieves the highest Teaching average on LongTutor among the evaluated models, at 3.02. These results demonstrate the value of curated, capability-balanced supervision for adapting general language models to educational tasks spanning problem solving, curriculum understanding, and instructional support.",
+          "categories": [],
+          "keywords": [
+            "problem solving",
+            "curriculum grounding",
+            "instructional support",
+            "educational",
+            "adapting general language",
+            "alongside general capability"
           ],
           "matched_keywords": []
         },
