@@ -43632,7 +43632,7 @@
   "delivery": {
     "batch_id": "e7e28af6c113246bf8a6e962",
     "run_id": "daily-93f707d0fcc76edec183f1d1",
-    "updated_at": "2026-09-22T05:58:24+00:00",
+    "updated_at": "2026-09-22T06:00:07+00:00",
     "profile_version": "992927a1524b59b3",
     "papers": [
       {
@@ -44105,7 +44105,144 @@
         "categories": [
           "cs.CV"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Yixin Chen",
+            "affiliation": "State Key Laboratory of General Artificial Intelligence, BIGAI"
+          },
+          {
+            "author": "Jingrun Du",
+            "affiliation": "State Key Laboratory of General Artificial Intelligence, BIGAI"
+          },
+          {
+            "author": "Tao Feng",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Wei Gong",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Siyuan Huang",
+            "affiliation": "Nanjing University"
+          },
+          {
+            "author": "Xiao Lin",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Jiaheng Liu",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Jun Luo",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Yongzhe Lyu",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Liya Ma",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Zenan Meng",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Lin Qu",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Wenbo Su",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Jiaming Wang",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Qinghe Wang",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Shaofei Wang",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Yanghai Wang",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Zequn Wang",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Ziming Wang",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Hu Wei",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Jiangtao Wu",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Ruiqi Wu",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Jiaxin Xie",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Yuchi Xu",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Ze Xu",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Chengting Yu",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Liangyu Yuan",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Gang Zeng",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Yawen Zeng",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Xingyao Zhang",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Zizheng Zhang",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Bo Zheng",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Jiancheng Zhu",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Song-Chun Zhu",
+            "affiliation": "Tsinghua University"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-09-22",
         "listing_date": "2026-09-22",
@@ -44115,7 +44252,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "unresolved",
+        "affiliation_status": "resolved",
         "keywords": [
           "three tracks",
           "happyworld-bench",
