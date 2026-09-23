@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-09-23T04:54:53+00:00",
+  "updated_at": "2026-09-23T05:44:12+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-122fe806556d9caa3611b558": {
-      "run_id": "daily-122fe806556d9caa3611b558",
-      "generated_at": "2026-09-23T04:54:53+00:00",
+    "daily-aa920e5cf0023bc74817f9e3": {
+      "run_id": "daily-aa920e5cf0023bc74817f9e3",
+      "generated_at": "2026-09-23T05:44:12+00:00",
       "selected_ids": [
         "2609.26299",
         "2609.26458",
@@ -1319,38 +1319,6 @@
           ],
           "matched_keywords": []
         },
-        "2609.15987": {
-          "title": "Bellman Policy Optimization",
-          "abstract": "Reinforcement learning with verifiable rewards (RLVR) improves the reasoning capabilities of large language models (LLMs). We introduce Bellman Policy Optimization (BPO), a critic-free method derived from Policy Mirror Descent (PMD). For autoregressive generation with terminal rewards, BPO uses the Bellman equations to reformulate PMD as a trajectory-level objective. The reformulation avoids estimating state values at intermediate states. We prove that it has the same unique optimal solution as the original PMD objective. We derive the practical BPO loss by approximating this objective. Its mismatch-correction weight is a smoothed ratio of complementary token probabilities. Experiments on mathematical reasoning benchmarks demonstrate the effectiveness of BPO.",
-          "categories": [],
-          "keywords": [
-            "bellman policy optimization",
-            "bpo",
-            "pmd",
-            "avoids estimating state",
-            "complementary token probabilities",
-            "estimating state values"
-          ],
-          "matched_keywords": []
-        },
-        "2609.25186": {
-          "title": "From Pattern Recognizers to Personalized Companions: A Survey of Large Language Models in Mental Health",
-          "abstract": "The rising global prevalence of mental health conditions, together with longstanding barriers in traditional healthcare, such as limited resources, high cost, stigma, and privacy concerns, has created an urgent need for accessible and scalable support. Large Language Models (LLMs) have emerged as a transformative technology with strong potential to democratize mental health support through advanced natural language understanding and generation. However, the rapidly expanding, fragmented body of work in this area lacks a coherent evolutionary narrative, making it difficult to contextualize current progress and identify future directions. This survey addresses this gap by organizing and analyzing the literature around a central thesis: the role of LLMs in mental health is evolving through three distinct, increasingly sophisticated phases. We trace this trajectory from Phase I, in which LLMs act primarily as passive Information Tools and Pattern Recognizers for assessment; through Phase II, where they function as Empathetic Conversationalists for in-the-moment, stateless interactions; to the current frontier, Phase III, which seeks Longitudinal, Personalized Companions implemented as stateful cognitive agents. To support this framework, we systematically review core technologies, agent architectures (Profile, Memory, Reasoning, and Planning), and the critical infrastructure of datasets and benchmarks, highlighting how their evolution underpins this developmental path. Viewing the field through this developmental lens, we provide a comprehensive synthesis of existing work, an insightful narrative of its trajectory, and a clear roadmap for future innovation in responsible, effective, and human-centered AI for mental healthcare. A curated collection of the resources reviewed in this survey is available at our project repository: this https URL.",
-          "categories": [
-            "cs.CY",
-            "cs.AI",
-            "cs.CL"
-          ],
-          "keywords": [
-            "mental health",
-            "pattern recognizers",
-            "personalized companions",
-            "advanced natural language",
-            "agent architectures profile",
-            "architectures profile memory"
-          ],
-          "matched_keywords": []
-        },
         "2609.26796": {
           "title": "Flash-dLLM: IO-Aware KV Caching and Parallel Decoding for Fast, Memory-Efficient Diffusion LLMs",
           "abstract": "Diffusion Large Language Models (dLLMs) have recently emerged as a promising alternative to autoregressive LLMs by enabling non-autoregressive text generation. However, their practical deployment remains limited by inefficient inference, largely due to the absence of effective Key-Value (KV) caching and scalable parallel decoding mechanisms. Existing acceleration methods typically study KV caching and parallel decoding in isolation, overlooking the I/O bottlenecks that arise when cache reuse and parallel token verification are jointly applied. In this work, we introduce Flash-dLLM, a training-free inference acceleration framework for fast and memory-efficient dLLMs. Flash-dLLM first identifies GPU memory I/O as a dominant bottleneck in KV-cache-enabled dLLM inference and addresses it with an I/O-aware fused KV-cache kernel that reduces redundant memory movement. Building on this optimized cache mechanism, Flash-dLLM further proposes an efficient KV-cache-driven draft-and-verify decoding strategy, where the dLLM itself serves as both drafter and verifier without requiring an auxiliary model. This unified design enables faster decoding while preserving generation quality and improving scalability to longer sequences and larger batch size. Extensive experiments on mathematical reasoning and code-generation benchmarks demonstrate that Flash-dLLM consistently outperforms existing state-of-the-art dLLM acceleration methods in both inference speed and memory efficiency. In particular, it achieves 5.1times and 11.0times speedups over prior strongest baseline Elastic-Cache on GSM8K and HumanEval, respectively.",
@@ -1362,24 +1330,6 @@
             "acceleration methods",
             "dllm",
             "acceleration methods typically"
-          ],
-          "matched_keywords": []
-        },
-        "2609.26457": {
-          "title": "Recursive self-improvement of AI research agents",
-          "abstract": "AI agents are beginning to automate research and development across the AI stack, from improving training efficiency to optimizing inference. A natural next step is to improve the research efficiency of the agents themselves. When an AI research agent's own code is the object of optimization, each accepted rewrite becomes the agent that the next round edits. We refer to this loop as recursive self-improvement. Its significance lies in a long-standing trend, in which increased cumulative spending on R&D yields diminishing returns. Sustained self-improvement offers a way to counter this trend. We present AIDE^2, a system that implements this loop for a frontier AI research agent. It proposes changes to its own code, benchmarks modified versions of itself on a suite of AI R&D tasks, and keeps the changes that perform best on hidden evaluations. In an autonomous 8-day run, AIDE^2 discovered seven successive improvements, ranging from a new search policy to memory mechanisms that compress and manage the agent's growing context. These gains generalize to four held-out benchmarks spanning machine learning engineering, heuristic algorithm engineering, and physics-based weather forecasting, the last of which is out of distribution from the selection tasks. On all four, the strongest discovered agent matches or exceeds a human-engineered production research agent that ranks among the strongest on FML-Bench. On a separate held-out task family, the discovered agents also exhibit reduced reward hacking, a property the loop never explicitly optimized for: the rate falls from 55% to 32% during the run, 7 percentage points below the human-engineered agent. Together, these results show that an AI research agent can improve its own research efficiency through recursive self-improvement, and that these gains transfer to tasks and domains the loop never encountered.",
-          "categories": [
-            "cs.AI",
-            "cs.LG",
-            "cs.SE"
-          ],
-          "keywords": [
-            "ai research agent",
-            "recursive self-improvement",
-            "loop never",
-            "research efficiency",
-            "own code",
-            "accepted rewrite becomes"
           ],
           "matched_keywords": []
         },
@@ -37836,6 +37786,56 @@
             "autonomy experience-acquisition autonomy",
             "autonomy improvement-strategy autonomy",
             "connect rsi research"
+          ],
+          "matched_keywords": []
+        },
+        "2609.15987": {
+          "title": "Bellman Policy Optimization",
+          "abstract": "Reinforcement learning with verifiable rewards (RLVR) improves the reasoning capabilities of large language models (LLMs). We introduce Bellman Policy Optimization (BPO), a critic-free method derived from Policy Mirror Descent (PMD). For autoregressive generation with terminal rewards, BPO uses the Bellman equations to reformulate PMD as a trajectory-level objective. The reformulation avoids estimating state values at intermediate states. We prove that it has the same unique optimal solution as the original PMD objective. We derive the practical BPO loss by approximating this objective. Its mismatch-correction weight is a smoothed ratio of complementary token probabilities. Experiments on mathematical reasoning benchmarks demonstrate the effectiveness of BPO.",
+          "categories": [],
+          "keywords": [
+            "bellman policy optimization",
+            "bpo",
+            "pmd",
+            "avoids estimating state",
+            "complementary token probabilities",
+            "estimating state values"
+          ],
+          "matched_keywords": []
+        },
+        "2609.25186": {
+          "title": "From Pattern Recognizers to Personalized Companions: A Survey of Large Language Models in Mental Health",
+          "abstract": "The rising global prevalence of mental health conditions, together with longstanding barriers in traditional healthcare, such as limited resources, high cost, stigma, and privacy concerns, has created an urgent need for accessible and scalable support. Large Language Models (LLMs) have emerged as a transformative technology with strong potential to democratize mental health support through advanced natural language understanding and generation. However, the rapidly expanding, fragmented body of work in this area lacks a coherent evolutionary narrative, making it difficult to contextualize current progress and identify future directions. This survey addresses this gap by organizing and analyzing the literature around a central thesis: the role of LLMs in mental health is evolving through three distinct, increasingly sophisticated phases. We trace this trajectory from Phase I, in which LLMs act primarily as passive Information Tools and Pattern Recognizers for assessment; through Phase II, where they function as Empathetic Conversationalists for in-the-moment, stateless interactions; to the current frontier, Phase III, which seeks Longitudinal, Personalized Companions implemented as stateful cognitive agents. To support this framework, we systematically review core technologies, agent architectures (Profile, Memory, Reasoning, and Planning), and the critical infrastructure of datasets and benchmarks, highlighting how their evolution underpins this developmental path. Viewing the field through this developmental lens, we provide a comprehensive synthesis of existing work, an insightful narrative of its trajectory, and a clear roadmap for future innovation in responsible, effective, and human-centered AI for mental healthcare. A curated collection of the resources reviewed in this survey is available at our project repository: this https URL.",
+          "categories": [
+            "cs.CY",
+            "cs.AI",
+            "cs.CL"
+          ],
+          "keywords": [
+            "mental health",
+            "pattern recognizers",
+            "personalized companions",
+            "advanced natural language",
+            "agent architectures profile",
+            "architectures profile memory"
+          ],
+          "matched_keywords": []
+        },
+        "2609.26457": {
+          "title": "Recursive self-improvement of AI research agents",
+          "abstract": "AI agents are beginning to automate research and development across the AI stack, from improving training efficiency to optimizing inference. A natural next step is to improve the research efficiency of the agents themselves. When an AI research agent's own code is the object of optimization, each accepted rewrite becomes the agent that the next round edits. We refer to this loop as recursive self-improvement. Its significance lies in a long-standing trend, in which increased cumulative spending on R&D yields diminishing returns. Sustained self-improvement offers a way to counter this trend. We present AIDE^2, a system that implements this loop for a frontier AI research agent. It proposes changes to its own code, benchmarks modified versions of itself on a suite of AI R&D tasks, and keeps the changes that perform best on hidden evaluations. In an autonomous 8-day run, AIDE^2 discovered seven successive improvements, ranging from a new search policy to memory mechanisms that compress and manage the agent's growing context. These gains generalize to four held-out benchmarks spanning machine learning engineering, heuristic algorithm engineering, and physics-based weather forecasting, the last of which is out of distribution from the selection tasks. On all four, the strongest discovered agent matches or exceeds a human-engineered production research agent that ranks among the strongest on FML-Bench. On a separate held-out task family, the discovered agents also exhibit reduced reward hacking, a property the loop never explicitly optimized for: the rate falls from 55% to 32% during the run, 7 percentage points below the human-engineered agent. Together, these results show that an AI research agent can improve its own research efficiency through recursive self-improvement, and that these gains transfer to tasks and domains the loop never encountered.",
+          "categories": [
+            "cs.AI",
+            "cs.LG",
+            "cs.SE"
+          ],
+          "keywords": [
+            "ai research agent",
+            "recursive self-improvement",
+            "loop never",
+            "research efficiency",
+            "own code",
+            "accepted rewrite becomes"
           ],
           "matched_keywords": []
         },
