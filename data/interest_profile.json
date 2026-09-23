@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-09-23T05:44:12+00:00",
+  "updated_at": "2026-09-23T09:17:27+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-aa920e5cf0023bc74817f9e3": {
-      "run_id": "daily-aa920e5cf0023bc74817f9e3",
-      "generated_at": "2026-09-23T05:44:12+00:00",
+    "daily-fcd10ac1c2f7bc85bdb46666": {
+      "run_id": "daily-fcd10ac1c2f7bc85bdb46666",
+      "generated_at": "2026-09-23T09:17:27+00:00",
       "selected_ids": [
         "2609.26299",
         "2609.26458",
@@ -7962,6 +7962,37 @@
           ],
           "matched_keywords": []
         },
+        "2609.24967": {
+          "title": "Emergent Collusion in Long-Horizon LLM Agent Interaction",
+          "abstract": "LLM agents are increasingly deployed in collaborative settings, yet long-term interaction may give rise to undesirable coordination. We study the emergence of collusion in a long-horizon multi-agent environment: two agents repeatedly complete individual tasks, share task logs, verify each other's work, and receive rewards. We introduce realistic constraints that make compliance with the verification protocol incompatible with reward maximization, and find that agents increasingly deviate from the protocol over repeated interactions. Collusion emerges in 94% of trajectories across 10 models, and more capable models within the same family reach it earlier. Controlled peer interventions show that collusion is shaped by peer behavior, while ablations reveal additional effects of reward structure, the verification feedback agents receive, and their interaction history. In particular, restricting the amount and scope of interaction history available to agents reduces collusion. Overall, our findings show that long-horizon interaction can reshape how agents coordinate in ways that create safety risks.",
+          "categories": [
+            "cs.AI",
+            "cs.CL"
+          ],
+          "keywords": [
+            "collusion",
+            "interaction history",
+            "ablations reveal additional",
+            "agents increasingly deviate",
+            "agents reduces collusion",
+            "agents repeatedly complete"
+          ],
+          "matched_keywords": []
+        },
+        "2609.26346": {
+          "title": "Blaming Across the Aisle: Political Contrasting and Blame Attribution in the Danish Parliament",
+          "abstract": "Political discourse is widely perceived to be growing more hostile, yet robust evidence remains scarce. This study examines blame attribution in the Danish Parliament from 1997 to 2026, combining a purpose-built classifier, BlameBERT (F1: 0.80), with multilevel statistical modeling. The classifier is constructed using an annotation-efficient pipeline for blame attribution in low-to-mid resource languages. The results reveal a banana-shaped trajectory, with blame declining until around 2016 before entering a significant and sustained increase in recent years (2019-2026). Government status consistently influenced blame attribution - an effect we term political contrasting - with opposition parties blaming substantially more than governing parties. This effect was moderated by ideology: The blame-dampening effect of governing was less pronounced among right-wing parties, and ideological extremity amplified blame more strongly on the right. In recent years, the interaction between political wing and ideological extremity intensified, suggesting an ideological hardening of the blame rhetoric concentrated on the right of the political spectrum. Taken together, these patterns suggest that the perceived rise in harsh political language reflects not merely a general rhetorical drift, but an ideologically asymmetric hardening of political discourse. A sensitivity analysis showed that the conclusions were robust to varying classification thresholds.",
+          "categories": [],
+          "keywords": [
+            "blame attribution",
+            "political",
+            "danish parliament",
+            "ideological extremity",
+            "political contrasting",
+            "political discourse"
+          ],
+          "matched_keywords": []
+        },
         "2609.23863": {
           "title": "Grounded Action Model: 3D Grounding as a Foundation for Robotics",
           "abstract": "Manipulation policies must know which objects matter and where they are, yet the pretrained backbones that current robot foundation models build on, from language in vision-language-action models (VLAs) to video generation in world-action models (WAMs), do not directly require this metric grounding, leaving it to be learned implicitly from robot demonstrations. We propose Grounded Action Models (GAMs), a new paradigm of robot foundation models built with 3D grounding. GAM can be conditioned using language, points, or box prompts, which are first transformed into a shared object-centric representation of the selected objects. This representation captures target-focused visual features and metric object geometry, which is mixed with robot state history through a multi-stream transformer to predict action chunks. Although GAMs can be run autonomously, they can also serve as a low-level controller that a high-level planner controls using its various input modalities, allowing for long-horizon and memory-dependent manipulation. On RoboTwin 2.0, GAM achieves an average success rate of 55.3% across 50 tasks (vs. 52.0% for Spatial Forcing), including 47.6% under scene randomization (vs. 30.4% for Abot-M0), with its action policy trained only on clean-scene demonstrations. On LIBERO-PRO, it achieves a state-of-the-art average success rate of 61% (vs. 53% for $\\pi_{0.5}$) across 16 perturbation settings, with the largest gains when targets are relocated or newly designated. On two real robots, GAM retains 17/20 successes under visual shift on a bimanual YAM versus 4/20 for $\\pi_{0.5}$, while its composition with a Molmo2 planner on a Franka achieves 64.7% ID and 49.8% OOD step completion on long-horizon and memory-dependent tasks.",
@@ -14474,23 +14505,6 @@
             "personal context",
             "wealth",
             "agent steers recommendations"
-          ],
-          "matched_keywords": []
-        },
-        "2609.24967": {
-          "title": "Emergent Collusion in Long-Horizon LLM Agent Interaction",
-          "abstract": "LLM agents are increasingly deployed in collaborative settings, yet long-term interaction may give rise to undesirable coordination. We study the emergence of collusion in a long-horizon multi-agent environment: two agents repeatedly complete individual tasks, share task logs, verify each other's work, and receive rewards. We introduce realistic constraints that make compliance with the verification protocol incompatible with reward maximization, and find that agents increasingly deviate from the protocol over repeated interactions. Collusion emerges in 94% of trajectories across 10 models, and more capable models within the same family reach it earlier. Controlled peer interventions show that collusion is shaped by peer behavior, while ablations reveal additional effects of reward structure, the verification feedback agents receive, and their interaction history. In particular, restricting the amount and scope of interaction history available to agents reduces collusion. Overall, our findings show that long-horizon interaction can reshape how agents coordinate in ways that create safety risks.",
-          "categories": [
-            "cs.AI",
-            "cs.CL"
-          ],
-          "keywords": [
-            "collusion",
-            "interaction history",
-            "ablations reveal additional",
-            "agents increasingly deviate",
-            "agents reduces collusion",
-            "agents repeatedly complete"
           ],
           "matched_keywords": []
         },
@@ -28457,11 +28471,11 @@
           ],
           "keywords": [
             "ukraine",
-            "languages",
             "ai systems assess",
             "ask gpt claude",
             "broad pattern recurs",
-            "countries official languages"
+            "countries official languages",
+            "evaluate twenty statements"
           ],
           "matched_keywords": []
         },
