@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-09-24T05:59:11+00:00",
+  "updated_at": "2026-09-24T09:16:55+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-cfe402d1e889a0b40d1d42d3": {
-      "run_id": "daily-cfe402d1e889a0b40d1d42d3",
-      "generated_at": "2026-09-24T05:59:11+00:00",
+    "daily-83e8ccb1e2279a940d084154": {
+      "run_id": "daily-83e8ccb1e2279a940d084154",
+      "generated_at": "2026-09-24T09:16:55+00:00",
       "selected_ids": [
         "2609.28393",
         "2609.27753",
@@ -1106,24 +1106,6 @@
           ],
           "matched_keywords": []
         },
-        "2609.27252": {
-          "title": "What Converges in the Platonic Representation Hypothesis? Structure over Geometry",
-          "abstract": "The Platonic Representation Hypothesis suggests that increasingly capable models converge toward shared representations. Recent work narrows this claim to shared local neighborhood relationships, finding that capacity-dependent trends in several global similarity measures largely disappear after calibration. We challenge this interpretation by showing that prior local-global comparisons confound structural scale (local versus global) with what is compared: relational structure, defined by which samples are related, versus metric geometry, characterized by quantitative relations such as distances, similarities, or correlations. To disentangle these factors, we construct a controlled $2\\times2$ framework that evaluates both relational structure and metric geometry at local and global scales. We introduce $H_0$ skeleton overlap as a global counterpart to mutual $k$-nearest neighbors, together with matched distance-aware variants. Across vision-language models, relational structure exhibits robust representational convergence at both scales after calibration, whereas increasingly stringent distance agreement substantially weakens alignment and progressively flattens the capacity-dependent trend. We further extend the analysis beyond ambient Euclidean geometry by evaluating distance agreement under a Riemannian metric approximation and recover the same structure-geometry pattern. The pattern is also reproduced in video-text representations. Together, these results show that relational convergence extends beyond local neighborhoods to global spanning structure, whereas metric geometry exhibits substantially weaker convergence.",
-          "categories": [
-            "cs.LG",
-            "cs.CV",
-            "math.AT"
-          ],
-          "keywords": [
-            "platonic representation hypothesis",
-            "relational structure",
-            "metric geometry",
-            "distance agreement",
-            "agreement substantially weakens",
-            "ambient euclidean geometry"
-          ],
-          "matched_keywords": []
-        },
         "2609.28258": {
           "title": "Generalizable Robotic Insertion with World Models",
           "abstract": "Robotic assembly in high-mixture settings requires adaptable systems that can handle diverse parts, yet current approaches typically rely on policies specialized to each insertion task. Although this can reach high success rates, it makes the process of deploying systems for new problems tedious and time consuming. We present a framework for generalizable insertion using world models that combine robot proprioceptive information with raw visual observations captured by a wrist-mounted camera. Our model-based approach trains a single world model on up to 90 insertion tasks with geometrically diverse parts, achieving 56% zero-shot success on unseen objects with unknown geometry compared to just 7% with a model-free baseline. Importantly, performance improves as more objects are included in the training dataset, demonstrating strong scalability. Lastly, finetuning the generalist model on held-out objects significantly enhances data-efficiency compared to training from scratch and, in some cases, achieves better asymptotic performance. To our knowledge, this is the first system capable of assembling unseen objects in an entirely data-driven manner, and thus represents a significant step toward scalable, generalizable robotic assembly systems.",
@@ -1143,6 +1125,40 @@
           "matched_keywords": [
             "world model"
           ]
+        },
+        "2609.28377": {
+          "title": "Amplify: A Lightweight Library for Reproducible Nonlinear Programming Problems in Robotics",
+          "abstract": "Optimization problems (OPs) are key to solving many challenging research problems in robotics. However, reproducibility still remains a major issue. In this paper, we present Amplify, a lightweight nonlinear programming library aimed at reproducible results of robotic-related trajectory optimization problems. The minimalistic requirements for the 537-line library (80 characters per line) are an Internet connection, familiarity with the AMPL modeling language, and a text editor. Our primary contribution is the formulation of a library where trajectory optimization algorithms are represented directly within the optimization model. Specifically, we implement the algorithms used to compute the dynamics, trajectories, and reference motions as constraints of the OP in a declarative programming paradigm. We outline how our formulation of objectives, decisions variables, and constraints can be implemented in other transcription libraries that want to be lightweight and reproducible. We also compare the Amplify framework with 3 other libraries across examples of benchmark optimization problems across several fields, including bipedal locomotion and grasp planning.",
+          "categories": [
+            "cs.RO"
+          ],
+          "keywords": [
+            "optimization problems",
+            "nonlinear programming",
+            "ampl modeling language",
+            "amplify lightweight nonlinear",
+            "benchmark optimization problems",
+            "challenging research problems"
+          ],
+          "matched_keywords": []
+        },
+        "2609.27252": {
+          "title": "What Converges in the Platonic Representation Hypothesis? Structure over Geometry",
+          "abstract": "The Platonic Representation Hypothesis suggests that increasingly capable models converge toward shared representations. Recent work narrows this claim to shared local neighborhood relationships, finding that capacity-dependent trends in several global similarity measures largely disappear after calibration. We challenge this interpretation by showing that prior local-global comparisons confound structural scale (local versus global) with what is compared: relational structure, defined by which samples are related, versus metric geometry, characterized by quantitative relations such as distances, similarities, or correlations. To disentangle these factors, we construct a controlled $2\\times2$ framework that evaluates both relational structure and metric geometry at local and global scales. We introduce $H_0$ skeleton overlap as a global counterpart to mutual $k$-nearest neighbors, together with matched distance-aware variants. Across vision-language models, relational structure exhibits robust representational convergence at both scales after calibration, whereas increasingly stringent distance agreement substantially weakens alignment and progressively flattens the capacity-dependent trend. We further extend the analysis beyond ambient Euclidean geometry by evaluating distance agreement under a Riemannian metric approximation and recover the same structure-geometry pattern. The pattern is also reproduced in video-text representations. Together, these results show that relational convergence extends beyond local neighborhoods to global spanning structure, whereas metric geometry exhibits substantially weaker convergence.",
+          "categories": [
+            "cs.LG",
+            "cs.CV",
+            "math.AT"
+          ],
+          "keywords": [
+            "platonic representation hypothesis",
+            "relational structure",
+            "metric geometry",
+            "distance agreement",
+            "agreement substantially weakens",
+            "ambient euclidean geometry"
+          ],
+          "matched_keywords": []
         },
         "2609.27621": {
           "title": "SHRAV: State-Hypothesis-Reason-Action-Verify Framework for Physical Modeling and Inverse Design",
@@ -1231,22 +1247,6 @@
             "simulation benchmark",
             "adopt multi-axis domain",
             "alongside nearly hour"
-          ],
-          "matched_keywords": []
-        },
-        "2609.28377": {
-          "title": "Amplify: A Lightweight Library for Reproducible Nonlinear Programming Problems in Robotics",
-          "abstract": "Optimization problems (OPs) are key to solving many challenging research problems in robotics. However, reproducibility still remains a major issue. In this paper, we present Amplify, a lightweight nonlinear programming library aimed at reproducible results of robotic-related trajectory optimization problems. The minimalistic requirements for the 537-line library (80 characters per line) are an Internet connection, familiarity with the AMPL modeling language, and a text editor. Our primary contribution is the formulation of a library where trajectory optimization algorithms are represented directly within the optimization model. Specifically, we implement the algorithms used to compute the dynamics, trajectories, and reference motions as constraints of the OP in a declarative programming paradigm. We outline how our formulation of objectives, decisions variables, and constraints can be implemented in other transcription libraries that want to be lightweight and reproducible. We also compare the Amplify framework with 3 other libraries across examples of benchmark optimization problems across several fields, including bipedal locomotion and grasp planning.",
-          "categories": [
-            "cs.RO"
-          ],
-          "keywords": [
-            "optimization problems",
-            "nonlinear programming",
-            "ampl modeling language",
-            "amplify lightweight nonlinear",
-            "benchmark optimization problems",
-            "challenging research problems"
           ],
           "matched_keywords": []
         },
@@ -6788,6 +6788,51 @@
             "comprehensive framework",
             "packlab",
             "average packlab-vlm outperforms"
+          ],
+          "matched_keywords": []
+        },
+        "2609.24815": {
+          "title": "Uranus: Building the Next-Generation Simulation Infrastructure for Embodied AI",
+          "abstract": "Scalable simulation is essential for robot data generation, policy training, evaluation, and safe iteration, yet real-world interaction is costly and conventional simulators require labor-intensive construction. We present Uranus, a data-driven robot simulator built around a joint-trajectory-conditioned autoregressive diffusion model. Uranus offers three key capabilities: (1) streaming, open-ended rollout, which receives future joint-position trajectories online and autoregressively generates one latent frame per step, corresponding to four RGB frames, without a fixed horizon; (2) low-latency generation, achieving 24 FPS after inference optimization; and (3) scalable, extensible robot control, providing a unified interface for synchronized multi-view generation across diverse robot embodiments and camera configurations. We conduct comprehensive quantitative and qualitative evaluations on both in-distribution and out-of-distribution data, providing an objective assessment of Uranus and clearly identifying its current limitations. We release the code and model weights to empower the community with practical tools and insights.",
+          "categories": [
+            "cs.RO",
+            "cs.AI"
+          ],
+          "keywords": [
+            "uranus",
+            "around joint-trajectory-conditioned autoregressive",
+            "autoregressively generates one",
+            "built around joint-trajectory-conditioned",
+            "conduct comprehensive quantitative",
+            "control providing unified"
+          ],
+          "matched_keywords": []
+        },
+        "2609.27980": {
+          "title": "Six Layers Less: Encoder Pruning for Whisper with Label-Free Recovery",
+          "abstract": "Pruning large pre-trained transformer-based ASR models such as OpenAI's Whisper has seen great adoption, as pruning the decoder led to significant end-to-end transcription speedups. For instance, the {\\tt whisper-large-v3-turbo} variant reduced the decoder from 32 to 4 layers, while Distill-Whisper similarly reduced the decoder to only 2 layers. Although some attention has been put towards reducing the size of the encoder, no approach has seen wide adoption. This could be due to the need for custom inference implementations to take advantage of the compressed model. We present an approach that ranks encoder layers by the leave-one-layer-out change in Word Error Rate (WER). The six layers that cause the least change are removed, corresponding to 18.5% of the encoder stack. The pruned model requires no custom inference code as it is simply a more shallow encoder with fewer layers. We further distill using unlabeled monolingual speech data to recover performance degradation caused by the zero-shot layer pruning. Mean WER across four languages increases to 20.1% after distillation, compared to 21.9% zero-shot, going from a baseline of 18.2%. We release all of our code (https://github.com/rasgaard/whisper-encoder-layer-prune) and the pruned model (https://huggingface.co/rasgaard/whisper-large-v3-turbo-encoder-pruned).",
+          "categories": [],
+          "keywords": [
+            "custom inference",
+            "six layers",
+            "although some attention",
+            "been put towards",
+            "co rasgaard whisper-large-v3-turbo-encoder-pruned",
+            "com rasgaard whisper-encoder-layer-prune"
+          ],
+          "matched_keywords": []
+        },
+        "2609.25853": {
+          "title": "MemoryAthena: Adaptive Routing over Latent and Generated Memories",
+          "abstract": "Learned-memory methods store information in an explicit table and consume it through a separate reader, allowing addressing, storage, and reading to be modified independently. We study whether useful memory can also be generated rather than only retrieved. MemoryAthena uses three pathways: direct Engram retrieval (E), generation from retrieved Engram cues (GE), and generation from causal backbone states without consulting the memory table (GH). Generated memory is conditionally useful: it can complement E in one context but interfere with it in another. MemoryAthena therefore treats E as an anchor and learns when a generated representation should intervene. With the backbone, memory, generators, and readers frozen, a lightweight causal routing head is trained from counterfactual future-token likelihood advantages of GE and GH relative to E. At inference time, an admitted candidate modifies the E residual through bounded interpolation, while rejection recovers the direct pathway exactly. On question answering, MemoryAthena raises the five-task average from 37.65 to 39.28 over the direct pathway of the same checkpoint, while the six-task general-NLP average increases from 76.73 to 79.13. The complete memory-side system contains approximately 201M parameters, excluding the frozen backbone. Further analyses show complementary strengths among E, GE, and GH across tasks and inputs. These results support generated memory as a selective correction to direct retrieval and highlight routing when, which, and how strongly to intervene as the central challenge.",
+          "categories": [],
+          "keywords": [
+            "memoryathena",
+            "direct pathway",
+            "generated memory",
+            "ge",
+            "gh",
+            "admitted candidate modifies"
           ],
           "matched_keywords": []
         },
@@ -23824,23 +23869,6 @@
           ],
           "matched_keywords": []
         },
-        "2609.24815": {
-          "title": "Uranus: Building the Next-Generation Simulation Infrastructure for Embodied AI",
-          "abstract": "Scalable simulation is essential for robot data generation, policy training, evaluation, and safe iteration, yet real-world interaction is costly and conventional simulators require labor-intensive construction. We present Uranus, a data-driven robot simulator built around a joint-trajectory-conditioned autoregressive diffusion model. Uranus offers three key capabilities: (1) streaming, open-ended rollout, which receives future joint-position trajectories online and autoregressively generates one latent frame per step, corresponding to four RGB frames, without a fixed horizon; (2) low-latency generation, achieving 24 FPS after inference optimization; and (3) scalable, extensible robot control, providing a unified interface for synchronized multi-view generation across diverse robot embodiments and camera configurations. We conduct comprehensive quantitative and qualitative evaluations on both in-distribution and out-of-distribution data, providing an objective assessment of Uranus and clearly identifying its current limitations. We release the code and model weights to empower the community with practical tools and insights.",
-          "categories": [
-            "cs.RO",
-            "cs.AI"
-          ],
-          "keywords": [
-            "uranus",
-            "around joint-trajectory-conditioned autoregressive",
-            "autoregressively generates one",
-            "built around joint-trajectory-conditioned",
-            "conduct comprehensive quantitative",
-            "control providing unified"
-          ],
-          "matched_keywords": []
-        },
         "2609.24847": {
           "title": "SPECTRA: Adaptive Execution of Speculative Decoding on a Runtime-Reconfigurable Tiled Architecture",
           "abstract": "LLM inference on edge devices is constrained by computational and memory resources, making efficient autoregressive decoding challenging. Speculative decoding alleviates this bottleneck by generating tokens with a smaller draft model and verifying multiple tokens in parallel with a batched target model pass. However, verification introduces a runtime-dependent intermediate regime between memory-bound general matrix-vector (GEMV) operations in decoding and compute-bound general matrix-matrix (GEMM) operations in prefill, as its arithmetic intensity varies with speculation length and acceptance rate. We present SPECTRA, a runtime-reconfigurable tiled architecture that sustains high utilization across the full speculative decoding pipeline. Within each tile, the compute engine switches between systolic execution for GEMMs and vector-lane execution for GEMVs. Across tiles, SPECTRA dynamically adapts computation parallelism by selecting tile count, kernel partitioning, and communication pattern. Both tile-level and system-level reconfiguration operate on a per-kernel basis, enabling efficient execution across these diverse regimes. Evaluated on a 20-tile FPGA prototype across the Pythia, SmolLM2, and GPT-2 families, SPECTRA achieves up to $2.09\\times$ speedup from tile-level reconfiguration and a further $1.25\\times$ gain from system-level adaptability over fixed designs.",
@@ -27557,11 +27585,11 @@
           ],
           "keywords": [
             "prismalign",
-            "table",
             "aligning diverse visual",
             "assess output plausibility",
             "bayesian decision strategy",
-            "cell content alignment"
+            "cell content alignment",
+            "computable rule violations"
           ],
           "matched_keywords": []
         },
@@ -36227,8 +36255,8 @@
             "target-speaker selection",
             "underlying asr",
             "farmerchat",
-            "error rate",
-            "agricultural"
+            "agricultural",
+            "error rate"
           ],
           "matched_keywords": []
         },
