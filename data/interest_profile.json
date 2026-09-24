@@ -40025,7 +40025,7 @@
   "delivery": {
     "batch_id": "db659454f4dd88f295137b2e",
     "run_id": "daily-cfe402d1e889a0b40d1d42d3",
-    "updated_at": "2026-09-24T05:59:11+00:00",
+    "updated_at": "2026-09-24T06:04:25+00:00",
     "profile_version": "992927a1524b59b3",
     "papers": [
       {
@@ -40351,7 +40351,48 @@
           "cs.CV",
           "cs.LG"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Nicklas Hansen",
+            "affiliation": "NVIDIA"
+          },
+          {
+            "author": "Iretiayo Akinola",
+            "affiliation": "NVIDIA"
+          },
+          {
+            "author": "Yijie Guo",
+            "affiliation": "NVIDIA"
+          },
+          {
+            "author": "Jie Xu",
+            "affiliation": "NVIDIA"
+          },
+          {
+            "author": "Bingjie Tang",
+            "affiliation": "NVIDIA"
+          },
+          {
+            "author": "Hao Su",
+            "affiliation": "University of California San Diego"
+          },
+          {
+            "author": "Xiaolong Wang",
+            "affiliation": "University of California San Diego"
+          },
+          {
+            "author": "Abhishek Gupta",
+            "affiliation": "NVIDIA"
+          },
+          {
+            "author": "Dieter Fox",
+            "affiliation": "NVIDIA"
+          },
+          {
+            "author": "Yashraj Narang",
+            "affiliation": "NVIDIA"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-09-24",
         "listing_date": "2026-09-24",
@@ -40361,7 +40402,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "unresolved",
+        "affiliation_status": "resolved",
         "keywords": [
           "diverse parts",
           "generalizable robotic",
@@ -43183,7 +43224,12 @@
         "categories": [
           "cs.RO"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Nelson Rosa Jr",
+            "affiliation": "Northwestern University"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-09-24",
         "listing_date": "2026-09-24",
@@ -43193,7 +43239,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "unresolved",
+        "affiliation_status": "resolved",
         "keywords": [
           "optimization problems",
           "nonlinear programming",
