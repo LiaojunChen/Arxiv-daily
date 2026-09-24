@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-09-24T05:04:29+00:00",
+  "updated_at": "2026-09-24T05:59:11+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-8ad65ebf897971050ac98d86": {
-      "run_id": "daily-8ad65ebf897971050ac98d86",
-      "generated_at": "2026-09-24T05:04:29+00:00",
+    "daily-cfe402d1e889a0b40d1d42d3": {
+      "run_id": "daily-cfe402d1e889a0b40d1d42d3",
+      "generated_at": "2026-09-24T05:59:11+00:00",
       "selected_ids": [
         "2609.28393",
         "2609.27753",
@@ -1337,22 +1337,6 @@
             "control yet vast",
             "episode-level information beyond",
             "evaluated rmbench tasks"
-          ],
-          "matched_keywords": []
-        },
-        "2609.27284": {
-          "title": "Hunyuan-A13B Technical Report",
-          "abstract": "We present Hunyuan-A13B, an open-source large language model based on a Mixture-of-Experts architecture. It contains 80 billion total parameters but activates only 13 billion during inference, balancing model capability, computational efficiency, and deployment cost. The model is pretrained on a rigorously filtered 20T-token corpus with enhanced STEM data curation, improving factual reliability and reasoning ability. High-quality supervised fine-tuning and large-scale reinforcement learning further enhance its overall performance. Hunyuan-A13B also introduces a dual-mode Chain-of-Thought framework that adapts reasoning depth to task complexity: fast thinking for routine queries and slow thinking for complex, multi-step problems. Evaluations show competitive performance across mathematics, science, programming, general language understanding, and agent tasks, often approaching that of much larger models. Its high inference throughput makes it suitable for latency-sensitive applications. We release Hunyuan-A13B to support open research and practical LLM deployment.",
-          "categories": [
-            "cs.AI"
-          ],
-          "keywords": [
-            "hunyuan-a13b",
-            "adapts reasoning depth",
-            "agent tasks often",
-            "billion during inference",
-            "billion total parameters",
-            "capability computational efficiency"
           ],
           "matched_keywords": []
         },
@@ -6753,6 +6737,57 @@
             "limited feedback",
             "ankle",
             "elbow"
+          ],
+          "matched_keywords": []
+        },
+        "2609.24308": {
+          "title": "HappyWorld-Bench",
+          "abstract": "Evaluating world models requires assessing both the quality of the worlds they generate and their consistency and responsiveness under exploration, interaction, and modification. We introduce HappyWorld-Bench, a comprehensive benchmark that evaluates whether generated worlds remain reliable as agents interact with them. Our design is built on a hierarchical capability framework of six world capabilities (W1-W6), from generative construction to unified world modeling, instantiated across three independent evaluation tracks: video world models, spatial world models, and embodied world models. HappyWorld-Bench comprises 1,138 video prompts, 300 spatial scenes, and 254 embodied test cases. Across all three tracks, we build and operate HappyWorld-Arena to organize human A/B comparisons and derive model-level Elo ratings, which complement newly designed automated metrics that capture behavioral correctness. We evaluate 14 video world models, 9 spatial systems, and 8 embodied candidates under this unified framework. Results reveal remaining reliability gaps across all three tracks: video models exhibit reduced consistency during extended rollouts and revisits, spatial models achieve at best 70.14% placement accuracy and 73.33% edit execution, and embodied models struggle to preserve state across multi-step actions and respond precisely to altered action conditions and physical rules. These findings highlight the need to evaluate world models not only by visual quality, but also by state consistency and the correctness of their responses to actions and interventions.",
+          "categories": [
+            "cs.CV"
+          ],
+          "keywords": [
+            "three tracks",
+            "happyworld-bench",
+            "video world",
+            "altered action conditions",
+            "capture behavioral correctness",
+            "complement newly designed"
+          ],
+          "matched_keywords": [
+            "world model"
+          ]
+        },
+        "2609.23038": {
+          "title": "Spatial-Interactor: Learning Spatial Reasoning through Interaction with the Observable Physical World",
+          "abstract": "Spatial reasoning is essential for vision-language models (VLMs) to understand and act in the physical world. Reasoning in dynamic environments requires VLMs to perceive local state transitions caused by object motion and viewpoint changes and integrate them over long trajectories to maintain an updated spatial state, yet existing VLMs remain limited in both capabilities. Current spatial training primarily focuses on static questions about object attributes and spatial relations, providing limited direct supervision for state transitions; in contrast, interaction trajectories naturally connect a preceding observation, an action, and a subsequent observation, offering direct supervision for local state transitions, while complete trajectories reveal dependencies among consecutive transitions. We therefore introduce Spatial-Interactor, a framework that trains VLMs to model physical-world state transitions through interaction, organizing this learning process into a three-level curriculum covering L1 passive world-state transitions, L2 active self-state transitions, and L3 long-horizon interaction trajectories. Accordingly, we construct the Learning from Spatial Interaction dataset (LSI-108K) from simulated and real interaction trajectories, with tasks aligned with the objective of each level. Our two-stage training strategy applies Supervised Fine-Tuning (SFT) to L1 and L2 for local transition modeling, and On-Policy Distillation (OPD) then uses privileged self-distillation: a teacher branch given segment-level transition descriptions supervises the student's on-policy CoT, helping the student learn to integrate consecutive transitions over L3 long trajectories. Experiments across multiple VLMs and spatial benchmarks show consistent gains in local transition modeling and long-horizon integration.",
+          "categories": [
+            "cs.AI",
+            "cs.LG"
+          ],
+          "keywords": [
+            "local state transitions",
+            "local transition modeling",
+            "interaction trajectories",
+            "consecutive transitions",
+            "long trajectories",
+            "direct supervision"
+          ],
+          "matched_keywords": []
+        },
+        "2609.23784": {
+          "title": "PackLab: A Comprehensive Framework for Developing, Training, and Evaluating MLLMs in Robotic Bin Packing",
+          "abstract": "Robotic bin packing requires long-horizon sequential decision-making, as each object placement affects the available space for subsequent packing. Existing methods primarily rely on hand-crafted geometric heuristics that optimize predefined objectives or reinforcement learning policies learned through trial and error over predefined training configurations. Despite recent advances in multimodal large language models (MLLMs) for this task, their potential for closed-loop sequential decisions across heterogeneous packing configurations remains underexplored. To address this gap, we introduce PackLab, a comprehensive framework for developing, training, and evaluating MLLMs for closed-loop robotic bin packing. PackLab-Suite provides a physics-based simulation platform for scalable generation of diverse training packing trajectories and evaluation of their physical outcomes. PackLab-VLM is a packing-specialized MLLM that understands the evolving object and container states to jointly select objects and predict placements in a closed-loop manner. PackLab-Bench provides standardized packing scenarios at multiple difficulty levels for systematic evaluation. Extensive experiments demonstrate that, on average, PackLab-VLM outperforms conventional packing heuristics, traditional reinforcement learning methods, and general-purpose MLLMs across object sets and container configurations, highlighting the potential of MLLMs for long-horizon robotic packing. The code, model, dataset, and benchmark are available at https://github.com/Correr-Zhou/PackLab .",
+          "categories": [
+            "cs.RO"
+          ],
+          "keywords": [
+            "robotic bin packing",
+            "developing training",
+            "evaluating mllms",
+            "comprehensive framework",
+            "packlab",
+            "average packlab-vlm outperforms"
           ],
           "matched_keywords": []
         },
@@ -14670,24 +14705,6 @@
           ],
           "matched_keywords": []
         },
-        "2609.24308": {
-          "title": "HappyWorld-Bench",
-          "abstract": "Evaluating world models requires assessing both the quality of the worlds they generate and their consistency and responsiveness under exploration, interaction, and modification. We introduce HappyWorld-Bench, a comprehensive benchmark that evaluates whether generated worlds remain reliable as agents interact with them. Our design is built on a hierarchical capability framework of six world capabilities (W1-W6), from generative construction to unified world modeling, instantiated across three independent evaluation tracks: video world models, spatial world models, and embodied world models. HappyWorld-Bench comprises 1,138 video prompts, 300 spatial scenes, and 254 embodied test cases. Across all three tracks, we build and operate HappyWorld-Arena to organize human A/B comparisons and derive model-level Elo ratings, which complement newly designed automated metrics that capture behavioral correctness. We evaluate 14 video world models, 9 spatial systems, and 8 embodied candidates under this unified framework. Results reveal remaining reliability gaps across all three tracks: video models exhibit reduced consistency during extended rollouts and revisits, spatial models achieve at best 70.14% placement accuracy and 73.33% edit execution, and embodied models struggle to preserve state across multi-step actions and respond precisely to altered action conditions and physical rules. These findings highlight the need to evaluate world models not only by visual quality, but also by state consistency and the correctness of their responses to actions and interventions.",
-          "categories": [
-            "cs.CV"
-          ],
-          "keywords": [
-            "three tracks",
-            "happyworld-bench",
-            "video world",
-            "altered action conditions",
-            "capture behavioral correctness",
-            "complement newly designed"
-          ],
-          "matched_keywords": [
-            "world model"
-          ]
-        },
         "2609.24972": {
           "title": "RRSI: Regularized Recursive Self-Improvement of Agent Harnesses",
           "abstract": "An LLM agent's capability is largely magnified by its harness, namely the prompts, control flow, tooling, memory, and context management surrounding the frozen backbone model. Recent methods increasingly automate this process by iteratively proposing and selecting component-wise edits of an agent harness, practically establishing a form of recursive self-improvement (RSI) at the agent-system level. However, such recursive evolution may overfit by memorizing the training tasks, showing large in-distribution gains that shrink or even vanish on out-of-distribution benchmarks. We introduce Regularized Recursive Self-Improvement of Agent Harnesses (RRSI), which incorporates the principles of regularizations into harness self-improvement by constraining the evolution candidate proposal and selection. The proposer operates with a temporally annealed budget, limiting how many edits a candidate can bundle, and it encourages unexplored trajectories based on evolution history. The selector is equipped with a critic and a pruner: the critic screens benchmark-specific proposals, while the pruner, removes changes that are too small, too expensive, or no longer useful. Together these constraints favor reusable agent mechanisms over benchmark-specific ones or even noises. Across eight benchmarks spanning coding, agentic workspace and engineering design tasks, RRSI gains up to 14.1 points on the split it evolves against and up to 4.7 points on the five out-of-distribution benchmarks, while producing a harness that runs on 30% fewer policy tokens than the unregularized evolution. Code is available at this https URL and project page is this https URL.",
@@ -19311,23 +19328,6 @@
             "actual training",
             "candidate configurations",
             "mean mse"
-          ],
-          "matched_keywords": []
-        },
-        "2609.23038": {
-          "title": "Spatial-Interactor: Learning Spatial Reasoning through Interaction with the Observable Physical World",
-          "abstract": "Spatial reasoning is essential for vision-language models (VLMs) to understand and act in the physical world. Reasoning in dynamic environments requires VLMs to perceive local state transitions caused by object motion and viewpoint changes and integrate them over long trajectories to maintain an updated spatial state, yet existing VLMs remain limited in both capabilities. Current spatial training primarily focuses on static questions about object attributes and spatial relations, providing limited direct supervision for state transitions; in contrast, interaction trajectories naturally connect a preceding observation, an action, and a subsequent observation, offering direct supervision for local state transitions, while complete trajectories reveal dependencies among consecutive transitions. We therefore introduce Spatial-Interactor, a framework that trains VLMs to model physical-world state transitions through interaction, organizing this learning process into a three-level curriculum covering L1 passive world-state transitions, L2 active self-state transitions, and L3 long-horizon interaction trajectories. Accordingly, we construct the Learning from Spatial Interaction dataset (LSI-108K) from simulated and real interaction trajectories, with tasks aligned with the objective of each level. Our two-stage training strategy applies Supervised Fine-Tuning (SFT) to L1 and L2 for local transition modeling, and On-Policy Distillation (OPD) then uses privileged self-distillation: a teacher branch given segment-level transition descriptions supervises the student's on-policy CoT, helping the student learn to integrate consecutive transitions over L3 long trajectories. Experiments across multiple VLMs and spatial benchmarks show consistent gains in local transition modeling and long-horizon integration.",
-          "categories": [
-            "cs.AI",
-            "cs.LG"
-          ],
-          "keywords": [
-            "local state transitions",
-            "local transition modeling",
-            "interaction trajectories",
-            "consecutive transitions",
-            "long trajectories",
-            "direct supervision"
           ],
           "matched_keywords": []
         },
@@ -25309,22 +25309,6 @@
             "egowild2dex",
             "aligning unstable egocentric",
             "average object-level zero-shot"
-          ],
-          "matched_keywords": []
-        },
-        "2609.23784": {
-          "title": "PackLab: A Comprehensive Framework for Developing, Training, and Evaluating MLLMs in Robotic Bin Packing",
-          "abstract": "Robotic bin packing requires long-horizon sequential decision-making, as each object placement affects the available space for subsequent packing. Existing methods primarily rely on hand-crafted geometric heuristics that optimize predefined objectives or reinforcement learning policies learned through trial and error over predefined training configurations. Despite recent advances in multimodal large language models (MLLMs) for this task, their potential for closed-loop sequential decisions across heterogeneous packing configurations remains underexplored. To address this gap, we introduce PackLab, a comprehensive framework for developing, training, and evaluating MLLMs for closed-loop robotic bin packing. PackLab-Suite provides a physics-based simulation platform for scalable generation of diverse training packing trajectories and evaluation of their physical outcomes. PackLab-VLM is a packing-specialized MLLM that understands the evolving object and container states to jointly select objects and predict placements in a closed-loop manner. PackLab-Bench provides standardized packing scenarios at multiple difficulty levels for systematic evaluation. Extensive experiments demonstrate that, on average, PackLab-VLM outperforms conventional packing heuristics, traditional reinforcement learning methods, and general-purpose MLLMs across object sets and container configurations, highlighting the potential of MLLMs for long-horizon robotic packing. The code, model, dataset, and benchmark are available at this https URL .",
-          "categories": [
-            "cs.RO"
-          ],
-          "keywords": [
-            "robotic bin packing",
-            "developing training",
-            "evaluating mllms",
-            "comprehensive framework",
-            "average packlab-vlm outperforms",
-            "bin packing requires"
           ],
           "matched_keywords": []
         },
@@ -37844,6 +37828,22 @@
             "question answering",
             "against human judgements",
             "alter question meaning"
+          ],
+          "matched_keywords": []
+        },
+        "2609.27284": {
+          "title": "Hunyuan-A13B Technical Report",
+          "abstract": "We present Hunyuan-A13B, an open-source large language model based on a Mixture-of-Experts architecture. It contains 80 billion total parameters but activates only 13 billion during inference, balancing model capability, computational efficiency, and deployment cost. The model is pretrained on a rigorously filtered 20T-token corpus with enhanced STEM data curation, improving factual reliability and reasoning ability. High-quality supervised fine-tuning and large-scale reinforcement learning further enhance its overall performance. Hunyuan-A13B also introduces a dual-mode Chain-of-Thought framework that adapts reasoning depth to task complexity: fast thinking for routine queries and slow thinking for complex, multi-step problems. Evaluations show competitive performance across mathematics, science, programming, general language understanding, and agent tasks, often approaching that of much larger models. Its high inference throughput makes it suitable for latency-sensitive applications. We release Hunyuan-A13B to support open research and practical LLM deployment.",
+          "categories": [
+            "cs.AI"
+          ],
+          "keywords": [
+            "hunyuan-a13b",
+            "adapts reasoning depth",
+            "agent tasks often",
+            "billion during inference",
+            "billion total parameters",
+            "capability computational efficiency"
           ],
           "matched_keywords": []
         },
