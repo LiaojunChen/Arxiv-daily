@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-09-24T09:16:55+00:00",
+  "updated_at": "2026-09-25T01:37:51+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-83e8ccb1e2279a940d084154": {
-      "run_id": "daily-83e8ccb1e2279a940d084154",
-      "generated_at": "2026-09-24T09:16:55+00:00",
+    "daily-c9fc08419fbb737e23c6261b": {
+      "run_id": "daily-c9fc08419fbb737e23c6261b",
+      "generated_at": "2026-09-25T01:37:51+00:00",
       "selected_ids": [
         "2609.28393",
         "2609.27753",
@@ -1250,6 +1250,20 @@
           ],
           "matched_keywords": []
         },
+        "2609.29892": {
+          "title": "Qwen-Planner-Agent: A Closed-Loop AI-for-AI Framework for Real-World Mobile Planner Agents",
+          "abstract": "The rapid progression of large language models is extending AI from passive content generation into the active workflows of engineering and scientific discovery. This shift raises a compelling question: can AI be both the object of development and an active participant in building next-generation AI systems? We explore this question by building Qwen-Planner-Agent within a closed-loop AI-for-AI framework for scalable development and iterative improvement. Mobile planning offers a demanding test of this approach: complex, long-horizon tasks challenge agent reliability, while costly real-device interaction limits development scalability. The framework connects data production, model training, and deployment through a shared action-feedback-verification contract. (i) AI for Data builds a human-gated agentic data flywheel in which specialized agents construct tasks, collect interaction trajectories, curate and balance training data, and use training feedback to guide subsequent data generation. (ii) AI for Training combines a supervised planning cold start with hybrid-environment online agentic reinforcement learning, where we introduce Competence-Aware Reward-and-Advantage Engineering (CARE) to reduce reasoning and tool-use costs while preserving task performance. (iii) AI drives model--harness co-evolution through an execution-evidence-driven loop that orchestrates memory, skills, and tools at runtime and feeds structured action feedback and preserved failure traces back into coordinated model and harness adaptation. Qwen-Planner-Agent achieves the best overall performance among all evaluated models and systems on MobilePA-Bench, improving over its base model across tool use, memory, skills, and sub-agent coordination. Further evaluations of our model show improvements across non-mobile agentic benchmarks while largely preserving general capabilities.",
+          "categories": [],
+          "keywords": [
+            "closed-loop ai-for-ai framework",
+            "memory skills",
+            "qwen-planner-agent",
+            "agent reliability while",
+            "agentic benchmarks while",
+            "agents construct tasks"
+          ],
+          "matched_keywords": []
+        },
         "2609.26780": {
           "title": "SpeakerMem-R1: Speaker-Centered Dual-Track Memory for Multi-Party Dialogue",
           "abstract": "Long-term conversational memory in multi-party settings requires more than retrieving relevant content from long-term conversations: it must distinguish who said what, whom each statement concerns, how individuals perceive one another, what information is shared by the group, and how states change over time. Recent studies on multi-party dialogue benchmarks show that existing general-purpose LLM memory systems tend to lose person and group relations or struggle to integrate clues distributed across members, groups, and time. Together, these issues reveal two core bottlenecks: message attribution and relational understanding in multi-party dialogue, and state reconstruction from interleaved histories. To address both, we propose SpeakerMem-R1: its dual-track memory stores speaker-labeled verbatim messages and derived states organized into person-level and group-level views, then combines evidence from both tracks by entity, event, and time at query time. To reduce attribution and update errors during structured memory construction while enabling local deployment, we train Writer-R1 with SpeakerLevenshtein and speaker-conditioned GRPO. On GroupMemBench, SocialMemBench, and EverMemBench, SpeakerMem-R1 achieves binary accuracies of 47.9%, 69.2%, and 61.9%, respectively. On the publicly reported EverMemBench leaderboard from EverMind-AI, we achieves 62.33%, the best reported result among the latest state-of-the-art frameworks. It also achieves 70.85% on all 1,986 LoCoMo questions, which we use as a two-person long-term conversation boundary test. In a controlled evaluation of 305 questions, RL raises the SFT Writer's mean accuracy from 57.38% to 68.20%. We report both binary accuracy and token-F1, and ablations show that the verbatim and structured tracks, as well as person-level and group-level views, are complementary under the standardized evaluation interface.",
@@ -1390,23 +1404,6 @@
           ],
           "matched_keywords": []
         },
-        "2609.26920": {
-          "title": "Cross-Modal Contrastive Learning from Histopathology and CT for Automated Renal Cell Carcinoma Grading",
-          "abstract": "Background: Clear cell renal cell carcinoma (ccRCC) exhibits substantial clinical heterogeneity, and accurate grade assessment is essential for risk stratification and treatment planning. However, conventional grading requires invasive tissue sampling. We developed RCC-Align, a cross-modal contrastive learning framework that leverages paired histopathology and computed tomography (CT) data during training to improve noninvasive CT-based ccRCC grade prediction. Methods: RCC-Align aligns paired whole-slide histopathology images (WSIs) and CT scans through contrastive cross-modal objectives, transferring grade-discriminative information from microscopic tissue morphology to macroscopic radiologic representations. The framework was trained and evaluated on paired TCGA and CPTAC cohorts using patient-level five-fold cross-validation. Performance for low- versus high-grade ccRCC classification was compared against CT-only baselines (DINOv2-Base and DINOv2-Finetuned) and a WSI-based reference model (GigaPath-Finetuned). Cross-modal alignment was assessed using cosine similarity analysis. Results: RCC-Align achieved an AUC of 0.601 (95% CI, 0.524-0.673) and AUPRC of 0.599 (95% CI, 0.541-0.676), outperforming DINOv2-Finetuned (AUC 0.545; AUPRC 0.543) with significantly improved low-grade prediction (p = 0.004). RCC-Align also demonstrated stronger paired WSI-CT embedding alignment compared with baselines. The WSI-based GigaPath reference achieved an AUC of 0.719. Conclusion: Pathology-guided contrastive learning improves CT-based ccRCC grading while requiring only CT at inference. This approach may complement tissue diagnosis when biopsy is unsafe, infeasible, or limited by intratumoral heterogeneity. Validation in larger, multi-institutional cohorts with external testing is needed before clinical translation.",
-          "categories": [
-            "cs.CV",
-            "cs.AI"
-          ],
-          "keywords": [
-            "renal cell carcinoma",
-            "rcc-align",
-            "cross-modal contrastive",
-            "ct-based ccrcc",
-            "accurate grade assessment",
-            "against ct-only baselines"
-          ],
-          "matched_keywords": []
-        },
         "2609.26923": {
           "title": "A 3D Pose-Based Ensemble Framework for Cricket Shot Classification and Automated Biomechanical Analysis",
           "abstract": "Cricket is one of the most celebrated sports world-wide, and technological advancement has become deeply embedded in how the modern game is analyzed and coached. Cricket shot classification and automated performance analysis add a further dimension to this trend. Traditional approaches rely on RGB video features or static images, which are sensitive to environmental variations such as camera angle, lighting, and background clutter, and often fail to capture the underlying biomechanics of batting actions. In this paper, we propose a system to improve cricket coaching that takes raw video data, extracts batsmen from video frames using YOLO, and extracts 3D pose data from video frames using MeTRAbs. The system produces sequential skeletal pose data of 30 body points and captures the biomechanical features of a batsman. As part of the system, we also propose a deep learning ensemble for shot classification of four shots: flick, pull, defense, and drive. The ensemble performed well, compared to existing classification works, achieving 97.68% accuracy. In addition, we analyzed the misclassification rates to identify cases where shots were incorrectly classified and examined their possible causes. Our proposed system allows novice players to obtain useful feedback, such as important joint angles relative to expert batsmen, which can also be useful for injury prevention. The shot classifier also helps track class-wise shots over time for further analysis. In addition to novice players, coaches can use the system for player evaluation.",
@@ -1441,22 +1438,6 @@
           ],
           "matched_keywords": []
         },
-        "2609.27011": {
-          "title": "HYDRO: Towards Non-Reversible Face De-Identification Using a High-Fidelity Hybrid Diffusion and Target-Oriented Approach",
-          "abstract": "Target-oriented face de-identification models aim to anonymize the identity of a target individual across different images or video frames, such that the target can no longer be reliably recognized, while maintaining key characteristics of the visual data. Such models commonly leverage generative encoder-decoder architectures to manipulate facial appearances, enabling them to produce realistic high-fidelity de-identification results, while ensuring considerable attribute-retention capabilities. However, target-oriented models also carry the risk of inadvertently preserving subtle identity cues, making them (potentially) reversible and susceptible to reconstruction attacks. To address this problem, we introduce in this paper a novel (robust) face de-identification approach, called HYDRO, that combines target-oriented models with a dedicated diffusion process specifically designed to destroy any imperceptible information that may allow learning to reverse the de-identification procedure. HYDRO first de-identifies the given face image, injects noise into the de-identification result to impede reconstruction, and then applies a diffusion-based recovery step to improve fidelity and minimize the impact of the noising process on the data characteristics. To further improve image fidelity and better retain gaze directions, a novel Eye Similarity Discriminator (ESD) is also introduced and incorporated it into the training of HYDRO. Extensive quantitative and qualitative experiments on three diverse datasets demonstrate that HYDRO exhibits state-of-the-art (SOTA) fidelity and attribute-retention capabilities, while being the only target-oriented method resilient against reconstruction attacks. In comparison to multiple SOTA competitors, HYDRO reduces the success of reconstruction attacks by 85.7% on average.",
-          "categories": [
-            "cs.CV"
-          ],
-          "keywords": [
-            "face de-identification",
-            "reconstruction attacks",
-            "hydro",
-            "target-oriented",
-            "attribute-retention capabilities",
-            "against reconstruction attacks"
-          ],
-          "matched_keywords": []
-        },
         "2609.27015": {
           "title": "Anatomy-Aware Synthesis of Post-Contrast Breast MRI from Pre-Contrast Images",
           "abstract": "We developed an anatomy-aware deep learning framework to synthesize post-contrast breast MRI from pre-contrast images, emphasizing tumor and background parenchymal enhancement (BPE) regions. This retrospective study included 649 patients with 6,251 paired pre-contrast and post-contrast images. The framework integrates breast mask consistency, lesion-region supervision, and BPE-region supervision into an image-to-image translation model. Evaluation included quantitative image quality metrics, a reader study with two breast radiologists, and downstream Ki-67 classification. The proposed method outperformed Pix2Pix, Pix2PixHD, diffusion-based synthesis, and mask-supervised baselines in whole-image and regional evaluations. Ki-67 classification showed no statistically significant performance differences across real- and synthetic-image training and testing settings, although this does not establish equivalence. These findings suggest that anatomy-aware supervision improves synthesis fidelity and support further investigation of synthetic post-contrast MRI for contrast-free imaging workflows.",
@@ -1470,22 +1451,6 @@
             "anatomy-aware",
             "anatomy-aware supervision improves",
             "background parenchymal enhancement"
-          ],
-          "matched_keywords": []
-        },
-        "2609.27022": {
-          "title": "Adversarial Attacks and Identity Leakage in De-Identification Systems: An Empirical Study",
-          "abstract": "In this paper, we investigate the impact of adversarial attacks on identity encoders within a realistic de-identification framework. Our experiments show that the transferability of attacks transfers from an external surrogate model to the system model (e.g., CosFace to ArcFace) allows the adversary to cause identity information to leak in a sufficiently sensitive face recognition system. We present experimental evidence and propose strategies to mitigate this vulnerability. Specifically, we show how fine-tuning on adversarial examples helps to mitigate this effect for distortion-based attacks (i.e., snow, fog, etc.), while a simple low-pass filter can attenuate the effect of adversarial noise without affecting the de-identified images. Our mitigation results in a de-identification system that preserves its functionality while being significantly more robust to adversarial noise.",
-          "categories": [
-            "cs.CV"
-          ],
-          "keywords": [
-            "adversarial noise",
-            "adversarial attacks",
-            "de-identification",
-            "adversarial examples helps",
-            "cause identity information",
-            "encoders within realistic"
           ],
           "matched_keywords": []
         },
@@ -1574,22 +1539,6 @@
           ],
           "matched_keywords": []
         },
-        "2609.27142": {
-          "title": "MINER: Multi-crop INference-time Enhancement for Rare-Object Retrieval with Frozen Dual Encoders",
-          "abstract": "Text-to-image retrieval with frozen dual encoders degrades when the query names a small, visually subordinate object in a cluttered scene: a single global image embedding underrepresents the localized visual evidence. We present MINER, a training-free inference framework that augments a frozen dual encoder's global image embedding with a small bank of region-level embeddings and a hubness-correcting similarity rescoring, recovering visual evidence that global pooling underweights. To evaluate this setting, we introduce ROCS, a benchmark built from high-clutter subsets of Flickr30K and MS COCO whose images are re-captioned to name a single low-salience object. Experiments on CLIP, SigLIP, and SigLIP 2 show that MINER improves retrieval on every backbone, on ROCS and on the standard splits. Analyses show that these gains come primarily from broader spatial coverage rather than precise crop placement, revealing a simple and general way to recover localized evidence from frozen representations. Code: this https URL. Dataset: this https URL.",
-          "categories": [
-            "cs.CV"
-          ],
-          "keywords": [
-            "frozen dual encoders",
-            "global image embedding",
-            "miner",
-            "augments frozen dual",
-            "broader spatial coverage",
-            "coco whose images"
-          ],
-          "matched_keywords": []
-        },
         "2609.27143": {
           "title": "A Systematic Evaluation of Infrastructure-Based Radar System for Highway Traffic Monitoring",
           "abstract": "Infrastructure-based radar systems offer robust and long-range solutions for traffic monitoring, yet their detection and tracking performance under real-world conditions remains insufficiently evaluated. This study introduces DRaT (Drone and Radar Trajectories), a dual-modality dataset of naturalistic vehicle trajectories collected at a highway merging segment in Fort Worth, Texas, to systematically assess radar sensing performance against drone-derived ground truth. The performance is evaluated at three levels: individual vehicle detection, trajectory tracking, and macroscopic traffic parameter estimation. For individual vehicle detection, the radar achieves an overall precision of 78% and a recall of 57%, with degraded performance under congested traffic conditions and at longer distances. At the trajectory level, the radar demonstrates reasonably strong tracking performance (IDF1 = 0.699), maintaining reliable vehicle identities when tracks are successfully established. For macroscopic traffic flow metrics, the radar accurately estimates space-mean speed (MAPE < 4%) but underestimates density and volume by approximately 23% due to missed detections. The paper also discusses practical deployment considerations and potential downstream applications of roadside radar sensing systems. To support reproducible research on infrastructure-based sensing systems, we have open-sourced the DRaT dataset on Zenodo: this https URL.",
@@ -1653,23 +1602,6 @@
             "expression-cluster agreement",
             "below random",
             "spatial transcriptomics"
-          ],
-          "matched_keywords": []
-        },
-        "2609.27217": {
-          "title": "Learning Spectral Allocation: A Fractional Diffusion Framework for Adaptive Volumetric Segmentation",
-          "abstract": "We address adaptive computation in 3D medical image segmentation: instead of designing another backbone, we ask how much spectral mixing each network stage needs and let optimization answer. We derive FHEAT, a two-parameter operator family, from the discrete cosine transform (DCT) solution of a fractional heat equation. A fractional order alpha and a diffusion strength D govern the operator, and at D=0 it is exactly the identity. Reparametrized by the semigroup time tau = D*alpha, same-resolution instances compose exactly, so any distribution of diffusion across same-resolution stages amounts to a single Sobolev-type regularizer of learned strength. This identity limit lets the optimizer of each layer, not the designer, decide whether global mixing is needed and how sharp it should be. We instantiate FHEAT in a lightweight U-shaped architecture (Light-UNETR) paired with a Kolmogorov-Arnold mixer (KAN3D) with adaptive rational activations, yielding FHEAT-Seg. At 5% to 20% label rates on three public benchmarks, training produces gradient-driven spectral sparsification: seven of the eight stage-level operators drive D to zero, and the survivor saturates at the sharpest low-pass (alpha ~ 0.9) in the decoder layer feeding the semi-supervised attention map. The retired layers become exact identity shortcuts at inference, cutting FLOPs from 4.29G to 0.90G (a 79% drop) at 0.975M parameters. Under a standard semi-supervised protocol, FHEAT-Seg reaches Dice scores of 90.47% (left atrium), 78.79% (Pancreas-CT), and 81.90% (BraTS 2019), ahead of five semi-supervised methods and the Light-UNETR baseline. The large variant also surpasses Light-UNETR-L under full supervision (Dice 93.09%, 85.11%, and 87.19%) with 2.851M parameters and 55.75G FLOPs. These results suggest that the allocation of spectral computation is a learnable property of optimization dynamics, not a manual design commitment.",
-          "categories": [
-            "cs.CV",
-            "cs.AI"
-          ],
-          "keywords": [
-            "fractional",
-            "activations yielding fheat-seg",
-            "adaptive rational activations",
-            "adaptive volumetric segmentation",
-            "address adaptive computation",
-            "alpha same-resolution instances"
           ],
           "matched_keywords": []
         },
@@ -1856,23 +1788,6 @@
           ],
           "matched_keywords": []
         },
-        "2609.27442": {
-          "title": "SatUnreal: A High-Precision Synthetic Dataset for Satellite Stereo Matching via Unreal Engine",
-          "abstract": "3D reconstruction from satellite imagery is essential for large-scale topographic analysis, yet the lack of high-fidelity training datasets with accurate occlusion labels remains a primary bottleneck. Existing benchmarks, such as US3D and WHU-Stereo, face inherent challenges in spatio-temporal mismatch -- environmental changes and shadow displacements between multi-view acquisitions -- and provide ambiguous ground truth in occluded regions due to LiDAR sparsity. In this paper, we propose SatUnreal, a high-precision synthetic dataset designed to fundamentally overcome these limitations through an Unreal Engine-based simulation pipeline. SatUnreal provides 10,000 stereo pairs with high resolution (0.3m GSD) and is characterized by: (1) Physical Geometry Simulation, replicating realistic satellite orbits by systematically varying baselines and azimuths; (2) Spatio-temporal Consistency, eliminating temporal noise through fixed virtual environments; (3) Topographic Diversity, spanning dense urban canyons to low-texture natural terrains; and (4) Mathematical Label Integrity, utilizing a novel two-step linetrace algorithm to generate flawless occlusion masks. Experimental results using SOTA iterative models demonstrate that models trained exclusively on SatUnreal achieve superior zero-shot transfer performance on real-world benchmarks (US3D, WHU-Stereo) compared to those trained on real datasets. Our findings prove that physically accurate synthetic data provides a more effective supervisory signal for learning geometric features than complex real-world observations, establishing a new paradigm for Sim-to-Real transfer in Earth Observation. Code and dataset are available at this https URL",
-          "categories": [
-            "cs.CV",
-            "eess.IV"
-          ],
-          "keywords": [
-            "high-precision synthetic dataset",
-            "satunreal",
-            "accurate occlusion labels",
-            "achieve superior zero-shot",
-            "ambiguous ground truth",
-            "benchmarks us3d whu-stereo"
-          ],
-          "matched_keywords": []
-        },
         "2609.27457": {
           "title": "Beyond Balanced Accuracy: A Resolution and Parity-Controlled Benchmark for Vision-Language and Vision-Only Defect Assessment in UAV Power-Line Inspection",
           "abstract": "Vision-language models (VLMs) are often reported to outperform task-specific vision backbones for unmanned aerial vehicle (UAV) power-line defect assessment. We test that claim on ElecVQA-Bench, a 56,972-item benchmark derived from the public InsPLAD dataset, across six evaluation choices: partition, evaluated item set, label space, replication, input resolution, and side information. On a matched partition, a Swin Transformer and the strongest adapted VLM differ by only 0.03 points at binary screening. At seven-way defect typing, increasing the vision backbones from 224 px to the measured pixel budget of the VLM preprocessor narrows the gap against InternVL3.5-8B from +20.53 to -0.57 points for ResNet-50 and from +23.67 to +4.70 points for Swin-T. A pixel-budget audit shifts Qwen3-VL-8B macro recall by 10.78 points, yet a source-pixel-matched InternVL control still leaves Qwen ahead by 7.43 to 13.61 points while using 56% fewer visual tokens, so neither source pixels nor token budget explains the difference between the two VLMs. A two-seed global replication changes Qwen binary accuracy and seven-way macro recall by 0.86 and 1.02 points. After split-specific retraining, Qwen does not lead at crop or image level, and a 14-tower, three-seed replication reverses the sign across seeds, giving mean common-six macro recall of 0.9085 for Qwen against 0.9509 for ResNet-50. No split regime yields a family-level advantage that survives multiple-comparison correction. The study supports a benchmark-audit contribution rather than a general claim of VLM superiority.",
@@ -2006,22 +1921,6 @@
           ],
           "matched_keywords": []
         },
-        "2609.27533": {
-          "title": "ICM: Intra-class Mixing for Domain Adaptation in Adverse Weather",
-          "abstract": "Unsupervised domain adaptation (UDA) for semantic segmentation remains challenging under adverse weather conditions because severe appearance changes enlarge the domain gap and degrade the reliability of pseudo labels in the target domain. To address this problem, we propose an Intra-Class Mixing Consistency (ICM) framework that enforces prediction consistency between an intra-class mixed image and its original counterpart. Unlike previous mixing-based consistency methods that combine regions across different images or domains and may introduce unrealistic semantic inconsistencies, ICM performs mixing within the same image and semantic class, preserving realistic semantic layout for consistency regularization. With ICM, we establish a new state-of-the-art performance for clear-to-adverse-weather unsupervised domain adaptation (UDA) in semantic segmentation. On the Cityscapes $\\rightarrow$ ACDC benchmark, our method achieves 75.7\\% mIoU, outperforming the previous state of the art by +1.9 pp, demonstrating its effectiveness in mitigating class confusion under challenging environmental conditions. The code is provided in the supplementary material.",
-          "categories": [
-            "cs.CV"
-          ],
-          "keywords": [
-            "domain adaptation uda",
-            "unsupervised domain adaptation",
-            "intra-class mixing",
-            "icm",
-            "adverse weather",
-            "appearance changes enlarge"
-          ],
-          "matched_keywords": []
-        },
         "2609.27611": {
           "title": "A generalizable structural brain MRI foundation model built through dual-priority federated pretraining",
           "abstract": "Foundation models hold promise for generalizable analysis of structural brain magnetic resonance imaging (MRI) across development, aging and disease. However, existing models are typically built through centralized pretraining on pooled data, despite privacy and governance constraints. Such pooling optimization can overemphasize cohort size and overlook complementary information from smaller, specialized cohorts. Here we present BrainFedFM, a structural brain MRI foundation model federatively pretrained on 164,707 three-dimensional scans drawn from diverse real-world data distributions and organized across 42 federated sites. BrainFedFM uses dual-priority federated pretraining, coupling spatial-priority masking at each site with site-priority aggregation at the server to emphasize informative anatomical regions locally and prioritize site contributions globally. Across 20 downstream datasets spanning 17 classification, regression and segmentation tasks, BrainFedFM achieved the state-of-the-art performance (mean rank 1.68, 50\\% gain) across seven models, including four centralized foundation models, while showing particularly consistent advantages in classification and regression and robustness across underrepresented populations. These findings demonstrate the generalizability of BrainFedFM and highlight federated pretraining as a practical strategy for developing neuroimaging foundation models from distributed data without pooling raw images.",
@@ -2035,39 +1934,6 @@
             "brainfedfm",
             "built through",
             "anatomical regions locally"
-          ],
-          "matched_keywords": []
-        },
-        "2609.27620": {
-          "title": "InGuard: Towards Generalized Inner Guardrail for Safe Text-to-Image Generation",
-          "abstract": "Modern text-to-image (T2I) models generate high-quality images from arbitrary user prompts, yet they can just as easily produce not-safe-for-work (NSFW) content. Conventional outer guardrails consist of two components: a prompt classifier that checks for risk before generation, and a post-hoc image classifier that checks the fully generated image. In this design, both classifiers operate outside the generation pipeline and do not use the model's own representations. This separation can limit prompt-screening accuracy, while the image-side check runs only after the full generation cost has been spent. Moreover, a flagged prompt can only be rejected, even when it could be adjusted to produce a safe image. In this work, we propose the Inner Guardrail (InGuard), a safety framework that works inside the pipeline on the model's own representations, leaving base-model parameters untouched. First, a risk classifier grades each prompt as unsafe, risky, or benign based on the text encoder's embeddings, with no external language model. Second, SAGE (Soft-gated Asymmetric Guardrail for Embeddings) modifies the embeddings of risky prompts, aiming to return a safe image instead of a refusal. Third, a latent detector checks the one-step clean latent estimate midway through denoising, reaching nearly image-level performance and halting generation when risk is detected. We also construct the RevGen Safety Benchmark to evaluate T2I safety under realistic conditions: 10,000 prompts built through real-image reverse generation, with a rewriting step that supplies controlled intellectual-property (IP) characters, covering graded porn/gore risks, categorical IP risks, and benign negatives. Across five open-weight T2I models, InGuard reaches 97.9-98.8% safety rate, matching or exceeding the outer guardrail, with 57.5-73.5% less benign disturbance, ~3.7x fewer parameters, and 50-55.6% of denoising steps skipped.",
-          "categories": [
-            "cs.CV",
-            "cs.AI"
-          ],
-          "keywords": [
-            "inner guardrail",
-            "own representations",
-            "safe image",
-            "inguard",
-            "t2i",
-            "arbitrary user prompts"
-          ],
-          "matched_keywords": []
-        },
-        "2609.27671": {
-          "title": "SGDet3D++: Geometry-Grounded Semantics for 4D Radar and Camera 3D Object Detection",
-          "abstract": "4D radar complements dense image semantics with long-range geometry and radial motion, but existing radar--camera detectors largely solve \\emph{where} to align the modalities while leaving \\emph{whether} a piece of evidence supports an evolving object hypothesis implicit. An image token may describe an occluder, a nearby radar return may belong to another object, and a pose-aligned memory slot may carry incompatible motion. We formulate \\emph{hypothesis-conditioned evidence grounding}, which separates candidate access from evidence use: semantic, geometric, or temporal evidence is filtered or conditioned by the evolving 3D state before updating the corresponding query. \\sgdetpp{} instantiates this principle through Anchor-Grounded Semantic Retrieval (AGR), which conditions deformable image retrieval on pooled anchor-consistent radar support; Geometry-Consistent Anchor Refinement (GCR), which attentively aggregates individual associated returns; and Doppler-Verified Correspondence (DVC), which replaces history only when current radial motion contradicts it. \\sgdetpp{} improves the strongest compared method by 3.82 mAP and 6.82 ODS on OmniHD-Scenes and by 6.82 mAP and 9.22 NDS on ManTruckScenes, while also leading the listed methods in the TJ4DRadSet test comparison. Mechanism-targeted evaluations show that AGR improves strict AP in every projected-occlusion bin, the yaw-aligned box gate raises target-return purity from 29.95\\% to 58.87\\%, and DVC preserves 96.11\\% of motion-consistent history while retaining 75.90\\% contradiction recall. Code will be released.",
-          "categories": [
-            "cs.CV"
-          ],
-          "keywords": [
-            "radial motion",
-            "aggregates individual associated",
-            "agr improves strict",
-            "anchor refinement gcr",
-            "anchor-consistent radar support",
-            "anchor-grounded semantic retrieval"
           ],
           "matched_keywords": []
         },
@@ -2213,22 +2079,6 @@
             "diffusion-weighted mri",
             "adc-only",
             "adc maps either"
-          ],
-          "matched_keywords": []
-        },
-        "2609.27821": {
-          "title": "Groundbench: Multi-Resolution Polygon Grounding Exposes the Geometry Gap in Vision-Language Models",
-          "abstract": "Bounding-box scores on RefCOCO-family grounding leave little room to distinguish frontier vision-language systems, yet boxes discard object shape. We introduce GroundingBench, a matched benchmark that re-targets the same 1,500 image-expression-referent triples to exact-N polygons at five vertex budgets. A fixed-denominator harness separately audits filled-region intersection over union (IoU) and legal-polygon completion. The strongest tested configuration reaches 88.2 box IoU and 97.1 accuracy at IoU >= .5 (Acc@.5), versus 57.7 and 69.2 for direct polygons; because these headline scores use different references, we also compare direct polygons with predicted boxes rasterised against the same contour target, obtaining 57.7 versus 57.3 when pooled. Performance is non-monotone in N and collapses at the densest budget, where legality failures compound residual geometric error. Qwen's thinking-setting contrast is the largest tested input-preserving configuration difference; under frozen templates, false spatial cues are more damaging than false colour cues, and target preference can remain high while contour tracing is poor. Alternate masks and a continuous-area scorer preserve the principal ordering. GroundingBench therefore measures an operational output-geometry gap spanning localisation, boundary construction, serialisation, and topology, rather than latent boundary perception alone.",
-          "categories": [
-            "cs.CV"
-          ],
-          "keywords": [
-            "direct polygons",
-            "audits filled-region intersection",
-            "boundary construction serialisation",
-            "boundary perception alone",
-            "boxes discard object",
-            "boxes rasterised against"
           ],
           "matched_keywords": []
         },
@@ -2396,22 +2246,6 @@
           ],
           "matched_keywords": []
         },
-        "2609.28078": {
-          "title": "LiAM-SAM: Lifecycle-Aware Memory for Robust SAM2-Based MOT",
-          "abstract": "Segmentation-based multi-object tracking (MOT) with foundation video models such as SAM2 offers strong localization quality, yet remains fragile in crowded, real-world scenes. In detector-prompted SAM2 pipelines, failures typically arise at three stages of the object lifecycle: (i) erroneous or duplicate track initiation, (ii) memory drift during close interactions, and (iii) unreliable re-identification after long occlusions or re-entry. These errors corrupt object memory and accumulate over time, making long-horizon tracking unstable. In this paper, we reframe MOT as a lifecycle memory integrity problem. We present LiAM-SAM, a Lifecycle-Aware Memory (LiAM) framework with targeted mechanisms for each of the three failure modes. At track birth, to prevent faulty or duplicate initiations, we apply contrastive track initiation, which conditions each prompt on existing nearby tracked instances. To preserve memory integrity during strong interactions, we introduce motion- and geometry-grounded memory correction that resolves interaction confusions and suppresses drift. For reliable re-identification after disappearance, we maintain an adaptive context memory that promotes diverse and trustworthy references as long-term identity anchors. Finally, similarity aware spatial pruning optionally selects the memory tokens to retain at cross-attention time, improving efficiency with minimal accuracy loss. LiAM-SAM represents a modular, detector-agnostic, SAM2-based MOT system that achieves state-of-the-art HOTA and IDF1 on the evaluated benchmarks. In association-challenging environments, our ablations show that LiAM improves a detector+SAM2 baseline by +10.5 HOTA, +17.4 AssA, and reduces identity switches by 96%.",
-          "categories": [
-            "cs.CV"
-          ],
-          "keywords": [
-            "lifecycle-aware memory",
-            "memory integrity",
-            "sam2-based mot",
-            "track initiation",
-            "liam-sam",
-            "sam2"
-          ],
-          "matched_keywords": []
-        },
         "2609.28083": {
           "title": "ZoomDiff: A High-Fidelity Diffusion Model for Dual-Camera Smooth Zooming",
           "abstract": "Digital zoom transitions between dual cameras often exhibit conspicuous discontinuities in geometric structure and chromatic consistency, degrading the user experience. While recent dual-camera smooth zoom (DCSZ) methods attempt to mitigate this by fine-tuning frame interpolation (FI) models on DCSZ data, they struggle with the large cross-view disparities and complex geometric transformations. Considering that the generative prior of diffusion models is suitable for addressing this problem, we explore their application to DCSZ. However, naively applying existing diffusion-based FI models still yields low-fidelity transitions due to insufficient conditional guidance, high-frequency information loss during VAE encoding, as well as inadequate temporal consistency. To address this, we propose ZoomDiff, a high-fidelity diffusion model that leverages dual-camera inputs in both latent and pixel spaces for photo-realistic transitions. Specifically, we first strengthen dual-image conditional guidance during the multi-step denoising process to improve geometric consistency. Then we inject flow-aligned multi-scale features from the VAE encoder into the VAE decoder to recover high-frequency details, where flow-guided temporal consistency supervision are introduced to produce more smooth transitions. Extensive experiments on both synthetic and real-world datasets demonstrate that ZoomDiff outperforms state-of-the-art methods quantitatively and qualitatively. Project page: this https URL.",
@@ -2476,22 +2310,6 @@
             "highest median",
             "settlement contexts",
             "settlement datasets"
-          ],
-          "matched_keywords": []
-        },
-        "2609.28159": {
-          "title": "Depth-Guided Contrastive Learning for 2D Representations with 3D Spatial Awareness",
-          "abstract": "Standard contrastive learning frameworks are mainly designed from a semantic perspective, yet learning 2D visual representations that preserve 3D spatial structure is also important for scene understanding. In this work, we propose Depth-Guided Contrastive Learning (DGCL), a simple auxiliary objective that injects 3D spatial awareness into 2D contrastive representation learning. Our key idea is to use depth to convert local 3D proximity into contrastive similarity: pixels that are closer in 3D space are encouraged to have more similar representations than pixels that are farther apart. Instead of relying on absolute depth values, DGCL formulates supervision through relative 3D distance comparisons among randomly sampled pixels, making the objective invariant to depth scale, efficient to compute, and easy to integrate into existing contrastive frameworks. Experiments across different datasets and models show that DGCL consistently improves 2D representation learning and benefits semantic downstream tasks by stronger spatial and geometric understanding. The code is available on this https URL.",
-          "categories": [
-            "cs.CV"
-          ],
-          "keywords": [
-            "depth-guided contrastive",
-            "spatial awareness",
-            "dgcl",
-            "absolute depth values",
-            "among randomly sampled",
-            "benefits semantic downstream"
           ],
           "matched_keywords": []
         },
@@ -2756,22 +2574,6 @@
             "grounded reasoning",
             "decision-critical",
             "anchorreasoning visually grounded"
-          ],
-          "matched_keywords": []
-        },
-        "2609.28424": {
-          "title": "The Skin-Restricted Reinhard Transform:Uniqueness under a Lightness-Preserving Constraint",
-          "abstract": "Catalog skin recolouring has to change pigment and leave shading alone. The classical Reinhard map does not make that split: it rescales lightness by the ratio of standard deviations, and a flat reference swatch therefore flattens the limb. This paper formalises the correction used in our pipeline, the skin-restricted Reinhard transform. It is the diagonal affine map in CIE Lab that translates lightness, matches the chromatic mean, and clamps the chromatic gain to [0.72, 1.18], with moments taken on the central 84% of each channel. A diagonal affine map has six real parameters. The shading constraint forces the lightness gain to +1 and the lightness shift to the difference of means; one-dimensional quadratic optimal transport on each chromatic axis, followed by Euclidean projection onto the gain interval, fixes the other four. Inside that family the four conditions determine every parameter. The content of the result is the forced lightness gain; it is not a uniqueness claim outside the diagonal affine class. For Gaussian marginals the chromatic step is not merely the best affine map: it is the unrestricted Wasserstein-2 map. The same formulae with trimmed moments remain optimal because a positive affine image commutes with quantile trimming. On hands, arms, legs, and feet of nine photographs and three reference tones, the map keeps the lightness contrast ratio at 0.974 +/- 0.029 with chromatic error 0.77 CIE Lab units. Reinhard matching, the linear Monge map, and histogram matching reach a smaller chromatic error only by cutting lightness contrast to about half.",
-          "categories": [
-            "cs.CV"
-          ],
-          "keywords": [
-            "diagonal affine map",
-            "skin-restricted reinhard transform",
-            "lightness",
-            "chromatic",
-            "chromatic error",
-            "cie lab"
           ],
           "matched_keywords": []
         },
@@ -6788,23 +6590,6 @@
             "comprehensive framework",
             "packlab",
             "average packlab-vlm outperforms"
-          ],
-          "matched_keywords": []
-        },
-        "2609.24815": {
-          "title": "Uranus: Building the Next-Generation Simulation Infrastructure for Embodied AI",
-          "abstract": "Scalable simulation is essential for robot data generation, policy training, evaluation, and safe iteration, yet real-world interaction is costly and conventional simulators require labor-intensive construction. We present Uranus, a data-driven robot simulator built around a joint-trajectory-conditioned autoregressive diffusion model. Uranus offers three key capabilities: (1) streaming, open-ended rollout, which receives future joint-position trajectories online and autoregressively generates one latent frame per step, corresponding to four RGB frames, without a fixed horizon; (2) low-latency generation, achieving 24 FPS after inference optimization; and (3) scalable, extensible robot control, providing a unified interface for synchronized multi-view generation across diverse robot embodiments and camera configurations. We conduct comprehensive quantitative and qualitative evaluations on both in-distribution and out-of-distribution data, providing an objective assessment of Uranus and clearly identifying its current limitations. We release the code and model weights to empower the community with practical tools and insights.",
-          "categories": [
-            "cs.RO",
-            "cs.AI"
-          ],
-          "keywords": [
-            "uranus",
-            "around joint-trajectory-conditioned autoregressive",
-            "autoregressively generates one",
-            "built around joint-trajectory-conditioned",
-            "conduct comprehensive quantitative",
-            "control providing unified"
           ],
           "matched_keywords": []
         },
@@ -19438,8 +19223,8 @@
             "advances three core",
             "ai critical challenges",
             "blocks harmful text",
-            "building next-generation ai",
-            "contextually knowledgeable ethically"
+            "contextually knowledgeable ethically",
+            "decoding-time alignment mechanism"
           ],
           "matched_keywords": []
         },
@@ -22930,8 +22715,8 @@
             "learner understanding",
             "video tutoring",
             "instructional",
-            "content generation",
-            "generative video"
+            "generative video",
+            "content generation"
           ],
           "matched_keywords": []
         },
@@ -37856,6 +37641,235 @@
             "question answering",
             "against human judgements",
             "alter question meaning"
+          ],
+          "matched_keywords": []
+        },
+        "2609.26920": {
+          "title": "Cross-Modal Contrastive Learning from Histopathology and CT for Automated Renal Cell Carcinoma Grading",
+          "abstract": "Background: Clear cell renal cell carcinoma (ccRCC) exhibits substantial clinical heterogeneity, and accurate grade assessment is essential for risk stratification and treatment planning. However, conventional grading requires invasive tissue sampling. We developed RCC-Align, a cross-modal contrastive learning framework that leverages paired histopathology and computed tomography (CT) data during training to improve noninvasive CT-based ccRCC grade prediction. Methods: RCC-Align aligns paired whole-slide histopathology images (WSIs) and CT scans through contrastive cross-modal objectives, transferring grade-discriminative information from microscopic tissue morphology to macroscopic radiologic representations. The framework was trained and evaluated on paired TCGA and CPTAC cohorts using patient-level five-fold cross-validation. Performance for low- versus high-grade ccRCC classification was compared against CT-only baselines (DINOv2-Base and DINOv2-Finetuned) and a WSI-based reference model (GigaPath-Finetuned). Cross-modal alignment was assessed using cosine similarity analysis. Results: RCC-Align achieved an AUC of 0.601 (95% CI, 0.524-0.673) and AUPRC of 0.599 (95% CI, 0.541-0.676), outperforming DINOv2-Finetuned (AUC 0.545; AUPRC 0.543) with significantly improved low-grade prediction (p = 0.004). RCC-Align also demonstrated stronger paired WSI-CT embedding alignment compared with baselines. The WSI-based GigaPath reference achieved an AUC of 0.719. Conclusion: Pathology-guided contrastive learning improves CT-based ccRCC grading while requiring only CT at inference. This approach may complement tissue diagnosis when biopsy is unsafe, infeasible, or limited by intratumoral heterogeneity. Validation in larger, multi-institutional cohorts with external testing is needed before clinical translation.",
+          "categories": [
+            "cs.CV",
+            "cs.AI"
+          ],
+          "keywords": [
+            "renal cell carcinoma",
+            "rcc-align",
+            "cross-modal contrastive",
+            "ct-based ccrcc",
+            "accurate grade assessment",
+            "against ct-only baselines"
+          ],
+          "matched_keywords": []
+        },
+        "2609.27011": {
+          "title": "HYDRO: Towards Non-Reversible Face De-Identification Using a High-Fidelity Hybrid Diffusion and Target-Oriented Approach",
+          "abstract": "Target-oriented face de-identification models aim to anonymize the identity of a target individual across different images or video frames, such that the target can no longer be reliably recognized, while maintaining key characteristics of the visual data. Such models commonly leverage generative encoder-decoder architectures to manipulate facial appearances, enabling them to produce realistic high-fidelity de-identification results, while ensuring considerable attribute-retention capabilities. However, target-oriented models also carry the risk of inadvertently preserving subtle identity cues, making them (potentially) reversible and susceptible to reconstruction attacks. To address this problem, we introduce in this paper a novel (robust) face de-identification approach, called HYDRO, that combines target-oriented models with a dedicated diffusion process specifically designed to destroy any imperceptible information that may allow learning to reverse the de-identification procedure. HYDRO first de-identifies the given face image, injects noise into the de-identification result to impede reconstruction, and then applies a diffusion-based recovery step to improve fidelity and minimize the impact of the noising process on the data characteristics. To further improve image fidelity and better retain gaze directions, a novel Eye Similarity Discriminator (ESD) is also introduced and incorporated it into the training of HYDRO. Extensive quantitative and qualitative experiments on three diverse datasets demonstrate that HYDRO exhibits state-of-the-art (SOTA) fidelity and attribute-retention capabilities, while being the only target-oriented method resilient against reconstruction attacks. In comparison to multiple SOTA competitors, HYDRO reduces the success of reconstruction attacks by 85.7% on average.",
+          "categories": [
+            "cs.CV"
+          ],
+          "keywords": [
+            "face de-identification",
+            "reconstruction attacks",
+            "hydro",
+            "target-oriented",
+            "attribute-retention capabilities",
+            "against reconstruction attacks"
+          ],
+          "matched_keywords": []
+        },
+        "2609.27022": {
+          "title": "Adversarial Attacks and Identity Leakage in De-Identification Systems: An Empirical Study",
+          "abstract": "In this paper, we investigate the impact of adversarial attacks on identity encoders within a realistic de-identification framework. Our experiments show that the transferability of attacks transfers from an external surrogate model to the system model (e.g., CosFace to ArcFace) allows the adversary to cause identity information to leak in a sufficiently sensitive face recognition system. We present experimental evidence and propose strategies to mitigate this vulnerability. Specifically, we show how fine-tuning on adversarial examples helps to mitigate this effect for distortion-based attacks (i.e., snow, fog, etc.), while a simple low-pass filter can attenuate the effect of adversarial noise without affecting the de-identified images. Our mitigation results in a de-identification system that preserves its functionality while being significantly more robust to adversarial noise.",
+          "categories": [
+            "cs.CV"
+          ],
+          "keywords": [
+            "adversarial noise",
+            "adversarial attacks",
+            "de-identification",
+            "adversarial examples helps",
+            "cause identity information",
+            "encoders within realistic"
+          ],
+          "matched_keywords": []
+        },
+        "2609.27142": {
+          "title": "MINER: Multi-crop INference-time Enhancement for Rare-Object Retrieval with Frozen Dual Encoders",
+          "abstract": "Text-to-image retrieval with frozen dual encoders degrades when the query names a small, visually subordinate object in a cluttered scene: a single global image embedding underrepresents the localized visual evidence. We present MINER, a training-free inference framework that augments a frozen dual encoder's global image embedding with a small bank of region-level embeddings and a hubness-correcting similarity rescoring, recovering visual evidence that global pooling underweights. To evaluate this setting, we introduce ROCS, a benchmark built from high-clutter subsets of Flickr30K and MS COCO whose images are re-captioned to name a single low-salience object. Experiments on CLIP, SigLIP, and SigLIP 2 show that MINER improves retrieval on every backbone, on ROCS and on the standard splits. Analyses show that these gains come primarily from broader spatial coverage rather than precise crop placement, revealing a simple and general way to recover localized evidence from frozen representations. Code: this https URL. Dataset: this https URL.",
+          "categories": [
+            "cs.CV"
+          ],
+          "keywords": [
+            "frozen dual encoders",
+            "global image embedding",
+            "miner",
+            "augments frozen dual",
+            "broader spatial coverage",
+            "coco whose images"
+          ],
+          "matched_keywords": []
+        },
+        "2609.27217": {
+          "title": "Learning Spectral Allocation: A Fractional Diffusion Framework for Adaptive Volumetric Segmentation",
+          "abstract": "We address adaptive computation in 3D medical image segmentation: instead of designing another backbone, we ask how much spectral mixing each network stage needs and let optimization answer. We derive FHEAT, a two-parameter operator family, from the discrete cosine transform (DCT) solution of a fractional heat equation. A fractional order alpha and a diffusion strength D govern the operator, and at D=0 it is exactly the identity. Reparametrized by the semigroup time tau = D*alpha, same-resolution instances compose exactly, so any distribution of diffusion across same-resolution stages amounts to a single Sobolev-type regularizer of learned strength. This identity limit lets the optimizer of each layer, not the designer, decide whether global mixing is needed and how sharp it should be. We instantiate FHEAT in a lightweight U-shaped architecture (Light-UNETR) paired with a Kolmogorov-Arnold mixer (KAN3D) with adaptive rational activations, yielding FHEAT-Seg. At 5% to 20% label rates on three public benchmarks, training produces gradient-driven spectral sparsification: seven of the eight stage-level operators drive D to zero, and the survivor saturates at the sharpest low-pass (alpha ~ 0.9) in the decoder layer feeding the semi-supervised attention map. The retired layers become exact identity shortcuts at inference, cutting FLOPs from 4.29G to 0.90G (a 79% drop) at 0.975M parameters. Under a standard semi-supervised protocol, FHEAT-Seg reaches Dice scores of 90.47% (left atrium), 78.79% (Pancreas-CT), and 81.90% (BraTS 2019), ahead of five semi-supervised methods and the Light-UNETR baseline. The large variant also surpasses Light-UNETR-L under full supervision (Dice 93.09%, 85.11%, and 87.19%) with 2.851M parameters and 55.75G FLOPs. These results suggest that the allocation of spectral computation is a learnable property of optimization dynamics, not a manual design commitment.",
+          "categories": [
+            "cs.CV",
+            "cs.AI"
+          ],
+          "keywords": [
+            "fractional",
+            "activations yielding fheat-seg",
+            "adaptive rational activations",
+            "adaptive volumetric segmentation",
+            "address adaptive computation",
+            "alpha same-resolution instances"
+          ],
+          "matched_keywords": []
+        },
+        "2609.27442": {
+          "title": "SatUnreal: A High-Precision Synthetic Dataset for Satellite Stereo Matching via Unreal Engine",
+          "abstract": "3D reconstruction from satellite imagery is essential for large-scale topographic analysis, yet the lack of high-fidelity training datasets with accurate occlusion labels remains a primary bottleneck. Existing benchmarks, such as US3D and WHU-Stereo, face inherent challenges in spatio-temporal mismatch -- environmental changes and shadow displacements between multi-view acquisitions -- and provide ambiguous ground truth in occluded regions due to LiDAR sparsity. In this paper, we propose SatUnreal, a high-precision synthetic dataset designed to fundamentally overcome these limitations through an Unreal Engine-based simulation pipeline. SatUnreal provides 10,000 stereo pairs with high resolution (0.3m GSD) and is characterized by: (1) Physical Geometry Simulation, replicating realistic satellite orbits by systematically varying baselines and azimuths; (2) Spatio-temporal Consistency, eliminating temporal noise through fixed virtual environments; (3) Topographic Diversity, spanning dense urban canyons to low-texture natural terrains; and (4) Mathematical Label Integrity, utilizing a novel two-step linetrace algorithm to generate flawless occlusion masks. Experimental results using SOTA iterative models demonstrate that models trained exclusively on SatUnreal achieve superior zero-shot transfer performance on real-world benchmarks (US3D, WHU-Stereo) compared to those trained on real datasets. Our findings prove that physically accurate synthetic data provides a more effective supervisory signal for learning geometric features than complex real-world observations, establishing a new paradigm for Sim-to-Real transfer in Earth Observation. Code and dataset are available at this https URL",
+          "categories": [
+            "cs.CV",
+            "eess.IV"
+          ],
+          "keywords": [
+            "high-precision synthetic dataset",
+            "satunreal",
+            "accurate occlusion labels",
+            "achieve superior zero-shot",
+            "ambiguous ground truth",
+            "benchmarks us3d whu-stereo"
+          ],
+          "matched_keywords": []
+        },
+        "2609.27533": {
+          "title": "ICM: Intra-class Mixing for Domain Adaptation in Adverse Weather",
+          "abstract": "Unsupervised domain adaptation (UDA) for semantic segmentation remains challenging under adverse weather conditions because severe appearance changes enlarge the domain gap and degrade the reliability of pseudo labels in the target domain. To address this problem, we propose an Intra-Class Mixing Consistency (ICM) framework that enforces prediction consistency between an intra-class mixed image and its original counterpart. Unlike previous mixing-based consistency methods that combine regions across different images or domains and may introduce unrealistic semantic inconsistencies, ICM performs mixing within the same image and semantic class, preserving realistic semantic layout for consistency regularization. With ICM, we establish a new state-of-the-art performance for clear-to-adverse-weather unsupervised domain adaptation (UDA) in semantic segmentation. On the Cityscapes $\\rightarrow$ ACDC benchmark, our method achieves 75.7\\% mIoU, outperforming the previous state of the art by +1.9 pp, demonstrating its effectiveness in mitigating class confusion under challenging environmental conditions. The code is provided in the supplementary material.",
+          "categories": [
+            "cs.CV"
+          ],
+          "keywords": [
+            "domain adaptation uda",
+            "unsupervised domain adaptation",
+            "intra-class mixing",
+            "icm",
+            "adverse weather",
+            "appearance changes enlarge"
+          ],
+          "matched_keywords": []
+        },
+        "2609.27620": {
+          "title": "InGuard: Towards Generalized Inner Guardrail for Safe Text-to-Image Generation",
+          "abstract": "Modern text-to-image (T2I) models generate high-quality images from arbitrary user prompts, yet they can just as easily produce not-safe-for-work (NSFW) content. Conventional outer guardrails consist of two components: a prompt classifier that checks for risk before generation, and a post-hoc image classifier that checks the fully generated image. In this design, both classifiers operate outside the generation pipeline and do not use the model's own representations. This separation can limit prompt-screening accuracy, while the image-side check runs only after the full generation cost has been spent. Moreover, a flagged prompt can only be rejected, even when it could be adjusted to produce a safe image. In this work, we propose the Inner Guardrail (InGuard), a safety framework that works inside the pipeline on the model's own representations, leaving base-model parameters untouched. First, a risk classifier grades each prompt as unsafe, risky, or benign based on the text encoder's embeddings, with no external language model. Second, SAGE (Soft-gated Asymmetric Guardrail for Embeddings) modifies the embeddings of risky prompts, aiming to return a safe image instead of a refusal. Third, a latent detector checks the one-step clean latent estimate midway through denoising, reaching nearly image-level performance and halting generation when risk is detected. We also construct the RevGen Safety Benchmark to evaluate T2I safety under realistic conditions: 10,000 prompts built through real-image reverse generation, with a rewriting step that supplies controlled intellectual-property (IP) characters, covering graded porn/gore risks, categorical IP risks, and benign negatives. Across five open-weight T2I models, InGuard reaches 97.9-98.8% safety rate, matching or exceeding the outer guardrail, with 57.5-73.5% less benign disturbance, ~3.7x fewer parameters, and 50-55.6% of denoising steps skipped.",
+          "categories": [
+            "cs.CV",
+            "cs.AI"
+          ],
+          "keywords": [
+            "inner guardrail",
+            "own representations",
+            "safe image",
+            "inguard",
+            "t2i",
+            "arbitrary user prompts"
+          ],
+          "matched_keywords": []
+        },
+        "2609.27671": {
+          "title": "SGDet3D++: Geometry-Grounded Semantics for 4D Radar and Camera 3D Object Detection",
+          "abstract": "4D radar complements dense image semantics with long-range geometry and radial motion, but existing radar--camera detectors largely solve \\emph{where} to align the modalities while leaving \\emph{whether} a piece of evidence supports an evolving object hypothesis implicit. An image token may describe an occluder, a nearby radar return may belong to another object, and a pose-aligned memory slot may carry incompatible motion. We formulate \\emph{hypothesis-conditioned evidence grounding}, which separates candidate access from evidence use: semantic, geometric, or temporal evidence is filtered or conditioned by the evolving 3D state before updating the corresponding query. \\sgdetpp{} instantiates this principle through Anchor-Grounded Semantic Retrieval (AGR), which conditions deformable image retrieval on pooled anchor-consistent radar support; Geometry-Consistent Anchor Refinement (GCR), which attentively aggregates individual associated returns; and Doppler-Verified Correspondence (DVC), which replaces history only when current radial motion contradicts it. \\sgdetpp{} improves the strongest compared method by 3.82 mAP and 6.82 ODS on OmniHD-Scenes and by 6.82 mAP and 9.22 NDS on ManTruckScenes, while also leading the listed methods in the TJ4DRadSet test comparison. Mechanism-targeted evaluations show that AGR improves strict AP in every projected-occlusion bin, the yaw-aligned box gate raises target-return purity from 29.95\\% to 58.87\\%, and DVC preserves 96.11\\% of motion-consistent history while retaining 75.90\\% contradiction recall. Code will be released.",
+          "categories": [
+            "cs.CV"
+          ],
+          "keywords": [
+            "radial motion",
+            "aggregates individual associated",
+            "agr improves strict",
+            "anchor refinement gcr",
+            "anchor-consistent radar support",
+            "anchor-grounded semantic retrieval"
+          ],
+          "matched_keywords": []
+        },
+        "2609.27821": {
+          "title": "Groundbench: Multi-Resolution Polygon Grounding Exposes the Geometry Gap in Vision-Language Models",
+          "abstract": "Bounding-box scores on RefCOCO-family grounding leave little room to distinguish frontier vision-language systems, yet boxes discard object shape. We introduce GroundingBench, a matched benchmark that re-targets the same 1,500 image-expression-referent triples to exact-N polygons at five vertex budgets. A fixed-denominator harness separately audits filled-region intersection over union (IoU) and legal-polygon completion. The strongest tested configuration reaches 88.2 box IoU and 97.1 accuracy at IoU >= .5 (Acc@.5), versus 57.7 and 69.2 for direct polygons; because these headline scores use different references, we also compare direct polygons with predicted boxes rasterised against the same contour target, obtaining 57.7 versus 57.3 when pooled. Performance is non-monotone in N and collapses at the densest budget, where legality failures compound residual geometric error. Qwen's thinking-setting contrast is the largest tested input-preserving configuration difference; under frozen templates, false spatial cues are more damaging than false colour cues, and target preference can remain high while contour tracing is poor. Alternate masks and a continuous-area scorer preserve the principal ordering. GroundingBench therefore measures an operational output-geometry gap spanning localisation, boundary construction, serialisation, and topology, rather than latent boundary perception alone.",
+          "categories": [
+            "cs.CV"
+          ],
+          "keywords": [
+            "direct polygons",
+            "audits filled-region intersection",
+            "boundary construction serialisation",
+            "boundary perception alone",
+            "boxes discard object",
+            "boxes rasterised against"
+          ],
+          "matched_keywords": []
+        },
+        "2609.28078": {
+          "title": "LiAM-SAM: Lifecycle-Aware Memory for Robust SAM2-Based MOT",
+          "abstract": "Segmentation-based multi-object tracking (MOT) with foundation video models such as SAM2 offers strong localization quality, yet remains fragile in crowded, real-world scenes. In detector-prompted SAM2 pipelines, failures typically arise at three stages of the object lifecycle: (i) erroneous or duplicate track initiation, (ii) memory drift during close interactions, and (iii) unreliable re-identification after long occlusions or re-entry. These errors corrupt object memory and accumulate over time, making long-horizon tracking unstable. In this paper, we reframe MOT as a lifecycle memory integrity problem. We present LiAM-SAM, a Lifecycle-Aware Memory (LiAM) framework with targeted mechanisms for each of the three failure modes. At track birth, to prevent faulty or duplicate initiations, we apply contrastive track initiation, which conditions each prompt on existing nearby tracked instances. To preserve memory integrity during strong interactions, we introduce motion- and geometry-grounded memory correction that resolves interaction confusions and suppresses drift. For reliable re-identification after disappearance, we maintain an adaptive context memory that promotes diverse and trustworthy references as long-term identity anchors. Finally, similarity aware spatial pruning optionally selects the memory tokens to retain at cross-attention time, improving efficiency with minimal accuracy loss. LiAM-SAM represents a modular, detector-agnostic, SAM2-based MOT system that achieves state-of-the-art HOTA and IDF1 on the evaluated benchmarks. In association-challenging environments, our ablations show that LiAM improves a detector+SAM2 baseline by +10.5 HOTA, +17.4 AssA, and reduces identity switches by 96%.",
+          "categories": [
+            "cs.CV"
+          ],
+          "keywords": [
+            "lifecycle-aware memory",
+            "memory integrity",
+            "sam2-based mot",
+            "track initiation",
+            "liam-sam",
+            "sam2"
+          ],
+          "matched_keywords": []
+        },
+        "2609.28159": {
+          "title": "Depth-Guided Contrastive Learning for 2D Representations with 3D Spatial Awareness",
+          "abstract": "Standard contrastive learning frameworks are mainly designed from a semantic perspective, yet learning 2D visual representations that preserve 3D spatial structure is also important for scene understanding. In this work, we propose Depth-Guided Contrastive Learning (DGCL), a simple auxiliary objective that injects 3D spatial awareness into 2D contrastive representation learning. Our key idea is to use depth to convert local 3D proximity into contrastive similarity: pixels that are closer in 3D space are encouraged to have more similar representations than pixels that are farther apart. Instead of relying on absolute depth values, DGCL formulates supervision through relative 3D distance comparisons among randomly sampled pixels, making the objective invariant to depth scale, efficient to compute, and easy to integrate into existing contrastive frameworks. Experiments across different datasets and models show that DGCL consistently improves 2D representation learning and benefits semantic downstream tasks by stronger spatial and geometric understanding. The code is available on this https URL.",
+          "categories": [
+            "cs.CV"
+          ],
+          "keywords": [
+            "depth-guided contrastive",
+            "spatial awareness",
+            "dgcl",
+            "absolute depth values",
+            "among randomly sampled",
+            "benefits semantic downstream"
+          ],
+          "matched_keywords": []
+        },
+        "2609.28424": {
+          "title": "The Skin-Restricted Reinhard Transform:Uniqueness under a Lightness-Preserving Constraint",
+          "abstract": "Catalog skin recolouring has to change pigment and leave shading alone. The classical Reinhard map does not make that split: it rescales lightness by the ratio of standard deviations, and a flat reference swatch therefore flattens the limb. This paper formalises the correction used in our pipeline, the skin-restricted Reinhard transform. It is the diagonal affine map in CIE Lab that translates lightness, matches the chromatic mean, and clamps the chromatic gain to [0.72, 1.18], with moments taken on the central 84% of each channel. A diagonal affine map has six real parameters. The shading constraint forces the lightness gain to +1 and the lightness shift to the difference of means; one-dimensional quadratic optimal transport on each chromatic axis, followed by Euclidean projection onto the gain interval, fixes the other four. Inside that family the four conditions determine every parameter. The content of the result is the forced lightness gain; it is not a uniqueness claim outside the diagonal affine class. For Gaussian marginals the chromatic step is not merely the best affine map: it is the unrestricted Wasserstein-2 map. The same formulae with trimmed moments remain optimal because a positive affine image commutes with quantile trimming. On hands, arms, legs, and feet of nine photographs and three reference tones, the map keeps the lightness contrast ratio at 0.974 +/- 0.029 with chromatic error 0.77 CIE Lab units. Reinhard matching, the linear Monge map, and histogram matching reach a smaller chromatic error only by cutting lightness contrast to about half.",
+          "categories": [
+            "cs.CV"
+          ],
+          "keywords": [
+            "diagonal affine map",
+            "skin-restricted reinhard transform",
+            "lightness",
+            "chromatic",
+            "chromatic error",
+            "cie lab"
+          ],
+          "matched_keywords": []
+        },
+        "2609.24815": {
+          "title": "Uranus: Building the Next-Generation Simulation Infrastructure for Embodied AI",
+          "abstract": "Scalable simulation is essential for robot data generation, policy training, evaluation, and safe iteration, yet real-world interaction is costly and conventional simulators require labor-intensive construction. We present Uranus, a data-driven robot simulator built around a joint-trajectory-conditioned autoregressive diffusion model. Uranus offers three key capabilities: (1) streaming, open-ended rollout, which receives future joint-position trajectories online and autoregressively generates one latent frame per step, corresponding to four RGB frames, without a fixed horizon; (2) low-latency generation, achieving 24 FPS after inference optimization; and (3) scalable, extensible robot control, providing a unified interface for synchronized multi-view generation across diverse robot embodiments and camera configurations. We conduct comprehensive quantitative and qualitative evaluations on both in-distribution and out-of-distribution data, providing an objective assessment of Uranus and clearly identifying its current limitations. We release the code and model weights to empower the community with practical tools and insights.",
+          "categories": [
+            "cs.RO",
+            "cs.AI"
+          ],
+          "keywords": [
+            "uranus",
+            "around joint-trajectory-conditioned autoregressive",
+            "autoregressively generates one",
+            "built around joint-trajectory-conditioned",
+            "conduct comprehensive quantitative",
+            "control providing unified"
           ],
           "matched_keywords": []
         },
