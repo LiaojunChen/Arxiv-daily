@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-09-25T06:00:38+00:00",
+  "updated_at": "2026-09-25T09:35:26+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-bb826105670735dd6fdbc9b5": {
-      "run_id": "daily-bb826105670735dd6fdbc9b5",
-      "generated_at": "2026-09-25T06:00:38+00:00",
+    "daily-5c0f513dff8cdfd689608d39": {
+      "run_id": "daily-5c0f513dff8cdfd689608d39",
+      "generated_at": "2026-09-25T09:35:26+00:00",
       "selected_ids": [
         "2609.29669",
         "2609.29555",
@@ -7694,6 +7694,20 @@
             "same frequency",
             "rotor",
             "system identification"
+          ],
+          "matched_keywords": []
+        },
+        "2609.29362": {
+          "title": "Parts-of-Speech as Emergent Categories in SAE Latent Space",
+          "abstract": "Sparse AutoEncoders (SAEs) offer a promising way to inspect language model representations, but it is still unclear what kind of linguistic structure their latents expose. We use part-of-speech (PoS) categories as a controlled test case to study whether morpho-syntactic information is encoded by individual latents or by structured groups of features. We find that PoS distinctions are highly recoverable from SAE activations, but do not align with one-to-one latent / category mappings. This recoverability is not reducible to lexical memorisation, and Open and Closed PoS classes differ substantially. Categories are supported by compact groups of sparse latents, with substantial variation across tags. These groups remain stable on held-out data, while also showing overlap between related categories. Our results show that SAEs localise morpho-syntactic information in a distributed and category-dependent form rather than through atomic grammatical features.",
+          "categories": [],
+          "keywords": [
+            "morpho-syntactic information",
+            "pos",
+            "activations but do",
+            "atomic grammatical features",
+            "autoencoders saes offer",
+            "category-dependent form rather"
           ],
           "matched_keywords": []
         },
