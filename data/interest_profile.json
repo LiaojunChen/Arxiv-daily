@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-09-28T05:36:08+00:00",
+  "updated_at": "2026-09-28T06:34:22+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-b96ad6c418c49e9fbc9ca53d": {
-      "run_id": "daily-b96ad6c418c49e9fbc9ca53d",
-      "generated_at": "2026-09-28T05:36:08+00:00",
+    "daily-77c60c7bac785cbaff0935c4": {
+      "run_id": "daily-77c60c7bac785cbaff0935c4",
+      "generated_at": "2026-09-28T06:34:22+00:00",
       "selected_ids": [
         "2609.31394",
         "2609.30946",
@@ -1342,22 +1342,6 @@
             "action selection content",
             "answers natural-language questions",
             "available jev projects"
-          ],
-          "matched_keywords": []
-        },
-        "2609.31473": {
-          "title": "Game Arena: Strategic LLM Evaluation in Competitive Environments",
-          "abstract": "We introduce Kaggle Game Arena, an open and ever-expanding platform to evaluate large language models (LLMs) through competitive games. Different from static benchmarks, game arena enables models to play head-to-head matchups in structured environments where the gameplay strength naturally increases as models evolve, preventing performance saturation. This technical report details the infrastructure behind Game Arena and describes the three pilot game environments: Chess, Poker, and Werewolf. These environments span perfect information, imperfect information, and multiplayer game settings, enabling a systematic study of models' strategic planning, adaptation, and robustness under uncertainty. For each game, we provide a detailed description of the environment, evaluation metrics, and results from running full competitions across models. Through robust infrastructure and large-scale ground-truth based evaluation, Game Arena ensures reproducibility, transparency and generalizability to new games and variants over time.",
-          "categories": [
-            "cs.AI"
-          ],
-          "keywords": [
-            "game arena",
-            "arena ensures reproducibility",
-            "behind game arena",
-            "benchmarks game arena",
-            "ensures reproducibility transparency",
-            "environment evaluation metrics"
           ],
           "matched_keywords": []
         },
@@ -6399,6 +6383,20 @@
             "local progress",
             "actions precise contact",
             "behavior responses within"
+          ],
+          "matched_keywords": []
+        },
+        "2609.31002": {
+          "title": "ZooWork-ShopRanker: An Open, Preference-Aligned E-Commerce Reranker",
+          "abstract": "Open rerankers trained for general web retrieval transfer imperfectly to e-commerce, where ranking decisions depend not only on topical relevance but also on user preferences, product constraints, and comparative product fit. These preference signals are difficult to supervise at scale: real search traffic provides authentic queries and candidates but no clean pairwise labels. We present ZooWork-ShopRanker, a family of e-commerce rerankers (0.6B, 4B, and 8B) aligned to judge-labeled shopping preference. Training pairs are labeled by a panel of reasoning large language models (LLMs) from different families acting as a preference oracle, with position-debiased judgments and agreement tiers, and the rerankers are trained on these labels. The aligned 8B flagship then serves as a distillation teacher for the efficient 4B and 0.6B models, which are fit to its scores and sharpened on judged pairs. To measure progress, we introduce ShopRank-Bench, a contamination-limited benchmark of ~10,000 private-traffic preference pairs in both text formats, tiered by how many judge families committed to each label. ZooWork-ShopRanker-8B and -4B significantly outperform the strongest open reranker baseline, every model significantly beats its own un-aligned base, and ZooWork-ShopRanker-0.6B beats its size peer; the gains hold in both formats and extend to common MTEB benchmarks. We release the models and the dual-format ShopRank-Bench to facilitate further research.",
+          "categories": [],
+          "keywords": [
+            "rerankers",
+            "aligned flagship then",
+            "but no clean",
+            "candidates but no",
+            "clean pairwise labels",
+            "common mteb benchmarks"
           ],
           "matched_keywords": []
         },
@@ -34091,8 +34089,8 @@
             "memory-poisoning defenses",
             "token overhead",
             "defense",
-            "reranker",
-            "adjudicated items reaching"
+            "adjudicated items reaching",
+            "backend retrieval process"
           ],
           "matched_keywords": []
         },
@@ -43649,6 +43647,22 @@
             "accompanying research artifact",
             "achieve perfect macro-averaged",
             "anti-fraud generation pipeline"
+          ],
+          "matched_keywords": []
+        },
+        "2609.31473": {
+          "title": "Game Arena: Strategic LLM Evaluation in Competitive Environments",
+          "abstract": "We introduce Kaggle Game Arena, an open and ever-expanding platform to evaluate large language models (LLMs) through competitive games. Different from static benchmarks, game arena enables models to play head-to-head matchups in structured environments where the gameplay strength naturally increases as models evolve, preventing performance saturation. This technical report details the infrastructure behind Game Arena and describes the three pilot game environments: Chess, Poker, and Werewolf. These environments span perfect information, imperfect information, and multiplayer game settings, enabling a systematic study of models' strategic planning, adaptation, and robustness under uncertainty. For each game, we provide a detailed description of the environment, evaluation metrics, and results from running full competitions across models. Through robust infrastructure and large-scale ground-truth based evaluation, Game Arena ensures reproducibility, transparency and generalizability to new games and variants over time.",
+          "categories": [
+            "cs.AI"
+          ],
+          "keywords": [
+            "game arena",
+            "arena ensures reproducibility",
+            "behind game arena",
+            "benchmarks game arena",
+            "ensures reproducibility transparency",
+            "environment evaluation metrics"
           ],
           "matched_keywords": []
         },
