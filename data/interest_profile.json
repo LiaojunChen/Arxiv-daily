@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-09-29T06:43:35+00:00",
+  "updated_at": "2026-09-29T10:39:27+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-e027d810016dfa81725bd836": {
-      "run_id": "daily-e027d810016dfa81725bd836",
-      "generated_at": "2026-09-29T06:43:35+00:00",
+    "daily-4b7daefec37011b5d78a8203": {
+      "run_id": "daily-4b7daefec37011b5d78a8203",
+      "generated_at": "2026-09-29T10:39:27+00:00",
       "selected_ids": [
         "2609.34414",
         "2609.33854",
@@ -13192,7 +13192,7 @@
             "formal geometry",
             "readout accuracy",
             "candidate pool",
-            "llm reasoning"
+            "analyzes covered failures"
           ],
           "matched_keywords": []
         },
@@ -13613,8 +13613,8 @@
           ],
           "keywords": [
             "codeskill",
-            "code agents",
             "latent skill",
+            "code agents",
             "adaptive boundary mechanism",
             "adapts hierarchical latent",
             "against strong open-weight"
@@ -26384,6 +26384,62 @@
           ],
           "matched_keywords": []
         },
+        "2609.33848": {
+          "title": "QwenGyre: An Elastic Reinforcement Learning Framework for Training xLong-Horizon Agents",
+          "abstract": "Large language model (LLM) agents increasingly undertake extreme-long (xlong) horizon tasks, where a single execution can span hours, hundreds of model--environment interactions, and nearly 1M tokens per rollout. Applying online reinforcement learning (RL) to such executions poses two fundamental challenges: (1) severe execution variance and prolonged rollout delays cause massive GPU idling; and (2) complex non-linear branching generates massive trajectory redundancy, crippling training efficiency. To address these, we presents QwenGyre, an end-to-end framework for xlong-horizon online RL. QwenGyre elastically reallocates GPUs between rollout and training without interrupting live executions, while its trajectory processor reconstructs branching histories, scores partial progress, and deduplicates redundant paths to bound training costs. Scaled to our flagship model, Qwen~3.8 2.4T, with 700K tokens per rollout, QwenGyre yields a 6.0% absolute gain on NL2RepoBench (52.5% to 58.5%) in 48 steps. Across our evaluations on diverse domains of training datasets, QwenGyre delivers up to 1.85times and 1.78times speedups over Colocate and Async, respectively.",
+          "categories": [],
+          "keywords": [
+            "tokens per rollout",
+            "qwengyre",
+            "agents increasingly undertake",
+            "applying online reinforcement",
+            "bound training costs",
+            "branching generates massive"
+          ],
+          "matched_keywords": []
+        },
+        "2609.32577": {
+          "title": "Groupwise Agentic Grading and Advantage Redistribution for Code Agent RL",
+          "abstract": "Reinforcement learning (RL) for code agents often uses executable tests to provide binary rewards. With these rewards, Group Relative Policy Optimization (GRPO) assigns identical advantages to test-passing trajectories within each rollout group, overlooking differences in implementation quality and adherence to task requirements. This leaves the policy without a learning signal that favors clean, targeted implementations over those containing unnecessary or out-of-scope changes. We introduce GAGAR, a framework for quality-aware credit redistribution in code agent RL. Built on dynamic sampling that retains groups containing both passing and failing trajectories, GAGAR places all trajectories from each group in a shared workspace, where an SFT-trained agentic grader jointly inspects them and ranks the test-passing candidates. Based on this ranking, we downweight lower-ranked trajectories and proportionally rescale the advantages of all test-passing trajectories to restore their original sum. This sum-preserving redistribution retains the relative weights established by quality-based downweighting while shifting credit toward higher-quality implementations. We evaluate GAGAR at industrial scale using pre-RL SFT checkpoints of MiMo-V2.6-Flash (310B total parameters) and MiMo-V2.6-Pro (1.02T total parameters). Controlled code-only Flash experiments show improved code agent performance, reduced trajectory-length growth, and more stable training. We further apply GAGAR in large-scale mixed-task RL with both Flash and Pro. Our results support combining test-based verification with groupwise agentic grading to improve the quality and stability of code agent RL.",
+          "categories": [],
+          "keywords": [
+            "code agent rl",
+            "groupwise agentic grading",
+            "gagar",
+            "test-passing trajectories",
+            "total parameters",
+            "agent performance reduced"
+          ],
+          "matched_keywords": []
+        },
+        "2609.35505": {
+          "title": "An RL View of OPD: Least Square Policy Distillation for Sample-Efficient LLM Reasoning",
+          "abstract": "We study on-policy distillation (OPD) through the lens of reinforcement learning, establishing a connection between the reverse-KL objective in OPD and KL-regularized policy optimization. Building on this connection, we introduce Least-Square Policy Distillation (LSPD), an RL-inspired framework that brings optimistic exploration and off-policy data reuse from value-based RL into policy distillation. LSPD preserves policy diversity through exploration while improving rollout efficiency by repeatedly learning from previously collected trajectories. Our theoretical analysis connects LSPD to optimistic value-based learning and shows that its idealized formulation achieves a sharp mathcal O(log K) regret bound under online exploration. Empirically, LSPD consistently outperforms existing distillation baselines across six mathematical reasoning benchmarks and diverse teacher-student settings, with average gains of +1.59 points in Avg@16. Remarkably, through Pass@k evaluations up to k=64, we found that LSPD better preserves policy diversity by achieving stronger performance as k grows. Its fully off-policy variant achieves comparable performance to vanilla OPD using only the first 25% of rollout batches. Together, these results provide an RL perspective on OPD that offers both a principled interpretation and a practical route toward more effective and rollout-efficient language model distillation.",
+          "categories": [],
+          "keywords": [
+            "preserves policy diversity",
+            "lspd",
+            "policy distillation",
+            "achieves sharp mathcal",
+            "achieving stronger performance",
+            "better preserves policy"
+          ],
+          "matched_keywords": []
+        },
+        "2609.32814": {
+          "title": "Change the Product, Keep the Parameters: Associative Algebra Layers for Transformers",
+          "abstract": "Fast matrix multiplication algorithms keep the product fixed and search for a cheaper way to evaluate it. We instead ask whether a Transformer's learned projections can use a different, cheaper product altogether. Building on an associative-algebra construction that replaces ordinary matrix multiplication with a sparser interaction table over the same weight blocks, we construct a family with quadratic arithmetic in the matrix dimension when the physical block size remains fixed, and derive finite-shape constraints for GPU execution. The construction is provably optimal for its bilinear rank by the Alder--Strassen bound and can be realized as row-typed rectangular projections compatible with causal masking and KV-cached decoding. We provide an empirical test of this approach by training two approximately 110M-parameter decoder-only Transformer LMs from the same recipe and 12.3B-token budget, differing only in their feed-forward layer: one uses ordinary dense matrix multiplication and the other uses the associative-algebra product. Across four prompt domains, the algebraic model achieves a 6.2--7.8\\% increase in end-to-end generation throughput, while obtaining lower scores on all three reported downstream metrics. We treat these results as a feasibility and trainability check for the proposed approach at small scale, leaving further investigation to future work.",
+          "categories": [],
+          "keywords": [
+            "matrix multiplication",
+            "approximately m-parameter decoder-only",
+            "ask whether transformer",
+            "associative algebra layers",
+            "b-token budget differing",
+            "block size remains"
+          ],
+          "matched_keywords": []
+        },
         "2609.31620": {
           "title": "FuseReg: Regularizing Layer Fusion Mitigates the Reconstruction-Generation Gap in Representation Autoencoders",
           "abstract": "Representation autoencoders (RAEs) reuse features from a pretrained visual encoder as reconstruction and diffusion latents, integrating strong visual representations into image generation. However, RAEs still need to decide which encoder layers form the shared latent space for the generator and pixel decoder. This choice involves a trade-off. Shallower layers tend to preserve fine pixel details better, while deeper layers tend to yield better generation metrics. A fixed heuristic layer fusion therefore couples two stages that benefit from different information. We introduce FuseReg, which replaces heuristic feature selection with training over random subsets of encoder layers. We theoretically analyze the underlying mechanism: subset sampling explicitly penalizes sensitivity to cross-layer disagreement. On ImageNet-256 with DINOv3-L, a single FuseReg decoder reconstructs from full, sparse, and single-layer fusions without retraining, achieving higher PSNR than decoders specialized to fixed fusions. This flexibility also benefits generation: decoder replacement alone reduces unguided gFID by 27% with an unchanged RAEv2 DiT-XL generator. The same regularization principle extends to diffusion training, with joint regularization of both stages reducing unguided gFID by 29% on DiT-Base. These results show that training downstream models for layer-fusion robustness narrows the reconstruction-generation gap without modifying the pretrained encoder.",
@@ -29969,9 +30025,9 @@
             "adaptive multi-resolution gaussian",
             "data-sparse covariance matrix",
             "naturally data-sparse covariance",
-            "mathcal log",
             "multi-resolution basis",
-            "exact inference"
+            "exact inference",
+            "mathcal log"
           ],
           "matched_keywords": []
         },
@@ -38116,9 +38172,9 @@
             "model-based diffusion",
             "bk-mbd",
             "control period",
-            "bilinear",
             "achieves effective trajectory",
-            "almost never did"
+            "almost never did",
+            "annealed schedule improves"
           ],
           "matched_keywords": []
         },
