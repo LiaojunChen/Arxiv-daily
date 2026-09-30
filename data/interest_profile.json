@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-09-30T06:31:19+00:00",
+  "updated_at": "2026-09-30T10:28:12+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-57022b966b7d8358338e930f": {
-      "run_id": "daily-57022b966b7d8358338e930f",
-      "generated_at": "2026-09-30T06:31:19+00:00",
+    "daily-5a9457f1cc59b6700353eec1": {
+      "run_id": "daily-5a9457f1cc59b6700353eec1",
+      "generated_at": "2026-09-30T10:28:12+00:00",
       "selected_ids": [
         "2609.38163",
         "2609.37970",
@@ -3114,8 +3114,8 @@
             "sfe-vggt",
             "surrogate frames",
             "source-free",
-            "depth estimation",
-            "annotations during training"
+            "annotations during training",
+            "any paired rgb"
           ],
           "matched_keywords": []
         },
@@ -14278,6 +14278,67 @@
             "agents omni-native through",
             "audio video documents",
             "broad evolvable omni"
+          ],
+          "matched_keywords": []
+        },
+        "2609.32522": {
+          "title": "Beyond Dyadic Memory: Interaction-Aware Multimodal Memory with Adaptive Agentic Retrieval for Multi-Party Spoken Conversations",
+          "abstract": "Long-term memory enables agents to accumulate information and reason across sessions, yet existing research primarily focuses on dyadic text or image-text conversations, leaving long-term memory for multi-party spoken conversations underexplored. This setting requires preserving conversational content, identifying participants across sessions, and retaining who speaks to whom. To this end, we propose VoxPolyMem, an interaction-aware multimodal memory framework combining incremental speaker identification with a memory hierarchy comprising interaction memory, fact memory, and participant profiles. We formulate retrieval as sequential decision-making, where an agent rewrites queries and selects retrieval tools and memory layers based on accumulated evidence to address information gaps. We further introduce Evidence-Gain GRPO (EG-GRPO), which uses round-wise credit assignment to encourage complementary evidence acquisition. We also construct VoxPolyBench to evaluate memory evolution, personalized answering, memory retrieval and reasoning, and interaction reasoning and attribution in multi-party spoken conversations. VoxPolyMem achieves an overall score of 85.0 on VoxPolyBench, surpassing the strongest evaluated baseline by 23.6 points. On Mem-Gallery and H2HMem-Multi, it scores 89.6 and 74.4, respectively, exceeding the strongest evaluated public memory baselines by over 8 points each. These results highlight its potential for persistent, personalized assistance in multi-party multimodal interactions. Code and datasets are available at https://voxpolymem.github.io/VoxPolyBench/demo/",
+          "categories": [
+            "cs.AI",
+            "cs.IR",
+            "cs.SD",
+            "eess.AS"
+          ],
+          "keywords": [
+            "multi-party spoken conversations",
+            "interaction-aware multimodal memory",
+            "voxpolybench",
+            "voxpolymem",
+            "adaptive agentic retrieval",
+            "address information gaps"
+          ],
+          "matched_keywords": []
+        },
+        "2609.35427": {
+          "title": "LLMs are General Asynchronous Agents",
+          "abstract": "Modern LLMs are increasingly capable as autonomous agents, but they follow sequential interaction cycles: read, think, reply or call tools, repeat. Many real-world use cases are not sequential: voice assistants, embodied agents, and monitoring systems receive new inputs while they think or perform another task. Modern LLMs address this with specialized architectures for voice interaction and video streams, VLAs for robot control, asynchronous tool calling for API usage, and others. In this work, we generalize from different asynchronous tasks to general asynchronous agents that can adapt to different types of concurrency. To achieve this, we develop an asynchronous LLM framework that lets users (or the agents themselves) define inference coroutines with overlapping memory states. We showcase that Qwen 3.x models are capable of asynchronous operation for streaming video understanding, videogames, and monitoring, without task-specific training.",
+          "categories": [],
+          "keywords": [
+            "general asynchronous agents",
+            "modern llms",
+            "agents themselves define",
+            "assistants embodied agents",
+            "asynchronous llm framework",
+            "asynchronous tool calling"
+          ],
+          "matched_keywords": []
+        },
+        "2609.16409": {
+          "title": "Reasoning with Image Generation",
+          "abstract": "Chain-of-thought reasoning has revolutionized natural language processing by enabling large language models (LLMs) to decompose problems into intermediate steps before answering. Yet confining reasoning to the textual domain presents limitations for tasks requiring direct manipulation of visual representations. Recent efforts augment multimodal LLMs with external visual expert tools such as depth estimation or object detection modules, but these remain fundamentally limited by their reliance on narrow, rigid operations that cannot flexibly generate or transform visual content. We propose ReImaGin, which leverages image generation models as a flexible visual reasoning mechanism for multimodal LLMs: unlike fixed-function tools, they accept natural language commands and can perform open-ended visual operations, like removing an occlusion or generating a floorplan from multiple disjoint views of a room. Across six diverse visual reasoning tasks including multi-view spatial reasoning and collision prediction, ReImaGin consistently outperforms both text-only reasoning and specialist vision-tool baselines, with gains of up to 25\\%, demonstrating the advantage of flexible, generative visual reasoning.",
+          "categories": [],
+          "keywords": [
+            "visual reasoning",
+            "multimodal llms",
+            "accept natural language",
+            "augment multimodal llms",
+            "cannot flexibly generate",
+            "collision prediction reimagin"
+          ],
+          "matched_keywords": []
+        },
+        "2609.38157": {
+          "title": "EmoRES-TTS: Residual-Enhanced Vector Steering for Emotional Speech Generation",
+          "abstract": "Emotion-conditioned text-to-speech (TTS) models may fail to express the requested emotion reliably, and improving controllability by additional training is costly in both computation and emotion-labeled speech training data. We therefore study vector steering, a training-free approach that modifies the internal representations of a frozen model. CoCoEmo, a conventional vector steering method for emotion TTS, treats each emotion vector as an indivisible direction controlled by a single global strength, limiting adherence to the requested emotion. In this work, we first discover that an emotion vector can be decomposed into a shared component that moves speech away from neutral expression and a residual component that directs generation toward the requested emotion. Building on this finding, we propose Emotion Residual-Enhanced Steering for TTS (EmoRES), a novel method that controls the two components without retraining the backbone. On IEMOCAP, EmoRES outperforms CoCoEmo across all four objective emotion metrics on the IndexTTS-2 and CosyVoice2 backbones. Rank correlation improves by 26.13 and 12.97 percentage points, corresponding to relative gains of 118.8% and 33.1%, while emotion hit rate improves by 12.95 and 6.92 points, corresponding to relative gains of 20.1% and 9.8%. Human evaluation further shows a relative improvement up to 35.0% in the rate at which listeners correctly identified the dominant requested emotion and up to a 17.3% improvement in fidelity, while listeners prefer EmoRES for naturalness in up to 63.8% of pairwise comparisons. Component ablations further demonstrate that effective control benefits from preserving the shared component while strengthening the residual of the emotion steering vectors.",
+          "categories": [],
+          "keywords": [
+            "requested emotion",
+            "vector steering",
+            "emotion vector",
+            "points corresponding",
+            "shared component",
+            "emores"
           ],
           "matched_keywords": []
         },
@@ -25581,25 +25642,6 @@
           ],
           "matched_keywords": []
         },
-        "2609.32522": {
-          "title": "Beyond Dyadic Memory: Interaction-Aware Multimodal Memory with Adaptive Agentic Retrieval for Multi-Party Spoken Conversations",
-          "abstract": "Long-term memory enables agents to accumulate information and reason across sessions, yet existing research primarily focuses on dyadic text or image-text conversations, leaving long-term memory for multi-party spoken conversations underexplored. This setting requires preserving conversational content, identifying participants across sessions, and retaining who speaks to whom. To this end, we propose VoxPolyMem, an interaction-aware multimodal memory framework combining incremental speaker identification with a memory hierarchy comprising interaction memory, fact memory, and participant profiles. We formulate retrieval as sequential decision-making, where an agent rewrites queries and selects retrieval tools and memory layers based on accumulated evidence to address information gaps. We further introduce Evidence-Gain GRPO (EG-GRPO), which uses round-wise credit assignment to encourage complementary evidence acquisition. We also construct VoxPolyBench to evaluate memory evolution, personalized answering, memory retrieval and reasoning, and interaction reasoning and attribution in multi-party spoken conversations. VoxPolyMem achieves an overall score of 85.0 on VoxPolyBench, surpassing the strongest evaluated baseline by 23.6 points. On Mem-Gallery and H2HMem-Multi, it scores 89.6 and 74.4, respectively, exceeding the strongest evaluated public memory baselines by over 8 points each. These results highlight its potential for persistent, personalized assistance in multi-party multimodal interactions. Code and datasets are available at this https URL",
-          "categories": [
-            "cs.AI",
-            "cs.IR",
-            "cs.SD",
-            "eess.AS"
-          ],
-          "keywords": [
-            "multi-party spoken conversations",
-            "interaction-aware multimodal memory",
-            "adaptive agentic retrieval",
-            "address information gaps",
-            "agent rewrites queries",
-            "answering memory retrieval"
-          ],
-          "matched_keywords": []
-        },
         "2609.32527": {
           "title": "AmbiModBench: Benchmarking Gene Perturbation Prediction Beyond Shared Responses",
           "abstract": "Predicting cellular responses to genetic perturbations helps prioritize experiments in single-cell genomics, where exhaustive measurement is infeasible. While computational models increasingly predict these responses, three evaluation deficiencies obscure what their scores demonstrate. First, absolute metrics cannot separate target-specific predictions from a shared background response. Second, common metrics remain high under gene shuffling, so gene-level accuracy is never verified. Third, a score at one training size says nothing about coverage, which depends on representation-space proximity and response-constraining power. We propose AmbiModBench, a specificity-aware, gene-resolved and coverage-aware benchmark. It pairs every score with a training-mean reference fitted on the same split, screens each readout by gene-coordinate permutation, and links embedding distance to response variation. Across K562, RPE1 and Norman, strong absolute scores largely reflect shared background rather than target-specific learning. Widely used readouts track response magnitude distributions rather than the affected genes. Detectable gain follows representation-space coverage rather than training-set size. Nonetheless, on RPE1 the protocol yields a reproducible target-specific gain across five additional splits and three gene selections, which absolute scores alone cannot distinguish from shared background.",
@@ -27569,8 +27611,8 @@
             "relaxkv",
             "repair targets",
             "cache reuse",
-            "ablations further demonstrate",
-            "aggregate longbench performance"
+            "aggregate longbench performance",
+            "anchor ratio improves"
           ],
           "matched_keywords": []
         },
@@ -47060,8 +47102,8 @@
             "context-aware sampling",
             "frame-to-panorama localization",
             "historical ptz",
-            "video streams",
-            "ship detection"
+            "ship detection",
+            "video streams"
           ],
           "matched_keywords": []
         },
@@ -50056,12 +50098,12 @@
             "cs.AI"
           ],
           "keywords": [
-            "autonomous agents",
             "address gap common",
             "addresses distinct point",
             "ai-driven anomaly detection",
             "ai-driven security operations",
-            "ai-powered anomaly detection"
+            "ai-powered anomaly detection",
+            "automated code remediation"
           ],
           "matched_keywords": []
         },
