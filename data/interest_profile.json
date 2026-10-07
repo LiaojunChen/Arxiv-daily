@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-10-07T06:12:27+00:00",
+  "updated_at": "2026-10-07T07:03:08+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-9020667f2736abd5427fed5e": {
-      "run_id": "daily-9020667f2736abd5427fed5e",
-      "generated_at": "2026-10-07T06:12:27+00:00",
+    "daily-239025b6851fba9734dbe862": {
+      "run_id": "daily-239025b6851fba9734dbe862",
+      "generated_at": "2026-10-07T07:03:08+00:00",
       "selected_ids": [
         "2610.08640",
         "2610.06877",
@@ -1323,22 +1323,6 @@
           ],
           "matched_keywords": []
         },
-        "2610.05140": {
-          "title": "AutoSciBench: Autonomous Benchmark Generation for Evaluating Scientific Agents",
-          "abstract": "As agents rapidly evolve, existing benchmarks can become saturated, limiting their ability to distinguish capabilities and reveal remaining failure modes. Particularly in scientific domains, constructing and updating benchmarks requires substantial time, labor, and domain expertise, making it difficult to keep evaluation aligned with advances in agent capabilities. We address this challenge by investigating whether scientific-agent benchmarks can be automatically generated and iteratively adapted as agent capabilities evolve. We introduce AutoSciBench, a framework that represents each task as a high-level concept specifying the scientific domain, data modality, and required reasoning approach, together with a low-level recipe specifying how the question, environment, and ground-truth answer are constructed and verified. Agents attempt to solve each task, producing solver trajectories and corresponding judge feedback which AutoSciBench uses to revise the recipe or concept, closing observed shortcuts and shifting tasks toward raw-data re-examination, interpretation of intermediate results, and evidence integration. Experience distilled from completed refinement trajectories further guides new concept generation, allowing lessons from earlier task refinement to inform subsequent benchmark construction. Starting from existing benchmarks, we evaluate AutoSciBench across computational biology, materials science, and clinical imaging. Generated benchmarks reduce average solver accuracy by 22.4 and 25.5 percentage points relative to the human-curated benchmarks in computational biology and materials science, respectively, while generated tasks receive higher average quality ratings across all three domains, suggesting that scientific-agent evaluation can adapt as agent capabilities advance.",
-          "categories": [
-            "cs.AI"
-          ],
-          "keywords": [
-            "agent capabilities",
-            "autoscibench",
-            "computational biology",
-            "materials science",
-            "agent capabilities advance",
-            "agent capabilities evolve"
-          ],
-          "matched_keywords": []
-        },
         "2610.06191": {
           "title": "Judged Useless, Queried Anyway: Tool-Using Agents Rarely Turn Their Own Evidence Judgments into Stopping Decisions",
           "abstract": "An agent whose tool keeps returning nothing useful should stop relying on it. In a retrieval environment with controlled source failures, we separate how agents judge results from what they do. We compare stopping at the same step after longer and shorter runs of results the agent judged useless; this contrast is zero for clock- or deadline-driven stopping. Where we record their judgments, the seven agents we test call a failing source's results useless 97-100% of the time, yet most of them rarely stop on that judgment. Prompt cues change when they stop but not what they stop on. Permission to answer from memory and a reasoning mode can bring early stops regardless of evidence, a stated budget moves the 7-8B models' stops to the deadline, and a stopping rule or call cost in the prompt is followed at most partly. Stopping follows the evidence only when the harness enforces an integration step that makes the agent answer after five consecutive results it judged useless. This step raises failing-source success for every model, keeps the stopping point fixed when the budget doubles, and needs no extra judgment call when the agent states its judgments. A pre-registered replication on 300 fresh questions confirms the dissociation and the rule's effect.",
@@ -1471,23 +1455,6 @@
             "cia",
             "task accuracy",
             "alignment cia metric"
-          ],
-          "matched_keywords": []
-        },
-        "2610.08448": {
-          "title": "Rethinking Cross-Tokenizer On-Policy Distillation: From Alignment Coverage to Supervision Reliability",
-          "abstract": "On-Policy Distillation (OPD) trains a student on its own generations using teacher feedback. With different tokenizers, comparing teacher and student predictions requires alignment at both sequence and vocabulary levels. In this paper, we examine whether expanding this alignment coverage improves learning. Across three heterogeneous teacher--student pairs on mathematical reasoning and code generation, strict 1:1 groups already cover most student-generated tokens despite substantial vocabulary mismatch. On responses sampled from the students before distillation, the shared vocabulary retains nearly all teacher and student probability mass at strictly aligned positions on average. Restricting reverse KL to a student-selected top-16 subset of the shared vocabulary at each strict position achieves accuracy comparable to full shared-vocabulary OPD, outperforming the evaluated cross-tokenizer baselines. Adding mean squared error supervision on span log-probabilities in mismatch groups gives complete supervision coverage, yet reduces accuracy. At checkpoints from training with only the strict loss, the span gradients show weak or negative directional agreement with the strict gradients and grow in magnitude relative to them. These diagnostics may help explain the accuracy drop from adding span supervision. Our findings motivate a shift from maximizing alignment coverage to prioritizing supervision reliability: compact supervision at strict positions can be more effective than broader coverage that introduces weakly aligned or conflicting training signals.",
-          "categories": [
-            "cs.CL",
-            "cs.AI"
-          ],
-          "keywords": [
-            "alignment coverage",
-            "shared vocabulary",
-            "supervision reliability",
-            "achieves accuracy comparable",
-            "adding mean squared",
-            "adding span supervision"
           ],
           "matched_keywords": []
         },
@@ -1646,22 +1613,6 @@
             "embodied reasoning",
             "failure patterns",
             "agent harness framework"
-          ],
-          "matched_keywords": []
-        },
-        "2610.08790": {
-          "title": "Building Rome from a Single Image",
-          "abstract": "Single-image scene generation aims to produce a complete 3D scene mesh from a single image, including surfaces the camera did not observe. While pretrained 3D object generators encode a strong shape prior, they are mainly designed for isolated objects in a fixed canonical volume and focus mostly on indoor scenes, since diverse 3D data for outdoor scenes are quite limited. In this work, we present a method that redesigns such an object-centric generator, e.g., Trellis 2, to work on both indoor and outdoor scenes while retaining its prior. We accomplish this by (a) partitioning the scene into adaptive chunks that scale relative to the distance to the camera; nearby chunks have a smaller size to keep the finer detail, while distant structures, e.g., buildings, are covered by large chunks; (b) making the generator capture explicit 2D-3D correspondence by lifting image features and making the model aware of the free space, observed surface, and unobserved region; (c) synthesizing around 4,000 outdoor scenes to broaden the training data, as existing scene datasets are largely indoor. Experiments on Tanks and Temples, ScanNet++, and in-the-wild images show that our method outperforms all baselines in geometric accuracy and perceptual quality across both indoor and outdoor scenes.",
-          "categories": [
-            "cs.CV"
-          ],
-          "keywords": [
-            "outdoor scenes",
-            "around outdoor scenes",
-            "capture explicit d-3d",
-            "complete scene mesh",
-            "detail while distant",
-            "encode strong shape"
           ],
           "matched_keywords": []
         },
@@ -8117,8 +8068,8 @@
           ],
           "keywords": [
             "hybrid latent attention",
-            "hla",
             "looped language",
+            "hla",
             "adding parameters but",
             "concurrent sequences per",
             "decoding throughput improves"
@@ -10550,6 +10501,84 @@
           ],
           "matched_keywords": []
         },
+        "2610.04605": {
+          "title": "ConEx: Human-Interpretable Saliency Maps via Concept-Aware Attribution",
+          "abstract": "Many visual explanation methods in computer vision highlight pixel importance but struggle to link these low-level cues to semantically meaningful concepts, limiting their interpretability and trustworthiness. We introduce Concept-based Explanations (ConEx), a novel framework that bridges saliency visualization with concept-based reasoning to provide both faithfulness and interpretability. ConEx automatically discovers class-specific concepts and represents them through concept activation vectors (CAVs), learned without manual supervision using an architecture-specific masking mechanism that reduces noise introduced by the segmentation masks to enhance concept purity. ConEx generates faithful saliency maps that reveal where each concept appears in the image and how it contributes to the prediction. To evaluate the reliability of these learned concepts, we propose two complementary metrics, Vector-Concept Match (VCM) and Concept-Class Match (CCM), that quantify concept alignment and enable direct comparison with existing methods. Extensive experiments across diverse settings demonstrate that ConEx achieves state-of-the-art performance on faithfulness, segmentation, and concept-quality benchmarks. Overall, ConEx advances the field toward truly interpretable and concept-grounded explanations in vision models.",
+          "categories": [
+            "cs.CV",
+            "cs.AI",
+            "cs.LG"
+          ],
+          "keywords": [
+            "conex",
+            "saliency maps",
+            "activation vectors cavs",
+            "architecture-specific masking mechanism",
+            "automatically discovers class-specific",
+            "bridges saliency visualization"
+          ],
+          "matched_keywords": []
+        },
+        "2610.05912": {
+          "title": "MiniCorp: The Last Mile of the AI Agent Firm",
+          "abstract": "The last mile toward enterprise AGI is a company that runs itself. Training and adapting such agents require longitudinal enterprise data, which remain scarce, costly to acquire, and often restricted by privacy constraints. Historical archives are also frequently incomplete and record only what actually happened. They cannot show the outcomes of alternative decisions. We introduce MiniCorp, an office simulator for studying how agents can collectively run a company while generating enterprise data at scale. Using an e-commerce company as a demonstration, MiniCorp connects two interacting worlds. The external world models customers, dynamic competitors, and market mechanisms. The internal world consists of agents that observe events, discuss their options, and make strategic decisions. These decisions have lasting effects on the market, and the resulting feedback informs the firm's later decisions. As the firm and market interact, MiniCorp continuously records the agents' communications and decisions. These records preserve the information available at the time and the business results that followed. Checkpointing allows the same situation to be replayed under different decisions, providing comparisons unavailable in static archives. We evaluate end-to-end fidelity against patterns reported in empirical studies of real markets. These evaluations provide agents with realistic market feedback and reduce the risk that they learn to exploit flaws in the simulator. Our experiments show agents coordinating across roles and adapting their decisions to market feedback. With explicit long-term strategic guidance, they also sustain advertising exploration despite weak early returns. MiniCorp thus provides an environment for studying AI-run companies and a scalable source of longitudinal and counterfactual enterprise data for agent training and evaluation.",
+          "categories": [
+            "cs.AI"
+          ],
+          "keywords": [
+            "minicorp",
+            "market feedback",
+            "last mile",
+            "company",
+            "firm",
+            "advertising exploration despite"
+          ],
+          "matched_keywords": []
+        },
+        "2609.37334": {
+          "title": "Taming VLAs under Robot Execution Errors: Self-Compensation and Stress Testing",
+          "abstract": "Vision-language-action (VLA) policies often fail when a robot's executed motion deviates from their commanded action. Such execution errors arise from the robot's mechanics and operating conditions, such as wear and payload changes. We propose self-compensating VLA, a deployment-time adaptation method that enables a VLA policy to pre-compensate for the robot's execution errors when generating commands. Without task rewards or labels, it updates the policy online using the residual between the action commanded by a VLA and the motion executed by the robot. To stress-test VLA robustness across execution conditions that are impractical to cover with physical robots alone, we introduce RoboStress, a controlled simulation benchmark. It combines established joint-level models of friction, backlash, compliance, and gravity-compensation error into seven deployment scenarios whose execution errors depend on the robot's state and motion history. On RoboStress, self-compensating VLA achieves higher average task success than both the base policies and methods that build in robustness during training. On two physical robot arms with different usage histories, it raises the average task success rate by more than 30 percentage points on each arm, and the gains extend to objects not seen in the task demonstrations.",
+          "categories": [
+            "cs.RO"
+          ],
+          "keywords": [
+            "robot execution errors",
+            "average task success",
+            "self-compensating vla",
+            "combines established joint-level",
+            "controlled simulation benchmark",
+            "deployment scenarios whose"
+          ],
+          "matched_keywords": []
+        },
+        "2609.32921": {
+          "title": "Adaptive Latent Capacity for World Models",
+          "abstract": "We introduce Adaptive LeWorldModel (ALeWM), a world model based on a joint-embedding predictive architecture (JEPA) that learns to concentrate predictive information in compact prefixes of a wide latent representation. To encourage this ordering, ALeWM learns a sequence-conditioned distribution over prefix lengths and trains the predictor to estimate the full next embedding from a sampled input prefix. As standard anti-collapse objectives encourage variation across latent coordinates and do not organize them by predictive importance, we also introduce MixSIGReg. MixSIGReg regularizes the masked embeddings against a prior-weighted mixture with Gaussian active prefixes and zeros in the remaining coordinates. As a result, the ALeWM objective encourages early coordinates to retain information useful for prediction and recursive planning. Our analysis shows that the mixture distribution used by MixSIGReg assigns higher variance to earlier coordinate blocks and lower variance to later ones. In addition, we show that, under specified assumptions, prediction error is minimized by placing the information most useful for prediction in earlier blocks. Empirically, we study the behavior of ALeWM in a controlled dynamical system with known state variables and in goal-conditioned visual control. We show that ALeWM consistently achieves higher mean success rates than tuned fixed-width LeWM, with lower planning capacity on average.",
+          "categories": [],
+          "keywords": [
+            "alewm",
+            "mixsigreg",
+            "adaptive latent capacity",
+            "adaptive leworldmodel alewm",
+            "against prior-weighted mixture",
+            "alewm consistently achieves"
+          ],
+          "matched_keywords": []
+        },
+        "2610.05842": {
+          "title": "HLA: Expressive Hybrid Linear Attention via Chunk-Wise Dynamic Mixing",
+          "abstract": "Linear attention enables efficient long-context autoregressive decoding by compressing history into recurrent states, but this compression can make selective access to sparse and distant information difficult. Existing chunk-based extensions increase memory capacity, yet learned chunk-mixing coefficients may remain fixed with respect to input content and therefore cannot adapt historical access to each query. We introduce Hybrid Linear Attention (HLA), a query-dependent chunk-level attention mechanism for Gated DeltaNet (GDN). HLA represents each completed chunk as an exact affine state transition and computes content-dependent routing gates from compact, self-attentively pooled representatives. Each gate interpolates the corresponding historical transition with the identity map, controlling both the chunk's additive memory and its transformation of earlier states. Effective-support regularization further encourages concentrated routing for sparse inference. We evaluate HLA under both pretrained adaptation and from-scratch training. Across Qwen3.5 models from 0.8B to 9B, HLA consistently improves over native GDN and fixed chunk mixing, with gains of up to 5.57 percentage points on LongBench-V2 and 3.97 points on RULER. In a controlled from-scratch 1.3B setting trained for 100B tokens with a 4K context, HLA also improves RULER performance from 4K to 32K, with gains increasing from 0.83 points at 4K to 4.22 points at 32K. These results demonstrate that query-dependent composition of recurrent memory improves long-context modeling and remains effective beyond the training context while using compact per-chunk affine summaries. Project page: https://caesarhhh.github.io/hla/",
+          "categories": [],
+          "keywords": [
+            "hybrid linear attention",
+            "hla",
+            "adapt historical access",
+            "affine state transition",
+            "attention hla query-dependent",
+            "cannot adapt historical"
+          ],
+          "matched_keywords": []
+        },
         "2610.06617": {
           "title": "RealtimeWAM: One-Step Asynchronous World Action Models",
           "abstract": "World Action Models (WAMs) incorporate visual representations from video generation backbones to guide action prediction. Recent efficient WAMs adopt Mixture-of-Transformers (MoT) architectures and compute video representations once for reuse by the action expert. However, intra-expert iteration (\\ie, multi-step action denoising) and inter-expert waiting (\\ie, sequential execution of the video and action experts) still limit inference efficiency. To this end, we present RealtimeWAM, an extremely efficient WAM variant with one-step action generation and asynchronous inference, addressing these two bottlenecks. To reduce intra-expert iteration, we propose Teacher-Anchored Consistency Distillation (TACD) to address a local-global error gap: low local consistency error alone does not guarantee accurate final actions. TACD supplements local consistency with explicit supervision from the frozen teacher's multi-step rollout endpoint, enabling accurate one-step action generation. Additionally, we propose Cross-Expert Wavefront Pipelining (CEWP) to eliminate unnecessary expert-level waiting. It overlaps the two experts through block-wise sharing of the video KV cache, synchronizing only immediately before the corresponding action attention consumes it. Extensive experiments across diverse benchmarks (\\eg, LIBERO, LIBERO-Plus and RoboTwin) and model variants (\\eg, Fast-WAM and Faster-WAM) demonstrate the superiority of RealtimeWAM. Notably, RealtimeWAM maintains near-lossless performance (\\ie, $<1\\%$ drop) across these benchmarks while delivering significant end-to-end speedup (\\eg, $\\sim25\\times$ on H100). Our code and checkpoints are available via this \\href{this https URL}{link}.",
@@ -12513,24 +12542,6 @@
             "accurate surface boundaries",
             "aggregate partition metrics",
             "applies merge-and-stop policy"
-          ],
-          "matched_keywords": []
-        },
-        "2610.04605": {
-          "title": "ConEx: Human-Interpretable Saliency Maps via Concept-Aware Attribution",
-          "abstract": "Many visual explanation methods in computer vision highlight pixel importance but struggle to link these low-level cues to semantically meaningful concepts, limiting their interpretability and trustworthiness. We introduce Concept-based Explanations (ConEx), a novel framework that bridges saliency visualization with concept-based reasoning to provide both faithfulness and interpretability. ConEx automatically discovers class-specific concepts and represents them through concept activation vectors (CAVs), learned without manual supervision using an architecture-specific masking mechanism that reduces noise introduced by the segmentation masks to enhance concept purity. ConEx generates faithful saliency maps that reveal where each concept appears in the image and how it contributes to the prediction. To evaluate the reliability of these learned concepts, we propose two complementary metrics, Vector-Concept Match (VCM) and Concept-Class Match (CCM), that quantify concept alignment and enable direct comparison with existing methods. Extensive experiments across diverse settings demonstrate that ConEx achieves state-of-the-art performance on faithfulness, segmentation, and concept-quality benchmarks. Overall, ConEx advances the field toward truly interpretable and concept-grounded explanations in vision models.",
-          "categories": [
-            "cs.CV",
-            "cs.AI",
-            "cs.LG"
-          ],
-          "keywords": [
-            "conex",
-            "saliency maps",
-            "activation vectors cavs",
-            "architecture-specific masking mechanism",
-            "automatically discovers class-specific",
-            "bridges saliency visualization"
           ],
           "matched_keywords": []
         },
@@ -18429,22 +18440,6 @@
             "rolling-agent workload",
             "token top-",
             "agents repeatedly call"
-          ],
-          "matched_keywords": []
-        },
-        "2610.05912": {
-          "title": "MiniCorp: The Last Mile of the AI Agent Firm",
-          "abstract": "The last mile toward enterprise AGI is a company that runs itself. Training and adapting such agents require longitudinal enterprise data, which remain scarce, costly to acquire, and often restricted by privacy constraints. Historical archives are also frequently incomplete and record only what actually happened. They cannot show the outcomes of alternative decisions. We introduce MiniCorp, an office simulator for studying how agents can collectively run a company while generating enterprise data at scale. Using an e-commerce company as a demonstration, MiniCorp connects two interacting worlds. The external world models customers, dynamic competitors, and market mechanisms. The internal world consists of agents that observe events, discuss their options, and make strategic decisions. These decisions have lasting effects on the market, and the resulting feedback informs the firm's later decisions. As the firm and market interact, MiniCorp continuously records the agents' communications and decisions. These records preserve the information available at the time and the business results that followed. Checkpointing allows the same situation to be replayed under different decisions, providing comparisons unavailable in static archives. We evaluate end-to-end fidelity against patterns reported in empirical studies of real markets. These evaluations provide agents with realistic market feedback and reduce the risk that they learn to exploit flaws in the simulator. Our experiments show agents coordinating across roles and adapting their decisions to market feedback. With explicit long-term strategic guidance, they also sustain advertising exploration despite weak early returns. MiniCorp thus provides an environment for studying AI-run companies and a scalable source of longitudinal and counterfactual enterprise data for agent training and evaluation.",
-          "categories": [
-            "cs.AI"
-          ],
-          "keywords": [
-            "minicorp",
-            "market feedback",
-            "last mile",
-            "company",
-            "firm",
-            "advertising exploration despite"
           ],
           "matched_keywords": []
         },
@@ -66941,22 +66936,6 @@
           ],
           "matched_keywords": []
         },
-        "2609.37334": {
-          "title": "Taming VLAs under Robot Execution Errors: Self-Compensation and Stress Testing",
-          "abstract": "Vision-language-action (VLA) policies often fail when a robot's executed motion deviates from their commanded action. Such execution errors arise from the robot's mechanics and operating conditions, such as wear and payload changes. We propose self-compensating VLA, a deployment-time adaptation method that enables a VLA policy to pre-compensate for the robot's execution errors when generating commands. Without task rewards or labels, it updates the policy online using the residual between the action commanded by a VLA and the motion executed by the robot. To stress-test VLA robustness across execution conditions that are impractical to cover with physical robots alone, we introduce RoboStress, a controlled simulation benchmark. It combines established joint-level models of friction, backlash, compliance, and gravity-compensation error into seven deployment scenarios whose execution errors depend on the robot's state and motion history. On RoboStress, self-compensating VLA achieves higher average task success than both the base policies and methods that build in robustness during training. On two physical robot arms with different usage histories, it raises the average task success rate by more than 30 percentage points on each arm, and the gains extend to objects not seen in the task demonstrations.",
-          "categories": [
-            "cs.RO"
-          ],
-          "keywords": [
-            "robot execution errors",
-            "average task success",
-            "self-compensating vla",
-            "combines established joint-level",
-            "controlled simulation benchmark",
-            "deployment scenarios whose"
-          ],
-          "matched_keywords": []
-        },
         "2609.37348": {
           "title": "DROM: A Language-Guided Diffusion Framework for Multi-Skill Robotic Manipulation",
           "abstract": "Learning robust manipulation policies for diverse, long-horizon tasks from limited demonstrations remains a fundamental challenge in robotics. We present DROM, a language-guided diffusion framework that enables robots to learn, represent, and compose multiple manipulation skills within a single generative policy. DROM leverages Dynamic Movement Primitives (DMPs) to augment a small set of expert demonstrations into expressive multi-skill datasets, substantially reducing data collection while improving spatial generalization beyond the demonstrated workspace. Building upon Motion Planning Diffusion (MPD), we extend the diffusion architecture to support language-conditioned multi-skill trajectory generation through cross-attention, allowing a single model to generate skill-consistent motions for a diverse set of manipulation primitives, including orientation-sensitive behaviors that are difficult to design using conventional motion planning or hard-coded controllers. For long-horizon manipulation, a large language model decomposes high-level operator requests into executable sequences of skills, enabling natural language interaction and autonomous task execution. We validate DROM on a Franka Emika Panda robot, a FANUC CRX25ia robot, and in MuJoCo simulation across a wide range of manipulation tasks. Experimental results demonstrate that DROM outperforms Motion Planning Diffusion and Behavior Cloning baselines, achieves robust multi-skill generalization, and composes learned skills to reliably execute long-horizon manipulation tasks from natural language instructions using only a limited number of human demonstrations. Datasets, simulation environments, and more at this https URL.",
@@ -67466,6 +67445,55 @@
             "points corresponding",
             "shared component",
             "emores"
+          ],
+          "matched_keywords": []
+        },
+        "2610.05140": {
+          "title": "AutoSciBench: Autonomous Benchmark Generation for Evaluating Scientific Agents",
+          "abstract": "As agents rapidly evolve, existing benchmarks can become saturated, limiting their ability to distinguish capabilities and reveal remaining failure modes. Particularly in scientific domains, constructing and updating benchmarks requires substantial time, labor, and domain expertise, making it difficult to keep evaluation aligned with advances in agent capabilities. We address this challenge by investigating whether scientific-agent benchmarks can be automatically generated and iteratively adapted as agent capabilities evolve. We introduce AutoSciBench, a framework that represents each task as a high-level concept specifying the scientific domain, data modality, and required reasoning approach, together with a low-level recipe specifying how the question, environment, and ground-truth answer are constructed and verified. Agents attempt to solve each task, producing solver trajectories and corresponding judge feedback which AutoSciBench uses to revise the recipe or concept, closing observed shortcuts and shifting tasks toward raw-data re-examination, interpretation of intermediate results, and evidence integration. Experience distilled from completed refinement trajectories further guides new concept generation, allowing lessons from earlier task refinement to inform subsequent benchmark construction. Starting from existing benchmarks, we evaluate AutoSciBench across computational biology, materials science, and clinical imaging. Generated benchmarks reduce average solver accuracy by 22.4 and 25.5 percentage points relative to the human-curated benchmarks in computational biology and materials science, respectively, while generated tasks receive higher average quality ratings across all three domains, suggesting that scientific-agent evaluation can adapt as agent capabilities advance.",
+          "categories": [
+            "cs.AI"
+          ],
+          "keywords": [
+            "agent capabilities",
+            "autoscibench",
+            "computational biology",
+            "materials science",
+            "agent capabilities advance",
+            "agent capabilities evolve"
+          ],
+          "matched_keywords": []
+        },
+        "2610.08448": {
+          "title": "Rethinking Cross-Tokenizer On-Policy Distillation: From Alignment Coverage to Supervision Reliability",
+          "abstract": "On-Policy Distillation (OPD) trains a student on its own generations using teacher feedback. With different tokenizers, comparing teacher and student predictions requires alignment at both sequence and vocabulary levels. In this paper, we examine whether expanding this alignment coverage improves learning. Across three heterogeneous teacher--student pairs on mathematical reasoning and code generation, strict 1:1 groups already cover most student-generated tokens despite substantial vocabulary mismatch. On responses sampled from the students before distillation, the shared vocabulary retains nearly all teacher and student probability mass at strictly aligned positions on average. Restricting reverse KL to a student-selected top-16 subset of the shared vocabulary at each strict position achieves accuracy comparable to full shared-vocabulary OPD, outperforming the evaluated cross-tokenizer baselines. Adding mean squared error supervision on span log-probabilities in mismatch groups gives complete supervision coverage, yet reduces accuracy. At checkpoints from training with only the strict loss, the span gradients show weak or negative directional agreement with the strict gradients and grow in magnitude relative to them. These diagnostics may help explain the accuracy drop from adding span supervision. Our findings motivate a shift from maximizing alignment coverage to prioritizing supervision reliability: compact supervision at strict positions can be more effective than broader coverage that introduces weakly aligned or conflicting training signals.",
+          "categories": [
+            "cs.CL",
+            "cs.AI"
+          ],
+          "keywords": [
+            "alignment coverage",
+            "shared vocabulary",
+            "supervision reliability",
+            "achieves accuracy comparable",
+            "adding mean squared",
+            "adding span supervision"
+          ],
+          "matched_keywords": []
+        },
+        "2610.08790": {
+          "title": "Building Rome from a Single Image",
+          "abstract": "Single-image scene generation aims to produce a complete 3D scene mesh from a single image, including surfaces the camera did not observe. While pretrained 3D object generators encode a strong shape prior, they are mainly designed for isolated objects in a fixed canonical volume and focus mostly on indoor scenes, since diverse 3D data for outdoor scenes are quite limited. In this work, we present a method that redesigns such an object-centric generator, e.g., Trellis 2, to work on both indoor and outdoor scenes while retaining its prior. We accomplish this by (a) partitioning the scene into adaptive chunks that scale relative to the distance to the camera; nearby chunks have a smaller size to keep the finer detail, while distant structures, e.g., buildings, are covered by large chunks; (b) making the generator capture explicit 2D-3D correspondence by lifting image features and making the model aware of the free space, observed surface, and unobserved region; (c) synthesizing around 4,000 outdoor scenes to broaden the training data, as existing scene datasets are largely indoor. Experiments on Tanks and Temples, ScanNet++, and in-the-wild images show that our method outperforms all baselines in geometric accuracy and perceptual quality across both indoor and outdoor scenes.",
+          "categories": [
+            "cs.CV"
+          ],
+          "keywords": [
+            "outdoor scenes",
+            "around outdoor scenes",
+            "capture explicit d-3d",
+            "complete scene mesh",
+            "detail while distant",
+            "encode strong shape"
           ],
           "matched_keywords": []
         },
