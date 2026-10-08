@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-10-08T06:20:06+00:00",
+  "updated_at": "2026-10-08T07:12:02+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-87f0fc1e0167f28b0f494aed": {
-      "run_id": "daily-87f0fc1e0167f28b0f494aed",
-      "generated_at": "2026-10-08T06:20:06+00:00",
+    "daily-ee9b5f74f70b20865465c2d8": {
+      "run_id": "daily-ee9b5f74f70b20865465c2d8",
+      "generated_at": "2026-10-08T07:12:02+00:00",
       "selected_ids": [
         "2610.09514",
         "2610.09734",
@@ -1629,39 +1629,6 @@
             "task families",
             "agent behavior help",
             "agents become increasingly"
-          ],
-          "matched_keywords": []
-        },
-        "2610.10539": {
-          "title": "Tetris3D: 3D Scene Generation With Objects That Fit Together",
-          "abstract": "We propose Tetris3D, a generative framework for single-image 3D scene reconstruction that recovers objects which are physically and geometrically coherent as a scene. Existing methods often generate objects independently or couple them implicitly, providing limited guidance for ensuring fine-grained spatial compatibility between neighboring objects that interact with one another. To address this, we explicitly condition the generation of each object on the geometry of surrounding objects and their physical relationships, guiding its shape and pose to remain geometrically and physically plausible within the scene. Moreover, we introduce ComOb, a physics simulation-based dataset of 1.2M scenes featuring physical interactions across diverse object categories, with per-object meshes and pairwise physical relation annotations. Comprehensive experiments on synthetic and realworld scenes show that Tetris3D recovers coherent object shapes and poses even when interacting regions are occluded, and achieves state-of-the-art performance in both generation quality and physical stability.",
-          "categories": [
-            "cs.CV"
-          ],
-          "keywords": [
-            "tetris3d",
-            "coherent object shapes",
-            "comob physics simulation-based",
-            "couple them implicitly",
-            "ensuring fine-grained spatial",
-            "even when interacting"
-          ],
-          "matched_keywords": []
-        },
-        "2610.10444": {
-          "title": "RunningTab: Direct Workspace Interaction with Environment-Side Tabs",
-          "abstract": "Much knowledge work produces new deliverables from files a workspace already holds, and LLM agents are beginning to take such work over. Through direct corpus interaction, an agent can search and read any of those files from a terminal with no indexing, and producing a deliverable from many of them in this way is what we call direct workspace interaction (DWI). Reaching the files, however, is only half the task: nothing keeps track of what the task asks for, what has been read, and what was listed but never opened, all of which slip through the context window without leaving a trace, so an agent may extract a figure and still deliver a report without it. To address this, we present RunningTab, a framework that equips direct workspace interaction with an environment-side tab: a per-task record of what the task still owes, kept by the environment alongside the agent. Specifically, the agent adds its requirements, while the environment records every file read as an excerpt with its provenance and every listed but unopened file as a candidate; the agent can then see each requirement beside its best-matching excerpts and top unopened candidates, resolve it against matching content or set it aside with a reason, and, should it try to finish with requirements still open, receive them in a finish check. We validate RunningTab on three benchmarks with three LLMs, where it consistently outperforms plain DWI and baselines that keep the record in the model, while its tab usually holds the values a deliverable needs once seen.",
-          "categories": [
-            "cs.AI",
-            "cs.CL"
-          ],
-          "keywords": [
-            "direct workspace interaction",
-            "listed but",
-            "runningtab",
-            "against matching content",
-            "agent may extract",
-            "but never opened"
           ],
           "matched_keywords": []
         },
@@ -9436,6 +9403,20 @@
             "temporally interpretable",
             "ddts",
             "action chunking"
+          ],
+          "matched_keywords": []
+        },
+        "2610.10533": {
+          "title": "EngramEdit: Decoupled Knowledge Updates in LLMs through Conditional Memory",
+          "abstract": "Conditional memory architectures such as DeepSeek Engram use input n-grams to look up learned embeddings, expanding the capacity of large language models (LLMs) with limited additional computation. Beyond model scaling, this architecture has demonstrated the potential to decouple factual knowledge storage from general-purpose computation, offering a promising route to updating factual knowledge while keeping the Transformer backbone fixed. Realizing this potential is challenging because different expressions of a fact may activate different n-gram embeddings, while updating shared embeddings can unintentionally change the model's predictions about other facts. We propose EngramEdit for decoupled knowledge updates through conditional memory. EngramEdit first computes target memory representations that make the model predict the updated fact across multiple expressions. It then jointly updates the shared n-gram embeddings to match these targets across expressions and edits, penalizing updates to frequently reused embeddings more strongly to preserve unrelated knowledge. Experiments show that EngramEdit enables independent factual knowledge updates through conditional memory, achieving near-perfect editing success. Revised knowledge is usable across unseen expressions and in multi-hop reasoning, with nearly three times the strongest baseline's accuracy under chain-of-thought (CoT) prompting. Unrelated knowledge and general capabilities are largely preserved even as factual updates accumulate. These findings show that EngramEdit turns conditional memory into an editable knowledge interface, extending its role beyond model scaling to support decoupled knowledge updates.",
+          "categories": [],
+          "keywords": [
+            "decoupled knowledge updates",
+            "through conditional memory",
+            "knowledge updates through",
+            "updates through conditional",
+            "factual knowledge",
+            "engramedit"
           ],
           "matched_keywords": []
         },
@@ -62497,6 +62478,39 @@
             "math reasoning",
             "affect llm evaluation",
             "careful evaluation protocols"
+          ],
+          "matched_keywords": []
+        },
+        "2610.10539": {
+          "title": "Tetris3D: 3D Scene Generation With Objects That Fit Together",
+          "abstract": "We propose Tetris3D, a generative framework for single-image 3D scene reconstruction that recovers objects which are physically and geometrically coherent as a scene. Existing methods often generate objects independently or couple them implicitly, providing limited guidance for ensuring fine-grained spatial compatibility between neighboring objects that interact with one another. To address this, we explicitly condition the generation of each object on the geometry of surrounding objects and their physical relationships, guiding its shape and pose to remain geometrically and physically plausible within the scene. Moreover, we introduce ComOb, a physics simulation-based dataset of 1.2M scenes featuring physical interactions across diverse object categories, with per-object meshes and pairwise physical relation annotations. Comprehensive experiments on synthetic and realworld scenes show that Tetris3D recovers coherent object shapes and poses even when interacting regions are occluded, and achieves state-of-the-art performance in both generation quality and physical stability.",
+          "categories": [
+            "cs.CV"
+          ],
+          "keywords": [
+            "tetris3d",
+            "coherent object shapes",
+            "comob physics simulation-based",
+            "couple them implicitly",
+            "ensuring fine-grained spatial",
+            "even when interacting"
+          ],
+          "matched_keywords": []
+        },
+        "2610.10444": {
+          "title": "RunningTab: Direct Workspace Interaction with Environment-Side Tabs",
+          "abstract": "Much knowledge work produces new deliverables from files a workspace already holds, and LLM agents are beginning to take such work over. Through direct corpus interaction, an agent can search and read any of those files from a terminal with no indexing, and producing a deliverable from many of them in this way is what we call direct workspace interaction (DWI). Reaching the files, however, is only half the task: nothing keeps track of what the task asks for, what has been read, and what was listed but never opened, all of which slip through the context window without leaving a trace, so an agent may extract a figure and still deliver a report without it. To address this, we present RunningTab, a framework that equips direct workspace interaction with an environment-side tab: a per-task record of what the task still owes, kept by the environment alongside the agent. Specifically, the agent adds its requirements, while the environment records every file read as an excerpt with its provenance and every listed but unopened file as a candidate; the agent can then see each requirement beside its best-matching excerpts and top unopened candidates, resolve it against matching content or set it aside with a reason, and, should it try to finish with requirements still open, receive them in a finish check. We validate RunningTab on three benchmarks with three LLMs, where it consistently outperforms plain DWI and baselines that keep the record in the model, while its tab usually holds the values a deliverable needs once seen.",
+          "categories": [
+            "cs.AI",
+            "cs.CL"
+          ],
+          "keywords": [
+            "direct workspace interaction",
+            "listed but",
+            "runningtab",
+            "against matching content",
+            "agent may extract",
+            "but never opened"
           ],
           "matched_keywords": []
         },
