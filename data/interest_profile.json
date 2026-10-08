@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-10-08T07:12:02+00:00",
+  "updated_at": "2026-10-08T11:20:10+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-ee9b5f74f70b20865465c2d8": {
-      "run_id": "daily-ee9b5f74f70b20865465c2d8",
-      "generated_at": "2026-10-08T07:12:02+00:00",
+    "daily-951bae3b14dcecf0a032eac7": {
+      "run_id": "daily-951bae3b14dcecf0a032eac7",
+      "generated_at": "2026-10-08T11:20:10+00:00",
       "selected_ids": [
         "2610.09514",
         "2610.09734",
@@ -9417,6 +9417,100 @@
             "updates through conditional",
             "factual knowledge",
             "engramedit"
+          ],
+          "matched_keywords": []
+        },
+        "2610.03799": {
+          "title": "StepCAD: Mesh-to-CAD Code Generation via LLM Policy and Geometry-Guided Search",
+          "abstract": "Recovering executable CAD programs from 3D meshes is challenging due to the compositional nature of CAD construction and the interaction between discrete modeling choices and continuous parameters. Many learning-based methods predict complete programs in a single pass and rely predominantly on sketch-extrude representations, limiting operation diversity and opportunities to correct geometric errors during reconstruction. We introduce StepCAD, a generative optimization approach that combines a state-conditioned CAD policy with geometry-guided search. Given an input mesh, the policy predicts construction actions conditioned on both target and intermediate geometry, and an IoU-guided tree search refines the resulting program through local edits. We also introduce ARCADE-1.5M, a large-scale dataset of 1.5M executable CAD programs spanning diverse operations, sequences with a maximum length of 150+ counted operations, and 12.5M intermediate state-action transitions. Experiments across multiple CAD reconstruction benchmarks show that StepCAD achieves state-of-the-art geometric reconstruction accuracy with consistently high validity, yielding up to 87.2% relative IoU improvement over the strongest evaluated baseline, with particularly large gains on complex shapes. Project page: https://ghadinehme.com/stepcad.github.io/",
+          "categories": [
+            "cs.CV",
+            "cs.LG"
+          ],
+          "keywords": [
+            "executable cad programs",
+            "stepcad",
+            "geometry-guided search",
+            "achieves state-of-the-art geometric",
+            "cad programs spanning",
+            "cad reconstruction benchmarks"
+          ],
+          "matched_keywords": []
+        },
+        "2610.04722": {
+          "title": "NAMVIS: Next-Scale Autoregressive Multi-View Image Synthesis",
+          "abstract": "Sparse-view novel view synthesis is a central problem in 3D content creation, but diffusion-based approaches remain limited by iterative denoising, making multi-view generation expensive at inference time. We introduce NAMVIS, a diffusion-free framework that reformulates multi-view image synthesis as geometry-conditioned next-scale autoregression. Instead of generating target views through repeated denoising, NAMVIS predicts discrete visual tokens through a small number of coarse-to-fine scale steps, while sampling all tokens within each scale and across target views in parallel. To anchor this generation process to explicit camera geometry, we propose Multi-scale Projective Pose Encoding, which injects source and target camera transformations into both target-view self-attention and source-to-target cross-attention at every resolution. NAMVIS further combines global conditioning with dense geometry-aware cross-attention, enabling the model to preserve source-view appearance while maintaining target-view consistency. Across Objaverse, GSO, and OmniObject3D, NAMVIS outperforms diffusion-based baselines in PSNR, SSIM, and LPIPS, while running over 3 times faster than the evaluated diffusion baselines under the same evaluation setting. These results suggest that geometry-conditioned next-scale autoregression is a promising and efficient alternative to diffusion for sparse-view multi-view synthesis. Additional qualitative results, videos, and resources are available at https://corl-team.github.io/namvis/",
+          "categories": [
+            "cs.CV"
+          ],
+          "keywords": [
+            "geometry-conditioned next-scale autoregression",
+            "multi-view image synthesis",
+            "namvis",
+            "target views",
+            "appearance while maintaining",
+            "autoregressive multi-view image"
+          ],
+          "matched_keywords": []
+        },
+        "2610.02832": {
+          "title": "FastOPD: On-Policy Distillation for Lightweight VLA Deployment",
+          "abstract": "Vision-Language-Action (VLA) foundation models have scaled rapidly to enhance manipulation performance and generalizability, but this scaling incurs high computational costs that render real-world deployment increasingly challenging. Existing approaches typically mitigate this issue by designing smaller architectures or reducing the iterative denoising steps in flow-based policies. In this work, we propose FastOPD, a foundation-to-lightweight VLA framework that enables the practical deployment of large-scale VLAs through efficient on-policy distillation. Specifically, FastOPD adapts a flow map for single-state teacher supervision and combines it with a self-consistency objective to construct a compact student that learns the teacher dynamics. Furthermore, we theoretically demonstrate that minimizing this objective allows the distilled student to recover a distribution on par with that induced by an ideal few-step teacher model. We evaluate FastOPD across diverse foundation policies in simulation and real-world experiments. On LIBERO, FastOPD retains 84% of the performance of π_{0.5} with only two inference steps, reducing inference latency by 78.1% while outperforming existing few-step distillation baselines in average success rate. With LingBot-VLA as the teacher, FastOPD improves the single-step success rate over the base student by 15.9 percentage points on RoboTwin 2.0. We further demonstrate its applicability to a World Action Model (WAM) and deploy a compact student distilled from MolmoAct2 on a real robot.",
+          "categories": [
+            "cs.RO",
+            "cs.AI",
+            "cs.CV",
+            "cs.LG"
+          ],
+          "keywords": [
+            "fastopd",
+            "compact student",
+            "adapts flow map",
+            "approaches typically mitigate",
+            "compact student distilled",
+            "construct compact student"
+          ],
+          "matched_keywords": []
+        },
+        "2610.05336": {
+          "title": "SheetSage2: Coherent Lead-Sheet Transcription with Synthetic Supervision",
+          "abstract": "Transcribing music into a human-readable score requires a coherent understanding of rhythm, harmony, melody, and form. Two obstacles limit this goal: annotated recordings are scarce, and accurate local predictions can still produce inconsistent musical sequences. We present SheetSage2, a unified music transcription framework that combines synthetic data, task-specific structured decoding, and autoregressive distillation. Automatically annotated MIDI, rendered into audio, provides scalable supervision across music understanding tasks. Task-specific structured decoders integrate complementary musical cues and their temporal dependencies to produce musically coherent scores. Autoregressive distillation further retains transcription accuracy without task-specific dynamic programming at inference. Across eight benchmark collections, a single SheetSage2-AR model exceeds the listed prior systems on 12 of 15 benchmark--metric pairs in our evaluation, substantially improving over SheetSage1 and surpassing task-specific models on several benchmarks. Model weights and inference code are publicly available.",
+          "categories": [],
+          "keywords": [
+            "autoregressive distillation",
+            "task-specific structured",
+            "accurate local predictions",
+            "annotated midi rendered",
+            "audio provides scalable",
+            "automatically annotated midi"
+          ],
+          "matched_keywords": []
+        },
+        "2609.36995": {
+          "title": "Salt++: Context-Aligned Post-Training for Few-Step Streaming Multimodal Generation",
+          "abstract": "Few-step streaming audio--video generation requires both causal modeling and step distillation, yet standard training recipes face two context-related challenges. Teacher forcing pairs clean history with a noisy target, but supervises predictive contextual representations only indirectly through velocity prediction. Meanwhile, directly reusing bidirectional score models in causal Distribution Matching Distillation (DMD) creates a mismatch between generation and scoring contexts. We address these challenges with Salt++, a two-stage post-training framework comprising Causal Self-Flow (CSF) and context-aligned autoregressive DMD. CSF exploits contextual information asymmetry by varying the history while keeping the noisy target fixed: a noise-mixed-history student aligns its intermediate representations with those of a clean-history exponential-moving-average teacher. This self-supervised signal encourages the student to extract semantic information and improves cross-modal alignment. Context-aligned AR DMD shares the causal mask and prefix across generator sampling, fake-score training, and real-score evaluation to match generated and reference distributions under a block-conditional KL objective. With calibrated teacher guidance, it performs clean-prefix few-step distillation and then adapts to generated histories without switching objectives or requiring separate consistency distillation. At 480p, Salt++ improves visual and motion quality by 57% and 45% over OmniForcing on JavisBench under the same 4-step causal setting. A separate scale-wise post-training stage extends Salt++ to 4-step 1664times960 generation, outperforming bidirectional LTX-2 on six of seven reported metrics. Project page: https://xingtongge.github.io/Saltpp",
+          "categories": [],
+          "keywords": [
+            "noisy target",
+            "salt",
+            "few-step streaming",
+            "context-aligned",
+            "ar dmd shares",
+            "audio--video generation requires"
+          ],
+          "matched_keywords": []
+        },
+        "2610.08884": {
+          "title": "Task-Sufficient Contraction: Source Selection for Machine Information Interfaces",
+          "abstract": "A declared task can sometimes certify a reduced source before a downstream encoder, codebook, rate, distortion target, or optimizer is chosen. This paper studies when one such reduction preserves the complete downstream problem family, a property termed Task-Sufficient Contraction. The reduced source is fixed by the task before the later operating point is selected. An exact contraction allows the later problem to be solved on that source with the same result as if the full source had been retained.\n  For a machine with a fixed set of possible actions and a fixed loss, the paper identifies a consumer-specific source by merging states only when every available action has the same regret in both. For finite action sets, replacing the richer source by this reduced source preserves the complete one-step rate-regret curve, even though the reduction is fixed before the distortion target is chosen. A second result gives an exact characterization for quadratic loss on affine feasible-action sets: the canonical reduced source is the projection onto the directions in which feasible actions can differ. Under a fixed energy budget, this becomes centered load, while retaining only the optimal water-filled action is too coarse. Earlier Information Bottleneck, semantic rate-distortion, and goal-oriented quantization results are then used to distinguish exact, architecture-conditioned, approximate, failed, and corrected contractions. The framework suggests a way for heterogeneous machines to exchange what a receiving task needs without first aligning their full internal representations.",
+          "categories": [],
+          "keywords": [
+            "reduced source",
+            "distortion target",
+            "task-sufficient contraction",
+            "action sets replacing",
+            "affine feasible-action sets",
+            "architecture-conditioned approximate failed"
           ],
           "matched_keywords": []
         },
@@ -20540,23 +20634,6 @@
           ],
           "matched_keywords": []
         },
-        "2610.03799": {
-          "title": "StepCAD: Mesh-to-CAD Code Generation via LLM Policy and Geometry-Guided Search",
-          "abstract": "Recovering executable CAD programs from 3D meshes is challenging due to the compositional nature of CAD construction and the interaction between discrete modeling choices and continuous parameters. Many learning-based methods predict complete programs in a single pass and rely predominantly on sketch-extrude representations, limiting operation diversity and opportunities to correct geometric errors during reconstruction. We introduce StepCAD, a generative optimization approach that combines a state-conditioned CAD policy with geometry-guided search. Given an input mesh, the policy predicts construction actions conditioned on both target and intermediate geometry, and an IoU-guided tree search refines the resulting program through local edits. We also introduce ARCADE-1.5M, a large-scale dataset of 1.5M executable CAD programs spanning diverse operations, sequences with a maximum length of 150+ counted operations, and 12.5M intermediate state-action transitions. Experiments across multiple CAD reconstruction benchmarks show that StepCAD achieves state-of-the-art geometric reconstruction accuracy with consistently high validity, yielding up to 87.2% relative IoU improvement over the strongest evaluated baseline, with particularly large gains on complex shapes. Project page: this https URL",
-          "categories": [
-            "cs.CV",
-            "cs.LG"
-          ],
-          "keywords": [
-            "executable cad programs",
-            "geometry-guided search",
-            "stepcad",
-            "achieves state-of-the-art geometric",
-            "cad programs spanning",
-            "cad reconstruction benchmarks"
-          ],
-          "matched_keywords": []
-        },
         "2610.03822": {
           "title": "Beyond Token Accuracy: Prioritizing What Matters for Visual Reconstruction",
           "abstract": "Tokens have become a unified interface for multimodal foundation models, making visual-token communication a natural paradigm for efficient image delivery. However, existing methods typically rely on static policies that cannot jointly adapt to image content and channel conditions. Moreover, their token-level utility objectives do not necessarily translate into improved image reconstruction quality. In this paper, we propose AdapToC, an adaptive, reconstruction-oriented visual-token communication framework. At the transmitter, an adaptive selector jointly models image content, channel state, and communication budget to perform instance-wise resource allocation. Rather than using a fixed token rate and protection policy, it dynamically determines how many tokens should be transmitted and assigns different protection levels according to token importance and current channel conditions. At the receiver, an adaptive MaskGIT receiver incorporates channel reliability into contextual token modeling. It distinguishes tokens with different reliability levels, preserves high-confidence observations, corrects potentially corrupted tokens, and iteratively reconstructs missing content from the received evidence and global visual context. By co-designing token quantity, unequal protection, and reliability-aware recovery for image-level reconstruction quality, AdapToC achieves a peak mean PSNR gain of 4.20 dB over the strongest static baseline under matched communication costs and state-of-the-art performance among the evaluated visual-token communication methods.",
@@ -21359,22 +21436,6 @@
             "diagram topology extraction",
             "knossos",
             "ariadne"
-          ],
-          "matched_keywords": []
-        },
-        "2610.04722": {
-          "title": "NAMVIS: Next-Scale Autoregressive Multi-View Image Synthesis",
-          "abstract": "Sparse-view novel view synthesis is a central problem in 3D content creation, but diffusion-based approaches remain limited by iterative denoising, making multi-view generation expensive at inference time. We introduce NAMVIS, a diffusion-free framework that reformulates multi-view image synthesis as geometry-conditioned next-scale autoregression. Instead of generating target views through repeated denoising, NAMVIS predicts discrete visual tokens through a small number of coarse-to-fine scale steps, while sampling all tokens within each scale and across target views in parallel. To anchor this generation process to explicit camera geometry, we propose Multi-scale Projective Pose Encoding, which injects source and target camera transformations into both target-view self-attention and source-to-target cross-attention at every resolution. NAMVIS further combines global conditioning with dense geometry-aware cross-attention, enabling the model to preserve source-view appearance while maintaining target-view consistency. Across Objaverse, GSO, and OmniObject3D, NAMVIS outperforms diffusion-based baselines in PSNR, SSIM, and LPIPS, while running over 3 times faster than the evaluated diffusion baselines under the same evaluation setting. These results suggest that geometry-conditioned next-scale autoregression is a promising and efficient alternative to diffusion for sparse-view multi-view synthesis. Additional qualitative results, videos, and resources are available at this https URL",
-          "categories": [
-            "cs.CV"
-          ],
-          "keywords": [
-            "geometry-conditioned next-scale autoregression",
-            "multi-view image synthesis",
-            "namvis",
-            "target views",
-            "appearance while maintaining",
-            "autoregressive multi-view image"
           ],
           "matched_keywords": []
         },
@@ -36181,25 +36242,6 @@
             "adopt streaming video-llm",
             "aware embodied navigation",
             "backbone own representations"
-          ],
-          "matched_keywords": []
-        },
-        "2610.02832": {
-          "title": "FastOPD: On-Policy Distillation for Lightweight VLA Deployment",
-          "abstract": "Vision-Language-Action (VLA) foundation models have scaled rapidly to enhance manipulation performance and generalizability, but this scaling incurs high computational costs that render real-world deployment increasingly challenging. Existing approaches typically mitigate this issue by designing smaller architectures or reducing the iterative denoising steps in flow-based policies. In this work, we propose FastOPD, a foundation-to-lightweight VLA framework that enables the practical deployment of large-scale VLAs through efficient on-policy distillation. Specifically, FastOPD adapts a flow map for single-state teacher supervision and combines it with a self-consistency objective to construct a compact student that learns the teacher dynamics. Furthermore, we theoretically demonstrate that minimizing this objective allows the distilled student to recover a distribution on par with that induced by an ideal few-step teacher model. We evaluate FastOPD across diverse foundation policies in simulation and real-world experiments. On LIBERO, FastOPD retains 84% of the performance of $\\pi_{0.5}$ with only two inference steps, reducing inference latency by 78.1% while outperforming existing few-step distillation baselines in average success rate. With LingBot-VLA as the teacher, FastOPD improves the single-step success rate over the base student by 15.9 percentage points on RoboTwin 2.0. We further demonstrate its applicability to a World Action Model (WAM) and deploy a compact student distilled from MolmoAct2 on a real robot.",
-          "categories": [
-            "cs.RO",
-            "cs.AI",
-            "cs.CV",
-            "cs.LG"
-          ],
-          "keywords": [
-            "fastopd",
-            "compact student",
-            "adapts flow map",
-            "approaches typically mitigate",
-            "compact student distilled",
-            "construct compact student"
           ],
           "matched_keywords": []
         },
