@@ -63351,7 +63351,7 @@
   "delivery": {
     "batch_id": "1141e03a70a07feafc2fa739",
     "run_id": "daily-61ac9b67ca10e887edad6303",
-    "updated_at": "2026-10-09T07:16:08+00:00",
+    "updated_at": "2026-10-09T07:18:41+00:00",
     "profile_version": "992927a1524b59b3",
     "papers": [
       {
@@ -63593,7 +63593,48 @@
           "cs.AI",
           "cond-mat.mtrl-sci"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Ziming Pan",
+            "affiliation": "Yonsei University, Seoul, Republic of Korea"
+          },
+          {
+            "author": "Ruge Zhang",
+            "affiliation": "Institute of Computing Technology, Chinese Academy of Sciences, Beijing, China"
+          },
+          {
+            "author": "Haozhi Han",
+            "affiliation": "University of Chinese Academy of Sciences, Beijing, China"
+          },
+          {
+            "author": "Junkai Zhou",
+            "affiliation": "School of Computer Science, Peking University, Beijing, China"
+          },
+          {
+            "author": "Xingyuan Chen",
+            "affiliation": "Shenzhen Research Institute of Big Data, Shenzhen, China"
+          },
+          {
+            "author": "Yifeng Chen",
+            "affiliation": "School of Computer Science, Peking University, Beijing, China"
+          },
+          {
+            "author": "Yunquan Zhang",
+            "affiliation": "Institute of Computing Technology, Chinese Academy of Sciences, Beijing, China"
+          },
+          {
+            "author": "Ting Cao",
+            "affiliation": "Institute for AI Industry Research (AIR), Tsinghua University, Beijing, China"
+          },
+          {
+            "author": "Yunxin Liu",
+            "affiliation": "Institute for AI Industry Research (AIR), Tsinghua University, Beijing, China"
+          },
+          {
+            "author": "Kun Li",
+            "affiliation": "Institute for AI Industry Research (AIR), Tsinghua University, Beijing, China"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-09",
         "listing_date": "2026-10-09",
@@ -63603,7 +63644,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "unresolved",
+        "affiliation_status": "resolved",
         "keywords": [
           "long-term materials evolution",
           "macro-step",
