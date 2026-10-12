@@ -58925,7 +58925,7 @@
   "delivery": {
     "batch_id": "b9983a9b35d10816805841c1",
     "run_id": "daily-62312d5a88b8311f28d8adeb",
-    "updated_at": "2026-10-12T07:10:24+00:00",
+    "updated_at": "2026-10-12T07:12:38+00:00",
     "profile_version": "992927a1524b59b3",
     "papers": [
       {
@@ -59301,7 +59301,32 @@
           "cs.CV",
           "cs.LG"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Bahey Tharwat",
+            "affiliation": "University of Freiburg"
+          },
+          {
+            "author": "Iman Nematollahi",
+            "affiliation": "University of Freiburg"
+          },
+          {
+            "author": "Marvin Alles",
+            "affiliation": "University of Freiburg"
+          },
+          {
+            "author": "Xingyuan Zhang",
+            "affiliation": "University of Freiburg"
+          },
+          {
+            "author": "Akshay L Chandra",
+            "affiliation": "University of Freiburg"
+          },
+          {
+            "author": "Abhinav Valada",
+            "affiliation": "University of Freiburg"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-12",
         "listing_date": "2026-10-12",
@@ -59311,7 +59336,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "unresolved",
+        "affiliation_status": "resolved",
         "keywords": [
           "generalist robot policies",
           "prior tasks",
