@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-10-12T07:10:24+00:00",
+  "updated_at": "2026-10-12T11:54:44+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-62312d5a88b8311f28d8adeb": {
-      "run_id": "daily-62312d5a88b8311f28d8adeb",
-      "generated_at": "2026-10-12T07:10:24+00:00",
+    "daily-e56180e378112dd1c47bc731": {
+      "run_id": "daily-e56180e378112dd1c47bc731",
+      "generated_at": "2026-10-12T11:54:44+00:00",
       "selected_ids": [
         "2610.12818",
         "2610.13194",
@@ -1153,6 +1153,26 @@
             "world model"
           ]
         },
+        "2610.13816": {
+          "title": "Dream to Remember: Continual Steering of Generalist Robot Policies with World Models",
+          "abstract": "Generalist robot policies are trained with imitation learning and are bounded by the quality and coverage of their demonstrations. Reinforcement learning can improve and extend them, either by fine-tuning the policy weights or by training a small module to steer the input noise of a frozen generative policy. When tasks arrive sequentially, both approaches suffer from catastrophic forgetting. Fine-tuning on a task degrades prior tasks, and steering only shifts forgetting to the shared steering module. We propose Dream to Remember (D2R), which continually steers a frozen generalist policy toward new tasks, while retaining its earlier skills. As the steering module learns a new task, a frozen pretrained world model rehearses prior tasks through imagined rollouts, anchoring the module to its earlier behavior without a replay buffer or new data. When the world model is faithful enough, D2R learns the new task entirely in imagination. Otherwise, it learns the task in the environment while using the world model only to rehearse prior tasks. On CALVIN, D2R improves eight tasks in sequence entirely in imagination, raising average success from 63.7% to 74.8%, while LoRA fine-tuning on the same sequence drops it to 11.7%. With a frozen off-the-shelf generalist policy and world model, $\\pi_0$ and A2World, D2R learns unseen LIBERO-90 tasks in the environment while keeping $\\pi_0$'s performance on the LIBERO suites it was fine-tuned on, even though the world model is not accurate enough for policy optimization. Finally, on a real Franka robot, D2R improves three tasks in sequence entirely in imagination while retaining the earlier improvements.",
+          "categories": [
+            "cs.RO",
+            "cs.CV",
+            "cs.LG"
+          ],
+          "keywords": [
+            "generalist robot policies",
+            "prior tasks",
+            "d2r",
+            "d2r improves",
+            "d2r learns",
+            "environment while"
+          ],
+          "matched_keywords": [
+            "world model"
+          ]
+        },
         "2610.13527": {
           "title": "S-Space: Exploring Spatial Workspace in Multimodal Language Models",
           "abstract": "Multimodal language models (MLLMs) exhibit promising spatial reasoning capabilities, yet the internal mechanisms supporting them remain poorly understood. We uncover S-Space, a linear representation subspace in which object-token representations encode continuous coordinates along horizontal, vertical, and distance axes. Although we identify these axes by differentiating spatial-answer scores with respect to object-token activations, S-Space is intrinsic rather than induced by specific data or prompts, remaining readable under non-spatial questions. We show that S-Space functions as an internal spatial workspace of MLLMs. Perception encodes object locations into it, forming spatial representations that can be directly read out to support accurate spatial judgments. Internal reasoning transforms it for changing viewpoints. Verbal responses selectively access it, evidenced by causal interventions that alter spatial judgments while largely preserving non-spatial responses. Case studies further show that S-Space assigns locations to unseen entities and the observer, and connects physical directions with abstract linguistic meanings, suggesting both the capabilities and limitations of large-scale language training. Finally, we use S-Space as a diagnostic tool for spatial reasoning failures. Direction-word readouts reveal systematic coupling between cardinal and image-relative reference frames. More importantly, a perception-computation decomposition exposes a key bottleneck: MLLMs can form capable spatial representations, yet fall short in the spatial transformations required to reason reliably across viewpoint changes.",
@@ -1186,26 +1206,6 @@
             "beyond reconstruction fidelity"
           ],
           "matched_keywords": []
-        },
-        "2610.13816": {
-          "title": "Dream to Remember: Continual Steering of Generalist Robot Policies with World Models",
-          "abstract": "Generalist robot policies are trained with imitation learning and are bounded by the quality and coverage of their demonstrations. Reinforcement learning can improve and extend them, either by fine-tuning the policy weights or by training a small module to steer the input noise of a frozen generative policy. When tasks arrive sequentially, both approaches suffer from catastrophic forgetting. Fine-tuning on a task degrades prior tasks, and steering only shifts forgetting to the shared steering module. We propose Dream to Remember (D2R), which continually steers a frozen generalist policy toward new tasks, while retaining its earlier skills. As the steering module learns a new task, a frozen pretrained world model rehearses prior tasks through imagined rollouts, anchoring the module to its earlier behavior without a replay buffer or new data. When the world model is faithful enough, D2R learns the new task entirely in imagination. Otherwise, it learns the task in the environment while using the world model only to rehearse prior tasks. On CALVIN, D2R improves eight tasks in sequence entirely in imagination, raising average success from 63.7% to 74.8%, while LoRA fine-tuning on the same sequence drops it to 11.7%. With a frozen off-the-shelf generalist policy and world model, $\\pi_0$ and A2World, D2R learns unseen LIBERO-90 tasks in the environment while keeping $\\pi_0$'s performance on the LIBERO suites it was fine-tuned on, even though the world model is not accurate enough for policy optimization. Finally, on a real Franka robot, D2R improves three tasks in sequence entirely in imagination while retaining the earlier improvements.",
-          "categories": [
-            "cs.RO",
-            "cs.CV",
-            "cs.LG"
-          ],
-          "keywords": [
-            "generalist robot policies",
-            "prior tasks",
-            "d2r",
-            "d2r improves",
-            "d2r learns",
-            "environment while"
-          ],
-          "matched_keywords": [
-            "world model"
-          ]
         },
         "2610.13455": {
           "title": "Agentic Large Language Models",
@@ -6765,6 +6765,146 @@
           ],
           "matched_keywords": []
         },
+        "2610.10893": {
+          "title": "Less from More: Reinforcing Sparse Video Reasoning from Dense References",
+          "abstract": "Video-language models commonly assume that more temporal observations lead to more reliable reasoning. We question this assumption and argue that the key challenge is not merely processing more video frames efficiently, but learning to reason reliably under limited temporal evidence. We propose SAVER, a dense-to-sparse post-training framework that uses dense video views as training-time references for sparse-frame inference. During reinforcement post-training, paired dense and sparse views are optimized with grounding rewards and a reliability-gated reference reward, encouraging sparse view predictions to preserve task-relevant temporal evidence. Notably, SAVER is trained only on 1,250 randomly sampled temporal grounding examples, without using any video question answering annotations. Across three temporal grounding benchmarks and six video question-answering benchmarks, SAVER consistently improves performance across frame budgets. In particular, SAVER can match or surpass dense-frame Qwen3.5 baselines while using substantially fewer frames. These results show that temporal grounding can serve as an effective evidence-localization proxy for learning sparse video reasoning that transfers to broader video understanding tasks.",
+          "categories": [
+            "cs.CV"
+          ],
+          "keywords": [
+            "sparse video reasoning",
+            "temporal grounding",
+            "saver",
+            "temporal evidence",
+            "any video question",
+            "benchmarks saver consistently"
+          ],
+          "matched_keywords": []
+        },
+        "2610.12470": {
+          "title": "Dex-One2Many: Learning Dexterous Manipulation from a Single Human Demonstration",
+          "abstract": "While learning dexterous manipulation from a single human video offers a promising alternative to costly robot demonstrations, many recent methods predominantly imitate demonstrated motions. Such strict motion matching often limits generalization to initial object poses, goal poses, and grasps not shown in the video. Alternatively, discovering a policy via reinforcement learning (RL) allows for broad generalization, but without prior guidance, it struggles with high-dimensional exploration in complex, multi-stage tasks. To address these coupled generalization and exploration challenges, we present Dex-One2Many, a real-to-sim-to-real framework that learns a generalizable dexterous manipulation policy from a single human video. Our key insight is to abstract the video into sequential scene graphs that guide RL, enabling efficient exploration while preserving broad generalizability. The graphs serve as generative constraints for sampling diverse reset states and provide dense rewards for each stage. Because the graphs constrain relations rather than exact poses, these reset states cover object poses and grasps beyond the video, while initializing each stage from them with dense rewards keeps exploration short and guided. Trained entirely in simulation, Dex-One2Many transfers zero-shot to a real multi-fingered hand. Across five tool-use and manipulation tasks, Dex-One2Many exceeds baselines by 6.5% in seen configurations, while its robust generalization widens this gap to 71% in unseen scenarios.",
+          "categories": [
+            "cs.RO",
+            "cs.CV"
+          ],
+          "keywords": [
+            "single human video",
+            "dex-one2many",
+            "reset states",
+            "dense rewards",
+            "object poses",
+            "dexterous manipulation"
+          ],
+          "matched_keywords": []
+        },
+        "2610.12114": {
+          "title": "Universal Textual Teaching for LLMs",
+          "abstract": "Knowledge distillation (KD) transfers knowledge from stronger Teacher models to weaker Student models, but most methods require training the Student parameters, thereby binding the distilled knowledge to a specific architecture and checkpoint. This implicit representation is difficult to interpret or reuse across models and limits KD for API-only or costly-to-train models. This paper studies knowledge transfer for large language models (LLMs). We introduce Universal Textual Teaching (UTT), a parameter-update-free framework that distills observed Teacher-Student knowledge gaps into a textual, interpretable, and reusable natural-language artifact called Primer. Specifically, UTT first identifies representative gap cases through paired evaluations, and iteratively updates the Primer via multi-role interactions: the Student attempts each task, the Prompter turns evaluation feedback into a teaching instruction, the Teacher provides a targeted demonstration, and the Synthesizer consolidates validated lessons. Empirically, on the challenging math (Omni-MATH-2) and code generation (KernelBench) tasks, extensive results confirm the effectiveness of the method: UTT remarkably raises the Student's accuracy from 9.4% to 48.6% and Fast1 accuracy from 9% to 35% on KernelBench, while increasing mathematical reasoning accuracy from 27.6% to 51.7%. UTT also performs better than representative prompt engineering and parameter-based KD methods. Of note, UTT is shown to be generalizable across different Teachers and Students: a Primer synthesized for one Teacher-Student pair can generalize to other Students that do not participate in the synthesis.",
+          "categories": [
+            "cs.AI"
+          ],
+          "keywords": [
+            "universal textual teaching",
+            "utt",
+            "primer",
+            "kd",
+            "artifact called primer",
+            "but most methods"
+          ],
+          "matched_keywords": []
+        },
+        "2610.09607": {
+          "title": "Which Language Should a Skeleton Speak? Language Choices in Multilingual Reasoning",
+          "abstract": "Skeleton-based reasoning prompting is a promising training-free approach for structuring LLM reasoning, but prior work largely assumes an English-centric setting. We propose the Language-Aware Skeleton Exploration Framework (LASEF) to study skeleton-language choice in multilingual mathematical reasoning. Across math benchmarks, model scales, and languages, we show that English skeletons yield a small positive tendency on average, most visible for smaller models and low-resource languages. However, few language-level gains remain significant after correction, and English is not universally optimal. Combining greedy decoding, multi-rollout evaluation, translation ablation, and cross-benchmark validation, we further find three patterns of skeleton-language effects: directionally consistent, evaluation- and benchmark-dependent, and asymmetric negative. These effects cannot be fully explained by generation quality alone. Overall, skeleton language is a context-dependent design variable that requires multi-level exploration. All resources are released at https://github.com/lhsstn/LASEF.",
+          "categories": [
+            "cs.CL",
+            "cs.AI"
+          ],
+          "keywords": [
+            "average most visible",
+            "com lhsstn lasef",
+            "combining greedy decoding",
+            "context-dependent design variable",
+            "decoding multi-rollout evaluation",
+            "directionally consistent evaluation-"
+          ],
+          "matched_keywords": []
+        },
+        "2610.13118": {
+          "title": "The value of information and the emergence of communication in evolved e-puck robots",
+          "abstract": "We study when communication emerges between autonomous agents and what role an innate action selection architecture plays. Two e-puck robots, reconstructed in PyBullet from their Webots model and validated against it, must find a feeding zone that can only be detected when a robot passes over it. Each robot can emit a one-bit signal whose direction is detected by the receiver. Control is provided by a GRU recurrent network with a residual path, either operating alone or as a channel within an Embedded Action Selection Architecture (EASA). Fitness measures only the time the robots spend over the food. When the robots receive a compass pointing to the food, use of the signal disappears completely. Without a compass, in a small arena, three independent runs achieved similar performance using different strategies: a referential signal, a permanent beacon, or no use of the signal. As the arena expands, the strategy based on a referential signal generalizes best. In contrast, evolving directly in the large arena does not increase the frequency of communication, but it does separate the strategies, and the referential signal clearly outperforms solitary searching. Within EASA, innate reflexes constrain the network and reduce performance. As its priorities evolve, evolution consistently weakens those reflexes. The results suggest that communication emerges in proportion to the value of the information it transmits, and that an innate scaffolding designed for isolated agents can be an impediment in a social task.",
+          "categories": [
+            "cs.RO",
+            "cs.MA",
+            "cs.NE"
+          ],
+          "keywords": [
+            "action selection architecture",
+            "referential signal",
+            "communication emerges",
+            "e-puck robots",
+            "innate",
+            "achieved similar performance"
+          ],
+          "matched_keywords": []
+        },
+        "2610.12570": {
+          "title": "Contextual Correction of Parallel Draftsfor Speculative Decoding",
+          "abstract": "Speculative decoding accelerates large language model inference by using a lightweight drafter to propose multiple tokens that are subsequently verified in parallel by the target model. Recent diffusion-based drafters make this paradigm particularly attractive: deep attention-based neural backbones provide strong predictions, while drafting multiple future positions in parallel avoids the sequential cost of autoregressive generation. This parallelism, however, comes at a cost. Tokens within a draft block are predicted without access to the realized identities of preceding draft tokens, removing intra-block dependencies that would naturally be available under autoregressive generation. We introduce DCOCO (DFlash Contextual Corrector), a lightweight mechanism that restores these dependencies while preserving parallel drafting. Rather than committing to each position's top prediction, DCOCO retains multiple candidate tokens and evaluates their contextual compatibility across adjacent draft positions in parallel, enabling contextually informed token selection at low additional cost. Across four verifier backbones and ten benchmarks, DCOCO achieves the highest average throughput in every evaluated configuration, spanning greedy and stochastic decoding with and without extended reasoning, with speedups of up to 6.6x over vanilla decoding. Its advantage persists under concurrent serving: DCOCO outperforms the strongest competing method by 6-23% across 4-32 concurrent requests, while other sequential correctors fall below uncorrected DFlash at these loads. These results demonstrate that recovering intra-block dependencies through parallel contextual scoring delivers consistent acceleration across decoding regimes and serving loads.",
+          "categories": [],
+          "keywords": [
+            "dcoco",
+            "intra-block dependencies",
+            "autoregressive generation",
+            "adjacent draft positions",
+            "attention-based neural backbones",
+            "backbones provide strong"
+          ],
+          "matched_keywords": []
+        },
+        "2610.05014": {
+          "title": "MetaKernelBench: Measuring GPU Kernel Knowledge Transfer Beyond Code",
+          "abstract": "Recent GPU kernel optimization agents retain what they learn in knowledge bases or as distilled skills. Kernel benchmarks score each attempt's implementation for correctness and speed but leave the reuse value of retained experience unmeasured. We introduce MetaKernelBench, which measures whether experience distilled from an attempt in one kernel domain-specific language (DSL) improves a fresh attempt at the same problem in another. Its 74 problems are fused subgraphs in six families, each posed as a pair of CuTe DSL and TIRx variants that differ only in the DSL. The agent first attempts each variant solo and is instructed to distill what it learns into a natural-language skill, which is transferred whether or not the source attempt passes verification. The skill is the only extra input to a skill-conditioned attempt by the same model in the other DSL. We compare each skill-conditioned attempt with the solo attempt on the same variant under matched per-attempt budgets, scoring correctness and end-to-end runtime. Across six models and both directions, paired lift over solo attempts ranges from -19% to +29%. Four models gain in both directions, yet regressions occur on 16% to 45% of problems in every model and direction. Outcomes follow the source attempt's result relative to the target's solo attempt rather than source success alone, improving in 71% of comparisons when the source stands above and regressing in 54% when it stands below. MetaKernelBench complements implementation-quality metrics by measuring same-problem cross-DSL kernel knowledge transfer.",
+          "categories": [],
+          "keywords": [
+            "kernel knowledge transfer",
+            "skill-conditioned attempt",
+            "solo attempt",
+            "source attempt",
+            "gpu kernel",
+            "dsl"
+          ],
+          "matched_keywords": []
+        },
+        "2610.11291": {
+          "title": "When Do We Need On-Policy Distillation? Distilling on Offline Student Rollouts Is Often Better",
+          "abstract": "On-policy distillation (OPD) has become increasingly popular for transferring teacher capabilities to student models. In this work, we ask a critical research question: Is on-policy sampling always beneficial for distilling arbitrary teacher-student pairs? We show that a simple alternative, Semi-OPD, which distills from offline rollouts generated by the initial student, can often outperform OPD in both accuracy and training efficiency. Across 17 teacher-student pairs ranging from 1.5B to 235B parameters, Semi-OPD outperforms OPD in 14 cases, with up to +13.6% accuracy and 11.4x training speedup. We further find that the choice between OPD and Semi-OPD depends on the alignment between the initial teacher and student, quantified by an output-token overlap ratio: OPD is beneficial only when the two are highly aligned with high overlap ratios. Our deeper investigation suggests that effective distillation requires on-policyness w.r.t. both the student and the teacher. For misaligned pairs, student rollouts can become increasingly off-policy w.r.t. the teacher as context length grows, weakening the distillation signal. In contrast, Semi-OPD is often more stable, as it distills on shorter contexts while covering full trajectories and exposing the student to more teacher-preferred tokens. Beyond proposing Semi-OPD as an efficient alternative, our work motivates the community to rethink when to use OPD and to study stronger OPD variants with meaningful teacher-student pairs.",
+          "categories": [],
+          "keywords": [
+            "teacher-student pairs",
+            "semi-opd",
+            "student rollouts",
+            "opd",
+            "arbitrary teacher-student pairs",
+            "ask critical research"
+          ],
+          "matched_keywords": []
+        },
+        "2609.37359": {
+          "title": "Encore: Few-Shot Agentic Discovery of Manipulation Strategies",
+          "abstract": "Coding agents can now write, run, and debug programs with little human help. Robot tasks, however, are usually specified by a sentence that leaves out how to grasp, in what order to make contact, and what the result should look like, and an agent given only the sentence must find these details by trial and error. We introduce ENCORE, which gives the agent a few demonstrations as evidence to read rather than as training data. A deterministic builder distills each demonstration into a pack of multi-view keyframes, gripper events, frame strips, and the full trajectory. A coding agent studies the pack, writes a policy program against a fixed perception and action API, refines it iteratively over a few development rollouts, and freezes it before a sealed evaluation that never reveals the success signal. On LIBERO-PRO, the agent's first program already succeeds in half of the perturbed tasks with demonstrations and in one task without them, and the frozen programs outperform the strongest prior agentic system run with the same language model (96.3% against 89.3%). On RoboDojo tasks whose instructions leave the goal unstated, no program succeeds without demonstrations. ENCORE also runs on a real bimanual robot, learning cube handover and cup inversion from five demonstrations each.",
+          "categories": [],
+          "keywords": [
+            "encore",
+            "action api refines",
+            "against fixed perception",
+            "agent few demonstrations",
+            "agent first program",
+            "agentic system run"
+          ],
+          "matched_keywords": []
+        },
         "2610.12468": {
           "title": "DreamTrue: Action-Faithful Robot World Model with Counterfactual Post-Training",
           "abstract": "We present DreamTrue, a multi-view, cross-embodiment robot world model for action-faithful and physically plausible video prediction. Training such a model on existing robot datasets faces two obstacles: imprecise calibration can impair action following, while limited coverage of unsuccessful interactions can bias predictions toward successful outcomes. To improve action following across embodiments, we render action trajectories into image-space conditions and introduce offline geometric calibration to align these conditions with the target videos. To broaden interaction coverage, we introduce counterfactual post-training, modifying recorded action trajectories and generating future videos under a wider range of actions and contact configurations. To provide feedback on these predictions without paired ground-truth futures, we construct a human-annotated video dataset covering robot, object, and interaction defects and use it to train an embodied video reward model. Its scores guide reinforcement-learning post-training toward more physically plausible interaction outcomes. On AgiBot, DreamTrue attains state-of-the-art action following, while reducing the human-assessed interaction defect rate from from 48.12% to 6.25%. Notably, our model ranks first in the world model track of the AgiBot World Challenge 2026. The project page can be found at this https URL.",
@@ -8189,22 +8329,6 @@
             "along one capability",
             "answer-only grpo leaves",
             "atomic visual claims"
-          ],
-          "matched_keywords": []
-        },
-        "2610.10893": {
-          "title": "Less from More: Reinforcing Sparse Video Reasoning from Dense References",
-          "abstract": "Video-language models commonly assume that more temporal observations lead to more reliable reasoning. We question this assumption and argue that the key challenge is not merely processing more video frames efficiently, but learning to reason reliably under limited temporal evidence. We propose SAVER, a dense-to-sparse post-training framework that uses dense video views as training-time references for sparse-frame inference. During reinforcement post-training, paired dense and sparse views are optimized with grounding rewards and a reliability-gated reference reward, encouraging sparse view predictions to preserve task-relevant temporal evidence. Notably, SAVER is trained only on 1,250 randomly sampled temporal grounding examples, without using any video question answering annotations. Across three temporal grounding benchmarks and six video question-answering benchmarks, SAVER consistently improves performance across frame budgets. In particular, SAVER can match or surpass dense-frame Qwen3.5 baselines while using substantially fewer frames. These results show that temporal grounding can serve as an effective evidence-localization proxy for learning sparse video reasoning that transfers to broader video understanding tasks.",
-          "categories": [
-            "cs.CV"
-          ],
-          "keywords": [
-            "sparse video reasoning",
-            "temporal grounding",
-            "saver",
-            "temporal evidence",
-            "any video question",
-            "benchmarks saver consistently"
           ],
           "matched_keywords": []
         },
@@ -10594,23 +10718,6 @@
           ],
           "matched_keywords": []
         },
-        "2610.12470": {
-          "title": "Dex-One2Many: Learning Dexterous Manipulation from a Single Human Demonstration",
-          "abstract": "While learning dexterous manipulation from a single human video offers a promising alternative to costly robot demonstrations, many recent methods predominantly imitate demonstrated motions. Such strict motion matching often limits generalization to initial object poses, goal poses, and grasps not shown in the video. Alternatively, discovering a policy via reinforcement learning (RL) allows for broad generalization, but without prior guidance, it struggles with high-dimensional exploration in complex, multi-stage tasks. To address these coupled generalization and exploration challenges, we present Dex-One2Many, a real-to-sim-to-real framework that learns a generalizable dexterous manipulation policy from a single human video. Our key insight is to abstract the video into sequential scene graphs that guide RL, enabling efficient exploration while preserving broad generalizability. The graphs serve as generative constraints for sampling diverse reset states and provide dense rewards for each stage. Because the graphs constrain relations rather than exact poses, these reset states cover object poses and grasps beyond the video, while initializing each stage from them with dense rewards keeps exploration short and guided. Trained entirely in simulation, Dex-One2Many transfers zero-shot to a real multi-fingered hand. Across five tool-use and manipulation tasks, Dex-One2Many exceeds baselines by 6.5% in seen configurations, while its robust generalization widens this gap to 71% in unseen scenarios.",
-          "categories": [
-            "cs.RO",
-            "cs.CV"
-          ],
-          "keywords": [
-            "single human video",
-            "dex-one2many",
-            "reset states",
-            "dense rewards",
-            "object poses",
-            "dexterous manipulation"
-          ],
-          "matched_keywords": []
-        },
         "2610.10541": {
           "title": "An Explainable Header-Centric Framework for Large-Scale Semantic Table Interpretation and Data Quality Assessment",
           "abstract": "Knowledge Graph (KG) quality depends not only on downstream graph validation, but also on the quality of tabular metadata used before integration. In metadata-only Semantic Table Interpretation (STI), where cell values are unavailable, noisy, or unsuitable, column headers become a critical source of semantic evidence for traceable KG preparation. We present an explainable, header-centric framework for metadata-only Column Type Annotation (CTA) and Data Quality Assessment (DQA). The framework maps headers to 39 interpretable FinalFormat types using curated lexical resources and preserves token-level traceability through SourceKeywords. Each assigned type activates validation rules based on a taxonomy of Data Quality Issues (DQIs), producing detections such as missing data, duplicates, domain violations, wrong data type, and temporal mismatch. These detections are aggregated into HeadersIQ, a lightweight, unweighted data source-level quality metric. The framework was evaluated across heterogeneous benchmarks, including UCI, Prague, Kaggle, VizNet/Sato, SOTAB, T2Dv2, and the SemTab 2024 Metadata-to-KG track, comprising around 120,000 header columns. The results show broad practical coverage across noisy real-world metadata, while a parallel KG-mapping pathway supports alignment to DBpedia and this http URL. On the SemTab 2024 Metadata-to-KG track, the official GT-strict evaluation was modest. However, a blinded diagnostic audit indicates that many mismatches reflect benchmark granularity, aliasing, and ontology-selection effects rather than wholly implausible header-centric predictions. We report this audit as diagnostic evidence on disagreement patterns, not as revised benchmark performance. Overall, the paper presents a reusable workflow for metadata-driven semantic annotation, data source-level quality monitoring, and KG-oriented benchmark diagnosis.",
@@ -11415,8 +11522,8 @@
           ],
           "keywords": [
             "task where",
-            "coding agent",
             "scripts",
+            "coding agent",
             "so every",
             "abandons leaves trace",
             "abstract reasoning tasks"
@@ -12057,22 +12164,6 @@
             "allocate limited resources",
             "allocating computational resources",
             "allocation strategies throughout"
-          ],
-          "matched_keywords": []
-        },
-        "2610.12114": {
-          "title": "Universal Textual Teaching for LLMs",
-          "abstract": "Knowledge distillation (KD) transfers knowledge from stronger Teacher models to weaker Student models, but most methods require training the Student parameters, thereby binding the distilled knowledge to a specific architecture and checkpoint. This implicit representation is difficult to interpret or reuse across models and limits KD for API-only or costly-to-train models. This paper studies knowledge transfer for large language models (LLMs). We introduce Universal Textual Teaching (UTT), a parameter-update-free framework that distills observed Teacher-Student knowledge gaps into a textual, interpretable, and reusable natural-language artifact called Primer. Specifically, UTT first identifies representative gap cases through paired evaluations, and iteratively updates the Primer via multi-role interactions: the Student attempts each task, the Prompter turns evaluation feedback into a teaching instruction, the Teacher provides a targeted demonstration, and the Synthesizer consolidates validated lessons. Empirically, on the challenging math (Omni-MATH-2) and code generation (KernelBench) tasks, extensive results confirm the effectiveness of the method: UTT remarkably raises the Student's accuracy from 9.4% to 48.6% and Fast1 accuracy from 9% to 35% on KernelBench, while increasing mathematical reasoning accuracy from 27.6% to 51.7%. UTT also performs better than representative prompt engineering and parameter-based KD methods. Of note, UTT is shown to be generalizable across different Teachers and Students: a Primer synthesized for one Teacher-Student pair can generalize to other Students that do not participate in the synthesis.",
-          "categories": [
-            "cs.AI"
-          ],
-          "keywords": [
-            "universal textual teaching",
-            "utt",
-            "primer",
-            "kd",
-            "artifact called primer",
-            "but most methods"
           ],
           "matched_keywords": []
         },
@@ -17010,8 +17101,8 @@
           "categories": [],
           "keywords": [
             "target-model forward passes",
-            "draft tokens",
             "drafting stage",
+            "draft tokens",
             "dloop",
             "speculative decoding",
             "drafting stages"
@@ -19514,9 +19605,9 @@
             "agentic coding",
             "humanize",
             "judgement engineering",
-            "builder",
             "agentic coding built",
-            "agentic coding makes"
+            "agentic coding makes",
+            "agents hoa full"
           ],
           "matched_keywords": []
         },
@@ -22203,23 +22294,6 @@
           ],
           "matched_keywords": []
         },
-        "2610.09607": {
-          "title": "Which Language Should a Skeleton Speak? Language Choices in Multilingual Reasoning",
-          "abstract": "Skeleton-based reasoning prompting is a promising training-free approach for structuring LLM reasoning, but prior work largely assumes an English-centric setting. We propose the Language-Aware Skeleton Exploration Framework (LASEF) to study skeleton-language choice in multilingual mathematical reasoning. Across math benchmarks, model scales, and languages, we show that English skeletons yield a small positive tendency on average, most visible for smaller models and low-resource languages. However, few language-level gains remain significant after correction, and English is not universally optimal. Combining greedy decoding, multi-rollout evaluation, translation ablation, and cross-benchmark validation, we further find three patterns of skeleton-language effects: directionally consistent, evaluation- and benchmark-dependent, and asymmetric negative. These effects cannot be fully explained by generation quality alone. Overall, skeleton language is a context-dependent design variable that requires multi-level exploration. All resources are released at this https URL.",
-          "categories": [
-            "cs.CL",
-            "cs.AI"
-          ],
-          "keywords": [
-            "average most visible",
-            "combining greedy decoding",
-            "context-dependent design variable",
-            "decoding multi-rollout evaluation",
-            "directionally consistent evaluation-",
-            "english skeletons yield"
-          ],
-          "matched_keywords": []
-        },
         "2610.09633": {
           "title": "Coding-Agent Benchmarks Should Match Their Users' Task Flows",
           "abstract": "The evaluation of coding agents generally strives to be as realistic as possible. In our study, we collect 4,782 agent sessions of real software engineers in JetBrains IDEs, which we call Production Sessions. Since our subject is interactive agents, we study the sessions with at least three user messages (33% of the sample). These long sessions differ from issue-derived benchmark tasks in two ways: (i) user requests span a far wider mix of task types - questions about the project's code, planning, review, refactoring, execution - and (ii) users switch between types throughout a session. Long-session samples from three public interaction corpora exhibit markedly different Task Flows (the distributions of session lengths, task types, and type-to-type transitions), so no single interaction distribution is universally realistic: benchmarks should name a target use case and calibrate to measurements from it. We present SWE-TaskFlow, an approach for transforming any issue-derived benchmark: it preserves the verified tasks and tests while steering the interaction toward a target Task Flow through prompt splitting and verifiable repository QA, with a TaskFlow Alignment Score (TFAS) for selecting among generated trajectories. In a pilot on 700 SWE-Bench Pro tasks, solving the task sequentially in several steps approximately doubles agent cost without a stable change in resolve rate: the interaction protocol itself is an important dimension of evaluation.",
@@ -23105,7 +23179,7 @@
             "speculative decoding",
             "edr",
             "drafters",
-            "accelerates large language"
+            "ar drafters improve"
           ],
           "matched_keywords": []
         },
@@ -34931,9 +35005,9 @@
             "cs.PF"
           ],
           "keywords": [
-            "parallelism",
             "fundamental compute-communication",
             "pipeline utilization",
+            "parallelism",
             "parallelism strategies",
             "llm inference",
             "tp"
@@ -55661,24 +55735,6 @@
             "polyocr",
             "balance recognition parsing",
             "benchmark omnidocbench v1"
-          ],
-          "matched_keywords": []
-        },
-        "2610.13118": {
-          "title": "The value of information and the emergence of communication in evolved e-puck robots",
-          "abstract": "We study when communication emerges between autonomous agents and what role an innate action selection architecture plays. Two e-puck robots, reconstructed in PyBullet from their Webots model and validated against it, must find a feeding zone that can only be detected when a robot passes over it. Each robot can emit a one-bit signal whose direction is detected by the receiver. Control is provided by a GRU recurrent network with a residual path, either operating alone or as a channel within an Embedded Action Selection Architecture (EASA). Fitness measures only the time the robots spend over the food. When the robots receive a compass pointing to the food, use of the signal disappears completely. Without a compass, in a small arena, three independent runs achieved similar performance using different strategies: a referential signal, a permanent beacon, or no use of the signal. As the arena expands, the strategy based on a referential signal generalizes best. In contrast, evolving directly in the large arena does not increase the frequency of communication, but it does separate the strategies, and the referential signal clearly outperforms solitary searching. Within EASA, innate reflexes constrain the network and reduce performance. As its priorities evolve, evolution consistently weakens those reflexes. The results suggest that communication emerges in proportion to the value of the information it transmits, and that an innate scaffolding designed for isolated agents can be an impediment in a social task.",
-          "categories": [
-            "cs.RO",
-            "cs.MA",
-            "cs.NE"
-          ],
-          "keywords": [
-            "action selection architecture",
-            "referential signal",
-            "communication emerges",
-            "e-puck robots",
-            "innate",
-            "achieved similar performance"
           ],
           "matched_keywords": []
         },
