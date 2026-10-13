@@ -51973,7 +51973,7 @@
   "delivery": {
     "batch_id": "b9983a9b35d10816805841c1",
     "run_id": "daily-0d3fc8e2792b0c0a3d5afb6d",
-    "updated_at": "2026-10-13T11:43:56+00:00",
+    "updated_at": "2026-10-13T11:59:33+00:00",
     "profile_version": "992927a1524b59b3",
     "papers": [
       {
@@ -54992,7 +54992,36 @@
         "categories": [
           "cs.CV"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Haonan Wang",
+            "affiliation": "arXivLabs"
+          },
+          {
+            "author": "Yuchen Wang",
+            "affiliation": "arXivLabs"
+          },
+          {
+            "author": "Jingyu Lu",
+            "affiliation": "arXivLabs"
+          },
+          {
+            "author": "Qixiang Zhang",
+            "affiliation": "arXivLabs"
+          },
+          {
+            "author": "Lehan Wang",
+            "affiliation": "arXivLabs"
+          },
+          {
+            "author": "Xuanqi Huang",
+            "affiliation": "arXivLabs"
+          },
+          {
+            "author": "Xiaomeng Li",
+            "affiliation": "arXivLabs"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-12",
         "listing_date": "2026-10-12",
@@ -55002,7 +55031,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "unresolved",
+        "affiliation_status": "resolved",
         "keywords": [
           "video reconstruction",
           "neurons",
