@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-10-13T07:34:22+00:00",
+  "updated_at": "2026-10-13T09:33:07+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-442922d6b9a4c792c04c610f": {
-      "run_id": "daily-442922d6b9a4c792c04c610f",
-      "generated_at": "2026-10-13T07:34:22+00:00",
+    "daily-ca524f650d48eddcc88f72b8": {
+      "run_id": "daily-ca524f650d48eddcc88f72b8",
+      "generated_at": "2026-10-13T09:33:07+00:00",
       "selected_ids": [
         "2610.12818",
         "2610.13194",
@@ -1375,6 +1375,20 @@
           "matched_keywords": [
             "generation model"
           ]
+        },
+        "2609.36616": {
+          "title": "CrossTimeEdit: A Decade-Spanning Cross-View Dataset and Reward-Guided Editing for Historical Street-View Generation",
+          "abstract": "Historical street-view imagery records urban evolution, but uneven coverage leaves substantial gaps in historical records. Generating plausible past appearances requires restoring changed structures while preserving persistent scene content. We construct VIGOR-his, a decade-spanning cross-view dataset containing 43,653 location-level quadruplets across 11 cities on three continents. Its automated pipeline performs spatial pairing, consistency screening, change classification, and the generation and validation of satellite-based change descriptions and local editing instructions. Based on VIGOR-his, we propose CrossTimeEdit, a model that reformulates historical street-view generation as editing, using recent street views to constrain viewpoint and unchanged appearance and temporal satellite differences as change evidence. Starting from FLUX.2 [Klein] 4B, we train CrossTimeEdit through supervised fine-tuning (SFT) followed by online reinforcement learning (RL). We design three street-view editing criteria, namely Instruction Alignment (IA), Background Preservation (BP), and Quality and Physical Plausibility (QP), as both RL reward dimensions and evaluation metrics. We optimize this multi-reward objective using Within Group Relative Policy Optimization for flow-matching models (Flow-GRPO) with Group reward-Decoupled Normalization Policy Optimization (GDPO), which normalizes each reward dimension before aggregation. CrossTimeEdit improves overall performance across the three editing criteria by 17.12\\% over the pretrained baseline and outperforms cross-view generation models in scene consistency, visual realism, and perceptual quality. The implementation code, dataset, and model weights are available at https://luhanwen67.github.io/CrossTimeEdit-release/.",
+          "categories": [],
+          "keywords": [
+            "decade-spanning cross-view dataset",
+            "historical street-view generation",
+            "crosstimeedit",
+            "editing criteria",
+            "alignment ia background",
+            "appearances requires restoring"
+          ],
+          "matched_keywords": []
         },
         "2610.11361": {
           "title": "SepGen: Multi-Stem Audio-Video Separation and Generation in a Single Model",
@@ -30590,10 +30604,10 @@
             "cs.SI"
           ],
           "keywords": [
-            "ia",
             "factria framework",
             "institutional analytics",
             "responsible interpretation",
+            "ia",
             "analytics ia dashboards",
             "analytics pipeline institutional"
           ],
