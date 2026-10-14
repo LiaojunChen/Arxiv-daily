@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-10-14T04:42:17+00:00",
+  "updated_at": "2026-10-14T05:04:55+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-1f0c97569b9e6d1417d9c712": {
-      "run_id": "daily-1f0c97569b9e6d1417d9c712",
-      "generated_at": "2026-10-14T04:42:17+00:00",
+    "daily-8f7d3b6b9c4d38cc7690b55b": {
+      "run_id": "daily-8f7d3b6b9c4d38cc7690b55b",
+      "generated_at": "2026-10-14T05:04:55+00:00",
       "selected_ids": [
         "2610.12818",
         "2610.13194",
@@ -1286,20 +1286,6 @@
           ],
           "matched_keywords": []
         },
-        "2610.14709": {
-          "title": "Vela: User Behavior as Supervision Sparks LLM Intelligence",
-          "abstract": "Large language models are increasingly deployed in applications that act on users' long-term behavior histories, from personal assistants to recommendation and advertising systems. These applications demand the user dimension of LLM intelligence: inferring a person's preferences, intent, and likely future actions from weeks to years of behavior data. Yet current models are trained on static text or synthetic data, neither of which captures how user behavior evolves over time. Real-world behavior records, already available at scale on content platforms and in personal-assistant agents, offer a natural supervisory signal. We propose user behavior as supervision and introduce Vela, a framework that converts real user behavior data into trainable tasks and trajectories. From the anonymized behavior records of 100,000 users, Vela generates 100,000 tasks across 91 real-world task templates; difficulty-based filtering and trajectory acceptance criteria retain approximately 75,000 tasks with selected training trajectories. Fine-tuning Qwen3.6-35B-A3B on these trajectories improves performance over the base model by up to 11.5 points on user-related tasks and by an average of 4 points on general benchmarks. Training on more user behavior data further improves user-related performance, and reinforcement learning after fine-tuning outperforms reinforcement learning from the base model by up to 7.7 points. These gains suggest that real-world user behavior is a scalable source of supervision for both user-centered capabilities and the broader intelligence of LLMs.",
-          "categories": [],
-          "keywords": [
-            "user behavior",
-            "behavior records",
-            "llm intelligence",
-            "vela",
-            "acceptance criteria retain",
-            "agents offer natural"
-          ],
-          "matched_keywords": []
-        },
         "2610.13990": {
           "title": "DoSA: Dots Sparse Attention",
           "abstract": "Sparse attention visits few keys, yet finding them can still require scoring every key with every indexer head. We introduce DoSA (Dots Sparse Attention), a lossless method for making this computation conditional while preserving exact token selection. Its central observation is that Top-K selection requires sufficient evidence to reject a candidate, not necessarily its full score. A seed set supplies a lower bound on the winning threshold. Nonnegative head projections and joint residual bounds upper-bound positive contributions, while activation-informed aggregation bounds the magnitude subtracted by negative heads. The certificate directs full scoring toward candidates that remain eligible; exact-score filtering further reduces writeback and selection work. We establish the certificate and its exact-selection conditions, and analyze how geometry and selection margins govern its effectiveness. Our GPU implementation accelerates the complete Indexer by up to 2.74 times over SGLang and 1.69 times over LiteTopK across English, Chinese, and code workloads. End-to-end evaluation on GLM-5.2 and DeepSeek-V3.2 achieves up to 1.94 times and 1.50 times time-to-first-token speedups over the two baselines, respectively.",
@@ -1703,6 +1689,62 @@
             "research agents",
             "achieves leading task",
             "agents must acquire"
+          ],
+          "matched_keywords": []
+        },
+        "2610.15765": {
+          "title": "A Decade in a Day: Synthesizing Agent-Native Interfaces from Human-Oriented Software Evolution",
+          "abstract": "Large language model agents are emerging as an important new class of users of desktop applications. However, existing desktop interfaces were designed for human end users or application developers, leaving agents to interpret visual controls or discover and compose low-level software operations. This mismatch can hinder even capable agents, yet it remains unclear what interface properties make desktop software easier for agents to use. To study this question, we treat software evolution as a natural source of interface variation and introduce DeskIF-Bench, a benchmark of 255 artifact-verified tasks across six desktop applications. By holding the task, agent, and verifier fixed while varying the software release, we measure how interface changes affect agent performance. Across two models and six applications, the newest release consistently outperforms the oldest. Trajectory analysis identifies three relevant interface properties: discoverability, granularity, and observability. Guided by these properties, we develop ANIS, a framework that synthesizes agent-native interfaces from the capabilities of installed applications. On an expanded evaluation of 368 tasks across eight applications, atomic interfaces improve success over native SDK use by 3.8 and 3.5 percentage points with DeepSeek V4 Flash and Claude Haiku 4.5, respectively, while reducing online token usage by approximately 73%. Goal-level commands further raise success to 74.5% and 67.4%, respectively.",
+          "categories": [],
+          "keywords": [
+            "agent-native interfaces",
+            "desktop applications",
+            "interface properties",
+            "software evolution",
+            "affect agent performance",
+            "application developers leaving"
+          ],
+          "matched_keywords": []
+        },
+        "2610.18010": {
+          "title": "Fish Audio Drama 3 Technical Report",
+          "abstract": "We introduce Fish Audio Drama 3, an open-source speech generation model that turns text into directed performances, built on a 35B-parameter mixture-of-experts backbone that activates 3B parameters per token. It clones voices from multiple references, follows natural-language direction, revises a take when the next turn gives a note, voices multi-character scenes, edits existing speech by infilling, and synthesizes long-form and streaming audio. Multi-turn revision, scene dubbing, editing by infilling, and streaming text input are new in Drama 3, all in one model. Drama 3 pairs the hybrid linear-attention backbone with a new codebook multi-token-prediction audio decoder that predicts the acoustic codebooks of each frame in dedicated layers that attend over the entire sequence. The model is trained with a three-stage pre-training recipe, instruction fine-tuning, and large-batch reinforcement learning whose only reward is a single learned model of human preference. Its inference engine decodes a single stream at 271 frames per second on one H200, against 177 for Fish Audio S2, although Drama 3 has more than seven times as many parameters. The model weights are available on GitHub (https://github.com/fishaudio/fish-speech) and Hugging Face (https://huggingface.co/fishaudio/drama-3), and inference is available through SGLang-Omni (https://github.com/sgl-project/sglang-omni). We highly encourage readers to visit https://fish.audio to direct their own performances.",
+          "categories": [],
+          "keywords": [
+            "fish audio drama",
+            "activates parameters per",
+            "audio drama technical",
+            "audio s2 although",
+            "available through sglang-omni",
+            "b-parameter mixture-of-experts backbone"
+          ],
+          "matched_keywords": []
+        },
+        "2610.14912": {
+          "title": "Probable but Not Valid: A Psychometric Audit of Decision Models as Synthetic Survey Respondents",
+          "abstract": "Language models are increasingly used to create synthetic survey samples, also called silicon samples. Decision models are a new class of language models that return a probability for each point of a rating scale instead of text. We ask whether these models, or the newest generative LLMs, can stand in for human respondents on a psychometric survey. We test fourteen decision models from eleven providers and 47 generative LLMs on an open Lithuanian organisational-psychology survey (n=263, 68 items), with 100 real respondent profiles, the Psychometric Similarity Score (PSS) and statistical baselines. The best generative model, MiniMax M3, reaches PSS 0.813. This is level with a Gaussian copula fit only on other respondents (0.824) and below a copula fit in sample (0.927). A second sample of 100 real people scores below the best models, so at this size PSS cannot rank them against real respondents. In 5 of 10 product lines the newest generative release scores below an earlier release of the same line beyond resampling noise, and none gains beyond it. With the default rounded readout, 13 of 14 decision models score below the generative reference gpt-5.4-mini. Of the 47 generative models, 33 reproduce the pattern of item correlations better than any decision model. Averaged over respondents, the probability vectors are much closer to the human item marginals than rounded answers. They also rank respondents about as well as a profile regression fit on 163 real people. As forecasts of each person's own answers, however, every decision model is worse than the answer frequencies of other respondents, mainly because its average vector differs from them. The profile regression improves on these frequencies by only 1.0%, so the profile fields say little about how a person answers. Synthetic respondents built on such profiles should therefore aim at sample-level fidelity.",
+          "categories": [],
+          "keywords": [
+            "respondents",
+            "copula fit",
+            "generative llms",
+            "newest generative",
+            "other respondents",
+            "profile regression"
+          ],
+          "matched_keywords": []
+        },
+        "2610.17540": {
+          "title": "TacitVLA: Reasoning Vision-Language-Action Models Without Reasoning Latency",
+          "abstract": "Textual reasoning before acting has improved vision-language-action (VLA) models, but at the cost of latency: every action conditioned on the reasoning text must wait for autoregressive decoding. We show that actions do not need to wait for or condition on the generated reasoning to benefit from it, because the reasoning supervision already improves the backbone representation. We introduce TacitVLA, a reasoning VLA whose action expert never attends to the reasoning it generates for the current call. On long-horizon tasks where the reasoning text also serves as episodic memory, it can generate each entry during action execution rather than before acting. We evaluate it in a controlled study on four benchmarks spanning manipulation and autonomous driving, memory and non-memory tasks: RoboMME, RMBench, LIBERO, and PhysicalAI-AV. On all four, TacitVLA matches the performance of its explicit-reasoning counterpart at up to 3.4x lower latency, and matches the latency of the same architecture trained without reasoning at up to +17.1% success. In absolute terms, it surpasses the best previously published results on the RoboMME Counting suite (82.7% vs. 66.8%) and RMBench (77.5% vs. 56.5%), and reaches 72.9% on LIBERO-Plus and a 52.5% scene score on the public split of the PhysicalAI-AV closed-loop driving challenge. Project page: https://tacitvla.github.io.",
+          "categories": [],
+          "keywords": [
+            "tacitvla",
+            "reasoning text",
+            "before acting",
+            "action execution rather",
+            "action expert never",
+            "autonomous driving memory"
           ],
           "matched_keywords": []
         },
@@ -29992,9 +30034,9 @@
             "percentage points when",
             "design choices",
             "accuracy classification",
+            "rating",
             "rating scale",
-            "classification task",
-            "leniency"
+            "classification task"
           ],
           "matched_keywords": []
         },
@@ -34213,6 +34255,20 @@
             "corpus retrieval",
             "unifying retrieval",
             "b-token m-chunk wikipedia"
+          ],
+          "matched_keywords": []
+        },
+        "2610.14709": {
+          "title": "Vela: User Behavior as Supervision Sparks LLM Intelligence",
+          "abstract": "Large language models are increasingly deployed in applications that act on users' long-term behavior histories, from personal assistants to recommendation and advertising systems. These applications demand the user dimension of LLM intelligence: inferring a person's preferences, intent, and likely future actions from weeks to years of behavior data. Yet current models are trained on static text or synthetic data, neither of which captures how user behavior evolves over time. Real-world behavior records, already available at scale on content platforms and in personal-assistant agents, offer a natural supervisory signal. We propose user behavior as supervision and introduce Vela, a framework that converts real user behavior data into trainable tasks and trajectories. From the anonymized behavior records of 100,000 users, Vela generates 100,000 tasks across 91 real-world task templates; difficulty-based filtering and trajectory acceptance criteria retain approximately 75,000 tasks with selected training trajectories. Fine-tuning Qwen3.6-35B-A3B on these trajectories improves performance over the base model by up to 11.5 points on user-related tasks and by an average of 4 points on general benchmarks. Training on more user behavior data further improves user-related performance, and reinforcement learning after fine-tuning outperforms reinforcement learning from the base model by up to 7.7 points. These gains suggest that real-world user behavior is a scalable source of supervision for both user-centered capabilities and the broader intelligence of LLMs.",
+          "categories": [],
+          "keywords": [
+            "user behavior",
+            "behavior records",
+            "llm intelligence",
+            "vela",
+            "acceptance criteria retain",
+            "agents offer natural"
           ],
           "matched_keywords": []
         },
