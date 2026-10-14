@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-10-14T05:04:55+00:00",
+  "updated_at": "2026-10-14T05:58:31+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-8f7d3b6b9c4d38cc7690b55b": {
-      "run_id": "daily-8f7d3b6b9c4d38cc7690b55b",
-      "generated_at": "2026-10-14T05:04:55+00:00",
+    "daily-6e895b78036e51ee6cdd7aa5": {
+      "run_id": "daily-6e895b78036e51ee6cdd7aa5",
+      "generated_at": "2026-10-14T05:58:31+00:00",
       "selected_ids": [
         "2610.12818",
         "2610.13194",
@@ -1628,11 +1628,11 @@
           "categories": [],
           "keywords": [
             "autoenvscaling",
-            "terminal agents",
             "environment generation",
+            "terminal agents",
             "terminal task",
-            "terminal-bench",
-            "agentic domains generating"
+            "agentic domains generating",
+            "agents solve tasks"
           ],
           "matched_keywords": []
         },
@@ -1706,20 +1706,6 @@
           ],
           "matched_keywords": []
         },
-        "2610.18010": {
-          "title": "Fish Audio Drama 3 Technical Report",
-          "abstract": "We introduce Fish Audio Drama 3, an open-source speech generation model that turns text into directed performances, built on a 35B-parameter mixture-of-experts backbone that activates 3B parameters per token. It clones voices from multiple references, follows natural-language direction, revises a take when the next turn gives a note, voices multi-character scenes, edits existing speech by infilling, and synthesizes long-form and streaming audio. Multi-turn revision, scene dubbing, editing by infilling, and streaming text input are new in Drama 3, all in one model. Drama 3 pairs the hybrid linear-attention backbone with a new codebook multi-token-prediction audio decoder that predicts the acoustic codebooks of each frame in dedicated layers that attend over the entire sequence. The model is trained with a three-stage pre-training recipe, instruction fine-tuning, and large-batch reinforcement learning whose only reward is a single learned model of human preference. Its inference engine decodes a single stream at 271 frames per second on one H200, against 177 for Fish Audio S2, although Drama 3 has more than seven times as many parameters. The model weights are available on GitHub (https://github.com/fishaudio/fish-speech) and Hugging Face (https://huggingface.co/fishaudio/drama-3), and inference is available through SGLang-Omni (https://github.com/sgl-project/sglang-omni). We highly encourage readers to visit https://fish.audio to direct their own performances.",
-          "categories": [],
-          "keywords": [
-            "fish audio drama",
-            "activates parameters per",
-            "audio drama technical",
-            "audio s2 although",
-            "available through sglang-omni",
-            "b-parameter mixture-of-experts backbone"
-          ],
-          "matched_keywords": []
-        },
         "2610.14912": {
           "title": "Probable but Not Valid: A Psychometric Audit of Decision Models as Synthetic Survey Respondents",
           "abstract": "Language models are increasingly used to create synthetic survey samples, also called silicon samples. Decision models are a new class of language models that return a probability for each point of a rating scale instead of text. We ask whether these models, or the newest generative LLMs, can stand in for human respondents on a psychometric survey. We test fourteen decision models from eleven providers and 47 generative LLMs on an open Lithuanian organisational-psychology survey (n=263, 68 items), with 100 real respondent profiles, the Psychometric Similarity Score (PSS) and statistical baselines. The best generative model, MiniMax M3, reaches PSS 0.813. This is level with a Gaussian copula fit only on other respondents (0.824) and below a copula fit in sample (0.927). A second sample of 100 real people scores below the best models, so at this size PSS cannot rank them against real respondents. In 5 of 10 product lines the newest generative release scores below an earlier release of the same line beyond resampling noise, and none gains beyond it. With the default rounded readout, 13 of 14 decision models score below the generative reference gpt-5.4-mini. Of the 47 generative models, 33 reproduce the pattern of item correlations better than any decision model. Averaged over respondents, the probability vectors are much closer to the human item marginals than rounded answers. They also rank respondents about as well as a profile regression fit on 163 real people. As forecasts of each person's own answers, however, every decision model is worse than the answer frequencies of other respondents, mainly because its average vector differs from them. The profile regression improves on these frequencies by only 1.0%, so the profile fields say little about how a person answers. Synthetic respondents built on such profiles should therefore aim at sample-level fidelity.",
@@ -1745,6 +1731,148 @@
             "action execution rather",
             "action expert never",
             "autonomous driving memory"
+          ],
+          "matched_keywords": []
+        },
+        "2610.11850": {
+          "title": "VEDJE: Video-Efficient Discriminative Joint Encoder for Scalable Video-Text Retrieval",
+          "abstract": "Finding the right video often requires distinguishing similar scenes in which different events occur. Joint matching improves retrieval, but processing rich video representations for each query is costly. VEDJE compresses features within sampled frames while keeping their representations separate in a reusable cache. Feature-change prediction supplies an auxiliary training signal that improves retrieval from the compressed cache without adding work at query time. On MSR-VTT, MSVD, DiDeMo, and ActivityNet, VEDJE improves R@1 over matched first-stage retrievers in both retrieval directions. On MSR-VTT, it reaches 59.8 text-to-video R@1 with a fine-tuned VideoCLIP-XL first stage. In the VideoPrism configuration, shrinking the per-video cache fourfold to 12 KiB preserves text-to-video recall within 0.2 points. These results show that accurate video search can operate on compact evidence, encoded once and reused as new queries arrive.",
+          "categories": [
+            "cs.CV"
+          ],
+          "keywords": [
+            "improves retrieval",
+            "vedje",
+            "accurate video search",
+            "activitynet vedje improves",
+            "auxiliary training signal",
+            "but processing rich"
+          ],
+          "matched_keywords": []
+        },
+        "2610.17201": {
+          "title": "Multics: Generative Multi-Player World Model with Hierarchical Communication",
+          "abstract": "Multi-player interactive world models aim to simulate shared environments from multiple players' perspectives, but achieving robust generation while scaling to more players remains challenging. Existing approaches that rely on fully-connected communication (e.g., Solaris) incur quadratic attention costs as the number of players grows, while centralized approaches (e.g., γ-World) suffer from interference between unrelated events in a shared global representation. To address these challenges, we present Multics, a multi-player video generation framework with hierarchical communication that structures information exchange across player, group, and global levels. This hierarchy introduces group tokens into self-attention as intermediate group-level representations that aggregate locally relevant player information. These tokens connect to global tokens for cross-group communication, while the hierarchical topology limits direct mixing between unrelated local events. Group-token parameters are shared across group slots, allowing the same communication module to accommodate varying numbers of players without introducing new group-specific parameters. We further propose budget-constrained dynamic grouping based on recent camera trajectories, which adaptively groups relevant players while limiting unnecessary communication. Experiments demonstrate that Multics achieves state-of-the-art performance in 4- and 6-player settings, with improved cross-player consistency, player-specific action and camera controllability, and interference robustness. Moreover, Multics generalizes from 4-player training to 6-, 8-, and 10-player inference without retraining, while reducing self-attention computation compared with fully-connected communication.",
+          "categories": [],
+          "keywords": [
+            "multics",
+            "fully-connected communication",
+            "hierarchical communication",
+            "player",
+            "multi-player",
+            "players"
+          ],
+          "matched_keywords": []
+        },
+        "2610.17928": {
+          "title": "Learning How to Remember: Memory Modality Selection for GUI Agents",
+          "abstract": "Recent advances in vision-language models (VLMs) have substantially improved the capabilities of GUI agents, while memory augmentation has emerged as a promising approach for reusing knowledge from past interactions. However, existing memory augmented GUI agents typically adopt a fixed representation strategy, providing retrieved experience as a static modality. It remains unclear whether a single memory modality is consistently optimal, or how modality preference changes across interaction steps. In this work, we conduct a systematic study of memory modality in VLM based GUI agents. Across GUI benchmarks, we find that the preferred memory representation is strongly step dependent. Motivated by the finding, we introduce SwitchMem, a routing framework that dynamically selects between textual and visual memory representations at each step. Across three GUI benchmarks, SwitchMem outperforms memory augmented baselines that rely on static memory representations. Our findings validate our claim that memory modality is a step dependent decision rather than a fixed design choice. Code and project resources are available at https://txxnrd.github.io/switchmem",
+          "categories": [],
+          "keywords": [
+            "memory modality",
+            "gui agents",
+            "gui benchmarks",
+            "memory augmented",
+            "step dependent",
+            "memory representations"
+          ],
+          "matched_keywords": []
+        },
+        "2610.18868": {
+          "title": "Tev: Scaling Long-Horizon Agentic Environments with Dense Progress Rewards",
+          "abstract": "Long-horizon agents have drawn growing attention for their ability to work autonomously -- from hours to days -- on economically valuable tasks, a capability essential to automated discovery and recursive self-improvement (RSI). Yet open-source models still struggle on long-horizon tasks, largely for lack of both training data and a working recipe, and scaling both is hard: long, complex tasks are difficult to curate and verify, and their rewards are sparse. We address both. First, we introduce Tev-Gym, the first long-horizon agent training dataset with verifiable, dense, progressive rewards -- 1,170 verified task environments across 7 domains. It is built on a latent-world-first approach that first constructs a latent world: a complete and correct hidden specification of the task domain, workflow, and expected state after each step. Each task is then progressively rendered from this specification into an agent-facing environment, enabling controllable complexity and a natural progress metric. Second, we turn this metric into a training recipe: via progress-potential reward shaping (PPRS), we convert progress into a dense per-step reward that improves training efficiency and makes otherwise-intractable tasks trainable. Training with this recipe yields Tev-27B, which achieves substantial gains on the Agents' Last Exam computing and math sciences domains (ALE-CM), matching GPT-6 Astra and Claude Opus 5 at Pass@5. Despite training only on ALE-related data, it generalizes to the Terminal-Bench (TB) 3.0 and 4.0 subsets, surpassing GLM 5.2 and Gemini 3.7 Flash, and reaches Claude Opus 4.8-level performance on middle-horizon tasks such as TB 2.1.",
+          "categories": [],
+          "keywords": [
+            "claude opus",
+            "achieves substantial gains",
+            "agent training dataset",
+            "agent-facing environment enabling",
+            "ale-cm matching gpt-6",
+            "constructs latent world"
+          ],
+          "matched_keywords": []
+        },
+        "2610.18615": {
+          "title": "VideoJev: System One Model for Video Understanding and Interaction",
+          "abstract": "Visual agents must turn video observations into timely decisions to track progress and choose what to do next. Building on the emerging System One paradigm, we introduce VideoJev, a family of models that cast video understanding and interaction as structured decision tasks. We adapt pretrained multimodal large language models (MLLMs) by replacing autoregressive answer decoding with a shared head that scores temporal intervals and textual options against video evidence. These scores yield event spans or answer choices, unifying temporal grounding and multiple-choice video question answering. This combines the semantic flexibility of MLLMs with efficient decisions that agents can use directly. As an interaction unfolds, new goals and intermediate results prompt further queries about the same visual history. VideoJev therefore reuses visual computation through Cached inference for queries as they arrive and Joint inference for multiple queries in a single forward pass. Across three temporal grounding benchmarks, VideoJev-4B and VideoJev-35B-A3B improve mean mIoU over their backbones by 6.7 and 10.8 points, respectively, with measured inference speedups of 2.8-3.1times. On four video QA benchmarks, both achieve performance comparable to their backbones in Thinking mode, with measured inference speedups exceeding 100times. These results offer a unified, reusable decision interface for composing structured visual judgments into complex, open-ended workflows.",
+          "categories": [],
+          "keywords": [
+            "measured inference speedups",
+            "videojev",
+            "temporal grounding",
+            "system one",
+            "adapt pretrained multimodal",
+            "against video evidence"
+          ],
+          "matched_keywords": []
+        },
+        "2610.18860": {
+          "title": "AesCode: Aesthetic Code Generation with Decoupled Cross-Modal Rewards",
+          "abstract": "Generating information-rich visual artifacts such as slides, posters, and dashboards as code is appealing because the outputs are structured, editable, and verifiable. Yet code models cannot see how their choices of layout and color come together on the canvas, often limiting spatial planning and aesthetic quality. Image generators excel at visual design but can misrender requested content, making their outputs unreliable targets for direct reproduction. We therefore introduce AesCode, which generates code grounded in the content prompt while using an image generated from the same prompt as an aesthetic guidance. To do so, AesCode represents the target as a design graph that describes the whole canvas and makes each property attributable. From this graph, we derive complementary cross-modal rewards: deterministic verifiers score properties parsable from code and rendering, while a VLM judge assesses the non-parsable ones with a sample-specific Visual Graph Rubric (VGR) tied to graph elements and relations. We optimize these decoupled rewards through reinforcement learning with per-channel normalization to jointly improve spatial planning, aesthetic quality, and verifiable correctness. To evaluate this setting, we build a benchmark that scores verifiable correctness and visual quality separately, with visual scores highly consistent with human judgments. We find that reference images substantially improve the visual quality of code generated by existing models, and ablations show that AesCode benefits from references both as model input and as a source of visual rewards. Relative to same-scale Qwen3-VL baselines given the same references, AesCode-8B and AesCode-32B improve visual quality by 31.1 and 22.4 percentage points, reaching scores comparable to those of closed-source frontier models such as GPT-5.5 and Claude Opus 4.8.",
+          "categories": [],
+          "keywords": [
+            "aescode",
+            "cross-modal rewards",
+            "spatial planning",
+            "verifiable correctness",
+            "aesthetic quality",
+            "visual quality"
+          ],
+          "matched_keywords": []
+        },
+        "2610.13989": {
+          "title": "PsyBer-Agent: A Psychology-Driven User Agent for Recommender Systems",
+          "abstract": "Evaluating recommender systems before deployment requires simulators that remain realistic over long, closed-loop interaction cycles. Current LLM-based agents generally function as surface imitators that generate realistic short-term responses but fail to capture the underlying user dynamics such as fatigue, affect, and shifting preferences. We propose PsyBer-Agent, a psychology-inspired simulator that models these dynamics through its Psy-Engine. This engine represents each user with three evolving, model-defined latent states. To calibrate simulated behavior against real interaction logs, we align log-conditioned reference trajectories with simulator-generated latent-state trajectories via Unbalanced Gromov--Wasserstein optimal transport. This approach provides structured supervision for a lightweight policy without the computational burden of fine-tuning the backbone LLM. We also introduce WebSim and the PsyBer Benchmark, which encompass multimodal scenarios and seven recommender backbones. Our framework evaluates behavioral fidelity, latent-state consistency, robustness, and responses to social-cue perturbations. On the tested horizons, PsyBer-Agent shows lower behavioral discrepancy than the prompt-only simulators while maintaining stable performance under large-scale concurrent simulation for up to 5M queued simulation tasks under bounded concurrency. Code is available in the supplementary material and at: PsyBer-Agent: https://anonymous.4open.science/r/CC66F/, WebSim Platform: https://anonymous.4open.science/r/D8EAX/.",
+          "categories": [],
+          "keywords": [
+            "psyber-agent",
+            "recommender systems",
+            "against real interaction",
+            "agents generally function",
+            "align log-conditioned reference",
+            "before deployment requires"
+          ],
+          "matched_keywords": []
+        },
+        "2610.18484": {
+          "title": "ReTerm: Recovery Training for Self-Improving Terminal Agents",
+          "abstract": "Terminal agents have shown strong abilities in complex coding tasks. However, they often struggle to recover from errors during long-running execution (e.g., command errors, faulty implementations), eventually leading to task failures. To this end, we present ReTerm, a self-improving terminal agent trained by learning how to recover from its own failed terminal tasks. To support its training, we construct a customized data pipeline and produce ReTerm-10K, a high-quality dataset that provides effective recovery demonstrations for SFT cold start. Furthermore, we propose ReTerm-GRPO, an online RL algorithm that forks from the agent's own failure states to generate multiple independent self-recovery attempts. By learning from whether these attempts successfully complete the task, the agent self-improves through its own recovery experience. Built on Qwen3.5-9B, our ReTerm-9B achieves 34.8% Pass@1 on Terminal-Bench 2.0, improving over the base model by 14.6 points. Further analysis shows that our method achieves consistently higher recovery rates across diverse error categories compared with standard GRPO training. All code, data and model are released at https://github.com/twothsnd/ReTerm.",
+          "categories": [],
+          "keywords": [
+            "self-improving terminal",
+            "terminal agents",
+            "reterm",
+            "achieves consistently higher",
+            "agent own failure",
+            "agent self-improves through"
+          ],
+          "matched_keywords": []
+        },
+        "2610.17656": {
+          "title": "Open-o3-Video-v2: Seek, Ground, and Reason with Verifiable Spatio-Temporal Evidence",
+          "abstract": "Reliable video reasoning requires models to produce correct answers and expose supporting visual evidence. Open-o3-Video enables verifiable reasoning by embedding timestamps and object-level bounding boxes into reasoning traces, but is restricted to frames from an initial sparse sampler. We introduce Open-o3-Video-v2, which formulates video reasoning as a unified agentic evidencegrounded process. The model identifies missing information, acquires additional observations, grounds the moments and objects supporting its reasoning, and writes this evidence into the trajectory before continuing or answering. To support this behavior, we construct STGR-v2-CoT135K, including 52K multi-turn agentic grounded reasoning trajectories, and STGR-v2-RL-13K for reinforcement learning. We further propose Clue-Seek GRPO (CS-GRPO), which tracks how tool calls change accumulated evidence, rewards clue coverage and step-wise gains, and penalizes excessive, repetitive, or uninformative retrieval. On V-STaR, Open-o3-Video-v2-4B achieves 40.4% mAM and 56.3% mLGM, outperforming its Qwen3-VL-4B backbone by 8.5% and 12.6%, respectively. It also delivers consistent gains across general video understanding, long-video reasoning, and temporal grounding benchmarks. These results show that active evidence acquisition and verifiable object-level grounding are complementary for reliable video reasoning. The code and models are released at https://msalab-pku.github.io/projects/Open-o3-Video-v2.",
+          "categories": [],
+          "keywords": [
+            "reliable video reasoning",
+            "open-o3-video-v2",
+            "accumulated evidence rewards",
+            "acquires additional observations",
+            "active evidence acquisition",
+            "additional observations grounds"
+          ],
+          "matched_keywords": []
+        },
+        "2610.18862": {
+          "title": "DoubtLess: Training-Free Contrastive Decoding for Efficient Reasoning",
+          "abstract": "Reasoning models achieve strong performance through long chains of thought (CoT), but often spend more tokens than needed to solve a problem. Existing ways to shorten the CoT require additional training for each model, add a fixed steering vector to the model's hidden states, or use decoding heuristics such as stopping early or banning words like \"wait\", which can reduce accuracy. We propose DoubtLess, a training-free decoding method in which a much smaller reasoning model steers the large one towards brevity. The small model reads the large model's CoT so far twice, once prompted to be brief (the brief thinker) and once prompted to be verbose (the verbose thinker), and the difference between its two logit vectors, scaled by a strength, is added to the large model's logits at every step of the CoT. On seven benchmarks of competition mathematics, graduate-level science and competitive programming, DoubtLess shortens the CoT of Qwen3-32B by 31% with unchanged accuracy, outperforming five inference-time baselines. We also show that DoubtLess reduces thinking tokens per turn by 20% in a self-debugging coding agent with unchanged task performance. It also generalizes to two other model families with unchanged accuracy. When combined with training-based compression, it further shortens the CoT of a model already trained for brevity. Ablations and behavioral analysis show that DoubtLess reduces repeated checking, with most token savings coming after the correct answer first appears in the CoT. Our code is available at https://github.com/leoluolol/DoubtLess.",
+          "categories": [],
+          "keywords": [
+            "doubtless",
+            "doubtless reduces",
+            "once prompted",
+            "unchanged accuracy",
+            "cot",
+            "accuracy outperforming five"
           ],
           "matched_keywords": []
         },
@@ -6730,8 +6858,8 @@
           "keywords": [
             "fixed-point flow matching",
             "flow policies",
-            "online rl",
             "optimal policy",
+            "online rl",
             "ffm",
             "action gradients serve"
           ],
@@ -7700,8 +7828,8 @@
             "plaw-vla",
             "long-horizon control",
             "pp gain",
-            "latent world",
-            "future prediction"
+            "future prediction",
+            "future states"
           ],
           "matched_keywords": [
             "world model"
@@ -8131,9 +8259,9 @@
           "keywords": [
             "fused text-image",
             "modality composition",
-            "modality preference",
             "corpora but",
             "irrelevant text",
+            "modality preference",
             "text image"
           ],
           "matched_keywords": []
@@ -9787,22 +9915,6 @@
           ],
           "matched_keywords": []
         },
-        "2610.11850": {
-          "title": "VEDJE: Video-Efficient Discriminative Joint Encoder for Scalable Video-Text Retrieval",
-          "abstract": "Finding the right video often requires distinguishing similar scenes in which different events occur. Joint matching improves retrieval, but processing rich video representations for each query is costly. VEDJE compresses features within sampled frames while keeping their representations separate in a reusable cache. Feature-change prediction supplies an auxiliary training signal that improves retrieval from the compressed cache without adding work at query time. On MSR-VTT, MSVD, DiDeMo, and ActivityNet, VEDJE improves R@1 over matched first-stage retrievers in both retrieval directions. On MSR-VTT, it reaches 59.8 text-to-video R@1 with a fine-tuned VideoCLIP-XL first stage. In the VideoPrism configuration, shrinking the per-video cache fourfold to 12 KiB preserves text-to-video recall within 0.2 points. These results show that accurate video search can operate on compact evidence, encoded once and reused as new queries arrive.",
-          "categories": [
-            "cs.CV"
-          ],
-          "keywords": [
-            "improves retrieval",
-            "vedje",
-            "accurate video search",
-            "activitynet vedje improves",
-            "auxiliary training signal",
-            "but processing rich"
-          ],
-          "matched_keywords": []
-        },
         "2610.11857": {
           "title": "Pose-Free Feed-Forward 3D Inpainting via Learnable Mask Attention and Support Token Refinement",
           "abstract": "3D scene inpainting aims to recover missing or occluded regions in edited 3D scenes, while ensuring geometric and textural consistency. Existing approaches, however, typically require accurately calibrated camera poses, which restricts their applicability in casual, in-the-wild scenarios and introduces additional preprocessing overhead. To overcome this limitation, we present FreeInpaint, a novel feed-forward framework that generates complete and 3D-consistent scenes directly from unposed multi-view images with masked regions. At its core, FreeInpaint extends a 3D foundation model to propagate masked regions from a reference view to other unposed views, bridging 3D reconstruction and scene inpainting while preserving the model's native ability to recover camera poses and scene geometry. Our method addresses two key challenges in adapting feed-forward 3D foundation models to masked inputs. First, masked regions can corrupt cross-view correspondence reasoning, degrading pose estimation and geometry recovery. To address this, we introduce a Learnable Mask Attention mechanism that preserves the spatial anchoring of reliable observations while allowing masked regions to progressively absorb useful context in deeper layers. Second, under severe occlusions, a single forward pass often lacks sufficient appearance evidence for high-fidelity completion. Therefore, we propose a Support Token Refinement strategy, which injects diffusion-generated support evidence as confidence-weighted auxiliary tokens to refine under-observed regions while preserving the original spatial anchor. Extensive experiments across diverse datasets demonstrate that FreeInpaint achieves superior inpainting quality, eliminating the reliance on pre-computed camera poses while keeping a fast inference speed. The project page is this https URL.",
@@ -10312,8 +10424,8 @@
             "high-dynamic",
             "streaming video",
             "fps",
-            "video understanding",
-            "adjusts incoming frame"
+            "adjusts incoming frame",
+            "alone when finer"
           ],
           "matched_keywords": []
         },
@@ -16598,10 +16710,10 @@
           "keywords": [
             "recursive game creator",
             "reviewer",
-            "player",
             "achieves state-of-the-art overall",
             "achieves strict task",
-            "advance agentic game"
+            "advance agentic game",
+            "against game-specific criteria"
           ],
           "matched_keywords": []
         },
@@ -16667,8 +16779,8 @@
           "keywords": [
             "iterative agent self-distillation",
             "resail",
-            "interaction steps",
             "pi-conditioned behavior",
+            "interaction steps",
             "action prediction accuracy",
             "average absolute gain"
           ],
@@ -18222,8 +18334,8 @@
             "mean rmse",
             "observation-level",
             "standard deviation",
-            "days",
-            "achieves mean rmse"
+            "achieves mean rmse",
+            "affect reported performance"
           ],
           "matched_keywords": []
         },
@@ -18644,8 +18756,8 @@
             "long-context video understanding",
             "heico-focus",
             "procedural understanding",
-            "temporal grounding",
-            "mean accuracy"
+            "mean accuracy",
+            "temporal grounding"
           ],
           "matched_keywords": []
         },
@@ -24478,8 +24590,8 @@
           "keywords": [
             "physical inconsistencies",
             "video world",
-            "last exam",
             "physical relationships",
+            "last exam",
             "reference videos",
             "achieves higher agreement"
           ],
@@ -34258,6 +34370,20 @@
           ],
           "matched_keywords": []
         },
+        "2610.18010": {
+          "title": "Fish Audio Drama 3 Technical Report",
+          "abstract": "We introduce Fish Audio Drama 3, an open-source speech generation model that turns text into directed performances, built on a 35B-parameter mixture-of-experts backbone that activates 3B parameters per token. It clones voices from multiple references, follows natural-language direction, revises a take when the next turn gives a note, voices multi-character scenes, edits existing speech by infilling, and synthesizes long-form and streaming audio. Multi-turn revision, scene dubbing, editing by infilling, and streaming text input are new in Drama 3, all in one model. Drama 3 pairs the hybrid linear-attention backbone with a new codebook multi-token-prediction audio decoder that predicts the acoustic codebooks of each frame in dedicated layers that attend over the entire sequence. The model is trained with a three-stage pre-training recipe, instruction fine-tuning, and large-batch reinforcement learning whose only reward is a single learned model of human preference. Its inference engine decodes a single stream at 271 frames per second on one H200, against 177 for Fish Audio S2, although Drama 3 has more than seven times as many parameters. The model weights are available on GitHub (https://github.com/fishaudio/fish-speech) and Hugging Face (https://huggingface.co/fishaudio/drama-3), and inference is available through SGLang-Omni (https://github.com/sgl-project/sglang-omni). We highly encourage readers to visit https://fish.audio to direct their own performances.",
+          "categories": [],
+          "keywords": [
+            "fish audio drama",
+            "activates parameters per",
+            "audio drama technical",
+            "audio s2 although",
+            "available through sglang-omni",
+            "b-parameter mixture-of-experts backbone"
+          ],
+          "matched_keywords": []
+        },
         "2610.14709": {
           "title": "Vela: User Behavior as Supervision Sparks LLM Intelligence",
           "abstract": "Large language models are increasingly deployed in applications that act on users' long-term behavior histories, from personal assistants to recommendation and advertising systems. These applications demand the user dimension of LLM intelligence: inferring a person's preferences, intent, and likely future actions from weeks to years of behavior data. Yet current models are trained on static text or synthetic data, neither of which captures how user behavior evolves over time. Real-world behavior records, already available at scale on content platforms and in personal-assistant agents, offer a natural supervisory signal. We propose user behavior as supervision and introduce Vela, a framework that converts real user behavior data into trainable tasks and trajectories. From the anonymized behavior records of 100,000 users, Vela generates 100,000 tasks across 91 real-world task templates; difficulty-based filtering and trajectory acceptance criteria retain approximately 75,000 tasks with selected training trajectories. Fine-tuning Qwen3.6-35B-A3B on these trajectories improves performance over the base model by up to 11.5 points on user-related tasks and by an average of 4 points on general benchmarks. Training on more user behavior data further improves user-related performance, and reinforcement learning after fine-tuning outperforms reinforcement learning from the base model by up to 7.7 points. These gains suggest that real-world user behavior is a scalable source of supervision for both user-centered capabilities and the broader intelligence of LLMs.",
@@ -34843,8 +34969,8 @@
             "cs.AI"
           ],
           "keywords": [
-            "system one",
             "graph-text input",
+            "system one",
             "accurate adjacency recognition",
             "adjacency recognition does",
             "alongside language-model baselines",
@@ -35909,7 +36035,7 @@
             "spatial temporal coherence",
             "temporal coherence adversarial",
             "spatial attack",
-            "against video"
+            "modalities expansion"
           ],
           "matched_keywords": []
         },
