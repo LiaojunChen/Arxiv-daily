@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-10-16T05:41:23+00:00",
+  "updated_at": "2026-10-16T09:00:15+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-7ba273e634db7864860cd46f": {
-      "run_id": "daily-7ba273e634db7864860cd46f",
-      "generated_at": "2026-10-16T05:41:23+00:00",
+    "daily-cefd69c755b94d56bf2f2be6": {
+      "run_id": "daily-cefd69c755b94d56bf2f2be6",
+      "generated_at": "2026-10-16T09:00:15+00:00",
       "selected_ids": [
         "2610.21095",
         "2610.22311",
@@ -2581,11 +2581,11 @@
           ],
           "keywords": [
             "ti2i flow matching",
-            "classifier-free guidance",
             "broader generative modeling",
             "context classifier-free guidance",
             "controllable image editing",
-            "early flow steps"
+            "early flow steps",
+            "enabling richer alignment-preservation"
           ],
           "matched_keywords": []
         },
@@ -9067,6 +9067,80 @@
             "unified model"
           ]
         },
+        "2610.19397": {
+          "title": "SERO: Learning from Executable Oracle Continuations for Long-Horizon Agentic Reinforcement Learning",
+          "abstract": "Long-horizon agentic RL is constrained by the futures visited by the current policy. When rollouts fail to reach useful behaviors, improved credit assignment cannot provide supervision for states and actions that were never encountered. On-policy distillation (OPD) introduces teacher guidance on policy-induced states, and recent multi-turn variants improve how this guidance is scheduled, replayed, refined, or validated. However, they do not directly use the oracle-controlled future itself as the training trajectory. We introduce State-Rooted Executable Rollout Optimization (SERO), which augments on-policy agentic RL with executable oracle continuations. SERO restores a state actually reached by the current policy and lets a training-only oracle continue interacting with the real environment, making the downstream observations and oracle actions themselves available for learning. It then applies policy-reachability weighting, which weights each oracle step by the frozen behavior policy's compatibility with the preceding oracle actions. This allows deeper supervision to become effective as the policy becomes more compatible with the oracle branch. The oracle loss is optimized separately from the base RL estimator and no oracle is used at inference time. We evaluate SERO on two challenging interactive-agent benchmarks, ALFWorld and WebShop, using Qwen2.5-1.5B-Instruct and Qwen2.5-7B-Instruct. On ALFWorld, learning the full executable continuation is substantially more effective than supervising only the root oracle action, while policy-reachability weighting further improves out-of-distribution performance.",
+          "categories": [
+            "cs.AI"
+          ],
+          "keywords": [
+            "executable oracle continuations",
+            "sero",
+            "oracle actions",
+            "policy-reachability weighting",
+            "long-horizon agentic",
+            "agentic rl"
+          ],
+          "matched_keywords": []
+        },
+        "2610.17670": {
+          "title": "Cowork-Gym: Synthesizing Interactive Work Environments at Scale",
+          "abstract": "Cowork agents navigate dependencies across tools and files while adapting to changing user requirements and edits to shared workspaces. Scaling such environments requires maintaining consistency among task objectives, executable resources, user behavior, and success criteria. We introduce Cowork-Gym, a framework that synthesizes Cowork environments through a build-execute-revise loop that uses execution evidence and review feedback to validate and repair generated environments. To capture realistic Cowork dynamics, a stateful user simulator responds to the agent's actions through dialogue and direct edits to the shared workspace. We synthesize 64.9K environments across 14 application scenarios and use them to post-train 9B, 27B, and 35B-A3B Qwen models with supervised fine-tuning, reinforcement learning, and on-policy distillation. Averaged across six agentic benchmarks, these models outperform their corresponding base checkpoints by 8.7, 6.4, and 4.1 points, respectively. Ours-27B ranks second overall among the evaluated models and achieves the highest average scores on PawBench and ClawEval, outperforming models with over 100B total parameters on both benchmarks.",
+          "categories": [
+            "cs.AI"
+          ],
+          "keywords": [
+            "cowork",
+            "actions through dialogue",
+            "agent actions through",
+            "agents navigate dependencies",
+            "among task objectives",
+            "capture realistic cowork"
+          ],
+          "matched_keywords": []
+        },
+        "2610.21601": {
+          "title": "Waypoint-OPD: Transferring RL-Induced Policy Shifts via Gated On-Policy Distillation",
+          "abstract": "Policy-shift distillation reuses the difference between a teacher's log probabilities before and after reinforcement learning (RL) as supervision on student-generated trajectories. However, this endpoint policy shift cannot reveal whether local action preferences evolved consistently during teacher training. The same endpoint shift can result from early and late shifts that reinforce or partially cancel each other. We investigate whether agreement between early and late teacher policy shifts can guide selective transfer. We introduce Waypoint-guided On-Policy Distillation (Waypoint-OPD), which uses an intermediate teacher checkpoint from the same RL run to compare early and late shifts in relative action preferences at student-visited prefixes. We gate the endpoint shift according to the directional agreement between the early and late shifts, suppressing it when they point in opposing directions. Compared with endpoint-only transfer, our method requires only one additional frozen-teacher scoring pass. Using RL-trained Qwen3-4B teachers, we evaluate our method with Qwen3-8B, Qwen3-14B, and Qwen3-30B-A3B as student models in mathematical and code reasoning. In all six domain--student settings, Waypoint-OPD achieves the highest domain-average score among the compared distillation methods. Ablations with the Qwen3-8B student show that removing or shuffling gates reduces mathematical reasoning performance. These results support the use of directional agreement between early and late teacher policy shifts to weight the endpoint shift during student training.",
+          "categories": [],
+          "keywords": [
+            "late teacher policy",
+            "teacher policy shifts",
+            "endpoint shift",
+            "late shifts",
+            "directional agreement",
+            "action preferences"
+          ],
+          "matched_keywords": []
+        },
+        "2610.22355": {
+          "title": "OmniVerifier-C1: Decomposed Graded Verifier for Rule-Governed Generative World Modeling",
+          "abstract": "Generative visual verifiers play a crucial role in advancing multimodal intelligence. To enhance the robustness of visual verifiers in complex multimodal scenarios involving compositional requirements, we move beyond conventional binary verifiers that produce only True/False discrete judgments and introduce a verifier that automatically decomposes complex prompts or environmental rules into fine-grained components and assigns pointwise scores to provide a continuous and more informative critique signal. Our experiments further demonstrate that these structured and interpretable outputs improve the verifier's generalization to out-of-domain multimodal critic tasks. To train this verifier, we introduce a Decoupled RL training strategy that jointly optimizes sub-question-level binary judgment and global alignment scoring, using precise local feedback to develop fine-grained verification capabilities that provide a foundation for reliable continuous scoring at the global level. Under a general reinforcement learning framework, we first empirically demonstrate that the proposed pointwise graded verifier significantly outperforms binary verifiers in traditional text-to-image scenarios. We then extend our investigation to rule-governed generative world modeling where generative models are leveraged for world simulation and world reasoning under explicit rules. From a theoretical standpoint, we further show that a pairwise verification paradigm yields more accurate critiques than the pointwise formulation when ground-truth images are available, with empirical results on diverse structured world-modeling tasks such as Maze and Sudoku further validating the effectiveness of our approach. Overall, our findings suggest a key insight: the transition from generative models to structured world-modeling agents critically hinges on the availability of accurate pairwise graded visual verifiers.",
+          "categories": [],
+          "keywords": [
+            "generative world modeling",
+            "rule-governed generative world",
+            "visual verifiers",
+            "binary verifiers",
+            "graded verifier",
+            "structured world-modeling"
+          ],
+          "matched_keywords": []
+        },
+        "2610.06598": {
+          "title": "SimForcing: Distilling Simulation Motion Priors into Real-Domain Robot World Models",
+          "abstract": "Action-conditioned robot world models must respond precisely to robot trajectories while preserving realistic visual dynamics, yet learning both from heterogeneous robot videos remains challenging. Simulation offers structured motion supervision, but appearance differences hinder direct transfer, and inaccurate simulation predictions can misguide real-video generation. We present SimForcing, a simulation-guided framework that uses simulation both as a source of transferable motion knowledge and as a controllable reference for prediction. First, we transfer motion knowledge from a simulation teacher through latent-motion distillation, aligning temporal changes in latent space to internalize motion priors while mitigating the influence of appearance differences. Second, we introduce multi-block simulation conditioning with condition dropout to exploit predicted simulation trajectories without relying excessively on their accuracy. Our simulation-conditioning classifier-free guidance scheme unifies these two ideas by balancing predictions based on internalized motion knowledge with those additionally guided by simulation latents. The jointly trained student generates both simulation conditions and real-domain videos, requiring no additional world model at inference. On Bridge, SimForcing achieves the best PSNR, SSIM, LPIPS, and FVD among the compared methods without external embodied pretraining. Evaluation on InternData-A1 further supports its applicability across robot datasets. Moreover, using our trained world model to initialize a vision-language-action model improves LIBERO success, suggesting its utility for downstream policy learning. https://github.com/Wang-Xiaodong1899/SimForcing",
+          "categories": [],
+          "keywords": [
+            "motion knowledge",
+            "simforcing",
+            "appearance differences",
+            "motion priors",
+            "robot world",
+            "aligning temporal changes"
+          ],
+          "matched_keywords": []
+        },
         "2610.16143": {
           "title": "All-St3R SLAM: Real-time RGB Dynamic SLAM with Pixel-wise Motion Masking",
           "abstract": "SLAM (Simultaneous Localization and Mapping) is a core technology in autonomous systems that enables them to estimate their own position and build a map of unknown environments simultaneously. SLAM systems in dynamic environments are of great practical importance. However, existing dynamic SLAM approaches still have several limitations like over-removal and high computational costs. To address these limitations, we propose a real-time RGB Dynamic SLAM framework that precisely removes moving objects at the pixel level without relying on predefined labels or segmentation models. Our system combines pixel motion predicted by ego-motion using DUSt3R with point tracking from All-Tracker, removing only actually moving pixels by analyzing discrepancies between the two motion sources. Unlike object-level masking methods, our approach eliminates only currently moving regions, allowing temporarily static parts to be utilized for tracking. Operating at approximately 10 FPS, the system achieves real-time performance on standard 30 FPS video streams by subsampling every 3 frames. Relying solely on RGB inputs, this significantly improves upon state-of-the-art dense dynamic SLAM approaches (0.5-3 FPS), presenting a highly practical solution.",
@@ -13972,22 +14046,6 @@
             "early warning",
             "infectious-disease",
             "apparent leaving big"
-          ],
-          "matched_keywords": []
-        },
-        "2610.19397": {
-          "title": "SERO: Learning from Executable Oracle Continuations for Long-Horizon Agentic Reinforcement Learning",
-          "abstract": "Long-horizon agentic RL is constrained by the futures visited by the current policy. When rollouts fail to reach useful behaviors, improved credit assignment cannot provide supervision for states and actions that were never encountered. On-policy distillation (OPD) introduces teacher guidance on policy-induced states, and recent multi-turn variants improve how this guidance is scheduled, replayed, refined, or validated. However, they do not directly use the oracle-controlled future itself as the training trajectory. We introduce \\textbf{State-Rooted Executable Rollout Optimization (SERO)}, which augments on-policy agentic RL with executable oracle continuations. SERO restores a state actually reached by the current policy and lets a training-only oracle continue interacting with the real environment, making the downstream observations and oracle actions themselves available for learning. It then applies \\textbf{policy-reachability weighting}, which weights each oracle step by the frozen behavior policy's compatibility with the preceding oracle actions. This allows deeper supervision to become effective as the policy becomes more compatible with the oracle branch. The oracle loss is optimized separately from the base RL estimator and no oracle is used at inference time. We evaluate SERO on two challenging interactive-agent benchmarks, ALFWorld and WebShop, using Qwen2.5-1.5B-Instruct and Qwen2.5-7B-Instruct. On ALFWorld, learning the full executable continuation is substantially more effective than supervising only the root oracle action, while policy-reachability weighting further improves out-of-distribution performance.",
-          "categories": [
-            "cs.AI"
-          ],
-          "keywords": [
-            "executable oracle continuations",
-            "sero",
-            "oracle actions",
-            "policy-reachability weighting",
-            "long-horizon agentic",
-            "agentic rl"
           ],
           "matched_keywords": []
         },
@@ -29868,22 +29926,6 @@
           ],
           "matched_keywords": []
         },
-        "2610.17670": {
-          "title": "Cowork-Gym: Synthesizing Interactive Work Environments at Scale",
-          "abstract": "Cowork agents navigate dependencies across tools and files while adapting to changing user requirements and edits to shared workspaces. Scaling such environments requires maintaining consistency among task objectives, executable resources, user behavior, and success criteria. We introduce Cowork-Gym, a framework that synthesizes Cowork environments through a build-execute-revise loop that uses execution evidence and review feedback to validate and repair generated environments. To capture realistic Cowork dynamics, a stateful user simulator responds to the agent's actions through dialogue and direct edits to the shared workspace. We synthesize 64.9K environments across 14 application scenarios and use them to post-train 9B, 27B, and 35B-A3B Qwen models with supervised fine-tuning, reinforcement learning, and on-policy distillation. Averaged across six agentic benchmarks, these models outperform their corresponding base checkpoints by 8.7, 6.4, and 4.1 points, respectively. Ours-27B ranks second overall among the evaluated models and achieves the highest average scores on PawBench and ClawEval, outperforming models with over 100B total parameters on both benchmarks.",
-          "categories": [
-            "cs.AI"
-          ],
-          "keywords": [
-            "cowork",
-            "actions through dialogue",
-            "agent actions through",
-            "agents navigate dependencies",
-            "among task objectives",
-            "capture realistic cowork"
-          ],
-          "matched_keywords": []
-        },
         "2610.17672": {
           "title": "Encounter-Driven City-Scale Human Mobility Generation with Large Language Models",
           "abstract": "Large language models (LLMs) have shown strong potential for human mobility generation by modeling individual routines, activities, and mobility preferences. However, existing approaches remain largely resident-centric: generating realistic individual trajectories does not necessarily recover the encounters that emerge when multiple residents co-occur at the same place and time. To this end, we study encounter-aware human mobility generation, which jointly preserves individual mobility and population-level interaction structure. We propose EncounterMob, an encounter-driven LLM framework consisting of a coarse-to-fine Encounter Generator and an Iterative Coupling Framework. The Encounter Generator first captures city-level encounter rhythms and then instantiates participant-time-venue encounters, while the Iterative Coupling Framework coordinates these encounters with personal mobility behavior through successive refinement. We further introduce an encounter recovery protocol covering encounter marginal and joint distributions over residents, times, and venues. Experiments on the Japan and NYC datasets show that EncounterMob outperforms all external baselines on all seven encounter metrics and all six personal mobility metrics. Compared with ELLMob, it reduces the participant-time-venue joint error by 40.4%/41.7% and the mean personal mobility error by 58.8%/32.7% on Japan/NYC, respectively.",
@@ -35313,8 +35355,8 @@
           ],
           "keywords": [
             "lm agents",
-            "action preferences",
             "action values",
+            "action preferences",
             "action preferences interact",
             "action preferences throughout",
             "actions follow reasoning"
@@ -38039,8 +38081,8 @@
             "locations along",
             "object carrying",
             "transport objects",
-            "rl training",
             "humanoid",
+            "rl training",
             "along designated trajectories"
           ],
           "matched_keywords": []
@@ -38444,8 +38486,8 @@
             "exploitation branch",
             "diffusion policies",
             "cfg-policy",
-            "classifier-free guidance",
-            "acquired capabilities while"
+            "acquired capabilities while",
+            "action distributions offers"
           ],
           "matched_keywords": []
         },
