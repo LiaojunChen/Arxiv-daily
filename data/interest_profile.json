@@ -50378,7 +50378,7 @@
   "delivery": {
     "batch_id": "cbfd02332e3c758147f7188a",
     "run_id": "daily-23d55d9fcb69e0fa6a1ab3ac",
-    "updated_at": "2026-10-16T01:29:12+00:00",
+    "updated_at": "2026-10-16T01:33:14+00:00",
     "profile_version": "992927a1524b59b3",
     "papers": [
       {
@@ -51007,7 +51007,60 @@
           "cs.RO",
           "cs.CV"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Yunze Liu",
+            "affiliation": "NVIDIA"
+          },
+          {
+            "author": "Jing Wang",
+            "affiliation": "NVIDIA"
+          },
+          {
+            "author": "Wenkun He",
+            "affiliation": "MIT"
+          },
+          {
+            "author": "Guanqi Zhan",
+            "affiliation": "NVIDIA"
+          },
+          {
+            "author": "Junyu Chen",
+            "affiliation": "NVIDIA"
+          },
+          {
+            "author": "Wenhang Ge",
+            "affiliation": "NVIDIA"
+          },
+          {
+            "author": "Yuchao Gu",
+            "affiliation": "NVIDIA"
+          },
+          {
+            "author": "Zhuoyang Zhang",
+            "affiliation": "MIT"
+          },
+          {
+            "author": "Zhen Dong",
+            "affiliation": "NVIDIA"
+          },
+          {
+            "author": "Yuke Zhu",
+            "affiliation": "NVIDIA"
+          },
+          {
+            "author": "Linxi \"Jim\" Fan",
+            "affiliation": "NVIDIA"
+          },
+          {
+            "author": "Song Han",
+            "affiliation": "MIT"
+          },
+          {
+            "author": "Han Cai",
+            "affiliation": "NVIDIA"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-15",
         "listing_date": "2026-10-15",
@@ -51017,7 +51070,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "unresolved",
+        "affiliation_status": "resolved",
         "keywords": [
           "robot in-context",
           "robota-embed",
