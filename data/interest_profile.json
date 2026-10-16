@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-10-16T04:44:40+00:00",
+  "updated_at": "2026-10-16T05:41:23+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-0d2243634958b7c710758b01": {
-      "run_id": "daily-0d2243634958b7c710758b01",
-      "generated_at": "2026-10-16T04:44:40+00:00",
+    "daily-7ba273e634db7864860cd46f": {
+      "run_id": "daily-7ba273e634db7864860cd46f",
+      "generated_at": "2026-10-16T05:41:23+00:00",
       "selected_ids": [
         "2610.21095",
         "2610.22311",
@@ -1366,22 +1366,6 @@
           ],
           "matched_keywords": []
         },
-        "2610.20603": {
-          "title": "CommerceGen-Studio: An End-to-End Framework for Commercial-Grade Main-Image Generation",
-          "abstract": "We present CommerceGen-Studio, an end-to-end framework for generating commercial-grade main images for e-commerce Stock Keeping Units (SKUs). Our framework is organized along a three-stage pipeline of information extraction, semantic rewriting, and multi-condition generation: Prompt-Eval-Refine-Loop Agent (PERL-Agent) distills heterogeneous SKU metadata into concise selling-point text lists through an iterative closed loop of VLM and LLM roles scored by a reference-free rubric. Layout Thinker Optimization (LTO) aligns the rewriter with both caption and rendered-image quality via alternating domain-specific policy optimization. SKU-DiT, trained under Reinforce-Distill-Reinforce (RDR) progressive training, conditions jointly on the white-background product image, the trademark crop, and the structured layout to hold subject fidelity, trademark integrity, and character-level text accuracy together. The framework runs in production at a scale of millions of main images per day with a latency of a few seconds per image, which we believe makes it among the first systems of this kind to operate at commercial scale. We also release CommerceGen-Bench, a benchmark of hard cases collected from live traffic across all product categories. On it, our framework achieves the highest overall scores among the evaluated open-source baselines on both editing tracks, with and without prompt enhancement. It also matches much larger closed-source models, and beats several of them at Instruction Following and Product Integration - the two properties that determine whether an image can be published.",
-          "categories": [
-            "cs.CV"
-          ],
-          "keywords": [
-            "main images",
-            "end-to-end framework",
-            "agent perl-agent distills",
-            "along three-stage pipeline",
-            "alternating domain-specific policy",
-            "character-level text accuracy"
-          ],
-          "matched_keywords": []
-        },
         "2610.16784": {
           "title": "InfoVis: Unified Slide Image Generation and Editing",
           "abstract": "Generating and editing presentation slides requires models to combine accurate text rendering, instruction following, visual grounding, aesthetic design, and precise editing within one canvas. Existing work covers only subsets of these capabilities and lacks large-scale slide-native supervision and diagnostic evaluation. We formulate four slide-centric tasks and build a scalable data engine with over 13M continual-pretraining records and 1.9M supervised fine-tuning records. We also introduce VisSlideBench, a benchmark of 1,527 manually screened instances that covers all four tasks with task-specific, multidimensional evaluation. Its automatic rankings agree with blinded, dimension-wise human rankings. Using these resources, we train InfoVis, a unified 9B slide generation and editing model. On VisSlideBench, InfoVis leads every evaluated open-source model on all eleven metrics and scores 7.94 overall against 7.99 for Nano-Banana-2. Starting from FLUX.2-klein-base-9B, slide-specific post-training adds 1.6 points overall, with the largest generation gains in content faithfulness; the remaining gap to proprietary models is smallest in content faithfulness and largest in aesthetic quality. Built on InfoVis, our document-to-slide workflow achieves the second-highest Aesthetics score on the external SlidesGen-Bench. We will release the model, code, data, and benchmark.",
@@ -1529,20 +1513,6 @@
             "rpo",
             "dense attention",
             "stochastic exploration"
-          ],
-          "matched_keywords": []
-        },
-        "2610.17560": {
-          "title": "EdgeWise: Bringing Long-Horizon Agents to the Edge via Selective Cloud Delegation",
-          "abstract": "Complex and long-horizon agent tasks often rely on frontier models deployed in the cloud to achieve strong performance. However, using these models for every step of a long-horizon trajectory incurs substantial inference cost, even though not all steps may require the same level of model capability. In this paper, we find that allocating the LLM to only a small subset of key steps can achieve performance comparable to full LLM execution while significantly reducing inference cost. Motivated by this observation, we propose EdgeWise, an edge-cloud collaboration framework that deploys an SLM on the local device as the primary solver and selectively delegates critical steps to a cloud LLM when stronger model capacity is needed. To enable autonomous delegation without additional models at inference time, we introduce a step-level RL method that jointly optimizes task solving and delegation, with fine-grained credit assignment for individual delegation decisions. We also introduce an external judge-based delegation strategy and use it to systematically investigate key design choices in edge-cloud collaboration, including when to delegate, how delegation decisions should be made, what context should be shared, and how frequently the cloud LLM should be invoked. Experiments show that EdgeWise matches or outperforms pure-LLM execution while reducing inference cost up to 62% on SWE-Rebench and 34% on Terminal-Bench 2.1. We further deploy EdgeWise on a local workstation, demonstrating comparable cost savings in a practical edge-cloud setting.",
-          "categories": [],
-          "keywords": [
-            "reducing inference cost",
-            "edgewise",
-            "delegation decisions",
-            "cloud llm",
-            "edge-cloud collaboration",
-            "execution while"
           ],
           "matched_keywords": []
         },
@@ -1721,24 +1691,6 @@
           ],
           "matched_keywords": []
         },
-        "2610.21463": {
-          "title": "Trajectory-Level Speculation with Semantic Verification for Tool-Using Agents",
-          "abstract": "Large language model agents solve tasks through long sequences of tool calls, and the prevailing design has a single strong model generate every step, although many steps are routine enough for a much smaller model. Existing ways of sharing this work keep the strong model as the generator: routers and collaborative agents decide which model handles each query or step, and speculative methods check a small model's drafts one step at a time, usually against the strong model's own action. We introduce SpecAgent, a collaboration protocol that turns the strong model from the author of each step into a reviewer of steps drafted by a weak model. The weak model executes read-only tool calls as it drafts, so that every step is grounded in real observations, and holds the first action that would modify the environment. The strong model then verifies the drafted segment in a single prefill pass, commits the longest prefix it judges semantically valid, and repairs the first rejected step. Because verification replaces autoregressive decoding with parallel prefill, the strong model decodes only short verdicts and occasional repairs rather than every step. On $\\tau^2$-Bench, SpecAgent comes within one point of the strong model's success rate while roughly halving memory traffic and wall time, and on AutomationBench and VitaBench it recovers 44-75% of the quality gap while lowering both. In an edge-cloud deployment on MCP-Atlas with three cloud models, it closes 53-75% of the weak-strong quality gap while the strong model generates at most half as many tokens. These results suggest that a strong model need not author every step of an agent: reviewing grounded drafts retains most of its quality while cutting both latency and memory traffic.",
-          "categories": [
-            "cs.CL",
-            "cs.AI",
-            "cs.LG"
-          ],
-          "keywords": [
-            "quality gap while",
-            "every step",
-            "memory traffic",
-            "although many steps",
-            "author every step",
-            "because verification replaces"
-          ],
-          "matched_keywords": []
-        },
         "2610.22186": {
           "title": "EVA-Cap: Optimizing Audiovisual Video Captioning via Event-Centric Alignment",
           "abstract": "Recent advances in Omni Language Models (OLMs) provide a unified solution for audiovisual video captioning. Nevertheless, existing approaches predominantly treat captioning as an unstructured text generation process, neglecting the inherent semantic structure of videos and leading to suboptimal fine-grained audiovisual alignment. To bridge this gap, we propose EVA-Cap, a novel framework that decomposes captions into atomic audiovisual events and transforms unstructured text supervision into event-centric alignment. We train EVA-Cap via Supervised Fine-Tuning (SFT) and Group Relative Policy Optimization (GRPO) on a self-curated dataset, EVA-Data, which is built with event-centric quality control. During the GRPO phase, the model is explicitly optimized against three event-centric alignment targets: global event completeness, intra-event attribution, and inter-event synchronization. Extensive experiments demonstrate that EVA-Cap significantly outperforms existing methods in event-centric evaluation (e.g., +9.0% average gain on ChronusAV), while achieving competitive performance on general audiovisual captioning benchmarks (e.g., +3.3% on WorldSense).",
@@ -1767,22 +1719,6 @@
             "clift",
             "agent answers natural-language",
             "agent samples greedy"
-          ],
-          "matched_keywords": []
-        },
-        "2610.22319": {
-          "title": "A team of Gemini 4 Argon agents beats Minecraft",
-          "abstract": "We placed four Gemini 4 Argon agents in a sandboxed Minecraft survival world and gave them one goal: defeat the Ender Dragon. Each agent controlled a player via an open-source library called Mineflayer and coordinated with its teammates through in-game chat and shared memory. No one assigned roles or wrote game logic. The agents planned, wrote, and debugged every program themselves. Researchers could watch the run on a live dashboard and pause or stop it at any time, but they had no cause to intervene. Starting from a randomly generated world on Easy difficulty, the team wrote 2,783 programs and defeated the dragon in 27 hours and 14 minutes, dying 605 times along the way. To our knowledge, this is the first end-to-end autonomous completion of Minecraft by AI agents, achieved using only the standard Mineflayer library without pre-scouted seeds or other game-specific tools written by humans. Winning required the agents to keep a coherent plan across thousands of dependent steps for more than a day. Complex real-world software engineering and enterprise tasks demand the same long-horizon coding and multi-agent coordination. We describe the setup, how the run unfolded, the team's strategies (dividing the work, sharing what they learned, recovering each other's items), and the limits of the result.",
-          "categories": [
-            "cs.AI"
-          ],
-          "keywords": [
-            "gemini argon agents",
-            "wrote",
-            "agent controlled player",
-            "agents beats minecraft",
-            "agents planned wrote",
-            "ai agents achieved"
           ],
           "matched_keywords": []
         },
@@ -9111,6 +9047,25 @@
             "different reward combinations"
           ],
           "matched_keywords": []
+        },
+        "2610.16355": {
+          "title": "PINT: A Unified Model with Shared Predictive Intent for Robot Manipulation",
+          "abstract": "Generalist robot manipulation can benefit from pretrained vision-language models (VLMs) for semantic reasoning and video generation models (VGMs) for world modeling. However, existing unified models that directly fuse them through shared attention at multiple layers can make it harder to draw on their specialized capabilities. We introduce PINT, a unified model that coordinates semantic reasoning, world modeling, and action generation through a shared chunk-level Predictive Intent while preserving expert-specific pathways. PINT inserts learnable Intent Tokens into the VLM sequence to form this representation, conditioning both the VGM and an Action Expert (AE). It replaces only the VGM's prompt conditioning and retains the VGM at inference, where the AE reads its representations through one-way attention. Rather than prescribing what Predictive Intent should encode, PINT learns it jointly from the native prediction objectives of the VLM, VGM, and AE, which provide complementary views of the same upcoming task execution. Training uses two stages: Stage 1 freezes the VGM so that future video prediction shapes Predictive Intent with task-relevant future dynamics, while Stage 2 fixes the learned Intent and adapts the VGM and AE. Without embodied pretraining, PINT achieves strong in-distribution (ID) performance and substantially improves out-of-distribution (OOD) generalization, reaching 15.5% on RoboTwin 2.0-Hard compared with 1.8% for Fast-WAM and 3.2% for StarVLA, and 79.5% on LIBERO-Plus compared with 51.5% and 75.0%, respectively. Across five real-world bimanual tasks, PINT reaches 68% ID and 24% OOD success, compared with 35%/9% for pretrained Motus and 67%/35% for pretrained π_{0.5}.",
+          "categories": [
+            "cs.RO"
+          ],
+          "keywords": [
+            "predictive intent",
+            "pint",
+            "vgm",
+            "ae",
+            "semantic reasoning",
+            "bimanual tasks pint"
+          ],
+          "matched_keywords": [
+            "generation model",
+            "unified model"
+          ]
         },
         "2610.16143": {
           "title": "All-St3R SLAM: Real-time RGB Dynamic SLAM with Pixel-wise Motion Masking",
@@ -17976,25 +17931,6 @@
             "distinguishes spatial placement"
           ],
           "matched_keywords": []
-        },
-        "2610.16355": {
-          "title": "PINT: A Unified Model with Shared Predictive Intent for Robot Manipulation",
-          "abstract": "Generalist robot manipulation can benefit from pretrained vision-language models (VLMs) for semantic reasoning and video generation models (VGMs) for world modeling. However, existing unified models that directly fuse them through shared attention at multiple layers can make it harder to draw on their specialized capabilities. We introduce PINT, a unified model that coordinates semantic reasoning, world modeling, and action generation through a shared chunk-level Predictive Intent while preserving expert-specific pathways. PINT inserts learnable Intent Tokens into the VLM sequence to form this representation, conditioning both the VGM and an Action Expert (AE). It replaces only the VGM's prompt conditioning and retains the VGM at inference, where the AE reads its representations through one-way attention. Rather than prescribing what Predictive Intent should encode, PINT learns it jointly from the native prediction objectives of the VLM, VGM, and AE, which provide complementary views of the same upcoming task execution. Training uses two stages: Stage 1 freezes the VGM so that future video prediction shapes Predictive Intent with task-relevant future dynamics, while Stage 2 fixes the learned Intent and adapts the VGM and AE. Without embodied pretraining, PINT achieves strong in-distribution (ID) performance and substantially improves out-of-distribution (OOD) generalization, reaching 15.5% on RoboTwin 2.0-Hard compared with 1.8% for Fast-WAM and 3.2% for StarVLA, and 79.5% on LIBERO-Plus compared with 51.5% and 75.0%, respectively. Across five real-world bimanual tasks, PINT reaches 68% ID and 24% OOD success, compared with 35%/9% for pretrained Motus and 67%/35% for pretrained $\\pi_{0.5}$.",
-          "categories": [
-            "cs.RO"
-          ],
-          "keywords": [
-            "predictive intent",
-            "pint",
-            "vgm",
-            "ae",
-            "semantic reasoning",
-            "bimanual tasks pint"
-          ],
-          "matched_keywords": [
-            "generation model",
-            "unified model"
-          ]
         },
         "2610.16641": {
           "title": "What Limits Cross-Task Generalization in World Action Models?",
@@ -55609,6 +55545,70 @@
             "applies pareto-filtered top-n",
             "approaches commonly optimize",
             "appworld skill optimization"
+          ],
+          "matched_keywords": []
+        },
+        "2610.20603": {
+          "title": "CommerceGen-Studio: An End-to-End Framework for Commercial-Grade Main-Image Generation",
+          "abstract": "We present CommerceGen-Studio, an end-to-end framework for generating commercial-grade main images for e-commerce Stock Keeping Units (SKUs). Our framework is organized along a three-stage pipeline of information extraction, semantic rewriting, and multi-condition generation: Prompt-Eval-Refine-Loop Agent (PERL-Agent) distills heterogeneous SKU metadata into concise selling-point text lists through an iterative closed loop of VLM and LLM roles scored by a reference-free rubric. Layout Thinker Optimization (LTO) aligns the rewriter with both caption and rendered-image quality via alternating domain-specific policy optimization. SKU-DiT, trained under Reinforce-Distill-Reinforce (RDR) progressive training, conditions jointly on the white-background product image, the trademark crop, and the structured layout to hold subject fidelity, trademark integrity, and character-level text accuracy together. The framework runs in production at a scale of millions of main images per day with a latency of a few seconds per image, which we believe makes it among the first systems of this kind to operate at commercial scale. We also release CommerceGen-Bench, a benchmark of hard cases collected from live traffic across all product categories. On it, our framework achieves the highest overall scores among the evaluated open-source baselines on both editing tracks, with and without prompt enhancement. It also matches much larger closed-source models, and beats several of them at Instruction Following and Product Integration - the two properties that determine whether an image can be published.",
+          "categories": [
+            "cs.CV"
+          ],
+          "keywords": [
+            "main images",
+            "end-to-end framework",
+            "agent perl-agent distills",
+            "along three-stage pipeline",
+            "alternating domain-specific policy",
+            "character-level text accuracy"
+          ],
+          "matched_keywords": []
+        },
+        "2610.17560": {
+          "title": "EdgeWise: Bringing Long-Horizon Agents to the Edge via Selective Cloud Delegation",
+          "abstract": "Complex and long-horizon agent tasks often rely on frontier models deployed in the cloud to achieve strong performance. However, using these models for every step of a long-horizon trajectory incurs substantial inference cost, even though not all steps may require the same level of model capability. In this paper, we find that allocating the LLM to only a small subset of key steps can achieve performance comparable to full LLM execution while significantly reducing inference cost. Motivated by this observation, we propose EdgeWise, an edge-cloud collaboration framework that deploys an SLM on the local device as the primary solver and selectively delegates critical steps to a cloud LLM when stronger model capacity is needed. To enable autonomous delegation without additional models at inference time, we introduce a step-level RL method that jointly optimizes task solving and delegation, with fine-grained credit assignment for individual delegation decisions. We also introduce an external judge-based delegation strategy and use it to systematically investigate key design choices in edge-cloud collaboration, including when to delegate, how delegation decisions should be made, what context should be shared, and how frequently the cloud LLM should be invoked. Experiments show that EdgeWise matches or outperforms pure-LLM execution while reducing inference cost up to 62% on SWE-Rebench and 34% on Terminal-Bench 2.1. We further deploy EdgeWise on a local workstation, demonstrating comparable cost savings in a practical edge-cloud setting.",
+          "categories": [],
+          "keywords": [
+            "reducing inference cost",
+            "edgewise",
+            "delegation decisions",
+            "cloud llm",
+            "edge-cloud collaboration",
+            "execution while"
+          ],
+          "matched_keywords": []
+        },
+        "2610.21463": {
+          "title": "Trajectory-Level Speculation with Semantic Verification for Tool-Using Agents",
+          "abstract": "Large language model agents solve tasks through long sequences of tool calls, and the prevailing design has a single strong model generate every step, although many steps are routine enough for a much smaller model. Existing ways of sharing this work keep the strong model as the generator: routers and collaborative agents decide which model handles each query or step, and speculative methods check a small model's drafts one step at a time, usually against the strong model's own action. We introduce SpecAgent, a collaboration protocol that turns the strong model from the author of each step into a reviewer of steps drafted by a weak model. The weak model executes read-only tool calls as it drafts, so that every step is grounded in real observations, and holds the first action that would modify the environment. The strong model then verifies the drafted segment in a single prefill pass, commits the longest prefix it judges semantically valid, and repairs the first rejected step. Because verification replaces autoregressive decoding with parallel prefill, the strong model decodes only short verdicts and occasional repairs rather than every step. On $\\tau^2$-Bench, SpecAgent comes within one point of the strong model's success rate while roughly halving memory traffic and wall time, and on AutomationBench and VitaBench it recovers 44-75% of the quality gap while lowering both. In an edge-cloud deployment on MCP-Atlas with three cloud models, it closes 53-75% of the weak-strong quality gap while the strong model generates at most half as many tokens. These results suggest that a strong model need not author every step of an agent: reviewing grounded drafts retains most of its quality while cutting both latency and memory traffic.",
+          "categories": [
+            "cs.CL",
+            "cs.AI",
+            "cs.LG"
+          ],
+          "keywords": [
+            "quality gap while",
+            "every step",
+            "memory traffic",
+            "although many steps",
+            "author every step",
+            "because verification replaces"
+          ],
+          "matched_keywords": []
+        },
+        "2610.22319": {
+          "title": "A team of Gemini 4 Argon agents beats Minecraft",
+          "abstract": "We placed four Gemini 4 Argon agents in a sandboxed Minecraft survival world and gave them one goal: defeat the Ender Dragon. Each agent controlled a player via an open-source library called Mineflayer and coordinated with its teammates through in-game chat and shared memory. No one assigned roles or wrote game logic. The agents planned, wrote, and debugged every program themselves. Researchers could watch the run on a live dashboard and pause or stop it at any time, but they had no cause to intervene. Starting from a randomly generated world on Easy difficulty, the team wrote 2,783 programs and defeated the dragon in 27 hours and 14 minutes, dying 605 times along the way. To our knowledge, this is the first end-to-end autonomous completion of Minecraft by AI agents, achieved using only the standard Mineflayer library without pre-scouted seeds or other game-specific tools written by humans. Winning required the agents to keep a coherent plan across thousands of dependent steps for more than a day. Complex real-world software engineering and enterprise tasks demand the same long-horizon coding and multi-agent coordination. We describe the setup, how the run unfolded, the team's strategies (dividing the work, sharing what they learned, recovering each other's items), and the limits of the result.",
+          "categories": [
+            "cs.AI"
+          ],
+          "keywords": [
+            "gemini argon agents",
+            "wrote",
+            "agent controlled player",
+            "agents beats minecraft",
+            "agents planned wrote",
+            "ai agents achieved"
           ],
           "matched_keywords": []
         },
