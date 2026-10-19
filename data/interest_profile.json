@@ -55656,7 +55656,7 @@
   "delivery": {
     "batch_id": "83c0bfa8dc2e47dd23bffad5",
     "run_id": "daily-dd9886b1640a17324d162eed",
-    "updated_at": "2026-10-19T05:56:03+00:00",
+    "updated_at": "2026-10-19T06:01:24+00:00",
     "profile_version": "992927a1524b59b3",
     "papers": [
       {
@@ -55688,7 +55688,88 @@
         "categories": [
           "cs.RO"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Jiajun Cao",
+            "affiliation": "State Key Laboratory of Multimedia Information Processing, School of Computer Science, Peking University"
+          },
+          {
+            "author": "Kai Tang",
+            "affiliation": "State Key Laboratory of Multimedia Information Processing, School of Computer Science, Peking University"
+          },
+          {
+            "author": "Bohua Zhang",
+            "affiliation": "State Key Laboratory of Multimedia Information Processing, School of Computer Science, Peking University"
+          },
+          {
+            "author": "Zezhong Qian",
+            "affiliation": "State Key Laboratory of Multimedia Information Processing, School of Computer Science, Peking University"
+          },
+          {
+            "author": "Ying Li",
+            "affiliation": "State Key Laboratory of Multimedia Information Processing, School of Computer Science, Peking University"
+          },
+          {
+            "author": "Xiaozhu Ju",
+            "affiliation": "Beijing Innovation Center of Humanoid Robotics"
+          },
+          {
+            "author": "Xiaobao Wei",
+            "affiliation": "State Key Laboratory of Multimedia Information Processing, School of Computer Science, Peking University"
+          },
+          {
+            "author": "Jiaming Liu",
+            "affiliation": "State Key Laboratory of Multimedia Information Processing, School of Computer Science, Peking University"
+          },
+          {
+            "author": "Yang Ding",
+            "affiliation": "State Key Laboratory of Multimedia Information Processing, School of Computer Science, Peking University"
+          },
+          {
+            "author": "Sixiang Chen",
+            "affiliation": "State Key Laboratory of Multimedia Information Processing, School of Computer Science, Peking University"
+          },
+          {
+            "author": "Yiding Sun",
+            "affiliation": "State Key Laboratory of Multimedia Information Processing, School of Computer Science, Peking University"
+          },
+          {
+            "author": "Siyuan Qian",
+            "affiliation": "State Key Laboratory of Multimedia Information Processing, School of Computer Science, Peking University"
+          },
+          {
+            "author": "Tinghao Wang",
+            "affiliation": "State Key Laboratory of Multimedia Information Processing, School of Computer Science, Peking University"
+          },
+          {
+            "author": "Jixian Wu",
+            "affiliation": "State Key Laboratory of Multimedia Information Processing, School of Computer Science, Peking University"
+          },
+          {
+            "author": "Yichen Guo",
+            "affiliation": "State Key Laboratory of Multimedia Information Processing, School of Computer Science, Peking University"
+          },
+          {
+            "author": "Yi Zhang",
+            "affiliation": "Beijing Innovation Center of Humanoid Robotics"
+          },
+          {
+            "author": "Shilong Zou",
+            "affiliation": "Beijing Innovation Center of Humanoid Robotics"
+          },
+          {
+            "author": "Yong Dai",
+            "affiliation": "Beijing Innovation Center of Humanoid Robotics"
+          },
+          {
+            "author": "Jian Tang",
+            "affiliation": "Beijing Innovation Center of Humanoid Robotics"
+          },
+          {
+            "author": "Shanghang Zhang",
+            "affiliation": "State Key Laboratory of Multimedia Information Processing, School of Computer Science, Peking University"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-19",
         "listing_date": "2026-10-19",
@@ -55698,7 +55779,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "unresolved",
+        "affiliation_status": "resolved",
         "keywords": [
           "law achieves",
           "language reasoning",
