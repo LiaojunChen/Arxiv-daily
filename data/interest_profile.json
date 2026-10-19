@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-10-19T05:56:03+00:00",
+  "updated_at": "2026-10-19T09:51:08+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-dd9886b1640a17324d162eed": {
-      "run_id": "daily-dd9886b1640a17324d162eed",
-      "generated_at": "2026-10-19T05:56:03+00:00",
+    "daily-1dc35192220448cf96b7b5bb": {
+      "run_id": "daily-1dc35192220448cf96b7b5bb",
+      "generated_at": "2026-10-19T09:51:08+00:00",
       "selected_ids": [
         "2610.23334",
         "2610.23156",
@@ -1084,6 +1084,22 @@
           ],
           "matched_keywords": []
         },
+        "2610.23334": {
+          "title": "LAW: Unifying Language, Action, and World Modeling for Agentic Physical Intelligence",
+          "abstract": "World-action models jointly predict actions and future world states, but long-horizon manipulation further requires language reasoning to plan subtask objectives, assess execution progress, and guide action selection. We present LAW, a closed-loop VLM--WAM framework that unifies language reasoning, action generation, and world modeling through semantic subtask progress. Within the LAW agent, a hybrid-expert vision-language model plans the remaining subtasks, estimates the values of and fuses actions proposed by a world-action model, and asynchronously assesses execution status to support continued execution and subtask transitions. Within the world-action model, Mixture-of-Transformer Experts integrates modality-specific and shared computation for joint video--action modeling. Dual-stream hierarchical visual memory maintains temporal context for both models, while subtask-local value learning aligns action evaluation with semantic objectives and preserves supervision from successful prefixes of failed trajectories. LAW achieves 94.21% average success across 50 RoboTwin tasks. Replacing the WAM backbone with OpenWAM-$alpha$ further raises the average success rate to 95.56%, establishing a new open-source state of the art on RoboTwin. Despite having only 2B parameters, our VLM also outperforms variants using Embodied-R1.5 and GPT-5.5 High. On three long-horizon real-robot tasks, LAW achieves 65% average success, compared with 28.33% for $pi_{0.5}$ and 25% for Fast-WAM.",
+          "categories": [
+            "cs.RO"
+          ],
+          "keywords": [
+            "law achieves",
+            "language reasoning",
+            "average success",
+            "agent hybrid-expert vision-language",
+            "agentic physical intelligence",
+            "aligns action evaluation"
+          ],
+          "matched_keywords": []
+        },
         "2610.22471": {
           "title": "Has GPT-6-Astra Achieved Embodied Intelligence?",
           "abstract": "GPT-6-Astra demonstrates a level of competence in robotic manipulation and navigation that challenges the conventional paradigm of building specialized models for individual tasks and embodiments. In this report, we ask not only how capable GPT-6-Astra is, but what its capabilities imply for the field. First, we probe the limits of standalone GPT-6-Astra. We conduct a large-scale evaluation across 12 representative benchmarks spanning tabletop manipulation, humanoids, mobile platforms, and dexterous hands. Under a unified protocol that allows in-context learning (ICL) from training-set demonstrations and substantially increases the number of execution steps, GPT-6-Astra achieves unprecedented performance (Fig. 1). Future research may focus on improving 1) the generality of ICL 2) cost and execution time, 3) physical-state verification, 4) recovery from irreversible failures, and 5) long-horizon preservation of progress. Second, we study the agentic harness for embodied control. We identify that close-loop coordination between a high-level \"System 2\" reasoner (i.e., GPT-6-Astra) and a low-level \"System 1\" controller (e.g., {\\pi}0.5) is costly but effective. Third, we examine GPT-6-Astra on real-world deployment. Our experiments on 8 robot configurations reveal substantial gaps: 1) robot demonstrations required for ICL are expensive to collect, and 2) it is implausible to trade longer execution for higher success rates with physical constraints. Fourth, we envision the next generation of embodied benchmarks. We develop a prototype that 1) derives tasks from real-world needs, 2) provides no in-domain demonstrations, and 3) judges agents on a world clock that keeps running while they deliberate. Taken together, our results suggest that GPT-6-Astra has largely crossed the threshold of embodied competence, but not yet that of practical embodied intelligence.",
@@ -1239,22 +1255,6 @@
             "building full-lifecycle memory",
             "categorizing existing approaches",
             "characteristics architectural com-plexity"
-          ],
-          "matched_keywords": []
-        },
-        "2610.23334": {
-          "title": "LAW: Unifying Language, Action, and World Modeling for Agentic Physical Intelligence",
-          "abstract": "World-action models jointly predict actions and future world states, but long-horizon manipulation further requires language reasoning to plan subtask objectives, assess execution progress, and guide action selection. We present LAW, a closed-loop VLM--WAM framework that unifies language reasoning, action generation, and world modeling through semantic subtask progress. Within the LAW agent, a hybrid-expert vision-language model plans the remaining subtasks, estimates the values of and fuses actions proposed by a world-action model, and asynchronously assesses execution status to support continued execution and subtask transitions. Within the world-action model, Mixture-of-Transformer Experts integrates modality-specific and shared computation for joint video--action modeling. Dual-stream hierarchical visual memory maintains temporal context for both models, while subtask-local value learning aligns action evaluation with semantic objectives and preserves supervision from successful prefixes of failed trajectories. LAW achieves 94.21% average success across 50 RoboTwin tasks. Replacing the WAM backbone with OpenWAM-$alpha$ further raises the average success rate to 95.56%, establishing a new open-source state of the art on RoboTwin. Despite having only 2B parameters, our VLM also outperforms variants using Embodied-R1.5 and GPT-5.5 High. On three long-horizon real-robot tasks, LAW achieves 65% average success, compared with 28.33% for $pi_{0.5}$ and 25% for Fast-WAM.",
-          "categories": [
-            "cs.RO"
-          ],
-          "keywords": [
-            "law achieves",
-            "language reasoning",
-            "average success",
-            "agent hybrid-expert vision-language",
-            "agentic physical intelligence",
-            "aligns action evaluation"
           ],
           "matched_keywords": []
         },
@@ -6735,6 +6735,96 @@
           ],
           "matched_keywords": []
         },
+        "2610.21482": {
+          "title": "AI-Driven Disaster Response and Displacement Monitoring",
+          "abstract": "ARTIFICIAL INTELLIGENCE (AI) has demonstrated its potential across a wide range of humanitarian tasks, offering scalable and data-driven solutions to some of the world's most pressing challenges. For instance, in addressing climate change, AI-powered models are being used for faster and more accurate global weather forecasting, control and design of renewable energy, and monitoring deforestation. Machine learning algorithms analyze satellite imagery and socioeconomic data to predict poverty and promote sustainable development. AI has also transformed disaster response and conflict monitoring, providing innovative solutions for assessing damage and urgent needs and tracking displacement.",
+          "categories": [
+            "cs.AI",
+            "cs.CV"
+          ],
+          "keywords": [
+            "disaster response",
+            "accurate global weather",
+            "addressing climate change",
+            "ai-driven disaster response",
+            "algorithms analyze satellite",
+            "analyze satellite imagery"
+          ],
+          "matched_keywords": []
+        },
+        "2610.14022": {
+          "title": "OPMD: On-Policy Mechanism Distillation Beyond Output Supervision",
+          "abstract": "On-policy distillation (OPD) improves language-model by supervising a student on prefixes sampled from its own policy, but its supervision remains confined to the output space. Consequently, OPD transfers what a teacher predicts without supervising the intermediate computation that produces those predictions. Simply distilling intermediate representations like representation matching is insufficient since teacher and student representations may differ geometrically, and even well-aligned hidden states need not be usable by the student's subsequent computation. We introduce On-Policy Mechanism Distillation (OPMD), which transfers teacher-derived intermediate computation while explicitly accounting for its compatibility with the student. OPMD first constructs a student-compatible teacher that transforms teacher representations into intermediate states usable by the student's downstream computation, then it internalizes these states from on-policy trajectories. OPMD achieves the highest average accuracy among the evaluated distillation baselines in all three teacher--student settings, and generalizes to multi-teacher distillation and cross-family supervised fine-tuning. Further analyses show that mechanism supervision yields more effective reasoning and meaningfully alters the student's intermediate computation and solution strategies, supporting that it transfers information beyond output supervision alone. Together, these results establish mechanism-level supervision as an effective way to move on-policy distillation beyond output supervision, enabling students to learn inner mechanisms they can use and internalize.",
+          "categories": [
+            "cs.LG",
+            "cs.AI"
+          ],
+          "keywords": [
+            "beyond output supervision",
+            "distillation beyond output",
+            "on-policy mechanism distillation",
+            "intermediate computation",
+            "opmd",
+            "computation while explicitly"
+          ],
+          "matched_keywords": []
+        },
+        "2610.09872": {
+          "title": "LiveMACE: Process-Aware Evaluation of LLM Agent Capabilities in Evolving Markets",
+          "abstract": "Evaluating agents by outcomes alone can obscure the capabilities that produce them. This problem is especially pronounced in evolving environments, where outcomes reflect a closed-loop interaction between agent behavior and changing external conditions. We introduce LiveMACEBench, a process-aware benchmark that uses live financial markets as a naturally evolving testbed for persistent LLM agents. Five frontier LLMs operate along continuous trajectories under matched Tool Use, Persistent Memory, Rule Following, and Multi-Agent Collaboration configurations. We evaluate them through both realized outcomes and mechanism-specific diagnostics derived from complete decision traces. Across 30 days of live evaluation, we find a pronounced outcome-capability gap: realized returns often diverge from capability-specific measurements, and similar outcomes can arise from markedly different patterns of mechanism use. Trace-level diagnostics further expose distinct bottlenecks across capabilities, demonstrating that mechanism access, effective mechanism use, and downstream performance are not interchangeable measures of agent capability. LiveMACEBench makes this distinction measurable, turning live markets from a performance leaderboard into a diagnostic environment for agent capability",
+          "categories": [],
+          "keywords": [
+            "agent capability",
+            "access effective mechanism",
+            "along continuous trajectories",
+            "changing external conditions",
+            "complete decision traces",
+            "diagnostics further expose"
+          ],
+          "matched_keywords": []
+        },
+        "2610.22169": {
+          "title": "Lexical Reference Frames: Interpreting LM Residual Streams in Native Semantics",
+          "abstract": "The vocabulary of a language model is its native semantics: the embedding and the unembedding fix the meaning of a state at the two ends of the residual stream. Between them, existing methods either reuse a fixed lens or treat the states as a point cloud, and neither reads a state the way the model does. We argue that every hidden state has a native reference frame, induced by the layers that read it next and adaptive to the context. Lexical reference frames approximate it by reading a state through the model's own remaining layers with a stated number of rounds of attention between positions and a typical attention output for the rest, without fitting to the model's output. No lens, with fixed directions per layer, can exceed the square root of the native frame's coherence, 0.30 and 0.35 at mid-depth of SmolLM3-3B and OLMo3-7B, whereas the first-order frame, LexFrame[1], reaches 0.97 and 0.97 and reads a state within 0.16 nats of the model's output. Its coefficients attribute predictions more faithfully than attribution patching, its lexical basis steers a prediction while sparing other tokens, and its confident readings would let an early exit skip 0.45 and 0.42 of the layers, where lenses skip almost none. In this way, lexical reference frames make every hidden state of the model readable, attributable and steerable.",
+          "categories": [],
+          "keywords": [
+            "lexical reference frames",
+            "every hidden state",
+            "native semantics",
+            "reads state",
+            "basis steers prediction",
+            "coefficients attribute predictions"
+          ],
+          "matched_keywords": []
+        },
+        "2610.22428": {
+          "title": "Embeddings Are Overpriced? A Frozen 16 MB Vocabulary for Small and Ternary Language Models",
+          "abstract": "In a small language model the vocabulary is the single largest part. In Gemma 3 270M the embedding table holds 168M of 268M parameters, and because quantisation methods leave the embedding in 16-bit, it is also most of the file once the rest of the model is compressed. We ask what that table actually buys. We replace it with one frozen table of 512-bit codes, 16 MB, with no trainable parameters, derived once from a pretrained embedding by principal-component projection and sign binarisation, and we train the same Gemma-shaped body from scratch on the same 2.05B tokens with and without it. The learned table buys 0.20 nats of validation loss for 2.6 times the trainable parameters, but on LAMBADA, HellaSwag and PIQA the frozen-table model is better or tied; only ARC-Easy favours the learned table. With a ternary BitNet b1.58 body the whole model is a 46 MB file, still ties the float model on LAMBADA and PIQA, and on a laptop CPU generates 615 to 740 tokens per second in 62 MB of memory, five to six times the speed of the float model's 8-bit GGUF in llama.cpp at a seventh of the memory. The frozen table wins by 1.7 to 2.3 nats on rare words, accepts 10,000 new words after training with a 3% cost where the learned table collapses by 43%, and all of it is released with the weights, the data and every evaluation answer.",
+          "categories": [],
+          "keywords": [
+            "frozen table",
+            "mb",
+            "because quantisation methods",
+            "bit codes mb",
+            "embedding table holds",
+            "every evaluation answer"
+          ],
+          "matched_keywords": []
+        },
+        "2610.18082": {
+          "title": "Failure Recovery via Belief Updates and World Modeling for Long-Horizon Agents",
+          "abstract": "Long-horizon agents often struggle to recover from failures whose causes lie several steps earlier, beyond what local reflection or backtracking can resolve. We introduce BELIEFWEAVER, a framework that combines persistent evidence across attempts with prospective reasoning over repair directions. It maintains a relational belief state over frontiers, attempts, observations, and checkpoints. Execution evidence updates related frontier priorities across attempts and rollback, while diagnostic evidence gates execution. An implicit world model (IWM) evaluates repair hypotheses, predicts progress, and identifies relations among frontiers to guide exploration. We further distill these recurring IWM reasoning components into a 9B student through supervised fine-tuning and on-policy distillation (OPD). Across three terminal-based benchmarks, BELIEFWEAVER improves aggregate final score by 5.1 percentage points over native Terminus-2 continuation, with positive trends in exploration efficiency. The distilled 9B student improves final score by 9.8 percentage points over the reported native baseline while reducing estimated teacher API cost by 54.8% relative to the matched teacher. These results show that persistent evidence and prospective reasoning can improve recovery in long-horizon agent tasks while substantially reducing reliance on teacher-model inference.",
+          "categories": [],
+          "keywords": [
+            "persistent evidence",
+            "prospective reasoning",
+            "final score",
+            "long-horizon agents",
+            "agent tasks while",
+            "agents often struggle"
+          ],
+          "matched_keywords": []
+        },
         "2610.20693": {
           "title": "Orbia: Do Generated Videos Form a Consistent 3D World?",
           "abstract": "Video generators serve as interactive worlds for exploration and simulation, yet realistic and visually appealing frames do not necessarily depict a consistent 3D world. Existing benchmarks assess selected geometric properties or use vision-language models to judge memory and consistency, leaving systematic 3D evaluation underexplored. We introduce Orbia, the first benchmark dedicated to a systematic and comprehensive evaluation of 3D consistency in interactive world models. Through controlled exploration and revisit, we organize the evaluation into three dimensions: input preservation, generated-content persistence, and 3D self-consistency. For input preservation, registered RGB-D references and annotated anchors support appearance, geometry, and spatial stability measurements. For generated-content persistence, we compare revisits to regions absent from the input image with their first generated observations to test whether models preserve what they create. For 3D self-consistency, cross-view depth and feature correspondence, regional scale agreement, and held-out Gaussian rendering test whether generated views describe the same 3D scene. Minute-long exploration and revisits further test long-term consistency. Our construction and annotation pipeline brings together public datasets, self-captured scenes, and simulation, yielding 720 instances across indoor and outdoor environments and six exploration-and-revisit protocols. Evaluation spans 27 text-, action-, and camera-conditioned models through native-interface adapters. Our Orbia benchmark provides a systematic basis for diagnosing 3D inconsistency and developing more persistent video world models.",
@@ -9880,23 +9970,6 @@
             "full-duplex",
             "gestures",
             "advance dialogue modeling"
-          ],
-          "matched_keywords": []
-        },
-        "2610.21482": {
-          "title": "AI-Driven Disaster Response and Displacement Monitoring",
-          "abstract": "ARTIFICIAL INTELLIGENCE (AI) has demonstrated its potential across a wide range of humanitarian tasks, offering scalable and data-driven solutions to some of the world's most pressing challenges. For instance, in addressing climate change, AI-powered models are being used for faster and more accurate global weather forecasting, control and design of renewable energy, and monitoring deforestation. Machine learning algorithms analyze satellite imagery and socioeconomic data to predict poverty and promote sustainable development. AI has also transformed disaster response and conflict monitoring, providing innovative solutions for assessing damage and urgent needs and tracking displacement.",
-          "categories": [
-            "cs.AI",
-            "cs.CV"
-          ],
-          "keywords": [
-            "disaster response",
-            "accurate global weather",
-            "addressing climate change",
-            "ai-driven disaster response",
-            "algorithms analyze satellite",
-            "analyze satellite imagery"
           ],
           "matched_keywords": []
         },
@@ -19124,8 +19197,8 @@
           ],
           "keywords": [
             "adversarial robustness distillation",
-            "distilled student",
             "robust teacher",
+            "distilled student",
             "base distillation",
             "refined teacher",
             "student feedback"
@@ -21511,8 +21584,8 @@
             "dtdd",
             "base initialization",
             "long-horizon reasoning",
-            "opd",
-            "adaptive opd framework"
+            "adaptive opd framework",
+            "agentic code respectively"
           ],
           "matched_keywords": []
         },
@@ -32239,9 +32312,9 @@
             "recurrent memory",
             "gatesight",
             "attention memory",
-            "attention output",
             "gdn heads",
-            "gdn layers"
+            "gdn layers",
+            "layer keeps"
           ],
           "matched_keywords": []
         },
@@ -37224,23 +37297,6 @@
           ],
           "matched_keywords": []
         },
-        "2610.14022": {
-          "title": "OPMD: On-Policy Mechanism Distillation Beyond Output Supervision",
-          "abstract": "On-policy distillation (OPD) improves language-model by supervising a student on prefixes sampled from its own policy, but its supervision remains confined to the output space. Consequently, OPD transfers what a teacher predicts without supervising the intermediate computation that produces those predictions. Simply distilling intermediate representations like representation matching is insufficient since teacher and student representations may differ geometrically, and even well-aligned hidden states need not be usable by the student's subsequent computation. We introduce On-Policy Mechanism Distillation (OPMD), which transfers teacher-derived intermediate computation while explicitly accounting for its compatibility with the student. OPMD first constructs a student-compatible teacher that transforms teacher representations into intermediate states usable by the student's downstream computation, then it internalizes these states from on-policy trajectories. OPMD achieves the highest average accuracy among the evaluated distillation baselines in all three teacher--student settings, and generalizes to multi-teacher distillation and cross-family supervised fine-tuning. Further analyses show that mechanism supervision yields more effective reasoning and meaningfully alters the student's intermediate computation and solution strategies, supporting that it transfers information beyond output supervision alone. Together, these results establish mechanism-level supervision as an effective way to move on-policy distillation beyond output supervision, enabling students to learn inner mechanisms they can use and internalize.",
-          "categories": [
-            "cs.LG",
-            "cs.AI"
-          ],
-          "keywords": [
-            "beyond output supervision",
-            "distillation beyond output",
-            "on-policy mechanism distillation",
-            "intermediate computation",
-            "opmd",
-            "computation while explicitly"
-          ],
-          "matched_keywords": []
-        },
         "2610.14025": {
           "title": "Contrastive Covariance Subspaces for Activation Steering",
           "abstract": "Activation steering controls large language model behavior by adding a direction to hidden activations during inference. For steering to work well, that direction must be a pure signal for the target concept: any confound entangled with it, such as an incidental topic or writing style, is injected into the residual stream alongside the concept itself and degrades the generated text. We introduce Contrastive Covariance Steering (CCS), a training-free method that eliminates this confound variation. CCS projects steering vectors to a low-dimensional subspace obtained in closed form by solving a contrastive variance objective, which retains the directions along which the target concept varies while suppressing directions shared with the other classes. Across three LLMs and four steering domains, CCS consistently beats all baseline steering methods in all $12$ model-domain settings. The largest relative improvement occurs on AxBench and Emotion where we outperform the next strongest steering baseline by $48$ to $70\\%$ and $13$ to $27\\%$, respectively. Furthermore, CCS outperforms naive difference-of-means steering by up to $151\\%$, showcasing the importance of deconfounding concepts. A toy experiment verifies our motivation on why: planting a topic nuisance into the training data reduces unprojected steering by $46\\%$, whereas CCS loses only $12\\%$ and recovers most of the gap to an oracle that explicitly deletes the planted direction. A human study with $23$ raters on $296$ generations reproduces the LLM judge's ranking. Our extensive ablation verifies the importance of our method's components and robustness to the number of nuisance classes. Finally, we extend our method to multi-turn conversations, where CCS sustains both concept expression and fluency, matching system prompt performance as other steering methods drift.",
@@ -42025,10 +42081,10 @@
           "keywords": [
             "when training",
             "currently fails",
-            "opd",
             "ask whether opd",
             "configurations show decline",
-            "correct student prefixes"
+            "correct student prefixes",
+            "degrading performance despite"
           ],
           "matched_keywords": []
         },
@@ -50495,7 +50551,7 @@
             "local agentic ai",
             "safety assurance",
             "metric scores",
-            "lm"
+            "edge cases"
           ],
           "matched_keywords": []
         },
