@@ -55712,7 +55712,7 @@
   "delivery": {
     "batch_id": "83c0bfa8dc2e47dd23bffad5",
     "run_id": "daily-1dc35192220448cf96b7b5bb",
-    "updated_at": "2026-10-19T09:51:08+00:00",
+    "updated_at": "2026-10-19T10:07:13+00:00",
     "profile_version": "992927a1524b59b3",
     "papers": [
       {
@@ -56253,7 +56253,64 @@
         "categories": [
           "cs.RO"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Liyun Yan",
+            "affiliation": "RL⁡⁡2 Lab, Shanghai Jiao Tong University"
+          },
+          {
+            "author": "Haoyang Li",
+            "affiliation": "RL⁡⁡2 Lab, Shanghai Jiao Tong University"
+          },
+          {
+            "author": "Yang Zhang",
+            "affiliation": "RL⁡⁡2 Lab, Shanghai Jiao Tong University"
+          },
+          {
+            "author": "Jialing Zhu",
+            "affiliation": "RL⁡⁡2 Lab, Shanghai Jiao Tong University"
+          },
+          {
+            "author": "Zhanxiang Cao",
+            "affiliation": "RL⁡⁡2 Lab, Shanghai Jiao Tong University"
+          },
+          {
+            "author": "Zihao Zhou",
+            "affiliation": "RL⁡⁡2 Lab, Shanghai Jiao Tong University"
+          },
+          {
+            "author": "Keqi Zhu",
+            "affiliation": "Zhejiang University"
+          },
+          {
+            "author": "Yizhi Chen",
+            "affiliation": "Tongji University"
+          },
+          {
+            "author": "Huang Chuxuan",
+            "affiliation": "Fudan University"
+          },
+          {
+            "author": "Shengcheng Fu",
+            "affiliation": "Tongji University"
+          },
+          {
+            "author": "Zhong Jiangwei",
+            "affiliation": "Robotics Lab, Lenovo Research, Lenovo Group Limited"
+          },
+          {
+            "author": "Qiao Sun",
+            "affiliation": "Robotics Lab, Lenovo Research, Lenovo Group Limited"
+          },
+          {
+            "author": "Chen Zhang",
+            "affiliation": "Robotics Lab, Lenovo Research, Lenovo Group Limited"
+          },
+          {
+            "author": "Yue Gao",
+            "affiliation": "RL⁡⁡2 Lab, Shanghai Jiao Tong University"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-19",
         "listing_date": "2026-10-19",
@@ -56263,7 +56320,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "unresolved",
+        "affiliation_status": "resolved",
         "keywords": [
           "bejepa",
           "behavior world",
