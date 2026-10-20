@@ -64338,7 +64338,7 @@
   "delivery": {
     "batch_id": "c3bccc64e1ab84c532a33f3c",
     "run_id": "daily-95147c7e101993c30a5bd3bd",
-    "updated_at": "2026-10-20T04:46:49+00:00",
+    "updated_at": "2026-10-20T04:55:43+00:00",
     "profile_version": "992927a1524b59b3",
     "papers": [
       {
@@ -64366,7 +64366,12 @@
           "cs.CV",
           "cs.RO"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Tianqi Liu",
+            "affiliation": "Nanyang Technological University Ropedia Duke University University of California, San Diego Tsinghua University"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -64376,7 +64381,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "diverse embodiments",
           "loco-manipulation world",
@@ -64423,7 +64428,32 @@
           "Jian Zhang",
           "Jie Chen"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Yian Zhao",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Yu Yan",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Hongcan Guo",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Ruochong Zheng",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Jian Zhang",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Jie Chen",
+            "affiliation": "Tsinghua University"
+          }
+        ],
         "abstract": "Streaming video world models generate the future chunk by chunk, conditioned on their own past and a stream of actions. Trained on short clips, they drift once a rollout exceeds the training horizon, as prediction errors re-enter the context and compound. A common remedy is to train the model on its own rollouts via distribution matching distillation (DMD). For action-conditioned world models, the teacher becomes a bottleneck: an external video model is agnostic to the actions, whereas the model's own pretrained network drifts in the same manner as the student. We observe that a long rollout need not match a teacher, provided it remains a realistic continuation of its own scene that follows the commanded actions. Realism and scene fidelity can be measured against real-data statistics, which remain valid at any horizon, while action following is preserved by the model's conditional generation loss. We propose Fréchet Forcing, which fine-tunes a world model together with its deployed multi-step sampler under three constraints. Generative anchoring applies the flow-matching loss after a self-generated history ending on real data. Context fidelity, a Fréchet distance (FD) on latent statistics of the free rollout centred on each clip's own ground truth, keeps every rollout faithful to its scene. Reality matching, an FD to real frames in a frozen perceptual space, keeps the generated frames realistic. Because all three targets are derived from short real clips without comparing a rollout against a long recorded future, training requires no teacher, no online critic and no long videos. Fine-tuning MiniWorld-1B, pretrained on 253-frame clips, for at most 36 GPU-hours on 381-frame clips yields rollouts that remain stable beyond 4,000 frames and continue to follow their actions in both robot manipulation and camera-controlled exploration.",
         "categories": [
           "cs.CV"
@@ -64439,7 +64469,7 @@
           "arxiv"
         ],
         "listing_date": "2026-10-20",
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "frame clips",
           "short clips",
@@ -64486,7 +64516,36 @@
           "Xinping Guan",
           "Dacheng Tao"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Jize Wang",
+            "affiliation": "School of Automation and Intelligent Sensing, Shanghai Jiao Tong University"
+          },
+          {
+            "author": "Jize Wang",
+            "affiliation": "College of Computing and Data Science, Nanyang Technological University"
+          },
+          {
+            "author": "Yongcheng Jing",
+            "affiliation": "College of Computing and Data Science, Nanyang Technological University"
+          },
+          {
+            "author": "Xinyi Le",
+            "affiliation": "School of Automation and Intelligent Sensing, Shanghai Jiao Tong University"
+          },
+          {
+            "author": "Cailian Chen",
+            "affiliation": "School of Automation and Intelligent Sensing, Shanghai Jiao Tong University"
+          },
+          {
+            "author": "Xinping Guan",
+            "affiliation": "School of Automation and Intelligent Sensing, Shanghai Jiao Tong University"
+          },
+          {
+            "author": "Dacheng Tao",
+            "affiliation": "College of Computing and Data Science, Nanyang Technological University"
+          }
+        ],
         "abstract": "Emerging Joint-Embedding Predictive Architectures (JEPAs) are moving beyond representation learning towards latent world models that support prediction, planning, and control. Yet their latent worlds naturally lack a human-interpretable interface. In this Perspective, we argue that as JEPA latents become internal states for prediction and action, interpretability must move beyond what they encode to how latent variables interact, evolve, and causally drive prediction. To this end, we envision a four-stage research agenda, involving Ground, Structure, Verify, and Act, to guide this shift toward actionable latent-world understanding. Within our framework, existing JEPA interpretability efforts provide early evidence for Ground, while systematic analysis of latent structure, causal verification, and intervention remains largely unexplored. Overall, this Perspective aims to call for a broader latent-world interpretability agenda that shifts attention from decoding representations toward understanding, validating, and acting on latent worlds.",
         "categories": [
           "cs.LG",
@@ -64503,7 +64562,7 @@
           "arxiv"
         ],
         "listing_date": "2026-10-20",
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "latent worlds",
           "decoding representations",
@@ -64553,7 +64612,24 @@
           "cs.AI",
           "cs.CL"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Xinye Yang",
+            "affiliation": "Northwestern University, Evanston, IL"
+          },
+          {
+            "author": "Zhenyang Liu",
+            "affiliation": "Department of Physics, University of Florida, Gainesville, FL"
+          },
+          {
+            "author": "Yuxuan Wang",
+            "affiliation": "University of Florida, Gainesville, FL"
+          },
+          {
+            "author": "Yuanyuan Lei",
+            "affiliation": "Computer & Information Science and Engineering, University of Florida, Gainesville, FL Project Website"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -64563,7 +64639,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "axiomatic world",
           "axiomatic world modeling",
@@ -64609,7 +64685,24 @@
           "Randall Balestriero",
           "David Klindt"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Heejeong Nam",
+            "affiliation": "Brown University"
+          },
+          {
+            "author": "Divyat Mahajan",
+            "affiliation": "Cold Spring Harbor Laboratory"
+          },
+          {
+            "author": "Quentin Le Lidec",
+            "affiliation": "Mila, Université de Montréal"
+          },
+          {
+            "author": "Randall Balestriero",
+            "affiliation": "New York University"
+          }
+        ],
         "abstract": "The goal of a world model is to capture the dynamics of an environment. This has the great appeal that it allows agents to plan and simulate a course of actions with the help of a world model. For these uses to be reliable, however, the learned dynamics must behave well beyond the specific state-action combinations observed in expert rollouts. Despite this, the relationship between data coverage, dynamics generalization, and downstream planning performance remains underexplored. We study this relationship through the lens of compositional generalization: can a world model recombine familiar state and action factors into valid dynamics? To answer this, we introduce AnyGoal, a benchmark of goal-shifted task variants built from widely used world-model environments, together with an open-source library. Each task is designed to be within reach of a world model that has learned the underlying dynamics: individual state factors and actions remain within their training support, but their combinations are underrepresented in expert trajectories. Across multiple environments and world model families, we find that current models consistently exhibit failures under these recombinations. By examining dynamics and representation failures across model families, interaction regimes, and evaluation metrics, we study where current world models generalize and where challenges remain for goal-shifted prediction and planning. Together, this framework, benchmark, and analysis provide a basis for evaluating progress toward world models that generalize to new planning tasks.",
         "categories": [
           "cs.AI"
@@ -64625,7 +64718,7 @@
           "arxiv"
         ],
         "listing_date": "2026-10-20",
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "expert rollouts",
           "actions remain within",
@@ -64677,7 +64770,28 @@
         "categories": [
           "cs.CV"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Lin Zhao",
+            "affiliation": "the Department of Biomedical Engineering, New Jersey Institute of Technology, Newark, NJ 07102, USA."
+          },
+          {
+            "author": "Bowen Chen",
+            "affiliation": "the College of Engineering, Northeastern University, Boston, MA 02115, USA."
+          },
+          {
+            "author": "Qiaohui Gao",
+            "affiliation": "the Department of Radiology, Massachusetts General Hospital, Boston, MA 02114, USA."
+          },
+          {
+            "author": "Shaowen Wan",
+            "affiliation": "the Department of Radiation Oncology, Mayo Clinic, Phoenix, AZ 85054, USA."
+          },
+          {
+            "author": "Xiang Li",
+            "affiliation": "the School of Computing, University of Georgia, Athens, GA 30602, USA."
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -64687,7 +64801,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "conditioned response-state world",
           "response-state world modeling",
@@ -64743,7 +64857,52 @@
         "categories": [
           "cs.CV"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Tianyu Xin",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Wanqi Zhong",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Bowen Hu",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Zhangchi Guo",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Lijie Wang",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Yiming Wang",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Haoran Liao",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Heyang Yu",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Xiaoyu Tian",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Zhiding Yu",
+            "affiliation": "NVIDIA"
+          },
+          {
+            "author": "Yiming Li",
+            "affiliation": "Tsinghua University"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -64753,7 +64912,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "embodied action pretraining",
           "prismwam",
@@ -64803,7 +64962,12 @@
         "categories": [
           "cs.CV"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Jaeseok Jeong",
+            "affiliation": "Department of Artificial Intelligence, Yonsei University"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -64813,7 +64977,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "controllable world simulation",
           "object motion",
@@ -64862,7 +65026,16 @@
         "categories": [
           "cs.RO"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Xuezhou Xu",
+            "affiliation": "New York University, New York, NY, USA."
+          },
+          {
+            "author": "Chung-Pang Wang",
+            "affiliation": "NVIDIA."
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -64872,7 +65045,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "feedback motion planning",
           "latent feedback motion",
@@ -64923,7 +65096,12 @@
           "cs.LG",
           "cs.CV"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Kevin Chen",
+            "affiliation": "Tsinghua University"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -64933,7 +65111,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "latent dynamics",
           "embodied world",
@@ -64981,7 +65159,16 @@
           "cs.LG",
           "cs.AI"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Karthik Iyer",
+            "affiliation": "University of Chicago Booth School of Business"
+          },
+          {
+            "author": "Madan Dabbeeru",
+            "affiliation": "University of Chicago Booth School of Business"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -64991,7 +65178,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "store",
           "lightgbm",
@@ -65040,7 +65227,16 @@
         "categories": [
           "cs.AI"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Xinxing Zhou",
+            "affiliation": "Nankai University"
+          },
+          {
+            "author": "Xiaojie Yuan",
+            "affiliation": "Griffith University"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -65050,7 +65246,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "intervention fidelity",
           "acttime",
@@ -65100,7 +65296,20 @@
         "categories": [
           "cs.CV"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Shenyi Li",
+            "affiliation": "Harbin Institute of Technology"
+          },
+          {
+            "author": "Ziyang Zhang",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Wen Wu",
+            "affiliation": "Shanghai Artificial Intelligence Laboratory"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -65110,7 +65319,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "physical time series",
           "physical state evolves",
@@ -65161,7 +65370,16 @@
           "cs.LG",
           "cs.RO"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Zunzhi You",
+            "affiliation": "The University of Sydney"
+          },
+          {
+            "author": "Linwei Tao",
+            "affiliation": "Machine Learning Research, Apple"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -65171,7 +65389,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "latent manifold",
           "distances along",
@@ -65218,7 +65436,12 @@
         "categories": [
           "cs.CV"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Xiang Kaibo",
+            "affiliation": "Department of Industrial and Systems Engineering, Hosei University"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -65228,7 +65451,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "hierarchical world",
           "ablations identify state-adaptive",
@@ -65277,7 +65500,12 @@
           "Jie Zhou",
           "Jiwen Lu"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Chan Yan Ki",
+            "affiliation": "Department of Automation, Tsinghua University, China"
+          }
+        ],
         "abstract": "Existing world models can generate action-conditioned video from a single image. Many focus on camera movement, allowing users to explore the generated scene. However, navigation alone does not ensure that an action follows persistent rules when its outcome depends on state that is invisible in the current frame. We present Stateful Harness, a framework that separates world evolution from video rendering to support stateful and rule-governed interaction. It maintains an evolving world state under specified rules, renders each resulting event with a frozen video model, and uses the generated clip to update the world state for the next turn. At each turn, the harness resolves the action selected by the user and compiles the resulting event into an instruction, while a preview clip from an editable 3D scene provides spatial and camera guidance. To evaluate rule compliance, we build WorldState-Bench, a benchmark of 50 counterfactual twin pairs that share an initial frame and action but differ in hidden state and required outcome. Under rule-only prompting, the best of the 11 evaluated video backends produces the required endings for both cases in 32% of pairs. For MiniMax-H3, specifying the required endings raises this rate from 32% to 64%, while the full harness reaches 92% with the same frozen model. These results support separating rule execution from video rendering for world interactions with hidden state.",
         "categories": [
           "cs.CV"
@@ -65293,7 +65521,7 @@
           "arxiv"
         ],
         "listing_date": "2026-10-20",
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "required endings",
           "resulting event",
@@ -65350,7 +65578,16 @@
           "cs.CV",
           "cs.LG"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Siming Zhou",
+            "affiliation": "University of Electronic Science and Technology of China"
+          },
+          {
+            "author": "Bowen Ma",
+            "affiliation": "Xi'an University of Architecture and Technology"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -65360,7 +65597,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "latent intentions",
           "conditioned jepa",
@@ -65410,7 +65647,44 @@
         "categories": [
           "cs.AI"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Xike Xie",
+            "affiliation": "School of Biomedical Engineering, Division of Life Sciences and Medicine, University of Science and Technology of China, Hefei, Anhui 230026, China"
+          },
+          {
+            "author": "Yu Li",
+            "affiliation": "Yangtze River Delta Research Institute of Group Health Technology - MIRACLE Lab, USTC Suzhou Institute for Advanced Research, Suzhou, Jiangsu 215123, China"
+          },
+          {
+            "author": "Weizhong Yang",
+            "affiliation": "Jiangsu Provincial Key Laboratory of Multimodal Digital Twin Technology, Suzhou, Jiangsu 215123, China"
+          },
+          {
+            "author": "Amalie Dyda",
+            "affiliation": "Biomedical Basic Research Center of Jiangsu Province, Suzhou, Jiangsu 215123, China"
+          },
+          {
+            "author": "Shaohua Kevin Zhou",
+            "affiliation": "State Key Laboratory of Precision and Intelligent Chemistry, Hefei, Anhui 230026, China"
+          },
+          {
+            "author": "",
+            "affiliation": "School of Population Medicine and Public Health, Chinese Academy of Medical Sciences & Peking Union Medical College, Beijing 100006, China"
+          },
+          {
+            "author": "",
+            "affiliation": "Innovation Center for Philosophy and Social Sciences in Higher Education, Innovation Center for Public Health Emergency Management, Beijing 100006, China"
+          },
+          {
+            "author": "",
+            "affiliation": "State Key Laboratory of Respiratory Health and Multimorbidity, Beijing 100006, China"
+          },
+          {
+            "author": "",
+            "affiliation": "School of Public Health, The University of Queensland, Brisbane, Queensland, Australia"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -65420,7 +65694,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "digital medicine",
           "health world",
@@ -65479,7 +65753,20 @@
           "cs.CL",
           "cs.LG"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Zhaoyang Wang",
+            "affiliation": "Microsoft Research"
+          },
+          {
+            "author": "Qianhui Wu",
+            "affiliation": "Northeastern University"
+          },
+          {
+            "author": "Haorui Wang",
+            "affiliation": "Independent Researcher"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -65489,7 +65776,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "agent world",
           "wildawm",
@@ -65542,7 +65829,16 @@
         "categories": [
           "cs.RO"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Yuxiang Ma",
+            "affiliation": "Massachusetts Institute of Technology University of Washington Harvard University"
+          },
+          {
+            "author": "Weihan Xu",
+            "affiliation": "University of California, Berkeley Stanford University"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -65552,7 +65848,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "human physical interaction",
           "visuo-tactile world",
@@ -65601,7 +65897,16 @@
         "categories": [
           "cs.AI"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Sizhe Tang",
+            "affiliation": "George Washington University"
+          },
+          {
+            "author": "Hanhan Zhou",
+            "affiliation": "Amazon Web Services"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -65611,7 +65916,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "gui world",
           "decision value",
@@ -65660,7 +65965,12 @@
         "categories": [
           "cs.CV"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Yanbo Wang",
+            "affiliation": "Delft University of Technology (TU Delft)"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -65670,7 +65980,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "pretrained visual features",
           "compact latent",
@@ -65730,7 +66040,68 @@
         "categories": [
           "cs.RO"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Junjie Yang",
+            "affiliation": "The Hong Kong University of Science and Technology"
+          },
+          {
+            "author": "Qiming Zhang",
+            "affiliation": "The Hong Kong University of Science and Technology"
+          },
+          {
+            "author": "Yuyan Li",
+            "affiliation": "The Hong Kong University of Science and Technology"
+          },
+          {
+            "author": "Shuqi Shen",
+            "affiliation": "The Hong Kong University of Science and Technology"
+          },
+          {
+            "author": "Yusong Huang",
+            "affiliation": "The Hong Kong University of Science and Technology"
+          },
+          {
+            "author": "Yanggang Sheng",
+            "affiliation": "The Hong Kong University of Science and Technology"
+          },
+          {
+            "author": "Wenpeng Xu",
+            "affiliation": "The Hong Kong University of Science and Technology"
+          },
+          {
+            "author": "Ziyi Shi",
+            "affiliation": "The Hong Kong University of Science and Technology"
+          },
+          {
+            "author": "Tianshun Li",
+            "affiliation": "The Hong Kong University of Science and Technology"
+          },
+          {
+            "author": "Yijie Chen",
+            "affiliation": "The Hong Kong University of Science and Technology"
+          },
+          {
+            "author": "Yujia Wang",
+            "affiliation": "The Hong Kong University of Science and Technology"
+          },
+          {
+            "author": "Jun Ma",
+            "affiliation": "The Hong Kong University of Science and Technology"
+          },
+          {
+            "author": "Xinhu Zheng",
+            "affiliation": "The Hong Kong University of Science and Technology (Guangzhou)"
+          },
+          {
+            "author": "Hongliang Lu",
+            "affiliation": "The Chinese University of Hong Kong, Shenzhen"
+          },
+          {
+            "author": "Hai Yang",
+            "affiliation": "Victoria University of Wellington"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -65740,7 +66111,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "autonomous driving systems",
           "guided post-hoc reflection",
@@ -65802,7 +66173,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "unresolved",
         "keywords": [
           "embodied world agents",
           "ewa",
@@ -65851,7 +66222,16 @@
         "categories": [
           "cs.CV"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Zhiyang Deng",
+            "affiliation": "National University of Singapore"
+          },
+          {
+            "author": "Yuzhe Wu",
+            "affiliation": "Nanyang Technological University"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -65861,7 +66241,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "spatially consistent control",
           "game world",
@@ -65916,7 +66296,20 @@
           "cs.RO",
           "eess.SY"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Adrian Remonda",
+            "affiliation": "Toyota Research Institute, Los Altos, CA, USA."
+          },
+          {
+            "author": "Jiajun Xi",
+            "affiliation": "University of California San Diego (UCSD), La Jolla, CA, USA."
+          },
+          {
+            "author": "Nicklas Hansen",
+            "affiliation": "University of California San Diego (UCSD), La Jolla, CA, USA. Work done in part during an internship at UCSD. Website"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -65926,7 +66319,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "pia",
           "simulation priors",
@@ -65981,7 +66374,44 @@
           "cs.RO",
           "cs.AI"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Jingxiang Guo",
+            "affiliation": "National University of Singapore"
+          },
+          {
+            "author": "Haoyu Zhao",
+            "affiliation": "National University of Singapore"
+          },
+          {
+            "author": "Xidong Zhang",
+            "affiliation": "Harbin Institute of Technology"
+          },
+          {
+            "author": "Yuhang Zheng",
+            "affiliation": "National University of Singapore"
+          },
+          {
+            "author": "Hao Wu",
+            "affiliation": "National University of Singapore"
+          },
+          {
+            "author": "Chen Gao",
+            "affiliation": "National University of Singapore"
+          },
+          {
+            "author": "Jianshu Zhou",
+            "affiliation": "National University of Singapore"
+          },
+          {
+            "author": "Shuicheng Yan",
+            "affiliation": "National University of Singapore"
+          },
+          {
+            "author": "Weihao Yuan",
+            "affiliation": "Nanjing University"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -65991,7 +66421,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "relative camera poses",
           "action following",
@@ -66046,7 +66476,24 @@
         "categories": [
           "cs.RO"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Haohan Geng",
+            "affiliation": "University of Science and Technology of China."
+          },
+          {
+            "author": "Sha Zhang",
+            "affiliation": "The Chinese University of Hong Kong."
+          },
+          {
+            "author": "Weishuo Sun",
+            "affiliation": "University of Macau."
+          },
+          {
+            "author": "Guanting Ye",
+            "affiliation": "Huawei Technologies Co., Ltd. These authors contributed equally to this work."
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -66056,7 +66503,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "dynamic object manipulation",
           "dynamic robotic manipulation",
@@ -66106,7 +66553,12 @@
           "cs.CV",
           "cs.RO"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Yude Zou",
+            "affiliation": "Shanghai Jiao Tong University Shanghai Artificial Intelligence Laboratory Fudan University"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -66116,7 +66568,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "pica-wam",
           "cross-appearance self-alignment",
@@ -66168,7 +66620,24 @@
         "categories": [
           "cs.CV"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Tengju Ru",
+            "affiliation": "Zhejiang University"
+          },
+          {
+            "author": "Weitong Lian",
+            "affiliation": "The University of Hong Kong"
+          },
+          {
+            "author": "Zecong Tang",
+            "affiliation": "The Chinese University of Hong Kong, Shenzhen"
+          },
+          {
+            "author": "Zhiheng Liu",
+            "affiliation": "Shenzhen Loop Area Institute"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -66178,7 +66647,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "fine-grained visual understanding",
           "generation-side",
@@ -66236,7 +66705,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "unresolved",
         "keywords": [
           "robotic photography",
           "human aesthetic preferences",
@@ -66290,7 +66759,48 @@
           "cs.RO",
           "cs.LG"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Yanjun Li",
+            "affiliation": "Peking University"
+          },
+          {
+            "author": "Jiarui Ye",
+            "affiliation": "Peking University"
+          },
+          {
+            "author": "Weiyu Guo",
+            "affiliation": "Peking University"
+          },
+          {
+            "author": "Zixiao He",
+            "affiliation": "Peking University"
+          },
+          {
+            "author": "Kangjie Ye",
+            "affiliation": "Peking University"
+          },
+          {
+            "author": "Dihan Wang",
+            "affiliation": "Peking University"
+          },
+          {
+            "author": "Yishuo Cheng",
+            "affiliation": "Peking University"
+          },
+          {
+            "author": "Zishang Xiang",
+            "affiliation": "Peking University"
+          },
+          {
+            "author": "Mingju Gao",
+            "affiliation": "Peking University"
+          },
+          {
+            "author": "Hao Tang",
+            "affiliation": "Peking University"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -66300,7 +66810,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "same wam",
           "language alignment",
@@ -66350,7 +66860,32 @@
           "cs.CV",
           "cs.AI"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Duc Kieu",
+            "affiliation": "Applied Artificial Intelligence Initiative, Deakin University"
+          },
+          {
+            "author": "Kien Do",
+            "affiliation": "VinSmart Future, 3 Aalborg University"
+          },
+          {
+            "author": "Minh Khoa Le",
+            "affiliation": "VinSmart Future, 3 Aalborg University"
+          },
+          {
+            "author": "Tung Kieu",
+            "affiliation": "Applied Artificial Intelligence Initiative, Deakin University"
+          },
+          {
+            "author": "Dang Nguyen",
+            "affiliation": "VinSmart Future, 3 Aalborg University"
+          },
+          {
+            "author": "Thin Nguyen",
+            "affiliation": "VinSmart Future, 3 Aalborg University"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -66360,7 +66895,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "modaliff",
           "any-to-any generation",
@@ -66413,7 +66948,16 @@
           "cs.RO",
           "cs.AI"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Hojin Jeon",
+            "affiliation": "Korea University"
+          },
+          {
+            "author": "Jimin Lee",
+            "affiliation": "Seoul National University"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -66423,7 +66967,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "temporal action quantization",
           "adaptive temporal",
@@ -66470,7 +67014,12 @@
           "cs.AI",
           "cs.CL"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Pedram Mouseli",
+            "affiliation": "University of Toronto"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -66480,7 +67029,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "retaining earlier reasoning",
           "reasoning written",
@@ -66542,7 +67091,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "unresolved",
         "keywords": [
           "vlda",
           "actionable transition",
@@ -66600,7 +67149,28 @@
         "categories": [
           "cs.RO"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Langzhe Gu",
+            "affiliation": "State Key Laboratory of Multimedia Information Processing, School of Computer Science, Peking University"
+          },
+          {
+            "author": "Chengkai Hou",
+            "affiliation": "Beijing Innovation Center of Humanoid Robotics"
+          },
+          {
+            "author": "Meng Li",
+            "affiliation": "Nankai University"
+          },
+          {
+            "author": "Xinhua Wang",
+            "affiliation": "Xi’an Jiaotong University"
+          },
+          {
+            "author": "Xinyuan Lv",
+            "affiliation": "Tsinghua University"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -66610,7 +67180,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "humanoid whole-body loco-manipulation",
           "whole-body action space",
@@ -66665,7 +67235,16 @@
           "cs.SD",
           "eess.AS"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Kien T. Pham",
+            "affiliation": "HKUST"
+          },
+          {
+            "author": "Yuhao Liu",
+            "affiliation": "Huawei Research"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -66675,7 +67254,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "unified audio-video creation",
           "noise schedule",
@@ -66726,7 +67305,20 @@
         "categories": [
           "cs.CV"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Shiyun Xiong",
+            "affiliation": "MMLab, The Chinese University of Hong Kong Shenzhen Loop Area Institute"
+          },
+          {
+            "author": "Dongming Wu",
+            "affiliation": "The Chinese University of Hong Kong, Shenzhen Southeast University"
+          },
+          {
+            "author": "Peiwen Sun",
+            "affiliation": "China Singapore International Joint Research Institute"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -66736,7 +67328,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "sensory modalities",
           "embodied sensory understanding",
@@ -66786,7 +67378,12 @@
           "cs.CV",
           "cs.AI"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Francesco Colasurdo",
+            "affiliation": "Eindhoven University of Technology"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -66796,7 +67393,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "chaining three",
           "cross-modal forgetting",
@@ -66856,7 +67453,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "unresolved",
         "keywords": [
           "estimating humanoid robot",
           "joint configurations",
@@ -66907,7 +67504,16 @@
         "categories": [
           "cs.RO"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Jiaju He",
+            "affiliation": "School of Electrical and Electronic Engineering, Nanyang Technological University (NTU), Singapore"
+          },
+          {
+            "author": "Zhiyuan Yang",
+            "affiliation": "Singapore Institute of Manufacturing Technology (SIMTech), Agency for Science, Technology and Research (A STAR), Singapore"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -66917,7 +67523,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "force admission",
           "visual-language context",
@@ -66966,7 +67572,16 @@
           "cs.RO",
           "cs.AI"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Shenli Zheng",
+            "affiliation": "Nanjing University, Nanjing, China"
+          },
+          {
+            "author": "Zhou Fang",
+            "affiliation": "Nanjing University of Information Science and Technology, Nanjing, China"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -66976,7 +67591,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "action recovery",
           "structural pruning",
@@ -67030,7 +67645,68 @@
           "Zhaoxi Chen",
           "Ziwei Liu"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Xinhao Ji",
+            "affiliation": "Nanyang Technological University"
+          },
+          {
+            "author": "Hui En Pang",
+            "affiliation": "Nanyang Technological University"
+          },
+          {
+            "author": "Hao Li",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Kairui Hu",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Jiner Wang",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Mingze Sun",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Ziang Cao",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Yalun Dai",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Thang Luu",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Qin Ma",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Hongyi Chen",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Yukang Cao",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Fangzhou Hong",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Zhaoxi Chen",
+            "affiliation": "Tsinghua University"
+          },
+          {
+            "author": "Ziwei Liu",
+            "affiliation": "Tsinghua University"
+          }
+        ],
         "abstract": "Reconstructing human activity from egocentric video requires more than recovering individual 3D components: the observer's motion, surrounding geometry, and hand-object interactions must fit together in a consistent world. Achieving this coherence requires both joint reconstruction and aligned supervision, yet existing methods and datasets offer limited support for either. We present EgoXperience, a full-stack paradigm that addresses these needs through data collection, automatic annotation, unified modeling, and benchmarking. Central to EgoXperience is an automatic annotation engine, EgoX-Engine, that couples geometrically verified object tracking with SLAM-based world alignment, yielding consistent supervision for the camera, scene, hands, and objects. This yields EgoX-Data-6M, a 50-hour dataset of task-driven manipulation and locomotion within and across indoor and outdoor environments, with second-level task captions. We carefully select one hour across these activity categories as EgoX-Bench to evaluate joint reconstruction. To translate this supervision into reconstruction, we introduce EgoX, trained with EgoX-Data-6M and complementary annotations from additional public datasets. Given monocular egocentric video and first-frame object masks, our model achieves joint metric reconstruction of the camera, scene, hands, and objects in a shared world coordinate frame with a single forward pass. Extensive experiments demonstrate state-of-the-art performance across scene estimation and world-space hand-object pose recovery. Against the strongest evaluated baselines, EgoX reduces camera, hand, and depth errors by 68.9%, 65.6%, and 42.9%, and improves object pose scores by 28.0%.",
         "categories": [
           "cs.CV"
@@ -67046,7 +67722,7 @@
           "arxiv"
         ],
         "listing_date": "2026-10-20",
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "camera scene hands",
           "automatic annotation",
@@ -67118,7 +67794,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "unresolved",
         "keywords": [
           "robotic value",
           "fine-grained sim-and-real benchmark",
@@ -67163,7 +67839,24 @@
           "Xin Li",
           "Wenjie Pei"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Junwei Wen",
+            "affiliation": "Harbin Institute of Technology, Shenzhen"
+          },
+          {
+            "author": "Deshui Miao",
+            "affiliation": "Pengcheng Laboratory"
+          },
+          {
+            "author": "Guangming Lu",
+            "affiliation": "Pazhou Lab (Huangpu)"
+          },
+          {
+            "author": "Ming-Hsuan Yang",
+            "affiliation": "University of California at Merced"
+          }
+        ],
         "abstract": "Video Reasoning Segmentation (VRS) requires a model to identify an implicitly described target and predict its pixel-level mask trajectory, while resolving the spatial relations and temporal events that determine the answer. Text-only Chain-of-Thought (CoT) can explain a target choice without making the underlying visual references explicit, leaving a \\emph{video reference gap} between linguistic inference and the evidence distributed across frames. We introduce \\textbf{Temporal Chain of Video Primitives (TCoVP)}, a spatiotemporally grounded form of Video CoT that organizes query-relevant observations into a chronological reasoning chain. Each primitive associates an entity reference with temporal support and timestamped spatial evidence, and the chain interleaves these references with language to guide reasoning about which entity is relevant, when the queried event holds, and where its evidence appears. The selected target primitives then provide box prompts and temporal support for video mask prediction. We construct TCoVP-SFT-15k and TCoVP-RL-13k to learn this representation through supervised fine-tuning and chain-aligned reinforcement learning. Extensive experiments across five VRS benchmarks and three model backbones demonstrate the strong performance of TCoVP, highlighting the effectiveness of organizing spatial and temporal evidence within the reasoning process. All models and code will be publicly released. Project page: \\url{this https URL}",
         "categories": [
           "cs.CV"
@@ -67179,7 +67872,7 @@
           "arxiv"
         ],
         "listing_date": "2026-10-20",
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "temporal support",
           "chronological reasoning chain",
@@ -67233,7 +67926,24 @@
         "categories": [
           "cs.RO"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Jiaming Liu",
+            "affiliation": "NVIDIA"
+          },
+          {
+            "author": "Xinghao Zhu",
+            "affiliation": "Peking University"
+          },
+          {
+            "author": "Yiming Zhang",
+            "affiliation": "UC Berkeley"
+          },
+          {
+            "author": "Shanghang Zhang",
+            "affiliation": "NVIDIA Peking University UC Berkeley Co-First Authors"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -67243,7 +67953,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "physical words",
           "physword",
@@ -67295,7 +68005,12 @@
         "categories": [
           "cs.CV"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Run Shao",
+            "affiliation": "Central South University"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -67305,7 +68020,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "native multimodal reasoning",
           "native visual representations",
@@ -67352,7 +68067,12 @@
           "cs.AI",
           "cs.LG"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Chenhe Yang",
+            "affiliation": "SAGA Lab, The Chinese University of Hong Kong, Shenzhen"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -67362,7 +68082,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "generation order",
           "anatomically organized factorizations",
@@ -67411,7 +68131,32 @@
         "categories": [
           "cs.CV"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Muhammad Ahmad",
+            "affiliation": "Khanpur Institute of Technology, Khanpur 64100, Pakistan"
+          },
+          {
+            "author": "Gemine Vivone",
+            "affiliation": "National Research Council - Institute of Methodologies for Environmental Analysis (CNR-IMAA), 85050 Tito, Italy"
+          },
+          {
+            "author": "Ronny Hänsch",
+            "affiliation": "Department of SAR Technology, German Aerospace Center (DLR), Germany"
+          },
+          {
+            "author": "Ahmed Sohaib",
+            "affiliation": "Khanpur Institute of Technology, Khanpur 64100, Pakistan"
+          },
+          {
+            "author": "Manuel Mazzara",
+            "affiliation": "Institute of Software Development and Engineering, Innopolis University, Innopolis, 420500, Russia"
+          },
+          {
+            "author": "Danfeng Hong",
+            "affiliation": "School of Automation, Southeast University, Nanjing, China"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -67421,7 +68166,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "stochastic latent world",
           "latent world modeling",
