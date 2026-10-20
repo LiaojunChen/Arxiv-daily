@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-10-20T05:48:43+00:00",
+  "updated_at": "2026-10-20T09:24:03+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-f3d946bbc283bb07fee3cae8": {
-      "run_id": "daily-f3d946bbc283bb07fee3cae8",
-      "generated_at": "2026-10-20T05:48:43+00:00",
+    "daily-f69ad3a4bdd8312fc1602949": {
+      "run_id": "daily-f69ad3a4bdd8312fc1602949",
+      "generated_at": "2026-10-20T09:24:03+00:00",
       "selected_ids": [
         "2610.26855",
         "2610.25666",
@@ -1189,6 +1189,22 @@
             "world model"
           ]
         },
+        "2610.26663": {
+          "title": "RoboValue: A Fine-Grained Sim-and-Real Benchmark for Unified Evaluation of Robotic Value Models",
+          "abstract": "Robotic value models assess task execution from visual observations and instructions, providing feedback for policy learning and execution monitoring. However, existing evaluations cover only selected aspects of execution understanding, leaving the reliability of value feedback insufficiently tested. We introduce RoboValue, a fine-grained sim-and-real benchmark for unified evaluation of robotic value models. Its framework evaluates four complementary capability dimensions through shared interfaces: task-state understanding, temporal progress monitoring, failure and recovery reasoning, and value consistency. Diagnostic trajectories and instruction variations test whether value judgments accurately reflect task requirements and changes throughout execution. RoboValue-Dataset covers 15 simulation and 20 real-world manipulation tasks, providing expert demonstrations for training and annotated trajectories for fine-grained evaluation. We evaluate representative robotic value models in zero-shot and one-shot settings under standard conditions and separate shifts in robot embodiment and environment. Our results reveal errors in fine-grained instruction grounding, history-dependent progress tracking, and recovery assessment, even in models with strong outcome and forward-progress scores. The same semantic subtask can also receive substantially different value gains across valid execution orders. These findings identify concrete targets for value supervision, while the dataset and public leaderboard support continued assessment of feedback reliability. The website is available at this https URL.",
+          "categories": [
+            "cs.RO"
+          ],
+          "keywords": [
+            "robotic value",
+            "fine-grained sim-and-real benchmark",
+            "unified evaluation",
+            "accurately reflect task",
+            "assess task execution",
+            "capability dimensions through"
+          ],
+          "matched_keywords": []
+        },
         "2610.25288": {
           "title": "Vision as Proprioception: Estimating Humanoid Robot Pose from Video",
           "abstract": "Estimating a humanoid robot's internal state from video has a wide range of real-world applications but remains unexplored. During interactions with a robot, its onboard state information may be unavailable due to privacy, ownership, or communication constraints. Meanwhile, online and AI-generated robot videos provide rich sources of data but typically lack corresponding joint configurations, limiting their direct use in robot learning. To address these issues, we present HumanoidPose, a new framework that treats vision as proprioception to recover full-body joint configurations in world space from video alone. Specifically, we combine pretrained human-pose features with robot kinematics in a unified model that predicts each embodiment's joint configurations. We retarget human motions to sixteen different humanoid embodiments, enabling scalable learning entirely from synthetic data. To improve real-world generalization, we further leverage unlabeled online videos through self-training to develop a 2D robot-pose detector. In our evaluation, HumanoidPose improves joint-angle and joint-position accuracy over the evaluated baselines and reduces joint-angle error by 18-32% relative to the best-performing baseline on each of the three real humanoid platforms. We further show improved global localization and generalization to unseen embodiments. HumanoidPose enables visual understanding of other robots during interaction and extraction of robot motion from online and generated videos.",
@@ -1258,22 +1274,6 @@
             "aesthetic direct preference",
             "aesthetic preferences while",
             "aesthetically pleasing images"
-          ],
-          "matched_keywords": []
-        },
-        "2610.26663": {
-          "title": "RoboValue: A Fine-Grained Sim-and-Real Benchmark for Unified Evaluation of Robotic Value Models",
-          "abstract": "Robotic value models assess task execution from visual observations and instructions, providing feedback for policy learning and execution monitoring. However, existing evaluations cover only selected aspects of execution understanding, leaving the reliability of value feedback insufficiently tested. We introduce RoboValue, a fine-grained sim-and-real benchmark for unified evaluation of robotic value models. Its framework evaluates four complementary capability dimensions through shared interfaces: task-state understanding, temporal progress monitoring, failure and recovery reasoning, and value consistency. Diagnostic trajectories and instruction variations test whether value judgments accurately reflect task requirements and changes throughout execution. RoboValue-Dataset covers 15 simulation and 20 real-world manipulation tasks, providing expert demonstrations for training and annotated trajectories for fine-grained evaluation. We evaluate representative robotic value models in zero-shot and one-shot settings under standard conditions and separate shifts in robot embodiment and environment. Our results reveal errors in fine-grained instruction grounding, history-dependent progress tracking, and recovery assessment, even in models with strong outcome and forward-progress scores. The same semantic subtask can also receive substantially different value gains across valid execution orders. These findings identify concrete targets for value supervision, while the dataset and public leaderboard support continued assessment of feedback reliability. The website is available at this https URL.",
-          "categories": [
-            "cs.RO"
-          ],
-          "keywords": [
-            "robotic value",
-            "fine-grained sim-and-real benchmark",
-            "unified evaluation",
-            "accurately reflect task",
-            "assess task execution",
-            "capability dimensions through"
           ],
           "matched_keywords": []
         },
@@ -2594,9 +2594,9 @@
             "local trajectories",
             "local planning",
             "vision-language navigation",
-            "future prediction",
             "baselines while real-world",
-            "compact language-conditioned latent"
+            "compact language-conditioned latent",
+            "decouples predictive reasoning"
           ],
           "matched_keywords": []
         },
@@ -15560,6 +15560,99 @@
           ],
           "matched_keywords": []
         },
+        "2610.14397": {
+          "title": "RealityBench: Simulated Environments to Evaluate a Vision Language Model's Ability to Document Human Physical Work",
+          "abstract": "Augmenting worker capabilities in the physical world through guidance has been a decades-long goal for AI agents. One key supporting capability is to understand what the worker is doing, seeing through the human's camera or smart glasses, and assist them in documentation. Despite advances in vision language models, their capabilities in these settings remain uncertain and are challenging to benchmark because most physical work data is proprietary, and involves too much variability to study in a principled manner. Unlike structured settings such as kitchens and warehouses that have predictable lighting, geometry, and objects, field-facing tasks such as rooftop solar installation and vehicle repair are unconstrained and high variance. Here, we model real-world physical work in Blender across eleven environments, incorporating variants in both image acceptability and documentation. The acceptability task asks whether a particular view would be suitable proof-of-work and documentation asks whether an agent can understand the task-relevant state of the environment from that view. Across 26 vision-language models, we find that top models largely solve documentation when the answer is text in frame, but are weak at reading measurements and at judging small parts and spatial relations, such as whether a tape measure leans. Acceptability is harder to pin down because human raters disagree with each other. Measured against a scorer that agrees with the raters' majority about as often as a single rater does, the best models cannot be distinguished from a single non-author rater, at a cost within the range of a human pass. In the three environments where we can trace acceptability errors, most wrong rejections come from misreading the scene rather than the requirement. On the three documentation questions for which we have real images, model rankings on rendered frames transfer to real images.",
+          "categories": [
+            "cs.CV",
+            "cs.AI",
+            "cs.CL"
+          ],
+          "keywords": [
+            "physical work",
+            "acceptability",
+            "asks whether",
+            "documentation",
+            "vision language",
+            "real images"
+          ],
+          "matched_keywords": []
+        },
+        "2610.16782": {
+          "title": "LIBERO-Industry: Benchmarking Robotic Manipulation under Industrial Process Constraints",
+          "abstract": "Industrial manipulation in flexible manufacturing, e.g., high-mix, low-volume (HMLV) electronics assembly, requires robot policies to adapt to changing products and production conditions. Such settings impose industrial process constraints, including product variants, moving material flows, finite execution windows, and tight geometric tolerances. However, existing evaluation frameworks do not systematically capture these constraints when assessing generalist robot policies. To address this gap, we introduce LIBERO-Industry, a novel benchmark built on the widely used robot learning benchmark LIBERO, that translates the aforementioned industrial constraints into controllable task conditions and measurable success criteria. Specifically, LIBERO-Industry comprises three classic task scenarios: Static-to-Dynamic (S2D) loading, Dynamic-to-Static (D2S) unloading, and Dynamic-to-Dynamic (D2D) transfer. The suites contain 216 tasks in total that systematically vary object geometry, conveyor speed, interaction-window duration, and geometric acceptance region size. Extensive experiments across five generalist robot policies (including vision-language-action models and world-action models) show that performance progressively degrades as industrial constraints are introduced and combined. Under a shared fine-tuning and evaluation protocol, the LIBERO-Industry co-training condition achieved higher observed target-transfer completion than the original-LIBERO condition.",
+          "categories": [
+            "cs.AI"
+          ],
+          "keywords": [
+            "industrial process constraints",
+            "generalist robot policies",
+            "libero-industry",
+            "acceptance region size",
+            "achieved higher observed",
+            "aforementioned industrial constraints"
+          ],
+          "matched_keywords": []
+        },
+        "2610.17724": {
+          "title": "Evidence-First Agentic Verification",
+          "abstract": "Long-horizon, semi-verifiable agentic tasks often rely on rubric-based evaluation, but the evidence needed to assess these tasks can be spread across the environment state and the execution trace. A judge may overlook this evidence or accept unsupported claims, including an agent's own reports of success. When rubric verdicts serve as reinforcement-learning rewards, such errors can reinforce undesirable behavior. We introduce Sauron, an evidence-first agentic verifier that investigates both state and trace and relies on a claim only after independently validating it against its source. Bounded queries and joint investigation of related criteria reduce context use and redundant work, and each verdict carries an auditable receipt of its supporting evidence. Across 2,586 human-labeled criteria from 100 personal-assistant episodes, Sauron achieves the highest F1 of five verifiers on all eight backbones tested while costing less than Gandalf, the strongest baseline. With GPT-5.6 Sol, it reaches 0.96 F1 versus Gandalf's 0.92 at 23% lower cost, with a wider margin on process criteria. On a paired fault-injection suite covering 13 families, several of which simulate reward hacking, Sauron detects 97% of injected failures while flagging only 2% of clean controls, outperforming baselines even when they are given the full trace. On TRAIL, a benchmark for detecting and localizing real agent errors, Sauron leads both Gandalf and TRAIL's own judge on all three quality metrics.",
+          "categories": [
+            "cs.AI",
+            "cs.LG"
+          ],
+          "keywords": [
+            "sauron",
+            "evidence-first agentic",
+            "gandalf",
+            "accept unsupported claims",
+            "agent errors sauron",
+            "agent own reports"
+          ],
+          "matched_keywords": []
+        },
+        "2610.26825": {
+          "title": "MemT-1.0: Towards Memory-Native Evolution",
+          "abstract": "Memory-native evolution requires making memory an intrinsic capability of foundation models, enabling them to continuously accumulate and utilize information. To this end, we introduce MemT-1.0, a new architecture of memory foundation models that internalize memory as part of model computation. Building on Metis, MemT-1.0 employs Gated DeltaNet-2 with a stable token-level memory update mechanism within each turn. We further introduce Mixture-of-Storage to scale native memory capacity. Following a deliberate backbone preparation, we develop a two-stage training pipeline consisting of continued pre-training and post-training, supported by 34B tokens of training data and efficient training and inference infrastructure. We release a model family comprising MemT-1.0-Nano and MemT-1.0-Flash, and conduct a comprehensive evaluation of memory and general capabilities. The results show that they outperform the parametric memory baselines on average and remain competitive with retrieval-augmented methods, while largely preserving general capabilities. At a history length of 128K tokens, MemT-1.0-Nano achieves approximately 1.86times end-to-end inference speedup and a 66times reduction in persistent storage relative to full context KV cache. By internalizing retrieved procedural experience, MemT-1.0 improves task success on agentic tasks, providing a practical step toward memory-native evolution.",
+          "categories": [],
+          "keywords": [
+            "memt-1",
+            "memory-native evolution",
+            "general capabilities",
+            "agentic tasks providing",
+            "conduct comprehensive evaluation",
+            "context kv cache"
+          ],
+          "matched_keywords": []
+        },
+        "2610.26824": {
+          "title": "SpecMRL: Redesign Matryoshka Representation Learning within Parametric Spectrum",
+          "abstract": "Matryoshka Representation Learning (MRL) is designed to support flexible representation sizes by jointly optimizing nested prefixes. While effective, this design lacks an explicit constraint to ensure that the leading portion provides a suitable compact encoding. To address this, we propose SpecMRL, which reorganizes the feature space to enable more effective prefix readout. Specifically, we extend MRL with a parameter-derived spectral basis organized with feature importance. SpecMRL otherwise follows standard MRL, with prefix readout performed in the learned spectral space. Experiments on MTEB show that SpecMRL outperforms MRL at all evaluated reduced dimensions, with larger gains under more aggressive compression. These results suggest that the learned spectral basis better prioritizes informative directions, enabling more effective representation compression. Notably, SpecMRL extends the performance frontier of MRL, surpassing full-dimensional MRL with only half the embedding dimensions.",
+          "categories": [],
+          "keywords": [
+            "mrl",
+            "specmrl",
+            "matryoshka representation",
+            "prefix readout",
+            "spectral basis",
+            "basis better prioritizes"
+          ],
+          "matched_keywords": []
+        },
+        "2610.24766": {
+          "title": "ECHO: Efficient Causal Self-Recursion Beyond Auxiliary Multi-Token Prediction",
+          "abstract": "Existing Multi-token prediction (MTP) methods are auxiliary by design: the multi-horizon loss mostly trains modules attached to the backbone, and each added horizon costs another module and another pass. We propose Efficient Causal Self-Recursion (ECHO), which removes both costs. The backbone's own final layer predicts every horizon, so the supervision lands on the parameters that generate the next token, and Dynamic Depth Sampling (DDS) keeps deeper horizons affordable by drawing the training depth with probabilities that decay along depth. Future prediction thus becomes part of the autoregressive objective rather than a task attached to it, and the gains follow on both sides of it. In pretraining, added depth converts into downstream accuracy where auxiliary modules saturate, concentrating on reasoning and code at half the MTP training overhead of training every depth. At inference, the pretrained model is its own drafter: it drafts beyond the depth it was trained for, and keeps its draft-target alignment on the open-ended, high-entropy generation where post-hoc drafters lose theirs. The advantage survives a doubled token budget, a repeated pretraining run, and supervised finetuning.",
+          "categories": [],
+          "keywords": [
+            "efficient causal self-recursion",
+            "multi-token prediction",
+            "accuracy where auxiliary",
+            "added depth converts",
+            "added horizon costs",
+            "advantage survives doubled"
+          ],
+          "matched_keywords": []
+        },
         "2610.23542": {
           "title": "Execution Before Memory: Diagnosing Memory Failures in Video World Models",
           "abstract": "A memory test for a video world model should say whether the scene was set, whether the asked change was carried out, and whether the last frame shows the result. Current tests fold these into one number, so a low score is easy to read as forgetting. When the change is not carried out, the hidden state transition cannot appear, so the test is not really a test of memory. We introduce MIST, an evaluation that separates the change from the memory it should leave behind. The model first sets the scene while the change stays hidden, and only later is asked to show it, with leakage before that point kept under control. This separation locates the bottleneck: the model sets the scene but does not carry out the instructed change. The same gap appears in general memory evaluations. On that basis we propose M3-Agent (Make the Missing Move), which recursively revises the details of the input instruction so that the model successfully carries out the requested instruction. Relative to the baseline, it more than triples the MIST reveal score. On the benchmarks, WRBench's score T rises by 26.1% and MBench-T's score U by 52.7%. The method meets the problem from the execution side: it shows what the frozen model can do once the move is stated, and it sets a stricter baseline.",
@@ -19701,8 +19794,8 @@
             "multi-space contextual guidance",
             "one-pass registration",
             "contextual cues",
-            "feature space",
-            "achieved state-of-the-art performance"
+            "achieved state-of-the-art performance",
+            "adopt either one-pass"
           ],
           "matched_keywords": []
         },
@@ -22258,11 +22351,11 @@
           ],
           "keywords": [
             "policy-aligned predictive",
-            "future prediction",
             "adaptive methods make",
             "adaptive vla action-chunk",
             "behavior within failed",
-            "candidate action prefixes"
+            "candidate action prefixes",
+            "candidate prefix preserves"
           ],
           "matched_keywords": []
         },
@@ -38179,8 +38272,8 @@
             "long-horizon robot video",
             "robot video world",
             "generated history",
-            "full context",
             "recap",
+            "full context",
             "active-context growth independently"
           ],
           "matched_keywords": [
@@ -39754,24 +39847,6 @@
             "transferable world-action",
             "analyses before robot",
             "another demonstration actions"
-          ],
-          "matched_keywords": []
-        },
-        "2610.14397": {
-          "title": "RealityBench: Simulated Environments to Evaluate a Vision Language Model's Ability to Document Human Physical Work",
-          "abstract": "Augmenting worker capabilities in the physical world through guidance has been a decades-long goal for AI agents. One key supporting capability is to understand what the worker is doing, seeing through the human's camera or smart glasses, and assist them in documentation. Despite advances in vision language models, their capabilities in these settings remain uncertain and are challenging to benchmark because most physical work data is proprietary, and involves too much variability to study in a principled manner. Unlike structured settings such as kitchens and warehouses that have predictable lighting, geometry, and objects, field-facing tasks such as rooftop solar installation and vehicle repair are unconstrained and high variance. Here, we model real-world physical work in Blender across eleven environments, incorporating variants in both image acceptability and documentation. The acceptability task asks whether a particular view would be suitable proof-of-work and documentation asks whether an agent can understand the task-relevant state of the environment from that view. Across 26 vision-language models, we find that top models largely solve documentation when the answer is text in frame, but are weak at reading measurements and at judging small parts and spatial relations, such as whether a tape measure leans. Acceptability is harder to pin down because human raters disagree with each other. Measured against a scorer that agrees with the raters' majority about as often as a single rater does, the best models cannot be distinguished from a single non-author rater, at a cost within the range of a human pass. In the three environments where we can trace acceptability errors, most wrong rejections come from misreading the scene rather than the requirement. On the three documentation questions for which we have real images, model rankings on rendered frames transfer to real images.",
-          "categories": [
-            "cs.CV",
-            "cs.AI",
-            "cs.CL"
-          ],
-          "keywords": [
-            "physical work",
-            "acceptability",
-            "asks whether",
-            "documentation",
-            "vision language",
-            "real images"
           ],
           "matched_keywords": []
         },
@@ -46525,8 +46600,8 @@
             "cs.LG"
           ],
           "keywords": [
-            "echo",
             "accumulated error",
+            "echo",
             "all-reduce",
             "bit",
             "a100 gpus echo",
@@ -49580,22 +49655,6 @@
           ],
           "matched_keywords": []
         },
-        "2610.16782": {
-          "title": "LIBERO-Industry: Benchmarking Robotic Manipulation under Industrial Process Constraints",
-          "abstract": "Industrial manipulation in flexible manufacturing, e.g., high-mix, low-volume (HMLV) electronics assembly, requires robot policies to adapt to changing products and production conditions. Such settings impose industrial process constraints, including product variants, moving material flows, finite execution windows, and tight geometric tolerances. However, existing evaluation frameworks do not systematically capture these constraints when assessing generalist robot policies. To address this gap, we introduce LIBERO-Industry, a novel benchmark built on the widely used robot learning benchmark LIBERO, that translates the aforementioned industrial constraints into controllable task conditions and measurable success criteria. Specifically, LIBERO-Industry comprises three classic task scenarios: Static-to-Dynamic (S2D) loading, Dynamic-to-Static (D2S) unloading, and Dynamic-to-Dynamic (D2D) transfer. The suites contain 216 tasks in total that systematically vary object geometry, conveyor speed, interaction-window duration, and geometric acceptance region size. Extensive experiments across five generalist robot policies (including vision-language-action models and world-action models) show that performance progressively degrades as industrial constraints are introduced and combined. Under a shared fine-tuning and evaluation protocol, the LIBERO-Industry co-training condition achieved higher observed target-transfer completion than the original-LIBERO condition.",
-          "categories": [
-            "cs.AI"
-          ],
-          "keywords": [
-            "industrial process constraints",
-            "generalist robot policies",
-            "libero-industry",
-            "acceptance region size",
-            "achieved higher observed",
-            "aforementioned industrial constraints"
-          ],
-          "matched_keywords": []
-        },
         "2610.16838": {
           "title": "Same Operation, Different Permission: Evaluating Whether Guardrails Honor Authorization",
           "abstract": "As language-model agents write code, move money and change records on behalf of users, deciding whether an action is authorized has become a central safety problem. Guardrails are often placed in front of these actions, yet few evaluations ask whether their decisions follow authorization: blocking unauthorized actions while still allowing the same actions under valid permission. We introduce \\bench{}, a benchmark that contrasts authorization evidence for the same operation in its language track. It combines expert-annotated natural-language scenarios with executed and verified operations, plus externally sourced native-policy requests. \\bench{} checks each decision for correctness, usability and resulting effect, and tracks each request across guardrail changes. Our experiments show that many blocked operations stem from failed reviews, not correct denials. Repairing the output format restores usable decisions but changes which authorized requests are honored, and adding a second reviewer removes some errors while rejecting valid authorization. Guardrails should therefore be evaluated on both the unauthorized actions they stop and the authorized actions they let through.",
@@ -50572,23 +50631,6 @@
             "almost never restated",
             "architecture---source access handoff",
             "authentic threads comments"
-          ],
-          "matched_keywords": []
-        },
-        "2610.17724": {
-          "title": "Evidence-First Agentic Verification",
-          "abstract": "Long-horizon, semi-verifiable agentic tasks often rely on rubric-based evaluation, but the evidence needed to assess these tasks can be spread across the environment state and the execution trace. A judge may overlook this evidence or accept unsupported claims, including an agent's own reports of success. When rubric verdicts serve as reinforcement-learning rewards, such errors can reinforce undesirable behavior. We introduce Sauron, an evidence-first agentic verifier that investigates both state and trace and relies on a claim only after independently validating it against its source. Bounded queries and joint investigation of related criteria reduce context use and redundant work, and each verdict carries an auditable receipt of its supporting evidence. Across 2,586 human-labeled criteria from 100 personal-assistant episodes, Sauron achieves the highest F1 of five verifiers on all eight backbones tested while costing less than Gandalf, the strongest baseline. With GPT-5.6 Sol, it reaches 0.96 F1 versus Gandalf's 0.92 at 23% lower cost, with a wider margin on process criteria. On a paired fault-injection suite covering 13 families, several of which simulate reward hacking, Sauron detects 97% of injected failures while flagging only 2% of clean controls, outperforming baselines even when they are given the full trace. On TRAIL, a benchmark for detecting and localizing real agent errors, Sauron leads both Gandalf and TRAIL's own judge on all three quality metrics.",
-          "categories": [
-            "cs.AI",
-            "cs.LG"
-          ],
-          "keywords": [
-            "sauron",
-            "evidence-first agentic",
-            "gandalf",
-            "accept unsupported claims",
-            "agent errors sauron",
-            "agent own reports"
           ],
           "matched_keywords": []
         },
@@ -53969,8 +54011,8 @@
             "sid",
             "mtp",
             "auxiliary ranking",
-            "multi-token prediction",
-            "retrieval content"
+            "retrieval content",
+            "multi-token prediction"
           ],
           "matched_keywords": []
         },
@@ -55536,8 +55578,8 @@
           ],
           "keywords": [
             "dynamic integration network",
-            "feature importance",
             "importance patterns",
+            "feature importance",
             "joint embedding",
             "automatically engineer complex",
             "because neural networks"
