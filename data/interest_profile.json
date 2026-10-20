@@ -64366,7 +64366,7 @@
   "delivery": {
     "batch_id": "c3bccc64e1ab84c532a33f3c",
     "run_id": "daily-f3d946bbc283bb07fee3cae8",
-    "updated_at": "2026-10-20T05:48:43+00:00",
+    "updated_at": "2026-10-20T05:50:42+00:00",
     "profile_version": "992927a1524b59b3",
     "papers": [
       {
@@ -67812,7 +67812,84 @@
         "categories": [
           "cs.RO"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Shengbang Liu",
+            "affiliation": "Nanyang Technological University"
+          },
+          {
+            "author": "Zhengye Du",
+            "affiliation": "Nanyang Technological University"
+          },
+          {
+            "author": "Zhilong Wan",
+            "affiliation": "Nanyang Technological University"
+          },
+          {
+            "author": "Honghao Su",
+            "affiliation": "Nanyang Technological University"
+          },
+          {
+            "author": "Chenxiang Xia",
+            "affiliation": "Nanyang Technological University"
+          },
+          {
+            "author": "Chang Ge",
+            "affiliation": "Nanyang Technological University"
+          },
+          {
+            "author": "Jinyang Xiao",
+            "affiliation": "Nanyang Technological University"
+          },
+          {
+            "author": "Nan Wang",
+            "affiliation": "Nanyang Technological University"
+          },
+          {
+            "author": "Zhipeng Hu",
+            "affiliation": "Nanyang Technological University"
+          },
+          {
+            "author": "Huining Yuan",
+            "affiliation": "Nanyang Technological University"
+          },
+          {
+            "author": "Shu'ang Yu",
+            "affiliation": "Nanyang Technological University"
+          },
+          {
+            "author": "Yue Chen",
+            "affiliation": "Nanyang Technological University"
+          },
+          {
+            "author": "Tianxing Chen",
+            "affiliation": "Nanyang Technological University"
+          },
+          {
+            "author": "Chuankang Li",
+            "affiliation": "Nanyang Technological University"
+          },
+          {
+            "author": "Maoqing Yao",
+            "affiliation": "Nanyang Technological University"
+          },
+          {
+            "author": "Wenbo Ding",
+            "affiliation": "Nanyang Technological University"
+          },
+          {
+            "author": "Yu Wang",
+            "affiliation": "Nanyang Technological University"
+          },
+          {
+            "author": "Guanghui Ren",
+            "affiliation": "Nanyang Technological University"
+          },
+          {
+            "author": "Chao Yu",
+            "affiliation": "Nanyang Technological University"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-20",
         "listing_date": "2026-10-20",
@@ -67822,7 +67899,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "unresolved",
+        "affiliation_status": "resolved",
         "keywords": [
           "robotic value",
           "fine-grained sim-and-real benchmark",
