@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-10-21T05:02:19+00:00",
+  "updated_at": "2026-10-21T05:51:35+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-7f37413c06169b49a764185e": {
-      "run_id": "daily-7f37413c06169b49a764185e",
-      "generated_at": "2026-10-21T05:02:19+00:00",
+    "daily-df1172665b08f619c0383f49": {
+      "run_id": "daily-df1172665b08f619c0383f49",
+      "generated_at": "2026-10-21T05:51:35+00:00",
       "selected_ids": [
         "2610.28594",
         "2610.28631",
@@ -9314,6 +9314,67 @@
           ],
           "matched_keywords": []
         },
+        "2610.25369": {
+          "title": "Painting Change Map as guidance for generating painting processes",
+          "abstract": "Digital art generation has undergone a massive paradigm shift, moving from static image synthesis to dynamic video generation that can mimic the human painting process. While existing models can synthesize visually stunning time-lapses of paintings being created or \"unpainted,\" they largely treat the creative process as a black box. Current conditioning mechanisms are either too rigid, relying on static geometric cues like Canny edges or depth maps, or too holistic, utilizing simple scalar progress variables that offer no localized control. Consequently, users lack the agency to steer how a painting evolves over time. In this work, we argue that true control over the video generation of artwork requires a joint understanding of two fundamental dimensions: where an artist acts, and when those actions take place. To achieve this, we introduce the Painting Change Map, a novel spatio-temporal control mechanism that explicitly tracks normalized structural changes across a 1,000-timestep continuum, a resolution sufficient to capture fine-grained stroke-level changes while remaining computationally tractable. By mapping localized visual differences into an encoded RGB space, our representation enables fine-grained guidance for both the forward painting and reverse unpainting processes. Extensive benchmarking demonstrates the efficacy of our approach. We outperform existing control baselines and achieve competitive or superior results compared to state-of-the-art painting methods. Furthermore, under oracle conditions, our method surpasses all baselines by a significant margin. Code is available at https://github.com/Markus-Pobitzer/painting-change-map.",
+          "categories": [
+            "cs.CV"
+          ],
+          "keywords": [
+            "painting change map",
+            "actions take place",
+            "artwork requires joint",
+            "capture fine-grained stroke-level",
+            "change map novel",
+            "changes while remaining"
+          ],
+          "matched_keywords": []
+        },
+        "2610.24649": {
+          "title": "Good Judgment, Bad Advice: Decision-Model Controllers Raise Agent Cost Without Improving Success",
+          "abstract": "Agent scaffolds increasingly delegate small decisions (whether to stop, verify, or change approach) to cheaper models. We ask whether a typed decision model, Jev 1.13, consulted only at deterministic decision points, makes a Claude Sonnet 5.5 terminal agent cheaper without making it worse. In a pre-specified study on Terminal-Bench 2.1, we hold one agent loop fixed and vary only the controller: none, deterministic rules, a small LLM (Claude Haiku 5.5) answering the same questions, Jev, and a placebo that samples Jev's development-phase choice frequencies at the same moments. On 21 held-out tasks (315 trials), Jev raised cost per attempt by 19% (geometric-mean ratio 1.19, 95% CI 1.02-1.36) at an identical pass rate (73.0% vs. 73.0%). Jev was cheaper than the small-LLM controller (ratio 0.81) but 22% more expensive than the placebo, and no pass-rate difference between arms was detectable. Offline, Jev ranked finish requests better than the alternatives (AUROC 0.78 vs. 0.62 for rules and 0.60 for the small LLM) but was poorly calibrated: its mean probability that a run was complete was 0.50 when 87% of those runs passed, so it asked the agent to verify work that was already correct. No controller ever chose to abandon a run. Informative decision signals did not become useful interventions; we discuss what that would require.",
+          "categories": [
+            "cs.AI",
+            "cs.LG"
+          ],
+          "keywords": [
+            "small llm",
+            "jev",
+            "agent loop fixed",
+            "agent scaffolds increasingly",
+            "ask whether typed",
+            "become useful interventions"
+          ],
+          "matched_keywords": []
+        },
+        "2610.25078": {
+          "title": "CoEvo-RSI: When Harnesses Evolve, Which Models Should Follow?",
+          "abstract": "Model--harness co-evolution has emerged as a prominent paradigm for recursive self-improving (RSI) agents, jointly evolving their execution scaffolds and intrinsic capabilities. We study the persistent yet often overlooked brain--body mismatch problem in this paradigm, where an evolving harness (body) demands behaviors its model (brain) has not learned or restricts capabilities it already possesses. We introduce CoEvo-RSI, a RSI framework that advances model--harness co-evolution through agent-driven, bidirectional historical inheritance. Drawing on a shared evolutionary archive and execution feedback, a meta-agent coordinates harness development from historical designs with model checkpoint selection or merging and subsequent adaptation under the selected harness, aligning inherited capabilities with evolving execution requirements to reduce brain--body mismatch. Using only supervised fine-tuning (SFT) on its own rejection-sampled trajectories, CoEvo-RSI makes Qwen3.5-9B competitive with larger models across diverse vertical applications, including multi-agent failure attribution, role-aware text-to-SQL, and smart-home instruction following. It surpasses DeepSeek-V4-Pro on TraceElephant (+14.16 agent accuracy) and GLM-5.3 on HomeBench VM (+4.90 success rate), underscoring the need for brain--body alignment and the potential of bidirectional historical inheritance to advance agent co-evolution.",
+          "categories": [],
+          "keywords": [
+            "bidirectional historical inheritance",
+            "brain--body mismatch",
+            "model--harness co-evolution",
+            "coevo-rsi",
+            "advance agent co-evolution",
+            "advances model--harness co-evolution"
+          ],
+          "matched_keywords": []
+        },
+        "2610.28435": {
+          "title": "Multimodal Reranking Is a System One Decision",
+          "abstract": "Multimodal rerankers are usually dedicated models: a vision-language model (VLM) is trained on retrieval data to score the candidates of a query. Scoring options is not specific to reranking. System One decision models such as Jev map a state and a typed question to one probability per option without generating text, and general models can make such decisions with little or no training. Reranking is one such decision, with the query and its candidates as the state and the candidates as the options. We therefore argue that a general VLM can serve as a multimodal reranker through System One decisions, and that decision tuning can improve its reranking. We ask a VLM one choice question over the top 16 candidates of a first-stage retriever and rank the candidates by the probabilities of their labels, read from one forward pass. On MMEB-V2 image retrieval, this choice scores 5.4 to 7.3 hit@1 above a yes/no question per candidate, and the yes/no question falls below the first stage. With the choice, zero-shot Qwen3.8-27B beats the supervised Qwen3-VL-Reranker-2B on all three benchmarks and comes within 1.6 points of Reranker-8B on each. It matches Reranker-8B on MMEB-V2 visual documents (84.79 vs. 84.78 nDCG@5), at 1.1 to 1.5 times its latency. JEV-27B-VL, the same backbone tuned on text decisions only, improves page reranking by 0.6 to 1.1 points, with gains on most tasks (sign test, p <= 0.017), and leaves natural images unchanged. The zero-shot model is larger than the supervised rerankers and of a newer generation, so these comparisons are confounded; we discuss this and other alternative views, and the experiments that would test the position.",
+          "categories": [],
+          "keywords": [
+            "yes no question",
+            "system one decision",
+            "reranking",
+            "above yes no",
+            "ask vlm one",
+            "choice zero-shot qwen3"
+          ],
+          "matched_keywords": []
+        },
         "2610.26844": {
           "title": "AnyGoal: On World Model Generalization Beyond Expert Rollouts",
           "abstract": "The goal of a world model is to capture the dynamics of an environment. This has the great appeal that it allows agents to plan and simulate a course of actions with the help of a world model. For these uses to be reliable, however, the learned dynamics must behave well beyond the specific state-action combinations observed in expert rollouts. Despite this, the relationship between data coverage, dynamics generalization, and downstream planning performance remains underexplored. We study this relationship through the lens of compositional generalization: can a world model recombine familiar state and action factors into valid dynamics? To answer this, we introduce AnyGoal, a benchmark of goal-shifted task variants built from widely used world-model environments, together with an open-source library. Each task is designed to be within reach of a world model that has learned the underlying dynamics: individual state factors and actions remain within their training support, but their combinations are underrepresented in expert trajectories. Across multiple environments and world model families, we find that current models consistently exhibit failures under these recombinations. By examining dynamics and representation failures across model families, interaction regimes, and evaluation metrics, we study where current world models generalize and where challenges remain for goal-shifted prediction and planning. Together, this framework, benchmark, and analysis provide a basis for evaluating progress toward world models that generalize to new planning tasks.",
@@ -12683,22 +12744,6 @@
           ],
           "matched_keywords": []
         },
-        "2610.25369": {
-          "title": "Painting Change Map as guidance for generating painting processes",
-          "abstract": "Digital art generation has undergone a massive paradigm shift, moving from static image synthesis to dynamic video generation that can mimic the human painting process. While existing models can synthesize visually stunning time-lapses of paintings being created or \"unpainted,\" they largely treat the creative process as a black box. Current conditioning mechanisms are either too rigid, relying on static geometric cues like Canny edges or depth maps, or too holistic, utilizing simple scalar progress variables that offer no localized control. Consequently, users lack the agency to steer how a painting evolves over time. In this work, we argue that true control over the video generation of artwork requires a joint understanding of two fundamental dimensions: where an artist acts, and when those actions take place. To achieve this, we introduce the Painting Change Map, a novel spatio-temporal control mechanism that explicitly tracks normalized structural changes across a 1,000-timestep continuum, a resolution sufficient to capture fine-grained stroke-level changes while remaining computationally tractable. By mapping localized visual differences into an encoded RGB space, our representation enables fine-grained guidance for both the forward painting and reverse unpainting processes. Extensive benchmarking demonstrates the efficacy of our approach. We outperform existing control baselines and achieve competitive or superior results compared to state-of-the-art painting methods. Furthermore, under oracle conditions, our method surpasses all baselines by a significant margin. Code is available at this https URL.",
-          "categories": [
-            "cs.CV"
-          ],
-          "keywords": [
-            "painting change map",
-            "actions take place",
-            "artwork requires joint",
-            "capture fine-grained stroke-level",
-            "change map novel",
-            "changes while remaining"
-          ],
-          "matched_keywords": []
-        },
         "2610.25387": {
           "title": "Only Means Only: what a harmonization benchmark score averages over",
           "abstract": "Image harmonization methods adjust the colour and lighting of an object pasted into a photograph so that it looks native to its new scene, and they are ranked by average error on one benchmark whose test images are real photographs with one object recoloured. One photograph can yield several such test images, and the benchmark promises that no photograph appears in both the training and the test split. We find that 1,399 photographs do, and the composites built on them are a quarter of the test set. Duplicate checks over file names or bytes miss this, because every composite is a different file. On that quarter the three methods we score end to end read two to five times lower error than on the rest, but most of the gap is composition rather than the sharing: the shared composites come almost entirely from one of the benchmark's four source collections, and inside that collection the gap falls to about one and a half times. An official score is therefore an average over two populations, mixed in a proportion the benchmark does not report. We release a test list of 5,581 composites whose construction identities do not appear in training, with four confirmed near-duplicate pairs disclosed rather than removed, adoptable without retraining at the price of one rescore per checkpoint. We leave open whether the sharing itself changes what a model learns.",
@@ -13539,8 +13584,8 @@
           ],
           "keywords": [
             "adversarial split",
-            "yes",
             "llava-1",
+            "yes",
             "adversarial gain reported",
             "adversarial shift exceeds",
             "adversarial split resists"
@@ -16245,23 +16290,6 @@
             "bound produces no",
             "expose membership through",
             "faster so discriminability"
-          ],
-          "matched_keywords": []
-        },
-        "2610.24649": {
-          "title": "Good Judgment, Bad Advice: Decision-Model Controllers Raise Agent Cost Without Improving Success",
-          "abstract": "Agent scaffolds increasingly delegate small decisions (whether to stop, verify, or change approach) to cheaper models. We ask whether a typed decision model, Jev 1.13, consulted only at deterministic decision points, makes a Claude Sonnet 5.5 terminal agent cheaper without making it worse. In a pre-specified study on Terminal-Bench 2.1, we hold one agent loop fixed and vary only the controller: none, deterministic rules, a small LLM (Claude Haiku 5.5) answering the same questions, Jev, and a placebo that samples Jev's development-phase choice frequencies at the same moments. On 21 held-out tasks (315 trials), Jev raised cost per attempt by 19% (geometric-mean ratio 1.19, 95% CI 1.02-1.36) at an identical pass rate (73.0% vs. 73.0%). Jev was cheaper than the small-LLM controller (ratio 0.81) but 22% more expensive than the placebo, and no pass-rate difference between arms was detectable. Offline, Jev ranked finish requests better than the alternatives (AUROC 0.78 vs. 0.62 for rules and 0.60 for the small LLM) but was poorly calibrated: its mean probability that a run was complete was 0.50 when 87% of those runs passed, so it asked the agent to verify work that was already correct. No controller ever chose to abandon a run. Informative decision signals did not become useful interventions; we discuss what that would require.",
-          "categories": [
-            "cs.AI",
-            "cs.LG"
-          ],
-          "keywords": [
-            "small llm",
-            "jev",
-            "agent loop fixed",
-            "agent scaffolds increasingly",
-            "ask whether typed",
-            "become useful interventions"
           ],
           "matched_keywords": []
         },
@@ -24937,12 +24965,12 @@
             "cs.CL"
           ],
           "keywords": [
-            "inheritance",
             "backbones evoheir achieves",
             "before final confirmation",
             "characterizes selection-induced optimism",
             "every resulting update",
-            "every round must"
+            "every round must",
+            "evoheir separates parameter"
           ],
           "matched_keywords": []
         },
