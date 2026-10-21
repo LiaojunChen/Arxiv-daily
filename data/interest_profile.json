@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-10-21T05:51:35+00:00",
+  "updated_at": "2026-10-21T09:20:44+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-df1172665b08f619c0383f49": {
-      "run_id": "daily-df1172665b08f619c0383f49",
-      "generated_at": "2026-10-21T05:51:35+00:00",
+    "daily-5167a178d33c060c0e724e0f": {
+      "run_id": "daily-5167a178d33c060c0e724e0f",
+      "generated_at": "2026-10-21T09:20:44+00:00",
       "selected_ids": [
         "2610.28594",
         "2610.28631",
@@ -9375,6 +9375,148 @@
           ],
           "matched_keywords": []
         },
+        "2610.26837": {
+          "title": "SpecKCast: Spectral Kalman Forecasting for Diffusion Acceleration",
+          "abstract": "Diffusion Transformers (DiTs) achieve high-fidelity image and video generation, but they suffer from substantial inference costs due to repeated transformer evaluations across many denoising steps. Feature caching reduces this cost by reusing features across denoising steps. Recent forecasting methods extend this idea by extrapolating features to skipped steps instead of reusing them. However, existing forecasting methods extrapolate the features they predict uniformly, even though the spatial-frequency components of these features change most at different stages of denoising. They also overlook that denoising progresses nonuniformly, so equal step intervals can correspond to very different amounts of change. These mismatches amplify forecast errors as more steps are skipped, limiting the achievable acceleration. We propose SpecKCast, a training-free method that forecasts the model output in the frequency domain. SpecKCast applies a 2D discrete cosine transform (DCT) to the output and tracks each coefficient with a lightweight Kalman filter along a band-specific time coordinate derived from the noise schedule. The filter tracks each coefficient's value and rate of change, and the transformer is evaluated only when the filter's forecast uncertainty exceeds a threshold. Experiments on FLUX.1-dev, Qwen-Image, Wan2.1-14B, and HunyuanVideo show that SpecKCast achieves a better trade-off between acceleration and fidelity than existing caching and forecasting methods, reaching up to 6x speedup with less than 0.05 GiB of additional memory.",
+          "categories": [
+            "cs.CV"
+          ],
+          "keywords": [
+            "forecasting methods",
+            "speckcast",
+            "achieve high-fidelity image",
+            "along band-specific time",
+            "amplify forecast errors",
+            "applies discrete cosine"
+          ],
+          "matched_keywords": []
+        },
+        "2610.24628": {
+          "title": "Muse Glimmer 30B: An On-Device Agentic Model",
+          "abstract": "We introduce Muse Glimmer, an open-source 30B parameter causal language model with perception encoder, purpose-built for autonomous agentic tasks on consumer hardware. Muse Glimmer integrates multi-step reasoning, reliable tool use and failure recovery into a single model that runs locally on consumer devices without requiring cloud infrastructure. The model accepts text and image inputs and produces text outputs, was trained on data from over a hundred languages, and is quantized to approximately 4-bit precision for efficient single-GPU inference. Muse Glimmer achieves state-of-the-art performance for its size class on agentic benchmarks, setting a new standard compared to the models of its size: Gemma4-31B and Qwen3.6-27B on tool use, multi-step planning, and agentic task completion. We release the model under the Apache 2.0 license to foster open-source development of capable, safe, local AI agents.",
+          "categories": [
+            "cs.CL",
+            "cs.AI"
+          ],
+          "keywords": [
+            "muse glimmer",
+            "agentic benchmarks setting",
+            "agentic task completion",
+            "approximately bit precision",
+            "autonomous agentic tasks",
+            "capable safe local"
+          ],
+          "matched_keywords": []
+        },
+        "2610.24944": {
+          "title": "Epi: Towards a Persistent, Self-Improving Agent for Autonomous Research",
+          "abstract": "We present Épi, an autonomous research agent that sustains investigations across model sessions and evolves its methods through accumulated experience. Épi combines persistent research history, hierarchical memory, branching and independent review to maintain research continuity, learn from experiments, and explore and revisit alternative approaches. Its experiments run across session boundaries, and a fixed verifier evaluates their outputs. Épi produced 120 record-setting results, comprising 20 numerical bound records across 12 families and 100 construction records across eight families. These include an approximately 84-fold narrower interval for the n-queens constant and a more than 3.6-million-fold narrower rigorous interval for the quartic Feigenbaum attractor dimension. Exact dual certificates establish that the Cohn-Elkies linear-programming bound cannot be sharp in dimensions 10 and 11. Beyond numerical improvements, Épi gives a computer-assisted proof of Tuza's conjecture for split graphs with an eight-vertex clique part and at most three triangle-active neighborhood types, with arbitrary multiplicities. We extend this research process to algorithmic coding with Épi-turbo, a lightweight configuration that develops executable solvers for tasks including vehicle routing, scheduling and production planning. On 30 FrontierOR tasks, Épi-turbo achieves a 5.4% higher total benchmark score than Codex at 64% of its model cost, using the same underlying model and reasoning effort. Épi is designed to support human understanding by connecting computational results to explicit methods and mathematical arguments that researchers can examine and build upon.",
+          "categories": [
+            "cs.CL",
+            "cs.AI"
+          ],
+          "keywords": [
+            "autonomous research",
+            "approximately fold narrower",
+            "beyond numerical improvements",
+            "cohn-elkies linear-programming bound",
+            "combines persistent research",
+            "comprising numerical bound"
+          ],
+          "matched_keywords": []
+        },
+        "2610.22444": {
+          "title": "Event-STVG: Spatio-Temporal Video Grounding for Long-Form Event Reasoning",
+          "abstract": "Spatio-Temporal Video Grounding (STVG) aims to jointly localize a target in space and time given a natural-language query. Despite continued advances, existing STVG benchmarks remain largely centered on localizing targets through instance-specific descriptions, leaving them largely decoupled from long-form reasoning increasingly emphasized in multimodal large language models (MLLMs). In this paper, we introduce Event-STVG, a task that shifts STVG from locating what is described toward event-level reasoning by unifying long-form context, repeated-event reasoning, event localization, role inference, and multi-target grounding. To facilitate research on Event-STVG, we construct a large-scale benchmark comprising 4,016 annotated event occurrences across soccer and seven additional domains. Experiments with state-of-the-art MLLMs reveal substantial difficulty, with the strongest model achieving only 5.4% m-vIoU at the 10-minute horizon. Across domains, we consistently observe confusion among repeated same-type events, spatial grounding bottlenecks, and rare success in jointly grounding all required roles. Event-STVG establishes a new challenge for visual understanding in MLLMs, calling for future models that can jointly reason about complex events across space and time. Code and annotations are available at https://github.com/THU-KEG/EventSTVG",
+          "categories": [
+            "cs.CV"
+          ],
+          "keywords": [
+            "spatio-temporal video grounding",
+            "event-stvg",
+            "stvg",
+            "advances existing stvg",
+            "among repeated same-type",
+            "annotated event occurrences"
+          ],
+          "matched_keywords": []
+        },
+        "2610.19425": {
+          "title": "Evaluating Agentic Capabilities Before Post-Training: An End-to-End Approach",
+          "abstract": "Agentic capabilities are increasingly important for modern LLMs, yet remain difficult to evaluate during pretraining. Existing approaches typically rely on static trajectory-derived tasks or likelihood-based proxies, which are lightweight but provide limited visibility into how base models behave in interactive environments. We introduce ASAP (Agent Scaffold Adaptation for Pretraining Evaluation), a lightweight framework for eliciting and evaluating agentic behavior from pretrained base models on end-to-end tasks. Rather than converting base models into chat-style agents, ASAP preserves the completion interface and adapts existing agent scaffolds through structured trajectory continuation, short reference prefixes, and minimal recovery mechanisms. Across software-engineering and deep-research benchmarks, ASAP yields discriminative end-to-end performance across base models and pretraining checkpoints. Beyond aggregate scores, ASAP exposes model-generated execution trajectories, enabling analysis of exploration, editing, testing, recovery, and task completion across training stages. These trajectories provide a behavioral view of how agent-relevant capabilities change during pretraining and how execution patterns differ after post-training. Our results suggest that end-to-end agent evaluation can complement conventional pretraining benchmarks by providing a practical diagnostic of interactive model behavior.",
+          "categories": [
+            "cs.AI"
+          ],
+          "keywords": [
+            "evaluating agentic",
+            "asap",
+            "agentic capabilities",
+            "during pretraining",
+            "adapts existing agent",
+            "agent scaffold adaptation"
+          ],
+          "matched_keywords": []
+        },
+        "2610.18604": {
+          "title": "LLM2R: From Large Language Models to 3D Reassemblers",
+          "abstract": "3D part assembly aims to reconstruct a complete shape from a set of unassembled parts by predicting a rigid SE(3) transformation for each part. Because the placement of a part is rarely determined by its own geometry, the task demands reasoning over the entire part set, and existing methods, which rely on pairwise relations or iterative generation and verification, scale poorly to objects with many parts. We present LLM2R, which casts part assembly as sequence modeling with a pretrained decoder-only large language model (LLM): a Point-BERT encoder and a Q-Former compress each part into a block of geometric tokens, the blocks of all parts are concatenated, and a causal LLM adapted with Low-Rank Adaptation (LoRA) processes the sequence in one forward pass. Causal attention, however, lets the hidden states of a part observe only the parts that precede it. LLM2R therefore appends a block of learnable summary tokens after the last part: these tokens follow every part, so their states aggregate the whole assembly at a constant token cost, and a part-aware pose head fuses each part's states with them before predicting its rotation and translation. One architecture thus handles semantic and geometric assembly and predicts all poses in a single non-autoregressive pass. LLM2R achieves the highest part accuracy and success rate on all three PartNet categories, the best rotation error, translation error, and part accuracy on PartNeXt, and the lowest translation error and fastest inference on Breaking Bad, where only a fracture-specialized method is more accurate. Its advantage grows with the number of parts: at 100 parts it exceeds GARF by 33.5 points in part accuracy on Breaking Bad and Assembler by 29.1 points on PartNet, and it transfers zero-shot to unseen categories with more than 16 points higher part accuracy than the strongest of three baselines.",
+          "categories": [
+            "cs.CV",
+            "cs.AI",
+            "cs.RO"
+          ],
+          "keywords": [
+            "part accuracy",
+            "llm2r",
+            "breaking bad",
+            "part assembly",
+            "translation error",
+            "adaptation lora processes"
+          ],
+          "matched_keywords": []
+        },
+        "2511.14102": {
+          "title": "Specter: Fast MoE Inference via Quantization-Enabled Multi-Step Speculative Offloading",
+          "abstract": "Mixture-of-experts (MoE) models often exceed a single accelerator's memory capacity. Offloading experts to host memory creates a severe PCIe I/O bottleneck because data-dependent routing keeps transfers on the critical path. We present Specter, an inference system that uses quantization to combine speculative decoding with expert offloading. Its lightweight quantized draft model runs efficiently on device while preserving high-fidelity expert activation patterns. This provides accurate multi-step lookahead over future expert usage, allowing the runtime to organize expert movement and execution ahead of verification and improve both communication and execution efficiency. Under single-request inference, Specter achieves an average 1.50x (up to 1.88x) speedup in time per output token (TPOT) over the state-of-the-art system. Specter makes memory-constrained, single-GPU MoE inference more practical on commodity hardware. Our code is available at https://github.com/wwwwwf/specter_asplos.",
+          "categories": [],
+          "keywords": [
+            "specter",
+            "moe inference",
+            "accelerator memory capacity",
+            "accurate multi-step lookahead",
+            "because data-dependent routing",
+            "bottleneck because data-dependent"
+          ],
+          "matched_keywords": []
+        },
+        "2609.34565": {
+          "title": "FlowState: Execution State as Memory for Long-Horizon LLM Agents",
+          "abstract": "Long-horizon tasks require LLM agents to continually draw on information from earlier interactions. However, retaining the full history increases context costs, while compressing it risks losing details needed later, and the relevance of historical information often becomes apparent as the task progresses. To address these challenges, we propose FlowState, which treats execution state as memory that can be retained and revisited across requests, unifying current decision-making with the reuse of historical information. FlowState preserves semantically typed state nodes, their relations, and references to raw tool observations, separating persistent retention from on-demand access. Within a single execution loop, Incremental State Update (ISU) maintains the current state based on new inputs and feedback, while Progressive State Access (PSA) progressively reveals historical states and supporting evidence as needed during reasoning. Together, these mechanisms enable agents to reassess prior decisions in light of new information and guide subsequent actions. Compared with a full-context baseline using the same DeepSeek-V4-Flash model, FlowState improves the average success rate on MemoryArena and the average pass rate on τ^3-Bench by 4.55 and 13.95 percentage points, respectively, while reducing total token consumption by 43.2% and 40.6%. These results demonstrate the performance and efficiency advantages of FlowState on long-horizon tasks.",
+          "categories": [],
+          "keywords": [
+            "flowstate",
+            "execution state",
+            "historical information",
+            "access psa progressively",
+            "average pass rate",
+            "context costs while"
+          ],
+          "matched_keywords": []
+        },
+        "2610.09513": {
+          "title": "OmniCam: Omni-Camera Trajectory Generation via Geometry-Grounded Pose Token Learning",
+          "abstract": "Camera trajectories control viewpoint changes in video generation, scene reconstruction, and robotic perception. Generating them from language requires both scene geometry and target-aware framing. We introduce OmniCam, an autoregressive model that generates camera pose sequences from a single panorama and textual trajectory descriptions. Its geometry-grounded pose token learning combines three components: a panoramic point-cloud encoder for omnidirectional geometric context; hybrid absolute-rotation and relative-translation tokenization with temporally consistent quaternion signs; and separate geometric and semantic conditioning streams with an explicit 3D target anchor. We also construct OmniCaT, containing 267,700 trajectories across four camera behaviors. On the reported OmniCaT evaluation, OmniCam reduces trajectory errors by 28--47% and collision rate by 65.8% relative to GenDoP retrained on OmniCaT. Against the best baseline for each metric, the ATE and collision reductions are 43.0% and 62.3%, respectively. Component ablations support the use of geometric and target-aware conditioning, while downstream experiments examine camera-controlled video generation and robotic active perception.",
+          "categories": [],
+          "keywords": [
+            "geometry-grounded pose token",
+            "omnicam",
+            "omnicat",
+            "camera pose sequences",
+            "camera trajectories control",
+            "combines three components"
+          ],
+          "matched_keywords": []
+        },
         "2610.26844": {
           "title": "AnyGoal: On World Model Generalization Beyond Expert Rollouts",
           "abstract": "The goal of a world model is to capture the dynamics of an environment. This has the great appeal that it allows agents to plan and simulate a course of actions with the help of a world model. For these uses to be reliable, however, the learned dynamics must behave well beyond the specific state-action combinations observed in expert rollouts. Despite this, the relationship between data coverage, dynamics generalization, and downstream planning performance remains underexplored. We study this relationship through the lens of compositional generalization: can a world model recombine familiar state and action factors into valid dynamics? To answer this, we introduce AnyGoal, a benchmark of goal-shifted task variants built from widely used world-model environments, together with an open-source library. Each task is designed to be within reach of a world model that has learned the underlying dynamics: individual state factors and actions remain within their training support, but their combinations are underrepresented in expert trajectories. Across multiple environments and world model families, we find that current models consistently exhibit failures under these recombinations. By examining dynamics and representation failures across model families, interaction regimes, and evaluation metrics, we study where current world models generalize and where challenges remain for goal-shifted prediction and planning. Together, this framework, benchmark, and analysis provide a basis for evaluating progress toward world models that generalize to new planning tasks.",
@@ -10492,7 +10634,7 @@
             "dscout factorizes",
             "mean speedup",
             "per-round latency",
-            "speculative decoding"
+            "higher throughput"
           ],
           "matched_keywords": []
         },
@@ -14536,22 +14678,6 @@
             "geometry lora",
             "shape family",
             "structural sketches"
-          ],
-          "matched_keywords": []
-        },
-        "2610.26837": {
-          "title": "SpecKCast: Spectral Kalman Forecasting for Diffusion Acceleration",
-          "abstract": "Diffusion Transformers (DiTs) achieve high-fidelity image and video generation, but they suffer from substantial inference costs due to repeated transformer evaluations across many denoising steps. Feature caching reduces this cost by reusing features across denoising steps. Recent forecasting methods extend this idea by extrapolating features to skipped steps instead of reusing them. However, existing forecasting methods extrapolate the features they predict uniformly, even though the spatial-frequency components of these features change most at different stages of denoising. They also overlook that denoising progresses nonuniformly, so equal step intervals can correspond to very different amounts of change. These mismatches amplify forecast errors as more steps are skipped, limiting the achievable acceleration. We propose SpecKCast, a training-free method that forecasts the model output in the frequency domain. SpecKCast applies a 2D discrete cosine transform (DCT) to the output and tracks each coefficient with a lightweight Kalman filter along a band-specific time coordinate derived from the noise schedule. The filter tracks each coefficient's value and rate of change, and the transformer is evaluated only when the filter's forecast uncertainty exceeds a threshold. Experiments on FLUX.1-dev, Qwen-Image, Wan2.1-14B, and HunyuanVideo show that SpecKCast achieves a better trade-off between acceleration and fidelity than existing caching and forecasting methods, reaching up to 6x speedup with less than 0.05 GiB of additional memory.",
-          "categories": [
-            "cs.CV"
-          ],
-          "keywords": [
-            "forecasting methods",
-            "speckcast",
-            "achieve high-fidelity image",
-            "along band-specific time",
-            "amplify forecast errors",
-            "applies discrete cosine"
           ],
           "matched_keywords": []
         },
@@ -20003,23 +20129,6 @@
           ],
           "matched_keywords": []
         },
-        "2610.24628": {
-          "title": "Muse Glimmer 30B: An On-Device Agentic Model",
-          "abstract": "We introduce Muse Glimmer, an open-source 30B parameter causal language model with perception encoder, purpose-built for autonomous agentic tasks on consumer hardware. Muse Glimmer integrates multi-step reasoning, reliable tool use and failure recovery into a single model that runs locally on consumer devices without requiring cloud infrastructure. The model accepts text and image inputs and produces text outputs, was trained on data from over a hundred languages, and is quantized to approximately 4-bit precision for efficient single-GPU inference. Muse Glimmer achieves state-of-the-art performance for its size class on agentic benchmarks, setting a new standard compared to the models of its size: Gemma4-31B and Qwen3.6-27B on tool use, multi-step planning, and agentic task completion. We release the model under the Apache 2.0 license to foster open-source development of capable, safe, local AI agents.",
-          "categories": [
-            "cs.CL",
-            "cs.AI"
-          ],
-          "keywords": [
-            "muse glimmer",
-            "agentic benchmarks setting",
-            "agentic task completion",
-            "approximately bit precision",
-            "autonomous agentic tasks",
-            "capable safe local"
-          ],
-          "matched_keywords": []
-        },
         "2610.24685": {
           "title": "Contrastive Adversarial Training for Robust Graph Neural Networks under Label Poisoning",
           "abstract": "Graph Neural Networks (GNNs) are effective for modeling relational data but are vulnerable to label poisoning, where a small number of corrupted training labels can propagate errors across the graph via message passing. Despite this risk, defenses against label poisoning remain underexplored: existing methods are primarily designed for label noise and often rely on robust losses or heuristic data cleaning that fail to distinguish adversarial poisoning from naturally hard examples. In this paper, we propose CoLAT (Contrastive Label-flipping for Adversarial Training), a novel contrastive adversarial training framework tailored for robust node classification on graphs. The core of our approach is a structure-aware detection model that uses contrastive learning to identify label-structure inconsistencies. Unlike prior contrastive methods that focus on representation learning, CoLAT leverages contrastive embeddings to select high-risk nodes that guide adversarial label-flipping during training. This alternating optimization not only performs structure-aware adversarial training but also implicitly sanitizes some corrupted labels, improving robustness against diverse attacks from the literature. Extensive experiments on multiple benchmarks show that CoLAT consistently outperforms existing defenses under various poisoning intensities while scaling efficiently to large graphs.",
@@ -20309,23 +20418,6 @@
             "target domain",
             "acquires radio frequency",
             "acquisition domain similarity"
-          ],
-          "matched_keywords": []
-        },
-        "2610.24944": {
-          "title": "Epi: Towards a Persistent, Self-Improving Agent for Autonomous Research",
-          "abstract": "We present Épi, an autonomous research agent that sustains investigations across model sessions and evolves its methods through accumulated experience. Épi combines persistent research history, hierarchical memory, branching and independent review to maintain research continuity, learn from experiments, and explore and revisit alternative approaches. Its experiments run across session boundaries, and a fixed verifier evaluates their outputs. Épi produced 120 record-setting results, comprising 20 numerical bound records across 12 families and 100 construction records across eight families. These include an approximately 84-fold narrower interval for the $n$-queens constant and a more than 3.6-million-fold narrower rigorous interval for the quartic Feigenbaum attractor dimension. Exact dual certificates establish that the Cohn-Elkies linear-programming bound cannot be sharp in dimensions 10 and 11. Beyond numerical improvements, Épi gives a computer-assisted proof of Tuza's conjecture for split graphs with an eight-vertex clique part and at most three triangle-active neighborhood types, with arbitrary multiplicities. We extend this research process to algorithmic coding with Épi-turbo, a lightweight configuration that develops executable solvers for tasks including vehicle routing, scheduling and production planning. On 30 FrontierOR tasks, Épi-turbo achieves a 5.4% higher total benchmark score than Codex at 64% of its model cost, using the same underlying model and reasoning effort. Épi is designed to support human understanding by connecting computational results to explicit methods and mathematical arguments that researchers can examine and build upon.",
-          "categories": [
-            "cs.CL",
-            "cs.AI"
-          ],
-          "keywords": [
-            "autonomous research",
-            "approximately fold narrower",
-            "beyond numerical improvements",
-            "cohn-elkies linear-programming bound",
-            "combines persistent research",
-            "comprising numerical bound"
           ],
           "matched_keywords": []
         },
@@ -24318,7 +24410,7 @@
             "rigs",
             "dynamic scene",
             "allowing moving content",
-            "camera-controlled video generation"
+            "cannot update dynamic"
           ],
           "matched_keywords": [
             "world model"
@@ -25226,22 +25318,6 @@
             "branch sibling graph",
             "but never ranks",
             "contains most often"
-          ],
-          "matched_keywords": []
-        },
-        "2610.22444": {
-          "title": "Event-STVG: Spatio-Temporal Video Grounding for Long-Form Event Reasoning",
-          "abstract": "Spatio-Temporal Video Grounding (STVG) aims to jointly localize a target in space and time given a natural-language query. Despite continued advances, existing STVG benchmarks remain largely centered on localizing targets through instance-specific descriptions, leaving them largely decoupled from long-form reasoning increasingly emphasized in multimodal large language models (MLLMs). In this paper, we introduce Event-STVG, a task that shifts STVG from locating what is described toward event-level reasoning by unifying long-form context, repeated-event reasoning, event localization, role inference, and multi-target grounding. To facilitate research on Event-STVG, we construct a large-scale benchmark comprising 4,016 annotated event occurrences across soccer and seven additional domains. Experiments with state-of-the-art MLLMs reveal substantial difficulty, with the strongest model achieving only 5.4% m-vIoU at the 10-minute horizon. Across domains, we consistently observe confusion among repeated same-type events, spatial grounding bottlenecks, and rare success in jointly grounding all required roles. Event-STVG establishes a new challenge for visual understanding in MLLMs, calling for future models that can jointly reason about complex events across space and time. Code and annotations are available at this https URL",
-          "categories": [
-            "cs.CV"
-          ],
-          "keywords": [
-            "spatio-temporal video grounding",
-            "event-stvg",
-            "stvg",
-            "advances existing stvg",
-            "among repeated same-type",
-            "annotated event occurrences"
           ],
           "matched_keywords": []
         },
@@ -31898,8 +31974,8 @@
           "keywords": [
             "geometric inconsistencies",
             "panoramic reconstruction",
-            "single panorama",
             "geometrically accurate",
+            "single panorama",
             "accuracy geometric consistency",
             "aggregator featuring streamlined"
           ],
@@ -43297,22 +43373,6 @@
           ],
           "matched_keywords": []
         },
-        "2610.19425": {
-          "title": "Evaluating Agentic Capabilities Before Post-Training: An End-to-End Approach",
-          "abstract": "Agentic capabilities are increasingly important for modern LLMs, yet remain difficult to evaluate during pretraining. Existing approaches typically rely on static trajectory-derived tasks or likelihood-based proxies, which are lightweight but provide limited visibility into how base models behave in interactive environments. We introduce ASAP (Agent Scaffold Adaptation for Pretraining Evaluation), a lightweight framework for eliciting and evaluating agentic behavior from pretrained base models on end-to-end tasks. Rather than converting base models into chat-style agents, ASAP preserves the completion interface and adapts existing agent scaffolds through structured trajectory continuation, short reference prefixes, and minimal recovery mechanisms. Across software-engineering and deep-research benchmarks, ASAP yields discriminative end-to-end performance across base models and pretraining checkpoints. Beyond aggregate scores, ASAP exposes model-generated execution trajectories, enabling analysis of exploration, editing, testing, recovery, and task completion across training stages. These trajectories provide a behavioral view of how agent-relevant capabilities change during pretraining and how execution patterns differ after post-training. Our results suggest that end-to-end agent evaluation can complement conventional pretraining benchmarks by providing a practical diagnostic of interactive model behavior.",
-          "categories": [
-            "cs.AI"
-          ],
-          "keywords": [
-            "evaluating agentic",
-            "asap",
-            "agentic capabilities",
-            "during pretraining",
-            "adapts existing agent",
-            "agent scaffold adaptation"
-          ],
-          "matched_keywords": []
-        },
         "2610.19433": {
           "title": "EvoProbe: Evaluation-Driven Benchmark Evolution for LLM Agents",
           "abstract": "Static benchmarks for large language model (LLM) agents face saturation and data contamination risks, motivating continual updates to evaluation tasks. However, aggregate scores and success rates offer limited insight into specific problem-solving bottlenecks and provide limited guidance for subsequent task design. We propose EvoProbe, an evaluation-driven benchmark evolution framework that integrates task generation, diagnostic evaluation, and feedback-driven regeneration into a closed loop. It combines verifiable subtask outcome scoring with evidence-supported multi-judge trajectory evaluation and distills phase-level bottlenecks, success patterns, and failure patterns into diagnostic feedback for generating new executable tasks. Across two rounds of cybersecurity experiments, evaluations of eight models on 66 tasks reveal phase-level performance differences and common failure patterns beyond aggregate scores. In a cross-round comparison with the Examiner model set and solver configuration held fixed, all eight models achieve lower Outcome scores on the updated tasks, with relative decreases of 11.8\\% in mean Outcome and 40.0\\% in mean Pass\\textasciicircum{}3. These results support using fine-grained diagnostics to guide iterative task updates and probe agents' current capabilities and limitations.",
@@ -52887,24 +52947,6 @@
           ],
           "matched_keywords": []
         },
-        "2610.18604": {
-          "title": "LLM2R: From Large Language Models to 3D Reassemblers",
-          "abstract": "3D part assembly aims to reconstruct a complete shape from a set of unassembled parts by predicting a rigid SE(3) transformation for each part. Because the placement of a part is rarely determined by its own geometry, the task demands reasoning over the entire part set, and existing methods, which rely on pairwise relations or iterative generation and verification, scale poorly to objects with many parts. We present LLM2R, which casts part assembly as sequence modeling with a pretrained decoder-only large language model (LLM): a Point-BERT encoder and a Q-Former compress each part into a block of geometric tokens, the blocks of all parts are concatenated, and a causal LLM adapted with Low-Rank Adaptation (LoRA) processes the sequence in one forward pass. Causal attention, however, lets the hidden states of a part observe only the parts that precede it. LLM2R therefore appends a block of learnable summary tokens after the last part: these tokens follow every part, so their states aggregate the whole assembly at a constant token cost, and a part-aware pose head fuses each part's states with them before predicting its rotation and translation. One architecture thus handles semantic and geometric assembly and predicts all poses in a single non-autoregressive pass. LLM2R achieves the highest part accuracy and success rate on all three PartNet categories, the best rotation error, translation error, and part accuracy on PartNeXt, and the lowest translation error and fastest inference on Breaking Bad, where only a fracture-specialized method is more accurate. Its advantage grows with the number of parts: at 100 parts it exceeds GARF by 33.5 points in part accuracy on Breaking Bad and Assembler by 29.1 points on PartNet, and it transfers zero-shot to unseen categories with more than 16 points higher part accuracy than the strongest of three baselines.",
-          "categories": [
-            "cs.CV",
-            "cs.AI",
-            "cs.RO"
-          ],
-          "keywords": [
-            "part accuracy",
-            "llm2r",
-            "breaking bad",
-            "part assembly",
-            "translation error",
-            "adaptation lora processes"
-          ],
-          "matched_keywords": []
-        },
         "2610.18607": {
           "title": "Recasting DiT for Extreme Image Compression with Hierarchical Visual Priors",
           "abstract": "Pretrained diffusion models provide powerful generative priors for extreme image compression, but their stochastic, iterative generation processes are not designed to decode compressed representations directly. We present PrismCodec, which recasts a pretrained Diffusion Transformer (DiT) as a bitstream-grounded one-step generative decoder. PrismCodec uses the decoded representation in two complementary roles: a projected codec state defines the starting state for generation, while hierarchical visual priors derived from the same decoded latent provide semantic and structural guidance. To bridge the gap between stochastic, iterative generation and deterministic one-step decoding, we develop a progressive adaptation strategy. We first learn codec-conditioned transport from a noisy neighborhood centered on the codec state, distill it into a one-step mapping, and finally anneal the source perturbation to zero during end-to-end optimization. The resulting decoder reconstructs deterministically from the received representation without additional conditioning bits. Across Kodak, CLIC, and DIV2K, PrismCodec consistently improves rate-perception performance over prior generative codecs, achieving BD-rate reductions of 70-75% in LPIPS and 75-81% in DISTS over StableCodec. Code will be released upon acceptance.",
@@ -54029,8 +54071,8 @@
             "acoustic inputs",
             "acoustic sensing",
             "persistent state",
-            "acoustic security llm-based",
-            "acoustic sensing-to-action s2a"
+            "security",
+            "acoustic security llm-based"
           ],
           "matched_keywords": []
         },
@@ -69775,6 +69817,23 @@
           ],
           "matched_keywords": []
         },
+        "2610.18950": {
+          "title": "λ_0: Scaling Open-World Egocentric Human Data for Humanoid Loco-Manipulation",
+          "abstract": "Humanoid loco-manipulation requires coordinated whole-body interaction with the physical world, yet collecting robot demonstrations at scale remains costly. Human demonstrations offer a scalable alternative, but existing egocentric human supervision often omits locomotion and posture, while embodiment differences and controller dynamics hinder accurate end-effector execution. We introduce HumanVerse, a 500-hour dataset of open-world human loco-manipulation pairing egocentric video with synchronized body and hand motion. Our human-to-humanoid pipeline aligns camera viewpoints and arm appearance, and refines motion references and controller inputs offline to reduce end-effector errors while preserving whole-body coordination. We validate the pipeline through zero-shot transfer to Unitree G1 on representative whole-body manipulation and long-range loco-manipulation tasks, without target-task robot demonstrations. Building on this pipeline, we develop λ_0, a humanoid foundation model for whole-body loco-manipulation, with robot-aligned human demonstrations providing supervision for mid-training. Increasing whole-body human data consistently improves downstream task progress. λ_0 achieves 90.0% success on SIMPLE and 62.5% across real-world loco-manipulation tasks. We expect this study to guide scalable whole-body human data collection toward humanoid foundation models for richer interaction with the physical world. Homepage: https://lambdahumanoid.github.io/",
+          "categories": [
+            "cs.RO",
+            "cs.CV"
+          ],
+          "keywords": [
+            "humanoid foundation",
+            "whole-body human",
+            "loco-manipulation",
+            "loco-manipulation tasks",
+            "humanoid loco-manipulation",
+            "egocentric human"
+          ],
+          "matched_keywords": []
+        },
         "2610.25288": {
           "title": "Vision as Proprioception: Estimating Humanoid Robot Pose from Video",
           "abstract": "Estimating a humanoid robot's internal state from video has a wide range of real-world applications but remains unexplored. During interactions with a robot, its onboard state information may be unavailable due to privacy, ownership, or communication constraints. Meanwhile, online and AI-generated robot videos provide rich sources of data but typically lack corresponding joint configurations, limiting their direct use in robot learning. To address these issues, we present HumanoidPose, a new framework that treats vision as proprioception to recover full-body joint configurations in world space from video alone. Specifically, we combine pretrained human-pose features with robot kinematics in a unified model that predicts each embodiment's joint configurations. We retarget human motions to sixteen different humanoid embodiments, enabling scalable learning entirely from synthetic data. To improve real-world generalization, we further leverage unlabeled online videos through self-training to develop a 2D robot-pose detector. In our evaluation, HumanoidPose improves joint-angle and joint-position accuracy over the evaluated baselines and reduces joint-angle error by 18-32% relative to the best-performing baseline on each of the three real humanoid platforms. We further show improved global localization and generalization to unseen embodiments. HumanoidPose enables visual understanding of other robots during interaction and extraction of robot motion from online and generated videos.",
@@ -70914,23 +70973,6 @@
             "sensing degeneracy",
             "state estimation",
             "adaptive dual safety"
-          ],
-          "matched_keywords": []
-        },
-        "2610.18950": {
-          "title": "$λ_0$: Scaling Open-World Egocentric Human Data for Humanoid Loco-Manipulation",
-          "abstract": "Humanoid loco-manipulation requires coordinated whole-body interaction with the physical world, yet collecting robot demonstrations at scale remains costly. Human demonstrations offer a scalable alternative, but existing egocentric human supervision often omits locomotion and posture, while embodiment differences and controller dynamics hinder accurate end-effector execution. We introduce HumanVerse, a 500-hour dataset of open-world human loco-manipulation pairing egocentric video with synchronized body and hand motion. Our human-to-humanoid pipeline aligns camera viewpoints and arm appearance, and refines motion references and controller inputs offline to reduce end-effector errors while preserving whole-body coordination. We validate the pipeline through zero-shot transfer to Unitree G1 on representative whole-body manipulation and long-range loco-manipulation tasks, without target-task robot demonstrations. Building on this pipeline, we develop $\\lambda_0$, a humanoid foundation model for whole-body loco-manipulation, with robot-aligned human demonstrations providing supervision for mid-training. Increasing whole-body human data consistently improves downstream task progress. $\\lambda_0$ achieves 90.0% success on SIMPLE and 62.5% across real-world loco-manipulation tasks. We expect this study to guide scalable whole-body human data collection toward humanoid foundation models for richer interaction with the physical world. Homepage: this https URL",
-          "categories": [
-            "cs.RO",
-            "cs.CV"
-          ],
-          "keywords": [
-            "humanoid foundation",
-            "whole-body human",
-            "loco-manipulation",
-            "loco-manipulation tasks",
-            "humanoid loco-manipulation",
-            "egocentric human"
           ],
           "matched_keywords": []
         },
