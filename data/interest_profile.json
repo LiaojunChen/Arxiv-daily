@@ -73004,8 +73004,8 @@
   },
   "delivery": {
     "batch_id": "04b6a537da24071c1a5d792d",
-    "run_id": "daily-28e443efef39171b6dead73b",
-    "updated_at": "2026-10-21T04:42:38+00:00",
+    "run_id": "daily-7f37413c06169b49a764185e",
+    "updated_at": "2026-10-21T05:02:19+00:00",
     "profile_version": "992927a1524b59b3",
     "papers": [
       {
@@ -76799,7 +76799,8 @@
         "unseen task configurations": 0.7325,
         "liked_papers": 6.851025,
         "zotero": 6.851025
-      }
+      },
+      "reused_batch": true
     }
   },
   "positive_examples": {
