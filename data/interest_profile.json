@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-10-22T05:54:54+00:00",
+  "updated_at": "2026-10-22T09:23:14+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-6c913c649949e7d51361a9c2": {
-      "run_id": "daily-6c913c649949e7d51361a9c2",
-      "generated_at": "2026-10-22T05:54:54+00:00",
+    "daily-506b7ad7bb5af2982e6d53dc": {
+      "run_id": "daily-506b7ad7bb5af2982e6d53dc",
+      "generated_at": "2026-10-22T09:23:14+00:00",
       "selected_ids": [
         "2610.29168",
         "2610.30120",
@@ -2247,9 +2247,9 @@
             "streaming video understanding",
             "query time",
             "cached kvs",
-            "during prefill",
             "idle time",
-            "video tokens"
+            "video tokens",
+            "during prefill"
           ],
           "matched_keywords": []
         },
@@ -7134,6 +7134,65 @@
             "charts webpages animations",
             "code intelligence connects",
             "code intelligence through"
+          ],
+          "matched_keywords": []
+        },
+        "2610.26659": {
+          "title": "SpatialScout: Can VLM Agents Actively Explore and Map 3D Scenes?",
+          "abstract": "Spatial intelligence requires agents to actively acquire visual evidence and integrate observations into a coherent representation of the three-dimensional world. Yet spatial question answering offers limited evidence of whether models can construct accurate metric maps through autonomous exploration. We introduce SpatialScout, a benchmark for evaluating vision-language model (VLM) agents on active object-level 3D mapping. SpatialScout comprises 80 diverse indoor scenes containing 3,140 target objects. Given an object inventory, RGB observations, camera calibration, and camera poses, agents control a camera to explore each scene and estimate object centers in a shared coordinate frame. The task requires coordinating viewpoint selection, cross-view association, geometric estimation, and map revision under bounded interaction budgets. Evaluation jointly measures localization accuracy and target coverage through object-scale overlap scores that penalize missing predictions. Experiments with frontier VLMs reveal substantial limitations: the strongest evaluated model, Claude Opus 5.5, achieves a mean overlap score of 41.71%, with 47.23% of targets exceeding an intersection-over-union (IoU) threshold of 0.5 and only 3.25% exceeding 0.9. These results reveal a substantial gap between recovering coarse object layouts and constructing complete, precise metric maps. SpatialScout provides a quantitative testbed for developing agents that build reliable 3D spatial representations through active perception. Code is available at https://github.com/JesseZZZZZ/SpatialScout.",
+          "categories": [
+            "cs.CV",
+            "cs.CL"
+          ],
+          "keywords": [
+            "spatialscout",
+            "metric maps",
+            "vlm agents",
+            "accurate metric maps",
+            "achieves mean overlap",
+            "acquire visual evidence"
+          ],
+          "matched_keywords": []
+        },
+        "2610.29545": {
+          "title": "PACE: Periodic and Channel-Aligned Encoding of Four-Bit Recurrent States",
+          "abstract": "Linear-attention language models keep their context in a recurrent state of fixed size, where an inference system stores one copy of this state for every sequence it decodes at the same time. Storing the state at lower precision therefore lets more sequences share an accelerator. Existing state quantizers round the state after every generated token and report that four bits lose accuracy unless the bit width is raised or the model is fine-tuned.\\par We introduce PACE, a post-hoc four-bit state quantizer. PACE rounds the state only once every few generated tokens, as chunked kernels already do once per chunk during prefill, and keeps the tokens generated in between in a small buffer. Rounding less often reduces the error that accumulates in the state. Additionally, we find that the large entries of the gated-delta state gather in columns, because some channels of the update written at each token remain large across many tokens. PACE therefore shares each quantization scale within one column. It also keeps the heads that retain rounding error longest at eight bits. On four hybrid models from 4B to 35B parameters, PACE with mixed four- and eight-bit heads is competitive with eight-bit DAMP on the three larger models at about two thirds of its memory, PACE with four-bit heads throughout scores higher than Q-Mamba at equal memory, and rounding every few tokens preserves the decoding speedup of the buffer.",
+          "categories": [],
+          "keywords": [
+            "every few",
+            "pace",
+            "four-bit",
+            "already do once",
+            "because some channels",
+            "bits lose accuracy"
+          ],
+          "matched_keywords": []
+        },
+        "2610.13177": {
+          "title": "CompactSplat: Spatially Adaptive Gaussian Distribution for Feedforward Scene Reconstruction",
+          "abstract": "Reconstructing 3D scenes from sparse views without per-scene optimization remains highly challenging, especially for recovering accurate geometry and fine textures. While recent feedforward approaches leverage generalizable 3D Gaussian Splatting (3DGS) for scene generation, they typically assign one or multiple Gaussians to each pixel. Such uniform allocation not only produces highly redundant representations by wasting primitives in homogeneous areas, but also fails to exploit the inherent geometric priors of planar surfaces, often resulting in sub-optimal structural modeling. To address these limitations, we present CompactSplat, a novel feedforward framework that enables a content-aware allocation of 3D Gaussians. By integrating texture-guided spatial partitioning with hierarchical sampling, CompactSplat adaptively distributes primitives - concentrating dense Gaussians in complex regions while tiling flat areas with expanded, scale-modulated primitives. Moreover, our framework inherently supports dynamic sparsity control at inference time, enabling seamless trade-offs between rendering fidelity and memory footprint without requiring network retraining. Extensive experiments on RealEstate10K, DL3DV, and ScanNet demonstrate that CompactSplat consistently outperforms prior methods on both standard metrics and high-resolution rendering consistency, achieving high-fidelity reconstructions with significantly fewer primitives.",
+          "categories": [],
+          "keywords": [
+            "compactsplat",
+            "achieving high-fidelity reconstructions",
+            "adaptive gaussian distribution",
+            "adaptively distributes primitives",
+            "approaches leverage generalizable",
+            "compactsplat adaptively distributes"
+          ],
+          "matched_keywords": []
+        },
+        "2610.11942": {
+          "title": "Right Screen, Wrong Transition: World Models as Verifiers for GUI Agents",
+          "abstract": "A login screen that appears after a tap on Sign in is expected; the same screen after a tap on View order is an attack. For GUI agents, safety is therefore a property of the transition rather than of the screen, and a monitor that inspects only screens can be defeated by reusing a legitimate one. Judging a transition requires an expectation of what should have followed the action. Existing GUI world models provide one, but they output it as text, code, or images, so checking it against the observed screen requires a second model to judge the two. We argue that a world model meant for verification should instead predict in the space in which observations are encoded, and present LGWM, a decoder-free, action-conditioned world model that predicts the representation of the next screen directly, trained without semantic annotation on 1.85M real GUI transitions. Verification reduces to a vector comparison, and the same signal reveals whether a mismatch is harmful. We evaluate on RSWT-BENCH, a diagnostic where each credential screen appears under both a legitimate and a hijacked transition, so detectors that see only the screen are at chance by construction. The training-free score reaches 0.987 AUC at 17 ms per decision, on par with the strongest closed-source VLMs and about ten AUC points above generative GUI world models at over three orders of magnitude lower latency. The residual direction reaches 0.953 AUC at separating harmful from benign violations, where prompted VLMs are near chance. Further analyses show that the prediction is a usable future state rather than an anomaly score. World models have mostly served as simulators or planners; our results point to a third role, verification, for which predicting in representation space is the natural design.",
+          "categories": [],
+          "keywords": [
+            "gui world",
+            "screen",
+            "gui agents",
+            "above generative gui",
+            "auc points above",
+            "benign violations where"
           ],
           "matched_keywords": []
         },
@@ -20756,23 +20815,6 @@
           ],
           "matched_keywords": []
         },
-        "2610.26659": {
-          "title": "SpatialScout: Can VLM Agents Actively Explore and Map 3D Scenes?",
-          "abstract": "Spatial intelligence requires agents to actively acquire visual evidence and integrate observations into a coherent representation of the three-dimensional world. Yet spatial question answering offers limited evidence of whether models can construct accurate metric maps through autonomous exploration. We introduce SpatialScout, a benchmark for evaluating vision-language model (VLM) agents on active object-level 3D mapping. SpatialScout comprises 80 diverse indoor scenes containing 3,140 target objects. Given an object inventory, RGB observations, camera calibration, and camera poses, agents control a camera to explore each scene and estimate object centers in a shared coordinate frame. The task requires coordinating viewpoint selection, cross-view association, geometric estimation, and map revision under bounded interaction budgets. Evaluation jointly measures localization accuracy and target coverage through object-scale overlap scores that penalize missing predictions. Experiments with frontier VLMs reveal substantial limitations: the strongest evaluated model, Claude Opus 5.5, achieves a mean overlap score of 41.71%, with 47.23% of targets exceeding an intersection-over-union (IoU) threshold of 0.5 and only 3.25% exceeding 0.9. These results reveal a substantial gap between recovering coarse object layouts and constructing complete, precise metric maps. SpatialScout provides a quantitative testbed for developing agents that build reliable 3D spatial representations through active perception. Code is available at this https URL.",
-          "categories": [
-            "cs.CV",
-            "cs.CL"
-          ],
-          "keywords": [
-            "spatialscout",
-            "metric maps",
-            "vlm agents",
-            "accurate metric maps",
-            "achieves mean overlap",
-            "acquire visual evidence"
-          ],
-          "matched_keywords": []
-        },
         "2610.26661": {
           "title": "CaptionFuse: Training-Free Composed Product Retrieval Via VLM Intent Captioning and Weighted Embedding Fusion",
           "abstract": "Composed Image Retrieval (CIR) retrieves products matching a reference image modified by natural language---a core capability for eCommerce search. Existing training-free methods fuse CLIP embeddings via arithmetic, but we identify a fundamental limitation: user text modifications are attribute-sparse---a user who types ``make it red with shorter sleeves'' specifies what to change but not what to keep (the floral pattern, the V-neck, the fit-and-flare silhouette). We introduce language-space fusion: a Vision-Language Model (VLM) jointly interprets the reference image and modification to generate a visually grounded product-title caption---e.g., ``Red floral fit-and-flare dress with short sleeves and V-neck''---that fills in the missing attributes from the image. Our method, CaptionFuse, requires no task-specific training and is model-agnostic. A controlled experiment confirms that attribute content--- not linguistic style---drives the gains: imperative and descriptive captions with identical attributes achieve equal R@10, while both outperform raw modifications by +6.5 points.",
@@ -21170,10 +21212,10 @@
           "keywords": [
             "mr angiography",
             "vessel priors",
-            "once per",
             "ablation isolating what",
             "anatomy-aware pipeline rather",
-            "anatomy-aware staged pipeline"
+            "anatomy-aware staged pipeline",
+            "becomes downstream training"
           ],
           "matched_keywords": []
         },
@@ -25083,7 +25125,7 @@
             "rollback states",
             "gui agents",
             "mobile npus",
-            "recurrent state"
+            "npu"
           ],
           "matched_keywords": []
         },
@@ -33652,7 +33694,7 @@
             "shadowfpt",
             "prompt parameters",
             "prompt updates",
-            "representation space"
+            "achieves targeted misclassification"
           ],
           "matched_keywords": []
         },
@@ -44151,8 +44193,8 @@
             "safety management",
             "positioning",
             "outdoor-indoor",
-            "seamless",
-            "achieve mean errors"
+            "achieve mean errors",
+            "approximately outdoor-indoor route"
           ],
           "matched_keywords": []
         },
@@ -53125,8 +53167,8 @@
             "localejepa",
             "embedding geometries",
             "localejepa framework",
-            "geometric priors",
             "lejepa",
+            "geometric priors",
             "accompanying localereg novel"
           ],
           "matched_keywords": []
