@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-10-23T05:04:50+00:00",
+  "updated_at": "2026-10-23T05:52:53+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-83d4e5853dfa103d42816e3d": {
-      "run_id": "daily-83d4e5853dfa103d42816e3d",
-      "generated_at": "2026-10-23T05:04:50+00:00",
+    "daily-685c6f8548f97b40250d9c81": {
+      "run_id": "daily-685c6f8548f97b40250d9c81",
+      "generated_at": "2026-10-23T05:52:53+00:00",
       "selected_ids": [
         "2610.30814",
         "2610.31668",
@@ -1474,23 +1474,6 @@
             "accuracy substantially while",
             "against llm-as-a-judge revision",
             "almost never coins"
-          ],
-          "matched_keywords": []
-        },
-        "2610.31062": {
-          "title": "SCOPE: Compiling Natural-Language Policies into Neurosymbolic Predicate Programs",
-          "abstract": "Policy enforcement for LLM agents has shifted from single-turn content moderation to compound, application-specific policies evaluated over multi-turn transcripts and tool-call trajectories. Fine-tuned guardrail models are efficient but degrade on compound policies, and while LLM-as-a-judge approaches achieve higher accuracy, they incur high inference cost and tend to produce unstable predictions. Neurosymbolic methods offer a natural alternative, decomposing the policy into narrow neural decisions composed under explicit logic. However, existing symbolic layers lack the required expressiveness and are optimized against fixed data rather than the policy itself. To address this, we introduce SCOPE, which compiles a policy into an executable program of neural predicates executed by small models, deterministic extractors, and code that composes their outputs. The program is optimized jointly with its training data, using adversarial generation of counterexamples that target where the program deviates from the policy. We evaluate SCOPE on a benchmark of real-world policy tasks against prompt optimization, task decomposition, and workflow generation methods, achieving the highest average accuracy across tasks and models. Programs optimized with the weakest executor transfer to other models without further optimization. This allows them to be deployed in production on inexpensive models, where they reach accuracy comparable to frontier reasoning models. Unlike these monolithic models, SCOPE produces substantially more stable predictions, and each verdict is interpretable through the predicate outputs that produced it. Additionally, we validate the key components of our method through an ablation study. SCOPE thus enables reliable, interpretable, and efficient policy enforcement at production scale.",
-          "categories": [
-            "cs.AI",
-            "cs.CL"
-          ],
-          "keywords": [
-            "policy enforcement",
-            "achieve higher accuracy",
-            "against prompt optimization",
-            "application-specific policies evaluated",
-            "approaches achieve higher",
-            "compiling natural-language policies"
           ],
           "matched_keywords": []
         },
@@ -7000,6 +6983,36 @@
             "agent cone-constrained thrust",
             "alongside increasing orbital",
             "approaches span decentralized"
+          ],
+          "matched_keywords": []
+        },
+        "2610.24738": {
+          "title": "Editing Images into Reusable Layers via Compositional Edit-Prior Distillation",
+          "abstract": "High-quality image editing requires precise modification of target regions while preserving the content of unrelated regions. Existing editing models produce flattened outputs that limit precise local manipulation and layer reuse, while decomposition methods typically optimize layer recovery separately from instruction-driven editing. To this end, we introduce LayerEditor, a unified framework that couples instruction-guided image editing with controllable generation of reusable RGBA layers. At its core, In-Context RGB-Alpha Token Modeling jointly represents the edited canvas and an ordered sequence of RGB-Alpha layers within a single token sequence, enabling semantic edits and explicit control over individual layer content. To retain the pretrained model's editing capability during adaptation to layered outputs, we propose Compositional Edit-Prior Distillation, which transfers its editing prior to both the edited canvas and the image composed from the predicted layers. To support training and evaluation, we construct LayerEditor-100K, a large-scale paired image-editing dataset with ordered RGBA layer annotations, and introduce dedicated benchmarks for layered editing. Extensive experiments demonstrate that LayerEditor maintains strong editing fidelity while generating accurate RGBA layers, supporting both flexible layer-level manipulation and multi-layer decomposition.",
+          "categories": [
+            "cs.CV"
+          ],
+          "keywords": [
+            "compositional edit-prior distillation",
+            "edited canvas",
+            "rgba layers",
+            "accurate rgba layers",
+            "capability during adaptation",
+            "construct layereditor-100k large-scale"
+          ],
+          "matched_keywords": []
+        },
+        "2610.26233": {
+          "title": "Heartbeat Thinking: Speculative Reasoning and Tool Execution While Listening in Realtime Voice Agents",
+          "abstract": "Tool-using voice agents often leave users waiting after speech ends, even when actionable information arrives earlier in the request. Speculative approaches begin work during speech, but chunk-bounded or interrupt-on-update generation can truncate a tool call before its arguments are complete. This couples computation time to speech updates, limiting useful work completed in advance. We introduce Heartbeat Thinking, which handles updated input through new Thinker invocations while allowing ongoing invocations and dispatched tools to finish. Periodic invocations read the latest partial transcript and a shared record of completed reasoning and tool results. These results help resolve missing arguments and initiate dependent calls, allowing preparation to progress across speech updates. Across SpeechFCEval, FDBench v3, and AudioCRAG, Heartbeat improves aggregate speculative tool coverage or retrieval reuse over a SHANKS-style windowed baseline, with benchmark-dependent effects on final task quality. On FDBench v3, it increases tool coverage by 16 percentage points and reduces mean final-response latency by 36.4\\%. The results show that heartbeat thinking paradigm preserving ongoing computation during speech can turn listening time into reusable preparation for faster and more capable voice-agent responses.",
+          "categories": [],
+          "keywords": [
+            "heartbeat thinking",
+            "during speech",
+            "fdbench v3",
+            "speech updates",
+            "tool coverage",
+            "voice agents"
           ],
           "matched_keywords": []
         },
@@ -24656,22 +24669,6 @@
             "affect reconstruction accuracy",
             "affecting optimisation stability",
             "although spatial transformer"
-          ],
-          "matched_keywords": []
-        },
-        "2610.24738": {
-          "title": "Editing Images into Reusable Layers via Compositional Edit-Prior Distillation",
-          "abstract": "High-quality image editing requires precise modification of target regions while preserving the content of unrelated regions. Existing editing models produce flattened outputs that limit precise local manipulation and layer reuse, while decomposition methods typically optimize layer recovery separately from instruction-driven editing. To this end, we introduce LayerEditor, a unified framework that couples instruction-guided image editing with controllable generation of reusable RGBA layers. At its core, In-Context RGB-Alpha Token Modeling jointly represents the edited canvas and an ordered sequence of RGB-Alpha layers within a single token sequence, enabling semantic edits and explicit control over individual layer content. To retain the pretrained model's editing capability during adaptation to layered outputs, we propose Compositional Edit-Prior Distillation, which transfers its editing prior to both the edited canvas and the image composed from the predicted layers. To support training and evaluation, we construct LayerEditor-100K, a large-scale paired image-editing dataset with ordered RGBA layer annotations, and introduce dedicated benchmarks for layered editing. Extensive experiments demonstrate that LayerEditor maintains strong editing fidelity while generating accurate RGBA layers, supporting both flexible layer-level manipulation and multi-layer decomposition.",
-          "categories": [
-            "cs.CV"
-          ],
-          "keywords": [
-            "compositional edit-prior distillation",
-            "edited canvas",
-            "rgba layers",
-            "accurate rgba layers",
-            "capability during adaptation",
-            "construct layereditor-100k large-scale"
           ],
           "matched_keywords": []
         },
@@ -50663,7 +50660,7 @@
             "peak gpu memory",
             "cf-splat",
             "sh coefficients",
-            "computation time"
+            "splatting methods"
           ],
           "matched_keywords": []
         },
@@ -50956,6 +50953,23 @@
             "robot world",
             "motion priors",
             "action-conditioned robot world"
+          ],
+          "matched_keywords": []
+        },
+        "2610.31062": {
+          "title": "SCOPE: Compiling Natural-Language Policies into Neurosymbolic Predicate Programs",
+          "abstract": "Policy enforcement for LLM agents has shifted from single-turn content moderation to compound, application-specific policies evaluated over multi-turn transcripts and tool-call trajectories. Fine-tuned guardrail models are efficient but degrade on compound policies, and while LLM-as-a-judge approaches achieve higher accuracy, they incur high inference cost and tend to produce unstable predictions. Neurosymbolic methods offer a natural alternative, decomposing the policy into narrow neural decisions composed under explicit logic. However, existing symbolic layers lack the required expressiveness and are optimized against fixed data rather than the policy itself. To address this, we introduce SCOPE, which compiles a policy into an executable program of neural predicates executed by small models, deterministic extractors, and code that composes their outputs. The program is optimized jointly with its training data, using adversarial generation of counterexamples that target where the program deviates from the policy. We evaluate SCOPE on a benchmark of real-world policy tasks against prompt optimization, task decomposition, and workflow generation methods, achieving the highest average accuracy across tasks and models. Programs optimized with the weakest executor transfer to other models without further optimization. This allows them to be deployed in production on inexpensive models, where they reach accuracy comparable to frontier reasoning models. Unlike these monolithic models, SCOPE produces substantially more stable predictions, and each verdict is interpretable through the predicate outputs that produced it. Additionally, we validate the key components of our method through an ablation study. SCOPE thus enables reliable, interpretable, and efficient policy enforcement at production scale.",
+          "categories": [
+            "cs.AI",
+            "cs.CL"
+          ],
+          "keywords": [
+            "policy enforcement",
+            "achieve higher accuracy",
+            "against prompt optimization",
+            "application-specific policies evaluated",
+            "approaches achieve higher",
+            "compiling natural-language policies"
           ],
           "matched_keywords": []
         },
