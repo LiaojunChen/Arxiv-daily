@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-10-26T05:54:46+00:00",
+  "updated_at": "2026-10-26T10:03:49+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-c5c34680296b10cca729cd3b": {
-      "run_id": "daily-c5c34680296b10cca729cd3b",
-      "generated_at": "2026-10-26T05:54:46+00:00",
+    "daily-7aaa39b499040d6163e4dc91": {
+      "run_id": "daily-7aaa39b499040d6163e4dc91",
+      "generated_at": "2026-10-26T10:03:49+00:00",
       "selected_ids": [
         "2610.32977",
         "2610.32177",
@@ -6165,22 +6165,6 @@
           ],
           "matched_keywords": []
         },
-        "2610.31494": {
-          "title": "AgentVQA: A Unified Benchmark for Agentic Visual Understanding",
-          "abstract": "Vision-language models (VLMs) can perform a broad range of tasks across diverse settings, yet their performance in agentic contexts remains poorly understood. Although online evaluations in simulators and real-world environments are essential for measuring interactive agent performance, they are costly and challenging to scale. Complementary offline VQA benchmarks can enable faster and more reliable comparisons across agentic domains, yet existing benchmarks remain limited and fragmented. To address this gap, we introduce AgentVQA, an offline benchmark for evaluating VLMs on realistic agentic scenarios across five agent domains: Web Agents, Robotics, Egocentric Videos, Games, and Spatial Planning. We build AgentVQA by manually selecting 1000 challenging, real-world agent examples from 23 source datasets and adapting them for reliable offline evaluation. The resulting benchmark preserves realistic scenarios from interactive environments across diverse domains, and its model rankings track those from corresponding online evaluations. Across the 22 evaluated models, the best achieves only 58.5% accuracy. Our cross-domain analysis shows that errors are driven primarily by failures to ground and maintain accurate representations of the current and evolving visual state, including localizing relevant UI elements, interpreting motion, tracking state changes over time, and inferring 3D spatial relationships, rather than by task misinterpretation or downstream logical reasoning.",
-          "categories": [
-            "cs.CV"
-          ],
-          "keywords": [
-            "online evaluations",
-            "agentvqa",
-            "agentic contexts remains",
-            "agentic domains yet",
-            "agentic visual understanding",
-            "agents robotics egocentric"
-          ],
-          "matched_keywords": []
-        },
         "2610.31668": {
           "title": "Reading, Writing, Sharing, and Interacting with the World through Video",
           "abstract": "Video foundation models have advanced rapidly in understanding and generating visual sequences, while video world models seek to capture the underlying dynamics of the world they depict. Despite their different objectives, both concern the relationship between video observations and an evolving world. This survey adopts world modeling as a unifying lens for examining these developments. Viewing an observed video as a partial, lossy, and temporally ordered projection of a latent temporal world, we organize the literature around four complementary operations: reading infers world properties from observed video; writing synthesizes video from specified or learned world conditions; sharing integrates understanding and generation through common modeling mechanisms; and interacting predicts and updates world states under actions and evolving observations. This perspective distinguishes temporal coherence in observed or generated sequences from consistency in the underlying world state. Across tasks, representations, models, datasets, and benchmarks, we trace a shift in emphasis from clip-level recognition and perceptual fidelity toward persistent state, controllable evolution, physical and causal validity, and evaluation grounded in interaction and downstream decisions, and we distill the open challenges that follow.",
@@ -6198,6 +6182,199 @@
           "matched_keywords": [
             "world model"
           ]
+        },
+        "2610.30006": {
+          "title": "Building Auditable AI Text Detectors with Sparse Autoencoders",
+          "abstract": "AI-generated text detectors are increasingly deployed in consequential settings---peer review, education, admissions, journalism, and content moderation---where their outputs directly affect individuals. Yet the strongest detectors are fine-tuned neural classifiers whose decisions are opaque, while transparent alternatives (stylometric and linguistic-feature classifiers) underperform them by wide margins. We present a pipeline that converts a fine-tuned neural detector into a classifier that operates on human-readable concepts. We accomplish this by training sparse autoencoders (SAEs) directly on a detector's residual stream, assigning auto-interpretation labels to each SAE feature, and retaining only features whose generated descriptions pass a global fidelity threshold. We then train a lightweight classifier on just the interpretable features. We find that our SAEs recover latent concepts that correspond to highly specific and predictive linguistic \"tells\" of AI-generated text. Classifiers built on these extracted features are not only highly interpretable but exhibit stronger performance on out-of-distribution texts than either neural or stylometric alternatives.",
+          "categories": [
+            "cs.CL",
+            "cs.AI"
+          ],
+          "keywords": [
+            "fine-tuned neural",
+            "text detectors",
+            "ai-generated text",
+            "sparse autoencoders",
+            "ai text detectors",
+            "ai-generated text detectors"
+          ],
+          "matched_keywords": []
+        },
+        "2610.27782": {
+          "title": "RoboJudge: Multimodal Language Models as Judges for Embodied Video Generation",
+          "abstract": "Video generation models are promising foundations for embodied world models, but only if their generated rollouts are physically valid and faithful to task instructions. Multimodal large language models (MLLMs) are increasingly used to judge these properties, yet their agreement with human judgments on embodied videos has not been systematically evaluated. To address this gap, we introduce RoboJudge-Bench, a benchmark for evaluating MLLMs as judges of embodied video generation. The benchmark measures two fundamental dimensions, Physical Adherence and Instruction Alignment, across 800 human-annotated videos from 8 source corpora and 10 video generators, spanning grippers, human hands, and dexterous hands. Experiments reveal uneven alignment between existing judges and human ratings: general-purpose MLLMs show lower agreement on physical adherence, while specialized video judges designed for general-domain physical reasoning do not consistently transfer to embodied scenarios. Motivated by these findings, we construct RoboJudge-Train, comprising 12K videos annotated with 25K human-verified scores and model-assisted rationales for Physical Adherence and Instruction Alignment. We fine-tune a 9B MLLM on this dataset with supervised learning followed by reinforcement learning, yielding RoboJudge-9B. Among the model judges evaluated on RoboJudge-Bench, RoboJudge-9B achieves the highest overall agreement, reaching a Pearson correlation of 0.719 with a statistically significant 0.089 gain over Gemini-3.7-Flash, the best-performing proprietary baseline in our evaluation. Training on RoboJudge-Train also yields gains on external benchmarks, including VideoPhy2 and Physion-Eval. We further use RoboJudge-9B as a downstream evaluator to benchmark video generation models according to Physical Adherence and Instruction Alignment.",
+          "categories": [
+            "cs.CV",
+            "cs.RO"
+          ],
+          "keywords": [
+            "physical adherence",
+            "embodied video generation",
+            "instruction alignment",
+            "robojudge-9b",
+            "adherence while specialized",
+            "agreement reaching pearson"
+          ],
+          "matched_keywords": [
+            "world model",
+            "generation model"
+          ]
+        },
+        "2610.29477": {
+          "title": "TenetBench: A Clause-Anchored Russian Corpus for Evaluating Language Models against Professional Codes of Ethics",
+          "abstract": "Codes of professional ethics guide and restrict specialists, who increasingly work with assistants built on large language models. Such an assistant can breach the user's code, or help the user breach it, without the user noticing. Evaluations reporting broad categories of harm cannot show how often this happens or which provision is breached. TenetBench pairs 3,433 requests conflicting with clauses of fifteen Russian-language professional codes with benign twins that differ only in the legitimacy of what is asked. An automated pipeline generates the tasks from the text of a code, so the corpus grows with every code added and a provision yields new tasks on every run. It also produced tasks and human-validated verdicts from two English codes of other jurisdictions. In human validation of the frozen pipeline, specialists rated 0.995 of the conflicting tasks plausible, and the model judge agreed with the adjudicated label at Gwet's AC1 of at least 0.894 on 1,860 elements. We evaluated fourteen model and reasoning-mode combinations on whether they produce the conflicting text, decline or warn. Eleven of the fourteen produce conflicting content on most such requests, mostly without a warning, and nearly three warnings in four accompany conflicting content. The models that conform more do so by declining while still serving the legitimate twin, and enabling reasoning halved the refusals of two models. We hope the dataset and pipeline will help evaluate how language models observe professional norms and let diagnostic datasets be built for particular professions and organisations.",
+          "categories": [],
+          "keywords": [
+            "conflicting content",
+            "professional codes",
+            "accompany conflicting content",
+            "against professional codes",
+            "automated pipeline generates",
+            "clause-anchored russian corpus"
+          ],
+          "matched_keywords": []
+        },
+        "2610.32002": {
+          "title": "DraMaze: A Multi-Agent Pipeline with Future-Aware Memory for Diverse Microdrama Script Generation",
+          "abstract": "The rapid growth of microdramas has increased demand for high-quality script production. Long-form microdrama script generation with LLMs requires both diverse plot progression and long-range narrative coherence. Our observations reveal that candidate continuations increasingly concentrate on fewer narrative mechanisms as generation progresses, while conventional retrieval may reinforce trope reuse and overlook historical information essential to future plots. To address these challenges, we propose DraMaze, a multi-agent pipeline that explores diverse causal paths through trope memory-guided evolutionary tree search and mutation. It further constructs a Backward Narrative Dependency Tree to organize, retain, and retrieve historical memories based on future narrative goals. We also introduce MiDramaBench, a bilingual benchmark for evaluating script logic and creative quality across different script lengths, together with causal-pattern metrics for narrative repetition and diversity. Experiments show consistent improvements across three backbone LLMs. For 60-episode scripts of up to 60k words, DraMaze reduces causal-pattern repetition by 32.1% and achieves a Logic score of 82.5, outperforming the best-performing baseline by 8.5 points.",
+          "categories": [],
+          "keywords": [
+            "microdrama script generation",
+            "multi-agent pipeline",
+            "dramaze",
+            "narrative",
+            "achieves logic score",
+            "backward narrative dependency"
+          ],
+          "matched_keywords": []
+        },
+        "2610.23234": {
+          "title": "MultiAgent-OPD: End-to-End Training of Hierarchical Multi-Agent Systems with On-Policy Distillation",
+          "abstract": "In a hierarchical multi-agent system, a Leader assigns tasks and subagents carry them out. Jointly training the Leader and the subagents is difficult because a final answer gives only indirect feedback to the subagents. An LLM judge can score the performance of the subagents, but these scores depend on the judge's own assessment of the quality of subagents' responses. We present MultiAgent-OPD, which combines on-policy distillation with reinforcement learning to jointly train a shared-parameter Leader-Searcher-Answerer team end to end. We first train a Teacher in a Searcher-Answerer workflow using answer correctness. During team training, the frozen Teacher scores student-generated search and summary tokens to provide local process supervision for the Searchers, while the Leader learns from team success and the Answerer from candidate correctness. Across seven datasets, the trained system reaches 38.68% macro avg@4, exceeding Prompted Critic by 4.06 percentage points and C-MAS + RL, the trained cascaded multiagent system, by 2.61 percentage points. The team also solves more questions within four attempts.",
+          "categories": [],
+          "keywords": [
+            "subagents",
+            "hierarchical multi-agent",
+            "leader",
+            "avg exceeding prompted",
+            "because final answer",
+            "carry them out"
+          ],
+          "matched_keywords": []
+        },
+        "2610.01352": {
+          "title": "MMVistaReason: Toward Open-Data and Post-Training Recipes for Multimodal Reasoning",
+          "abstract": "Open multimodal reasoning models have benefited from large-scale reasoning supervision, yet reliable post-training remains challenging due to uneven data quality, inefficient supervision construction, imbalanced difficulty, and cross-domain interference. We introduce MMVistaReason (MVR), an open-data post-training recipe with three components: (1) broader capability coverage across complementary Analytical and Real-World reasoning groups, emphasizing structured reasoning versus visual perception and spatial grounding; (2) efficient SFT and RL data construction, standardizing heterogeneous open data through staged cleaning and annotation, combining difficulty-aware cascaded teacher distillation with answer-likelihood-based trajectory selection to construct MVR-SFT-528K, and applying scale-specific frontier filtering for MVR-RL-63K; and (3) specialize-then-integrate training, which trains complementary RL experts and consolidates their capabilities through multi-teacher on-policy distillation (MOPD). Our analyses reveal a capacity-dependent interaction between supervision difficulty, trajectory quality, and model capacity: smaller students benefit more from selected supervision, while larger students are robust to trajectory variation and mixed-domain interference. Mixed-domain RL introduces benchmark-level negative transfer, whereas MOPD provides consistent capability integration, with the preferred KL direction varying across model scales. Across 15 multimodal benchmarks, MVR-4B achieves an average score of 72.8, outperforming Qwen3.5-9B (Instruct) and MMFineReason-8B while using about 70% fewer samples than MMFineReason. Scaling to 9B improves the average to 74.4, surpassing Qwen3.5-35B-A3B (Instruct). Overall, MMVistaReason demonstrates that systematic open-data construction and capacity-aware post-training provide a practical and scalable path toward reliable multimodal reasoning.",
+          "categories": [],
+          "keywords": [
+            "multimodal reasoning",
+            "mmvistareason",
+            "open-data",
+            "analyses reveal capacity-dependent",
+            "annotation combining difficulty-aware",
+            "answer-likelihood-based trajectory selection"
+          ],
+          "matched_keywords": []
+        },
+        "2610.31288": {
+          "title": "DISC: Domain-Integrated Similarity Cost for Time-Series Dataset",
+          "abstract": "The growth of time-series datasets and foundation models has made dataset comparison a central part of time-series workflows. Assessing source-target transfer before model adaptation requires similarity estimates that can summarize transfer-related dataset relationships without exhaustive source-target evaluation over every candidate pair. Many metrics have been proposed for measuring similarity between time-series datasets, but they capture different dataset relationships and vary in how well they align with downstream utility across tasks. We evaluate this gap by measuring the correlation between source-target similarity scores and downstream forecasting errors in out-of-distribution and transfer-learning settings. We propose Domain-Integrated Similarity Cost (DISC), a learnable aggregation framework that uses calibration transfer observations to select, weight, and combine similarity metrics for different downstream tasks. By integrating complementary metric values, DISC better distinguishes source-target dataset differences that matter for downstream behavior. After calibration, DISC scores source-target pairs using only their similarity-metric values and yields higher alignment than single-metric references on the reported split. These results show that time-series dataset similarity is task-dependent, and that learned metric integration provides a stronger proxy for downstream transfer behavior than manually selecting one similarity metric.",
+          "categories": [],
+          "keywords": [
+            "domain-integrated similarity cost",
+            "dataset relationships",
+            "time-series dataset",
+            "time-series datasets",
+            "source-target",
+            "disc"
+          ],
+          "matched_keywords": []
+        },
+        "2610.24481": {
+          "title": "DuoLM: Fast and Effective Personalized Recommendation with Language Models",
+          "abstract": "Language models can make personalized recommendations from rich item content, user history, and feedback. However, evaluating many candidates with full-text inputs incurs substantial online computation and limits serving throughput. We introduce DuoLM, a framework for fast and effective personalized recommendation that integrates a compact recommendation model with an efficient serving runtime. An encoder LLM learns compact item representations for offline reuse, while a personalized ranker LLM combines them with user history and feedback for recommendation. We train both models end to end with recommendation supervision and teacher distillation. The runtime further accelerates inference through virtual token IDs for embedding access, shared history computation, and CUDA Graph replay. Benchmark results show that our framework achieves recommendation quality comparable to that of the expert teacher model. On a single H100, it delivers approximately 26,400 candidate scores per second, about 60times the throughput of the teacher served with vLLM and automatic prefix caching.",
+          "categories": [],
+          "keywords": [
+            "effective personalized recommendation",
+            "user history",
+            "accelerates inference through",
+            "access shared history",
+            "achieves recommendation quality",
+            "approximately candidate scores"
+          ],
+          "matched_keywords": []
+        },
+        "2606.00778": {
+          "title": "A path-following framework on fiber bundle for variational inequalities",
+          "abstract": "Developing general-purpose algorithms with global asymptotic convergence guarantees for variational inequalities (VIs) remains a longstanding challenge. This paper proposes a path-following framework for finite-dimensional VIs with arbitrary continuous mappings and polytope domains. The approach first transforms a general VI into a smooth VI on a simplex. Its key innovation is to formulate the resulting problem on a fiber bundle, called the fixed-point bundle, whose geometric structure enables the systematic integration of initialization, path-following, and singularity avoidance. Without imposing monotonicity or similar assumptions, the framework guarantees global linear convergence for nonsingular solutions and global linear convergence up to any prescribed precision for singular solutions. In numerical experiments, the algorithm attained a precision of 10^{-5} on all 6400 randomly generated instances, with dimensions up to 1024. Code and data are available at https://github.com/shb20tsinghua/FiberBundle_VI.",
+          "categories": [],
+          "keywords": [
+            "global linear convergence",
+            "path-following framework",
+            "fiber bundle",
+            "variational inequalities",
+            "vi",
+            "any prescribed precision"
+          ],
+          "matched_keywords": []
+        },
+        "2609.16158": {
+          "title": "The fixed-point bundle method over product-of-simplex domains arising from game equilibria",
+          "abstract": "Developing general-purpose algorithms with global asymptotic convergence guarantees for Nash equilibria of general-sum games remains a longstanding challenge. This paper extends the fixed-point bundle framework for finite-dimensional variational inequalities (VIs) from simplex domains to product-of-simplex domains, enabling its direct application to Nash equilibrium computation. The resulting fixed-point bundle exhibits a composite fiber bundle structure. The key innovation is to construct an equivalent VI on a simplex and establish the equivalence between the two fixed-point bundle frameworks via a fiber bundle isomorphism. Exploiting this geometric equivalence, we show that the path-following algorithm for VIs on product-of-simplex domains inherits the global linear convergence guarantees of the simplex-domain framework. In numerical experiments, the algorithm attained a precision of 10^{-5} on all 5600 randomly generated game instances, with dimension ranging from 2-player 128-action to 128-player 2-action. Code and data are available at https://github.com/shb20tsinghua/FiberBundle_VI.",
+          "categories": [],
+          "keywords": [
+            "fixed-point bundle",
+            "product-of-simplex domains",
+            "player action",
+            "fiber bundle",
+            "convergence guarantees",
+            "bundle exhibits composite"
+          ],
+          "matched_keywords": []
+        },
+        "2610.14253": {
+          "title": "SliderEdit++: Improved Slider Trajectories in Instruction-Based Image Editing",
+          "abstract": "Slider-based control aims to give users continuous, fine-grained control over the intensity of individual edits in instruction-based image editing. However, existing approaches fail to deliver reliable continuous controllability: traversing a slider can produce abrupt visual jumps and non-monotonic changes, while jointly controlled sliders can interfere with one another. To systematically study these limitations, we introduce SlideBench, a comprehensive benchmark for continuous image editing spanning diverse editing categories and equipped with a unified suite of metrics quantifying monotonic progression, perceptual continuity, and inter-slider disentanglement. Building on these observations, we propose SliderEdit++, which explicitly regularizes the intermediate editing trajectory rather than supervising only its endpoints. Our method combines velocity- and semantic-space trajectory regularization with spectral control to encourage smooth, predictable slider traversal, together with a disentanglement objective that reduces interference between independently controlled edits. On SlideBench, SliderEdit++ achieves state-of-the-art performance, improving the overall score by 18.5% relative to the strongest baseline. At the same time, using a few-step editing backbone makes our method approximately 3x to 20x faster than existing slider-based approaches, enabling substantially more responsive interactive editing.",
+          "categories": [],
+          "keywords": [
+            "instruction-based image editing",
+            "slider",
+            "slideredit",
+            "abrupt visual jumps",
+            "approaches enabling substantially",
+            "changes while jointly"
+          ],
+          "matched_keywords": []
+        },
+        "2610.14465": {
+          "title": "Co-adaptive Rule Routing and Constraining for Structured Knowledge Retrieval",
+          "abstract": "Structured knowledge retrieval acquires task-relevant evidence from structured knowledge sources for downstream tasks. Existing methods rely on unconstrained retrieval or predefined query-rule supervision, such as author-paper rules for scientific discovery and anatomy-drug rules for precision medicine. Such supervision is rarely available in practice. We propose Co-Adaptive Rule Routing and Constraining Retrieval (CoRE), which jointly learns which reasoning rule to assign to each query and how to retrieve evidence under that rule, without predefined query-rule pairs. A routing agent selects a rule, and its corresponding retriever traverses the knowledge base and ranks evidence that satisfies the rule's constraints. Because routing and retrieval are interdependent, CoRE alternates between reinforcement learning for the routing policy and contrastive learning for the rule-constrained retriever. The selected rules provide supervision for retriever training, while retrieval performance rewards the routing policy. This closed-loop process enables both components to co-adapt without explicit query-rule supervision. Experiments on STaRK-QA datasets across scientific discovery, biomedical reasoning, and e-commerce knowledge management demonstrate CoRE's effectiveness. Ablations show the benefit of co-adapting the router and retriever. Generation-based routing transfers across datasets and benefits from multi-domain pretraining followed by target-specific fine-tuning. Analysis of rule usage across queries also informs automatic rule refinement and discovery.",
+          "categories": [],
+          "keywords": [
+            "co-adaptive rule routing",
+            "structured knowledge retrieval",
+            "predefined query-rule",
+            "query-rule supervision",
+            "routing policy",
+            "acquires task-relevant evidence"
+          ],
+          "matched_keywords": []
+        },
+        "2610.31494": {
+          "title": "AgentVQA: A Unified Benchmark for Agentic Visual Understanding",
+          "abstract": "Vision-language models (VLMs) can perform a broad range of tasks across diverse settings, yet their performance in agentic contexts remains poorly understood. Although online evaluations in simulators and real-world environments are essential for measuring interactive agent performance, they are costly and challenging to scale. Complementary offline VQA benchmarks can enable faster and more reliable comparisons across agentic domains, yet existing benchmarks remain limited and fragmented. To address this gap, we introduce AgentVQA, an offline benchmark for evaluating VLMs on realistic agentic scenarios across five agent domains: Web Agents, Robotics, Egocentric Videos, Games, and Spatial Planning. We build AgentVQA by manually selecting 1000 challenging, real-world agent examples from 23 source datasets and adapting them for reliable offline evaluation. The resulting benchmark preserves realistic scenarios from interactive environments across diverse domains, and its model rankings track those from corresponding online evaluations. Across the 22 evaluated models, the best achieves only 58.5% accuracy. Our cross-domain analysis shows that errors are driven primarily by failures to ground and maintain accurate representations of the current and evolving visual state, including localizing relevant UI elements, interpreting motion, tracking state changes over time, and inferring 3D spatial relationships, rather than by task misinterpretation or downstream logical reasoning.",
+          "categories": [
+            "cs.CV"
+          ],
+          "keywords": [
+            "online evaluations",
+            "agentvqa",
+            "agentic contexts remains",
+            "agentic domains yet",
+            "agentic visual understanding",
+            "agents robotics egocentric"
+          ],
+          "matched_keywords": []
         },
         "2610.31474": {
           "title": "Skeleton-Grounded Latent Action Model for Robot World Models",
@@ -9508,7 +9685,7 @@
           ],
           "keywords": [
             "allocate activation precision",
-            "different downstream tasks",
+            "different tasks different",
             "distinct precision requirements",
             "dlms introduce unique",
             "downstream tasks exhibiting",
@@ -14369,10 +14546,10 @@
           ],
           "keywords": [
             "autonomous industrial inspection",
-            "vis",
             "temporal memory",
             "cdot",
             "detm-tracker",
+            "vis",
             "active instances where"
           ],
           "matched_keywords": []
@@ -17966,23 +18143,6 @@
           ],
           "matched_keywords": []
         },
-        "2610.30006": {
-          "title": "Building Auditable AI Text Detectors with Sparse Autoencoders",
-          "abstract": "AI-generated text detectors are increasingly deployed in consequential settings---peer review, education, admissions, journalism, and content moderation---where their outputs directly affect individuals. Yet the strongest detectors are fine-tuned neural classifiers whose decisions are opaque, while transparent alternatives (stylometric and linguistic-feature classifiers) underperform them by wide margins. We present a pipeline that converts a fine-tuned neural detector into a classifier that operates on human-readable concepts. We accomplish this by training sparse autoencoders (SAEs) directly on a detector's residual stream, assigning auto-interpretation labels to each SAE feature, and retaining only features whose generated descriptions pass a global fidelity threshold. We then train a lightweight classifier on just the interpretable features. We find that our SAEs recover latent concepts that correspond to highly specific and predictive linguistic \"tells\" of AI-generated text. Classifiers built on these extracted features are not only highly interpretable but exhibit stronger performance on out-of-distribution texts than either neural or stylometric alternatives.",
-          "categories": [
-            "cs.CL",
-            "cs.AI"
-          ],
-          "keywords": [
-            "fine-tuned neural",
-            "text detectors",
-            "ai-generated text",
-            "sparse autoencoders",
-            "ai text detectors",
-            "ai-generated text detectors"
-          ],
-          "matched_keywords": []
-        },
         "2610.30014": {
           "title": "Agent Behavior Maps: Locating Agents by What They Would Do, Without Running Them",
           "abstract": "LLM agents with similar success rates can follow different action sequences. An Agent Behavior Map represents LLM-harness combinations using centered action log-likelihoods on shared reference trajectories, without requiring new environment rollouts from the target agent. We derive error bounds relating squared coordinate distances to trajectory KL under explicit assumptions, and across eight cross-scored models the distances track the directly measured trajectory KL in rank order. Across 100 LLMs and four environments, ALFWorld-based coordinates support performance prediction and identify behavioral similarities. In ALFWorld, these similarities persist after controlling for success rates and model size, including across model families. As an extension, harness-component displacements approximately compose, with accuracy varying across components and environments.",
@@ -19226,26 +19386,6 @@
             "architectural differences ruling"
           ],
           "matched_keywords": []
-        },
-        "2610.27782": {
-          "title": "RoboJudge: Multimodal Language Models as Judges for Embodied Video Generation",
-          "abstract": "Video generation models are promising foundations for embodied world models, but only if their generated rollouts are physically valid and faithful to task instructions. Multimodal large language models (MLLMs) are increasingly used to judge these properties, yet their agreement with human judgments on embodied videos has not been systematically evaluated. To address this gap, we introduce RoboJudge-Bench, a benchmark for evaluating MLLMs as judges of embodied video generation. The benchmark measures two fundamental dimensions, Physical Adherence and Instruction Alignment, across 800 human-annotated videos from 8 source corpora and 10 video generators, spanning grippers, human hands, and dexterous hands. Experiments reveal uneven alignment between existing judges and human ratings: general-purpose MLLMs show lower agreement on physical adherence, while specialized video judges designed for general-domain physical reasoning do not consistently transfer to embodied scenarios. Motivated by these findings, we construct RoboJudge-Train, comprising 12K videos annotated with 25K human-verified scores and model-assisted rationales for Physical Adherence and Instruction Alignment. We fine-tune a 9B MLLM on this dataset with supervised learning followed by reinforcement learning, yielding RoboJudge-9B. Among the model judges evaluated on RoboJudge-Bench, RoboJudge-9B achieves the highest overall agreement, reaching a Pearson correlation of 0.719 with a statistically significant 0.089 gain over Gemini-3.7-Flash, the best-performing proprietary baseline in our evaluation. Training on RoboJudge-Train also yields gains on external benchmarks, including VideoPhy2 and Physion-Eval. We further use RoboJudge-9B as a downstream evaluator to benchmark video generation models according to Physical Adherence and Instruction Alignment.",
-          "categories": [
-            "cs.CV",
-            "cs.RO"
-          ],
-          "keywords": [
-            "physical adherence",
-            "embodied video generation",
-            "instruction alignment",
-            "robojudge-9b",
-            "adherence while specialized",
-            "agreement reaching pearson"
-          ],
-          "matched_keywords": [
-            "world model",
-            "generation model"
-          ]
         },
         "2610.27890": {
           "title": "EndoWorld-JEPA: Motion-Guided Global-Local Latent World Modeling for Endoscopic Video Representation Learning",
@@ -26078,9 +26218,9 @@
           "keywords": [
             "cognitive bias triggers",
             "mental shortcuts",
-            "carry them",
             "human agreement",
             "surface cues",
+            "carry them",
             "bait"
           ],
           "matched_keywords": []
@@ -39907,10 +40047,10 @@
           "keywords": [
             "multi-teacher on-policy distillation",
             "nash-mopd",
-            "mopd",
             "accuracy metrics respectively",
             "adaptive domain scheduler",
-            "address inflexible allocation"
+            "address inflexible allocation",
+            "already improve quickly"
           ],
           "matched_keywords": []
         },
@@ -40997,8 +41137,8 @@
             "control responses",
             "single perceptive",
             "bfm",
-            "fiber",
             "humanoid loco-manipulation",
+            "fiber",
             "abstractions but do"
           ],
           "matched_keywords": []
@@ -45799,11 +45939,11 @@
           ],
           "keywords": [
             "dmllms",
-            "caching",
             "approximate caching",
             "deep-layer entropy",
             "repeat curse",
-            "cota"
+            "cota",
+            "information flow"
           ],
           "matched_keywords": []
         },
@@ -46996,8 +47136,8 @@
             "cs.AI"
           ],
           "keywords": [
-            "macro avg",
             "receive larger",
+            "macro avg",
             "additional correction while",
             "cached rollout measurements",
             "combines verified correctness",
