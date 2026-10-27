@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-10-27T06:07:14+00:00",
+  "updated_at": "2026-10-27T09:47:33+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-77ad116482fa6c5e27a19f7a": {
-      "run_id": "daily-77ad116482fa6c5e27a19f7a",
-      "generated_at": "2026-10-27T06:07:14+00:00",
+    "daily-61a157093f41c35e82a66213": {
+      "run_id": "daily-61a157093f41c35e82a66213",
+      "generated_at": "2026-10-27T09:47:33+00:00",
       "selected_ids": [
         "2610.35044",
         "2610.34593",
@@ -1140,6 +1140,22 @@
             "world model"
           ]
         },
+        "2610.33398": {
+          "title": "Rethinking Microscopy Generation: Co-Designed Diffusion for Biologically Interpretable Single-Cell Synthesis",
+          "abstract": "Generative models for microscopy can already produce realistic whole-image fields of view, but offer no principled way to control how each individual cell looks. We address this gap by recasting microscopy generation at the single-cell level and designing the input controls and the model's internal representation jointly, so that both are organized along the same biologically meaningful directions. On the input side, we aggregate a long list of standard cell measurements into a small set of semantic axes (size, elongation, brightness, texture, etc.) that are each named, measurable, and traversable. On the model side, we introduce BioVAE, an encoder-decoder whose latent space is explicitly aligned with the same set of measurements. A key finding is that the benefit of biologically structuring the latent emerges only when conditioning is also moved to the semantic axes, showing that the two ends must be designed jointly. Experiments on LIVECell show that semantic-axis conditioning substantially improves generative fidelity over high-dimensional conditioning, a blind study with biologists confirms the realism of generated cells, and per-axis traversals produce stable and interpretable phenotypic changes.",
+          "categories": [
+            "cs.CV"
+          ],
+          "keywords": [
+            "microscopy generation",
+            "semantic axes",
+            "aggregate long list",
+            "already produce realistic",
+            "axes size elongation",
+            "biologically interpretable single-cell"
+          ],
+          "matched_keywords": []
+        },
         "2610.33066": {
           "title": "OvisOCR3 Technical Report",
           "abstract": "We introduce OvisOCR3, a 0.8B model for a broad range of OCR-related tasks. OvisOCR3 unifies document parsing, general OCR, key information extraction (KIE), document figure captioning, and cross-page table reconstruction in a single model. We train the model on real and synthetic data through continued pretraining and use domain-balanced mid-training to balance supervision across tasks with different data volumes and response lengths. Multi-teacher on-policy distillation transfers expertise from five domain-specific 4B teachers into the shared model, followed by mixed-task reinforcement learning with domain-specific rewards. We compare OvisOCR3 with general-purpose vision-language models and specialized OCR models on public and in-house benchmarks covering all five task families. In these comparisons, it achieves an overall score of 96.74 on OmniDocBench v1.6 and the highest overall scores on PureDocBench, Real5-OmniDocBench, and MDPBench. On OCRBench v2, it ranks first, scoring 65.9 and 61.3 on the English and Chinese splits, respectively. It also outperforms the baselines on OCRBench and all four KIE benchmarks. On DocFigCapBench, it achieves the highest localization F1 and a caption score close to that of Qwen3.8-Max. For cross-page tables, it leads in Relation F1 on CrossTabBench and truncated-table TEDS on MPDocBench-Parse. These results demonstrate that a compact 0.8B model can achieve strong performance across diverse OCR-related tasks. OvisOCR3 is available at this https URL.",
@@ -1154,22 +1170,6 @@
             "chinese splits respectively",
             "cross-page table reconstruction",
             "distillation transfers expertise"
-          ],
-          "matched_keywords": []
-        },
-        "2610.33398": {
-          "title": "Rethinking Microscopy Generation: Co-Designed Diffusion for Biologically Interpretable Single-Cell Synthesis",
-          "abstract": "Generative models for microscopy can already produce realistic whole-image fields of view, but offer no principled way to control how each individual cell looks. We address this gap by recasting microscopy generation at the single-cell level and designing the input controls and the model's internal representation jointly, so that both are organized along the same biologically meaningful directions. On the input side, we aggregate a long list of standard cell measurements into a small set of semantic axes (size, elongation, brightness, texture, etc.) that are each named, measurable, and traversable. On the model side, we introduce BioVAE, an encoder-decoder whose latent space is explicitly aligned with the same set of measurements. A key finding is that the benefit of biologically structuring the latent emerges only when conditioning is also moved to the semantic axes, showing that the two ends must be designed jointly. Experiments on LIVECell show that semantic-axis conditioning substantially improves generative fidelity over high-dimensional conditioning, a blind study with biologists confirms the realism of generated cells, and per-axis traversals produce stable and interpretable phenotypic changes.",
-          "categories": [
-            "cs.CV"
-          ],
-          "keywords": [
-            "microscopy generation",
-            "semantic axes",
-            "aggregate long list",
-            "already produce realistic",
-            "axes size elongation",
-            "biologically interpretable single-cell"
           ],
           "matched_keywords": []
         },
@@ -13351,6 +13351,76 @@
           ],
           "matched_keywords": []
         },
+        "2610.30970": {
+          "title": "Joint or Per-Option? Compact Encoders for Closed-Set Decisions from 17 Million to 1 Billion Parameters",
+          "abstract": "Many language-model pipelines end in a closed-set decision, such as selecting a tool. Prompting a large language model for it is slow and order-sensitive. We ask how small an encoder for such decisions can be and whether it should read the options jointly or separately. In a three-seed study at 32 million parameters, per-option scoring beats joint scoring on a held-out sample of a 37-benchmark decision suite by 5.8 points of chance-corrected skill at matched optimizer steps and by 2.8 at approximately matched training compute; two external benchmarks agree, though not significantly on their unseen tasks. Crossing reader with initialisation shows that the advantage requires a reranker initialisation, whose query-candidate pair input matches per-option reading; from the raw encoder the two readers are indistinguishable. Per-option scoring needs 5 to 13 times more encoder passes: at most twice the median latency, but more than four times the mean. Of six released joint encoders (17 million to 1 billion parameters), the 68- and 150-million-parameter models exceed a 435-million-parameter DeBERTa-v3 zero-shot classifier by 4.9 and 5.9 accuracy points on 209 overlap-audited System1-Arena tasks and are at least on par with it on the 145 tasks unseen in training. The smallest answers a median request in 14 milliseconds on 16 processor threads, against 728 for the classifier. Reordering options changes 12 to 23% of the joint models' answers (per-option scoring: none). Up to 68 million parameters, they lead their size range on a public leaderboard's private, mainly in-distribution tests.",
+          "categories": [],
+          "keywords": [
+            "per-option scoring",
+            "million parameters",
+            "billion parameters",
+            "advantage requires reranker",
+            "answers median request",
+            "answers per-option scoring"
+          ],
+          "matched_keywords": []
+        },
+        "2610.14018": {
+          "title": "RoboHarness: A Simple Harness Outperforms VLA and World Action Models",
+          "abstract": "The rise of large language models (LLMs) has opened a path toward generalist embodied AI, raising the question of how LLMs can act in the physical world. One straightforward approach is training the model to generate actions: collect robot-action data and video demonstration, refine LLM architecture with an action head, and train a vision-language-action (VLA) model at scale. However, we argue that coding agents have the potential to realize generalist embodied manipulation. All they need is a simple yet effective robot harness. We present RoboHarness: a robotic harness that gives LLM agents a visual-geometric control panel so that they can directly understand and invoke embodied tasks. With RoboHarness, Qwen3.8-Flash-Next outperforms state-of-the-art VLA models on BEHAVIOR Challenge 2025 tasks. The implementation is open source.",
+          "categories": [],
+          "keywords": [
+            "generalist embodied",
+            "roboharness",
+            "agents visual-geometric control",
+            "behavior challenge tasks",
+            "control panel so",
+            "demonstration refine llm"
+          ],
+          "matched_keywords": []
+        },
+        "2610.31818": {
+          "title": "Nested Sparsity for Scalable Pretraining and Continual Learning",
+          "abstract": "Mixture-of-experts (MoE) transformers, the standard backbone for modern large-scale deep learning, employ conditional computation: only a sparse subset of model weights is used in each forward pass. In MoE transformers, this sparsity arises in the MoE operator, which generalizes the multi-layer perceptron in the classical transformer. In this work, we explore an alternative mechanism for conditional computation that analogously generalizes the attention operator. The sparsity induced by this mechanism naturally nests (i.e., hierarchically composes) with the sparsity induced by the MoE operator. We show that a transformer employing this nested sparsity mechanism, which we call Nestor, performs better than a conventional MoE transformer at equal compute and equal sparsity in language model pretraining. We also show that Nestor is well-suited for continual pretraining: it can be adapted to longer contexts more effectively than conventional MoEs, as well as adapt more efficiently to new domains while forgetting less on old domains. Furthermore, we demonstrate that these benefits persist as model size, dataset size, and context length grow. Our results demonstrate the potential of alternative conditional computation mechanisms for deep neural network architectures. Code and checkpoints are available on GitHub at https://github.com/Ma-Lab-Berkeley/Nestor .",
+          "categories": [],
+          "keywords": [
+            "conditional computation",
+            "moe operator",
+            "moe transformers",
+            "nested sparsity",
+            "sparsity induced",
+            "nestor"
+          ],
+          "matched_keywords": []
+        },
+        "2610.24451": {
+          "title": "Assessing the CAD Capabilities of General-Purpose AI Models: A Case Study of GPT-6 Astra",
+          "abstract": "Recent advances in general-purpose AI models and agentic systems have enabled them to perform some CAD tasks. A systematic assessment is now needed to establish what these systems can accomplish and how well their outputs meet engineering requirements. This paper presents an empirical study of GPT-6 Astra, a SOTA general-purpose AI model, across four basic CAD tasks: model understanding, generation, editing, and evaluation. We design test cases spanning different levels of complexity and engineering requirements. The results show that GPT-6 Astra can support multiple stages of CAD workflows, with successful outcomes in cases involving nontrivial geometric complexity. This suggests that general-purpose AI is beginning to offer practical value in almost all steps in CAD workflow. However, gaps remain between generating visually plausible geometry and producing valid, functional, and editable CAD models. Recurring errors in freeform geometry, parameter dependencies, and mating relationships between parts limit engineering usefulness. Agentic iterative refinement can improve results but does not consistently resolve critical errors; long completion times further constrain practical use.",
+          "categories": [],
+          "keywords": [
+            "general-purpose ai",
+            "cad tasks",
+            "engineering requirements",
+            "gpt-6 astra",
+            "agentic iterative refinement",
+            "astra sota general-purpose"
+          ],
+          "matched_keywords": []
+        },
+        "2610.34241": {
+          "title": "Beyond Benchmarks: Can Small Open-Weight Models Get Real Coding Work Done?",
+          "abstract": "Making an open-weight language model generate text is not the same as making it finish coding work. This retrospective empirical systems experience report follows my engineering work from July to October 2026 across coding clients, model-specific serving recipes, vLLM, SGLang, llama.cpp, and MLX. Models behind a nominally compatible endpoint still differed in tool-call formatting, turn control, context behavior, cache reuse, and reliability. A served model, coherent text, executed tool calls, and code that passes independent behavioral checks proved to be distinct levels of progress. The evidence includes 4,165 coding-agent gateway turns from my own sessions, 623 debug jobs, and three separate delegation studies with hidden behavioral checks and a fixed Claude Opus 5.5 parent. Saved cold-prefix requests had a median time to first token of about 69.4 s, versus 2.8 s for high-reuse requests (observational). In a 45-trial study, direct coding passed 15/15 and delegation to a quantized Qwen3-Coder 30B-A3B worker passed 12/15 and 14/15. On a second 15-task suite under a fixed artifact contract, the completed replacement cohort had 45/45 for direct coding and 12/45 for a Nemotron Cascade 2 worker (11 worker substitutions). Sixteen sessions stopped by a subscription limit before any model call were replaced; counting them as failures gives 37/45 and 8/45. A Qwen3-Coder worker passed 0/45. In both studies with a direct arm, direct coding had lower API list-price-equivalent frontier cost per verified success. A post-hoc diagnostic found that 19 of 36 artifacts rejected only for renamed parameters passed the hidden checks unchanged; they are not counted as successes.\n  The contribution is an evidence-qualified account of serving, agent protocol, session continuity, artifact validation, and verification in practice. The studies are not pooled and do not rank models or runtimes.",
+          "categories": [],
+          "keywords": [
+            "direct coding",
+            "coding work",
+            "worker passed",
+            "behavioral checks",
+            "agent protocol session",
+            "api list-price-equivalent frontier"
+          ],
+          "matched_keywords": []
+        },
         "2610.32965": {
           "title": "RynnUnify: Towards Unified Embodied Brain",
           "abstract": "We introduce RynnUnify, a 16B unified embodied model that combines strong embodied understanding with long-horizon visual planning through interleaved video--language reasoning. With capabilities spanning spatial reasoning, physical prediction, and grounding, RynnUnify connects an understanding of the physical world with visual anticipation of how it evolves across successive subtasks. Building on these capabilities, we further develop an agentic extension through reinforcement learning to selectively use video predictions for reasoning about unobserved states and interaction outcomes. We also develop a world-action extension of the full RynnUnify model, translating its understanding and prediction capabilities into robot control. To evaluate these capabilities, we introduce Rynn-VP and Rynn-GEU for long-horizon visual planning and anticipatory reasoning. Experiments show that RynnUnify achieves the highest average embodied understanding score among the evaluated unified multimodal models and improves the Rynn-VP overall score by 9.75 points over Cosmos 3 Nano. Its agentic extension improves the Rynn-GEU average by 6.0 points over direct reasoning, while the world-action extension achieves 51.5\\% success on 20 selected composite RoboCasa365 tasks and 46.7\\% average success across three real-robot tasks. Together, these results establish RynnUnify as a shared foundation for embodied understanding, visual planning, and robot control, taking a step toward a unified embodied brain.",
@@ -22490,9 +22560,9 @@
             "adaptive skill granularity",
             "macro-to-micro recovery",
             "runtime routing",
-            "coding agents",
             "action-abstraction policy conditioned",
-            "additional runtime control"
+            "additional runtime control",
+            "adoption failure recovery"
           ],
           "matched_keywords": []
         },
@@ -26322,8 +26392,8 @@
             "cache engineering",
             "different cache",
             "retained context",
-            "cache reuse",
             "akv",
+            "cache reuse",
             "active cache growth"
           ],
           "matched_keywords": []
@@ -30585,8 +30655,8 @@
             "pause",
             "online steering",
             "planner cost",
-            "coding agents",
-            "advisor when monitor"
+            "advisor when monitor",
+            "anomalous behavior does"
           ],
           "matched_keywords": []
         },
@@ -52428,8 +52498,8 @@
             "policy search",
             "search discovered",
             "multi-agent pathfinding",
-            "coding agents",
-            "agents offers highly"
+            "agents offers highly",
+            "any manually engineered"
           ],
           "matched_keywords": []
         },
