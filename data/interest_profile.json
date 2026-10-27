@@ -58683,7 +58683,7 @@
   "delivery": {
     "batch_id": "1539507173f62c7fa238cd5f",
     "run_id": "daily-77ad116482fa6c5e27a19f7a",
-    "updated_at": "2026-10-27T06:07:14+00:00",
+    "updated_at": "2026-10-27T06:11:45+00:00",
     "profile_version": "992927a1524b59b3",
     "papers": [
       {
@@ -60711,7 +60711,28 @@
         "categories": [
           "cs.CV"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Shumpei Takezaki",
+            "affiliation": "Kyushu University, Fukuoka, Japan"
+          },
+          {
+            "author": "Duway Nicolas Lesmes-Leon",
+            "affiliation": "University of Kaiserslautern-Landau (RPTU), Kaiserslautern, Germany"
+          },
+          {
+            "author": "Ryoma Bise",
+            "affiliation": "Kyushu University, Fukuoka, Japan"
+          },
+          {
+            "author": "Andreas Dengel",
+            "affiliation": "German Research Center for Artificial Intelligence (DFKI), Kaiserslautern, Germany"
+          },
+          {
+            "author": "Sheraz Ahmed",
+            "affiliation": "German Research Center for Artificial Intelligence (DFKI), Kaiserslautern, Germany"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-27",
         "listing_date": "2026-10-27",
@@ -60721,7 +60742,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "unresolved",
+        "affiliation_status": "resolved",
         "keywords": [
           "microscopy generation",
           "semantic axes",
