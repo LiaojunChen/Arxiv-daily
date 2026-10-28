@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-10-28T06:45:29+00:00",
+  "updated_at": "2026-10-28T10:32:43+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-7bba71d5decf959ee3562508": {
-      "run_id": "daily-7bba71d5decf959ee3562508",
-      "generated_at": "2026-10-28T06:45:29+00:00",
+    "daily-deb6075f9b2a6761247e8764": {
+      "run_id": "daily-deb6075f9b2a6761247e8764",
+      "generated_at": "2026-10-28T10:32:43+00:00",
       "selected_ids": [
         "2610.37091",
         "2610.37588",
@@ -1025,6 +1025,23 @@
           ],
           "matched_keywords": []
         },
+        "2610.36135": {
+          "title": "Physical structure as an organizing principle for universal Hamiltonian learning",
+          "abstract": "Density functional theory (DFT) gives the electronic structure of materials, but its cost limits large-supercell calculations and materials screening. Machine-learned Hamiltonians bypass the self-consistent cycle but are usually system-specific; universal ones could cover new compositions and disordered solids. Such models must generalize across chemistry and keep downstream properties physical, while staying inexpensive for large cells. Here we introduce UniTB, a universal E(3) equivariant Hamiltonian representation framework that integrates physical priors rooted in density-functional tight-binding theory with deep learning. UniTB's network, which corrects a prior Hamiltonian, generalizes across chemistry through a mixture of experts routed by that prior and a charge-equilibration head as in self-consistent-charge tight binding. A projection bounds band shifts from the prior, suppressing spurious states and keeping downstream properties physical. We provide the fastest SO(2) tensor-product GPU kernels for the network. The variant UniTB-Flash assembles its prior from two-center tables at $O(N)$ cost for $N$ atoms, against $O(N\\log N)$ on a grid. Trained on 29,242 crystals, UniTB reaches a 0.48 meV matrix-element error on nonmagnetic test crystals spanning 68 elements. Without amorphous training data, both models agree with DFT optics and conductivity of amorphous Ge-Sb-Te. UniTB-Flash ranks candidates with no significant difference from UniTB, whose property values are more accurate; together they screen 16,195 crystals for five application domains of industrial relevance.",
+          "categories": [
+            "cond-mat.mtrl-sci",
+            "cs.AI"
+          ],
+          "keywords": [
+            "downstream properties physical",
+            "unitb",
+            "crystals",
+            "hamiltonian",
+            "atoms against log",
+            "bounds band shifts"
+          ],
+          "matched_keywords": []
+        },
         "2610.36729": {
           "title": "Hy-Nomas: Towards Free-form Interactive World Generation",
           "abstract": "Interactive world generation requires models to follow successive commands while preserving relevant history and action consequences. We present Hy-Nomas, a video world model with an 8B diffusion backbone that supports free-form text instructions and continuous camera control across multiple interaction turns. It generates variable-length segments conditioned on current inputs and cached history. Our central design aligns structured video captions with action-aware causal attention: descriptive context remains accessible across segments, while action instructions are restricted to their intended temporal windows. A vision-language Prompt Enhancer (PE) translates user requests and multimodal interaction histories into structured conditions for the next segment. A multi-stage curriculum progressively introduces causal generation, text interaction, camera control, and training on model-generated histories, followed by diffusion distillation. In human evaluation, Hy-Nomas shows superior performance over existing world models. We release model weights, code and benchmarks, together with a lightweight adaptation workflow, to support reproducible research on interactive world generation.",
@@ -1165,23 +1182,6 @@
             "answer already exists",
             "audit tax due",
             "breaking frontier harnesses"
-          ],
-          "matched_keywords": []
-        },
-        "2610.36135": {
-          "title": "Physical structure as an organizing principle for universal Hamiltonian learning",
-          "abstract": "Density functional theory (DFT) gives the electronic structure of materials, but its cost limits large-supercell calculations and materials screening. Machine-learned Hamiltonians bypass the self-consistent cycle but are usually system-specific; universal ones could cover new compositions and disordered solids. Such models must generalize across chemistry and keep downstream properties physical, while staying inexpensive for large cells. Here we introduce UniTB, a universal E(3) equivariant Hamiltonian representation framework that integrates physical priors rooted in density-functional tight-binding theory with deep learning. UniTB's network, which corrects a prior Hamiltonian, generalizes across chemistry through a mixture of experts routed by that prior and a charge-equilibration head as in self-consistent-charge tight binding. A projection bounds band shifts from the prior, suppressing spurious states and keeping downstream properties physical. We provide the fastest SO(2) tensor-product GPU kernels for the network. The variant UniTB-Flash assembles its prior from two-center tables at $O(N)$ cost for $N$ atoms, against $O(N\\log N)$ on a grid. Trained on 29,242 crystals, UniTB reaches a 0.48 meV matrix-element error on nonmagnetic test crystals spanning 68 elements. Without amorphous training data, both models agree with DFT optics and conductivity of amorphous Ge-Sb-Te. UniTB-Flash ranks candidates with no significant difference from UniTB, whose property values are more accurate; together they screen 16,195 crystals for five application domains of industrial relevance.",
-          "categories": [
-            "cond-mat.mtrl-sci",
-            "cs.AI"
-          ],
-          "keywords": [
-            "downstream properties physical",
-            "unitb",
-            "crystals",
-            "hamiltonian",
-            "atoms against log",
-            "bounds band shifts"
           ],
           "matched_keywords": []
         },
@@ -7878,6 +7878,51 @@
             "blind human preferences",
             "cannot reliably render",
             "chart rule-consistent game"
+          ],
+          "matched_keywords": []
+        },
+        "2610.36077": {
+          "title": "The Trinity:Capability-Driven Recursive Self-Improvement for Multimodal Agents",
+          "abstract": "Multimodal intelligence can be viewed as human-guided co-evolution between worlds and agents through interaction. However, scaling this process faces two bottlenecks: constructing heterogeneous, verifiable environments is costly, and manual Harness iteration cannot keep pace with growing task diversity and complexity. A key insight is that tasks with different modalities and surface forms can share the same underlying capability requirements. We therefore introduce The Trinity, a recursive self-improvement framework coupling world generation with Harness evolution through three roles: Creator, Explorer, and Evolver. Drawing on verified execution trajectories, Evolver shifts the basis of task organization from surface categories to shared requirements, reorganizing the original task tree into a hierarchical capability tree. We introduce Capability-Driven Real2Sim2Real: for heterogeneous tasks at the same node, Creator abstracts their common requirements into simplified, verifiable simulated worlds for capability learning, while evaluation on original tasks measures transfer. Along this capability tree, Explorer progressively evolves reusable capability modules through selective inheritance, forming a Harness tree whose validated updates accumulate across iterations within a fixed topology. The resulting Harnesses specialize in different capabilities, motivating a Capability-Aware Harness Router that uses public task information to select compatible module configurations from the tree. Our evolved Harnesses improve mean performance by 34 points across 28 training benchmarks and 26 points across 18 unseen benchmarks, including two real-world embodied tasks.",
+          "categories": [
+            "cs.AI",
+            "cs.CV"
+          ],
+          "keywords": [
+            "capability tree",
+            "agents through interaction",
+            "benchmarks including two",
+            "capabilities motivating capability-aware",
+            "capability modules through",
+            "capability tree explorer"
+          ],
+          "matched_keywords": []
+        },
+        "2602.10657": {
+          "title": "The Lexical Imprint of Pre-training Data",
+          "abstract": "How much of zero-shot benchmark accuracy is captured by word-level alignment between a pre-training corpus and the benchmark target? We study this question through word-level unigram cross-entropy (UCE), a tokenizer-agnostic, model-free measure of lexical alignment between a reference corpus and a target benchmark. Likelihood training shapes the model's predictive distribution from the pre-training corpus, and zero-shot scores under likelihood-based evaluation depend in part on the lexical alignment between that corpus and the benchmark target. Cleanly tracing how the lexical imprint of pre-training data scales with corpus--benchmark alignment requires controlled from-scratch pre-training that varies corpus identity while holding the training recipe fixed. Across this controlled sweep, spanning 10 zero-shot benchmarks, 4 pre-training corpora, and 3 model scales, we find that corpus--benchmark lexical alignment, UCE, consistently tracks zero-shot accuracy on every benchmark, with corpora more aligned with the benchmark (lower UCE) achieving higher accuracy. The same signal extends from measurement to control at finer scopes. At the document level, strengthening the imprint by selecting training documents to maximize lexical alignment with the benchmark produces the accuracy gains predicted by the mechanism. At the prompt level, matching the imprint per prompt by routing each prompt to the drafter whose domain corpus is most lexically aligned with it produces measurable throughput gains over a generalist-drafter baseline. Taken together, pre-training corpora leave a measurable lexical imprint on base-model zero-shot behavior, and UCE provides a model-free probe of lexical alignment between reference and target data.",
+          "categories": [],
+          "keywords": [
+            "lexical alignment",
+            "lexical imprint",
+            "uce",
+            "benchmark target",
+            "pre-training corpora",
+            "pre-training corpus"
+          ],
+          "matched_keywords": []
+        },
+        "2610.26030": {
+          "title": "Truncate or Not? A Scaling Study of Looped Transformers with Truncated Backpropagation",
+          "abstract": "Looped transformers reuse a shared block of layers to increase computational depth without increasing the number of trainable parameters. They are trained with backpropagation through time (BPTT). To save training compute, BPTT is often truncated to the last few loops, but truncation yields biased gradients that may weaken the benefit of looping. In this work, we study the value of truncation in looped transformer training in a systematic way: we jointly vary model size, training tokens, and forward and backward loop counts across nearly 600 training runs and fit a unified scaling law that captures the effects of looping and truncation through effective parameters. Despite the training-compute savings of truncation, our fitted law favors full BPTT when forward and backward loop counts are jointly optimized. In matched-compute runs, full BPTT through fewer loops consistently outperforms truncated settings of the same compute. The law further shows that at fixed model size, the compute-optimal loop count and training-token budget both grow with compute. When model size is also free, the law identifies two fully trained loops as the best looped setting. Experimentally, this setting achieves lower validation loss than the compute-optimal non-looped model with about 27% fewer non-embedding parameters and only 8% more training compute.",
+          "categories": [],
+          "keywords": [
+            "backward loop counts",
+            "full bptt",
+            "looped transformers",
+            "training compute",
+            "truncation",
+            "best looped setting"
           ],
           "matched_keywords": []
         },
@@ -36748,8 +36793,8 @@
             "quantum",
             "quantum machine",
             "wearable cohort",
-            "trainable parameters",
-            "absolute probability errors"
+            "absolute probability errors",
+            "analytic gradient bound"
           ],
           "matched_keywords": []
         },
@@ -38931,8 +38976,8 @@
           "keywords": [
             "looped udlms reach",
             "uniform diffusion language",
-            "loop counts",
             "non-looped udlm",
+            "loop counts",
             "mdlms",
             "training efficiency"
           ],
@@ -47575,23 +47620,6 @@
             "direct retrieval",
             "raw history",
             "arise because memory"
-          ],
-          "matched_keywords": []
-        },
-        "2610.36077": {
-          "title": "The Trinity:Capability-Driven Recursive Self-Improvement for Multimodal Agents",
-          "abstract": "Multimodal intelligence can be viewed as human-guided co-evolution between worlds and agents through interaction. However, scaling this process faces two bottlenecks: constructing heterogeneous, verifiable environments is costly, and manual Harness iteration cannot keep pace with growing task diversity and complexity. A key insight is that tasks with different modalities and surface forms can share the same underlying capability requirements. We therefore introduce The Trinity, a recursive self-improvement framework coupling world generation with Harness evolution through three roles: Creator, Explorer, and Evolver. Drawing on verified execution trajectories, Evolver shifts the basis of task organization from surface categories to shared requirements, reorganizing the original task tree into a hierarchical capability tree. We introduce Capability-Driven Real2Sim2Real: for heterogeneous tasks at the same node, Creator abstracts their common requirements into simplified, verifiable simulated worlds for capability learning, while evaluation on original tasks measures transfer. Along this capability tree, Explorer progressively evolves reusable capability modules through selective inheritance, forming a Harness tree whose validated updates accumulate across iterations within a fixed topology. The resulting Harnesses specialize in different capabilities, motivating a Capability-Aware Harness Router that uses public task information to select compatible module configurations from the tree. Our evolved Harnesses improve mean performance by 34 points across 28 training benchmarks and 26 points across 18 unseen benchmarks, including two real-world embodied tasks.",
-          "categories": [
-            "cs.AI",
-            "cs.CV"
-          ],
-          "keywords": [
-            "capability tree",
-            "agents through interaction",
-            "benchmarks including two",
-            "capabilities motivating capability-aware",
-            "capability modules through",
-            "capability tree explorer"
           ],
           "matched_keywords": []
         },
