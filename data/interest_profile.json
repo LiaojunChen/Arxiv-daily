@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-10-29T06:02:44+00:00",
+  "updated_at": "2026-10-29T06:52:52+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-c9123a91b182a757f7810300": {
-      "run_id": "daily-c9123a91b182a757f7810300",
-      "generated_at": "2026-10-29T06:02:44+00:00",
+    "daily-9473227b5716208e34999fc6": {
+      "run_id": "daily-9473227b5716208e34999fc6",
+      "generated_at": "2026-10-29T06:52:52+00:00",
       "selected_ids": [
         "2610.37091",
         "2610.37588",
@@ -1346,6 +1346,20 @@
             "agentic services alternate",
             "best evaluated state-of-the-art",
             "combines near-term tool"
+          ],
+          "matched_keywords": []
+        },
+        "2601.15351": {
+          "title": "OmniSpectra: A Unified Foundation Model for Universal Spectra Representation Learning",
+          "abstract": "Standard sequence models encode position by token rank rather than physical coordinate, typically forcing practitioners to destructively resample continuous physical signals such as spectra observed across heterogeneous instruments. We identify this coordinate mismatch as a structural limitation in cross-instrument representation learning, and propose OmniSpectra, a wavelength-native foundation model for spectral representation learning: a continuous-coordinate masked autoencoder that discards the integer pixel indexing of sequence modeling. Mapping physical coordinates to a logarithmic basis turns the multiplicative scaling induced by cosmological redshift into a uniform additive shift. In continuous rotary position embeddings, this shared shift cancels from relative token distances rather than producing grid-dependent positional distortion. We further counter the spectral bias inherent to implicit neural decoders with a physics-grounded, resolution-gated Fourier decoder that provides anti-aliasing. Pretrained on eight surveys and benchmarked against seven baselines, our model reaches state-of-the-art performance with only 12.2M parameters while outperforming substantially larger models, indicating that encoding physical structure can substitute for parameter scale.",
+          "categories": [],
+          "keywords": [
+            "against seven baselines",
+            "benchmarked against seven",
+            "continuous physical signals",
+            "continuous rotary position",
+            "continuous-coordinate masked autoencoder",
+            "coordinate typically forcing"
           ],
           "matched_keywords": []
         },
@@ -23858,8 +23872,8 @@
           "keywords": [
             "actionrag",
             "long-term memory",
-            "indexing",
             "triple",
+            "indexing",
             "accounting mean synthesis",
             "accurate retrieval conflict"
           ],
