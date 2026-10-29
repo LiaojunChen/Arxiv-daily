@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-10-29T06:52:52+00:00",
+  "updated_at": "2026-10-29T10:52:37+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-9473227b5716208e34999fc6": {
-      "run_id": "daily-9473227b5716208e34999fc6",
-      "generated_at": "2026-10-29T06:52:52+00:00",
+    "daily-a47d58fb3a3400ada6f9f04a": {
+      "run_id": "daily-a47d58fb3a3400ada6f9f04a",
+      "generated_at": "2026-10-29T10:52:37+00:00",
       "selected_ids": [
         "2610.37091",
         "2610.37588",
@@ -1360,6 +1360,38 @@
             "continuous rotary position",
             "continuous-coordinate masked autoencoder",
             "coordinate typically forcing"
+          ],
+          "matched_keywords": []
+        },
+        "2610.34186": {
+          "title": "HuGe: Scaling Humanoid Generalist Vision-Language-Action Models with Egocentric Experience",
+          "abstract": "Extending Vision-Language-Action models (VLAs) to humanoid robots requires coordinated whole-body control and diverse demonstrations that are costly to collect in real-world scenarios. Although egocentric human demonstrations provide a complementary source of task experience, differences in visual embodiment and missing robot proprioception complicate transfer to humanoid policies. To address these challenges, we introduce HuGe, a family of Humanoid Generalist VLAs pre-trained on over 2,000 hours of egocentric human and robot data. Specifically, HuGe employs three existing representative VLA architectures to predict latent motion tokens for a pretrained whole-body controller, together with hand-control signals. Based on this, we introduce a three-stage training pipeline that combines egocentric pre-training, humanoid adaptation, and downstream fine-tuning. To facilitate transfer across embodiments, we construct pseudo-proprioceptive states through simulation playback during pre-training and modify arm appearance in egocentric observations through re-rendering during downstream fine-tuning. With this pipeline, HuGe achieves the state-of-the-art on simulation benchmark HumanoidArena. Furthermore, real-world experiments on the Unitree G1 indicate that augmenting robot demonstrations with visually adapted egocentric demonstrations significantly increases success on a pick-and-drop task.",
+          "categories": [
+            "cs.RO"
+          ],
+          "keywords": [
+            "humanoid generalist",
+            "downstream fine-tuning",
+            "huge",
+            "egocentric human",
+            "adapted egocentric demonstrations",
+            "although egocentric human"
+          ],
+          "matched_keywords": []
+        },
+        "2610.29702": {
+          "title": "CausGround: Causal Interaction Grounding for Adaptive Embodied Planning",
+          "abstract": "Multimodal large language models (MLLMs) show promising reasoning capabilities, but reliable physical interaction requires planning that accounts for when actions are executable and how they change the world. These preconditions and effects are environment-dependent and often not captured by MLLMs, making adaptation challenging. Yet existing approaches either require costly environment-specific training or rely on unstructured interaction experience that is difficult to reuse. Therefore, we introduce CausGround, a non-parametric causal interaction grounding framework that distills interaction experience into reusable action-centered causal knowledge. CausGround identifies action preconditions and effects and organizes them in a factorized world-state representation capturing object attributes and inter-object relations. At planning time, task-relevant causal dependencies are grounded in current observations to support backward reasoning over preconditions and forward reasoning over effects for action selection and multi-step planning. We evaluate CausGround on simulated high-level planning, interaction reasoning, and real-world robot manipulation. On adapted VirtualHome and RoboCasa benchmarks, CausGround improves vision-based high-level planning across MLLM backbones, increasing average task success from 24.9% to 53.3% on VirtualHome and closed-loop planning success from 43.0% to 57.0% on RoboCasa. On SWITCH, average interaction reasoning accuracy increases from 25.8% to 31.9%, indicating improved action selection, recovery, and verification. Moreover, real-world experiments show that CausGround reasons backward from MLLM-interpreted goals to derive executable high-level action sequences for sequential manipulation. These results demonstrate that reusable action preconditions and effects support long-horizon embodied planning across diverse environments without parameter updates.",
+          "categories": [
+            "cs.RO"
+          ],
+          "keywords": [
+            "causal interaction grounding",
+            "causground",
+            "action preconditions",
+            "embodied planning",
+            "interaction reasoning",
+            "high-level planning"
           ],
           "matched_keywords": []
         },
@@ -8468,22 +8500,6 @@
           "matched_keywords": [
             "world model"
           ]
-        },
-        "2610.34186": {
-          "title": "HuGe: Scaling Humanoid Generalist Vision-Language-Action Models with Egocentric Experience",
-          "abstract": "Extending Vision-Language-Action models (VLAs) to humanoid robots requires coordinated whole-body control and diverse demonstrations that are costly to collect in real-world scenarios. Although egocentric human demonstrations provide a complementary source of task experience, differences in visual embodiment and missing robot proprioception complicate transfer to humanoid policies. To address these challenges, we introduce HuGe, a family of Humanoid Generalist VLAs pre-trained on over 2,000 hours of egocentric human and robot data. Specifically, HuGe employs three existing representative VLA architectures to predict latent motion tokens for a pretrained whole-body controller, together with hand-control signals. Based on this, we introduce a three-stage training pipeline that combines egocentric pre-training, humanoid adaptation, and downstream fine-tuning. To facilitate transfer across embodiments, we construct pseudo-proprioceptive states through simulation playback during pre-training and modify arm appearance in egocentric observations through re-rendering during downstream fine-tuning. With this pipeline, HuGe achieves the state-of-the-art on simulation benchmark HumanoidArena. Furthermore, real-world experiments on the Unitree G1 indicate that augmenting robot demonstrations with visually adapted egocentric demonstrations significantly increases success on a pick-and-drop task.",
-          "categories": [
-            "cs.RO"
-          ],
-          "keywords": [
-            "humanoid generalist",
-            "downstream fine-tuning",
-            "huge",
-            "egocentric human",
-            "adapted egocentric demonstrations",
-            "although egocentric human"
-          ],
-          "matched_keywords": []
         },
         "2610.34593": {
           "title": "What Does World Modeling Actually Improve in Robot Action Learning?",
@@ -33118,22 +33134,6 @@
             "absolute error macromae",
             "action expert learns",
             "additional container-fluid settings"
-          ],
-          "matched_keywords": []
-        },
-        "2610.29702": {
-          "title": "CausGround: Causal Interaction Grounding for Adaptive Embodied Planning",
-          "abstract": "Multimodal large language models (MLLMs) show promising reasoning capabilities, but reliable physical interaction requires planning that accounts for when actions are executable and how they change the world. These preconditions and effects are environment-dependent and often not captured by MLLMs, making adaptation challenging. Yet existing approaches either require costly environment-specific training or rely on unstructured interaction experience that is difficult to reuse. Therefore, we introduce CausGround, a non-parametric causal interaction grounding framework that distills interaction experience into reusable action-centered causal knowledge. CausGround identifies action preconditions and effects and organizes them in a factorized world-state representation capturing object attributes and inter-object relations. At planning time, task-relevant causal dependencies are grounded in current observations to support backward reasoning over preconditions and forward reasoning over effects for action selection and multi-step planning. We evaluate CausGround on simulated high-level planning, interaction reasoning, and real-world robot manipulation. On adapted VirtualHome and RoboCasa benchmarks, CausGround improves vision-based high-level planning across MLLM backbones, increasing average task success from 24.9% to 53.3% on VirtualHome and closed-loop planning success from 43.0% to 57.0% on RoboCasa. On SWITCH, average interaction reasoning accuracy increases from 25.8% to 31.9%, indicating improved action selection, recovery, and verification. Moreover, real-world experiments show that CausGround reasons backward from MLLM-interpreted goals to derive executable high-level action sequences for sequential manipulation. These results demonstrate that reusable action preconditions and effects support long-horizon embodied planning across diverse environments without parameter updates.",
-          "categories": [
-            "cs.RO"
-          ],
-          "keywords": [
-            "causal interaction grounding",
-            "causground",
-            "action preconditions",
-            "embodied planning",
-            "interaction reasoning",
-            "high-level planning"
           ],
           "matched_keywords": []
         },
