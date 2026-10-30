@@ -47307,7 +47307,7 @@
   "delivery": {
     "batch_id": "1221379e1876fe4ebbb404cd",
     "run_id": "daily-30eefa434834479807cf8352",
-    "updated_at": "2026-10-30T10:50:41+00:00",
+    "updated_at": "2026-10-30T11:06:24+00:00",
     "profile_version": "992927a1524b59b3",
     "papers": [
       {
@@ -47511,7 +47511,12 @@
           "cs.AI",
           "cs.RO"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Lin Shao",
+            "affiliation": "National University of Singapore"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-10-30",
         "listing_date": "2026-10-30",
@@ -47521,7 +47526,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "unresolved",
+        "affiliation_status": "resolved",
         "keywords": [
           "worldflow achieves",
           "displacement error",
