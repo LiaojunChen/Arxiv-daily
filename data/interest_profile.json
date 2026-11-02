@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-11-02T07:47:06+00:00",
+  "updated_at": "2026-11-02T09:11:07+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-fb27c3f080e8c5d2118123ea": {
-      "run_id": "daily-fb27c3f080e8c5d2118123ea",
-      "generated_at": "2026-11-02T07:47:06+00:00",
+    "daily-476fb4723961ea15cca102df": {
+      "run_id": "daily-476fb4723961ea15cca102df",
+      "generated_at": "2026-11-02T09:11:07+00:00",
       "selected_ids": [
         "2610.42096",
         "2610.42146",
@@ -2536,8 +2536,8 @@
           ],
           "keywords": [
             "holistic motion generation",
-            "latent flow matching",
             "structured latent flow",
+            "latent flow matching",
             "talkflow",
             "part-specific dynamics",
             "facial expressions"
@@ -5951,6 +5951,51 @@
             "accurate lightweight medical",
             "activations enabling packed",
             "bit activations enabling"
+          ],
+          "matched_keywords": []
+        },
+        "2610.37919": {
+          "title": "SciGame: Let Agents Play the Scientific Discovery Games in the Real and Counterfactual World",
+          "abstract": "Large language model agents are increasingly used for scientific discovery. However, existing benchmarks mix law inference with programming, score data fitting instead of prediction on unseen inputs, and do not separate empirical evidence from pretrained priors. We introduce SciGame, a controlled benchmark that converts scientific literature into structured scientific cards. Each card yields a pair of Original and dimensionally consistent Counterfactual environments with the same task interface. SciGame contains a Historical collection of canonical laws and a live Temporal collection curated from papers published after model knowledge cutoffs. It evaluates agents in candidate-guided Identification and open-ended Discovery settings. Each setting runs under Prior-only, Fixed, and Adaptive protocols. Experiments on five frontier models yield three findings. First, familiar priors hurt performance once the governing relation is altered. Second, adaptive experimentation helps the strongest models but harms weaker ones under limited budgets. Third, good explanations can hide quantitative failures. Recovering the exact symbolic form remains the main bottleneck, even when agents interpret evidence correctly. Current agents can investigate systems actively, but inducing exact laws in unfamiliar settings remains an open challenge.",
+          "categories": [
+            "cs.AI",
+            "cs.CL"
+          ],
+          "keywords": [
+            "scigame",
+            "scientific discovery",
+            "actively but inducing",
+            "adaptive experimentation helps",
+            "agents interpret evidence",
+            "benchmarks mix law"
+          ],
+          "matched_keywords": []
+        },
+        "2610.31222": {
+          "title": "GLOW-FM: Efficient Generative Low-Light Image Enhancement with One-Step Latent Flow Matching",
+          "abstract": "Low-light image enhancement (LLIE) aims to recover well-exposed and perceptually faithful images from severely degraded observations. Recent diffusion-based generative methods achieve strong perceptual quality by leveraging powerful image priors, but their iterative sampling incurs substantial computational cost, limiting practical deployment. Despite recent efficiency gains in generative LLIE, high-quality enhancement with a single function evaluation and low overall computation remains challenging, particularly under diverse real-world low-light conditions. We introduce GLOW-FM, a one-step latent flow-matching framework for efficient generative LLIE. GLOW-FM performs conditional transport in the latent space of a frozen Tiny-VAE and leverages Terminal Velocity Matching (TVM) to enable enhancement with a single function evaluation. Matched comparisons with alternative one-step objectives support TVM as an effective design choice, and, to the best of our knowledge, this is its first adaptation to image restoration and specifically to LLIE. Extensive experiments on challenging real-world benchmarks demonstrate that GLOW-FM achieves competitive image quality and state-of-the-art cross-dataset generalization while requiring only a single function evaluation and 34 GFLOPs for the small variant. These findings highlight the potential of GLOW-FM to bring generative LLIE closer to practical deployment through single-step inference and compact latent modeling. Code will be made publicly available upon publication.",
+          "categories": [],
+          "keywords": [
+            "single function evaluation",
+            "generative llie",
+            "low-light image enhancement",
+            "glow-fm",
+            "one-step latent",
+            "efficient generative"
+          ],
+          "matched_keywords": []
+        },
+        "2610.40727": {
+          "title": "VoxLock: Target-Speaker Extraction for Voice Agents Without an Enrollment Step",
+          "abstract": "A voice agent's speech recognizer transcribes everyone near the microphone, including people other than the caller. I fine-tuned a public causal target-speaker extraction model (REAL-TSE, 27M parameters) on one GPU to work from a voice sample cut from the call itself, and released it as VoxLock. I score it by what a recognizer writes on real recordings. On Krisp's 265-recording benchmark it reaches 4.95% WER against 23.21% unprocessed and lets 9 background words into the transcript over 85 minutes of background-only speech. Its WER is not significantly different from Krisp's best filters and is significantly lower than the other commercial and open systems I tested. On 400 AMI meeting windows built and frozen before scoring, it cuts WER from 42.95% to 10.63%. The 8-bit model runs a live call on 77% of one CPU thread with 24 ms of algorithmic latency. Model, code and per-file scores are open.",
+          "categories": [],
+          "keywords": [
+            "target-speaker extraction",
+            "agent speech recognizer",
+            "ami meeting windows",
+            "causal target-speaker extraction",
+            "fine-tuned public causal",
+            "frozen before scoring"
           ],
           "matched_keywords": []
         },
@@ -10266,23 +10311,6 @@
             "low-pass dynamics",
             "spiking reservoir",
             "accuracy among spiking"
-          ],
-          "matched_keywords": []
-        },
-        "2610.37919": {
-          "title": "SciGame: Let Agents Play the Scientific Discovery Games in the Real and Counterfactual World",
-          "abstract": "Large language model agents are increasingly used for scientific discovery. However, existing benchmarks mix law inference with programming, score data fitting instead of prediction on unseen inputs, and do not separate empirical evidence from pretrained priors. We introduce SciGame, a controlled benchmark that converts scientific literature into structured scientific cards. Each card yields a pair of Original and dimensionally consistent Counterfactual environments with the same task interface. SciGame contains a Historical collection of canonical laws and a live Temporal collection curated from papers published after model knowledge cutoffs. It evaluates agents in candidate-guided Identification and open-ended Discovery settings. Each setting runs under Prior-only, Fixed, and Adaptive protocols. Experiments on five frontier models yield three findings. First, familiar priors hurt performance once the governing relation is altered. Second, adaptive experimentation helps the strongest models but harms weaker ones under limited budgets. Third, good explanations can hide quantitative failures. Recovering the exact symbolic form remains the main bottleneck, even when agents interpret evidence correctly. Current agents can investigate systems actively, but inducing exact laws in unfamiliar settings remains an open challenge.",
-          "categories": [
-            "cs.AI",
-            "cs.CL"
-          ],
-          "keywords": [
-            "scigame",
-            "scientific discovery",
-            "actively but inducing",
-            "adaptive experimentation helps",
-            "agents interpret evidence",
-            "benchmarks mix law"
           ],
           "matched_keywords": []
         },
@@ -38832,11 +38860,11 @@
           ],
           "keywords": [
             "surgical activity",
-            "microphone",
             "active instrument",
             "single microphone",
             "audio-visual correspondence",
-            "background noise"
+            "background noise",
+            "sounding"
           ],
           "matched_keywords": []
         },
