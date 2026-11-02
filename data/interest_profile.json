@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-11-02T09:11:07+00:00",
+  "updated_at": "2026-11-02T13:27:43+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-476fb4723961ea15cca102df": {
-      "run_id": "daily-476fb4723961ea15cca102df",
-      "generated_at": "2026-11-02T09:11:07+00:00",
+    "daily-8fe3b3f4340e55b17731913b": {
+      "run_id": "daily-8fe3b3f4340e55b17731913b",
+      "generated_at": "2026-11-02T13:27:43+00:00",
       "selected_ids": [
         "2610.42096",
         "2610.42146",
@@ -5999,6 +5999,70 @@
           ],
           "matched_keywords": []
         },
+        "2610.39276": {
+          "title": "MemSteer: Turning User Histories into Supervision for Agent Memory Optimization",
+          "abstract": "An effective agent memory system should adapt to a user's history and task requirements. Human-annotated supervision can guide this adaptation by providing feedback for evaluating and improving memory designs. Yet suitable labels are rarely available for new user histories, and manually constructing QA pairs and supporting evidence is costly. We introduce MemSteer, which turns unlabeled user histories into question-answer (QA) supervision with supporting evidence for memory-design optimization. MemSteer constructs an evidence-grounded answer plan that specifies how facts across related records jointly support a reference answer. The plan guides question generation, while source-grounded auditing and blind answer recovery check the resulting annotations. To study the utility of this supervision, we develop MemSteer-Opt, which combines QA-based design evaluation with evidence-guided failure diagnosis to revise memory store, retrieval, and context construction without updating model parameters. Experiments on ATM-Bench and RHELM show that this supervision is competitive with official-QA-guided optimization. Relative to Base-BM25, MemSteer-Opt improves ATM-Bench Question Score by 13.4 points and RHELM accuracy by 4.1 and 6.6 points without and with external data, respectively. The supervision also benefits two existing optimizers on ATM-Bench, while new-user experiments demonstrate continued design optimization using supervision generated from the target histories.",
+          "categories": [
+            "cs.AI"
+          ],
+          "keywords": [
+            "user histories",
+            "atm-bench",
+            "memsteer",
+            "supporting evidence",
+            "agent memory",
+            "agent memory optimization"
+          ],
+          "matched_keywords": []
+        },
+        "2610.37393": {
+          "title": "Learning Quality-Controllable Robot Policies with Iterative Hindsight Relabeling",
+          "abstract": "Robot policy evaluation often relies on a binary success signal for task completion. In real-world deployment, however, desired execution behaviors are also defined by quality attributes such as execution speed and motion smoothness, which need to be dynamically controlled according to task requirements. To address this, we introduce Quality-Controllable Policy (QCP), a robot policy that enables inference-time control over both individual quality attributes and their combinations. To extend the controllable quality range beyond initial demonstrations, we further propose an iterative hindsight relabeling loop: QCP collects online rollouts under target quality labels, adds successful trajectories to the dataset, relabels the accumulated trajectories in hindsight according to their measured quality, and fine-tunes the policy. Experiments on Robomimic and RoboEval demonstrate that QCP consistently improves both task execution quality and success rates across iterations, producing successful rollouts that exceed the quality of the initial demonstrations. Finally, we validate QCP on real-world manipulation tasks, where controlling speed increases throughput in conveyor operations and controlling transport stability improves success when carrying wine glasses, demonstrating that quality-controllable policies yield practical gains in physical deployment.",
+          "categories": [
+            "cs.RO",
+            "cs.AI",
+            "cs.LG"
+          ],
+          "keywords": [
+            "iterative hindsight relabeling",
+            "qcp",
+            "initial demonstrations",
+            "quality attributes",
+            "quality-controllable",
+            "adds successful trajectories"
+          ],
+          "matched_keywords": []
+        },
+        "2610.34926": {
+          "title": "Supervising the Visible State: Separating Representation from View Selection in Streaming Video",
+          "abstract": "An action seen once and the same action seen three times receive the same action-recognition label, so that supervision does not require a model to count. Answers shared across histories that differ in event order, accumulation, or relations leave those distinctions unconstrained; we call this state under-specification. Visible-State Supervision (ViSS) addresses it by training on source-grounded probes of event identity, order, accumulation, relation change, and answer sufficiency; under the same recent-frame interface it improves OVO-Bench over a strict-matched generic temporal supervision baseline while remaining comparable on StreamingBench, with the largest gain in hallucination detection. Test-Time Causal View Search (TVS) then adapts evidence access while keeping the learned model fixed, expanding from recent frames to sparse event and compact history views on demand. The two interventions separate representation from view selection: supervision particularly benefits hallucination detection and causal reasoning, access particularly benefits event recall and forward reasoning. Together they reach the best reported accuracy among the published systems compared here on StreamingBench and OVO-Bench at a fraction of the processed frames of exhaustive selection, and strict replay shows that most of the remaining gap to a three-view oracle is a correct answer that was later replaced. Streaming accuracy depends on what supervision asks the model to keep, what evidence inference exposes, and whether the model keeps a correct answer once it has one.",
+          "categories": [
+            "cs.CV"
+          ],
+          "keywords": [
+            "action seen",
+            "order accumulation",
+            "particularly benefits",
+            "view selection",
+            "hallucination detection",
+            "correct answer"
+          ],
+          "matched_keywords": []
+        },
+        "2610.40256": {
+          "title": "When Requirements Interact: Scaling Long-Horizon Coding via Interdependent Specifications",
+          "abstract": "To succeed in real-world long-horizon software development, coding agents must satisfy multi-dimensional task specifications, such as interface compatibility and error handling, and do so without breaking existing dependencies. However, current works lack specification in both quantity and diversity, often emphasizing primary goals while ignoring complex constraints. Synthesizing tasks to bridge this gap presents two challenges: naively adding specifications risks reducing tasks to trivial checklists rather than compelling joint reasoning, and verifying these subtle interactions risks overlooking hidden flaws or rejecting valid alternatives. To address these challenges, we introduce CodeSpecWeave, a framework for synthesizing tasks with rich, interdependent specifications. Grounded in real developer seeds, a synthesis agent iteratively develops both coupled task requirements and executable tests, while a review agent audits solution trajectories from multiple models to guarantee test reliability. Using this pipeline, we construct 4,670 training tasks across 2,865 repositories. Applying Reinforcement learning on these tasks significantly improves performance over the base model on DeepSWE-v1.1, largely outperforming existing baselines. Furthermore, we curate CodeSpecWeave-Bench, a rigorous benchmark comprising 100 tasks and 1,044 specifications, which clearly separates frontier models and reveals significant headroom in handling interdependent engineering constraints.",
+          "categories": [],
+          "keywords": [
+            "interdependent specifications",
+            "synthesizing tasks",
+            "adding specifications risks",
+            "agent audits solution",
+            "agent iteratively develops",
+            "agents must satisfy"
+          ],
+          "matched_keywords": []
+        },
         "2610.38289": {
           "title": "PulmoWorld: An Asynchronous Multimodal Medical World Model for Longitudinal Pneumonia Dynamics",
           "abstract": "Pneumonia changes across respiration, inflammation, and organ function, while the measurements that describe it arrive at different times and are often incomplete. We introduce PULMOWORLD, a world model for longitudinal pneumonia dynamics that connects asynchronous state estimation, recursive simulation, and evidence-constrained planning. History-aware filtering separates state propagation from observation-driven correction, so a measurement updates the shared belief only when it is observed. That belief supports recursive forecasts of clinical values and modality representations, and summaries of future prognosis. Cap-MBRL searches imagined continuations inside an authorized action set and replaces a frozen fallback only when a candidate meets the risk budget and a predicted-cost margin. On the pneumonia cohort MASS, recursive forecasts are competitive with task-trained sequence models, and simulated future states retain prognostic information. Trained separately on public MIMIC-IV-CXR chest radiographs and clinical trajectories, this model improves prognostic discrimination over latest-value fusion in development and is competitive on long-horizon error on the locked pneumonia panel. In five known-mechanism MASS-Syn environments, Cap-MBRL lowers selection regret relative to direct fallback execution.",
@@ -11443,22 +11507,6 @@
             "engineering knowledge",
             "adaptive direct search",
             "algorithms mesh adaptive"
-          ],
-          "matched_keywords": []
-        },
-        "2610.39276": {
-          "title": "MemSteer: Turning User Histories into Supervision for Agent Memory Optimization",
-          "abstract": "An effective agent memory system should adapt to a user's history and task requirements. Human-annotated supervision can guide this adaptation by providing feedback for evaluating and improving memory designs. Yet suitable labels are rarely available for new user histories, and manually constructing QA pairs and supporting evidence is costly. We introduce MemSteer, which turns unlabeled user histories into question-answer (QA) supervision with supporting evidence for memory-design optimization. MemSteer constructs an evidence-grounded answer plan that specifies how facts across related records jointly support a reference answer. The plan guides question generation, while source-grounded auditing and blind answer recovery check the resulting annotations. To study the utility of this supervision, we develop MemSteer-Opt, which combines QA-based design evaluation with evidence-guided failure diagnosis to revise memory store, retrieval, and context construction without updating model parameters. Experiments on ATM-Bench and RHELM show that this supervision is competitive with official-QA-guided optimization. Relative to Base-BM25, MemSteer-Opt improves ATM-Bench Question Score by 13.4 points and RHELM accuracy by 4.1 and 6.6 points without and with external data, respectively. The supervision also benefits two existing optimizers on ATM-Bench, while new-user experiments demonstrate continued design optimization using supervision generated from the target histories.",
-          "categories": [
-            "cs.AI"
-          ],
-          "keywords": [
-            "user histories",
-            "atm-bench",
-            "memsteer",
-            "supporting evidence",
-            "agent memory",
-            "agent memory optimization"
           ],
           "matched_keywords": []
         },
@@ -22712,24 +22760,6 @@
           ],
           "matched_keywords": []
         },
-        "2610.37393": {
-          "title": "Learning Quality-Controllable Robot Policies with Iterative Hindsight Relabeling",
-          "abstract": "Robot policy evaluation often relies on a binary success signal for task completion. In real-world deployment, however, desired execution behaviors are also defined by quality attributes such as execution speed and motion smoothness, which need to be dynamically controlled according to task requirements. To address this, we introduce Quality-Controllable Policy (QCP), a robot policy that enables inference-time control over both individual quality attributes and their combinations. To extend the controllable quality range beyond initial demonstrations, we further propose an iterative hindsight relabeling loop: QCP collects online rollouts under target quality labels, adds successful trajectories to the dataset, relabels the accumulated trajectories in hindsight according to their measured quality, and fine-tunes the policy. Experiments on Robomimic and RoboEval demonstrate that QCP consistently improves both task execution quality and success rates across iterations, producing successful rollouts that exceed the quality of the initial demonstrations. Finally, we validate QCP on real-world manipulation tasks, where controlling speed increases throughput in conveyor operations and controlling transport stability improves success when carrying wine glasses, demonstrating that quality-controllable policies yield practical gains in physical deployment.",
-          "categories": [
-            "cs.RO",
-            "cs.AI",
-            "cs.LG"
-          ],
-          "keywords": [
-            "iterative hindsight relabeling",
-            "qcp",
-            "initial demonstrations",
-            "quality attributes",
-            "quality-controllable",
-            "adds successful trajectories"
-          ],
-          "matched_keywords": []
-        },
         "2610.37429": {
           "title": "Bayes-Adaptive MDPs for Rollout Allocation to Enhance GRPO Training",
           "abstract": "Group Relative Policy Optimization (GRPO) has demonstrated strong performance in LLM post-training. However, it allocates a uniform rollout budget to every training question, ignoring variations in question difficulty. As a result, highly difficult questions may receive too few rollouts to generate informative positive reward signals, limiting their contribution to training, while moderately difficult questions often receive more rollouts than necessary. In this work, we formulate the problem of difficulty-aware rollout budget allocation to maximize training utility under the same total rollout budget as standard GRPO. We propose AdaRoll-GRPO, which reformulates rollout allocation as a sequential decision-making problem and leverages a Bayes-adaptive Markov decision process (MDP) to learn an adaptive allocation policy. The learned policy is computed offline and applied during GRPO training without introducing additional online optimization overhead. Extensive experiments on multiple reasoning datasets and LLM architectures demonstrate that AdaRoll-GRPO consistently improves GRPO training performance under a fixed rollout budget, highlighting the effectiveness of adaptive rollout allocation for GRPO in LLM post-training.",
@@ -27182,22 +27212,6 @@
             "css",
             "class imbalance",
             "achieve better trade-off"
-          ],
-          "matched_keywords": []
-        },
-        "2610.34926": {
-          "title": "Supervising the Visible State: Separating Representation from View Selection in Streaming Video",
-          "abstract": "An action seen once and the same action seen three times receive the same action-recognition label, so that supervision does not require a model to count. Answers shared across histories that differ in event order, accumulation, or relations leave those distinctions unconstrained; we call this state under-specification. Visible-State Supervision (ViSS) addresses it by training on source-grounded probes of event identity, order, accumulation, relation change, and answer sufficiency; under the same recent-frame interface it improves OVO-Bench over a strict-matched generic temporal supervision baseline while remaining comparable on StreamingBench, with the largest gain in hallucination detection. Test-Time Causal View Search (TVS) then adapts evidence access while keeping the learned model fixed, expanding from recent frames to sparse event and compact history views on demand. The two interventions separate representation from view selection: supervision particularly benefits hallucination detection and causal reasoning, access particularly benefits event recall and forward reasoning. Together they reach the best reported accuracy among the published systems compared here on StreamingBench and OVO-Bench at a fraction of the processed frames of exhaustive selection, and strict replay shows that most of the remaining gap to a three-view oracle is a correct answer that was later replaced. Streaming accuracy depends on what supervision asks the model to keep, what evidence inference exposes, and whether the model keeps a correct answer once it has one.",
-          "categories": [
-            "cs.CV"
-          ],
-          "keywords": [
-            "action seen",
-            "order accumulation",
-            "particularly benefits",
-            "view selection",
-            "hallucination detection",
-            "correct answer"
           ],
           "matched_keywords": []
         },
@@ -42083,6 +42097,22 @@
             "visual generation"
           ]
         },
+        "2610.37918": {
+          "title": "Venus-DefakerOne2: A Vision-Forensics Foundation Model with Broader Coverage",
+          "abstract": "Real-world forgery is inherently heterogeneous: it manifests not only as digital manipulation but also as physical spoofing, and is carried not only by images but also by videos. Despite substantial progress, a unified anti-forgery foundation model covering such a broad threat spectrum remains absent. In this paper, we present Venus-DefakerOne2, which substantially extends the forensic capability boundary along both the forgery-form and media-type dimensions. Trained on tens of millions of open-source and in-house samples, it incorporates two key designs. Tide-Style-Tuning alternates LoRA and full-parameter fine-tuning to balance computational efficiency, generalization, and hard-sample fitting while mitigating catastrophic forgetting. Entropy-based Test Adaptation determines the optimal prediction modality by analyzing prediction entropy. Venus-DefakerOne2 achieves new state-of-the-art performance across a comprehensive suite of benchmarks, including DeepFake faces (96.7%), AI-generated images (93.3%), tampered documents (87.6%), manipulated natural images (89.6%), physical spoofs (93.1%), and AI-generated videos (96.0%). It significantly outperforms both specialized expert models and its predecessor, DefakerOne, establishing itself as a powerful and versatile foundation model for binary-decision forensic tasks.",
+          "categories": [
+            "cs.CV"
+          ],
+          "keywords": [
+            "venus-defakerone2",
+            "analyzing prediction entropy",
+            "balance computational efficiency",
+            "benchmarks including deepfake",
+            "binary-decision forensic tasks",
+            "broad threat spectrum"
+          ],
+          "matched_keywords": []
+        },
         "2610.37891": {
           "title": "When More Planning Hurts: Learned Planners for World Models",
           "abstract": "On PushT, our fixed action updater (1,505 parameters) solves 8 of 16 scenes reserved from our configuration selection. The comparison planners perform as follows: Selected Adam (7 tasks solved, total planning and encoding time 218.440s), adapted iCEM (2 tasks solved, total planning and encoding time 49.309s), released LePlanner (16 tasks solved, total planning and encoding time 5.652s). The total planning and encoding time for our action updater is 59.079s. Note that our action updater does not satisfy the task-cost criterion we fixed before evaluation. We also conduct another matched experiment where we only replay the first ten commands in each context and then allow the next solve 4, 8 or 12 updates (subsequent solves all get 8 updates). Among all 16 contexts (8 scene clusters), the 3 budgets get 9, 8 and 7 successes, respectively. Interestingly, the extra updates did not rescue any failing task in this experiment. All the changes in success/failure happen in one scene cluster, where we observe that the extra updates decrease the costs of the selected latent world-model trajectories for our updater, while the tasks that used to be successes become failures. The code, weights, evaluators, execution traces and cost accounting accompany the paper.",
@@ -42150,22 +42180,6 @@
             "ex vivo",
             "intraglottal",
             "phonation"
-          ],
-          "matched_keywords": []
-        },
-        "2610.37918": {
-          "title": "Venus-DefakerOne2: A Vision-Forensics Foundation Model with Broader Coverage",
-          "abstract": "Real-world forgery is inherently heterogeneous: it manifests not only as digital manipulation but also as physical spoofing, and is carried not only by images but also by videos. Despite substantial progress, a unified anti-forgery foundation model covering such a broad threat spectrum remains absent. In this paper, we present Venus-DefakerOne2, which substantially extends the forensic capability boundary along both the forgery-form and media-type dimensions. Trained on tens of millions of open-source and in-house samples, it incorporates two key designs. Tide-Style-Tuning alternates LoRA and full-parameter fine-tuning to balance computational efficiency, generalization, and hard-sample fitting while mitigating catastrophic forgetting. Entropy-based Test Adaptation determines the optimal prediction modality by analyzing prediction entropy. Venus-DefakerOne2 achieves new state-of-the-art performance across a comprehensive suite of benchmarks, including DeepFake faces (96.7%), AI-generated images (93.3%), tampered documents (87.6%), manipulated natural images (89.6%), physical spoofs (93.1%), and AI-generated videos (96.0%). It significantly outperforms both specialized expert models and its predecessor, DefakerOne, establishing itself as a powerful and versatile foundation model for binary-decision forensic tasks.",
-          "categories": [
-            "cs.CV"
-          ],
-          "keywords": [
-            "venus-defakerone2",
-            "analyzing prediction entropy",
-            "balance computational efficiency",
-            "benchmarks including deepfake",
-            "binary-decision forensic tasks",
-            "broad threat spectrum"
           ],
           "matched_keywords": []
         },
