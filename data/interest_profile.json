@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-11-03T07:48:28+00:00",
+  "updated_at": "2026-11-03T08:01:25+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-5ac4f34db57eaabf607d1f3d": {
-      "run_id": "daily-5ac4f34db57eaabf607d1f3d",
-      "generated_at": "2026-11-03T07:48:28+00:00",
+    "daily-5a982eb3d8861698f7dc533e": {
+      "run_id": "daily-5a982eb3d8861698f7dc533e",
+      "generated_at": "2026-11-03T08:01:25+00:00",
       "selected_ids": [
         "2610.42096",
         "2610.42146",
@@ -1482,6 +1482,20 @@
             "above baselines when",
             "adaptively ordering transformer",
             "apply specific solution"
+          ],
+          "matched_keywords": []
+        },
+        "2611.03178": {
+          "title": "CoworkOS:Scaling Agent Coworkers for Real-world Automation",
+          "abstract": "Rapid advances in cowork agents are shifting human-AI collaboration toward real-world automation, delivering software, designs, and other artifacts. However, such productivity work demands both high-quality delivery on complex productivity tasks and continued monitoring and decision-making over long horizons, a combination that remains an open challenge. We introduce CoworkOS, a general-purpose harness for long-horizon work that separates task strategy from execution management: the model decides actions, delegation, and acceptance, while the runtime maintains state and feedback. Its three-layer architecture enables direct execution or delegation to Subagents, synchronously or asynchronously, under stable responsibilities. Through a shared application layer, humans and agents inspect and revise the same evolving documents, presentations, CAD models, and Blender scenes, so human-in-the-loop participation can enter both through conversation and through direct modification of the work itself. To sustain continuity across agents and sessions, CoworkOS further introduces hierarchical workspaces and persistent semantic memory, so working files, key decisions, and long-running Job logs remain shareable, reusable, and resumable after interruption. Across 12 benchmarks and 6 categories of real-world applications, CoworkOS proves highly competitive with frontier agent applications such as Codex and DeepSeek Harness. As a sustained-work case study, CoworkOS uses GLM-5.3 as its backbone to conduct RSI-driven automated post-training on Qwen3.6-35B-A3B. Over five rounds, the model's average score across eight benchmarks rose from 33.19 to 42.95 (+9.76). Looking ahead, we believe CoworkOS opens a meaningful path toward general cowork-agent intelligence.",
+          "categories": [],
+          "keywords": [
+            "coworkos",
+            "real-world automation",
+            "application layer humans",
+            "applications coworkos proves",
+            "architecture enables direct",
+            "automation delivering software"
           ],
           "matched_keywords": []
         },
@@ -35919,8 +35933,8 @@
           ],
           "keywords": [
             "long-horizon embodied navigation",
-            "interruption",
             "resumption",
+            "interruption",
             "interruption handling",
             "pifr",
             "agent must finish"
