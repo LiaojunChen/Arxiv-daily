@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-11-04T08:52:41+00:00",
+  "updated_at": "2026-11-04T12:58:23+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-99ef44847647fa1fc279537e": {
-      "run_id": "daily-99ef44847647fa1fc279537e",
-      "generated_at": "2026-11-04T08:52:41+00:00",
+    "daily-5f73273f82bc388a6bfcba35": {
+      "run_id": "daily-5f73273f82bc388a6bfcba35",
+      "generated_at": "2026-11-04T12:58:23+00:00",
       "selected_ids": [
         "2611.03937",
         "2611.04566",
@@ -4177,9 +4177,9 @@
             "gdn layer",
             "verification length",
             "verification runs",
-            "every token",
             "moe layers",
-            "hybridspec"
+            "hybridspec",
+            "every token"
           ],
           "matched_keywords": []
         },
@@ -7928,6 +7928,20 @@
             "every seed roughly",
             "expert averaged four",
             "expert routing score"
+          ],
+          "matched_keywords": []
+        },
+        "2610.40574": {
+          "title": "Every Token Needs Its Own Teacher: Multi-teacher Adaptive On-policy Self-distillation",
+          "abstract": "On-policy Self-distillation (OPSD) has proven effective for post-training large language models by constructing a teacher conditioned on privileged references. However, existing approaches keep the teacher fixed either throughout training by consistently exposing it to the full reference, or within each response by adaptively varying partial reference exposure only across responses. In this paper, we argue that neither of them is sufficient. Instead, every token needs its own teacher, as the teacher preference can vary token by token within the same response. Through a teacher-intervention pilot study, we validate that the teacher preference differs across tokens, and reveal that a preferred teacher can be identified for each token through majority voting and KL-based selection. Motivated by these findings, we propose Multi-teacher Adaptive On-policy Self-Distillation (MTA-OPSD), the first token-level adaptive OPSD method. Our method constructs a multi-teacher pool consisting of candidate teachers, and enables every token to adaptively select its preferred teacher during training. Experiments with Qwen3 models on mathematical reasoning tasks show that MTA-OPSD consistently outperforms existing OPSD approaches with an average gain of up to +5.9 over the base model, highlighting the importance of adapting teacher supervision at the token level. The code is available at https://github.com/xingzhejun/MTA-OPSD.",
+          "categories": [],
+          "keywords": [
+            "adaptive on-policy self-distillation",
+            "every token needs",
+            "multi-teacher adaptive on-policy",
+            "preferred teacher",
+            "teacher preference",
+            "own teacher"
           ],
           "matched_keywords": []
         },
@@ -44056,9 +44070,9 @@
           ],
           "keywords": [
             "fin-sd",
-            "full reference",
             "hindsight self-distillation",
             "financial reasoning",
+            "full reference",
             "hint",
             "accuracy while generating"
           ],
