@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-11-04T07:39:39+00:00",
+  "updated_at": "2026-11-04T08:52:41+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-402343e3f70055ababcca226": {
-      "run_id": "daily-402343e3f70055ababcca226",
-      "generated_at": "2026-11-04T07:39:39+00:00",
+    "daily-99ef44847647fa1fc279537e": {
+      "run_id": "daily-99ef44847647fa1fc279537e",
+      "generated_at": "2026-11-04T08:52:41+00:00",
       "selected_ids": [
         "2611.03937",
         "2611.04566",
@@ -1270,24 +1270,6 @@
           ],
           "matched_keywords": []
         },
-        "2611.02737": {
-          "title": "MoviEdit: Long-form Multi-Shot Video Editing Made Easy",
-          "abstract": "Long-form multi-shot video editing requires an intended edit to remain coherent across abrupt changes in scene, viewpoint, and subject appearance, while processing substantially longer visual context than conventional single-shot editors. We introduce MoviEdit, an end-to-end framework for scalable long-form multi-shot video editing that jointly addresses the challenges of data, modeling, and evaluation. To provide cross-shot supervision data at scale, we develop automatic data-generation pipelines spanning synchronized multi-view footage, real-world multi-shot videos, and generated multi-shot content, yielding 87K paired editing videos without manual annotation. Architecturally, MoviEdit employs a cascaded bidirectional-autoregressive design: a lightweight bidirectional stage first establishes a globally coherent editing draft over a spatiotemporally compressed representation, which is then autoregressively propagated and refined over the full video. We further introduce MoviEdit-Bench, a dedicated benchmark for systematic evaluation of long-form multi-shot video editing. Extensive experiments show that MoviEdit substantially outperforms existing open-source models and performs on par with industry frontier models across text-guided and image-guided editing. Visit our project page for complete results and to access the benchmark: https://multi-shot-edit.github.io/",
-          "categories": [
-            "cs.CV",
-            "cs.AI",
-            "cs.LG"
-          ],
-          "keywords": [
-            "long-form multi-shot video",
-            "multi-shot video editing",
-            "moviedit",
-            "appearance while processing",
-            "architecturally moviedit employs",
-            "automatic data-generation pipelines"
-          ],
-          "matched_keywords": []
-        },
         "2611.01927": {
           "title": "Is Your Long-Horizon Benchmark Really Deep? Measuring and Synthesizing Depth in Terminal Tasks",
           "abstract": "Long-horizon terminal tasks are used to evaluate and train agents. Human-curated datasets are scarce, so many synthesis methods have emerged. They usually measure the length of a task by the turns a model needs to pass it, and its difficulty by labels the LLM sets during generation. We find, however, that the turn count largely reflects the habits of the model, not only the demands of the task, and that the labels barely track how often models pass. We describe a terminal task by its work, the number of operations it requires, and its depth, the number of turns that must happen in sequence because the commands of each turn can only be chosen after reading the output of the previous one. Estimating depth as the smallest turn cap, stated to the agent, under which the task passes, we audit 734 tasks from six existing datasets. Synthesis has mostly added work, not depth: 94% of the solved synthetic tasks pass within three turns, yet depth, unlike the turn count, predicts difficulty beyond work. We propose DEPTH, in which a generation agent writes each task one segment at a time in a real software environment, carrying out each segment before writing it and starting the next from the state it leaves. Our 105 tasks exceed every audited dataset in depth and work, and none of six current models passes half of them. Fine-tuning Qwen3-8B on runs from these tasks improves it on two terminal benchmarks.",
@@ -1339,41 +1321,6 @@
           ],
           "matched_keywords": []
         },
-        "2611.03634": {
-          "title": "WebHarbor: Docking Real Websites for Evolving GUI Agent Environments",
-          "abstract": "GUI web agents require realistic and interactive environments that remain stable during both evaluation and training. Live website evaluation suffers from changing content, access restrictions, and limited coverage of authenticated workflows, while existing synthetic environments for training often lack functional depth and visual fidelity. We propose WebHarbor, a suite of 153 executable and dockerized website environments that faithfully reconstruct the visual interfaces, content, and functional workflows of real-world web services under deterministic control. We build WebHarbor through task-driven human-agent collaboration, where environments evolve as new tasks expand their functional scope, coding agents implement the required changes, and human contributors audit visual fidelity, functional correctness, and task validity. The resulting suite comprises 3,518 tasks spanning multi-step and post-authentication workflows, where existing works often fail to cover. Beyond reliable evaluation, WebHarbor provides high-fidelity synthetic web environments for cost-efficient reinforcement learning (RL). We demonstrate that a Qwen 4B-level GUI agent trained with RL in WebHarbor generalizes to unseen tasks and performs competitively with leading open-source GUI web agents across four benchmarks. The code and data are publicly available at https://github.com/aiming-lab/WebHarbor.",
-          "categories": [
-            "cs.AI",
-            "cs.CL",
-            "cs.LG"
-          ],
-          "keywords": [
-            "gui web agents",
-            "webharbor",
-            "gui agent",
-            "visual fidelity",
-            "agents require realistic",
-            "audit visual fidelity"
-          ],
-          "matched_keywords": []
-        },
-        "2611.02497": {
-          "title": "RoboColosseum: Evaluating Physical Intelligence at Scale In-The-Wild",
-          "abstract": "General-purpose robot policies must work across robots, tasks, and environments, yet the variation that makes physical trials informative also makes them difficult to reproduce. We introduce RoboColosseum, a distributed evaluation framework that combines unified policy serving and standardized protocols across a network of locally operated robots in diverse environments. Our initial study evaluates five vision-language-action (VLA) policies and three frontier AI agents across four embodiments (SO-101, Franka, Bimanual-YAM, and G1 Humanoid). The Open Track compares models without task-specific adaptation in blinded, pairwise trials under matched local conditions. The Fine-tune Track measures how well VLA policies adapt to 20 tasks across all four embodiments when each policy receives the same 100 demonstrations per task. Across 5,699 pairwise Open Track comparisons at 124 sites, frontier agents rival specialized VLA policies, while all systems struggle to complete open-world tasks reliably. After fine-tuning, GR00T N1.7 leads on SO-101 and pi0.5 leads on Franka and Bimanual-YAM. Policy rankings show weak agreement across embodiment-specific task suites (Kendall W = 0.24). Open Track rankings poorly predict relative performance after fine-tuning, with substantial rank reversals on all three embodiments shared between tracks. Measuring partial progress reveals differences that task success alone misses. On the G1 Humanoid, no policy completes any of the five tasks, yet average progress ranges from 13.3% to 23.2% across policies. Open Track rankings stabilize as trials accumulate, and active matchmaking achieves comparable ranking agreement with substantially fewer physical trials than uniform sampling. These results show how distributed physical evaluation can reveal where robot policies generalize, how well they adapt to new tasks, and how far they progress on tasks they fail to complete.",
-          "categories": [
-            "cs.RO",
-            "cs.AI"
-          ],
-          "keywords": [
-            "open track",
-            "open track rankings",
-            "four embodiments",
-            "physical trials",
-            "vla policies",
-            "g1 humanoid"
-          ],
-          "matched_keywords": []
-        },
         "2610.40753": {
           "title": "\"Shall We Approve?\" Consequence-Aware Approval for Autonomous Coding Agents",
           "abstract": "Coding agents increasingly rely on automated approvers to decide whether a proposed shell command may run. Existing approvers, from rule-based checkers to guardrail models and deployed permission classifiers, base their decisions on the text of the request and command. Yet a command's behavior depends on the code it invokes and the state of the workspace, and systems that observe file changes leave the assessment to the agent or a human after execution. We present Caper, a consequence-aware approval mechanism that pre-executes each command in a snapshotted sandbox, provides an independent approver with a bounded report of its observed effects, commits allowed commands, and rolls back blocked ones with a reason the agent can act on. Compared with six existing systems, Caper achieves the lowest harmful-outcome rate on SABER (6.7% versus at least 14.8%) and YoloFS-Ext, a benchmark we build in which harmful behavior is hidden inside invoked tools (7.8% versus at least 35.3%), while blocking 1.0% of the safe twins of the dangerous tasks in YoloFS-Ext.",
@@ -1404,22 +1351,6 @@
             "adaptive local suffix",
             "adaptive training framework",
             "agents but repeatedly"
-          ],
-          "matched_keywords": []
-        },
-        "2610.39714": {
-          "title": "MoLRSI: A Recursive Self-Improving AI agent for Molecular Discovery",
-          "abstract": "Molecular discovery requires navigating vast combinatorial search spaces while balancing competing biological objectives. AI agents can automate expert-defined molecular design protocols, but automation alone does not address how to optimize workflows for new tasks or improve their development through experience. Here we introduce MoLRSI, an AI agent that combines systematic optimization of workflows and model architectures with persistent cross-task memory to recursively improve its search policy for molecular discovery. Workflow performance, refinement outcomes, and execution feedback guide subsequent searches, allowing the agent to improve both its workflows and its strategy for developing them. We evaluate MoLRSI in two challenging molecular discovery settings that require balancing competing properties. In antibiotic discovery, MoLRSI developed a screening workflow balancing antibacterial activity, cytotoxicity and structural novelty, achieving an experimental hit rate of 15.9%, compared with 8.7% for a previous expert-led workflow using the same training data and screening library. In de novo peptide-MHC binder design, MoLRSI developed workflows that jointly consider target binding and specificity, producing eight experimentally validated hits against MART-1 and SARS-CoV-1 pMHCs with preferential binding over tested off-targets while Claude Science completely failed. These findings demonstrate how experience-guided workflow optimization can address competing discovery objectives while improving the search strategies used in subsequent campaigns.",
-          "categories": [
-            "cs.AI"
-          ],
-          "keywords": [
-            "molecular discovery",
-            "molrsi",
-            "balancing competing",
-            "molrsi developed",
-            "address competing discovery",
-            "antibacterial activity cytotoxicity"
           ],
           "matched_keywords": []
         },
@@ -1481,24 +1412,6 @@
           ],
           "matched_keywords": []
         },
-        "2611.05377": {
-          "title": "DreamX: Video Diffusion Model is a Universal Latent Action Learner",
-          "abstract": "Learning a universal action representation from video requires modeling dynamics that are consistent across different executions of the same action yet invariant to changes in embodiment and appearance. Existing latent action models infer actions from visual transitions, but their representations often entangle the underlying action with irrelevant visual variations, limiting transfer across embodiments. We introduce DreamX, which repurposes a pretrained video diffusion model as a universal latent action learner. Our approach extracts compact latent actions from the video model's rich spatiotemporal features, compressing each latent video frame by $\\boldsymbol{300\\times}$ ($\\boldsymbol{1{,}200 \\rightarrow 4}$ tokens). In addition, by leveraging the video model's generative prior, these latent actions capture action-relevant dynamics disentangled from visual appearance. The resulting latent space serves as a shared action interface across embodiments (human and robot), environments, and action parameterizations. On LARY-Bench, DreamX achieves state-of-the-art performance among latent action models. Moreover, actions encoded in one setting remain effective in another: the latent space supports any-to-any video transfer and zero-shot action transfer across diverse embodiments and environments. Furthermore, this shared interface also enables policy learning in a compact latent action space, reducing the computational cost of video-diffusion-based policies.",
-          "categories": [
-            "cs.CV",
-            "cs.AI",
-            "cs.RO"
-          ],
-          "keywords": [
-            "latent action",
-            "latent action learner",
-            "universal latent action",
-            "dreamx",
-            "latent actions",
-            "compact latent"
-          ],
-          "matched_keywords": []
-        },
         "2611.04418": {
           "title": "VidUEU-Agent: A Data-Curation Agent for Multimodal Understanding, Editing, and Unified Tasks",
           "abstract": "The advancement of multimodal learning is heavily constrained by the scarcity and high annotation cost of high-quality instruction data. While raw videos offer an abundant and dynamic source of visual knowledge, transforming them into precise instruction data remains highly challenging. To bridge this gap, we present VidUEU-Agent, an automated pipeline that synthesizes instruction data from raw videos for multimodal understanding, editing, and unified tasks. VidUEU-Agent follows a four-stage pipeline: it performs global perception to filter low-quality shots, mines keyframes and multimodal signals, constructs metadata and routes the metadata to synthesize instruction samples. More importantly, our agent framework can autonomously iterate the data distribution based on downstream training results, thereby optimizing data quality, balance, and training effectiveness. Scaling this pipeline, we construct VidUEU-100K, a large-scale dataset of 100K training samples spanning multiple domains and tasks, providing a robust foundation for developing comprehensive multimodal capabilities. Extensive experiments demonstrate that fine-tuning baseline models on VidUEU-100K yields significant and consistent performance gains across diverse representative benchmarks, validating the effectiveness of our proposed agent framework and dataset.",
@@ -1512,20 +1425,6 @@
             "vidueu-agent",
             "agent framework",
             "comprehensive multimodal capabilities"
-          ],
-          "matched_keywords": []
-        },
-        "2610.40747": {
-          "title": "Mage-VL-Cowork: A Full Training Recipe to Learn Hybrid Computer Use From Evolved Harnesses",
-          "abstract": "Effective computer-use agents (CUAs) should seamlessly combine visual GUI interaction with code and terminal execution within a single policy. We present Mage-VL-Cowork, a 4B hybrid CUA trained from a general multimodally aligned checkpoint through an end-to-end, progressive five-stage curriculum across midtraining, SFT, and RL. To power this curriculum at scale, Mage-CUA-Forge replaces per-task agent construction with reusable, skill-conditioned generation workflows and application-specific preparers, synthesizing 293,806 desktop and web tasks across 6,915 skills while reducing recurring per-task expenditure by 82.6%. Rather than directly distilling a default teacher, we evolve the teacher harness and instantiate specialized CUA harnesses to yield high-quality trajectories alongside stage-specific supervision. Mage-VL-Cowork-4B finally climbs to 66.0% on OSWorld-Verified through different training stages with more efficient reasoning cost, achieving state-of-the-art performance at its parameter size and pushing forward the frontier of on-device intelligence.",
-          "categories": [],
-          "keywords": [
-            "agents cuas should",
-            "aligned checkpoint through",
-            "alongside stage-specific supervision",
-            "application-specific preparers synthesizing",
-            "combine visual gui",
-            "computer-use agents cuas"
           ],
           "matched_keywords": []
         },
@@ -1560,51 +1459,6 @@
           ],
           "matched_keywords": []
         },
-        "2611.04449": {
-          "title": "Near-Zero Token Embeddings Silently Stall Training in Gated Sequence Models",
-          "abstract": "Among 291 surveyed open-weight language model repositories (280 distinct embedding tables), 52.6% of untied gated and hybrid checkpoints (20/38) contain reachable input embeddings with norms below 10^{-6}, compared with 0% of weight-tied models. Such near-zero rows can arise during pretraining when unseen rare or template tokens receive zero input gradients while AdamW weight decay shrinks untied embeddings. In tested Transformer configurations, non-initial positions or a BOS token prevent this failure mode. In gated sequence models (Mamba, Gated DeltaNet, xLSTM), a near-zero token can amplify input-embedding gradients by more than 30 orders of magnitude (up to 35). At zero input, current-token readout factors (SiLU gates or linear queries) vanish, suppressing historical-state readout. Residual RMS values can then fall below the square root of the RMSNorm floor across consecutive layers, causing Pre-RMSNorm to amplify backward gradients by up to 10^3 per layer. When a gradient entry exceeds 1.84 times 10^{19}, FP32 global-norm clipping in PyTorch, Hugging Face Trainer, and FSDP2 can overflow to infinity and zero the current batch's gradients. In Telugu continual pretraining of Nemotron-3-Nano-4B, this discards updates on approximately 20% of steps and leaves triggered rows frozen. We propose two remedies. For released checkpoints, GroupClip decouples input-embedding clipping using a 64-bit or rescaled norm; its rescaled implementation eliminates update loss and heals triggered rows in one step with negligible measured end-to-end overhead. For pretraining, GateFloor (SiLU(z) + δ, δin [0.01, 0.1]) keeps the gate positive at zero input, reducing near-zero gradients by 28 orders of magnitude in experiments up to 370M parameters, with perplexity comparable to the baseline.",
-          "categories": [],
-          "keywords": [
-            "zero input",
-            "gated sequence",
-            "near-zero token",
-            "triggered rows",
-            "adamw weight decay",
-            "among surveyed open-weight"
-          ],
-          "matched_keywords": []
-        },
-        "2611.03685": {
-          "title": "LOLPlay: Benchmarking Real-Time Visual Agents in League of Legends",
-          "abstract": "Visual agents need to coordinate reasoning and action while their environment evolves during inference. We introduce LOLPlay, a benchmark in native \\emph{League of Legends} with 36 champion-specific tasks spanning resource management, combat, cooperation, and objectives. Agents interact through screenshots and mouse--keyboard actions; automated initialization and 82 executable subgoal checks distinguish partial progress from completion. Across 324 task evaluations of three models at three reasoning-effort settings, GPT-6 Astra achieves the highest task success rate of 25.0\\% at low and medium effort, and the highest subgoal success rate of 40.3\\% at medium effort. However, high effort improves neither metric over low effort for any model. For Astra, longer requests leave fewer interaction rounds, suggesting a cost to additional reasoning in real-time control. Trajectories reveal incomplete subgoal composition and actions executing after the observed scene changes, motivating agents that combine visual reasoning with timely action.",
-          "categories": [
-            "cs.AI",
-            "cs.CV"
-          ],
-          "keywords": [
-            "medium effort",
-            "visual agents",
-            "agents interact through",
-            "astra longer requests",
-            "benchmarking real-time visual",
-            "champion-specific tasks spanning"
-          ],
-          "matched_keywords": []
-        },
-        "2610.00854": {
-          "title": "Are Frontier VLM Agents Ready to Be Robot Generalists? An Empirical Study with the Embodied Agent Arena",
-          "abstract": "A robot generalist must interpret a scene, act on it, and satisfy every condition of a task. How far do frontier vision-language models (VLMs) meet these demands? We introduce Embodied Agent Arena, evaluating ten VLM agents across Geometry, Spatial Reasoning, Affordance, Task Planning, and Manipulation. Its 1,000 cases combine 32 established sources with GeoProbe, our 168-case benchmark for camera, motion, depth, and scale estimation. A minimal harness leaves task decisions to the model through source-native interfaces. Closed-weight models lead all five domains, whereas open-weight VLMs show useful spatial reasoning but substantially lower planning and manipulation success. Beneath these averages, similar geometric errors conceal different scale and shape distortions, and valid region estimates need not identify usable action points. During execution, agents can achieve early subgoals yet lose object control, bind an action to the wrong receiving region, or stop before the required physical state holds. Additional computation does not uniformly resolve these failures: code repair can restore execution without completing the task, while self-review can reverse correct judgments. Failure costs also differ: the strongest planners concentrate failed-token expenditure in prolonged body-control tasks, whereas other models fail broadly across procedures. Matched traces show how successful recovery uses feedback to restore a missing prerequisite and advance the remaining task.",
-          "categories": [],
-          "keywords": [
-            "embodied agent arena",
-            "vlm agents",
-            "achieve early subgoals",
-            "additional computation does",
-            "affordance task planning",
-            "agent arena evaluating"
-          ],
-          "matched_keywords": []
-        },
         "2611.02017": {
           "title": "Switch-SWE: Do Coding Agents Hold Focus When Switching Between Unfinished Tasks?",
           "abstract": "Software development sessions often involve several unfinished tasks rather than one issue carried through to completion. As coding agents take on repository-level development, they need to recover an earlier task's requirements and partial progress after intervening work. Existing repository-level benchmarks typically score one issue-to-patch episode and do not directly measure whether an agent can resume a task after advancing other unfinished work in the same repository. We introduce \\ourmethod, a benchmark for focus-task resumption in sessions that interleave unfinished tasks drawn from the same source repository, with a persistent checkout for each task. Each focus task is evaluated in matched uninterrupted and switched sessions with identical focus requirements and executable verifiers. The switched session interleaves ordered stages from other unfinished tasks in the same repository, while only the final focus patch is scored. \\ourmethod~contains 200 focus tasks from 19 Python repositories, reconstructed from issue, pull-request, and review histories and rendered as 400 matched session specifications. Across 7 coding agents, interleaved unfinished work produces an average focus-task resolution gap of 11.5 percentage points, ranging from 6.0 to 15.0 percentage points. Trajectory analysis identifies cross-task requirement confusion and loss of task state as recurrent resumption behaviors. We introduce a plug-in context-management module that selects task-relevant history and maintains concise task-state summaries. On OpenCode, the module improves focus-task completion under same-repository task switching by 5.5 to 15.5 percentage points across the evaluated models. Code is available at github.com/Miraclecsc/Switch-SWE.",
@@ -1616,23 +1470,6 @@
             "unfinished work",
             "focus-task",
             "advancing other unfinished"
-          ],
-          "matched_keywords": []
-        },
-        "2611.05163": {
-          "title": "RoboTryOn: Synthesizing Dexterous Robot Demonstrations from Human Videos via Virtual Try-On",
-          "abstract": "Robot foundation models have shown remarkable performance in robot control, yet adapting them to a new task still relies heavily on teleoperated demonstrations. Egocentric human videos offer a scalable substitute, but overlaying rendered robots on human videos or retargeting human poses into robot actions leaves significant visual or action gaps for high-DoF robot embodiments. To address this limitation, we propose RoboTryOn, which treats human-to-robot translation as virtual try-on: try-on keeps the person and swaps the garment, RoboTryOn keeps the demonstrated motion and swaps the human for the robot. Specifically, RoboTryOn converts a human video into a video of the target robot specified by a reference image, while preserving the original task, objects, and background. To maintain visual consistency, we translate selected keyframes autoregressively and use them to guide video synthesis with motion conditioned on the human hand skeleton. Additionally, we use an inverse dynamics model (IDM) that incorporates depth features to infer action labels from synthesized videos for policy learning. Our experiments across multiple humanoid embodiments show that policies trained with our synthetic data improve the average success rate on novel tasks, including challenging bimanual manipulation, from 2% to 60%, without any real robot demonstration of those tasks. Moreover, training with our synthetic data matches the performance of policies trained solely on teleoperated demonstrations at approximately a third of the collection cost, demonstrating the cost efficiency of our approach.",
-          "categories": [
-            "cs.RO",
-            "cs.AI"
-          ],
-          "keywords": [
-            "robotryon",
-            "human videos",
-            "virtual try-on",
-            "teleoperated demonstrations",
-            "policies trained",
-            "actions leaves significant"
           ],
           "matched_keywords": []
         },
@@ -8033,6 +7870,67 @@
           ],
           "matched_keywords": []
         },
+        "2611.03360": {
+          "title": "Every Pixel Is an Option: A System One Model for Medical Ultrasound Biometry",
+          "abstract": "**Purpose:** Ultrasound biometry is widely used across various clinical applications, including prenatal and cardiac examinations, to obtain quantitative measurements by placing calipers at anatomical landmarks. However, these measurements remain subject to interoperator variability as they rely largely on manual caliper placement. Conventional methods often use specialized prediction heads for different ultrasound tasks, whereas vision-language models offer flexibility through text instructions. However, direct coordinate prediction does not explicitly model spatial likelihood distributions, limiting the representation of localization ambiguity.\n  **Methods:** We propose Kev-Bio, a vision-language model that uses clinical measurement questions to guide ultrasound landmark detection. Inspired by System One decision models, Kev-Bio uses decision representations of the language model to generate queries for each caliper endpoint. These queries are matched against shared dense ultrasound features to produce spatial probability maps, from which landmark coordinates and clinical measurements are derived. The model is trained end-to-end using both landmark localization and clinical measurement losses.\n  **Results:** On the nine-view FU/GU Biometry 2026 dataset, Kev-Bio achieves a mean radial error (MRE) of 22.50 pixels and a clinical measurement mean absolute error (MAE) of 15.38, outperforming the compared baselines in overall performance.\n  **Conclusion:** These results demonstrate the effectiveness of Kev-Bio for ultrasound landmark detection and clinical measurement across different anatomical views. Our code and models are available at https://github.com/moeinheidari7829/Kev-Bio.",
+          "categories": [
+            "cs.CV",
+            "cs.LG"
+          ],
+          "keywords": [
+            "clinical measurement",
+            "ultrasound landmark detection",
+            "kev-bio",
+            "ultrasound biometry",
+            "system one",
+            "achieves mean radial"
+          ],
+          "matched_keywords": []
+        },
+        "2611.03183": {
+          "title": "Auto-Research Agent on MSA Organization to Improve Protein-Protein Complex Structure Prediction",
+          "abstract": "Protein-complex structure prediction with AlphaFold 3 depends on MSA content, depth, and cross-chain pairing. Current pipelines apply uniform recipes, typically maximizing depth and pairing by species, yet even whether cross-chain pairing helps AF3 remains contested. We show that the value of both depth and pairing is strongly target-dependent, so no single recipe is optimal across interfaces. We introduce an autonomous agent that treats a frozen AF3 as a black-box experimental instrument. For each target, the agent formulates biological hypotheses, analyzes and reorganizes the MSA, and iteratively refines sequence selection and pairing using predictor label-free signals alone. On 1{,}015 protein--protein interfaces from three benchmarks released after AF3's training cutoff, the agent improves overall interface DockQ over AF3's default pipeline and fixed MSA recipes on every benchmark, while using on average 60\\% fewer MSA sequences than the default. Gains are largest for inter-species heteromers, where species-based pairing is unreliable: mean DockQ increases from 0.465 to 0.612 on FoldBench and from 0.482 to 0.562 on HD439. The improvements arise from both sequence construction and pairing policy, including deliberate non-pairing.These results recast MSA design as a target-specific problem and show that an autonomous agent can adapt it at test time through biological reasoning and self-directed, confidence-guided experimentation.",
+          "categories": [
+            "cs.AI"
+          ],
+          "keywords": [
+            "msa",
+            "af3",
+            "cross-chain pairing",
+            "structure prediction",
+            "autonomous agent",
+            "af3 default pipeline"
+          ],
+          "matched_keywords": []
+        },
+        "2611.02476": {
+          "title": "GigaSpeech 3: Scaling Multi-Dialect Arabic Speech Recognition with Weakly Labeled Data",
+          "abstract": "Dialectal Arabic speech recognition remains constrained by the scarcity of dialect-resolved transcribed speech despite the abundance of web audio. We introduce GigaSpeech 3, a corpus of 39,000 hours and 10 million weakly transcribed speech segments covering Algerian, Egyptian, Iraqi, Saudi, and Syrian Arabic. Starting from 60 hours of manual transcription per dialect, we train labeling models using speech-recognition-biased self-supervised learning and apply them to dialect-matched web audio. Data selection and four rounds of noisy-student refinement for Saudi and Syrian Arabic yield the final corpus. We validate its utility through dialect-specific and multi-dialect speech recognition training and cross-domain evaluation. On GigaSpeechBench, the final dialect-specific models outperform their labeling models across all five dialects and achieve a macro-average word error rate of 23.86%, a 16.6% relative reduction from the strongest third-party system covering all five dialects, while outperforming the best third-party result on three dialects. A multi-dialect model using self-predicted dialect identities achieves a macro-average word error rate of 25.51% while also supporting Modern Standard Arabic. Across eight conditions from three external corpora, a GigaSpeech 3-trained Zipformer achieves the lowest word error rate among six evaluated models in every condition, while adapting the Qwen3 speech recognizer on GigaSpeech 3 improves performance across all eight conditions. We release the corpus and recipes as a foundation for dialect-aware Arabic speech processing.",
+          "categories": [],
+          "keywords": [
+            "word error rate",
+            "arabic speech recognition",
+            "macro-average word error",
+            "gigaspeech",
+            "eight conditions",
+            "five dialects"
+          ],
+          "matched_keywords": []
+        },
+        "2610.37914": {
+          "title": "Muon Makes the First Mixture-of-Experts Layer Harder to Balance",
+          "abstract": "Many open mixture-of-experts (MoE) language models train with Muon instead of AdamW. Most balance the load with a bias on each expert's routing score, adjusted after every step. Their recipes disagree on whether Muon should also train the router. In models with 55M and 108M active parameters, we measure how the optimizer changes the span of these biases, the largest minus the smallest in a layer. The span grows when all tokens favor the same experts, so it shows how hard a layer is to balance. At learning rates tuned on shorter runs, Muon raised the span of the first MoE layer at every seed, roughly doubling it on average, while the other layers changed much less. The rise came from Muon on the rest of the network, whichever optimizer trained the router. In those runs, the inputs to the first router shared a direction, and soon after the warmup its busiest expert averaged four to seven times its fair share. Over the first 3,000 steps, subtracting the batch mean from these inputs removed this overload while barely changing the loss. On the smaller model, halving Muon's learning rate removed most of the rise and slightly improved the loss. Moving only the router to AdamW made the loads shift more during the warmup and slightly raised the loss, so at this scale the results favor keeping the router on Muon.",
+          "categories": [],
+          "keywords": [
+            "muon",
+            "busiest expert averaged",
+            "changed much less",
+            "every seed roughly",
+            "expert averaged four",
+            "expert routing score"
+          ],
+          "matched_keywords": []
+        },
         "2611.01560": {
           "title": "Democratizing Robot-Use Agents: A Unified Harness with Open Models",
           "abstract": "Robot-use Agents (RUAs) have shown promising zero-shot manipulation capabilities, but reliance on frontier, proprietary models limits research into further training. To democratize RUA research, we introduce uni-robot-agent, a unified harness for competitive open-weight robot use that supports further training. Without privileged inputs, an out-of-the-box Qwen3.8-Flash-Next achieves a RoboDojo Score of 31.39, surpassing the published GPT-6 Astra-RoboProbe result of 28.97 and many VLA/WAM baselines, and performs competitively on 19 real-world tasks. Our analysis across model generations, families, and sizes links effective robot use to four general capabilities, suggesting that future RUA training should develop them jointly.",
@@ -13626,23 +13524,6 @@
           ],
           "matched_keywords": []
         },
-        "2611.03360": {
-          "title": "Every Pixel Is an Option: A System One Model for Medical Ultrasound Biometry",
-          "abstract": "**Purpose:** Ultrasound biometry is widely used across various clinical applications, including prenatal and cardiac examinations, to obtain quantitative measurements by placing calipers at anatomical landmarks. However, these measurements remain subject to interoperator variability as they rely largely on manual caliper placement. Conventional methods often use specialized prediction heads for different ultrasound tasks, whereas vision-language models offer flexibility through text instructions. However, direct coordinate prediction does not explicitly model spatial likelihood distributions, limiting the representation of localization ambiguity. **Methods:** We propose Kev-Bio, a vision-language model that uses clinical measurement questions to guide ultrasound landmark detection. Inspired by System One decision models, Kev-Bio uses decision representations of the language model to generate queries for each caliper endpoint. These queries are matched against shared dense ultrasound features to produce spatial probability maps, from which landmark coordinates and clinical measurements are derived. The model is trained end-to-end using both landmark localization and clinical measurement losses. **Results:** On the nine-view FU/GU Biometry 2026 dataset, Kev-Bio achieves a mean radial error (MRE) of 22.50 pixels and a clinical measurement mean absolute error (MAE) of 15.38, outperforming the compared baselines in overall performance. **Conclusion:** These results demonstrate the effectiveness of Kev-Bio for ultrasound landmark detection and clinical measurement across different anatomical views. Our code and models are available at this https URL.",
-          "categories": [
-            "cs.CV",
-            "cs.LG"
-          ],
-          "keywords": [
-            "clinical measurement",
-            "ultrasound landmark detection",
-            "kev-bio",
-            "ultrasound biometry",
-            "system one",
-            "achieves mean radial"
-          ],
-          "matched_keywords": []
-        },
         "2611.03370": {
           "title": "Fuse To Align: Multimodal Representation Learning for Retrieval via Hypergraph Regularization",
           "abstract": "Multimodal retrieval must integrate complementary evidence from views that may be missing, noisy, or unequally informative. When a sample provides limited reliable evidence, learning from its views alone can hinder the acquisition of useful retrieval representations. Semantically related training samples may provide complementary observations, yet existing volume-based objectives jointly align modalities within each sample without explicitly enabling information exchange across samples. We therefore propose a training-time hypergraph fusion framework that connects observed modalities both within samples and across semantically related samples, allowing representation learning to draw on evidence beyond an individual sample while leaving the retrieval pipeline unchanged at inference. The framework includes HyVol as a special case and introduces two configurations: wHyVol learns view contribution weights and symmetric semantic affinities, whereas wRHG additionally models typed interactions and participant roles through relational propagation. Missing modalities are omitted rather than imputed, and the hypergraph is discarded after training, incurring no additional inference cost. Experiments on eleven zero-shot video-text and audio-text retrieval benchmarks demonstrate broad improvements with both GRAM and HyperGRAM. Across 17 video benchmark-modality settings evaluated in both retrieval directions, wRHG outperforms GRAM in all 34 comparisons and HyperGRAM in 33 of 34. Mean text-to-video R@1 increases from 63.4 to 68.2 with GRAM and from 64.8 to 68.4 with HyperGRAM, while the largest video-to-text gain reaches 13.3 percentage points on ActivityNet. Under missing-modality evaluation, both weighted configurations retain positive text-to-video gains over GRAM across seven benchmarks at every evaluated missingness rate, even when 90% of clips lack one modality.",
@@ -17906,22 +17787,6 @@
             "agents discover knowledge",
             "agents internalization remains",
             "any single agent"
-          ],
-          "matched_keywords": []
-        },
-        "2611.03183": {
-          "title": "Auto-Research Agent on MSA Organization to Improve Protein-Protein Complex Structure Prediction",
-          "abstract": "Protein-complex structure prediction with AlphaFold 3 depends on MSA content, depth, and cross-chain pairing. Current pipelines apply uniform recipes, typically maximizing depth and pairing by species, yet even whether cross-chain pairing helps AF3 remains contested. We show that the value of both depth and pairing is strongly target-dependent, so no single recipe is optimal across interfaces. We introduce an autonomous agent that treats a frozen AF3 as a black-box experimental instrument. For each target, the agent formulates biological hypotheses, analyzes and reorganizes the MSA, and iteratively refines sequence selection and pairing using predictor label-free signals alone. On 1{,}015 protein--protein interfaces from three benchmarks released after AF3's training cutoff, the agent improves overall interface DockQ over AF3's default pipeline and fixed MSA recipes on every benchmark, while using on average 60\\% fewer MSA sequences than the default. Gains are largest for inter-species heteromers, where species-based pairing is unreliable: mean DockQ increases from 0.465 to 0.612 on FoldBench and from 0.482 to 0.562 on HD439. The improvements arise from both sequence construction and pairing policy, including deliberate this http URL results recast MSA design as a target-specific problem and show that an autonomous agent can adapt it at test time through biological reasoning and self-directed, confidence-guided experimentation.",
-          "categories": [
-            "cs.AI"
-          ],
-          "keywords": [
-            "msa",
-            "af3",
-            "cross-chain pairing",
-            "structure prediction",
-            "autonomous agent",
-            "af3 default pipeline"
           ],
           "matched_keywords": []
         },
@@ -45642,7 +45507,7 @@
             "muongs",
             "muonh",
             "eta",
-            "muon"
+            "accumulation sustained even"
           ],
           "matched_keywords": []
         },
@@ -46495,6 +46360,169 @@
             "training compute",
             "looped transformers",
             "truncation"
+          ],
+          "matched_keywords": []
+        },
+        "2611.02737": {
+          "title": "MoviEdit: Long-form Multi-Shot Video Editing Made Easy",
+          "abstract": "Long-form multi-shot video editing requires an intended edit to remain coherent across abrupt changes in scene, viewpoint, and subject appearance, while processing substantially longer visual context than conventional single-shot editors. We introduce MoviEdit, an end-to-end framework for scalable long-form multi-shot video editing that jointly addresses the challenges of data, modeling, and evaluation. To provide cross-shot supervision data at scale, we develop automatic data-generation pipelines spanning synchronized multi-view footage, real-world multi-shot videos, and generated multi-shot content, yielding 87K paired editing videos without manual annotation. Architecturally, MoviEdit employs a cascaded bidirectional-autoregressive design: a lightweight bidirectional stage first establishes a globally coherent editing draft over a spatiotemporally compressed representation, which is then autoregressively propagated and refined over the full video. We further introduce MoviEdit-Bench, a dedicated benchmark for systematic evaluation of long-form multi-shot video editing. Extensive experiments show that MoviEdit substantially outperforms existing open-source models and performs on par with industry frontier models across text-guided and image-guided editing. Visit our project page for complete results and to access the benchmark: https://multi-shot-edit.github.io/",
+          "categories": [
+            "cs.CV",
+            "cs.AI",
+            "cs.LG"
+          ],
+          "keywords": [
+            "long-form multi-shot video",
+            "multi-shot video editing",
+            "moviedit",
+            "appearance while processing",
+            "architecturally moviedit employs",
+            "automatic data-generation pipelines"
+          ],
+          "matched_keywords": []
+        },
+        "2611.03634": {
+          "title": "WebHarbor: Docking Real Websites for Evolving GUI Agent Environments",
+          "abstract": "GUI web agents require realistic and interactive environments that remain stable during both evaluation and training. Live website evaluation suffers from changing content, access restrictions, and limited coverage of authenticated workflows, while existing synthetic environments for training often lack functional depth and visual fidelity. We propose WebHarbor, a suite of 153 executable and dockerized website environments that faithfully reconstruct the visual interfaces, content, and functional workflows of real-world web services under deterministic control. We build WebHarbor through task-driven human-agent collaboration, where environments evolve as new tasks expand their functional scope, coding agents implement the required changes, and human contributors audit visual fidelity, functional correctness, and task validity. The resulting suite comprises 3,518 tasks spanning multi-step and post-authentication workflows, where existing works often fail to cover. Beyond reliable evaluation, WebHarbor provides high-fidelity synthetic web environments for cost-efficient reinforcement learning (RL). We demonstrate that a Qwen 4B-level GUI agent trained with RL in WebHarbor generalizes to unseen tasks and performs competitively with leading open-source GUI web agents across four benchmarks. The code and data are publicly available at https://github.com/aiming-lab/WebHarbor.",
+          "categories": [
+            "cs.AI",
+            "cs.CL",
+            "cs.LG"
+          ],
+          "keywords": [
+            "gui web agents",
+            "webharbor",
+            "gui agent",
+            "visual fidelity",
+            "agents require realistic",
+            "audit visual fidelity"
+          ],
+          "matched_keywords": []
+        },
+        "2611.02497": {
+          "title": "RoboColosseum: Evaluating Physical Intelligence at Scale In-The-Wild",
+          "abstract": "General-purpose robot policies must work across robots, tasks, and environments, yet the variation that makes physical trials informative also makes them difficult to reproduce. We introduce RoboColosseum, a distributed evaluation framework that combines unified policy serving and standardized protocols across a network of locally operated robots in diverse environments. Our initial study evaluates five vision-language-action (VLA) policies and three frontier AI agents across four embodiments (SO-101, Franka, Bimanual-YAM, and G1 Humanoid). The Open Track compares models without task-specific adaptation in blinded, pairwise trials under matched local conditions. The Fine-tune Track measures how well VLA policies adapt to 20 tasks across all four embodiments when each policy receives the same 100 demonstrations per task. Across 5,699 pairwise Open Track comparisons at 124 sites, frontier agents rival specialized VLA policies, while all systems struggle to complete open-world tasks reliably. After fine-tuning, GR00T N1.7 leads on SO-101 and pi0.5 leads on Franka and Bimanual-YAM. Policy rankings show weak agreement across embodiment-specific task suites (Kendall W = 0.24). Open Track rankings poorly predict relative performance after fine-tuning, with substantial rank reversals on all three embodiments shared between tracks. Measuring partial progress reveals differences that task success alone misses. On the G1 Humanoid, no policy completes any of the five tasks, yet average progress ranges from 13.3% to 23.2% across policies. Open Track rankings stabilize as trials accumulate, and active matchmaking achieves comparable ranking agreement with substantially fewer physical trials than uniform sampling. These results show how distributed physical evaluation can reveal where robot policies generalize, how well they adapt to new tasks, and how far they progress on tasks they fail to complete.",
+          "categories": [
+            "cs.RO",
+            "cs.AI"
+          ],
+          "keywords": [
+            "open track",
+            "open track rankings",
+            "four embodiments",
+            "physical trials",
+            "vla policies",
+            "g1 humanoid"
+          ],
+          "matched_keywords": []
+        },
+        "2610.39714": {
+          "title": "MoLRSI: A Recursive Self-Improving AI agent for Molecular Discovery",
+          "abstract": "Molecular discovery requires navigating vast combinatorial search spaces while balancing competing biological objectives. AI agents can automate expert-defined molecular design protocols, but automation alone does not address how to optimize workflows for new tasks or improve their development through experience. Here we introduce MoLRSI, an AI agent that combines systematic optimization of workflows and model architectures with persistent cross-task memory to recursively improve its search policy for molecular discovery. Workflow performance, refinement outcomes, and execution feedback guide subsequent searches, allowing the agent to improve both its workflows and its strategy for developing them. We evaluate MoLRSI in two challenging molecular discovery settings that require balancing competing properties. In antibiotic discovery, MoLRSI developed a screening workflow balancing antibacterial activity, cytotoxicity and structural novelty, achieving an experimental hit rate of 15.9%, compared with 8.7% for a previous expert-led workflow using the same training data and screening library. In de novo peptide-MHC binder design, MoLRSI developed workflows that jointly consider target binding and specificity, producing eight experimentally validated hits against MART-1 and SARS-CoV-1 pMHCs with preferential binding over tested off-targets while Claude Science completely failed. These findings demonstrate how experience-guided workflow optimization can address competing discovery objectives while improving the search strategies used in subsequent campaigns.",
+          "categories": [
+            "cs.AI"
+          ],
+          "keywords": [
+            "molecular discovery",
+            "molrsi",
+            "balancing competing",
+            "molrsi developed",
+            "address competing discovery",
+            "antibacterial activity cytotoxicity"
+          ],
+          "matched_keywords": []
+        },
+        "2611.05377": {
+          "title": "DreamX: Video Diffusion Model is a Universal Latent Action Learner",
+          "abstract": "Learning a universal action representation from video requires modeling dynamics that are consistent across different executions of the same action yet invariant to changes in embodiment and appearance. Existing latent action models infer actions from visual transitions, but their representations often entangle the underlying action with irrelevant visual variations, limiting transfer across embodiments. We introduce DreamX, which repurposes a pretrained video diffusion model as a universal latent action learner. Our approach extracts compact latent actions from the video model's rich spatiotemporal features, compressing each latent video frame by $\\boldsymbol{300\\times}$ ($\\boldsymbol{1{,}200 \\rightarrow 4}$ tokens). In addition, by leveraging the video model's generative prior, these latent actions capture action-relevant dynamics disentangled from visual appearance. The resulting latent space serves as a shared action interface across embodiments (human and robot), environments, and action parameterizations. On LARY-Bench, DreamX achieves state-of-the-art performance among latent action models. Moreover, actions encoded in one setting remain effective in another: the latent space supports any-to-any video transfer and zero-shot action transfer across diverse embodiments and environments. Furthermore, this shared interface also enables policy learning in a compact latent action space, reducing the computational cost of video-diffusion-based policies.",
+          "categories": [
+            "cs.CV",
+            "cs.AI",
+            "cs.RO"
+          ],
+          "keywords": [
+            "latent action",
+            "latent action learner",
+            "universal latent action",
+            "dreamx",
+            "latent actions",
+            "compact latent"
+          ],
+          "matched_keywords": []
+        },
+        "2610.40747": {
+          "title": "Mage-VL-Cowork: A Full Training Recipe to Learn Hybrid Computer Use From Evolved Harnesses",
+          "abstract": "Effective computer-use agents (CUAs) should seamlessly combine visual GUI interaction with code and terminal execution within a single policy. We present Mage-VL-Cowork, a 4B hybrid CUA trained from a general multimodally aligned checkpoint through an end-to-end, progressive five-stage curriculum across midtraining, SFT, and RL. To power this curriculum at scale, Mage-CUA-Forge replaces per-task agent construction with reusable, skill-conditioned generation workflows and application-specific preparers, synthesizing 293,806 desktop and web tasks across 6,915 skills while reducing recurring per-task expenditure by 82.6%. Rather than directly distilling a default teacher, we evolve the teacher harness and instantiate specialized CUA harnesses to yield high-quality trajectories alongside stage-specific supervision. Mage-VL-Cowork-4B finally climbs to 66.0% on OSWorld-Verified through different training stages with more efficient reasoning cost, achieving state-of-the-art performance at its parameter size and pushing forward the frontier of on-device intelligence.",
+          "categories": [],
+          "keywords": [
+            "agents cuas should",
+            "aligned checkpoint through",
+            "alongside stage-specific supervision",
+            "application-specific preparers synthesizing",
+            "combine visual gui",
+            "computer-use agents cuas"
+          ],
+          "matched_keywords": []
+        },
+        "2611.04449": {
+          "title": "Near-Zero Token Embeddings Silently Stall Training in Gated Sequence Models",
+          "abstract": "Among 291 surveyed open-weight language model repositories (280 distinct embedding tables), 52.6% of untied gated and hybrid checkpoints (20/38) contain reachable input embeddings with norms below 10^{-6}, compared with 0% of weight-tied models. Such near-zero rows can arise during pretraining when unseen rare or template tokens receive zero input gradients while AdamW weight decay shrinks untied embeddings. In tested Transformer configurations, non-initial positions or a BOS token prevent this failure mode. In gated sequence models (Mamba, Gated DeltaNet, xLSTM), a near-zero token can amplify input-embedding gradients by more than 30 orders of magnitude (up to 35). At zero input, current-token readout factors (SiLU gates or linear queries) vanish, suppressing historical-state readout. Residual RMS values can then fall below the square root of the RMSNorm floor across consecutive layers, causing Pre-RMSNorm to amplify backward gradients by up to 10^3 per layer. When a gradient entry exceeds 1.84 times 10^{19}, FP32 global-norm clipping in PyTorch, Hugging Face Trainer, and FSDP2 can overflow to infinity and zero the current batch's gradients. In Telugu continual pretraining of Nemotron-3-Nano-4B, this discards updates on approximately 20% of steps and leaves triggered rows frozen. We propose two remedies. For released checkpoints, GroupClip decouples input-embedding clipping using a 64-bit or rescaled norm; its rescaled implementation eliminates update loss and heals triggered rows in one step with negligible measured end-to-end overhead. For pretraining, GateFloor (SiLU(z) + δ, δin [0.01, 0.1]) keeps the gate positive at zero input, reducing near-zero gradients by 28 orders of magnitude in experiments up to 370M parameters, with perplexity comparable to the baseline.",
+          "categories": [],
+          "keywords": [
+            "zero input",
+            "gated sequence",
+            "near-zero token",
+            "triggered rows",
+            "adamw weight decay",
+            "among surveyed open-weight"
+          ],
+          "matched_keywords": []
+        },
+        "2611.03685": {
+          "title": "LOLPlay: Benchmarking Real-Time Visual Agents in League of Legends",
+          "abstract": "Visual agents need to coordinate reasoning and action while their environment evolves during inference. We introduce LOLPlay, a benchmark in native \\emph{League of Legends} with 36 champion-specific tasks spanning resource management, combat, cooperation, and objectives. Agents interact through screenshots and mouse--keyboard actions; automated initialization and 82 executable subgoal checks distinguish partial progress from completion. Across 324 task evaluations of three models at three reasoning-effort settings, GPT-6 Astra achieves the highest task success rate of 25.0\\% at low and medium effort, and the highest subgoal success rate of 40.3\\% at medium effort. However, high effort improves neither metric over low effort for any model. For Astra, longer requests leave fewer interaction rounds, suggesting a cost to additional reasoning in real-time control. Trajectories reveal incomplete subgoal composition and actions executing after the observed scene changes, motivating agents that combine visual reasoning with timely action.",
+          "categories": [
+            "cs.AI",
+            "cs.CV"
+          ],
+          "keywords": [
+            "medium effort",
+            "visual agents",
+            "agents interact through",
+            "astra longer requests",
+            "benchmarking real-time visual",
+            "champion-specific tasks spanning"
+          ],
+          "matched_keywords": []
+        },
+        "2610.00854": {
+          "title": "Are Frontier VLM Agents Ready to Be Robot Generalists? An Empirical Study with the Embodied Agent Arena",
+          "abstract": "A robot generalist must interpret a scene, act on it, and satisfy every condition of a task. How far do frontier vision-language models (VLMs) meet these demands? We introduce Embodied Agent Arena, evaluating ten VLM agents across Geometry, Spatial Reasoning, Affordance, Task Planning, and Manipulation. Its 1,000 cases combine 32 established sources with GeoProbe, our 168-case benchmark for camera, motion, depth, and scale estimation. A minimal harness leaves task decisions to the model through source-native interfaces. Closed-weight models lead all five domains, whereas open-weight VLMs show useful spatial reasoning but substantially lower planning and manipulation success. Beneath these averages, similar geometric errors conceal different scale and shape distortions, and valid region estimates need not identify usable action points. During execution, agents can achieve early subgoals yet lose object control, bind an action to the wrong receiving region, or stop before the required physical state holds. Additional computation does not uniformly resolve these failures: code repair can restore execution without completing the task, while self-review can reverse correct judgments. Failure costs also differ: the strongest planners concentrate failed-token expenditure in prolonged body-control tasks, whereas other models fail broadly across procedures. Matched traces show how successful recovery uses feedback to restore a missing prerequisite and advance the remaining task.",
+          "categories": [],
+          "keywords": [
+            "embodied agent arena",
+            "vlm agents",
+            "achieve early subgoals",
+            "additional computation does",
+            "affordance task planning",
+            "agent arena evaluating"
+          ],
+          "matched_keywords": []
+        },
+        "2611.05163": {
+          "title": "RoboTryOn: Synthesizing Dexterous Robot Demonstrations from Human Videos via Virtual Try-On",
+          "abstract": "Robot foundation models have shown remarkable performance in robot control, yet adapting them to a new task still relies heavily on teleoperated demonstrations. Egocentric human videos offer a scalable substitute, but overlaying rendered robots on human videos or retargeting human poses into robot actions leaves significant visual or action gaps for high-DoF robot embodiments. To address this limitation, we propose RoboTryOn, which treats human-to-robot translation as virtual try-on: try-on keeps the person and swaps the garment, RoboTryOn keeps the demonstrated motion and swaps the human for the robot. Specifically, RoboTryOn converts a human video into a video of the target robot specified by a reference image, while preserving the original task, objects, and background. To maintain visual consistency, we translate selected keyframes autoregressively and use them to guide video synthesis with motion conditioned on the human hand skeleton. Additionally, we use an inverse dynamics model (IDM) that incorporates depth features to infer action labels from synthesized videos for policy learning. Our experiments across multiple humanoid embodiments show that policies trained with our synthetic data improve the average success rate on novel tasks, including challenging bimanual manipulation, from 2% to 60%, without any real robot demonstration of those tasks. Moreover, training with our synthetic data matches the performance of policies trained solely on teleoperated demonstrations at approximately a third of the collection cost, demonstrating the cost efficiency of our approach.",
+          "categories": [
+            "cs.RO",
+            "cs.AI"
+          ],
+          "keywords": [
+            "robotryon",
+            "human videos",
+            "virtual try-on",
+            "teleoperated demonstrations",
+            "policies trained",
+            "actions leaves significant"
           ],
           "matched_keywords": []
         },
