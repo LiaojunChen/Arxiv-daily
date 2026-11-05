@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-11-05T09:15:56+00:00",
+  "updated_at": "2026-11-05T13:09:40+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-caecd2daa57164fccd6673b4": {
-      "run_id": "daily-caecd2daa57164fccd6673b4",
-      "generated_at": "2026-11-05T09:15:56+00:00",
+    "daily-b6cac9e8200a836614f56f86": {
+      "run_id": "daily-b6cac9e8200a836614f56f86",
+      "generated_at": "2026-11-05T13:09:40+00:00",
       "selected_ids": [
         "2611.06120",
         "2611.05443",
@@ -6915,6 +6915,51 @@
             "koopman",
             "koopman generative",
             "iterative sampling"
+          ],
+          "matched_keywords": []
+        },
+        "2611.05029": {
+          "title": "DRAP: Dynamics-Risk Adaptive Plasticity for Continual Learning in Physical AI",
+          "abstract": "Continual learning in physical AI differs from conventional continual learning because small per-step policy errors can accumulate over a trajectory. Each deviation may move the agent outside the training distribution, increase subsequent prediction errors, and ultimately cause closed-loop task failure. This work introduces Dynamics-Risk Adaptive Plasticity (DRAP), a replay-free method that estimates the historical importance of adaptable model tensors from sample-level action gradients weighted by local trajectory-amplification risk. A ridge-regularized local linear model is fitted to expert state-action transitions, and the largest singular value of its state-transition matrix provides a policy-independent, Lyapunov-inspired estimate of one-step perturbation amplification. After each task, risk-weighted squared gradients are accumulated in a tensor-level importance memory. During subsequent tasks, DRAP uses normalized cumulative importance to scale the effective AdamW learning rate of each tensor, immediately reducing the plasticity of components that supported previous behavior at dynamically sensitive trajectory points. We instantiate DRAP on a fixed KappaTune-selected subnetwork of OpenVLA and evaluate replay-free sequential adaptation across the LIBERO Spatial, Object, and Goal suites. Compared with standard AdamW fine-tuning and EWC, the results show substantially improved retention of previously learned behaviors while preserving strong new-suite acquisition.",
+          "categories": [
+            "cs.LG",
+            "cs.RO"
+          ],
+          "keywords": [
+            "dynamics-risk adaptive plasticity",
+            "drap",
+            "physical ai",
+            "action gradients weighted",
+            "adaptive plasticity drap",
+            "because small per-step"
+          ],
+          "matched_keywords": []
+        },
+        "2611.01926": {
+          "title": "TAC-CoT: Tool-Empowered Implicit Chain-of-Thought via Interleaving Explicit Tokens",
+          "abstract": "LLM-based agentic systems are increasingly combined with CoT reasoning to solve tasks that require accurate reasoning, external knowledge, and multi-step deliberation. Yet, explicit CoT incurs substantial generation overhead, while implicit CoT, which replaces textual rationales with compact continuous tokens, does not naturally support the explicit communication interface required for agentic tool-use. We propose TAC-CoT, a tool-empowered adaptive implicit CoT framework that replaces explicit reasoning traces with compact latent reasoning segments while retaining textual tokens only for tool calls, observations, and final answers. This interleaved design enables agentic tool-use without verbalizing every intermediate reasoning step. Experiments on agentic math and QA benchmarks show that TAC-CoT improves accuracy by up to 8.8 points while reducing model forward passes by up to 6.8x. Furthermore, analyses show that TAC-CoT improves tool-use quality in both single- and multi-tool settings.",
+          "categories": [],
+          "keywords": [
+            "tac-cot",
+            "implicit cot",
+            "tac-cot improves",
+            "agentic tool-use",
+            "accurate reasoning external",
+            "adaptive implicit cot"
+          ],
+          "matched_keywords": []
+        },
+        "2611.05988": {
+          "title": "LiveFoley: Dynamic Real-Time Video-to-Audio Generation for Immersive Interactive Worlds",
+          "abstract": "Streaming video-to-audio (V2A) generation is essential for immersive interactive applications. However, real-time constraints leave existing streaming V2A methods far behind offline models: (1) visual frontends shrink their receptive fields to cut look-ahead latency, severely degrading audio-visual alignment; (2) causal autoregressive diffusion backends denoise each audio patch in isolation, impairing audio quality. To this end, we present LiveFoley, a streaming causal autoregressive diffusion architecture that addresses both bottlenecks with imperceptible latency. For the visual frontend, we introduce a Trailing Sliding Window that converts non-causal segment-level encoders into streaming modules without retraining. By simply realigning the window, it preserves precise audio-visual alignment, while a configurable hop size reduces the frontend look-ahead well below the human perceptual threshold. Building on this tunable hop size, we propose the Unified Varhop Framework to accommodate scenarios with diverse latency and computation budgets. For the audio backend, we explore widening the denoising window of the local diffusion transformer (LocDiT) head in two temporal directions. History LocDiT adds past context to improve quality at no latency cost and serves as our default. Alternatively, Future-Warmup LocDiT breaks the autoregressive deadlock with an approximate future condition, further improving generation quality at the cost of an acceptable backend look-ahead. Extensive experiments demonstrate that LiveFoley matches offline models in temporal alignment and leads streaming systems in generation quality. Project page: https://dalision.github.io/livefoley-page/",
+          "categories": [],
+          "keywords": [
+            "causal autoregressive diffusion",
+            "hop size",
+            "immersive interactive",
+            "audio-visual alignment",
+            "livefoley",
+            "locdit"
           ],
           "matched_keywords": []
         },
@@ -13674,23 +13719,6 @@
             "feedback messages",
             "robot tutoring",
             "context-adaptive"
-          ],
-          "matched_keywords": []
-        },
-        "2611.05029": {
-          "title": "DRAP: Dynamics-Risk Adaptive Plasticity for Continual Learning in Physical AI",
-          "abstract": "Continual learning in physical AI differs from conventional continual learning because small per-step policy errors can accumulate over a trajectory. Each deviation may move the agent outside the training distribution, increase subsequent prediction errors, and ultimately cause closed-loop task failure. This work introduces Dynamics-Risk Adaptive Plasticity (DRAP), a replay-free method that estimates the historical importance of adaptable model tensors from sample-level action gradients weighted by local trajectory-amplification risk. A ridge-regularized local linear model is fitted to expert state-action transitions, and the largest singular value of its state-transition matrix provides a policy-independent, Lyapunov-inspired estimate of one-step perturbation amplification. After each task, risk-weighted squared gradients are accumulated in a tensor-level importance memory. During subsequent tasks, DRAP uses normalized cumulative importance to scale the effective AdamW learning rate of each tensor, immediately reducing the plasticity of components that supported previous behavior at dynamically sensitive trajectory points. We instantiate DRAP on a fixed KappaTune-selected subnetwork of OpenVLA and evaluate replay-free sequential adaptation across the LIBERO Spatial, Object, and Goal suites. Compared with standard AdamW fine-tuning and EWC, the results show substantially improved retention of previously learned behaviors while preserving strong new-suite acquisition.",
-          "categories": [
-            "cs.LG",
-            "cs.RO"
-          ],
-          "keywords": [
-            "dynamics-risk adaptive plasticity",
-            "drap",
-            "physical ai",
-            "action gradients weighted",
-            "adaptive plasticity drap",
-            "because small per-step"
           ],
           "matched_keywords": []
         },
@@ -24181,9 +24209,9 @@
             "scorpio improves",
             "ranking error",
             "tree search",
-            "improves accuracy",
             "additional compute reduces",
-            "admits bias-variance decomposition"
+            "admits bias-variance decomposition",
+            "algorithmic design choices"
           ],
           "matched_keywords": []
         },
