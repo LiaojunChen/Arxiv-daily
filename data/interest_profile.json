@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-11-11T09:07:50+00:00",
+  "updated_at": "2026-11-11T12:41:25+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-d689561a2fd26a85a4e824a4": {
-      "run_id": "daily-d689561a2fd26a85a4e824a4",
-      "generated_at": "2026-11-11T07:51:21+00:00",
+    "daily-b3841f187b2129917d0fe3e4": {
+      "run_id": "daily-b3841f187b2129917d0fe3e4",
+      "generated_at": "2026-11-11T09:07:50+00:00",
       "selected_ids": [
         "2611.14420",
         "2611.13528",
@@ -35826,9 +35826,9 @@
         }
       }
     },
-    "daily-b3841f187b2129917d0fe3e4": {
-      "run_id": "daily-b3841f187b2129917d0fe3e4",
-      "generated_at": "2026-11-11T09:07:50+00:00",
+    "daily-3fbeedc3039951b75a5b8a7f": {
+      "run_id": "daily-3fbeedc3039951b75a5b8a7f",
+      "generated_at": "2026-11-11T12:41:25+00:00",
       "selected_ids": [
         "2611.14420",
         "2611.13528",
@@ -42147,9 +42147,9 @@
           ],
           "keywords": [
             "engineagent",
-            "cross-layer dependencies",
             "on-device llm",
             "underlying llms",
+            "cross-layer dependencies",
             "inference engines",
             "achieves end-to-end success"
           ],
@@ -42829,6 +42829,62 @@
             "agent receives no",
             "agents doing financial",
             "agents increasingly work"
+          ],
+          "matched_keywords": []
+        },
+        "2611.10649": {
+          "title": "MACaQ: Fast, Model Agnostic Calibrated Quantization for Low-Precision Weights and Activations",
+          "abstract": "Weight-activation quantization can reduce the memory and compute cost of neural-network inference, but recent methods often require expensive optimization and architecture-specific propagation of basis transforms across layers. We introduce MACaQ, an MXFP4 W4A4 post-training quantization method that treats every linear layer independently. MACaQ applies a per-channel scale and a block-Hadamard transform online to each layer's activations, while absorbing the corresponding inverse transforms into its weights. Retaining these transforms online avoids cross-layer dependencies and enables a simple streaming implementation of the quantization process, in which only one layer must reside in memory at a time. To improve over round-to-nearest quantization, we introduce Flip-Refinement, a Hessian-aware coordinate-descent procedure that greedily moves individual FP4 codes to adjacent representable values. Despite executing the activation transforms at inference time, MACaQ adds only 2.3% end-to-end overhead over pure MXFP4 on Qwen3-32B in vLLM. MACaQ reaches lower perplexity than DuQuant++ and MR-GPTQ, and already matches their best perplexity on Llama-3-8B in 11 times less quantization time. We further apply MACaQ without architecture-specific modifications to an image diffusion model, illustrating the generality of its layer-local design and show quantization of a 122B parameter model in 64 minutes, using only 32.5GB GPU RAM.",
+          "categories": [],
+          "keywords": [
+            "macaq",
+            "activations while absorbing",
+            "adjacent representable values",
+            "agnostic calibrated quantization",
+            "applies per-channel scale",
+            "avoids cross-layer dependencies"
+          ],
+          "matched_keywords": []
+        },
+        "2611.12184": {
+          "title": "Blind Variation, Selective Retention: Improving Creative Idea Generation in AI Scientists",
+          "abstract": "Scientific discovery requires ideas that are original, useful, and non-obvious. Yet AI scientists are typically given as much task information as possible during idea generation, which can anchor generation toward familiar approaches. Inspired by the cognitive framework of Blind Variation and Selective Retention (BVSR), we propose a discovery framework that separates these two roles of information: it generates proposals under deliberately limited task information to broaden exploration, then learns from proposals previously verified on the same task and their outcomes to retain promising candidates for costly empirical evaluation. We evaluate BVSR across five proposer models and 12 scientific tasks. Limiting task information substantially increases proposal originality and non-obviousness, and produces a larger share of highly creative and high-utility proposals than existing state-of-the-art prompting-based baselines. Learning from prior proposal outcomes on the task further improves candidate selection, discarding half of the candidates while retaining most top-performing proposals. When incorporated into existing AI-scientist workflows, BVSR achieves stronger discoveries across gene expression analysis, drug response prediction, anomaly detection, scaling law discovery, and brain activity prediction. These results suggest that effective AI scientists should use information differently across stages of discovery: constrain task-specific information during exploration while exploiting accumulated empirical experience on the task.",
+          "categories": [],
+          "keywords": [
+            "ai scientists",
+            "task information",
+            "blind variation",
+            "idea generation",
+            "selective retention",
+            "bvsr"
+          ],
+          "matched_keywords": []
+        },
+        "2611.13885": {
+          "title": "Are Causal Neuron Circuits Unique and Transferable?",
+          "abstract": "Interpretability demonstrations often show that intervening on a group of neurons changes a model's answer. A recent example removes an 18-neuron group in Qwen3-32B and the model answers \"Simba\" instead of \"Scar\" to a two-hop Lion King riddle. Such a demonstration establishes that the group matters, but not how much of it is necessary, whether other groups could do the same, or whether the effect carries over to other inputs. We ask: when intervening on a group of neurons changes a model's answer, how much of that group is actually necessary? For every selected group we measure all 4,096 subsets of 12 MLP neurons. On a two-alternative capital task (Qwen3-0.6B), zero-ablating 12 selected neurons lowers the answer margin by 27% while random neurons barely change it, yet replacing the same neurons with their values from other questions also barely changes it: their activations are nearly constant across questions, and we find no evidence that they carry question-specific content. On two-hop relation chains, patching 12 neurons with activations from the first-hop question shifts the answer to the bridge entity (from Scar to Simba): the greedy answer starts with the bridge in 9/11 chains for Qwen3-1.7B, 9/11 for Llama-3.2-1B and 8/10 for Gemma-3-1B; random neurons never do. The full group is rarely necessary: a few neurons often suffice, and in many chains disjoint subsets each flip the answer on their own, in an exploratory analysis most often when the model is less confident. Group effects transfer to rephrasings of the same chain but are much weaker on other tested chains. We study neuron-level causal interventions and alternative subsets; we do not recover the full connectivity of circuits.",
+          "categories": [],
+          "keywords": [
+            "neurons",
+            "neurons changes",
+            "random neurons",
+            "answers simba instead",
+            "capital task qwen3-0",
+            "carry question-specific content"
+          ],
+          "matched_keywords": []
+        },
+        "2611.10866": {
+          "title": "The Surprising Effectiveness of Deleting Weights in LLM Post-Training",
+          "abstract": "How little of a pretrained large language model (LLM) has to change for it to acquire new capabilities? We find that zeroing fewer than 0.05% of its weights, with no other modification, matches full fine-tuning (FFT) at scale across three LLM post-training regimes: reinforcement learning with verifiable rewards, supervised fine-tuning, and on-policy distillation. Our method, Deletion Tuning, learns a binary mask over the gate projection of transformer blocks. Two practical advantages follow: the trained mask is hundreds to thousands of times smaller than the corresponding FFT checkpoint, and Deletion Tuning forgets far less, which addresses a central challenge in continual learning. Under reinforcement learning, its prior-task accuracy stays near the base level while FFT, LoRA, and random sparse fine-tuning lose up to 5.4 points. To understand why masking alone suffices, we analyze the geometry of the learned weight changes under reinforcement learning using stable rank, spectrum drift, and principal-weight overlap. Compared with LoRA and random sparse fine-tuning, Deletion Tuning is closest to FFT across the three measures.",
+          "categories": [],
+          "keywords": [
+            "random sparse fine-tuning",
+            "deletion tuning",
+            "fft",
+            "llm post-training",
+            "accuracy stays near",
+            "addresses central challenge"
           ],
           "matched_keywords": []
         },
@@ -56336,12 +56392,12 @@
             "cs.RO"
           ],
           "keywords": [
-            "law",
             "classical estimators hardcode",
             "classical fits where",
             "composition parameter dense",
             "composition when imposing",
-            "correction psi learns"
+            "correction psi learns",
+            "criterion predicts exact"
           ],
           "matched_keywords": []
         },
@@ -69125,6 +69181,27 @@
           ],
           "matched_keywords": []
         },
+        "2611.10015": {
+          "title": "Micius-Flash: Lightweight Agentic Intelligence for Engineering",
+          "abstract": "We introduce Micius-Flash, a 27-billion-parameter model for engineering with native multimodal input, deep reasoning and a 256K-token context window. We design the Micius data pipeline as a knowledge-tree-driven data flywheel comprising three stages: knowledge tree construction and expansion, data synthesis, and quality validation with hard-example augmentation. From this data, we train expert models for semiconductor knowledge and reasoning, hardware coding, and semiconductor multimodal understanding, along with agentic experts. Subsequently, we employ Multi-Teacher On-Policy Distillation (MOPD) to supervise training on sequences generated by Micius itself, thereby integrating the capabilities of these expert models into a unified model. On more than 20 datasets with about 15K records, Micius-Flash averages 64.2% on hardware code benchmarks, 15.0 points above a same-size baseline. It scores 62.4% on a semiconductor-specific agent benchmark, exceeding the same-size baseline by 17.2 points. We further develop Micius Harness for industrial applications, connecting the model to specialized tools, including EDA tools and KiCad, as well as execution environments. Case studies in PCB design, chip design workflow automation, and software development demonstrate the model's ability to use tool execution feedback for multi-step planning, code debugging, and iterative verification. We release Micius as an open-source model to advance the development of agents for science and engineering.",
+          "categories": [
+            "cs.SE",
+            "cs.AI",
+            "cs.CL",
+            "cs.LG"
+          ],
+          "keywords": [
+            "micius",
+            "same-size baseline",
+            "micius-flash",
+            "above same-size baseline",
+            "agent benchmark exceeding",
+            "chip design workflow"
+          ],
+          "matched_keywords": [
+            "unified model"
+          ]
+        },
         "2611.10771": {
           "title": "WorldFoundry: Towards Unified Infrastructure for World Intelligence",
           "abstract": "Visual generative models increasingly blur the line between synthesizing observations and simulating environments. Yet visual plausibility alone does not constitute successful world modeling: compelling outputs may lack persistent state, physical dynamics, or causally consistent responses to interactions. We define a generative world model as a predictive dynamical system that maintains a persistent, history-conditioned representation of an environment, updates that representation in response to actions or interventions, and generates temporally coherent trajectories that reflect outcomes under observed and counterfactual interventions. From this definition, we derive an intelligence-oriented framework spanning perceptual grounding, persistent state modeling, controllable transformation, dynamics-aware prediction, and closed-loop interaction. We present WorldFoundry, open-source infrastructure for reproducible inference and evaluation across video, 3D and 4D, embodied action, and interactive world systems. WorldFoundry unifies model and benchmark discovery, runtime and asset preparation, execution orchestration, artifact management, and interactive visualization, while modality-specific adapters preserve native inputs, execution semantics, output representations, and evaluation protocols. Explicit manifests, durable artifact contracts, and evidence-aware scorecards separate execution readiness from evaluative claims, making each claim traceable to its supporting artifacts. The catalog contains 270 model entries, 74 benchmarks, and 62 registered metric entries, with readiness and execution evidence recorded separately. WorldFoundry enables reproducible comparison of persistent, controllable dynamics across heterogeneous systems, advancing the field from perceptual synthesis toward measurable world intelligence.",
@@ -69294,27 +69371,6 @@
             "example counts although"
           ],
           "matched_keywords": []
-        },
-        "2611.10015": {
-          "title": "Micius-Flash: Lightweight Agentic Intelligence for Engineering",
-          "abstract": "We introduce Micius-Flash, a 27-billion-parameter model for engineering with native multimodal input, deep reasoning and a 256K-token context window. We design the Micius data pipeline as a knowledge-tree-driven data flywheel comprising three stages: knowledge tree construction and expansion, data synthesis, and quality validation with hard-example augmentation. From this data, we train expert models for semiconductor knowledge and reasoning, hardware coding, and semiconductor multimodal understanding, along with agentic experts. Subsequently, we employ Multi-Teacher On-Policy Distillation (MOPD) to supervise training on sequences generated by Micius itself, thereby integrating the capabilities of these expert models into a unified model. On more than 20 datasets with about 15K records, Micius-Flash averages 64.2% on hardware code benchmarks, 15.0 points above a same-size baseline. It scores 62.4% on a semiconductor-specific agent benchmark, exceeding the same-size baseline by 17.2 points. We further develop Micius Harness for industrial applications, connecting the model to specialized tools, including EDA tools and KiCad, as well as execution environments. Case studies in PCB design, chip design workflow automation, and software development demonstrate the model's ability to use tool execution feedback for multi-step planning, code debugging, and iterative verification. We release Micius as an open-source model to advance the development of agents for science and engineering.",
-          "categories": [
-            "cs.SE",
-            "cs.AI",
-            "cs.CL",
-            "cs.LG"
-          ],
-          "keywords": [
-            "micius",
-            "same-size baseline",
-            "micius-flash",
-            "above same-size baseline",
-            "agent benchmark exceeding",
-            "chip design workflow"
-          ],
-          "matched_keywords": [
-            "unified model"
-          ]
         },
         "2611.12053": {
           "title": "BECON: Belief-Conditioned Constrained Multi-Objective Reinforcement Learning under Drifting Preferences and Budgets",
