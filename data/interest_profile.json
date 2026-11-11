@@ -37997,7 +37997,7 @@
   "delivery": {
     "batch_id": "21b2bb37166e9bcea871abd0",
     "run_id": "daily-6b6fdfd281a168f5f9eab302",
-    "updated_at": "2026-11-11T06:44:39+00:00",
+    "updated_at": "2026-11-11T06:49:21+00:00",
     "profile_version": "992927a1524b59b3",
     "papers": [
       {
@@ -38015,7 +38015,12 @@
         "categories": [
           "cs.CV"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Runjia Li",
+            "affiliation": "University of Oxford"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-11-11",
         "listing_date": "2026-11-11",
@@ -38025,7 +38030,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "scene invariance",
           "video pretraining",
@@ -38075,7 +38080,16 @@
           "cs.RO",
           "cs.CV"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Yuchen Yang",
+            "affiliation": "Department of Software Engineering, Nanchang University, Nanchang, China."
+          },
+          {
+            "author": "Ming Ding",
+            "affiliation": "Nanjing 4D Vector Technology Co., Ltd., Nanjing, China."
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-11-11",
         "listing_date": "2026-11-11",
@@ -38085,7 +38099,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "global extrinsic-calibration-refined mapping",
           "dgs map",
@@ -38133,7 +38147,12 @@
         "categories": [
           "cs.RO"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Nikita Sarawgi",
+            "affiliation": "GrayMatter Robotics Inc."
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-11-11",
         "listing_date": "2026-11-11",
@@ -38143,7 +38162,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "predicted surface",
           "operating conditions",
@@ -38201,7 +38220,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "unresolved",
         "keywords": [
           "three choices",
           "ebms",
@@ -38267,7 +38286,7 @@
           "arxiv"
         ],
         "listing_date": "2026-11-11",
-        "affiliation_status": "pending",
+        "affiliation_status": "unresolved",
         "keywords": [
           "closed-loop protein evolution",
           "proteus",
@@ -38317,7 +38336,12 @@
         "categories": [
           "cs.AI"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Souhaila Djaffal",
+            "affiliation": "PRISM AI Safety Research"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-11-11",
         "listing_date": "2026-11-11",
@@ -38327,7 +38351,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "generated world",
           "llm-generated world",
@@ -38389,7 +38413,16 @@
         "categories": [
           "cs.RO"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Xuheng Zhang",
+            "affiliation": "School of Computer Science, Peking University"
+          },
+          {
+            "author": "Yiming Zhang",
+            "affiliation": "The Chinese University of Hong Kong"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-11-11",
         "listing_date": "2026-11-11",
@@ -38399,7 +38432,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "last0",
           "interaction-centric",
@@ -38449,7 +38482,24 @@
           "cs.AI",
           "cs.LG"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Reece Keller",
+            "affiliation": "Neuroscience Institute, Carnegie Mellon University"
+          },
+          {
+            "author": "Declan Kutscher",
+            "affiliation": "Robotics Institute, Carnegie Mellon University"
+          },
+          {
+            "author": "Xaq Pitkow",
+            "affiliation": "Machine Learning Department, Carnegie Mellon University"
+          },
+          {
+            "author": "Aran Nayebi",
+            "affiliation": "Department of Computer Science, University of Maryland, College Park"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-11-11",
         "listing_date": "2026-11-11",
@@ -38459,7 +38509,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "intrinsic motivation",
           "building world",
@@ -38510,7 +38560,16 @@
           "cs.CV",
           "cs.RO"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Guoqiang Liang",
+            "affiliation": "National University of Singapore"
+          },
+          {
+            "author": "Yiqi Lin",
+            "affiliation": "National University of Singapore Guangzhou Research Translation and Innovation Institute"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-11-11",
         "listing_date": "2026-11-11",
@@ -38520,7 +38579,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "robot signals",
           "world action",
@@ -38570,7 +38629,16 @@
         "categories": [
           "cs.RO"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Jakub Suliga",
+            "affiliation": "Karlsruhe Institute of Technology"
+          },
+          {
+            "author": "Pankhuri Vanjani",
+            "affiliation": "University of Technology Nuremberg"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-11-11",
         "listing_date": "2026-11-11",
@@ -38580,7 +38648,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "few-shot residual adaptation",
           "pretrained latent world",
@@ -38640,7 +38708,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "unresolved",
         "keywords": [
           "recursive capability composition",
           "agentic workflows",
@@ -38696,7 +38764,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "unresolved",
         "keywords": [
           "lbt",
           "additional labeled examples",
@@ -38745,7 +38813,20 @@
           "cs.RO",
           "cs.AI"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Fabio Bonsignorio",
+            "affiliation": "University of Zagreb Faculty of Electrical Engineering and Computing, AIFORS LAB, 10000, Zagreb, Croatia and Heron Robots, 16121, Genoa, Italy."
+          },
+          {
+            "author": "Elisabetta Barletta",
+            "affiliation": "the School of Engineering of the University of Basilicata, 85100, Potenza, Italy."
+          },
+          {
+            "author": "Sorin Dragomir",
+            "affiliation": "the Institute of Marine Engineering of the National Research Council, 16149, Genoa, Italy"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-11-11",
         "listing_date": "2026-11-11",
@@ -38755,7 +38836,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "compass gait",
           "information metrics",
@@ -38804,7 +38885,28 @@
         "categories": [
           "cs.AI"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Yihang Che",
+            "affiliation": "University College London, London, United Kingdom"
+          },
+          {
+            "author": "Zhongwei Yu",
+            "affiliation": "AI Lab, The Yangtze River Delta, China"
+          },
+          {
+            "author": "Yang Li",
+            "affiliation": "The Hong Kong University of Science and Technology (Guangzhou), Guangzhou, China"
+          },
+          {
+            "author": "Xingyu Lu",
+            "affiliation": "Shanghai Jiao Tong University, Shanghai, China"
+          },
+          {
+            "author": "Hongxia Yu",
+            "affiliation": "Nanjing Agricultural University, Nanjing, China"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-11-11",
         "listing_date": "2026-11-11",
@@ -38814,7 +38916,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "learnability",
           "embodied experimental",
@@ -38865,7 +38967,16 @@
           "cs.AI",
           "cs.LG"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Daniel P. Jeong",
+            "affiliation": "Carnegie Mellon University"
+          },
+          {
+            "author": "Yewon Byun",
+            "affiliation": "Johns Hopkins University"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-11-11",
         "listing_date": "2026-11-11",
@@ -38875,7 +38986,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "clinical documentation",
           "ai clinical documentation",
@@ -38926,7 +39037,20 @@
           "cs.CV",
           "cs.AI"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Haozhan Shen",
+            "affiliation": "Zhejiang University"
+          },
+          {
+            "author": "Liangbo He",
+            "affiliation": "Om AI Research"
+          },
+          {
+            "author": "Jun Lan",
+            "affiliation": "Binjiang Institute of Zhejiang University"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-11-11",
         "listing_date": "2026-11-11",
@@ -38936,7 +39060,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "fine-grained visual supervision",
           "global-to-zoom perception gaps",
@@ -38991,7 +39115,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "unresolved",
         "keywords": [
           "mk set theory",
           "megrez",
@@ -39048,7 +39172,28 @@
           "cs.AI",
           "cs.CL"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Lirui Luo",
+            "affiliation": "Peking University"
+          },
+          {
+            "author": "Kelong Mao",
+            "affiliation": "Sichuan University"
+          },
+          {
+            "author": "Xinwei Yang",
+            "affiliation": "Beijing Institute of Technology"
+          },
+          {
+            "author": "Rongqing Li",
+            "affiliation": "Renmin University of China"
+          },
+          {
+            "author": "Luyu Chen",
+            "affiliation": "The Hong Kong University of Science and Technology"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-11-11",
         "listing_date": "2026-11-11",
@@ -39058,7 +39203,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "coding agent memory",
           "agent memory post-training",
@@ -39109,7 +39254,16 @@
           "cs.AI",
           "cs.LG"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Jaeyong Song",
+            "affiliation": "meta"
+          },
+          {
+            "author": "Daniel Wang",
+            "affiliation": "Work done during an internship at Meta"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-11-11",
         "listing_date": "2026-11-11",
@@ -39119,7 +39273,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "forespark",
           "every request",
@@ -39180,7 +39334,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "unresolved",
         "keywords": [
           "robot-based haptic dyads",
           "dyadic training",
@@ -39228,7 +39382,12 @@
           "cs.RO",
           "cs.AI"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Dimitris Panagopoulos",
+            "affiliation": "Faculty of Engineering and Applied Science, Cranfield University, Cranfield, MK43 0AL, UK"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-11-11",
         "listing_date": "2026-11-11",
@@ -39238,7 +39397,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "informational friction",
           "task completion",
@@ -39286,7 +39445,16 @@
           "cs.CV",
           "cs.MM"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Xiang Fang",
+            "affiliation": "the College of Computing and Data Science, Nanyang Technological University, Singapore."
+          },
+          {
+            "author": "Wanlong Fang",
+            "affiliation": "the Institute for Math & AI, Wuhan University, Wuhan, 430072, China."
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-11-11",
         "listing_date": "2026-11-11",
@@ -39296,7 +39464,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "temporal sentence grounding",
           "tsg",
@@ -39350,7 +39518,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "unresolved",
         "keywords": [
           "f3-agi v4",
           "program synthesis",
@@ -39409,7 +39577,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "unresolved",
         "keywords": [
           "farm security",
           "rural crime",
@@ -39455,7 +39623,16 @@
           "cs.LG",
           "cs.AI"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Mohamed Ghanem",
+            "affiliation": "CISPA Helmholtz Center for Information Security"
+          },
+          {
+            "author": "Bernd Finkbeiner",
+            "affiliation": "Technical University of Munich"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-11-11",
         "listing_date": "2026-11-11",
@@ -39465,7 +39642,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "execution traces",
           "almost every setting",
@@ -39516,7 +39693,24 @@
         "categories": [
           "cs.RO"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Qinfeng Zhu",
+            "affiliation": "Xi'an Jiaotong-Liverpool University"
+          },
+          {
+            "author": "Weiguang Zhao",
+            "affiliation": "Duke Kunshan University"
+          },
+          {
+            "author": "Ke Sun",
+            "affiliation": "University of Liverpool"
+          },
+          {
+            "author": "Xihao Guo",
+            "affiliation": "National University of Singapore"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-11-11",
         "listing_date": "2026-11-11",
@@ -39526,7 +39720,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "agentic robotics",
           "leash",
@@ -39573,7 +39767,16 @@
         "categories": [
           "cs.AI"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Akseli Kangaslahti",
+            "affiliation": "Harvard University"
+          },
+          {
+            "author": "Milind Tambe",
+            "affiliation": "University of Witwatersrand"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-11-11",
         "listing_date": "2026-11-11",
@@ -39583,7 +39786,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "contact network",
           "peer referral",
@@ -39631,7 +39834,20 @@
           "cs.CV",
           "cs.RO"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Kim Alexander Christensen",
+            "affiliation": "the Department of Mechanical and"
+          },
+          {
+            "author": "Dina Zimmermann",
+            "affiliation": "Industrial Engineering, Norwegian University of Science and Technology"
+          },
+          {
+            "author": "Martin Steinert",
+            "affiliation": "the Department of Mechanical and Industrial Engineering, Norwegian University of Science and Technology (NTNU), Norway."
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-11-11",
         "listing_date": "2026-11-11",
@@ -39641,7 +39857,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "maritime scene memory",
           "local places",
@@ -39688,7 +39904,12 @@
         "categories": [
           "cs.AI"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Zhu Jiaqi",
+            "affiliation": "Heidelberg University"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-11-11",
         "listing_date": "2026-11-11",
@@ -39698,7 +39919,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "communication energy",
           "v2v communication",
@@ -39755,7 +39976,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "unresolved",
         "keywords": [
           "temporal sr",
           "flow mri",
@@ -39804,7 +40025,20 @@
           "math.OC",
           "cs.AI"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Izack Cohen",
+            "affiliation": "Faculty of Engineering, Bar-Ilan University, Max and Anna Webb Street, Ramat Gan 5290002, Israel"
+          },
+          {
+            "author": "Dominik Kress",
+            "affiliation": "Business Administration, especially Procurement and Production, Helmut Schmidt University/University of the Federal Armed Forces Hamburg, Friedrich-Ebert-Damm 245, D-22159 Hamburg, Germany"
+          },
+          {
+            "author": "Lara Nehrke",
+            "affiliation": "Management Information Science, University of Siegen, Kohlbettstr. 15, D-57072 Siegen, Germany"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-11-11",
         "listing_date": "2026-11-11",
@@ -39814,7 +40048,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "resource-constrained project scheduling",
           "linear programming",
@@ -39859,7 +40093,12 @@
           "cs.AI",
           "cs.CL"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Karol Struniawski",
+            "affiliation": "Institute of Information Technology, Warsaw University of Life Sciences -- SGGW"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-11-11",
         "listing_date": "2026-11-11",
@@ -39869,7 +40108,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "text holm",
           "attention head",
@@ -39919,7 +40158,16 @@
           "cs.RO",
           "eess.SY"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Eduardo Figueiredo",
+            "affiliation": "Delft University of Technology"
+          },
+          {
+            "author": "Adrien Banse",
+            "affiliation": "University of Colorado Boulder"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-11-11",
         "listing_date": "2026-11-11",
@@ -39929,7 +40177,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "sampling-based planning algorithm",
           "stochastic systems",
@@ -39981,7 +40229,16 @@
           "cs.CR",
           "cs.AI"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Christian Montag",
+            "affiliation": "University of Macau"
+          },
+          {
+            "author": "Erik Cambria",
+            "affiliation": "Nanyang Technological University, Singapore"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-11-11",
         "listing_date": "2026-11-11",
@@ -39991,7 +40248,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "achieves mathrm abr",
           "benign work",
@@ -40043,7 +40300,16 @@
           "cs.LG",
           "cs.RO"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Amani Kiruga",
+            "affiliation": "MIT"
+          },
+          {
+            "author": "Zhiyi Li",
+            "affiliation": "University of Cambridge"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-11-11",
         "listing_date": "2026-11-11",
@@ -40053,7 +40319,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "geometric prediction",
           "ugg",
@@ -40111,7 +40377,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "unresolved",
         "keywords": [
           "visual similarity",
           "adult word extension",
@@ -40158,7 +40424,20 @@
           "Lianli Gao",
           "Jingkuan Song"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Xu Luo",
+            "affiliation": "Tongji University"
+          },
+          {
+            "author": "Jiaying Yang",
+            "affiliation": "The Hong Kong Polytechnic University"
+          },
+          {
+            "author": "Hao Wu",
+            "affiliation": "The Hong Kong Polytechnic University urlcolor=exrlcurveorange"
+          }
+        ],
         "abstract": "Predicting long action chunks, often spanning dozens of timesteps, has become a key ingredient in increasingly capable robot policies. In this paper, we find that adapting these long-chunk policies with existing reinforcement learning (RL) methods can require many online samples due to the high dimensionality of the action chunks being optimized, making such adaptation impractical in real-world scenarios where interaction data are costly to collect. Our key insight is to shift adaptation from optimizing actions to optimizing how long to execute each predicted action chunk. This keeps the adaptation space low-dimensional while its expressivity grows with the chunk size. We thus introduce Execution at the Right Length (ExRL), a simple approach which augments the base policy with a lightweight adapter that predicts the execution length of each chunk and is trained using off-policy RL algorithms. Across simulation benchmarks and real-world robotic tasks, ExRL enables sample-efficient adaptation of a diverse range of long-chunk policies with minimal task-specific hyperparameter tuning.",
         "categories": [
           "cs.RO"
@@ -40174,7 +40453,7 @@
           "arxiv"
         ],
         "listing_date": "2026-11-11",
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "long-chunk policies",
           "execution length",
@@ -40236,7 +40515,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "unresolved",
         "keywords": [
           "physmoe",
           "benchmarks trajectory affordance",
@@ -40291,7 +40570,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "unresolved",
         "keywords": [
           "forbidden-boundary principle",
           "just ai",
@@ -40347,7 +40626,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "unresolved",
         "keywords": [
           "language-grounded hierarchical reinforcement",
           "shared cognitive workspace",
@@ -40395,7 +40674,20 @@
         "categories": [
           "cs.CV"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Jianlong He",
+            "affiliation": "School of Artificial Intelligence, Wuhan University"
+          },
+          {
+            "author": "Liang Liao",
+            "affiliation": "Hangzhou Institute of Technology, Xidian University"
+          },
+          {
+            "author": "Jing Xiao",
+            "affiliation": "Institute for Math and AI, Wuhan"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-11-11",
         "listing_date": "2026-11-11",
@@ -40405,7 +40697,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "heterogeneous remote-sensing tasks",
           "uniflow-rs",
@@ -40471,7 +40763,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "unresolved",
         "keywords": [
           "seqfold",
           "sequence backbones",
@@ -40517,7 +40809,12 @@
           "cs.CV",
           "cs.AI"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Emre Kutlusan",
+            "affiliation": "Department of Computer Science, Brunel University of London"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-11-11",
         "listing_date": "2026-11-11",
@@ -40527,7 +40824,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "medical image segmentation",
           "adapted foundation",
@@ -40585,7 +40882,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "unresolved",
         "keywords": [
           "memory-induced degradation",
           "evidence-linked memory",
@@ -40631,7 +40928,16 @@
           "cs.RO",
           "cs.AI"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Pedro Antonio Alarcon Granadeno",
+            "affiliation": "is a PhD student in the Computer Science and Engineering department at the University of Notre Dame, IN, USA"
+          },
+          {
+            "author": "Jane Cleland-Huang",
+            "affiliation": "is a Professor in the Department of Computer Science and Engineering, University of Notre Dame, IN, USA"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-11-11",
         "listing_date": "2026-11-11",
@@ -40641,7 +40947,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "dynamic oriented bounding",
           "state-estimation uncertainty",
@@ -40689,7 +40995,12 @@
           "cs.AI",
           "eess.SP"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Dara Varam",
+            "affiliation": "Embedded Systems Laboratory (ESL), École Polytechnique Fédérale de Lausanne (EPFL), Switzerland"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-11-11",
         "listing_date": "2026-11-11",
@@ -40699,7 +41010,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "weight-space programming",
           "training subjects",
@@ -40747,7 +41058,24 @@
         "categories": [
           "cs.AI"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Xiaoyang Xing",
+            "affiliation": "School of Computer Science and Technology, Tongji University"
+          },
+          {
+            "author": "Chun-Mei Feng",
+            "affiliation": "School of Computer Science, University of Leeds"
+          },
+          {
+            "author": "Anthony Cohn",
+            "affiliation": "Electronic and Electrical Engineering, Brunel University of London"
+          },
+          {
+            "author": "Xiaoliang Gong",
+            "affiliation": "Agency for Science, Technology and Research (A STAR), Singapore"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-11-11",
         "listing_date": "2026-11-11",
@@ -40757,7 +41085,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "native action-generation procedure",
           "aps-vla",
@@ -40805,7 +41133,16 @@
           "cs.SE",
           "cs.AI"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Martim Afonso",
+            "affiliation": "INESC-ID & IST, University of Lisbon"
+          },
+          {
+            "author": "Inês Lynce",
+            "affiliation": "INESC-ID & Faculty of Engineering, University of Porto"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-11-11",
         "listing_date": "2026-11-11",
@@ -40815,7 +41152,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "automated software verification",
           "continuous reasoning",
@@ -40865,7 +41202,24 @@
         "categories": [
           "cs.RO"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Michelle Ho",
+            "affiliation": "Stanford University, Stanford, CA 94305"
+          },
+          {
+            "author": "Maximilian Adang",
+            "affiliation": "KBR Inc."
+          },
+          {
+            "author": "Zachary Booth",
+            "affiliation": "Intelligent Systems Division, NASA Ames Research Center, Moffett"
+          },
+          {
+            "author": "David E. Astle",
+            "affiliation": "Carnegie Mellon University, Pittsburgh, PA 15213"
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-11-11",
         "listing_date": "2026-11-11",
@@ -40875,7 +41229,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "rover trajectories",
           "becomes impractical when",
@@ -40921,7 +41275,12 @@
         "categories": [
           "cs.RO"
         ],
-        "affiliations": [],
+        "affiliations": [
+          {
+            "author": "Shaohong Zhong",
+            "affiliation": "Oxford Robotics Institute, Department of Engineering Science, University of Oxford, OX1 3PJ Oxford, U.K."
+          }
+        ],
         "source": "interest_profile",
         "source_date": "2026-11-11",
         "listing_date": "2026-11-11",
@@ -40931,7 +41290,7 @@
         "sources": [
           "arxiv"
         ],
-        "affiliation_status": "pending",
+        "affiliation_status": "resolved",
         "keywords": [
           "agentic co-design",
           "computational optimisation",
