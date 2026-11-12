@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-11-12T08:27:21+00:00",
+  "updated_at": "2026-11-12T09:35:20+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-ce3a84b5e7b1cd9dd1d8fa5a": {
-      "run_id": "daily-ce3a84b5e7b1cd9dd1d8fa5a",
-      "generated_at": "2026-11-12T08:11:24+00:00",
+    "daily-0192ad33262d3ca718dd0b07": {
+      "run_id": "daily-0192ad33262d3ca718dd0b07",
+      "generated_at": "2026-11-12T08:27:21+00:00",
       "selected_ids": [
         "2611.14420",
         "2611.13528",
@@ -1295,20 +1295,6 @@
             "autonomously retrieving studying",
             "benchmarks involving different",
             "beyond factual retrieval"
-          ],
-          "matched_keywords": []
-        },
-        "2608.22237": {
-          "title": "Read Less, Solve More: Token-Efficient Sparse Reading of External Content for AI Agents",
-          "abstract": "Web-facing AI agents repeatedly access webpages, documents, repositories, and tool responses, yet reading interfaces often expose entire objects when only sparse evidence is needed. This over-reading increases token and latency costs and can dilute relevant evidence. We present SparseRead, a reusable reading control layer that governs content admission without modifying the agent model. Its Read Intent Protocol tracks evolving needs and source coverage; Adaptive Reader Backends select how evidence is located and exposed; and the Budgeted Read Gate bounds cumulative raw exposure per episode with faithful full-view fallback. A unified Reader interface supports interchangeable evidence acquisition across heterogeneous resources. Across six models, including Claude Opus 5, and five scenarios, SparseRead reduces total tokens by up to 92.9% and wall time by up to 89.0%, preserving or improving task quality in 97% settings. On Web deep-search tasks, it reduces tokens by 31.0--43.0% and task completion time by 23.0--37.0%. Ablations validate the three designs, while integration with three agent frameworks demonstrates portability.",
-          "categories": [],
-          "keywords": [
-            "access webpages documents",
-            "adaptive reader backends",
-            "agent frameworks demonstrates",
-            "agents repeatedly access",
-            "ai agents repeatedly",
-            "bounds cumulative raw"
           ],
           "matched_keywords": []
         },
@@ -26387,6 +26373,20 @@
           ],
           "matched_keywords": []
         },
+        "2608.22237": {
+          "title": "Read Less, Solve More: Token-Efficient Sparse Reading of External Content for AI Agents",
+          "abstract": "Web-facing AI agents repeatedly access webpages, documents, repositories, and tool responses, yet reading interfaces often expose entire objects when only sparse evidence is needed. This over-reading increases token and latency costs and can dilute relevant evidence. We present SparseRead, a reusable reading control layer that governs content admission without modifying the agent model. Its Read Intent Protocol tracks evolving needs and source coverage; Adaptive Reader Backends select how evidence is located and exposed; and the Budgeted Read Gate bounds cumulative raw exposure per episode with faithful full-view fallback. A unified Reader interface supports interchangeable evidence acquisition across heterogeneous resources. Across six models, including Claude Opus 5, and five scenarios, SparseRead reduces total tokens by up to 92.9% and wall time by up to 89.0%, preserving or improving task quality in 97% settings. On Web deep-search tasks, it reduces tokens by 31.0--43.0% and task completion time by 23.0--37.0%. Ablations validate the three designs, while integration with three agent frameworks demonstrates portability.",
+          "categories": [],
+          "keywords": [
+            "access webpages documents",
+            "adaptive reader backends",
+            "agent frameworks demonstrates",
+            "agents repeatedly access",
+            "ai agents repeatedly",
+            "bounds cumulative raw"
+          ],
+          "matched_keywords": []
+        },
         "2611.12932": {
           "title": "URL-Sim: Unified and Regulated LiDAR Simulation for High-Fidelity Reconstruction of Dynamic Driving Scenes",
           "abstract": "Reconstructing high-fidelity LiDAR simulation scenes from real-world driving logs is essential for cost-effective safety validation of autonomous driving systems. While simulators based on Neural Radiance Fields (NeRF) achieve realistic scene reconstruction, their large-scale adoption is limited by slow rendering speeds. Recent 3D Gaussian splatting (3DGS) approaches have improved rendering efficiency through explicit primitive representation and differentiable rasterization. However, existing 3DGS-based methods remain largely restricted to rigid vehicles and produce redundant primitives through unconstrained densification. To address these limitations, we propose URL-Sim, a unified and regulated dynamic LiDAR simulation framework. URL-Sim constructs a dynamic Gaussian scene graph that decouples the modeling of traffic participants, including vehicles, pedestrians, and cyclists, enabling accurate reconstruction of heterogeneous dynamic objects within a single framework. It further introduces a regulated Gaussian densification strategy that ranks primitives with multi-dimensional importance scores and allocates Gaussians to the most critical regions while keeping the total primitive count bounded. Experiments on the Waymo and KITTI-360 datasets demonstrate that URL-Sim achieves higher quantitative accuracy and visual quality than existing baselines under comparable primitive budgets, and accurately recovers the geometry and poses of diverse dynamic traffic participants.",
@@ -28330,9 +28330,9 @@
         }
       }
     },
-    "daily-0192ad33262d3ca718dd0b07": {
-      "run_id": "daily-0192ad33262d3ca718dd0b07",
-      "generated_at": "2026-11-12T08:27:21+00:00",
+    "daily-cefb90e78a834e6ae4ba9c66": {
+      "run_id": "daily-cefb90e78a834e6ae4ba9c66",
+      "generated_at": "2026-11-12T09:35:20+00:00",
       "selected_ids": [
         "2611.14420",
         "2611.13528",
@@ -29347,6 +29347,20 @@
             "benchmarks largely rely",
             "change subsequent user",
             "closed loop where"
+          ],
+          "matched_keywords": []
+        },
+        "2611.12869": {
+          "title": "Where Does Alignment Emerge and What Does It Mean? A Closer Look at the Platonic Representation Hypothesis",
+          "abstract": "The Platonic Representation Hypothesis (PRH) suggests that neural networks are converging toward similar representation spaces. As language models become more capable, their representations are aligning with those of vision models. However, recent work has questioned whether this trend continues to hold for newer language models. Moreover, it has been shown that representation similarity metrics can be confounded by model depth and width, requiring appropriate baselines for interpretation. In this work, we first investigate where alignment emerges between unimodal models across model layers and representation dimensions. Next, we find that the PRH capability-alignment trend persists for newer models as long as the captions are sufficiently clean and informative. Finally, we contextualize cross-modal alignment, introducing unimodal and multimodal baselines on various datasets. Our results show that the cross-modal representational alignment of unimodal models can surpass that of explicitly aligned vision-language models, but remains substantially behind the alignment observed for models of the same modality. Code is available at https://github.com/ExplainableML/prh-closer-look.",
+          "categories": [],
+          "keywords": [
+            "platonic representation hypothesis",
+            "alignment introducing unimodal",
+            "but remains substantially",
+            "capability-alignment trend persists",
+            "com explainableml prh-closer-look",
+            "contextualize cross-modal alignment"
           ],
           "matched_keywords": []
         },
