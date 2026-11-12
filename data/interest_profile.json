@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-11-12T09:35:20+00:00",
+  "updated_at": "2026-11-12T12:55:10+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-0192ad33262d3ca718dd0b07": {
-      "run_id": "daily-0192ad33262d3ca718dd0b07",
-      "generated_at": "2026-11-12T08:27:21+00:00",
+    "daily-cefb90e78a834e6ae4ba9c66": {
+      "run_id": "daily-cefb90e78a834e6ae4ba9c66",
+      "generated_at": "2026-11-12T09:35:20+00:00",
       "selected_ids": [
         "2611.14420",
         "2611.13528",
@@ -1351,6 +1351,20 @@
             "benchmarks largely rely",
             "change subsequent user",
             "closed loop where"
+          ],
+          "matched_keywords": []
+        },
+        "2611.12869": {
+          "title": "Where Does Alignment Emerge and What Does It Mean? A Closer Look at the Platonic Representation Hypothesis",
+          "abstract": "The Platonic Representation Hypothesis (PRH) suggests that neural networks are converging toward similar representation spaces. As language models become more capable, their representations are aligning with those of vision models. However, recent work has questioned whether this trend continues to hold for newer language models. Moreover, it has been shown that representation similarity metrics can be confounded by model depth and width, requiring appropriate baselines for interpretation. In this work, we first investigate where alignment emerges between unimodal models across model layers and representation dimensions. Next, we find that the PRH capability-alignment trend persists for newer models as long as the captions are sufficiently clean and informative. Finally, we contextualize cross-modal alignment, introducing unimodal and multimodal baselines on various datasets. Our results show that the cross-modal representational alignment of unimodal models can surpass that of explicitly aligned vision-language models, but remains substantially behind the alignment observed for models of the same modality. Code is available at https://github.com/ExplainableML/prh-closer-look.",
+          "categories": [],
+          "keywords": [
+            "platonic representation hypothesis",
+            "alignment introducing unimodal",
+            "but remains substantially",
+            "capability-alignment trend persists",
+            "com explainableml prh-closer-look",
+            "contextualize cross-modal alignment"
           ],
           "matched_keywords": []
         },
@@ -28330,9 +28344,9 @@
         }
       }
     },
-    "daily-cefb90e78a834e6ae4ba9c66": {
-      "run_id": "daily-cefb90e78a834e6ae4ba9c66",
-      "generated_at": "2026-11-12T09:35:20+00:00",
+    "daily-2464a09aaf45c5664f2f0bb9": {
+      "run_id": "daily-2464a09aaf45c5664f2f0bb9",
+      "generated_at": "2026-11-12T12:55:10+00:00",
       "selected_ids": [
         "2611.14420",
         "2611.13528",
@@ -29361,6 +29375,34 @@
             "capability-alignment trend persists",
             "com explainableml prh-closer-look",
             "contextualize cross-modal alignment"
+          ],
+          "matched_keywords": []
+        },
+        "2611.12304": {
+          "title": "Evolving Infra: Agent-Adaptive LLM Serving at Scale",
+          "abstract": "Agentic workloads are a major source of LLM inference demand. Existing prefill--decode (PD) disaggregated serving systems offer limited flexibility for runtime adaptation of compute allocation and KV cache management, and rely on coarse signals that only partly capture the diverse and dynamic agent workload. These limitations lead to load imbalance between prefill and decode nodes and eviction of KV caches that agents will reuse. We present Evolving Infra, an agent-adaptive serving framework that adapts compute allocation to agent workloads and KV cache management to agent context management at runtime. We decouple compute allocation from key--value (KV) cache management, allowing nodes to switch efficiently between prefill and decode. Building on this design, an online planner matches the PD split to workload composition, while an agent-aware distributed KV manager guides cache eviction and transfer with signals from agent context management. Across coding, math, and computer-use tasks with GLM-5.2 and Kimi K2.6 on up to 256 GB300 GPUs, Evolving Infra reduces mean end-to-end request latency and P95 TTFT by up to 4.1x and 14x over Dynamo, NVIDIA's production framework.",
+          "categories": [],
+          "keywords": [
+            "kv cache management",
+            "agent context management",
+            "evolving infra",
+            "compute allocation",
+            "adapts compute allocation",
+            "agent-adaptive llm serving"
+          ],
+          "matched_keywords": []
+        },
+        "2611.05862": {
+          "title": "CARTBench: Rubric-Based Evaluation of Shopping Advice for Complex and Ambiguous Requests with Timelines",
+          "abstract": "Large language model (LLM) shopping assistants now recommend products in multi-turn conversations. However, reliable evaluation faces Data scarcity and Difficulty Standardizing Criteria. To address these obstacles, we introduce CARTBench for CART (Complex and Ambiguous Requests with Timelines). For Data scarcity, we curate cases from real commercial shopping needs across 17 retail domains, pairing timestamped dialogue with 1,603 product records. For Difficulty Standardizing Criteria, we develop case-specific rubrics guided by Ideal Response Principles, distilled from excellent replies manually selected from successfully completed orders. These principles also guide Principle-Guided CART Prompting, our structured recommendation strategy. The experimental benchmark contains 1,328 expert-annotated criteria across Core, Excellence, and Safety. To answer the CART question, we evaluate 7 flagship commercial API models, including GPT-6.1-Sol and Claude-Opus-5, and 35B+ parameters open-weight models. In the first full-suite evaluation under the frozen rubrics, 3 of 10 models exceed 90% on Core, while none exceeds 45% on Excellence. Therefore, we identify an understanding-to-execution gap between required behavior and high-quality purchase advice. To examine these limitations, we diagnose shared failures in product evidence and unresolved needs, linked to changing requirements and decisive unknowns. Code and data are available at https://github.com/Da1yuqin/CARTBench.",
+          "categories": [],
+          "keywords": [
+            "difficulty standardizing criteria",
+            "ambiguous requests",
+            "cartbench",
+            "cart",
+            "shopping",
+            "assistants now recommend"
           ],
           "matched_keywords": []
         },
@@ -33756,11 +33798,11 @@
           ],
           "keywords": [
             "synapse-control",
-            "advice",
             "adding inference cost",
             "advice adding inference",
             "agent experience actionable",
-            "agent runtime whose"
+            "agent runtime whose",
+            "agents reuse execution"
           ],
           "matched_keywords": []
         },
