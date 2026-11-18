@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-11-18T09:57:46+00:00",
+  "updated_at": "2026-11-18T13:54:52+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-2921f4ad510578b67d47334d": {
-      "run_id": "daily-2921f4ad510578b67d47334d",
-      "generated_at": "2026-11-18T09:57:46+00:00",
+    "daily-669de09fbea4e3b6d1afb0bc": {
+      "run_id": "daily-669de09fbea4e3b6d1afb0bc",
+      "generated_at": "2026-11-18T13:54:52+00:00",
       "selected_ids": [
         "2611.22001",
         "2611.21782",
@@ -8705,6 +8705,54 @@
           ],
           "matched_keywords": []
         },
+        "2611.19857": {
+          "title": "PanDWM: Panoramic 4D Driving World Models",
+          "abstract": "Driving world models usually generate videos from six pinhole cameras with separate optical centres and small overlaps, and must learn to keep these views consistent. We present PanDWM, which stitches them into one 360^circ panoramic band. Camera boundaries then fall inside one image, so keeping the views consistent means keeping the image continuous, and each pixel still records its camera ray. Conditioned on layouts, a causal student generates the band window by window in four steps; it is distilled from a causal teacher and trained on its own rollouts. A feed-forward decoder lifts each frame along these rays into 3D Gaussians, and static Gaussians from neighbouring frames complete them into 4D scenes. On nuScenes, scored in one stitched 360^circ view, PanDWM has lower FID and FVD than the multi-camera baselines at 8-46times their speed, and keeps its 50-step teacher's FID while lowering FVD by 22-25%.",
+          "categories": [
+            "cs.CV"
+          ],
+          "keywords": [
+            "views consistent",
+            "pandwm",
+            "driving world",
+            "boundaries then fall",
+            "camera boundaries then",
+            "causal student generates"
+          ],
+          "matched_keywords": [
+            "world model"
+          ]
+        },
+        "2611.21382": {
+          "title": "VisualArtifactSpec 1.0: Evaluating Visual Artifacts under Task Specifications",
+          "abstract": "Visual artifact tasks test agents' ability to translate task specifications and source materials into outputs that meet practical needs. Evaluation across artifact families helps distinguish broadly applicable authoring capabilities from strengths confined to a particular medium. We introduce VisualArtifactSpec 1.0 (VAS), a benchmark of 211 creation and modification tasks spanning presentations, static graphics, animations and videos, and web interfaces. Each task specifies authoring objectives, source materials, constraints, and deliverables. Existing benchmarks provide limited support for systematically evaluating how authoring choices suit different audiences, purposes, and media across artifact families. VAS evaluates two aspects separately: Task Fulfillment verifies explicit requirements and applicable functionality, while Artifact Performance assesses Content, Organization, Visuals, and Delivery. Task-specific rating anchors instantiate shared criteria for the intended audience, purpose, and medium, with judgments grounded in source materials and artifact inspection records. We evaluate nine model-harness configurations on all 211 tasks. Overall scores range from 42.12 to 70.52, with Artifact Performance accounting for 73.4% of the gap between the highest- and lowest-scoring configurations.",
+          "categories": [
+            "cs.AI"
+          ],
+          "keywords": [
+            "source materials",
+            "artifact families",
+            "artifact performance",
+            "task specifications",
+            "anchors instantiate shared",
+            "applicable authoring capabilities"
+          ],
+          "matched_keywords": []
+        },
+        "2611.21421": {
+          "title": "AuXSpec: Learning to Autoformalize Program Specifications via Executable Postconditions",
+          "abstract": "Formal specifications define intended program behavior and underpin verification, but writing them in theorem provers such as Lean is slow and expertise-intensive, making specification a major bottleneck to scaling formally correct code. Autoformalization from natural-language problems is promising, yet training specification models requires scalable feedback on whether generated specifications capture intended behavior. Prior approaches obtain this feedback through explicit proofs or separately implemented code with formal correspondence proofs, both expensive. We introduce AuXSpec, a Lean framework that pairs declarative postconditions with executable counterparts, obtained through type class resolution when possible and otherwise defined separately with an equivalence proof. Test cases can then evaluate declarative specifications by execution, letting us use agreement as a reinforcement-learning reward. Using AuXSpec, we synthesize 3,037 LeetCode problems and expand training to 19.5K samples through expert iteration on Codeforces. Experiments show that training Qwen3.5-9B and Qwen3.8-27B with the execution-based reward improves SpecGen pass@4 on AuXSpec-Test 0.7% to 82.7% and 14.3% to 84.3%, and the 27B model outperforms all frontier models. On the out-of-domain Verina benchmark with its original prompts, both models improve 7.0% to 90.5% and 21.9% to 90.5% and surpass VeriSpecGen-30B-A3B, the prior state of the art among open-source specification models, on pass@1 (theirs 47.6% vs. ours 73.7% and 84.5%) and pass@4 (theirs 63.9% at pass@10 vs. ours 90.5%). We release the weights of the trained 9B and 27B models and the 3,037 problems with test cases, including the 300-problem AuXSpec-Test benchmark with expert review and correctness proofs for future evaluation. Models and data: https://huggingface.co/collections/eth-algopt/auxspec. Website: https://auxspec.org",
+          "categories": [],
+          "keywords": [
+            "auxspec",
+            "pass theirs",
+            "test cases",
+            "among open-source specification",
+            "art among open-source",
+            "autoformalize program specifications"
+          ],
+          "matched_keywords": []
+        },
         "2611.18666": {
           "title": "ReMoVe: Refining a Video Model's Own Motion for Coherent Human Video Generation",
           "abstract": "Video generation models have become increasingly capable of synthesizing realistic human motion, yet they often lose track of the very structure that makes the motion plausible. As generated human motion becomes more complex, videos can suffer from progressive body deformation and appearance drift across frames. Existing motion-controlled methods use explicit representations to stabilize generation, but typically rely on pre-defined motion sequences as references. This raises a fundamental question: if the base generator already produces a usable coarse motion, why replace it with an external one? ReMoVe answers this question by treating the coarse output as a motion hypothesis rather than a final result. ReMoVe recovers and refines the underlying motion, then renders the refined motion as 3D mesh and transfers facial appearance onto it, thereby improving motion accuracy and identity consistency. We further derive depth from the same 3D scene and camera trajectory to impose scene-level spatial consistency beyond the mesh. By jointly conditioning video generation models on mesh and depth, ReMoVe synthesizes high-quality motion videos with controllable camera trajectories and enhanced spatio-temporal consistency. Extensive experiments demonstrate that ReMoVe improves human structural stability, appearance consistency, temporal coherence, and motion-following fidelity, while retaining the base generator's motion prior and offering accurate camera control.",
@@ -8834,24 +8882,6 @@
             "build fliptest three-level",
             "control future dynamics",
             "controls go further"
-          ],
-          "matched_keywords": [
-            "world model"
-          ]
-        },
-        "2611.19857": {
-          "title": "PanDWM: Panoramic 4D Driving World Models",
-          "abstract": "Driving world models usually generate videos from six pinhole cameras with separate optical centres and small overlaps, and must learn to keep these views consistent. We present PanDWM, which stitches them into one $360^\\circ$ panoramic band. Camera boundaries then fall inside one image, so keeping the views consistent means keeping the image continuous, and each pixel still records its camera ray. Conditioned on layouts, a causal student generates the band window by window in four steps; it is distilled from a causal teacher and trained on its own rollouts. A feed-forward decoder lifts each frame along these rays into 3D Gaussians, and static Gaussians from neighbouring frames complete them into 4D scenes. On nuScenes, scored in one stitched $360^\\circ$ view, PanDWM has lower FID and FVD than the multi-camera baselines at $8$-$46\\times$ their speed, and keeps its 50-step teacher's FID while lowering FVD by 22-25%.",
-          "categories": [
-            "cs.CV"
-          ],
-          "keywords": [
-            "views consistent",
-            "pandwm",
-            "driving world",
-            "boundaries then fall",
-            "camera boundaries then",
-            "causal student generates"
           ],
           "matched_keywords": [
             "world model"
@@ -16028,22 +16058,6 @@
             "agent stating hidden",
             "answers---that appear nowhere",
             "benchleaking now affects"
-          ],
-          "matched_keywords": []
-        },
-        "2611.21382": {
-          "title": "VisualArtifactSpec 1.0: Evaluating Visual Artifacts under Task Specifications",
-          "abstract": "Visual artifact tasks test agents' ability to translate task specifications and source materials into outputs that meet practical needs. Evaluation across artifact families helps distinguish broadly applicable authoring capabilities from strengths confined to a particular medium. We introduce VisualArtifactSpec 1.0 (VAS), a benchmark of 211 creation and modification tasks spanning presentations, static graphics, animations and videos, and web interfaces. Each task specifies authoring objectives, source materials, constraints, and deliverables. Existing benchmarks provide limited support for systematically evaluating how authoring choices suit different audiences, purposes, and media across artifact families. VAS evaluates two aspects separately: Task Fulfillment verifies explicit requirements and applicable functionality, while Artifact Performance assesses Content, Organization, Visuals, and Delivery. Task-specific rating anchors instantiate shared criteria for the intended audience, purpose, and medium, with judgments grounded in source materials and artifact inspection records. We evaluate nine model-harness configurations on all 211 tasks. Overall scores range from 42.12 to 70.52, with Artifact Performance accounting for 73.4% of the gap between the highest- and lowest-scoring configurations.",
-          "categories": [
-            "cs.AI"
-          ],
-          "keywords": [
-            "source materials",
-            "artifact families",
-            "artifact performance",
-            "task specifications",
-            "anchors instantiate shared",
-            "applicable authoring capabilities"
           ],
           "matched_keywords": []
         },
