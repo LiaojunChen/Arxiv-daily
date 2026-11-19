@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-11-19T08:55:01+00:00",
+  "updated_at": "2026-11-19T10:05:03+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-a756c36fda88bac5152b8825": {
-      "run_id": "daily-a756c36fda88bac5152b8825",
-      "generated_at": "2026-11-19T08:55:01+00:00",
+    "daily-58e37eb6c6b93c12e4378487": {
+      "run_id": "daily-58e37eb6c6b93c12e4378487",
+      "generated_at": "2026-11-19T10:05:03+00:00",
       "selected_ids": [
         "2611.24408",
         "2611.24062",
@@ -1525,20 +1525,6 @@
           ],
           "matched_keywords": []
         },
-        "2611.14848": {
-          "title": "Tideway: Phase-Aware Tiered Memory Management for MoE Inference on Consumer Devices",
-          "abstract": "Large language model (LLM) agents are rapidly becoming a dominant paradigm for AI applications. Recently, there is a growing demand to deploy large-scale Mixture-of-Experts (MoE) models locally on consumer PCs to balance data privacy, API costs, and inference efficiency. However, unlike datacenter servers with abundant DRAM, consumer devices are tightly constrained in both GPU VRAM and host RAM, forcing massive MoE weights to spill across VRAM, host RAM, and SSD. Under such spilling, we observe that existing systems fail to fully utilize this memory hierarchy, treating the tiers as independent caches and thrashing in inference.\n  We present TIDEWAY, a system for efficient inference of large MoE models on memory-constrained consumer devices. Our core insight is to manage host RAM and GPU VRAM as a unified memory pool. Within this pool, TIDEWAY couples phase-aware memory layouts, which adapt to the distinct access patterns of prefill and decode, with an execution engine that optimizes CUDA Graph execution under expert paging. Our evaluations on representative consumer hardware with frontier MoE models demonstrate that TIDEWAY significantly outperforms state-of-the-art systems. On average, TIDEWAY achieves speedups of 1.97x in end-to-end latency and 2.40x in Time-to-First-Token (TTFT), along with 1.61x higher decode throughput against the fastest baseline.\n  Our source code is publicly available at https://github.com/Afterglow231/Tideway .",
-          "categories": [],
-          "keywords": [
-            "consumer devices",
-            "host ram",
-            "tideway",
-            "gpu vram",
-            "moe",
-            "abundant dram consumer"
-          ],
-          "matched_keywords": []
-        },
         "2611.24154": {
           "title": "Game2Player: Scaling Gameplay Experience for Visual Agents through Environment-Player Co-Development",
           "abstract": "Games are a rich testbed for visual agents, demanding perception, long-horizon planning, and precise control. However, collecting human gameplay is costly, and learning from gameplay videos requires inferring missing actions. Existing datasets also cover a limited range of games, often without explicit tasks or verifiable outcomes. To address these gaps, we introduce Game2Player, a framework that co-develops game environments and players to collect diverse and verifiable gameplay experience at scale. In the Game2Player loop, a Builder agent adapts existing web games, exposes their internal state, and defines tasks with state-based progress measures and success checks. A Coding Player and a VLM Player then attempt the tasks and report problems to the Builder for repair, so that play serves as both environment validation and training data collection. With Game2Player, we build 568 verified web games with 3,436 tasks, collect 15.7K trajectories (307 hours of gameplay), and hold out 50 games as the benchmark PlayerBench. To evaluate the collected experience as training data, we train VLM agents with progress-weighted SFT, assigning greater weight to steps that advance task progress. Game2Player-9B improves progress from 14.3% to 31.2% on PlayerBench and from 30.0% to 53.1% on the external GameWorld benchmark. More broadly, our work suggests a path for visual agents to scale their gameplay experience by building, verifying, and learning from existing game worlds.",
@@ -1602,37 +1588,6 @@
           ],
           "matched_keywords": []
         },
-        "2611.24576": {
-          "title": "Late Entry in Looped Language Models",
-          "abstract": "Looped language models deepen reasoning at a compact parameter count by iterating a shared layer stack T times per token, turning recurrence depth directly into sequential decoding latency. Conventional early-exit decoding halts after initial passes without cache completion, truncating cached key-value states of past tokens to shallow depth. We study the opposite strategy, late entry, where new tokens skip initial passes and enter directly into the final K < T passes over a deep context cache. Once lightweight fine-tuning resolves hidden-state norm mismatch at the entry boundary, deep cached context substitutes for skipped token-local passes, allowing late entry to outperform matched early exit across model families and pass budgets. To turn this asymmetry into wall-clock speedups without stalling to build deep caches, candidate blocks verify through only the final K passes on the critical path while previously committed tokens complete passes 1 -> T alongside subsequent steps at zero extra serial calls. Projecting these finished T-pass wake states inside the existing output GEMM (Wake verification, governed by logit-margin tolerance tau in [0, inf]) unifies greedy-exact T-pass decoding (tau = 0, matching K = T block decoding within bf16 reduction order), margin-gated verification (tau > 0), and non-rollback lossy late entry (tau = inf) inside a single static CUDA graph. On Ouro-2.6B (T = 4), K = 2 Wake reaches 5.2x greedy-exact speedup at tau = 0 (+26% over K = 4 block decoding on GSM8K) and 6.8x at tau = inf (+16.9 points over trained early exit at matched speed). Scaling test-time recurrence across T in {8, 16, 32, 64} on Huginn-3.5B cuts K = T/4 rollbacks 21.5x with depth, driving greedy-exact (tau = 0) speedups to 6.1x (T = 32) and 8.4x (T = 64, +153% over K = 64 block) and tau = inf speedups to 10.6 to 12.5x.",
-          "categories": [],
-          "keywords": [
-            "late entry",
-            "tau inf",
-            "block decoding",
-            "early exit",
-            "final passes",
-            "initial passes"
-          ],
-          "matched_keywords": []
-        },
-        "2611.24681": {
-          "title": "DrawScore: Evaluating Generated CAD Models against Engineering Drawings",
-          "abstract": "Automatic CAD generation is commonly evaluated with volumetric IoU, Chamfer Distance, and surface F-score, which barely penalize local errors that occupy only a small fraction of a part's volume or surface area, such as a misplaced hole or a slot on the wrong face, even though such errors are critical to manufacturing. We formalize these metrics in a unified integral form and show that the weight of a local error decays as the $(k+q)$-th power of its size, where $k$ is the dimension of the integration domain and $q$ is determined by the penalty function. Guided by this analysis, we propose DrawScore, which projects both models into three orthographic views with visible and hidden lines, as in engineering drawings, and applies a saturating penalty along the projected curves, so that the weight of a local error decays only linearly. Controlled experiments confirm the predicted decay orders, and on outputs of existing CAD generation agents, DrawScore exposes errors in outputs that IoU rates as nearly perfect. DrawScore further improves generation as a reinforcement learning reward and, for CAD generation from engineering drawings, serves as a test-time verifier without 3D ground truth or an additional reward model. Our code is available at this https URL.",
-          "categories": [
-            "cs.CV",
-            "cs.SE"
-          ],
-          "keywords": [
-            "local error decays",
-            "cad generation",
-            "engineering drawings",
-            "drawscore",
-            "against engineering drawings",
-            "agents drawscore exposes"
-          ],
-          "matched_keywords": []
-        },
         "2611.23824": {
           "title": "Evidence-Based Credit Assignment for Search-Augmented Language Models",
           "abstract": "Reinforcement learning from terminal answer rewards enables search-augmented language models to interleave reasoning and retrieval without step-level annotations, yet outcome supervision assigns identical credit to every search in a trajectory regardless of whether it retrieved useful information. This limitation is especially severe when all sampled rollouts for a question fail, collapsing group-centered outcome advantages to zero even when trajectories gather markedly different evidence. We present Evidence-based Credit Assignment (ECA), which augments terminal outcome rewards with a training-only auxiliary signal measuring how retrieved documents improve the likelihood of a reference answer. Rather than scoring the full dialogue prefix, ECA queries a frozen snapshot of the current policy under an evidence-only prompt containing solely the question and the deduplicated documents observed so far, isolating the utility of retrieved passages from surface variations in generated thoughts or search queries. Within this framework, we compare two return formulations, ECA-Step (which accumulates step-clipped potential increments) and ECA-Horizon (which preserves the telescoping horizon gain in potential), paired with cross-fold group normalization, novelty gating, and search-local token assignment. Across seven Search QA benchmarks, ECA-Horizon improves strict macro exact match over an outcome-only GRPO baseline by 1.03 and 4.80 percentage points on Qwen2.5-3B- and 7B-Instruct, respectively, outperforming both RLOO and GiGPO. Zero-shot evaluation on MultiHop-RAG further demonstrates strong transfer to multi-hop inference queries.",
@@ -1649,22 +1604,6 @@
           ],
           "matched_keywords": []
         },
-        "2611.24941": {
-          "title": "UltraTex: Aligning Physical Knowledge for High-Fidelity PBR Texture Generation",
-          "abstract": "Generating physically based rendering (PBR) texture maps for a 3D mesh from a single reference image is highly ambiguous, as the observed appearance entangles material identity, surface reflectance, and illumination. While current generative methods produce realistic albedo maps, they still struggle to infer accurate metallic and roughness attributes for relighting. We present UltraTex, a cascaded multi-view framework that moves beyond appearance matching by integrating physical knowledge into multi-view diffusion-based PBR generation. UltraTex first jointly predicts albedo and world-space shading normals to generate more detailed albedo maps, and then predicts metallic-roughness (MR) maps conditioned on the generated albedo, reference image, and material semantic priors. To inject material semantics, a lightweight adapter transforms hidden-layer features of a vision-language model (VLM) into intrinsic material representation tokens, providing part-level knowledge anchors for MR estimation. To model material-light interaction, photometric representation alignment guides intermediate diffusion features toward ground-truth material renderings under controlled lighting. This makes metallic and roughness variations observable through highlight intensity, specular sharpness, and local reflectance contrast, providing stronger guidance for fine-grained material prediction without explicit lighting supervision. Extensive experiments show that UltraTex generates high-quality textures and outperforms existing open-source and commercial methods in visual fidelity, material accuracy, and physical plausibility.",
-          "categories": [
-            "cs.CV"
-          ],
-          "keywords": [
-            "ultratex",
-            "albedo maps",
-            "pbr texture",
-            "physical knowledge",
-            "reference image",
-            "material"
-          ],
-          "matched_keywords": []
-        },
         "2607.21179": {
           "title": "Out of Sight, Still in Mind: Token Compression for Omni-LLMs",
           "abstract": "The goal of this paper is to reduce the input token cost of Omni-modal large language models (Omni-LLMs) at inference time. Omni-LLMs reason jointly over audio, video and text, but the cost of the three streams is highly unbalanced: visual tokens account for the vast majority of the input, and are highly redundant. In this paper, we propose ReMo, a training-free framework that compresses visual tokens by redistributing their information across modalities: a visual token is kept only if its information appears nowhere else. ReMo achieves this in two ways: (i) it aligns audio and video in a shared space via closed-form calibration, and removes visual tokens already explained by the audio or by other visual tokens; and (ii) it replaces object-level visual tokens, identified by a lightweight object detector, with compact text proxies, short descriptions of each object and its location, conveying the same content in far fewer tokens. On Qwen2.5-Omni at two model scales, ReMo removes 54% of the input tokens with comparable accuracy. It performs comparably to the full-token model, reaching 101.2% and 101.4% of its average accuracy over five audio-visual benchmarks.",
@@ -1676,24 +1615,6 @@
             "appears nowhere else",
             "compact text proxies",
             "compresses visual tokens"
-          ],
-          "matched_keywords": []
-        },
-        "2611.24830": {
-          "title": "A Foundation Model to Measure and Predict Human Behaviour",
-          "abstract": "Large language models (LLMs) are increasingly used to infer psychological attributes, predict individual behaviour, and simulate human populations. However, despite generating plausible responses, they often misrepresent individuals and distort population statistics. Here we introduce Chiron, a foundation model to measure and predict human behaviour. We jointly fine-tune an LLM to represent psychological constructs, predict individual behaviour, and align population response distributions with human statistics. The training and evaluation data span 36 behavioural domains and 78 social science experiments, comprising 288,307 person records, 1,411,750 atomic behavioural decisions, and 99,953 psychometric assessments over 109 psychological constructs. In our evaluations, Chiron's psychological measurements agree more closely with human self-reports and exhibit fewer biases that undermine psychometric validity. It predicts individual behaviour more accurately than frontier LLMs (up to 28.4% relative improvement). In simulations of social science experiments, it more accurately captures the direction and magnitude of human experimental effects (82.2--94.3% lower effect-size estimation error). Together, these results establish Chiron as a unified computational instrument for measuring and predicting human behaviour.",
-          "categories": [
-            "cs.CL",
-            "cs.AI",
-            "cs.HC"
-          ],
-          "keywords": [
-            "predict human behaviour",
-            "predict individual behaviour",
-            "social science experiments",
-            "psychological constructs",
-            "chiron",
-            "align population response"
           ],
           "matched_keywords": []
         },
@@ -8789,6 +8710,52 @@
             "table",
             "allowing shared knowledge",
             "current hidden state"
+          ],
+          "matched_keywords": []
+        },
+        "2611.17600": {
+          "title": "LightTAR: Light and Fast Target-Aware Representations for Multimodal Tabular Learning",
+          "abstract": "Multimodal tabular learning involves classification and regression on tables combining structured numerical and categorical features with unstructured text and images. These unstructured fields are commonly represented by pretrained encoder embeddings reduced with principal component analysis (PCA). This reduction prioritizes input variance but may overlook information relevant to predicting the target. We introduce LightTAR, a simple, inexpensive method that adapts dimensionality reduction to the prediction task. LightTAR augments the standard PCA representation with a few target-aware features extracted jointly from the final and an intermediate encoder layer using regularized partial least squares (PLS). We evaluate LightTAR with 21 tabular models, including tree ensembles, neural networks, and tabular foundation models. LightTAR improves average predictive performance for all models and, averaged across models, improves prediction on almost every MulTaBench dataset. These gains come with a small increase in total runtime relative to PCA representations. LightTAR integrates directly into existing encoding pipelines, improving tabular learners' predictive performance without modifying the encoder or the learner.",
+          "categories": [
+            "cs.LG",
+            "cs.CL",
+            "cs.CV"
+          ],
+          "keywords": [
+            "lighttar",
+            "multimodal tabular",
+            "predictive performance",
+            "pca",
+            "adapts dimensionality reduction",
+            "almost every multabench"
+          ],
+          "matched_keywords": []
+        },
+        "2611.24654": {
+          "title": "CurvDelta: Low-Curvature Delta Modeling For Surgical Learning and Unlearning",
+          "abstract": "A central challenge in adapting large language models (LLMs) is capability preservation: an adaptation can achieve its target while degrading general capabilities. We introduce CurvDelta, a scalable framework that incorporates the preservation constraint into the parameterization of the model update. By analyzing the local geometry of the preservation constraint around the pre-adaptation model, CurvDelta constructs a low-curvature space in which parameter updates leave the preservation loss nearly invariant. We make its construction practical for LLMs through Kronecker-factored approximate curvature (K-FAC) and a factorized projection. We also introduce CurvLoRA, a low-rank variant within the same preservation geometry, designed for more efficient adaptation. Both methods apply to preservation-constrained adaptation tasks such as capability learning and selective unlearning. We evaluate our methods on mathematical reasoning, code generation, and knowledge unlearning. For mathematical reasoning and code generation, our approaches achieve competitive downstream performance while better preserving general capabilities, offering a favorable acquisition--retention trade-off relative to the baselines. For knowledge unlearning, our main results on TOFU and MUSE show a better balance between targeted forgetting and knowledge retention than the baselines, with retention performance close to the from-scratch retraining reference.",
+          "categories": [],
+          "keywords": [
+            "knowledge unlearning",
+            "preservation constraint",
+            "curvdelta",
+            "general capabilities",
+            "code generation",
+            "mathematical reasoning"
+          ],
+          "matched_keywords": []
+        },
+        "2611.23236": {
+          "title": "PGPO: Prototype-Guided Progressive Obfuscation for Privacy-Preserving LLM-Enhanced Recommendation",
+          "abstract": "LLM-enhanced recommender systems encode item side information into semantic embeddings, but these embeddings may leak sensitive textual attributes through inversion attacks. Existing input-side defenses rely on trusted collection or local token perturbation, often disrupting the inter-item semantic topology needed for recommendation. To address it, we introduce relational fidelity as the key objective, requiring semantic shift for privacy while preserving relative item relations for utility. Based on this principle, we propose prototype-guided progressive obfuscation (PGPO), which learns topology-aware obfuscation anchors for high-influence prototype words and propagates them through a static semantic graph. PGPO is optimized with GRPO using individual dissimilarity, structural consistency, and semantic constraint rewards. Experiments on two benchmarks show strong inversion defense with near-upper-bound recommendation performance. The code is available at https://github.com/Shengxiang-Lin/PGPO.",
+          "categories": [],
+          "keywords": [
+            "prototype-guided progressive obfuscation",
+            "pgpo",
+            "attributes through inversion",
+            "benchmarks show strong",
+            "com shengxiang-lin pgpo",
+            "dissimilarity structural consistency"
           ],
           "matched_keywords": []
         },
@@ -30493,24 +30460,6 @@
           ],
           "matched_keywords": []
         },
-        "2611.17600": {
-          "title": "LightTAR: Light and Fast Target-Aware Representations for Multimodal Tabular Learning",
-          "abstract": "Multimodal tabular learning involves classification and regression on tables combining structured numerical and categorical features with unstructured text and images. These unstructured fields are commonly represented by pretrained encoder embeddings reduced with principal component analysis (PCA). This reduction prioritizes input variance but may overlook information relevant to predicting the target. We introduce LightTAR, a simple, inexpensive method that adapts dimensionality reduction to the prediction task. LightTAR augments the standard PCA representation with a few target-aware features extracted jointly from the final and an intermediate encoder layer using regularized partial least squares (PLS). We evaluate LightTAR with 21 tabular models, including tree ensembles, neural networks, and tabular foundation models. LightTAR improves average predictive performance for all models and, averaged across models, improves prediction on almost every MulTaBench dataset. These gains come with a small increase in total runtime relative to PCA representations. LightTAR integrates directly into existing encoding pipelines, improving tabular learners' predictive performance without modifying the encoder or the learner.",
-          "categories": [
-            "cs.LG",
-            "cs.CL",
-            "cs.CV"
-          ],
-          "keywords": [
-            "lighttar",
-            "multimodal tabular",
-            "predictive performance",
-            "pca",
-            "adapts dimensionality reduction",
-            "almost every multabench"
-          ],
-          "matched_keywords": []
-        },
         "2611.17712": {
           "title": "A Tumour-Aware Multimodal Framework for Explainable Prediction of IDH Mutation in Gliomas from Multi-Sequence MRI",
           "abstract": "Accurate prediction of isocitrate dehydrogenase (IDH) mutation status is essential for glioma diagnosis, prognosis, and treatment planning. Although recent deep learning approaches have demonstrated promising performance, many rely on whole-brain feature extraction and provide limited interpretability. This study proposes a tumour-aware multimodal framework for explainable, non-invasive prediction of IDH mutation status from multiparametric magnetic resonance imaging (MRI). The proposed framework integrates four MRI sequences (T1, T1CE, T2, and FLAIR), tumour subregion segmentation, quantitative radiomic descriptors, and clinical information within a unified deep learning architecture. An ablation study was conducted to evaluate the contribution of tumour-aware learning, radiomic features, and clinical variables. Model performance was assessed using multiple complementary evaluation metrics, including accuracy, precision, recall, F1-score, balanced accuracy, receiver operating characteristic analysis, confusion matrix evaluation, and Grad-CAM visualisation. Experimental results demonstrated that the proposed multimodal framework consistently outperformed the baseline MRI-only model, with the Clinical Fusion model achieving the strongest overall predictive performance. The integration of tumour-aware learning, radiomic descriptors, and clinical information progressively improved classification performance, while Grad-CAM visualisations indicated that the model predominantly focused on biologically relevant tumour regions. These findings suggest that tumour-aware multimodal feature integration enables accurate, interpretable, and non-invasive molecular profiling of gliomas and provides a promising foundation for future clinical decision support in precision neuro-oncology.",
@@ -31104,11 +31053,11 @@
           ],
           "keywords": [
             "multi-agent reinforcement",
-            "unlearning",
             "adversarial auditing tests",
             "agents learn productive",
             "alternatives while adversarial",
-            "auditing tests whether"
+            "auditing tests whether",
+            "carve reduces mean"
           ],
           "matched_keywords": []
         },
@@ -41521,6 +41470,85 @@
             "cartbench",
             "assistants now recommend",
             "benchmark contains expert-annotated"
+          ],
+          "matched_keywords": []
+        },
+        "2611.14848": {
+          "title": "Tideway: Phase-Aware Tiered Memory Management for MoE Inference on Consumer Devices",
+          "abstract": "Large language model (LLM) agents are rapidly becoming a dominant paradigm for AI applications. Recently, there is a growing demand to deploy large-scale Mixture-of-Experts (MoE) models locally on consumer PCs to balance data privacy, API costs, and inference efficiency. However, unlike datacenter servers with abundant DRAM, consumer devices are tightly constrained in both GPU VRAM and host RAM, forcing massive MoE weights to spill across VRAM, host RAM, and SSD. Under such spilling, we observe that existing systems fail to fully utilize this memory hierarchy, treating the tiers as independent caches and thrashing in inference.\n  We present TIDEWAY, a system for efficient inference of large MoE models on memory-constrained consumer devices. Our core insight is to manage host RAM and GPU VRAM as a unified memory pool. Within this pool, TIDEWAY couples phase-aware memory layouts, which adapt to the distinct access patterns of prefill and decode, with an execution engine that optimizes CUDA Graph execution under expert paging. Our evaluations on representative consumer hardware with frontier MoE models demonstrate that TIDEWAY significantly outperforms state-of-the-art systems. On average, TIDEWAY achieves speedups of 1.97x in end-to-end latency and 2.40x in Time-to-First-Token (TTFT), along with 1.61x higher decode throughput against the fastest baseline.\n  Our source code is publicly available at https://github.com/Afterglow231/Tideway .",
+          "categories": [],
+          "keywords": [
+            "consumer devices",
+            "host ram",
+            "tideway",
+            "gpu vram",
+            "moe",
+            "abundant dram consumer"
+          ],
+          "matched_keywords": []
+        },
+        "2611.24576": {
+          "title": "Late Entry in Looped Language Models",
+          "abstract": "Looped language models deepen reasoning at a compact parameter count by iterating a shared layer stack T times per token, turning recurrence depth directly into sequential decoding latency. Conventional early-exit decoding halts after initial passes without cache completion, truncating cached key-value states of past tokens to shallow depth. We study the opposite strategy, late entry, where new tokens skip initial passes and enter directly into the final K < T passes over a deep context cache. Once lightweight fine-tuning resolves hidden-state norm mismatch at the entry boundary, deep cached context substitutes for skipped token-local passes, allowing late entry to outperform matched early exit across model families and pass budgets. To turn this asymmetry into wall-clock speedups without stalling to build deep caches, candidate blocks verify through only the final K passes on the critical path while previously committed tokens complete passes 1 -> T alongside subsequent steps at zero extra serial calls. Projecting these finished T-pass wake states inside the existing output GEMM (Wake verification, governed by logit-margin tolerance tau in [0, inf]) unifies greedy-exact T-pass decoding (tau = 0, matching K = T block decoding within bf16 reduction order), margin-gated verification (tau > 0), and non-rollback lossy late entry (tau = inf) inside a single static CUDA graph. On Ouro-2.6B (T = 4), K = 2 Wake reaches 5.2x greedy-exact speedup at tau = 0 (+26% over K = 4 block decoding on GSM8K) and 6.8x at tau = inf (+16.9 points over trained early exit at matched speed). Scaling test-time recurrence across T in {8, 16, 32, 64} on Huginn-3.5B cuts K = T/4 rollbacks 21.5x with depth, driving greedy-exact (tau = 0) speedups to 6.1x (T = 32) and 8.4x (T = 64, +153% over K = 64 block) and tau = inf speedups to 10.6 to 12.5x.",
+          "categories": [],
+          "keywords": [
+            "late entry",
+            "tau inf",
+            "block decoding",
+            "early exit",
+            "final passes",
+            "initial passes"
+          ],
+          "matched_keywords": []
+        },
+        "2611.24681": {
+          "title": "DrawScore: Evaluating Generated CAD Models against Engineering Drawings",
+          "abstract": "Automatic CAD generation is commonly evaluated with volumetric IoU, Chamfer Distance, and surface F-score, which barely penalize local errors that occupy only a small fraction of a part's volume or surface area, such as a misplaced hole or a slot on the wrong face, even though such errors are critical to manufacturing. We formalize these metrics in a unified integral form and show that the weight of a local error decays as the $(k+q)$-th power of its size, where $k$ is the dimension of the integration domain and $q$ is determined by the penalty function. Guided by this analysis, we propose DrawScore, which projects both models into three orthographic views with visible and hidden lines, as in engineering drawings, and applies a saturating penalty along the projected curves, so that the weight of a local error decays only linearly. Controlled experiments confirm the predicted decay orders, and on outputs of existing CAD generation agents, DrawScore exposes errors in outputs that IoU rates as nearly perfect. DrawScore further improves generation as a reinforcement learning reward and, for CAD generation from engineering drawings, serves as a test-time verifier without 3D ground truth or an additional reward model. Our code is available at this https URL.",
+          "categories": [
+            "cs.CV",
+            "cs.SE"
+          ],
+          "keywords": [
+            "local error decays",
+            "cad generation",
+            "engineering drawings",
+            "drawscore",
+            "against engineering drawings",
+            "agents drawscore exposes"
+          ],
+          "matched_keywords": []
+        },
+        "2611.24941": {
+          "title": "UltraTex: Aligning Physical Knowledge for High-Fidelity PBR Texture Generation",
+          "abstract": "Generating physically based rendering (PBR) texture maps for a 3D mesh from a single reference image is highly ambiguous, as the observed appearance entangles material identity, surface reflectance, and illumination. While current generative methods produce realistic albedo maps, they still struggle to infer accurate metallic and roughness attributes for relighting. We present UltraTex, a cascaded multi-view framework that moves beyond appearance matching by integrating physical knowledge into multi-view diffusion-based PBR generation. UltraTex first jointly predicts albedo and world-space shading normals to generate more detailed albedo maps, and then predicts metallic-roughness (MR) maps conditioned on the generated albedo, reference image, and material semantic priors. To inject material semantics, a lightweight adapter transforms hidden-layer features of a vision-language model (VLM) into intrinsic material representation tokens, providing part-level knowledge anchors for MR estimation. To model material-light interaction, photometric representation alignment guides intermediate diffusion features toward ground-truth material renderings under controlled lighting. This makes metallic and roughness variations observable through highlight intensity, specular sharpness, and local reflectance contrast, providing stronger guidance for fine-grained material prediction without explicit lighting supervision. Extensive experiments show that UltraTex generates high-quality textures and outperforms existing open-source and commercial methods in visual fidelity, material accuracy, and physical plausibility.",
+          "categories": [
+            "cs.CV"
+          ],
+          "keywords": [
+            "ultratex",
+            "albedo maps",
+            "pbr texture",
+            "physical knowledge",
+            "reference image",
+            "material"
+          ],
+          "matched_keywords": []
+        },
+        "2611.24830": {
+          "title": "A Foundation Model to Measure and Predict Human Behaviour",
+          "abstract": "Large language models (LLMs) are increasingly used to infer psychological attributes, predict individual behaviour, and simulate human populations. However, despite generating plausible responses, they often misrepresent individuals and distort population statistics. Here we introduce Chiron, a foundation model to measure and predict human behaviour. We jointly fine-tune an LLM to represent psychological constructs, predict individual behaviour, and align population response distributions with human statistics. The training and evaluation data span 36 behavioural domains and 78 social science experiments, comprising 288,307 person records, 1,411,750 atomic behavioural decisions, and 99,953 psychometric assessments over 109 psychological constructs. In our evaluations, Chiron's psychological measurements agree more closely with human self-reports and exhibit fewer biases that undermine psychometric validity. It predicts individual behaviour more accurately than frontier LLMs (up to 28.4% relative improvement). In simulations of social science experiments, it more accurately captures the direction and magnitude of human experimental effects (82.2--94.3% lower effect-size estimation error). Together, these results establish Chiron as a unified computational instrument for measuring and predicting human behaviour.",
+          "categories": [
+            "cs.CL",
+            "cs.AI",
+            "cs.HC"
+          ],
+          "keywords": [
+            "predict human behaviour",
+            "predict individual behaviour",
+            "social science experiments",
+            "psychological constructs",
+            "chiron",
+            "align population response"
           ],
           "matched_keywords": []
         },
