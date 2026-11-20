@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-11-20T08:42:00+00:00",
+  "updated_at": "2026-11-20T09:53:23+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-c5d2c4a6b13dabd0101daf2c": {
-      "run_id": "daily-c5d2c4a6b13dabd0101daf2c",
-      "generated_at": "2026-11-20T08:42:00+00:00",
+    "daily-afa9d93cdc6e7d1894f09ed2": {
+      "run_id": "daily-afa9d93cdc6e7d1894f09ed2",
+      "generated_at": "2026-11-20T09:53:23+00:00",
       "selected_ids": [
         "2611.25838",
         "2611.26464",
@@ -1317,23 +1317,6 @@
           ],
           "matched_keywords": []
         },
-        "2611.21373": {
-          "title": "WeVisForensics: Self-Evolving Agent for Omni AI-Generated Video Detection",
-          "abstract": "Recent advances in video generation call for reliable detection grounded in explicit forensic evidence. However, current methods primarily depend on single-pass chain-of-thought reasoning that overlooks brief or localized artifacts, or on predefined multi-agent workflows that offer limited flexibility in selecting relevant inspections. Even with adaptive investigation, optimizing the investigation policy alone does not directly improve the forensic capabilities of fixed experts. We introduce WeVisForensics, an agentic framework in which a main investigator agent coordinates a self-evolving library of forensic inspector sub-agents spanning visual and audio cues. The investigator learns which artifact type to examine, over which window, and when to conclude, and these interactions provide shared feedback for both levels of agents. Our dual-timescale policy optimization strategy, DTPO, closes this loop through fast reinforcement learning of the investigator and slower refinement of the inspectors, guided by annotated artifact intervals, to report subtle artifacts they once dismissed. Furthermore, we curate ForenCue-30K, combining role-specific forensic annotations and interaction trajectories to supervise individual inspections and their coordination, with an accompanying reinforcement-learning pool. Experiments show that WeVisForensics averages 95.2% detection accuracy across in-domain, out-of-domain and agentic benchmarks, 9.0% above the strongest prior detector, while grounding its verdicts in localized evidence.",
-          "categories": [
-            "cs.CV",
-            "cs.AI"
-          ],
-          "keywords": [
-            "wevisforensics",
-            "forensic",
-            "investigator",
-            "accompanying reinforcement-learning pool",
-            "adaptive investigation optimizing",
-            "agent coordinates self-evolving"
-          ],
-          "matched_keywords": []
-        },
         "2611.21383": {
           "title": "The Mask Is Not the Object: Volumetric Supervision for 3D Gaussian Segmentation",
           "abstract": "3D Gaussian Splatting enables object-level operations on Gaussian primitives, yet existing segmentation methods are largely trained and evaluated through rendered views. This mismatch can produce accurate rendered masks from incomplete 3D selections since alpha-blended feature supervision concentrates learning on dominant contributors while leaving occluded or low-contribution Gaussians weakly supervised. We propose VODA, a plug-and-play supervision objective that exploits local depth structure to group per-pixel contributors and directly supervises all Gaussians in selected depth clusters, bypassing contribution-weighted gradient delivery. To evaluate volumetric completeness, we introduce Removal-3D, a synthetic object-removal benchmark, and the Removal Depth Error (RDE), a metric comparing predicted and ground-truth depth changes. Across four rendering-based baselines, VODA consistently improves volumetric segmentation on Removal-3D while maintaining or improving performance on LERF and ScanNet. Further analysis shows that VODA recovers lower-contribution Gaussians, while simple gradient reweighting and spatial propagation fail to reproduce comparable gains.",
@@ -1348,57 +1331,6 @@
             "baselines voda consistently",
             "bypassing contribution-weighted gradient",
             "clusters bypassing contribution-weighted"
-          ],
-          "matched_keywords": []
-        },
-        "2611.19230": {
-          "title": "CompoundingKernel: Self-Improving from Zero to First",
-          "abstract": "We present CompoundingKernel, a self-improving agent system that writes GPU kernels by search. As of 2026-11-11, its generated kernels rank #1 on the public L1, L2 and Quantization boards of SOL-ExecBench (NVIDIA B200). They have held #1 on L1 since 2026-10-27, albeit a short loss on 2026-11-07. All 235 problems have a site-verified correct kernel; on the 209 public-board problems they are 4.40x faster than the benchmark's reference baseline. The search starts from zero: agents get each problem's PyTorch definition but no reference kernels or official scores. A per-problem archive outside the model holds every correct kernel and its lineage. An LLM controller reads it, picks a parent or a new design, and gives each parallel child agent one direction. Checks outside the model decide correctness. At equal wall time, it beat a coded UCB style tree on 35 of 38 problems by making 2.4x as many correct attempts. Over a thousand agents ran at once, and one warm restart fix raised their evaluation rate 3.6x. We find that the rate of reliable measurements, not the number of agents, limits how far such a search scales. Our code and kernels are available on URL.",
-          "categories": [
-            "cs.AI"
-          ],
-          "keywords": [
-            "correct kernel",
-            "agent one direction",
-            "albeit short loss",
-            "beat coded ucb",
-            "benchmark reference baseline",
-            "but no reference"
-          ],
-          "matched_keywords": []
-        },
-        "2611.26444": {
-          "title": "Mind2Act World: A Diagnostic Benchmark for Embodied Mind, Physical Action, and Mind-Action Composition in Robotic Manipulation",
-          "abstract": "Embodied intelligence aims to let robots perform complex physical tasks with human-like adaptability and reliability, which requires three complementary capabilities: history-based cognitive reasoning, precise and timely physical execution, and the composition of reasoning and execution through environmental feedback. Yet existing benchmarks either evaluate reasoning and execution within the same tasks or assess them separately without their composition, so they reveal little about whether a failure comes from reasoning, execution, or their composition. We introduce Mind2Act World, a diagnostic benchmark of 30 simulated manipulation tasks from five real-world application domains. Each task has three difficulty levels and two scene settings (Clean and Random), yielding 180 configurations. The tasks form three views: Mind tests decisions based on past observations, Act tests precise and timely execution, and Mind2Act combines both in closed-loop tasks where action outcomes guide later decisions. Comparing the three views shows whether a system lacks a capability or fails to compose capabilities it already has. A diagnosis harness further attributes the failed episodes of three representative systems to Mind, Act, or their composition and summarizes each system in a profile card. Our evaluation of multimodal agents, vision-language-action models (VLAs), and world-action models (WAMs) shows that competence in a single view does not carry over to Mind2Act tasks. Even the strongest agent succeeds in 52.7% of Mind and 39.0% of Act episodes but in only 12.0% of Mind2Act episodes. The strongest agent retains task state but struggles with sustained contact, whereas end-to-end policies execute practiced motions but retain little task state. These findings point to composing reasoning and execution through environmental feedback as the main open problem.",
-          "categories": [
-            "cs.RO",
-            "cs.AI",
-            "cs.CV"
-          ],
-          "keywords": [
-            "execution through environmental",
-            "through environmental feedback",
-            "mind2act",
-            "mind2act world",
-            "strongest agent",
-            "three views"
-          ],
-          "matched_keywords": []
-        },
-        "2611.26409": {
-          "title": "WeMM-Video: Pushing the Frontiers of Open-Source Omni-Modal Video Understanding",
-          "abstract": "Video understanding, particularly with accompanying audio, remains a central challenge in multimodal intelligence. In this report, we introduce \\textbf{WeMM-Video}, a family of Chinese-English bilingual omni-modal foundation models spanning 2B, 4B, 9B, and 35B-A3B variants. Centering on joint audio-visual perception and reasoning, WeMM-Video unifies text, image, audio, and video processing within a hybrid-thinking paradigm, seamlessly supporting both a non-thinking instruct mode for fast, direct responses and a thinking mode for explicit step-by-step reasoning. The models are trained on a large-scale multimodal corpus of approximately 1.2 trillion tokens through progressive pre-training and a multi-stage post-training pipeline incorporating multi-teacher OPD, anti-repetition MrDPO, and specialist RL. Evaluated across more than 120 benchmarks, WeMM-Video demonstrates superior performance in omni-modal video understanding and reasoning, while maintaining highly competitive capabilities across general audio, silent video, image, and text tasks. Specifically, in omni-modal video evaluations, our flagship WeMM-Video-35B-A3B establishes a new open-source state of the art, substantially outperforming proprietary models such as Qwen3.5-Omni-Flash and Seed2.0-Mini-0428 while narrowing the gap with the strong Gemini-3.0-Flash, and our compact WeMM-Video-9B surpasses the larger open-source Qwen3-Omni-30B-A3B-Instruct. We publicly release the WeMM-Video family along with our evaluation and reproduction pipeline to foster further research and development in the open-source community.",
-          "categories": [
-            "cs.CV",
-            "eess.AS"
-          ],
-          "keywords": [
-            "omni-modal video understanding",
-            "wemm-video",
-            "wemm-video family",
-            "accompanying audio remains",
-            "art substantially outperforming",
-            "audio remains central"
           ],
           "matched_keywords": []
         },
@@ -1481,22 +1413,6 @@
           ],
           "matched_keywords": []
         },
-        "2611.26414": {
-          "title": "ZeroVLN: Learning to Navigate without Supervised Fine-Tuning of the VLM Brain",
-          "abstract": "Representative vision-language navigation (VLN) methods typically couple a vision-language model (VLM) brain with a learnable action head and fine-tune the VLM brain on navigation-domain data to predict geometric goals. However, such adaptation can substantially alter base VLM weights and degrade general visual capabilities. We introduce ZeroVLN, a slow-fast navigation framework that achieves effective navigation with zero navigation-domain SFT of the VLM brain. Rather than teaching the brain to predict geometric goals, we equip it with a semantic tool-calling interface for conveying movement decisions to an action expert in natural language. We first adapt the action expert to carry out these movement requests, then jointly improve the brain's movement decisions and the action expert's continuous execution through closed-loop reinforcement learning (RL). Trained on the same navigation episodes, ZeroVLN substantially outperforms representative SFT-based hierarchical VLN methods on standard VLN-CE (continuous environments) benchmarks, while inducing only minor changes to the brain's weights and largely preserving its general capabilities. To our knowledge, ZeroVLN is the first slow-fast VLN framework with zero navigation-domain SFT of the VLM brain, and the first to jointly optimize its slow and fast policies through closed-loop agentic RL in VLN-CE.",
-          "categories": [
-            "cs.AI"
-          ],
-          "keywords": [
-            "vlm brain",
-            "predict geometric goals",
-            "zero navigation-domain sft",
-            "zerovln",
-            "movement decisions",
-            "through closed-loop"
-          ],
-          "matched_keywords": []
-        },
         "2611.24809": {
           "title": "On-Policy Morphing into Hybrid Attention Models",
           "abstract": "Hybrid attention models combine full and linear attention to achieve a better quality--efficiency trade-off. Converting pretrained Transformers into such models requires identifying which layers should retain full attention under a prescribed budget. We identify two off-policy mismatches in FlashMorph's layer selection: (i) continuous branch interpolation and teacher-forced hidden states differ from discrete hybrid computation; and (ii) frozen model weights fail to account for parameter adaptation during subsequent recovery. We introduce FlashMorph2, an on-policy layer-selection method that (I) evaluates sampled discrete hybrid architectures end to end using their own hidden states, and (II) jointly optimizes layer-selection scores and model weights under the recovery objective to reflect post-adaptation performance. Experiments across Qwen3 model scales and linear-attention variants show that FlashMorph2 consistently outperforms existing layer-selection methods, improving average scores over FlashMorph by +2.42 points on RULER, +1.08 on LongBench, and +0.76 on recall-intensive tasks, while completing layer selection in only 0.72--3.57 GPU hours across 0.6B--8B models, demonstrating high efficiency and scalability.",
@@ -1522,20 +1438,6 @@
             "automaster",
             "assumptions unproductive repetition",
             "automaster improves mean"
-          ],
-          "matched_keywords": []
-        },
-        "2611.20455": {
-          "title": "Embeddings vs. Grep: Rethinking the Dense Advantage in Code Search",
-          "abstract": "Code-search benchmarks show dense encoders well ahead of BM25, yet coding agents do well with grep. What does this dense advantage measure? Existing benchmarks cannot tell: they use curated queries, old code and a handicapped BM25. To find out, we build Repo-Premium, a realistic repository-level code-search benchmark. It ranks files in real repositories, with curated and raw queries in Python, JavaScript, TypeScript, Go, Rust and Java, pull requests from 2022 to 2026, and a preregistered test pool over 91 repositories. Our experiments trace the advantage to two sources: evaluation choices that favor dense retrieval, such as splitting files into chunks for BM25 and counting edited tests as relevant, and queries that lack the code's rare identifiers. Expanding the query with LLM-written identifiers (generate-then-grep) helps BM25 far more than dense retrieval, letting it match dense retrieval in every Python pool, even on pull requests opened after the LLM was released. No method we tried predicts which retriever will win on a given query. From these results we derive three guidelines: measure dense gains against a fair lexical baseline, fuse dense retrieval with BM25, and add the code's words to queries that lack them.",
-          "categories": [],
-          "keywords": [
-            "dense retrieval",
-            "dense advantage",
-            "bm25",
-            "pull requests",
-            "against fair lexical",
-            "agents do well"
           ],
           "matched_keywords": []
         },
@@ -1611,23 +1513,6 @@
             "videollm",
             "veto",
             "training distribution"
-          ],
-          "matched_keywords": []
-        },
-        "2611.26624": {
-          "title": "PlayCraft: Designing Engaging Games from Agent Play Experience",
-          "abstract": "Recent AI agents can generate playable games, but these games are not necessarily engaging. Mastery is a key source of engagement, yet designing for it requires extensive human play and tuning. We propose PlayCraft, an automated framework that uses a vision-based agent to play games and draws on its detailed play experience to revise them for mastery. Starting from an initial game, PlayCraft alternates between playing and crafting. In the playing stage, a player agent watches the game screen, uses the controls, and pursues the game objective over repeated episodes while retaining memory. After each episode, it reports its progress, outcomes, decisions, and reflections. In the crafting stage, a crafter agent uses these reports to revise the game. It estimates player abilities, predicts performance at different proficiency levels, and compares those predictions with a target learning progression. It diagnoses the game and addresses the gaps by giving players meaningful opportunities to improve through better decisions and execution. We evaluate games in fresh runs with player agents across three intelligence settings, measuring learning gain and learning slope. Compared with the initial games, PlayCraft yields larger learning gains and steeper learning slopes in most games. It also outperforms the baselines on the macro-average of each metric at every intelligence setting.",
-          "categories": [
-            "cs.AI",
-            "cs.CV"
-          ],
-          "keywords": [
-            "playcraft",
-            "play experience",
-            "games",
-            "abilities predicts performance",
-            "agent play experience",
-            "crafter agent uses"
           ],
           "matched_keywords": []
         },
@@ -48871,6 +48756,121 @@
             "active energy cascade",
             "benchmark state-of-the-art neural",
             "benchmarks capturing realistic"
+          ],
+          "matched_keywords": []
+        },
+        "2611.21373": {
+          "title": "WeVisForensics: Self-Evolving Agent for Omni AI-Generated Video Detection",
+          "abstract": "Recent advances in video generation call for reliable detection grounded in explicit forensic evidence. However, current methods primarily depend on single-pass chain-of-thought reasoning that overlooks brief or localized artifacts, or on predefined multi-agent workflows that offer limited flexibility in selecting relevant inspections. Even with adaptive investigation, optimizing the investigation policy alone does not directly improve the forensic capabilities of fixed experts. We introduce WeVisForensics, an agentic framework in which a main investigator agent coordinates a self-evolving library of forensic inspector sub-agents spanning visual and audio cues. The investigator learns which artifact type to examine, over which window, and when to conclude, and these interactions provide shared feedback for both levels of agents. Our dual-timescale policy optimization strategy, DTPO, closes this loop through fast reinforcement learning of the investigator and slower refinement of the inspectors, guided by annotated artifact intervals, to report subtle artifacts they once dismissed. Furthermore, we curate ForenCue-30K, combining role-specific forensic annotations and interaction trajectories to supervise individual inspections and their coordination, with an accompanying reinforcement-learning pool. Experiments show that WeVisForensics averages 95.2% detection accuracy across in-domain, out-of-domain and agentic benchmarks, 9.0% above the strongest prior detector, while grounding its verdicts in localized evidence.",
+          "categories": [
+            "cs.CV",
+            "cs.AI"
+          ],
+          "keywords": [
+            "wevisforensics",
+            "forensic",
+            "investigator",
+            "accompanying reinforcement-learning pool",
+            "adaptive investigation optimizing",
+            "agent coordinates self-evolving"
+          ],
+          "matched_keywords": []
+        },
+        "2611.19230": {
+          "title": "CompoundingKernel: Self-Improving from Zero to First",
+          "abstract": "We present CompoundingKernel, a self-improving agent system that writes GPU kernels by search. As of 2026-11-11, its generated kernels rank #1 on the public L1, L2 and Quantization boards of SOL-ExecBench (NVIDIA B200). They have held #1 on L1 since 2026-10-27, albeit a short loss on 2026-11-07. All 235 problems have a site-verified correct kernel; on the 209 public-board problems they are 4.40x faster than the benchmark's reference baseline. The search starts from zero: agents get each problem's PyTorch definition but no reference kernels or official scores. A per-problem archive outside the model holds every correct kernel and its lineage. An LLM controller reads it, picks a parent or a new design, and gives each parallel child agent one direction. Checks outside the model decide correctness. At equal wall time, it beat a coded UCB style tree on 35 of 38 problems by making 2.4x as many correct attempts. Over a thousand agents ran at once, and one warm restart fix raised their evaluation rate 3.6x. We find that the rate of reliable measurements, not the number of agents, limits how far such a search scales. Our code and kernels are available on URL.",
+          "categories": [
+            "cs.AI"
+          ],
+          "keywords": [
+            "correct kernel",
+            "agent one direction",
+            "albeit short loss",
+            "beat coded ucb",
+            "benchmark reference baseline",
+            "but no reference"
+          ],
+          "matched_keywords": []
+        },
+        "2611.26444": {
+          "title": "Mind2Act World: A Diagnostic Benchmark for Embodied Mind, Physical Action, and Mind-Action Composition in Robotic Manipulation",
+          "abstract": "Embodied intelligence aims to let robots perform complex physical tasks with human-like adaptability and reliability, which requires three complementary capabilities: history-based cognitive reasoning, precise and timely physical execution, and the composition of reasoning and execution through environmental feedback. Yet existing benchmarks either evaluate reasoning and execution within the same tasks or assess them separately without their composition, so they reveal little about whether a failure comes from reasoning, execution, or their composition. We introduce Mind2Act World, a diagnostic benchmark of 30 simulated manipulation tasks from five real-world application domains. Each task has three difficulty levels and two scene settings (Clean and Random), yielding 180 configurations. The tasks form three views: Mind tests decisions based on past observations, Act tests precise and timely execution, and Mind2Act combines both in closed-loop tasks where action outcomes guide later decisions. Comparing the three views shows whether a system lacks a capability or fails to compose capabilities it already has. A diagnosis harness further attributes the failed episodes of three representative systems to Mind, Act, or their composition and summarizes each system in a profile card. Our evaluation of multimodal agents, vision-language-action models (VLAs), and world-action models (WAMs) shows that competence in a single view does not carry over to Mind2Act tasks. Even the strongest agent succeeds in 52.7% of Mind and 39.0% of Act episodes but in only 12.0% of Mind2Act episodes. The strongest agent retains task state but struggles with sustained contact, whereas end-to-end policies execute practiced motions but retain little task state. These findings point to composing reasoning and execution through environmental feedback as the main open problem.",
+          "categories": [
+            "cs.RO",
+            "cs.AI",
+            "cs.CV"
+          ],
+          "keywords": [
+            "execution through environmental",
+            "through environmental feedback",
+            "mind2act",
+            "mind2act world",
+            "strongest agent",
+            "three views"
+          ],
+          "matched_keywords": []
+        },
+        "2611.26409": {
+          "title": "WeMM-Video: Pushing the Frontiers of Open-Source Omni-Modal Video Understanding",
+          "abstract": "Video understanding, particularly with accompanying audio, remains a central challenge in multimodal intelligence. In this report, we introduce \\textbf{WeMM-Video}, a family of Chinese-English bilingual omni-modal foundation models spanning 2B, 4B, 9B, and 35B-A3B variants. Centering on joint audio-visual perception and reasoning, WeMM-Video unifies text, image, audio, and video processing within a hybrid-thinking paradigm, seamlessly supporting both a non-thinking instruct mode for fast, direct responses and a thinking mode for explicit step-by-step reasoning. The models are trained on a large-scale multimodal corpus of approximately 1.2 trillion tokens through progressive pre-training and a multi-stage post-training pipeline incorporating multi-teacher OPD, anti-repetition MrDPO, and specialist RL. Evaluated across more than 120 benchmarks, WeMM-Video demonstrates superior performance in omni-modal video understanding and reasoning, while maintaining highly competitive capabilities across general audio, silent video, image, and text tasks. Specifically, in omni-modal video evaluations, our flagship WeMM-Video-35B-A3B establishes a new open-source state of the art, substantially outperforming proprietary models such as Qwen3.5-Omni-Flash and Seed2.0-Mini-0428 while narrowing the gap with the strong Gemini-3.0-Flash, and our compact WeMM-Video-9B surpasses the larger open-source Qwen3-Omni-30B-A3B-Instruct. We publicly release the WeMM-Video family along with our evaluation and reproduction pipeline to foster further research and development in the open-source community.",
+          "categories": [
+            "cs.CV",
+            "eess.AS"
+          ],
+          "keywords": [
+            "omni-modal video understanding",
+            "wemm-video",
+            "wemm-video family",
+            "accompanying audio remains",
+            "art substantially outperforming",
+            "audio remains central"
+          ],
+          "matched_keywords": []
+        },
+        "2611.26414": {
+          "title": "ZeroVLN: Learning to Navigate without Supervised Fine-Tuning of the VLM Brain",
+          "abstract": "Representative vision-language navigation (VLN) methods typically couple a vision-language model (VLM) brain with a learnable action head and fine-tune the VLM brain on navigation-domain data to predict geometric goals. However, such adaptation can substantially alter base VLM weights and degrade general visual capabilities. We introduce ZeroVLN, a slow-fast navigation framework that achieves effective navigation with zero navigation-domain SFT of the VLM brain. Rather than teaching the brain to predict geometric goals, we equip it with a semantic tool-calling interface for conveying movement decisions to an action expert in natural language. We first adapt the action expert to carry out these movement requests, then jointly improve the brain's movement decisions and the action expert's continuous execution through closed-loop reinforcement learning (RL). Trained on the same navigation episodes, ZeroVLN substantially outperforms representative SFT-based hierarchical VLN methods on standard VLN-CE (continuous environments) benchmarks, while inducing only minor changes to the brain's weights and largely preserving its general capabilities. To our knowledge, ZeroVLN is the first slow-fast VLN framework with zero navigation-domain SFT of the VLM brain, and the first to jointly optimize its slow and fast policies through closed-loop agentic RL in VLN-CE.",
+          "categories": [
+            "cs.AI"
+          ],
+          "keywords": [
+            "vlm brain",
+            "predict geometric goals",
+            "zero navigation-domain sft",
+            "zerovln",
+            "movement decisions",
+            "through closed-loop"
+          ],
+          "matched_keywords": []
+        },
+        "2611.20455": {
+          "title": "Embeddings vs. Grep: Rethinking the Dense Advantage in Code Search",
+          "abstract": "Code-search benchmarks show dense encoders well ahead of BM25, yet coding agents do well with grep. What does this dense advantage measure? Existing benchmarks cannot tell: they use curated queries, old code and a handicapped BM25. To find out, we build Repo-Premium, a realistic repository-level code-search benchmark. It ranks files in real repositories, with curated and raw queries in Python, JavaScript, TypeScript, Go, Rust and Java, pull requests from 2022 to 2026, and a preregistered test pool over 91 repositories. Our experiments trace the advantage to two sources: evaluation choices that favor dense retrieval, such as splitting files into chunks for BM25 and counting edited tests as relevant, and queries that lack the code's rare identifiers. Expanding the query with LLM-written identifiers (generate-then-grep) helps BM25 far more than dense retrieval, letting it match dense retrieval in every Python pool, even on pull requests opened after the LLM was released. No method we tried predicts which retriever will win on a given query. From these results we derive three guidelines: measure dense gains against a fair lexical baseline, fuse dense retrieval with BM25, and add the code's words to queries that lack them.",
+          "categories": [],
+          "keywords": [
+            "dense retrieval",
+            "dense advantage",
+            "bm25",
+            "pull requests",
+            "against fair lexical",
+            "agents do well"
+          ],
+          "matched_keywords": []
+        },
+        "2611.26624": {
+          "title": "PlayCraft: Designing Engaging Games from Agent Play Experience",
+          "abstract": "Recent AI agents can generate playable games, but these games are not necessarily engaging. Mastery is a key source of engagement, yet designing for it requires extensive human play and tuning. We propose PlayCraft, an automated framework that uses a vision-based agent to play games and draws on its detailed play experience to revise them for mastery. Starting from an initial game, PlayCraft alternates between playing and crafting. In the playing stage, a player agent watches the game screen, uses the controls, and pursues the game objective over repeated episodes while retaining memory. After each episode, it reports its progress, outcomes, decisions, and reflections. In the crafting stage, a crafter agent uses these reports to revise the game. It estimates player abilities, predicts performance at different proficiency levels, and compares those predictions with a target learning progression. It diagnoses the game and addresses the gaps by giving players meaningful opportunities to improve through better decisions and execution. We evaluate games in fresh runs with player agents across three intelligence settings, measuring learning gain and learning slope. Compared with the initial games, PlayCraft yields larger learning gains and steeper learning slopes in most games. It also outperforms the baselines on the macro-average of each metric at every intelligence setting.",
+          "categories": [
+            "cs.AI",
+            "cs.CV"
+          ],
+          "keywords": [
+            "playcraft",
+            "play experience",
+            "games",
+            "abilities predicts performance",
+            "agent play experience",
+            "crafter agent uses"
           ],
           "matched_keywords": []
         },
