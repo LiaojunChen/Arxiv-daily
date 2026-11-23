@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-11-23T09:14:46+00:00",
+  "updated_at": "2026-11-23T10:33:14+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-d81c9b739ac5944ebe8ece5a": {
-      "run_id": "daily-d81c9b739ac5944ebe8ece5a",
-      "generated_at": "2026-11-23T09:14:46+00:00",
+    "daily-0d5b3663722f8f77f16ab373": {
+      "run_id": "daily-0d5b3663722f8f77f16ab373",
+      "generated_at": "2026-11-23T10:33:14+00:00",
       "selected_ids": [
         "2611.26981",
         "2611.27963",
@@ -1311,24 +1311,6 @@
             "bound while preserving",
             "captions implicitly assuming",
             "common practice constructs"
-          ],
-          "matched_keywords": []
-        },
-        "2611.26613": {
-          "title": "AgentRoboCritic: Understanding the Capability of Frontier Agents on Direct Robot Control",
-          "abstract": "Frontier multimodal language agents such as GPT-6 Astra have demonstrated strong capabilities in controlling robots directly via low-level numerical actions without high-level primitives. However, existing benchmarks report only episode-level success rates, which show neither how these agents succeed nor where they fail. In this paper, we present a systematic action-level analysis of frontier agents on direct robot control across 12 manipulation benchmarks. We introduce AgentRoboCritic, an intent-grounded critique framework in which the policy agent states a local intent alongside each action, and a critic evaluates the action's outcome and failure mode against this intent. Our action-level analysis demonstrates the promising capabilities of frontier agents on direct robot control, including closed-loop recovery from local execution failures, reliable semantic grounding across diverse scenes, and strong zero-shot manipulation without task-specific adaptation. It also identifies their current limitations, including task-relevant physical execution bottlenecks such as grasping and alignment, and uneven recovery across failure modes. Finally, we validate our critic on a 400-action human-annotated benchmark and release a dataset of 12,844 annotated actions alongside a fine-tuned open-source critic, Muse-Glimmer-30B, whose failure-mode accuracy rises from 32.58% to 74.24%, enabling low-cost action-level analysis.",
-          "categories": [
-            "cs.RO",
-            "cs.CL",
-            "cs.CV"
-          ],
-          "keywords": [
-            "direct robot control",
-            "frontier agents",
-            "action-level",
-            "action human-annotated benchmark",
-            "actions alongside fine-tuned",
-            "agent states local"
           ],
           "matched_keywords": []
         },
@@ -7164,6 +7146,34 @@
             "formation control",
             "common orientation reference",
             "constraints often requires"
+          ],
+          "matched_keywords": []
+        },
+        "2611.22479": {
+          "title": "Exploited Before It Was Fixed? Vulnerability Timelines from Open, Machine-Readable Evidence",
+          "abstract": "-05-X-03), Known Exploited Vulnerabilities (KEV) catalogs, and exploitation sightings.\n  We introduce an evidence model implemented in Vulnerability-Lookup that selects the earliest evidence for each lifecycle event, distinguishes vulnerability-specific records, preserves date precision, and ensures traceability to original sources.\n  Among 3,758 vulnerability identifiers with exploitation evidence, 98% have disclosure dates, while only 15.7% have patch evidence. Vendor-side dates required by VTEM are entirely absent. Most exploitation dates originate from catalog listings, including 1,041 entries associated with bulk catalog imports. After excluding these entries and ambiguous same-day observations, 59 vulnerabilities exhibit patch evidence following exploitation evidence, with a median interval of 7.6 days, predominantly between catalog listings and distributor fixes.\n  Evidence traceability also exposes systematic measurement errors: one collector incorrectly classified exploit publications as active exploitation, accounting for 40% of initial exploitation dates, while another catalog assigned vulnerability publication timestamps to 11% of its listings.\n  Our findings demonstrate that exploitation-to-patch intervals are computationally measurable, but their reliability depends on the availability, precision, and provenance of published evidence. We identify the additional disclosure, exploitation observation, and patch availability timestamps needed to improve vulnerability lifecycle measurements.",
+          "categories": [],
+          "keywords": [
+            "exploitation",
+            "catalog listings",
+            "dates while",
+            "exploitation dates",
+            "exploitation evidence",
+            "patch evidence"
+          ],
+          "matched_keywords": []
+        },
+        "2611.25252": {
+          "title": "Moving Generality from Model to Modeler: LLM Agents for PHM on a Deployment-Style Benchmark",
+          "abstract": "Coding agents built on large language models (LLMs) now help develop many models published as general solutions. Should generality instead reside in the agent that builds a model for each new task? We examine this question in prognostics and health management (PHM), where every model must work on unseen equipment. Our deployment-style benchmark, NextUnit-Bench, covers 24 public datasets split into 58 folds that hold out units or operating conditions; each agent has two hours to deliver an executable predictor, then run on the hidden units. First, frontier agents outperform AutoML, which reaches less than half the best agent's score, and faithful implementations of published methods on four datasets, of which only 6 of 30 beat the strongest agent's own design; published accuracies, where reproducible, rest on the papers' own conventions, and a single convention, capping the remaining life of test engines, can halve the reported error. Second, the agents' advantage is a design made on each machine's data; once made, a plain-text plan of a few hundred words carries most of the gap between two frontier agents, and given a weaker agent's plan, the strongest agent falls to that agent's level, often to identical predictions. Before touching the data, however, it matters little whose plan an agent carries out, and domain toolkits appear to help neither: what sets the strongest apart is how much it learns from the data. Third, such designs reach only implementers that can execute them: given the strongest agent's designs, a locally deployable open-weight model delivers half as often, even when they are lightened, and scores no higher than without them. Generality, we argue, is not disappearing but moving, from the model to the modeler.",
+          "categories": [],
+          "keywords": [
+            "strongest agent",
+            "deployment-style benchmark",
+            "frontier agents",
+            "accuracies where reproducible",
+            "agent designs locally",
+            "agent level often"
           ],
           "matched_keywords": []
         },
@@ -46085,6 +46095,24 @@
             "average tokens per",
             "best configuration achieves",
             "bpe merges reducing"
+          ],
+          "matched_keywords": []
+        },
+        "2611.26613": {
+          "title": "AgentRoboCritic: Understanding the Capability of Frontier Agents on Direct Robot Control",
+          "abstract": "Frontier multimodal language agents such as GPT-6 Astra have demonstrated strong capabilities in controlling robots directly via low-level numerical actions without high-level primitives. However, existing benchmarks report only episode-level success rates, which show neither how these agents succeed nor where they fail. In this paper, we present a systematic action-level analysis of frontier agents on direct robot control across 12 manipulation benchmarks. We introduce AgentRoboCritic, an intent-grounded critique framework in which the policy agent states a local intent alongside each action, and a critic evaluates the action's outcome and failure mode against this intent. Our action-level analysis demonstrates the promising capabilities of frontier agents on direct robot control, including closed-loop recovery from local execution failures, reliable semantic grounding across diverse scenes, and strong zero-shot manipulation without task-specific adaptation. It also identifies their current limitations, including task-relevant physical execution bottlenecks such as grasping and alignment, and uneven recovery across failure modes. Finally, we validate our critic on a 400-action human-annotated benchmark and release a dataset of 12,844 annotated actions alongside a fine-tuned open-source critic, Muse-Glimmer-30B, whose failure-mode accuracy rises from 32.58% to 74.24%, enabling low-cost action-level analysis.",
+          "categories": [
+            "cs.RO",
+            "cs.CL",
+            "cs.CV"
+          ],
+          "keywords": [
+            "direct robot control",
+            "frontier agents",
+            "action-level",
+            "action human-annotated benchmark",
+            "actions alongside fine-tuned",
+            "agent states local"
           ],
           "matched_keywords": []
         },
