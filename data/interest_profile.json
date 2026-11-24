@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-11-24T12:15:57+00:00",
+  "updated_at": "2026-11-24T15:49:03+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-4f425d04bd7b4914ec6361ac": {
-      "run_id": "daily-4f425d04bd7b4914ec6361ac",
-      "generated_at": "2026-11-24T12:15:57+00:00",
+    "daily-c6212176bd617cb9fee832bf": {
+      "run_id": "daily-c6212176bd617cb9fee832bf",
+      "generated_at": "2026-11-24T15:49:03+00:00",
       "selected_ids": [
         "2611.30042",
         "2611.28978",
@@ -17414,6 +17414,20 @@
             "autonomous uav navigation",
             "consequently persistent obstacle",
             "considers different future"
+          ],
+          "matched_keywords": []
+        },
+        "2611.26863": {
+          "title": "LLMs Memorize Their Own Hallucinations During Post-Training",
+          "abstract": "Reasoning domains have shaped the post-training recipes of frontier models even though they are trained and deployed in domains beyond math and code. In this paper, we study the consequences of directly adopting reasoning-centric training recipes, e.g., the use of outcome-based rewards for reinforcement learning (RL), injection of \"cognitive\" behaviors such as proposing and backtracking from hypotheses in reasoning chains, etc., for knowledge tasks. We hypothesize that these decisions, while useful for reasoning, inadvertently encourage models to memorize hallucinations they themselves generate in their long reasoning chains when trained on knowledge tasks. To study this, we train models with standard post-training, extract their self-generated hallucinations during RL, and track memorization throughout the rest of training. Our experiments on six open models across two model families and two architectures confirm our hypothesis. We find that models' recall of hallucinations reinforced during training increases by 4.83% on average, compared to just 0.17% for self-hallucinations that receive no training signal. In fact, models even memorize false facts that they immediately retract in their reasoning; a backtracking template inherited from reasoning-centric training that has no benefit for knowledge recall. Furthermore, we find that memorization is strongest on the hardest training questions, and rewarding a hallucination makes the model less likely to abstain from it later (by 7.23% on average). Overall, our work identifies and systematically studies a previously unexamined pathway through which models learn hallucinations during training.",
+          "categories": [],
+          "keywords": [
+            "hallucinations during",
+            "reasoning-centric training",
+            "knowledge tasks",
+            "reasoning chains",
+            "adopting reasoning-centric training",
+            "backtracking template inherited"
           ],
           "matched_keywords": []
         },
