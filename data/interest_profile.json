@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-11-26T09:24:19+00:00",
+  "updated_at": "2026-11-26T09:42:19+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-dc931c757eb32724d693e935": {
-      "run_id": "daily-dc931c757eb32724d693e935",
-      "generated_at": "2026-11-26T09:24:19+00:00",
+    "daily-21ac15f23553242413d5ba65": {
+      "run_id": "daily-21ac15f23553242413d5ba65",
+      "generated_at": "2026-11-26T09:42:19+00:00",
       "selected_ids": [
         "2611.33591",
         "2611.34830",
@@ -1566,6 +1566,23 @@
           ],
           "matched_keywords": []
         },
+        "2611.34849": {
+          "title": "Real2SimLab: A Unified Platform for Real-to-Simulation Transfer",
+          "abstract": "Real-to-simulation transfer, which builds simulations from real-world observations, has long been studied in research and industry. Recently, coding agents have become capable of generating simulation programs from video recordings, and several benchmarks have been proposed to evaluate them. However, each individual benchmark defines its own inputs, deliverables, and scoring pipeline. This leads to $N \\times M$ integrations when evaluating $N$ methods on $M$ benchmarks. To this end, we present Real2SimLab, a unified platform for real-to-simulation transfer. It evaluates a method by running its written program and scoring the output simulation with the original scorer of each benchmark. Moreover, Real2SimLab provides a pipeline to create training data and reward annotations for real-to-simulation methods. Our pipeline carefully avoids data contamination by filtering out the video recordings that exist in benchmarks. For each video recording, a program is first produced, and then our pipeline computes its reward with the same code that Real2SimLab uses for evaluation. So far, it supports 47 coding agents and 5 non-agent methods on 6 benchmarks. Both the platform and Awesome-Real2Sim, our research map of nearly 300 real-to-simulation papers, are open source, and we invite the Real2SimHub community to build them together.",
+          "categories": [
+            "cs.RO",
+            "cs.CV"
+          ],
+          "keywords": [
+            "real-to-simulation transfer",
+            "real2simlab",
+            "unified platform",
+            "video recordings",
+            "build them together",
+            "generating simulation programs"
+          ],
+          "matched_keywords": []
+        },
         "2611.34941": {
           "title": "Improving and Expanding Video Editing Capabilities Without Videos",
           "abstract": "Image editing models can follow a wide range of instructions, but video editing models still lag behind, limited in part by the difficulty of collecting paired source and edited videos. Is it possible to transfer advanced image editing capabilities to video editors without new paired videos? We introduce Image-to-Video Transfer (I2VT), which improves pretrained video editors and expands them to new editing tasks using an image editor. It enables efficient post-training with no architectural changes and no new videos, using only individual images. Our key idea is to let the video editor role-play as an image editor: it edits an image as a one-frame video, with the image editor guiding the video editor's predictions at each denoising step. Although the video editor sees only single images during training, at test time it applies the improved and expanded capabilities to whole video clips while preserving temporal consistency. To push the boundaries of video editing, we introduce OpenVE++, an extension of OpenVE-Bench that adds four new editing tasks useful for video production, including action changes, expression changes, body movements, and scene relighting. Our experiments across three different video editors show that I2VT improves existing editing capabilities and expands them to new tasks, and our models achieve state-of-the-art (SOTA) performance on both OpenVE-Bench and OpenVE++.",
@@ -1633,6 +1650,24 @@
           ],
           "matched_keywords": []
         },
+        "2611.33457": {
+          "title": "Playfulness as Feedback for Agentic Game Development",
+          "abstract": "Coding agents can generate runnable games from natural-language descriptions. However, a runnable game does not guarantee an excellent gameplay experience for players. In our view, a playful game should provide 1) reliable core functionality, 2) appealing visual design and assets, and 3) rich gameplay that supports exploration and progression. How agents can improve these aspects of playfulness remains underexplored. In our work, we propose Play2Evolve, a recursive game development framework with three stages: Initialization, Refinement, and Evolution. Using playfulness as feedback, agents playtest the game and diagnose issues in its functionality, visual presentation, and gameplay. Their feedback guides bug fixes and asset improvements. It also helps agents propose new gameplay and aesthetic goals for continued game evolution. To enrich game materials, we combine a video generation model with code to create appealing static and dynamic assets and integrate them into interactive gameplay. Finally, Play2Evolve achieves state-of-the-art performance among the evaluated methods, scoring 60.05 on GameCraft-Bench compared with 50.81 after Game Initialization and 52.46 for Play2Code. Human overall-quality ratings reach 3.67, compared with 2.38 and 2.43, respectively. Our code will be released at this https URL.",
+          "categories": [
+            "cs.CV"
+          ],
+          "keywords": [
+            "playfulness",
+            "game development",
+            "gameplay",
+            "agentic game development",
+            "appealing visual design",
+            "combine video generation"
+          ],
+          "matched_keywords": [
+            "generation model"
+          ]
+        },
         "2611.34128": {
           "title": "FoundSurface: Feedforward Ray-Based 3D Scene Surface Reconstruction from Unposed Images",
           "abstract": "Accurate 3D surface reconstruction from unposed images remains a fundamental challenge in computer vision. Recent feed-forward pointmap methods eliminate the need for camera poses but inherently produce discrete, sparse representations. In this paper, we present a generalizable pipeline that directly recovers continuous, high-fidelity 3D surfaces from unposed images by seamlessly integrating pointmap- and ray-based representations. Our approach first extracts explicit geometric priors using a pre-trained pointmap model. A query-view-centric selection module then identifies geometrically relevant reference views via a robust surfel voting mechanism. Next, a cross-attention regressor bridges target query rays with reference features to estimate a continuous coarse surface. Lastly, a raylet-based module aggregates local 3D features to carve out high-frequency details and analytical normals. Trained as a single foundation model on 9 diverse datasets, our method demonstrates exceptional zero-shot generalization on 6 unseen datasets, clearly surpassing state-of-the-art baselines in geometric accuracy and detail preservation.",
@@ -1669,23 +1704,21 @@
           ],
           "matched_keywords": []
         },
-        "2611.33457": {
-          "title": "Playfulness as Feedback for Agentic Game Development",
-          "abstract": "Coding agents can generate runnable games from natural-language descriptions. However, a runnable game does not guarantee an excellent gameplay experience for players. In our view, a playful game should provide 1) reliable core functionality, 2) appealing visual design and assets, and 3) rich gameplay that supports exploration and progression. How agents can improve these aspects of playfulness remains underexplored. In our work, we propose Play2Evolve, a recursive game development framework with three stages: Initialization, Refinement, and Evolution. Using playfulness as feedback, agents playtest the game and diagnose issues in its functionality, visual presentation, and gameplay. Their feedback guides bug fixes and asset improvements. It also helps agents propose new gameplay and aesthetic goals for continued game evolution. To enrich game materials, we combine a video generation model with code to create appealing static and dynamic assets and integrate them into interactive gameplay. Finally, Play2Evolve achieves state-of-the-art performance among the evaluated methods, scoring 60.05 on GameCraft-Bench compared with 50.81 after Game Initialization and 52.46 for Play2Code. Human overall-quality ratings reach 3.67, compared with 2.38 and 2.43, respectively. Our code will be released at this https URL.",
+        "2611.34466": {
+          "title": "EgoUseBench: Benchmarking Computer-Use Agents under Evolving First-Person Contexts",
+          "abstract": "AI wearables, such as smart glasses, extend the context available to agents beyond digital environments to users' physical surroundings. With these devices, computer tasks can originate from users' ongoing activities rather than solely from explicit instructions. Through first-person observations, agents can identify objects and activities relevant to user requests and ground digital tasks in the surrounding context. We call this interaction paradigm Ego Use. However, first-person observations are limited by the wearer's viewpoint and may provide incomplete or ambiguous evidence of ongoing activities. As new observations arrive, agents may need to revise their understanding of the physical context and user intent, and reassess whether prior digital actions remain valid. Whether current agents can reliably handle these changes remains insufficiently evaluated. We introduce EgoUseBench, a benchmark for evaluating Ego Use across three interaction settings with different levels of first-person context. Computer-Use relies on explicit instructions, Offline Ego Use provides prerecorded first-person context before execution, and Online Ego Use provides continuous observations as user intent evolves. Based on over 74 hours of real-world first-person recordings, we construct 693 tasks across the three interaction settings. To capture task evolution, we track first-person observations, user requirements, and website state separately. We further group tasks by how information changes during execution, resulting in three types: Graft (revised user requirements), Refresh (new first-person observations), and Clarify (agent-initiated information seeking). We evaluate advanced models and find that average success rates in Online Ego Use are 26.3% lower than in Computer-Use. This result reveals the difficulty of keeping task execution aligned with evolving first-person context and user intent.",
           "categories": [
-            "cs.CV"
+            "cs.AI"
           ],
           "keywords": [
-            "playfulness",
-            "game development",
-            "gameplay",
-            "agentic game development",
-            "appealing visual design",
-            "combine video generation"
+            "first-person observations",
+            "three interaction settings",
+            "first-person context",
+            "evolving first-person",
+            "explicit instructions",
+            "ongoing activities"
           ],
-          "matched_keywords": [
-            "generation model"
-          ]
+          "matched_keywords": []
         },
         "2611.33636": {
           "title": "What Is Redundant at High Resolution? Efficient Attention and Feed-Forward Design for All-in-One Image Restoration",
@@ -1701,22 +1734,6 @@
             "intermediate stages",
             "neighboring queries",
             "spatial mixing"
-          ],
-          "matched_keywords": []
-        },
-        "2611.34466": {
-          "title": "EgoUseBench: Benchmarking Computer-Use Agents under Evolving First-Person Contexts",
-          "abstract": "AI wearables, such as smart glasses, extend the context available to agents beyond digital environments to users' physical surroundings. With these devices, computer tasks can originate from users' ongoing activities rather than solely from explicit instructions. Through first-person observations, agents can identify objects and activities relevant to user requests and ground digital tasks in the surrounding context. We call this interaction paradigm Ego Use. However, first-person observations are limited by the wearer's viewpoint and may provide incomplete or ambiguous evidence of ongoing activities. As new observations arrive, agents may need to revise their understanding of the physical context and user intent, and reassess whether prior digital actions remain valid. Whether current agents can reliably handle these changes remains insufficiently evaluated. We introduce EgoUseBench, a benchmark for evaluating Ego Use across three interaction settings with different levels of first-person context. Computer-Use relies on explicit instructions, Offline Ego Use provides prerecorded first-person context before execution, and Online Ego Use provides continuous observations as user intent evolves. Based on over 74 hours of real-world first-person recordings, we construct 693 tasks across the three interaction settings. To capture task evolution, we track first-person observations, user requirements, and website state separately. We further group tasks by how information changes during execution, resulting in three types: Graft (revised user requirements), Refresh (new first-person observations), and Clarify (agent-initiated information seeking). We evaluate advanced models and find that average success rates in Online Ego Use are 26.3% lower than in Computer-Use. This result reveals the difficulty of keeping task execution aligned with evolving first-person context and user intent.",
-          "categories": [
-            "cs.AI"
-          ],
-          "keywords": [
-            "first-person observations",
-            "three interaction settings",
-            "first-person context",
-            "evolving first-person",
-            "explicit instructions",
-            "ongoing activities"
           ],
           "matched_keywords": []
         },
@@ -1754,23 +1771,6 @@
           "matched_keywords": [
             "world model"
           ]
-        },
-        "2611.34849": {
-          "title": "Real2SimLab: A Unified Platform for Real-to-Simulation Transfer",
-          "abstract": "Real-to-simulation transfer, which builds simulations from real-world observations, has long been studied in research and industry. Recently, coding agents have become capable of generating simulation programs from video recordings, and several benchmarks have been proposed to evaluate them. However, each individual benchmark defines its own inputs, deliverables, and scoring pipeline. This leads to $N \\times M$ integrations when evaluating $N$ methods on $M$ benchmarks. To this end, we present Real2SimLab, a unified platform for real-to-simulation transfer. It evaluates a method by running its written program and scoring the output simulation with the original scorer of each benchmark. Moreover, Real2SimLab provides a pipeline to create training data and reward annotations for real-to-simulation methods. Our pipeline carefully avoids data contamination by filtering out the video recordings that exist in benchmarks. For each video recording, a program is first produced, and then our pipeline computes its reward with the same code that Real2SimLab uses for evaluation. So far, it supports 47 coding agents and 5 non-agent methods on 6 benchmarks. Both the platform and Awesome-Real2Sim, our research map of nearly 300 real-to-simulation papers, are open source, and we invite the Real2SimHub community to build them together.",
-          "categories": [
-            "cs.RO",
-            "cs.CV"
-          ],
-          "keywords": [
-            "real-to-simulation transfer",
-            "real2simlab",
-            "unified platform",
-            "video recordings",
-            "build them together",
-            "generating simulation programs"
-          ],
-          "matched_keywords": []
         },
         "2611.33915": {
           "title": "SEEK: Self-Evolution through Execution Knowledge for Agentic Robot Manipulation",
@@ -1824,6 +1824,22 @@
           ],
           "matched_keywords": []
         },
+        "2611.34147": {
+          "title": "Letting Models Manage Their Own Context: Where We Stand",
+          "abstract": "Agent harnesses today manage context on the model's behalf: when the window fills, the harness triggers a compaction that summarizes the history. We study the alternative, \\emph{model-driven} context management, in which the model itself decides when and what to compact through a context API. We gave models control over their own context in \\nooa, NVIDIA's open source agent harness, and compared the two strategies on document research and machine learning engineering across context budgets from 8K to 512K tokens. Models that use the context API effectively reach higher accuracy, often with fewer input tokens, especially at tight budgets: \\textbf{GPT 6.1 nearly triples its score at a 32K budget} on OfficeQA Pro v2 (21\\%~$\\rightarrow$~56\\%), and \\textbf{Kimi gains with up to 41\\% fewer input tokens}. Models differ widely, however, in how often they use the API, how aggressively they compact, and when they start compacting, and prompt changes shift that timing. Finally, we show that \\textbf{inference engines can make model-driven edits cheaper}: by reusing the KV cache of the unchanged suffix after an edit, \\textbf{we cut prefill compute by up to 15\\% per request with no measurable change in accuracy}. Together, these results point to a new co-design frontier: models trained to manage their own context, served by inference engines that support KV cache editing.",
+          "categories": [
+            "cs.AI"
+          ],
+          "keywords": [
+            "own context",
+            "fewer input tokens",
+            "context api",
+            "inference engines",
+            "agent harnesses today",
+            "alternative emph model-driven"
+          ],
+          "matched_keywords": []
+        },
         "2611.34671": {
           "title": "DemoFoundry: Toward Scalable Photorealistic Robot Data with Coding Agents and Generative Rendering",
           "abstract": "Scaling robot learning requires demonstrations that combine realistic visual observations with reliable action supervision. Simulation-based synthesis faces a substantial visual gap relative to real environments, while video-only generation struggles to maintain physically consistent interactions and provide aligned action labels. We present DemoFoundry, an automated framework that couples coding agents with generative rendering to synthesize photorealistic and physically grounded robot demonstrations. Coding agents both construct aligned real--proxy video pairs from existing robot episodes to train a video renderer and write executable interaction programs to generate new demonstrations. Given a scene reference and task instruction, an agent reconstructs task-relevant geometry and writes a control program without requiring target-task human demonstrations. Program execution in a physics simulator produces proxy videos with aligned robot states and actions. The video renderer translates these proxy videos into scene-consistent, photorealistic observations, reducing the need for detailed appearance modeling in each scene. Automated task-execution checks select successful trajectories for rendering and policy learning. Experiments show improved visual quality and action--video consistency. Policies trained on the generated demonstrations outperform raw-simulation training and approach the performance of training on an equal number of real demonstrations.",
@@ -1872,6 +1888,23 @@
             "multi-scale geometric",
             "scene graphs",
             "spatial relationships"
+          ],
+          "matched_keywords": []
+        },
+        "2611.33579": {
+          "title": "DexEngine: Scaling Human Demonstrations into Physically Executable Whole-Robot Data",
+          "abstract": "A growing body of recent work addresses the retargeting of human hand-object demonstrations to robotic hands. To train whole-robot policies, however, the retargeted motions must be kinematically feasible and physically executable, and be produced efficiently at scale. We present DexEngine, a simulation pipeline that turns human manipulation data into train-ready, physically executable arm-hand trajectories. DexEngine first places each clip's hand-object motion where the arms can reach it, finds an arm motion that follows the human hands, and then corrects the motion in physics simulation with residual reinforcement learning. From nine human hand-object datasets, we generate about 5,200 clips for each of four dexterous hands, augmented into 65,000 trajectories (116 h) and 325,000 episodes (578 h) in total. Even with arms attached, DexEngine tracks objects more accurately than prior floating-hand methods and runs over 10x faster than RL-based ones. Policies trained on our data far outperform those trained on the same clips without physics correction or with the arms attached after a floating-hand correction, showing that fine-tuning data need physics correction. Mid-training on our data further improves them at equal fine-tuning budget, in simulation and on a real robot.",
+          "categories": [
+            "cs.RO",
+            "cs.AI"
+          ],
+          "keywords": [
+            "physically executable",
+            "dexengine",
+            "arms attached",
+            "physics correction",
+            "human hand-object",
+            "arms attached dexengine"
           ],
           "matched_keywords": []
         },
@@ -1976,23 +2009,6 @@
           "matched_keywords": [
             "point tracks"
           ]
-        },
-        "2611.33579": {
-          "title": "DexEngine: Scaling Human Demonstrations into Physically Executable Whole-Robot Data",
-          "abstract": "A growing body of recent work addresses the retargeting of human hand-object demonstrations to robotic hands. To train whole-robot policies, however, the retargeted motions must be kinematically feasible and physically executable, and be produced efficiently at scale. We present DexEngine, a simulation pipeline that turns human manipulation data into train-ready, physically executable arm-hand trajectories. DexEngine first places each clip's hand-object motion where the arms can reach it, finds an arm motion that follows the human hands, and then corrects the motion in physics simulation with residual reinforcement learning. From nine human hand-object datasets, we generate about 5,200 clips for each of four dexterous hands, augmented into 65,000 trajectories (116 h) and 325,000 episodes (578 h) in total. Even with arms attached, DexEngine tracks objects more accurately than prior floating-hand methods and runs over 10x faster than RL-based ones. Policies trained on our data far outperform those trained on the same clips without physics correction or with the arms attached after a floating-hand correction, showing that fine-tuning data need physics correction. Mid-training on our data further improves them at equal fine-tuning budget, in simulation and on a real robot.",
-          "categories": [
-            "cs.RO",
-            "cs.AI"
-          ],
-          "keywords": [
-            "physically executable",
-            "dexengine",
-            "arms attached",
-            "physics correction",
-            "human hand-object",
-            "arms attached dexengine"
-          ],
-          "matched_keywords": []
         },
         "2611.34750": {
           "title": "SOLVE: Sparse, Ordered Keyposes Make LLM Agents Versatile and Efficient Robot Manipulator",
@@ -7267,22 +7283,6 @@
             "agentic task delegation",
             "balancing while rarely",
             "budget rules while"
-          ],
-          "matched_keywords": []
-        },
-        "2611.34147": {
-          "title": "Letting Models Manage Their Own Context: Where We Stand",
-          "abstract": "Agent harnesses today manage context on the model's behalf: when the window fills, the harness triggers a compaction that summarizes the history. We study the alternative, \\emph{model-driven} context management, in which the model itself decides when and what to compact through a context API. We gave models control over their own context in \\nooa, NVIDIA's open source agent harness, and compared the two strategies on document research and machine learning engineering across context budgets from 8K to 512K tokens. Models that use the context API effectively reach higher accuracy, often with fewer input tokens, especially at tight budgets: \\textbf{GPT 6.1 nearly triples its score at a 32K budget} on OfficeQA Pro v2 (21\\%~$\\rightarrow$~56\\%), and \\textbf{Kimi gains with up to 41\\% fewer input tokens}. Models differ widely, however, in how often they use the API, how aggressively they compact, and when they start compacting, and prompt changes shift that timing. Finally, we show that \\textbf{inference engines can make model-driven edits cheaper}: by reusing the KV cache of the unchanged suffix after an edit, \\textbf{we cut prefill compute by up to 15\\% per request with no measurable change in accuracy}. Together, these results point to a new co-design frontier: models trained to manage their own context, served by inference engines that support KV cache editing.",
-          "categories": [
-            "cs.AI"
-          ],
-          "keywords": [
-            "own context",
-            "fewer input tokens",
-            "context api",
-            "inference engines",
-            "agent harnesses today",
-            "alternative emph model-driven"
           ],
           "matched_keywords": []
         },
