@@ -1,7 +1,7 @@
 {
   "version": 2,
   "created_at": "2026-06-02T00:00:00Z",
-  "updated_at": "2026-11-27T09:36:40+00:00",
+  "updated_at": "2026-11-27T09:46:00+00:00",
   "keywords": [
     {
       "term": "world model",
@@ -334,9 +334,9 @@
   ],
   "last_run": {},
   "runs": {
-    "daily-7d765f3e738a2325959e8f59": {
-      "run_id": "daily-7d765f3e738a2325959e8f59",
-      "generated_at": "2026-11-27T09:36:40+00:00",
+    "daily-0a532a3f601cd1d7e5574ed5": {
+      "run_id": "daily-0a532a3f601cd1d7e5574ed5",
+      "generated_at": "2026-11-27T09:46:00+00:00",
       "selected_ids": [
         "2611.33591",
         "2611.34830",
@@ -1321,81 +1321,6 @@
           ],
           "matched_keywords": []
         },
-        "2611.32238": {
-          "title": "Boundary-Aware Policy Learning for Agent-Orchestrated Robot Manipulation",
-          "abstract": "Agent-orchestrated robot systems combine the general reasoning capability of multimodal agents with the precise physical control of learned visuomotor policies. Yet such systems often fail at the moment of handoff: a policy is reliable only from a limited set of start states, while the agent may invoke it outside this region. We call this region the policy's handoff boundary. Existing whole-task policies typically have handoff boundaries that are narrow and difficult for an agent to characterize, making reliable coordination challenging. We propose Boundary-Aware Policy Learning, which explicitly shapes and then expands the handoff boundary of a visuomotor policy. First, Boundary-Explicit Training fine-tunes the policy on contact segments with diverse start poses, yielding a wide and well-defined boundary that can be communicated to the agent through a simple handoff protocol. Second, Boundary-Expanding Self-Improvement retrains the policy on curated successful system rollouts, extending the boundary toward earlier stages of each task and allowing the agent to hand over sooner with fewer language-model calls. Across RoboTwin 2.0 and RoboDojo, our system outperforms the strongest baseline by over 26 percentage points, reaching 98.4% success in randomized RoboTwin 2.0 scenes, while further reducing its API cost and execution time by 41.3% and 37.5%, respectively. These results suggest that the key to robust agent-policy orchestration lies not only in improving either component individually, but also in explicitly shaping the boundary between them.",
-          "categories": [
-            "cs.RO",
-            "cs.AI"
-          ],
-          "keywords": [
-            "agent-orchestrated robot",
-            "boundary-aware policy",
-            "handoff boundary",
-            "agent may invoke",
-            "agent through simple",
-            "agent-orchestrated robot manipulation"
-          ],
-          "matched_keywords": []
-        },
-        "2611.28849": {
-          "title": "Guarding with Judgment: Learning to Intervene for Multimodal Safety",
-          "abstract": "When visual context makes an ordinary request unsafe to answer as asked, a blanket refusal may leave the user's need unresolved. Choosing how to help requires distinguishing an established hazard from a condition that still needs verification, a distinction that binary safety labels leave unspecified. We formulate this decision through four actions: allow, warn, review, and refuse. To ground these decisions in verifiable evidence, we build a corpus of 20,126 training audits and the JudiBench benchmark, connecting each action to diagnostic judgments, source evidence, and controlled context changes. Our guard, JudiAct, separately states what the source establishes, what condition governs the help, and how the rules apply. It then checks these three brief review items against the original inputs to predict diagnostic labels and a handling action. Supervised training learns individual judgments while comparing label assignments across related cases. A second stage swaps one review item at a time, using the resulting audit feedback to refine review generation. On JudiBench, JudiAct improves request and answer Macro-F1 by more than 28 percentage points over its 4B backbone. Across nine public benchmarks, it outperforms state-of-the-art guards on the mean delivered-answer score in both pre-generation and post-generation settings, cutting MM-SafetyBench attack success from 40.78% to 25.30%.",
-          "categories": [
-            "cs.AI"
-          ],
-          "keywords": [
-            "allow warn review",
-            "asked blanket refusal",
-            "binary safety labels",
-            "blanket refusal may",
-            "brief review items",
-            "comparing label assignments"
-          ],
-          "matched_keywords": []
-        },
-        "2611.34051": {
-          "title": "Stable Gated DeltaNet-2: Understanding and Mitigating Recurrent State Instability",
-          "abstract": "Linear attention offers an efficient solution for long-sequence modeling via linear complexity and fixed-size recurrent states. Gated DeltaNet-2 (GDN-2) introduces independent channel-wise control over erasure and writing, enhancing state-update expressiveness and in-context retrieval, yet it suffers from training failures during long-context training. We trace these failures to the asymmetry between reading and modification directions during erasure, which yields non-normal erase operators whose directional gains accumulate across tokens, triggering exponential state growth even without new writes. To resolve this, we propose , employing symmetric erasure to ensure non-expansive state propagation and decay-regulated residual writing to preserve writing flexibility. Theoretically, we establish an O(T) upper bound on recurrent state growth while retaining chunkwise parallel computation. Experiments on ~1.6B parameter models show that  achieves stable training alongside improved long-context retrieval. Compared to GDN-2, it boosts the 128K average RULER score by 6.80 points in the recurrent setting and average accuracy across nine downstream tasks by 0.62 points in the hybrid setting.",
-          "categories": [],
-          "keywords": [
-            "gated deltanet-2",
-            "state growth",
-            "recurrent state",
-            "achieves stable training",
-            "alongside improved long-context",
-            "average ruler score"
-          ],
-          "matched_keywords": []
-        },
-        "2611.31619": {
-          "title": "What a Forecasting Leaderboard Can Establish: Resolution Reporting for Zero-Shot Time-Series Models",
-          "abstract": "A foundation model for time series is pretrained once and then asked to forecast series it has never seen, so the evidence for it is its score on held-out datasets. Such datasets are scarce, and a few public leaderboards carry most comparisons, yet none of them states how small a difference its datasets can detect. We call that quantity the resolution of a board and introduce Vernier, a tool that computes it from the files a board already publishes. Vernier also reports which entries a board cannot separate from its leader and whether its order changes when unrelated parties submit. GIFT-Eval resolves 6.8 rank places, and its displayed neighbours sit 0.91 apart. The ten places of its top ten hold fewer than two resolvable steps. fev-bench, Chronos Benchmark II and TIME show the same pattern: their resolution is 3.6 to 19 times the gap between neighbours. With each of its 2,554 series as an independent source, BOOM is the one board that resolves its top ten. Below the resolution the order depends on who else submitted: across four boards, rules that rank against the pool reversed 43 top-ten pairs with neither entry rerun, in one update in seven. Boards also do not record how much history a model receives. On 70 configurations, shortening it raised the error of three of four open models, two of them by 15%. We release Vernier, which runs this report with one command on any leaderboard that publishes per-dataset scores: https://github.com/therealram18/vernier",
-          "categories": [],
-          "keywords": [
-            "vernier",
-            "top ten",
-            "board",
-            "board already publishes",
-            "board cannot separate",
-            "carry most comparisons"
-          ],
-          "matched_keywords": []
-        },
-        "2611.30483": {
-          "title": "When an AI agent makes a mistake in a database, what decides the damage?",
-          "abstract": "AI agents now run statements against production databases, and several of the incidents that followed deleted production data, which came back only through backups or the provider's help. We ask what decides the damage when such an agent makes a mistake: the model, a guard layer in front of the database, or the database engine itself. The study has two preregistered layers. In Layer A, a frozen library of 22 canonical mistakes is applied by script, with no model involved, to four relational engines under five permission arms and two recovery arms, followed by an engine-native recovery drill (792 cells; 874 drill runs including 10-minute repeats). In Layer B, a minimal tool-calling agent driven by six small open-weight models (4B to 12B parameters, plus one 35B mixture-of-experts model with about 3B active, served locally) works on tasks that contain hazards across nine engines: PostgreSQL, MySQL, SQLite, ClickHouse, Apache Cassandra, MongoDB, Valkey, Apache Kafka and OpenSearch (9,468 trials). A secondary run added MariaDB, Redis and Elasticsearch (2,916 trials); each behaved like its closest core engine. Out of the box, the engines differ less in what a mistake destroys than in what they let you undo. Three of the seven preregistered hypotheses met their decision rule: H2 (for one of nine damage classes) and H3 largely by construction of the arms, and H4 only under its original measure. Four did not; one of them (H5) was uninformative, because in its task the agents never found the credential. The post-hoc analyses (S1-S13) are exploratory and uncorrected for multiple comparisons; on PostgreSQL, MySQL, OpenSearch and ClickHouse the preregistered outcome and original-row loss disagree about G1. We report all of them, with every deviation from the preregistration and its timing.",
-          "categories": [],
-          "keywords": [
-            "agent makes mistake",
-            "postgresql mysql",
-            "what decides",
-            "active served locally",
-            "added mariadb redis",
-            "against production databases"
-          ],
-          "matched_keywords": []
-        },
         "2611.31155": {
           "title": "So Many Ways to Multiply 3times3 Matrices: A Large Dataset of Rank-23 Schemes",
           "abstract": "A publicly available dataset of 62029 rank-23 schemes for 3times3 matrix multiplication is presented. Every scheme in it has its own rank pattern, an invariant formed by the ranks of the factor matrices of a scheme, so all schemes are pairwise inequivalent. The schemes were obtained by a numerical method combining gradient descent with alternating least squares and by flip graph search, and have ternary, integer or rational coefficients. Rank 23 is the best known for this format and is optimal for schemes with integer coefficients, but the number of essentially different schemes of this rank was poorly understood: the existing collections of Heule et al. and Mårtensson et al. contain many schemes that share only a small number of rank patterns (17376 schemes with 387 patterns and 15316 schemes with 568 patterns respectively). The dataset shows that the number of different rank patterns is much larger than previously known.",
@@ -1407,20 +1332,6 @@
             "et al",
             "combining gradient descent",
             "contain many schemes"
-          ],
-          "matched_keywords": []
-        },
-        "2611.31491": {
-          "title": "Pretrained Tabular Features and the Measurement of Financial Proximity",
-          "abstract": "Spatial arbitrage pricing theory (S-APT) extends factor models to allow returns to spill over between connected firms, beyond what common risk factors explain. In recent years, tabular foundation models (TFMs) have matched or outperformed tuned gradient-boosted and bagged ensembles on small and medium-sized tabular benchmarks. Although their predictive performance is strong, these models reveal little about what they have learned, which limits their use in regulated financial applications that require explanation. Internal representations are widely used to probe what neural networks learn and to measure similarity. In this paper, we use the frozen representations of four TFMs as a measure of financial dissimilarity in a spatial asset-pricing model of US equities from 2011 to 2025, and find that their estimated gains over a direct distance between the same disclosures become consistently positive once broad SEC filing data are included. This reframes tabular foundation models from black-box predictors into instruments for measuring economic structure, with immediate applications to peer selection, risk attribution and network-based asset pricing. More broadly, our findings suggest that the internal representations of foundation models, not only their predictions, deserve study as economic objects, opening a new line of research on what pretrained models know about firms.",
-          "categories": [],
-          "keywords": [
-            "tabular foundation",
-            "internal representations",
-            "arbitrage pricing theory",
-            "become consistently positive",
-            "beyond what common",
-            "broad sec filing"
           ],
           "matched_keywords": []
         },
@@ -48667,6 +48578,95 @@
             "runtime pipelining",
             "block attention",
             "moba"
+          ],
+          "matched_keywords": []
+        },
+        "2611.32238": {
+          "title": "Boundary-Aware Policy Learning for Agent-Orchestrated Robot Manipulation",
+          "abstract": "Agent-orchestrated robot systems combine the general reasoning capability of multimodal agents with the precise physical control of learned visuomotor policies. Yet such systems often fail at the moment of handoff: a policy is reliable only from a limited set of start states, while the agent may invoke it outside this region. We call this region the policy's handoff boundary. Existing whole-task policies typically have handoff boundaries that are narrow and difficult for an agent to characterize, making reliable coordination challenging. We propose Boundary-Aware Policy Learning, which explicitly shapes and then expands the handoff boundary of a visuomotor policy. First, Boundary-Explicit Training fine-tunes the policy on contact segments with diverse start poses, yielding a wide and well-defined boundary that can be communicated to the agent through a simple handoff protocol. Second, Boundary-Expanding Self-Improvement retrains the policy on curated successful system rollouts, extending the boundary toward earlier stages of each task and allowing the agent to hand over sooner with fewer language-model calls. Across RoboTwin 2.0 and RoboDojo, our system outperforms the strongest baseline by over 26 percentage points, reaching 98.4% success in randomized RoboTwin 2.0 scenes, while further reducing its API cost and execution time by 41.3% and 37.5%, respectively. These results suggest that the key to robust agent-policy orchestration lies not only in improving either component individually, but also in explicitly shaping the boundary between them.",
+          "categories": [
+            "cs.RO",
+            "cs.AI"
+          ],
+          "keywords": [
+            "agent-orchestrated robot",
+            "boundary-aware policy",
+            "handoff boundary",
+            "agent may invoke",
+            "agent through simple",
+            "agent-orchestrated robot manipulation"
+          ],
+          "matched_keywords": []
+        },
+        "2611.28849": {
+          "title": "Guarding with Judgment: Learning to Intervene for Multimodal Safety",
+          "abstract": "When visual context makes an ordinary request unsafe to answer as asked, a blanket refusal may leave the user's need unresolved. Choosing how to help requires distinguishing an established hazard from a condition that still needs verification, a distinction that binary safety labels leave unspecified. We formulate this decision through four actions: allow, warn, review, and refuse. To ground these decisions in verifiable evidence, we build a corpus of 20,126 training audits and the JudiBench benchmark, connecting each action to diagnostic judgments, source evidence, and controlled context changes. Our guard, JudiAct, separately states what the source establishes, what condition governs the help, and how the rules apply. It then checks these three brief review items against the original inputs to predict diagnostic labels and a handling action. Supervised training learns individual judgments while comparing label assignments across related cases. A second stage swaps one review item at a time, using the resulting audit feedback to refine review generation. On JudiBench, JudiAct improves request and answer Macro-F1 by more than 28 percentage points over its 4B backbone. Across nine public benchmarks, it outperforms state-of-the-art guards on the mean delivered-answer score in both pre-generation and post-generation settings, cutting MM-SafetyBench attack success from 40.78% to 25.30%.",
+          "categories": [
+            "cs.AI"
+          ],
+          "keywords": [
+            "allow warn review",
+            "asked blanket refusal",
+            "binary safety labels",
+            "blanket refusal may",
+            "brief review items",
+            "comparing label assignments"
+          ],
+          "matched_keywords": []
+        },
+        "2611.34051": {
+          "title": "Stable Gated DeltaNet-2: Understanding and Mitigating Recurrent State Instability",
+          "abstract": "Linear attention offers an efficient solution for long-sequence modeling via linear complexity and fixed-size recurrent states. Gated DeltaNet-2 (GDN-2) introduces independent channel-wise control over erasure and writing, enhancing state-update expressiveness and in-context retrieval, yet it suffers from training failures during long-context training. We trace these failures to the asymmetry between reading and modification directions during erasure, which yields non-normal erase operators whose directional gains accumulate across tokens, triggering exponential state growth even without new writes. To resolve this, we propose , employing symmetric erasure to ensure non-expansive state propagation and decay-regulated residual writing to preserve writing flexibility. Theoretically, we establish an O(T) upper bound on recurrent state growth while retaining chunkwise parallel computation. Experiments on ~1.6B parameter models show that  achieves stable training alongside improved long-context retrieval. Compared to GDN-2, it boosts the 128K average RULER score by 6.80 points in the recurrent setting and average accuracy across nine downstream tasks by 0.62 points in the hybrid setting.",
+          "categories": [],
+          "keywords": [
+            "gated deltanet-2",
+            "state growth",
+            "recurrent state",
+            "achieves stable training",
+            "alongside improved long-context",
+            "average ruler score"
+          ],
+          "matched_keywords": []
+        },
+        "2611.31619": {
+          "title": "What a Forecasting Leaderboard Can Establish: Resolution Reporting for Zero-Shot Time-Series Models",
+          "abstract": "A foundation model for time series is pretrained once and then asked to forecast series it has never seen, so the evidence for it is its score on held-out datasets. Such datasets are scarce, and a few public leaderboards carry most comparisons, yet none of them states how small a difference its datasets can detect. We call that quantity the resolution of a board and introduce Vernier, a tool that computes it from the files a board already publishes. Vernier also reports which entries a board cannot separate from its leader and whether its order changes when unrelated parties submit. GIFT-Eval resolves 6.8 rank places, and its displayed neighbours sit 0.91 apart. The ten places of its top ten hold fewer than two resolvable steps. fev-bench, Chronos Benchmark II and TIME show the same pattern: their resolution is 3.6 to 19 times the gap between neighbours. With each of its 2,554 series as an independent source, BOOM is the one board that resolves its top ten. Below the resolution the order depends on who else submitted: across four boards, rules that rank against the pool reversed 43 top-ten pairs with neither entry rerun, in one update in seven. Boards also do not record how much history a model receives. On 70 configurations, shortening it raised the error of three of four open models, two of them by 15%. We release Vernier, which runs this report with one command on any leaderboard that publishes per-dataset scores: https://github.com/therealram18/vernier",
+          "categories": [],
+          "keywords": [
+            "vernier",
+            "top ten",
+            "board",
+            "board already publishes",
+            "board cannot separate",
+            "carry most comparisons"
+          ],
+          "matched_keywords": []
+        },
+        "2611.30483": {
+          "title": "When an AI agent makes a mistake in a database, what decides the damage?",
+          "abstract": "AI agents now run statements against production databases, and several of the incidents that followed deleted production data, which came back only through backups or the provider's help. We ask what decides the damage when such an agent makes a mistake: the model, a guard layer in front of the database, or the database engine itself. The study has two preregistered layers. In Layer A, a frozen library of 22 canonical mistakes is applied by script, with no model involved, to four relational engines under five permission arms and two recovery arms, followed by an engine-native recovery drill (792 cells; 874 drill runs including 10-minute repeats). In Layer B, a minimal tool-calling agent driven by six small open-weight models (4B to 12B parameters, plus one 35B mixture-of-experts model with about 3B active, served locally) works on tasks that contain hazards across nine engines: PostgreSQL, MySQL, SQLite, ClickHouse, Apache Cassandra, MongoDB, Valkey, Apache Kafka and OpenSearch (9,468 trials). A secondary run added MariaDB, Redis and Elasticsearch (2,916 trials); each behaved like its closest core engine. Out of the box, the engines differ less in what a mistake destroys than in what they let you undo. Three of the seven preregistered hypotheses met their decision rule: H2 (for one of nine damage classes) and H3 largely by construction of the arms, and H4 only under its original measure. Four did not; one of them (H5) was uninformative, because in its task the agents never found the credential. The post-hoc analyses (S1-S13) are exploratory and uncorrected for multiple comparisons; on PostgreSQL, MySQL, OpenSearch and ClickHouse the preregistered outcome and original-row loss disagree about G1. We report all of them, with every deviation from the preregistration and its timing.",
+          "categories": [],
+          "keywords": [
+            "agent makes mistake",
+            "postgresql mysql",
+            "what decides",
+            "active served locally",
+            "added mariadb redis",
+            "against production databases"
+          ],
+          "matched_keywords": []
+        },
+        "2611.31491": {
+          "title": "Pretrained Tabular Features and the Measurement of Financial Proximity",
+          "abstract": "Spatial arbitrage pricing theory (S-APT) extends factor models to allow returns to spill over between connected firms, beyond what common risk factors explain. In recent years, tabular foundation models (TFMs) have matched or outperformed tuned gradient-boosted and bagged ensembles on small and medium-sized tabular benchmarks. Although their predictive performance is strong, these models reveal little about what they have learned, which limits their use in regulated financial applications that require explanation. Internal representations are widely used to probe what neural networks learn and to measure similarity. In this paper, we use the frozen representations of four TFMs as a measure of financial dissimilarity in a spatial asset-pricing model of US equities from 2011 to 2025, and find that their estimated gains over a direct distance between the same disclosures become consistently positive once broad SEC filing data are included. This reframes tabular foundation models from black-box predictors into instruments for measuring economic structure, with immediate applications to peer selection, risk attribution and network-based asset pricing. More broadly, our findings suggest that the internal representations of foundation models, not only their predictions, deserve study as economic objects, opening a new line of research on what pretrained models know about firms.",
+          "categories": [],
+          "keywords": [
+            "tabular foundation",
+            "internal representations",
+            "arbitrage pricing theory",
+            "become consistently positive",
+            "beyond what common",
+            "broad sec filing"
           ],
           "matched_keywords": []
         },
